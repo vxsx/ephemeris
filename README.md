@@ -29,8 +29,8 @@ grid, neon, dark report, editorial. Set in Fraunces + Inter via Google Fonts.
 
 ## Automation
 
-A scheduled remote Claude agent runs every morning at 08:00 Zürich, following
-[`daily-prompt.md`](./daily-prompt.md):
+A **local** launchd job (macOS) runs every morning at 08:00 Europe/Zurich and
+invokes Claude Code in headless mode, following [`daily-prompt.md`](./daily-prompt.md):
 
 1. Fetch all six sources
 2. Pick ten stories
@@ -38,3 +38,42 @@ A scheduled remote Claude agent runs every morning at 08:00 Zürich, following
 4. Rebuild `index.html` and commit to `main`
 5. Push — GitHub Pages publishes the update
 6. Post the fresh URL to the Telegram bot
+
+**Why local, not a remote Claude trigger?** The notifier needs the Telegram
+bot token, and the token lives in `.env` (gitignored). Keeping the scheduler
+local means the token never leaves the machine.
+
+### Install
+
+```bash
+ln -sf "$PWD/deploy/name.vadim.fomo-morning.plist" \
+  ~/Library/LaunchAgents/name.vadim.fomo-morning.plist
+launchctl bootstrap "gui/$UID" \
+  ~/Library/LaunchAgents/name.vadim.fomo-morning.plist
+```
+
+### Inspect
+
+```bash
+launchctl list | grep fomo
+launchctl print "gui/$UID/name.vadim.fomo-morning"
+tail -f .logs/$(date +%Y-%m-%d).log
+```
+
+### Run now (dry-ish: actually publishes)
+
+```bash
+launchctl kickstart -k "gui/$UID/name.vadim.fomo-morning"
+```
+
+### Unload
+
+```bash
+launchctl bootout "gui/$UID/name.vadim.fomo-morning"
+```
+
+### Caveat
+
+If the Mac is asleep at 08:00, launchd catches the missed fire on wake. If
+the Mac is off, the day is skipped. Use `pmset repeat wakeorpoweron MTWRFSU
+07:55:00` (needs admin) for truly reliable delivery.
