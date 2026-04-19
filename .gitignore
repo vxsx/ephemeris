@@ -1,0 +1,15 @@
+# secrets
+.env
+.env.local
+*.secret
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+*.swp
+
+# build artifacts (none today, but preempting)
+node_modules/
+dist/
+.cache/
