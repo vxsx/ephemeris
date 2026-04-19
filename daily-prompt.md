@@ -19,10 +19,15 @@ URL, topic tags.
 **Newsletters / curation:**
 
 - https://www.deeplearning.ai/the-batch/
-- https://www.therundown.ai/
 - https://thezvi.substack.com/archive
 - https://jack-clark.net/
 - https://www.jeffbullas.com/jabs/
+
+**Model labs:**
+
+- https://openai.com/news/rss.xml  ← use this RSS URL; the HTML pages block scrapers
+- https://www.anthropic.com/engineering
+- https://www.anthropic.com/news
 
 **Engineering blogs:**
 
@@ -49,7 +54,13 @@ use the primary source URL where one is linked.
 
 If a source fails, try once more with its `/archive` or RSS equivalent. If
 still failing, note the absence in the colophon — don't fabricate content.
-**every.to is deliberately excluded** (paywalled content).
+**every.to and therundown.ai are deliberately excluded** (paywalled content).
+
+For model-lab announcements (OpenAI/Anthropic), count them for the rubric
+only if the post describes something useful — a new API primitive, a SDK
+update, a technical deep-dive, a benchmark, a case study, a behavior
+change. **Skip pure product-marketing** ("announcing our partnership
+with X", leadership shuffles, funding rounds).
 
 ## Step 3 — Pick ten articles
 

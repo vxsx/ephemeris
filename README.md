@@ -11,10 +11,15 @@ Live: https://vadim.sikora.name/fomo/
 **Newsletters / curation**
 
 - [deeplearning.ai/the-batch](https://www.deeplearning.ai/the-batch/)
-- [therundown.ai](https://www.therundown.ai/)
 - [thezvi.substack.com](https://thezvi.substack.com/)
 - [jack-clark.net](https://jack-clark.net/) (Import AI)
 - [jeffbullas.com/jabs](https://www.jeffbullas.com/jabs/)
+
+**Model labs**
+
+- [openai.com/news](https://openai.com/news/) (via RSS — HTML is scraper-blocked)
+- [anthropic.com/engineering](https://www.anthropic.com/engineering)
+- [anthropic.com/news](https://www.anthropic.com/news)
 
 **Engineering blogs**
 
