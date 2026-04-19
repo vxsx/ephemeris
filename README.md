@@ -22,6 +22,8 @@ Live: https://vadim.sikora.name/fomo/
 - [sentry.io/blog](https://sentry.io/blog/)
 - [vercel.com/blog](https://vercel.com/blog)
 - [posthog.com/blog](https://posthog.com/blog)
+- [blog.cloudflare.com](https://blog.cloudflare.com/)
+- [fly.io/blog](https://fly.io/blog/)
 
 **Telegram channels** (public preview fetched via `t.me/s/<channel>`)
 

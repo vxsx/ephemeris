@@ -30,6 +30,8 @@ URL, topic tags.
 - https://sentry.io/blog/
 - https://vercel.com/blog
 - https://posthog.com/blog
+- https://blog.cloudflare.com/
+- https://fly.io/blog/
 
 **Telegram channels** (fetch the public `t.me/s/` preview):
 
