@@ -31,9 +31,19 @@ URL, topic tags.
 - https://vercel.com/blog
 - https://posthog.com/blog
 
-**Telegram channels** (public preview — renders as HTML):
+**Telegram channels** (fetch the public `t.me/s/` preview):
 
-- (none yet — add t.me/s/<channel> URLs here as Vadim approves them)
+- https://t.me/s/seeallochnaya
+- https://t.me/s/TochkiNadAI
+- https://t.me/s/denissexy
+- https://t.me/s/rvnikita_blog
+- https://t.me/s/ProductsAndStartups
+
+Extract the last ~5–8 posts per channel. Short posts are expected — pick
+the ones that link out to a primary source or contain a concrete, actionable
+insight (tool release, benchmark, case study, playbook). Skip pure meme /
+reaction posts. **Attribute in the magazine as "via @channelname"**, and
+use the primary source URL where one is linked.
 
 If a source fails, try once more with its `/archive` or RSS equivalent. If
 still failing, note the absence in the colophon — don't fabricate content.

@@ -25,7 +25,11 @@ Live: https://vadim.sikora.name/fomo/
 
 **Telegram channels** (public preview fetched via `t.me/s/<channel>`)
 
-- _to be added_
+- [@seeallochnaya](https://t.me/s/seeallochnaya)
+- [@TochkiNadAI](https://t.me/s/TochkiNadAI)
+- [@denissexy](https://t.me/s/denissexy)
+- [@rvnikita_blog](https://t.me/s/rvnikita_blog)
+- [@ProductsAndStartups](https://t.me/s/ProductsAndStartups)
 
 ## Rubric
 
