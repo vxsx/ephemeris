@@ -102,8 +102,8 @@ git commit -m "issue $ISSUE_NUMBER — $ISSUE_DATE"
 git push origin main
 ```
 
-GitHub Pages publishes on push. The URL for today is
-`https://vxsx.github.io/fomo/magazines/$ISSUE_DATE.html`.
+GitHub Pages publishes on push (30–90s). The URL for today is
+`https://vadim.sikora.name/fomo/magazines/$ISSUE_DATE.html`.
 
 ## Step 7 — Notify Telegram
 

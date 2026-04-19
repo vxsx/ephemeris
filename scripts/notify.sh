@@ -19,7 +19,7 @@ fi
 : "${TELEGRAM_BOT_TOKEN:?TELEGRAM_BOT_TOKEN missing (see .env.example)}"
 : "${TELEGRAM_CHAT_ID:?TELEGRAM_CHAT_ID missing (see .env.example)}"
 
-URL="https://vxsx.github.io/fomo/magazines/${ISSUE_DATE}.html"
+URL="https://vadim.sikora.name/fomo/magazines/${ISSUE_DATE}.html"
 
 # Pretty date: "Sunday, 19 April 2026"
 PRETTY="$(date -j -f '%Y-%m-%d' "$ISSUE_DATE" '+%A, %-d %B %Y' 2>/dev/null \

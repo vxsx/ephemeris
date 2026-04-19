@@ -4,7 +4,7 @@ A daily editorial digest of the best writing on AI tools, creative software,
 dev tools, privacy and science — delivered every morning at **08:00 Zürich**
 as a typographically over-the-top HTML magazine.
 
-Live: https://vxsx.github.io/fomo/
+Live: https://vadim.sikora.name/fomo/
 
 ## Sources scanned every morning
 
