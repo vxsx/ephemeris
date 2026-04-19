@@ -57,6 +57,35 @@ ten-spread progression, same colophon.
 - Minimum body size 18px. Display headlines 64px+ on desktop.
 - No small type anywhere. If you're tempted, rewrite shorter.
 
+**Mobile / wrapping rules — non-negotiable:**
+
+These failed in issue 001 and must be baked into every issue. Copy the CSS
+baseline from `magazines/2026-04-19.html` unchanged, specifically:
+
+- `html, body { overflow-x: hidden; }` — kill horizontal scroll.
+- `h1, h2, h3, h4 { overflow-wrap: break-word; hyphens: auto; }` —
+  so long words wrap instead of clipping off the edge.
+- The `.folio` and `.cover .kicker` flex rows **must** use
+  `flex-wrap: wrap; gap: 8px ...` — otherwise phrases like "FOMO · MORNING"
+  and "19 APR 2026" smash together with no space.
+- No `&nbsp;` inside display headlines unless you are 100% sure the paired
+  words fit on one mobile line. Prefer plain spaces.
+- Headline sizes on mobile (<=800px) use `vw` units, not `clamp()` minimums
+  above ~48px. If `clamp(72px, 12vw, 220px)` has a 72px floor, a 360px
+  viewport will clip. Use `font-size: 12-13vw` inside the mobile media
+  query.
+- Headlines wrap → bump `line-height` to ≥1.02 on mobile. Desktop 0.85 is
+  fine, but don't assume headlines stay single-line.
+- Disable drop caps on mobile (`float: none; font-size: inherit;`) — they
+  collapse narrow columns into 2-words-per-line.
+- Set `max-width: 100%` on ledes, body copy, and abstracts inside the
+  mobile media query. `ch`-based caps overflow on phones.
+- Collapse `.columns { column-count: N }` to 1 column on mobile.
+- The `.folio` must go `position: static; margin-bottom: 16px` on mobile
+  so it doesn't overlap the headline.
+- Two-column grids collapse to 1; 5-column grids to 2 (and to 1 under
+  420px).
+
 **Ten spread themes — rotate freely so no two issues look identical.**
 You must use a *different* colour and layout for every story. Pick 10 from:
 
