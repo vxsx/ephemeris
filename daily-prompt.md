@@ -54,7 +54,6 @@ use the primary source URL where one is linked.
 
 If a source fails, try once more with its `/archive` or RSS equivalent. If
 still failing, note the absence in the colophon — don't fabricate content.
-**every.to and therundown.ai are deliberately excluded** (paywalled content).
 
 For model-lab announcements (OpenAI/Anthropic), count them for the rubric
 only if the post describes something useful — a new API primitive, a SDK
