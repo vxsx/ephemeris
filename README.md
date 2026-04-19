@@ -8,12 +8,24 @@ Live: https://vadim.sikora.name/fomo/
 
 ## Sources scanned every morning
 
-- [every.to](https://every.to/)
+**Newsletters / curation**
+
 - [deeplearning.ai/the-batch](https://www.deeplearning.ai/the-batch/)
 - [therundown.ai](https://www.therundown.ai/)
 - [thezvi.substack.com](https://thezvi.substack.com/)
 - [jack-clark.net](https://jack-clark.net/) (Import AI)
 - [jeffbullas.com/jabs](https://www.jeffbullas.com/jabs/)
+
+**Engineering blogs**
+
+- [github.blog/category/engineering](https://github.blog/category/engineering/)
+- [sentry.io/blog](https://sentry.io/blog/)
+- [vercel.com/blog](https://vercel.com/blog)
+- [posthog.com/blog](https://posthog.com/blog)
+
+**Telegram channels** (public preview fetched via `t.me/s/<channel>`)
+
+- _to be added_
 
 ## Rubric
 

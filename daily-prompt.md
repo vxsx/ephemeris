@@ -10,22 +10,34 @@ Use the system date. Convert to `YYYY-MM-DD` in Europe/Zurich. Store it as
 `$ISSUE_DATE`. The issue number is the count of files in `magazines/` + 1
 (i.e., if `magazines/` has 12 files before you write, today is issue 013).
 
-## Step 2 — Fetch six sources
+## Step 2 — Fetch all sources
 
-Fetch the homepages of all six sources in parallel with `WebFetch`:
+Fetch these homepages in parallel with `WebFetch`. Extract the latest
+~5–8 items per source: title, author (if visible), 1–2 sentence dek,
+URL, topic tags.
 
-- https://every.to/
+**Newsletters / curation:**
+
 - https://www.deeplearning.ai/the-batch/
 - https://www.therundown.ai/
 - https://thezvi.substack.com/archive
 - https://jack-clark.net/
 - https://www.jeffbullas.com/jabs/
 
-For each, extract the latest ~6–8 articles: title, author (if visible),
-1–2 sentence dek, URL, topic tags.
+**Engineering blogs:**
+
+- https://github.blog/category/engineering/
+- https://sentry.io/blog/
+- https://vercel.com/blog
+- https://posthog.com/blog
+
+**Telegram channels** (public preview — renders as HTML):
+
+- (none yet — add t.me/s/<channel> URLs here as Vadim approves them)
 
 If a source fails, try once more with its `/archive` or RSS equivalent. If
 still failing, note the absence in the colophon — don't fabricate content.
+**every.to is deliberately excluded** (paywalled content).
 
 ## Step 3 — Pick ten articles
 
@@ -42,8 +54,13 @@ Hard rules:
 
 - Skip pure hype/marketing.
 - Skip opinion-only pieces unless they sharply change how you'd act tomorrow.
-- Max 3 picks from any single source. Aim for ≥4 sources represented.
+- **Max 2 picks from any single source.** Aim for ≥6 sources represented.
+- Engineering-blog posts (GitHub/Sentry/Vercel/PostHog) count only if they
+  teach something (postmortem, architecture deep-dive, new primitive, tool
+  release) — skip launch fluff / positioning posts.
 - If two picks overlap heavily, keep the better-written one.
+- If a Telegram channel post links out to a primary source, prefer the
+  primary source's URL in the magazine (but credit the channel as "via").
 
 ## Step 4 — Render the magazine
 
