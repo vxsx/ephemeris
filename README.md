@@ -24,9 +24,9 @@ Live: https://vadim.sikora.name/fomo/
 **Engineering blogs**
 
 - [github.blog/category/engineering](https://github.blog/category/engineering/)
-- [sentry.io/blog](https://sentry.io/blog/)
+- [sentry.engineering](https://sentry.engineering/) (via RSS)
 - [vercel.com/blog](https://vercel.com/blog)
-- [posthog.com/blog](https://posthog.com/blog)
+- [posthog.com/blog](https://posthog.com/blog) (via RSS)
 - [blog.cloudflare.com](https://blog.cloudflare.com/)
 - [fly.io/blog](https://fly.io/blog/)
 

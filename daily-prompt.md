@@ -32,9 +32,9 @@ URL, topic tags.
 **Engineering blogs:**
 
 - https://github.blog/category/engineering/
-- https://sentry.io/blog/
+- https://sentry.engineering/feed.xml  ← RSS, not sentry.io/blog which is marketing + Cloudflare-blocked
 - https://vercel.com/blog
-- https://posthog.com/blog
+- https://posthog.com/rss.xml  ← RSS; the HTML page is JS-rendered
 - https://blog.cloudflare.com/
 - https://fly.io/blog/
 
@@ -52,8 +52,10 @@ insight (tool release, benchmark, case study, playbook). Skip pure meme /
 reaction posts. **Attribute in the magazine as "via @channelname"**, and
 use the primary source URL where one is linked.
 
-If a source fails, try once more with its `/archive` or RSS equivalent. If
-still failing, note the absence in the colophon — don't fabricate content.
+If a source returns empty / 403 / a JS-rendered shell with no post content,
+try (in order): `/rss.xml`, `/feed.xml`, `/rss/`, `/feed/`, `/archive`. Many
+marketing-skinned blogs still expose a real feed. If still failing after
+that, note the absence in the colophon — don't fabricate content.
 
 For model-lab announcements (OpenAI/Anthropic), count them for the rubric
 only if the post describes something useful — a new API primitive, a SDK
