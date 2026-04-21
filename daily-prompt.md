@@ -160,6 +160,19 @@ baseline from `magazines/2026-04-19.html` unchanged, specifically:
   pseudo-elements over `grid-template-rows: Npx 1fr Npx`. The grid version
   constrains the middle track to viewport-bound space and overflows
   invisibly under `overflow: hidden`.
+- **Every per-spread `.read-on` override must set `--flip` to the spread's
+  background colour.** The base rule does `:hover { background: currentColor }`
+  and `:hover span { color: var(--flip, #fff) }`. If the spread's text is
+  *light* (cream, pastel), hover makes the bg light and the text falls
+  back to white → invisible. Issue 003's PostHog CTA read white-on-cream.
+  Example: `.sXX .read-on { color: #fff2d1; border-color: #fff2d1; --flip: #080808; }`.
+- **Decorative lines / rules / crop marks must sit inside the spread's
+  left/right padding, never in the content column.** The spread base
+  padding is `clamp(24px, 6vw, 120px)`; position any `::before` rule at
+  `left: clamp(16px, 3vw, 48px)` (well under 6vw) so at every viewport
+  it stays to the left of content. Issue 003's memo margin rule was at
+  `8vw` vs. `6vw` content padding and sliced through the text on
+  desktop.
 
 **Spread themes — pick 10 per issue from this bench.** Each spread must use
 a different colour *and* layout than the others in the same issue. Cast
