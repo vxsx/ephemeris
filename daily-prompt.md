@@ -63,7 +63,11 @@ update, a technical deep-dive, a benchmark, a case study, a behavior
 change. **Skip pure product-marketing** ("announcing our partnership
 with X", leadership shuffles, funding rounds).
 
-## Step 3 — Pick ten articles
+## Step 3 — Pick 5 to 10 articles
+
+Aim for ten; ship fewer if the day is thin. **Minimum 5, maximum 10.**
+Do not pad with weak picks — a 6-story issue with real signal beats a
+10-story issue with four fillers.
 
 **Rubric (in priority order):**
 
@@ -78,7 +82,8 @@ Hard rules:
 
 - Skip pure hype/marketing.
 - Skip opinion-only pieces unless they sharply change how you'd act tomorrow.
-- **Max 2 picks from any single source.** Aim for ≥6 sources represented.
+- **Max 2 picks from any single source.** At least 4 distinct sources
+  represented on a 5–7 issue; at least 6 on an 8–10 issue.
 - Engineering-blog posts (GitHub/Sentry/Vercel/PostHog) count only if they
   teach something (postmortem, architecture deep-dive, new primitive, tool
   release) — skip launch fluff / positioning posts.
@@ -86,7 +91,7 @@ Hard rules:
 - If a Telegram channel post links out to a primary source, prefer the
   primary source's URL in the magazine (but credit the channel as "via").
 
-**No reprints.** Before finalizing the 10, enumerate every URL already
+**No reprints.** Before finalizing, enumerate every URL already
 published across prior issues — one-liner:
 
 ```bash
@@ -174,7 +179,7 @@ baseline from `magazines/2026-04-19.html` unchanged, specifically:
   `8vw` vs. `6vw` content padding and sliced through the text on
   desktop.
 
-**Spread themes — pick 10 per issue from this bench.** Each spread must use
+**Spread themes — pick one per story from this bench (so 5 to 10 per issue).** Each spread must use
 a different colour *and* layout than the others in the same issue. Cast
 themes to stories tonally (don't randomize — e.g. privacy → dark report;
 case study → big stats; deep research → academic; creative tool →
@@ -208,8 +213,8 @@ does **not** have to be the hero every day.
 A. **Masthead lockup** — big serif wordmark + dotted TOC (issue 001 default)
 B. **Pull-quote cover** — one giant italic quote from today's best story,
    masthead demoted to a corner line
-C. **Dossier grid** — 10 numbered cells, each a headline fragment + source,
-   no single hero element
+C. **Dossier grid** — N numbered cells (one per story), each a headline
+   fragment + source, no single hero element
 D. **Manifesto** — one paragraph in 48px+ serif that names today's theme
    ("Today's issue is about agents learning to read")
 E. **Date-hero** — giant typographic date ("MON 20 · APR 26") as the visual;
@@ -221,7 +226,8 @@ G. **Single-word mood** — one display word ("LEAKS", "QUIET", "AGENTS")
 H. **Source map** — horizontal row of the 18 source names with dots marking
    which contributed today, then TOC
 
-Each spread must have: folio (NN / 10 + source), tag, headline, lede,
+Each spread must have: folio (NN / total + source, where total is today's
+story count — so "04 / 07" on a 7-story issue), tag, headline, lede,
 secondary visual element (pull quote, stats, terminal, graph, grid, etc.),
 and a `.read-on` button pointing at the article URL.
 
@@ -236,8 +242,9 @@ which sources fed today's picks, the rubric, and the issue date.
 Read the two most recent issues in `magazines/` (excluding today's). List
 the themes each used in order. Today's issue must:
 
-- Share at most **4 out of 10** themes with yesterday's.
-- Share at most **6 out of 10** with the day before.
+- Share at most **40%** of themes with yesterday's issue (round down —
+  e.g. 3/8 or 4/10).
+- Share at most **60%** with the day before.
 - Use a cover treatment that's different from both.
 - Put repeated themes in a genuinely different slot order (don't just
   shuffle neighbours).
@@ -275,5 +282,5 @@ your final message if it fails — don't retry blindly.
 
 ## Step 8 — Final summary
 
-Report back in ≤80 words: issue number, date, the 10 story titles, and the
+Report back in ≤80 words: issue number, date, the story titles (5–10), and the
 public URL.
