@@ -86,6 +86,21 @@ Hard rules:
 - If a Telegram channel post links out to a primary source, prefer the
   primary source's URL in the magazine (but credit the channel as "via").
 
+**No reprints.** Before finalizing the 10, enumerate every URL already
+published across prior issues — one-liner:
+
+```bash
+grep -hoE 'class="read-on"[^>]*href="[^"]+"' magazines/*.html \
+  | grep -oE 'href="[^"]+"' | sort -u > /tmp/published-urls.txt
+```
+
+Any candidate whose URL appears in `/tmp/published-urls.txt` is out. Also
+reject candidates that are *the same story* reported from a different
+source (e.g. OpenAI's Codex announcement vs. Rundown's recap of it — one
+of them was already in issue 002, both are out). "Codex for (almost)
+everything" shipped in both issue 002 and 003 — that was the failure
+mode.
+
 ## Step 4 — Render the magazine
 
 Write **one** self-contained HTML file to `magazines/$ISSUE_DATE.html`.
@@ -136,6 +151,15 @@ baseline from `magazines/2026-04-19.html` unchanged, specifically:
   so it doesn't overlap the headline.
 - Two-column grids collapse to 1; 5-column grids to 2 (and to 1 under
   420px).
+- **Use `justify-content: safe center` (and `align-items: safe center`)**
+  on any flex container whose children might be taller than the container.
+  Plain `center` causes symmetric overflow when content exceeds the box —
+  the last element (often the `.read-on` button) clips off. This hit
+  issue 003's PostHog spread.
+- For letterbox / masthead decorations, prefer absolute-positioned
+  pseudo-elements over `grid-template-rows: Npx 1fr Npx`. The grid version
+  constrains the middle track to viewport-bound space and overflows
+  invisibly under `overflow: hidden`.
 
 **Spread themes — pick 10 per issue from this bench.** Each spread must use
 a different colour *and* layout than the others in the same issue. Cast
