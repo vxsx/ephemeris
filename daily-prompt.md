@@ -227,6 +227,9 @@ and a `.read-on` button pointing at the article URL.
 
 **Colophon spread** lists sources, rubric, and the issue number — can and
 should vary visually (dark on one issue, newsprint on another).
+**Do not name the fonts, say "hand-laid", or narrate how the issue was
+made.** That copy reads as self-congratulatory. Keep it to the facts:
+which sources fed today's picks, the rubric, and the issue date.
 
 ## Step 4b — Divergence check (before you write)
 
