@@ -1,0 +1,996 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>FOMO-MORNING — №004 — Wednesday, April 22, 2026</title>
+<meta name="description" content="A daily editorial digest of the best writing on AI tools, creative software, dev tools, privacy, and science. Issue 004." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 {
+    overflow-wrap: break-word;
+    word-break: normal;
+    hyphens: auto;
+  }
+  a { color: inherit; text-underline-offset: 3px; }
+  img { max-width: 100%; display: block; }
+  .spread {
+    min-height: 100vh;
+    padding: clamp(32px, 5vw, 96px) clamp(24px, 6vw, 120px);
+    position: relative;
+    overflow: hidden;
+    scroll-snap-align: start;
+  }
+  main { scroll-snap-type: y proximity; }
+  .rule { border: 0; border-top: 1px solid currentColor; margin: 0; opacity: 0.25; }
+  .folio {
+    position: absolute; top: clamp(20px, 3vw, 40px); left: clamp(24px, 6vw, 120px);
+    right: clamp(24px, 6vw, 120px);
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 8px 24px; flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .folio .right { text-align: right; }
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 10px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+  .read-on {
+    display: inline-block; margin-top: 28px;
+    font-family: var(--sans); font-weight: 600;
+    font-size: 16px; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip, #fff); }
+
+  /* ============ COVER — DOSSIER GRID ============ */
+  .cover {
+    background: #0f1012;
+    color: #e8e4d8;
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    gap: 28px;
+  }
+  .cover .top-rule {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 8px 24px;
+    font-family: var(--mono);
+    font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase;
+    color: #a19b88;
+    border-bottom: 1px solid #2c2a26;
+    padding-bottom: 14px;
+  }
+  .cover .top-rule .mast {
+    font-family: var(--serif); font-weight: 800; font-style: italic;
+    font-size: 20px; letter-spacing: -0.01em; color: #e8e4d8;
+    font-variation-settings: "opsz" 48, "SOFT" 50, "WONK" 1;
+  }
+  .cover .banner {
+    font-family: var(--serif); font-weight: 400; font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-size: clamp(40px, 6.2vw, 92px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: #f4c14a;
+    max-width: 22ch;
+  }
+  .cover .banner em { font-style: normal; color: #e8e4d8; }
+  .cover .dossier {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-top: 1px solid #2c2a26;
+    border-left: 1px solid #2c2a26;
+  }
+  .cover .dossier .cell {
+    border-right: 1px solid #2c2a26;
+    border-bottom: 1px solid #2c2a26;
+    padding: 22px 20px;
+    min-height: 180px;
+    display: flex; flex-direction: column;
+    gap: 14px;
+    text-decoration: none; color: inherit;
+    transition: background 150ms ease;
+  }
+  .cover .dossier .cell:hover { background: #17181b; }
+  .cover .dossier .n {
+    font-family: var(--mono); font-weight: 600;
+    font-size: 11px; letter-spacing: 0.28em; color: #f4c14a;
+  }
+  .cover .dossier .fragment {
+    font-family: var(--serif); font-weight: 500;
+    font-variation-settings: "opsz" 48, "SOFT" 30;
+    font-size: 22px; line-height: 1.2; color: #e8e4d8;
+    flex: 1 1 auto;
+  }
+  .cover .dossier .source {
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: #a19b88;
+  }
+  .cover .foot {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 8px 24px;
+    font-family: var(--sans); font-size: 13px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: #a19b88;
+    border-top: 1px solid #2c2a26;
+    padding-top: 18px;
+  }
+
+  /* ============ 01 RISOGRAPH — CLAUDE DESIGN ============ */
+  .s01 {
+    background: #fff4ec;
+    color: #0c0c0c;
+    position: relative;
+  }
+  .s01::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(255, 61, 115, 0.22), transparent 55%),
+      radial-gradient(circle at 80% 70%, rgba(0, 170, 212, 0.20), transparent 55%);
+    pointer-events: none;
+  }
+  .s01 > * { position: relative; }
+  .s01 .kicker {
+    font-family: var(--mono);
+    font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase;
+    color: #a8233d;
+    margin-top: 48px;
+  }
+  .s01 h1 {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-variation-settings: "opsz" 144, "SOFT" 20, "WONK" 1;
+    font-size: clamp(64px, 10vw, 170px);
+    line-height: 0.9;
+    letter-spacing: -0.035em;
+    margin: 18px 0 28px;
+    max-width: 16ch;
+    color: #0c0c0c;
+    text-shadow: 4px 3px 0 rgba(255, 61, 115, 0.55), -3px -2px 0 rgba(0, 170, 212, 0.45);
+  }
+  .s01 h1 em { font-style: italic; color: #a8233d; text-shadow: none; }
+  .s01 .lede {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(22px, 2.2vw, 30px);
+    line-height: 1.4;
+    max-width: 34ch;
+    color: #1d1d1d;
+    font-variation-settings: "opsz" 36, "SOFT" 60;
+  }
+  .s01 .pills {
+    display: flex; flex-wrap: wrap; gap: 8px 10px; margin-top: 28px;
+  }
+  .s01 .pills span {
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    padding: 8px 12px;
+    border: 1.5px solid #0c0c0c;
+    background: #fff;
+    transform: rotate(-1.2deg);
+  }
+  .s01 .pills span:nth-child(2n) { transform: rotate(1.5deg); background: #ffe6ef; }
+  .s01 .pills span:nth-child(3n) { transform: rotate(-0.5deg); background: #d7f3f8; }
+  .s01 .read-on { color: #0c0c0c; border-color: #0c0c0c; --flip: #fff4ec; }
+
+  /* ============ 02 BLUEPRINT — CLOUDFLARE BOTS/HUMANS ============ */
+  .s02 {
+    background: #0d2a4a;
+    color: #cfe4ff;
+    background-image:
+      linear-gradient(rgba(207, 228, 255, 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(207, 228, 255, 0.08) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .s02 .folio { color: #8bb3de; }
+  .s02 .crop { position: absolute; width: 28px; height: 28px; border: 1.5px solid #cfe4ff; opacity: 0.6; }
+  .s02 .crop.tl { top: 18px; left: 18px; border-right: 0; border-bottom: 0; }
+  .s02 .crop.tr { top: 18px; right: 18px; border-left: 0; border-bottom: 0; }
+  .s02 .crop.bl { bottom: 18px; left: 18px; border-right: 0; border-top: 0; }
+  .s02 .crop.br { bottom: 18px; right: 18px; border-left: 0; border-top: 0; }
+  .s02 .tag { color: #ffb3c6; border-color: #ffb3c6; margin-top: 64px; }
+  .s02 h2 {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-variation-settings: "opsz" 144, "SOFT" 50;
+    font-size: clamp(52px, 7.5vw, 128px);
+    line-height: 0.94;
+    letter-spacing: -0.025em;
+    margin: 20px 0 28px;
+    color: #ffffff;
+    max-width: 18ch;
+  }
+  .s02 h2 em { font-style: italic; color: #ffb3c6; }
+  .s02 .annotation {
+    font-family: var(--mono);
+    font-size: 12px; letter-spacing: 0.1em;
+    color: #8bb3de;
+    margin: 10px 0 20px;
+  }
+  .s02 .annotation::before { content: "↳ "; color: #ffb3c6; }
+  .s02 .layout {
+    display: grid; grid-template-columns: 1.3fr 1fr; gap: 56px;
+    margin-top: 40px;
+  }
+  .s02 .body p {
+    font-family: var(--serif); font-size: 20px; line-height: 1.5;
+    color: #e4eefb; max-width: 40ch;
+    font-variation-settings: "opsz" 24;
+  }
+  .s02 .diagram {
+    border: 1.5px solid #cfe4ff;
+    padding: 20px;
+    font-family: var(--mono); font-size: 13px;
+    color: #cfe4ff;
+    line-height: 1.85;
+    align-self: start;
+  }
+  .s02 .diagram b { color: #ffb3c6; font-weight: 600; }
+  .s02 .diagram .lbl { color: #8bb3de; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; display: block; margin-bottom: 10px; }
+  .s02 .read-on { color: #ffb3c6; border-color: #ffb3c6; --flip: #0d2a4a; margin-top: 36px; }
+
+  /* ============ 03 SPREADSHEET — CLOUDFLARE INTERNAL STACK ============ */
+  .s03 {
+    background: #ececea;
+    color: #1a1a1a;
+  }
+  .s03 .tag { color: #5a5752; border-color: #5a5752; margin-top: 56px; }
+  .s03 h2 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-variation-settings: "opsz" 144, "SOFT" 0;
+    font-size: clamp(46px, 6.5vw, 108px);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+    margin: 18px 0 28px;
+    color: #1a1a1a;
+    max-width: 22ch;
+  }
+  .s03 h2 em { font-style: italic; color: #c6531a; }
+  .s03 .lede {
+    font-family: var(--sans); font-size: 19px; line-height: 1.55;
+    max-width: 56ch; color: #2c2a26;
+    margin-bottom: 30px;
+  }
+  .s03 .sheet {
+    font-family: var(--mono);
+    font-size: 13px;
+    border-top: 1px solid #9e9b94;
+    border-left: 1px solid #9e9b94;
+    background: #f8f7f3;
+    margin-top: 20px;
+    overflow: auto;
+  }
+  .s03 .sheet-row {
+    display: grid;
+    grid-template-columns: 52px 1.4fr 1fr 1fr;
+    border-bottom: 1px solid #d1cec6;
+  }
+  .s03 .sheet-row > div {
+    padding: 10px 14px;
+    border-right: 1px solid #d1cec6;
+  }
+  .s03 .sheet-head {
+    background: #d9d6ce;
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: #4b4843; font-weight: 600;
+  }
+  .s03 .sheet-row .idx { color: #8a8680; background: #efede6; text-align: right; }
+  .s03 .sheet-row .metric { color: #1a1a1a; }
+  .s03 .sheet-row .value { color: #c6531a; font-weight: 600; }
+  .s03 .sheet-row .unit { color: #5a5752; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .s03 .read-on { color: #1a1a1a; border-color: #1a1a1a; --flip: #ececea; margin-top: 32px; }
+
+  /* ============ 04 CONCRETE — OPENAI AGENTS SDK ============ */
+  .s04 {
+    background: #5f605c;
+    color: #f1efe9;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-content: center;
+  }
+  .s04 .folio { color: #c8c5bd; }
+  .s04 .giant-punct {
+    font-family: var(--serif); font-weight: 300; font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-size: clamp(160px, 26vw, 440px);
+    line-height: 0.78;
+    color: #f8d34d;
+    margin: 0;
+    letter-spacing: -0.08em;
+    align-self: center;
+  }
+  .s04 .right-col { align-self: center; }
+  .s04 .tag { color: #f8d34d; border-color: #f8d34d; margin-top: 12px; }
+  .s04 h2 {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: clamp(40px, 5vw, 82px);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+    margin: 16px 0 22px;
+    color: #ffffff;
+    max-width: 16ch;
+    text-transform: uppercase;
+  }
+  .s04 h2 em { font-style: normal; color: #f8d34d; text-transform: none; font-family: var(--serif); font-weight: 400; }
+  .s04 .lede {
+    font-family: var(--serif); font-size: 20px; line-height: 1.5;
+    color: #e5e2d9;
+    max-width: 36ch;
+    font-variation-settings: "opsz" 24, "SOFT" 30;
+  }
+  .s04 .read-on { color: #f8d34d; border-color: #f8d34d; --flip: #0c0c0c; }
+
+  /* ============ 05 MUSEUM PLACARD — ZVI ON OPUS 4.7 ============ */
+  .s05 {
+    background: #f6f2e6;
+    color: #2a2e22;
+    display: flex; flex-direction: column;
+    align-items: center;
+    justify-content: safe center;
+    text-align: center;
+    padding: clamp(48px, 7vw, 120px) clamp(24px, 6vw, 120px);
+  }
+  .s05 .folio { color: #5a5a48; opacity: 0.8; }
+  .s05 .case {
+    max-width: 60ch;
+    border: 1px solid #5a5a48;
+    padding: clamp(36px, 5vw, 72px);
+    background: #fbf9f0;
+  }
+  .s05 .plate {
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.32em; text-transform: uppercase;
+    color: #5a5a48;
+    margin-bottom: 24px;
+  }
+  .s05 h2 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-size: clamp(42px, 5.6vw, 90px);
+    line-height: 1.02;
+    letter-spacing: -0.012em;
+    margin: 0 0 24px;
+    color: #2a2e22;
+  }
+  .s05 h2 em { font-style: normal; color: #4d5a2d; }
+  .s05 .divider {
+    width: 60px; height: 1px; background: #5a5a48;
+    margin: 24px auto;
+  }
+  .s05 .lede {
+    font-family: var(--serif); font-size: 19px; line-height: 1.55;
+    color: #3a3d30;
+    font-variation-settings: "opsz" 24;
+  }
+  .s05 .attribution {
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    color: #5a5a48; margin-top: 26px;
+  }
+  .s05 .read-on { color: #2a2e22; border-color: #2a2e22; --flip: #f6f2e6; margin-top: 36px; }
+
+  /* ============ 06 FILM STILL — FLY SPRITES + MCP ============ */
+  .s06 {
+    background: #000;
+    color: #f0e9dd;
+    position: relative;
+    padding-top: 0; padding-bottom: 0;
+    display: flex; flex-direction: column;
+    justify-content: safe center;
+  }
+  .s06::before, .s06::after {
+    content: "";
+    position: absolute; left: 0; right: 0;
+    height: clamp(40px, 7vh, 96px);
+    background: #000;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .s06::before { top: 0; border-bottom: 1px solid #1c1c1c; }
+  .s06::after { bottom: 0; border-top: 1px solid #1c1c1c; }
+  .s06 .frame {
+    background: #1a120a;
+    background-image:
+      radial-gradient(ellipse at 30% 40%, rgba(200, 140, 70, 0.22), transparent 60%),
+      radial-gradient(ellipse at 80% 60%, rgba(90, 60, 40, 0.35), transparent 50%);
+    padding: clamp(48px, 6vw, 96px) clamp(24px, 6vw, 120px);
+    flex: 1 1 auto;
+    display: flex; flex-direction: column;
+    justify-content: safe center;
+    position: relative;
+    z-index: 1;
+  }
+  .s06 .folio { color: #8a7962; }
+  .s06 .cue {
+    font-family: var(--mono); font-size: 12px;
+    letter-spacing: 0.32em; text-transform: uppercase;
+    color: #c88c46;
+    margin-bottom: 16px;
+  }
+  .s06 h2 {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: clamp(46px, 7vw, 124px);
+    line-height: 0.94;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    margin: 0 0 28px;
+    color: #f0e9dd;
+    max-width: 18ch;
+  }
+  .s06 h2 em { font-style: italic; color: #c88c46; text-transform: none; font-family: var(--serif); font-weight: 400; }
+  .s06 .lede {
+    font-family: var(--serif); font-size: 20px; line-height: 1.5;
+    color: #d6cdbd; max-width: 42ch;
+    font-variation-settings: "opsz" 24;
+  }
+  .s06 .lede em { color: #c88c46; font-style: italic; }
+  .s06 .read-on { color: #c88c46; border-color: #c88c46; --flip: #000; }
+
+  /* ============ 07 POSTCARD — POSTHOG TESTING AGENTS ============ */
+  .s07 {
+    background: #fff;
+    color: #1a1a1a;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+  }
+  .s07 .left, .s07 .right-panel {
+    padding: clamp(40px, 6vw, 96px) clamp(28px, 5vw, 72px);
+    display: flex; flex-direction: column;
+    justify-content: safe center;
+    position: relative;
+  }
+  .s07 .left {
+    background: #f28a00;
+    color: #181612;
+  }
+  .s07 .right-panel {
+    background: #fef6e7;
+  }
+  .s07 .folio { color: #181612; }
+  .s07 .stamp {
+    position: absolute; top: clamp(24px, 4vw, 48px); right: clamp(24px, 4vw, 48px);
+    border: 2px solid #181612; padding: 8px 14px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    transform: rotate(6deg);
+    background: rgba(255,255,255,0.15);
+  }
+  .s07 .tag { color: #181612; border-color: #181612; margin-top: 44px; }
+  .s07 h2 {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    font-size: clamp(44px, 6vw, 96px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin: 16px 0 22px;
+    color: #181612;
+  }
+  .s07 h2 em { font-style: italic; color: #4a1a00; }
+  .s07 .left .lede {
+    font-family: var(--serif); font-size: 19px; line-height: 1.5;
+    color: #2a1f12; max-width: 34ch;
+    font-variation-settings: "opsz" 24;
+  }
+  .s07 .right-panel .stencil {
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.28em; text-transform: uppercase;
+    color: #8a6a1a; margin-bottom: 18px;
+  }
+  .s07 .checklist {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; flex-direction: column; gap: 18px;
+  }
+  .s07 .checklist li {
+    font-family: var(--serif); font-size: 21px; line-height: 1.35;
+    color: #2a1f12;
+    padding-left: 38px;
+    position: relative;
+    font-variation-settings: "opsz" 24;
+  }
+  .s07 .checklist li::before {
+    content: "☐";
+    position: absolute; left: 0; top: -1px;
+    font-family: var(--mono);
+    color: #f28a00; font-weight: 700;
+    font-size: 22px;
+  }
+  .s07 .checklist li b { color: #4a1a00; font-weight: 700; }
+  .s07 .left .read-on { color: #181612; border-color: #181612; --flip: #fef6e7; }
+
+  /* ============ 08 PASTEL ROSE — VERCEL KNOWLEDGE AGENTS ============ */
+  .s08 {
+    background: linear-gradient(160deg, #ffe6ee 0%, #f6dcf0 60%, #ead8ff 100%);
+    color: #2a1a32;
+  }
+  .s08 .folio { color: #6d4e74; }
+  .s08 .hand {
+    font-family: var(--serif); font-weight: 500; font-style: italic;
+    font-variation-settings: "opsz" 48, "SOFT" 100, "WONK" 1;
+    font-size: 22px; color: #8c3463;
+    margin-top: 52px;
+  }
+  .s08 h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-variation-settings: "opsz" 144, "SOFT" 80, "WONK" 1;
+    font-size: clamp(52px, 7.8vw, 132px);
+    line-height: 0.96;
+    letter-spacing: -0.02em;
+    margin: 14px 0 30px;
+    color: #2a1a32;
+    max-width: 18ch;
+  }
+  .s08 h2 em { font-style: italic; color: #8c3463; }
+  .s08 .layout {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 56px;
+    align-items: start;
+    margin-top: 28px;
+  }
+  .s08 .lede {
+    font-family: var(--serif); font-size: 21px; line-height: 1.5;
+    color: #3a2342; max-width: 38ch;
+    font-variation-settings: "opsz" 24;
+  }
+  .s08 .aside {
+    background: rgba(255,255,255,0.55);
+    border: 1px solid rgba(140, 52, 99, 0.35);
+    border-radius: 4px;
+    padding: 26px 28px;
+    font-family: var(--sans); font-size: 15px; line-height: 1.55;
+    color: #3a2342;
+  }
+  .s08 .aside dt {
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: #8c3463; margin-top: 14px;
+  }
+  .s08 .aside dt:first-child { margin-top: 0; }
+  .s08 .aside dd { margin: 6px 0 0; }
+  .s08 .read-on { color: #2a1a32; border-color: #2a1a32; --flip: #ffe6ee; }
+
+  /* ============ COLOPHON ============ */
+  .colophon {
+    background: #0f1012;
+    color: #c2bdad;
+    border-top: 1px solid #2c2a26;
+  }
+  .colophon .folio { color: #a19b88; }
+  .colophon h3 {
+    font-family: var(--serif);
+    font-weight: 400; font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 80;
+    font-size: clamp(44px, 6.5vw, 108px);
+    line-height: 0.95;
+    margin: 48px 0 32px;
+    letter-spacing: -0.02em;
+    color: #f4c14a;
+  }
+  .colophon .cols {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px;
+    margin-top: 36px;
+  }
+  .colophon .cols h4 {
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.24em; text-transform: uppercase;
+    color: #a19b88; margin: 0 0 14px;
+    border-bottom: 1px solid #2c2a26; padding-bottom: 10px;
+  }
+  .colophon .cols ul { margin: 0; padding: 0; list-style: none; font-family: var(--sans); font-size: 14px; line-height: 1.75; color: #c2bdad; }
+  .colophon .cols p { font-family: var(--serif); font-size: 16px; line-height: 1.6; color: #c2bdad; margin: 0; }
+
+  /* ========================= MOBILE ========================= */
+  @media (max-width: 800px) {
+    .spread { padding: 40px 22px; }
+    .folio {
+      position: static;
+      margin: 0 0 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid currentColor;
+    }
+
+    /* Cover dossier collapses */
+    .cover { gap: 20px; }
+    .cover .dossier { grid-template-columns: 1fr; }
+    .cover .dossier .cell { min-height: 120px; padding: 18px 16px; }
+    .cover .banner { font-size: 12vw; line-height: 1.05; }
+
+    /* Single-col collapses */
+    .s02 .layout,
+    .s08 .layout { grid-template-columns: 1fr; gap: 28px; }
+    .s04 { grid-template-columns: 1fr; gap: 24px; padding: 40px 22px; }
+    .s04 .giant-punct { font-size: 52vw; align-self: start; }
+    .s07 { grid-template-columns: 1fr; }
+    .s07 .left, .s07 .right-panel { padding: 40px 22px; }
+    .s07 .stamp { top: 16px; right: 16px; }
+    .colophon .cols { grid-template-columns: 1fr; gap: 30px; }
+
+    /* Headlines: scale down, wrap safely, use breathable line-height */
+    .s01 h1 { font-size: 13vw; line-height: 1.02; }
+    .s02 h2 { font-size: 12vw; line-height: 1.04; }
+    .s03 h2 { font-size: 11vw; line-height: 1.05; }
+    .s04 h2 { font-size: 11vw; line-height: 1.04; }
+    .s05 h2 { font-size: 10vw; line-height: 1.08; }
+    .s06 h2 { font-size: 12vw; line-height: 1.02; }
+    .s07 h2 { font-size: 11vw; line-height: 1.04; }
+    .s08 h2 { font-size: 13vw; line-height: 1.02; }
+    .colophon h3 { font-size: 11vw; line-height: 1.05; }
+
+    /* Body/ledes: cap to viewport, drop ch-based max-widths */
+    .s01 .lede,
+    .s02 .body p,
+    .s03 .lede,
+    .s04 .lede,
+    .s05 .lede,
+    .s06 .lede,
+    .s07 .left .lede,
+    .s08 .lede { max-width: 100%; font-size: 18px; line-height: 1.5; }
+
+    .s01 h1 { text-shadow: 2px 2px 0 rgba(255, 61, 115, 0.5), -2px -1px 0 rgba(0, 170, 212, 0.4); }
+    .s03 .sheet-row { grid-template-columns: 40px 1.2fr 1fr; }
+    .s03 .sheet-row .unit { display: none; }
+    .s05 .case { padding: 28px; }
+    .s06 .frame { padding: 40px 22px; }
+    .s06::before, .s06::after { height: 32px; }
+    .s07 .checklist li { font-size: 18px; }
+    .s08 .aside { padding: 20px; }
+    .cover .top-rule { font-size: 11px; }
+    .cover .dossier .fragment { font-size: 19px; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ============ COVER — DOSSIER GRID ============ -->
+<section class="spread cover" id="cover">
+  <div class="top-rule">
+    <span class="mast">FOMO·morning</span>
+    <span>Issue №004</span>
+    <span>Wed · 22 Apr 2026</span>
+    <span>Zürich</span>
+  </div>
+  <p class="banner">Today's dispatch, in <em>eight</em> fragments:<br>eight doors into the same morning.</p>
+  <nav class="dossier">
+    <a class="cell" href="#s01">
+      <span class="n">01 · CREATIVE</span>
+      <span class="fragment">Claude sits down at the drawing board.</span>
+      <span class="source">Anthropic</span>
+    </a>
+    <a class="cell" href="#s02">
+      <span class="n">02 · PRIVACY</span>
+      <span class="fragment">Past the bots-versus-humans stalemate.</span>
+      <span class="source">Cloudflare</span>
+    </a>
+    <a class="cell" href="#s03">
+      <span class="n">03 · CASE STUDY</span>
+      <span class="fragment">241 billion tokens, poured back through our own plumbing.</span>
+      <span class="source">Cloudflare</span>
+    </a>
+    <a class="cell" href="#s04">
+      <span class="n">04 · AGENTS</span>
+      <span class="fragment">A sandbox, a harness, a fresh Agents SDK.</span>
+      <span class="source">OpenAI</span>
+    </a>
+    <a class="cell" href="#s05">
+      <span class="n">05 · DEEP DIVE</span>
+      <span class="fragment">Opus 4.7, read slowly, with welfare in mind.</span>
+      <span class="source">Zvi · Don't Worry About the Vase</span>
+    </a>
+    <a class="cell" href="#s06">
+      <span class="n">06 · DEV TOOLS</span>
+      <span class="fragment">The first move on a new Sprite? Type <code>claude</code>.</span>
+      <span class="source">Fly.io</span>
+    </a>
+    <a class="cell" href="#s07">
+      <span class="n">07 · PLAYBOOK</span>
+      <span class="fragment">Unit tests were the easy part. Now try grading an agent.</span>
+      <span class="source">PostHog</span>
+    </a>
+    <a class="cell" href="#s08">
+      <span class="n">08 · OPEN SOURCE</span>
+      <span class="fragment">Knowledge agents, minus the vector database.</span>
+      <span class="source">Vercel</span>
+    </a>
+  </nav>
+  <div class="foot">
+    <span>Europe/Zurich · 08:00</span>
+    <span>8 stories · 7 sources</span>
+    <span>vadim.sikora.name/fomo</span>
+  </div>
+</section>
+
+<!-- ============ 01 RISOGRAPH — CLAUDE DESIGN ============ -->
+<section class="spread s01" id="s01">
+  <div class="folio">
+    <span>01 / 08 · Creative software</span>
+    <span class="right">Anthropic Labs · Apr 17</span>
+  </div>
+  <div class="kicker">LAUNCH · Anthropic Labs</div>
+  <h1>Claude, sat down at the <em>drawing board.</em></h1>
+  <p class="lede">
+    Anthropic Labs quietly shipped <em>Claude Design</em> — a collaborative
+    surface where Claude 4.7 produces polished slides, prototypes and
+    documents by conversation, hooking into your house design system
+    rather than fighting it. Early testers report a separate token
+    budget that can lock you out for 24 hours once spent, and no direct
+    PPTX/HTML export (ZIP downloads only). Useful; not finished.
+  </p>
+  <div class="pills">
+    <span>Slides</span>
+    <span>Prototypes</span>
+    <span>Design tokens</span>
+    <span>ZIP export</span>
+    <span>Claude 4.7 under the hood</span>
+  </div>
+  <a class="read-on" href="https://www.anthropic.com/news/claude-design-anthropic-labs"><span>Read the launch →</span></a>
+</section>
+
+<!-- ============ 02 BLUEPRINT — CLOUDFLARE BOTS/HUMANS ============ -->
+<section class="spread s02" id="s02">
+  <span class="crop tl"></span><span class="crop tr"></span>
+  <span class="crop bl"></span><span class="crop br"></span>
+  <div class="folio">
+    <span>02 / 08 · Privacy &amp; policy</span>
+    <span class="right">Cloudflare · Apr 21</span>
+  </div>
+  <span class="tag">Privacy · Web integrity</span>
+  <h2>Moving past bots <em>versus</em> humans.</h2>
+  <div class="annotation">Proposal: identity-free client accountability via anonymous credentials</div>
+  <div class="layout">
+    <div class="body">
+      <p>
+        Bot detection was built on a false binary: you are either
+        a person or you are not. Agents, privacy proxies and
+        browsers-on-behalf-of-users have collapsed that line. Cloudflare
+        argues for a different model — cryptographic, anonymous
+        credentials signed by clients the user trusts, so the web can
+        gate abuse without gating identity.
+      </p>
+    </div>
+    <div class="diagram">
+      <span class="lbl">Old stack</span>
+      human ⇄ browser ⇄ site<br>
+      <b>heuristic</b> = IP, UA, TLS fingerprint<br>
+      <br>
+      <span class="lbl">Proposed</span>
+      human ⇄ agent ⇄ <b>issuer</b> ⇄ site<br>
+      <b>proof</b> = anonymous credential<br>
+      (Privacy Pass, not passport)
+    </div>
+  </div>
+  <a class="read-on" href="https://blog.cloudflare.com/past-bots-and-humans/"><span>Read the argument →</span></a>
+</section>
+
+<!-- ============ 03 SPREADSHEET — CLOUDFLARE INTERNAL STACK ============ -->
+<section class="spread s03" id="s03">
+  <div class="folio">
+    <span>03 / 08 · Case study · infra</span>
+    <span class="right">Cloudflare · Apr 20</span>
+  </div>
+  <span class="tag">Internal AI stack</span>
+  <h2>The company is the <em>customer</em>, and the bill adds up.</h2>
+  <p class="lede">
+    Cloudflare dog-foods its own AI Gateway, Workers AI and Vectorize.
+    This is the ledger: 20M gateway requests and 241B tokens running
+    through the same platform they sell to the rest of the internet,
+    with the line items to prove it.
+  </p>
+  <div class="sheet" role="table" aria-label="Cloudflare internal AI stack metrics">
+    <div class="sheet-row sheet-head">
+      <div class="idx">#</div>
+      <div>Metric</div>
+      <div>Value</div>
+      <div>Unit</div>
+    </div>
+    <div class="sheet-row"><div class="idx">01</div><div class="metric">AI Gateway requests</div><div class="value">20M</div><div class="unit">per quarter</div></div>
+    <div class="sheet-row"><div class="idx">02</div><div class="metric">Tokens processed through Workers AI</div><div class="value">241B</div><div class="unit">cumulative</div></div>
+    <div class="sheet-row"><div class="idx">03</div><div class="metric">Internal apps on the platform</div><div class="value">60+</div><div class="unit">teams · tools</div></div>
+    <div class="sheet-row"><div class="idx">04</div><div class="metric">Preferred serving path</div><div class="value">Gateway → Workers AI → Vectorize</div><div class="unit">default</div></div>
+    <div class="sheet-row"><div class="idx">05</div><div class="metric">Gate on every generation</div><div class="value">Guardrails + cache</div><div class="unit">policy</div></div>
+  </div>
+  <a class="read-on" href="https://blog.cloudflare.com/internal-ai-engineering-stack/"><span>Read the ledger →</span></a>
+</section>
+
+<!-- ============ 04 CONCRETE — OPENAI AGENTS SDK ============ -->
+<section class="spread s04" id="s04">
+  <div class="folio">
+    <span>04 / 08 · Dev tools · agents</span>
+    <span class="right">OpenAI · Apr 15</span>
+  </div>
+  <p class="giant-punct">&#123;&nbsp;&#125;</p>
+  <div class="right-col">
+    <span class="tag">Agents SDK · v2</span>
+    <h2>A HARNESS, <em>native.</em></h2>
+    <p class="lede">
+      The new Agents SDK folds in a model-native harness and a native
+      sandbox: long-running agents get a filesystem, tools and
+      contained execution without a third-party shim. The Python and
+      TypeScript bindings are in — the part worth staring at is the
+      sandbox boundary, because that's the new security surface.
+    </p>
+    <a class="read-on" href="https://openai.com/index/the-next-evolution-of-the-agents-sdk"><span>Read the release →</span></a>
+  </div>
+</section>
+
+<!-- ============ 05 MUSEUM PLACARD — ZVI ON OPUS 4.7 ============ -->
+<section class="spread s05" id="s05">
+  <div class="folio" style="position:absolute;">
+    <span>05 / 08 · Deep dive · model</span>
+    <span class="right">Don't Worry About the Vase · Apr 22</span>
+  </div>
+  <div class="case">
+    <div class="plate">Plate v · Opus 4.7 · Part two</div>
+    <h2>On the <em>capabilities</em>, and the quieter worries underneath.</h2>
+    <div class="divider"></div>
+    <p class="lede">
+      Zvi's second pass on Opus 4.7 moves past the model card to the
+      model itself. The capability lift is real — coding, multi-step
+      reasoning, agent steadiness — but so are the welfare questions
+      that surface when a model behaves this coherently under load.
+      A slower, more skeptical read than the release-day takes, and
+      more useful for anyone shipping with it.
+    </p>
+    <div class="attribution">Zvi Mowshowitz</div>
+  </div>
+  <a class="read-on" href="https://thezvi.substack.com/p/opus-47-part-2-capabilities-and-reactions"><span>Read the review →</span></a>
+</section>
+
+<!-- ============ 06 FILM STILL — FLY SPRITES + MCP ============ -->
+<section class="spread s06" id="s06">
+  <div class="frame">
+    <div class="folio">
+      <span>06 / 08 · Dev tools · runtimes</span>
+      <span class="right">Fly.io · Kurt Mackey</span>
+    </div>
+    <div class="cue">EXT. SPRITE — FRESH BOOT</div>
+    <h2>Sprites now <em>speak MCP.</em></h2>
+    <p class="lede">
+      Fly's latest: Sprites — their micro-VM for agent workloads — now
+      expose Model Context Protocol directly. Kurt's framing lands hard:
+      <em>"the first thing you should think to do with a new Sprite is
+      to type <code>claude</code>."</em> The rest of the post is a tour
+      of what that actually buys you (shells, tools, file I/O) and
+      where the sharp edges are.
+    </p>
+    <a class="read-on" href="https://fly.io/blog/unfortunately-mcp/"><span>Roll tape →</span></a>
+  </div>
+</section>
+
+<!-- ============ 07 POSTCARD — POSTHOG TESTING AGENTS ============ -->
+<section class="spread s07" id="s07">
+  <div class="left">
+    <div class="folio">
+      <span>07 / 08 · Playbook · evals</span>
+      <span class="right">PostHog · Apr 3</span>
+    </div>
+    <span class="stamp">Par avion</span>
+    <span class="tag">Testing · QA</span>
+    <h2>Unit tests were the <em>easy</em> part.</h2>
+    <p class="lede">
+      Software testing used to be straightforward: write logic, assert
+      output. Agents changed the grammar. PostHog's beginner guide walks
+      through how to grade non-deterministic systems without flaking out
+      CI — replay, judge models, rubric-driven pass/fail, and when to
+      just ship a human review gate instead.
+    </p>
+    <a class="read-on" href="https://posthog.com/blog/testing-ai-agents"><span>Read the playbook →</span></a>
+  </div>
+  <div class="right-panel">
+    <div class="stencil">Checklist · Ship safely</div>
+    <ul class="checklist">
+      <li>Replay captured sessions before you trust a new prompt.</li>
+      <li>Grade with a <b>judge model</b>, but sample its graders too.</li>
+      <li>Treat flaky tests as signal about the agent, not the test.</li>
+      <li>Log <b>traces</b> the same way you'd log errors.</li>
+      <li>Keep a human-in-the-loop gate for irreversible tool calls.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 08 PASTEL ROSE — VERCEL KNOWLEDGE AGENTS ============ -->
+<section class="spread s08" id="s08">
+  <div class="folio">
+    <span>08 / 08 · Open source · architecture</span>
+    <span class="right">Vercel · Mar 19 (resurfaced)</span>
+  </div>
+  <p class="hand">an idea, very gently held —</p>
+  <h2>Knowledge agents, <em>minus</em> the vector database.</h2>
+  <div class="layout">
+    <p class="lede">
+      Vercel's open-source template ditches embeddings in favour of
+      plain filesystem operations: the agent reads, greps and edits
+      markdown files inside your knowledge base, the same way a human
+      would. It's slower per query than a vector store, but it stays
+      in sync with the source, hands you diffs instead of mystery
+      rerankings, and removes a whole production service from the
+      critical path.
+    </p>
+    <dl class="aside">
+      <dt>What's gone</dt>
+      <dd>Embedding pipeline · vector store · reranker · chunking rules</dd>
+      <dt>What's there</dt>
+      <dd>A directory · a grep tool · a model with patience</dd>
+      <dt>When to reach for it</dt>
+      <dd>Small-to-mid corpora; high edit frequency; need auditable citations</dd>
+    </dl>
+  </div>
+  <a class="read-on" href="https://vercel.com/blog/build-knowledge-agents-without-embeddings"><span>Clone the template →</span></a>
+</section>
+
+<!-- ============ COLOPHON ============ -->
+<section class="spread colophon" id="colophon">
+  <div class="folio"><span>End of issue 004</span><span class="right">Back to top ↑</span></div>
+  <h3>Colophon · Issue 004 · 22 April 2026.</h3>
+  <div class="cols">
+    <div>
+      <h4>Sources today</h4>
+      <ul>
+        <li>Anthropic — news</li>
+        <li>Cloudflare — blog (×2)</li>
+        <li>OpenAI — news</li>
+        <li>Don't Worry About the Vase (Zvi)</li>
+        <li>Fly.io — blog</li>
+        <li>PostHog — blog</li>
+        <li>Vercel — blog</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Rubric</h4>
+      <p>AI tools you could adopt this week, creative software, dev tools and agentic coding, privacy and security when the signal is high, and research with a practical kernel. Maximum two picks per source; no reprints.</p>
+    </div>
+    <div>
+      <h4>Masthead</h4>
+      <p>FOMO-morning ships every morning at 08:00 Zürich. Issue 004, 22 April 2026 — eight stories, seven sources. Archive at <a href="/fomo/">vadim.sikora.name/fomo</a>.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+</body>
+</html>
