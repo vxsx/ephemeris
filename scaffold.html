@@ -1,0 +1,327 @@
+<!doctype html>
+<!--
+  FOMO-morning · canonical spread scaffold
+  ─────────────────────────────────────────
+
+  This file is the LOCKED structural baseline for every issue. The daily
+  agent clones this into magazines/YYYY-MM-DD.html and then:
+
+    ✓ duplicates the <section class="spread"> block per story
+    ✓ applies per-spread surface overrides in CSS (palette, fonts, motifs)
+    ✓ fills in cover/colophon content
+
+  It MUST NOT:
+
+    ✗ change `.spread` grid-template-rows or padding
+    ✗ absolute-position .folio / .tag / .hed / .lede / .figure / .cta
+    ✗ remove the `.decor` layer (it's the only place decorative absolutes
+      are allowed, behind content via z-index)
+    ✗ drop `overflow-wrap` / `hyphens` rules or `safe center` alignments
+
+  Why this exists: issues 001–005 used free-form per-spread layouts and
+  every issue shipped with at least one overlap/clipping bug. The grid
+  here makes overlap impossible by construction — folio, main, and cta
+  live in distinct grid rows; decorative content lives behind them.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>FOMO-morning</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — don't touch below this line unless fixing a bug.
+     Surface overrides live below, under "Theme overrides".
+     ═══════════════════════════════════════════════════════════════════ */
+
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 {
+    overflow-wrap: break-word;
+    hyphens: auto;
+    margin: 0;
+  }
+  img { max-width: 100%; display: block; }
+  main { scroll-snap-type: y proximity; }
+
+  /* ───── Spread skeleton ─────
+     3-row grid: folio | main | cta. Nothing ever collides because
+     nothing is absolute except the explicit .decor layer, which lives
+     behind content via isolation + z-index. */
+  .spread {
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    scroll-snap-align: start;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+
+  .spread > .decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+
+  .spread > .cta { align-self: start; }
+
+  /* ───── Shared components ─────
+     Per-spread themes restyle these; they never move or unposition. */
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 8vw, 140px);
+    line-height: 1.0;
+    letter-spacing: -0.025em;
+    padding-bottom: 0.12em;   /* reserve descender space for italic p/g/y/j */
+  }
+
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+
+  .figure { width: 100%; }
+
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;           /* default flip — override per spread */
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  /* ───── Mobile — content-safe defaults ─────
+     Reflow the grid, clamp headlines, keep read-on reachable. */
+  @media (max-width: 800px) {
+    .spread { padding: 44px 22px 40px; gap: 24px; }
+    .hed    { font-size: 11vw; line-height: 1.04; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — surface only: palette, type, decorative motifs.
+     Never override .spread / .folio / .main / .cta structure or position.
+     Each .sNN gets its own block. Add --flip to every .sNN .read-on.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── Example: cream editorial hero ─── */
+  .s01 {
+    background: #f3ead7;
+    color: #1a1a1a;
+  }
+  .s01 .tag   { color: #6b1f14; border-color: #6b1f14; }
+  .s01 .hed em {
+    font-style: italic;
+    color: #6b1f14;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s01 .read-on { color: #6b1f14; border-color: #6b1f14; --flip: #f3ead7; }
+
+  /* Decorative layer: a giant ghost-letter in the corner, absolutely
+     free to move around because it's z-index: 0 under content. */
+  .s01 .decor::before {
+    content: "";
+    position: absolute;
+    right: -6vw; bottom: -14vw;
+    width: 56vw; height: 56vw;
+    background: radial-gradient(circle, rgba(107,31,20,0.08), transparent 70%);
+  }
+
+  /* ─── Cover override ───
+     Cover reuses .spread; the hero block lives inside .main. */
+  .cover { background: #f3ead7; color: #1a1a1a; }
+  .cover .masthead {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    font-size: clamp(80px, 16vw, 260px);
+    line-height: 0.86;
+    letter-spacing: -0.04em;
+    color: #6b1f14;
+    padding-bottom: 0.14em;
+    margin: 0;
+  }
+  .cover .masthead em {
+    font-style: italic;
+    color: #1a1a1a;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .cover .dek {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(22px, 2.2vw, 32px);
+    line-height: 1.3;
+    max-width: 26ch;
+  }
+  .cover .toc {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 40px;
+    padding-top: 20px;
+    border-top: 1px solid currentColor;
+    width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    text-decoration: none; color: inherit;
+    padding: 6px 0;
+    border-bottom: 1px dotted rgba(0,0,0,0.25);
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.85em; opacity: 0.7; }
+  .cover .toc .num {
+    font-family: var(--serif); font-weight: 700; font-style: italic;
+    color: #6b1f14; margin-right: 8px;
+  }
+  @media (max-width: 800px) {
+    .cover .toc { grid-template-columns: 1fr; gap: 0; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     COVER — uses the same .spread skeleton, with .main containing the
+     masthead / dek / TOC instead of tag/hed/lede.
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span>FOMO·morning · Issue NNN</span>
+    <span>Weekday · DD MMM YYYY · Zürich</span>
+  </header>
+  <div class="main">
+    <h1 class="masthead">FOMO<br><em>morning.</em></h1>
+    <p class="dek">Short dek naming today's theme — e.g., "Today's issue is about agents learning to read."</p>
+    <nav class="toc">
+      <!-- Repeat per story: -->
+      <a href="#s01"><span><span class="num">01</span>Story title here</span><span>Source</span></a>
+    </nav>
+  </div>
+  <div class="cta"><!-- cover has no CTA; leave empty or drop --></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     SPREAD — clone this block per story. Change .sNN class + theme
+     override CSS above, but keep the structure.
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>FOMO·morning · Issue NNN</span>
+    <span>01 / N · Source</span>
+  </header>
+  <div class="main">
+    <span class="tag">Topic · Topic</span>
+    <h2 class="hed">Headline here with <em>emphasis</em>.</h2>
+    <p class="lede">Two-to-four sentence lede. Say what the piece is and why it matters to a senior engineer or founder who has ten minutes to decide whether to read it.</p>
+    <div class="figure">
+      <!-- Optional per-theme visual: pull-quote, stats, terminal, graph, grid.
+           Stays inside .main flow, never absolute. -->
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://example.com" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true">
+    <!-- Optional decorative layer. Absolute here is allowed; it lives at
+         z-index 0 under all content. Use pseudo-elements or positioned
+         children freely. -->
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     COLOPHON — same skeleton, plain text.
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue NNN</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Short wrap sentence. Sources that fed today's picks, the rubric, the issue date. No font-naming, no "hand-laid."</p>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>

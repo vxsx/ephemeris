@@ -111,17 +111,48 @@ mode.
 
 Write **one** self-contained HTML file to `magazines/$ISSUE_DATE.html`.
 
-**Locked technical baseline (copy from `magazines/2026-04-19.html` unchanged):**
-the Google Fonts `<link>`, the `:root` font vars, the `@media (max-width: 800px)`
-mobile rules, the `.spread` shell, the `.read-on` button, the `.folio` utility,
-and the overflow-wrap rules on `h1–h4`. These took iteration — don't re-derive.
+### Start from `scaffold.html`
 
-**Everything else — palette, layout, type treatment, decorative motifs,
-spread order, and the cover treatment — is a fresh design decision every
-day.** Think of FOMO-morning as a magazine with a guest art director on
-rotation: typography and rubric stay constant, visual personality shifts
-issue to issue. Issues 001 and 002 came out visually identical — that was
-the failure mode.
+`scaffold.html` in the repo root is the **locked structural baseline**.
+Copy it. Don't re-derive the skeleton from scratch and don't crib from
+prior issues — their layouts were free-form and introduced overlap
+bugs in every issue 001–005.
+
+The scaffold enforces: folio → main → cta as a 3-row CSS Grid so
+nothing can overlap. Decorative elements live in a `.decor` layer at
+`z-index: 0` behind content. `safe center` alignment, `overflow-wrap`,
+descender space, and `--flip` hover defaults are all baked in.
+
+### What you may change per issue
+
+- **Palette:** `.sNN { background: …; color: … }`
+- **Typography on hed/lede/tag:** font-family, weight, style, size,
+  optical-size axis, italic switching
+- **`.figure` content:** pull-quote, stats, terminal block, graph,
+  grid — whatever the theme calls for, inside `.main` flow
+- **`.decor` content:** pseudo-elements, positioned children, patterns,
+  ghost type — anything, because it's behind content
+- **Per-spread `--flip`** on `.read-on` (see hover rule)
+- **Cover masthead treatment** and **colophon wrap copy**
+
+### What you must NOT change
+
+- `grid-template-rows`, `padding`, or `display` on `.spread`
+- `position` on `.folio`, `.main`, `.tag`, `.hed`, `.lede`, `.figure`,
+  `.cta`, `.read-on` — they stay in the grid / in-flow
+- The `.decor` layer contract (`position: absolute; inset: 0; z-index: 0;
+  pointer-events: none`)
+- Global `html, body { overflow-x: hidden }` and the `h1–h4` wrap rules
+- The mobile `@media (max-width: 800px)` block (you can ADD to it, but
+  the existing rules stay)
+
+### Variety comes from surface, not structure
+
+Issues 001 and 002 were identical because layouts were copied. Issues
+003–005 had different layouts but every one shipped with an overlap
+bug because each layout was reinvented. The sweet spot: structure
+stable, surface changes. Think of it as a magazine with a consistent
+grid and a guest art director per issue — same bones, different skin.
 
 **Typography (unchanged):**
 
@@ -129,96 +160,47 @@ the failure mode.
 - Minimum body size 18px. Display headlines 64px+ on desktop.
 - No small type anywhere. If you're tempted, rewrite shorter.
 
-**Mobile / wrapping rules — non-negotiable:**
+### Pitfalls the scaffold can't prevent
 
-These failed in issue 001 and must be baked into every issue. Copy the CSS
-baseline from `magazines/2026-04-19.html` unchanged, specifically:
+The scaffold handles overflow-wrap, safe-center alignment, flex-wrap on
+folios, descender padding on `.hed`, mobile clamps, and `--flip`
+defaults. The things below are about content choices or new CSS you
+write — the scaffold can't enforce them for you:
 
-- `html, body { overflow-x: hidden; }` — kill horizontal scroll.
-- `h1, h2, h3, h4 { overflow-wrap: break-word; hyphens: auto; }` —
-  so long words wrap instead of clipping off the edge.
-- The `.folio` and `.cover .kicker` flex rows **must** use
-  `flex-wrap: wrap; gap: 8px ...` — otherwise phrases like "FOMO · MORNING"
-  and "19 APR 2026" smash together with no space.
-- No `&nbsp;` inside display headlines unless you are 100% sure the paired
-  words fit on one mobile line. Prefer plain spaces.
-- Headline sizes on mobile (<=800px) use `vw` units, not `clamp()` minimums
-  above ~48px. If `clamp(72px, 12vw, 220px)` has a 72px floor, a 360px
-  viewport will clip. Use `font-size: 12-13vw` inside the mobile media
-  query.
-- Headlines wrap → bump `line-height` to ≥1.02 on mobile. Desktop 0.85 is
-  fine, but don't assume headlines stay single-line.
-- Disable drop caps on mobile (`float: none; font-size: inherit;`) — they
-  collapse narrow columns into 2-words-per-line.
-- Set `max-width: 100%` on ledes, body copy, and abstracts inside the
-  mobile media query. `ch`-based caps overflow on phones.
-- Collapse `.columns { column-count: N }` to 1 column on mobile.
-- The `.folio` must go `position: static; margin-bottom: 16px` on mobile
-  so it doesn't overlap the headline.
-- Two-column grids collapse to 1; 5-column grids to 2 (and to 1 under
-  420px).
-- **Use `justify-content: safe center` (and `align-items: safe center`)**
-  on any flex container whose children might be taller than the container.
-  Plain `center` causes symmetric overflow when content exceeds the box —
-  the last element (often the `.read-on` button) clips off. This hit
-  issue 003's PostHog spread.
-- For letterbox / masthead decorations, prefer absolute-positioned
-  pseudo-elements over `grid-template-rows: Npx 1fr Npx`. The grid version
-  constrains the middle track to viewport-bound space and overflows
-  invisibly under `overflow: hidden`.
-- **Every per-spread `.read-on` override must set `--flip` to the spread's
-  background colour.** The base rule does `:hover { background: currentColor }`
-  and `:hover span { color: var(--flip, #fff) }`. If the spread's text is
-  *light* (cream, pastel), hover makes the bg light and the text falls
-  back to white → invisible. Issue 003's PostHog CTA read white-on-cream.
-  Example: `.sXX .read-on { color: #fff2d1; border-color: #fff2d1; --flip: #080808; }`.
-- **Decorative lines / rules / crop marks must sit inside the spread's
-  left/right padding, never in the content column.** The spread base
-  padding is `clamp(24px, 6vw, 120px)`; position any `::before` rule at
-  `left: clamp(16px, 3vw, 48px)` (well under 6vw) so at every viewport
-  it stays to the left of content. Issue 003's memo margin rule was at
-  `8vw` vs. `6vw` content padding and sliced through the text on
-  desktop.
-- **Decorative pseudo-elements at the top of a spread must not share the
-  vertical strip with `.folio`.** The folio lives at
-  `top: clamp(20px, 3vw, 40px)`. Any `::before` header / stamp / tag
-  belongs below it (`top: clamp(72px, 9vw, 120px)` or further down).
-  Issue 005's Cloudflare spread put a "CLASSIFICATION" pseudo-header at
-  the same `top` as the folio and the two stacked on top of each other.
-- **Display type with `line-height < 1` must reserve descender space.**
-  Fraunces italic `p`, `g`, `y`, `j` drop well below the baseline. If
-  your display element has `line-height: 0.82–0.9`, add
-  `padding-bottom: 0.15em` (or equivalent margin) or bump line-height to
-  ≥ 0.95 so descenders don't intrude into the next element. Issue 005's
-  cover `protocols.` descender overlapped the subtitle.
-- **Superscript "unit" glyphs on big italic numerals need real space.**
-  Italic Fraunces digits have generous right-side swashes. When
-  appending a unit (`faster`, `/day`, `×`) with `vertical-align`, use
-  `margin-left: 0.4–0.6em` — `0.1em` is not enough and the word ends up
-  visually behind the glyph. Or switch to `display: inline-flex` with
-  an explicit `gap`.
-- **Reset `letter-spacing`, `font-style`, and `font-family` on child
-  spans inside display numerals.** `letter-spacing: -0.06em` on a 360px
-  parent computes to ≈ -22px and **inherits as an absolute pixel value**
-  into children — at a 79px child that's catastrophic crushing, letters
-  literally stack on top of each other. Issue 005's "faster" unit
-  rendered as `f̶a̶s̶t̶e̶r̶`. Template for unit spans:
-  ```css
-  .hero-num .unit {
-    font-family: var(--sans);  /* break out of italic serif */
-    font-style: normal;
-    font-weight: 700;
-    font-size: 0.22em;
-    letter-spacing: normal;    /* reset the inherited px value */
-    margin-left: 0.5em;        /* clear the swash */
-  }
-  ```
+1. **No `&nbsp;` inside display headlines.** Forced non-breaks clip on
+   narrow viewports. Plain spaces. If a phrase must stay together, it's
+   too long for a headline — rewrite.
+2. **Reset `letter-spacing: normal` on spans nested inside display
+   numerals.** A parent's `letter-spacing: -0.06em` at 360px inherits
+   as **-22px** (absolute pixels) into a 79px child → letters crush.
+   Template:
+   ```css
+   .sNN .num .unit {
+     font-family: var(--sans); font-style: normal; font-weight: 700;
+     font-size: 0.22em;
+     letter-spacing: normal;
+     margin-left: 0.5em;          /* italic swashes need real space */
+   }
+   ```
+3. **If you add a multi-column block** (`column-count: N`), override it
+   to `column-count: 1` in the mobile media query.
+4. **Decorative positioned content goes in `.decor`, never on
+   `::before` / `::after` of the spread or of content elements.** The
+   `.decor` layer is `position: absolute; inset: 0; z-index: 0;
+   pointer-events: none` and lives *behind* content via isolation —
+   overlap becomes impossible. Every time issues 003–005 had overlap,
+   the cause was decoration outside this layer.
+5. **Don't re-add drop caps.** `::first-letter` float collapses narrow
+   columns into 2-words-per-line on mobile, and no CSS can save it.
 
-**Spread themes — pick one per story from this bench (so 5 to 10 per issue).** Each spread must use
-a different colour *and* layout than the others in the same issue. Cast
-themes to stories tonally (don't randomize — e.g. privacy → dark report;
-case study → big stats; deep research → academic; creative tool →
-risograph; launch → neon; postmortem → terminal; etc.).
+**Spread themes — surface treatments, not structural redesigns.** Pick
+one per story. Each item below is a package of *palette + type choices
++ decorative motifs* applied on top of the scaffold's fixed grid.
+"Two-column", "bar chart", "terminal card" etc. live inside `.figure`
+(in-flow) or `.decor` (behind content) — never by rearranging the
+spread shell. Cast themes tonally (privacy → dark report; case study
+→ big stats; research → academic; creative tool → risograph;
+postmortem → terminal; launch → neon).
 
 1. **Hero / editorial cream** — big serif display, oxblood accent
 2. **Warm orange** — two-column, pull-quote
