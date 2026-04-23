@@ -197,6 +197,22 @@ baseline from `magazines/2026-04-19.html` unchanged, specifically:
   `margin-left: 0.4–0.6em` — `0.1em` is not enough and the word ends up
   visually behind the glyph. Or switch to `display: inline-flex` with
   an explicit `gap`.
+- **Reset `letter-spacing`, `font-style`, and `font-family` on child
+  spans inside display numerals.** `letter-spacing: -0.06em` on a 360px
+  parent computes to ≈ -22px and **inherits as an absolute pixel value**
+  into children — at a 79px child that's catastrophic crushing, letters
+  literally stack on top of each other. Issue 005's "faster" unit
+  rendered as `f̶a̶s̶t̶e̶r̶`. Template for unit spans:
+  ```css
+  .hero-num .unit {
+    font-family: var(--sans);  /* break out of italic serif */
+    font-style: normal;
+    font-weight: 700;
+    font-size: 0.22em;
+    letter-spacing: normal;    /* reset the inherited px value */
+    margin-left: 0.5em;        /* clear the swash */
+  }
+  ```
 
 **Spread themes — pick one per story from this bench (so 5 to 10 per issue).** Each spread must use
 a different colour *and* layout than the others in the same issue. Cast
