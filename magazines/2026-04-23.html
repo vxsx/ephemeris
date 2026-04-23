@@ -1,0 +1,1224 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>FOMO-MORNING — №005 — Thursday, April 23, 2026</title>
+<meta name="description" content="A daily editorial digest of the best writing on AI tools, creative software, dev tools, privacy, and science. Issue 005." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 {
+    overflow-wrap: break-word;
+    word-break: normal;
+    hyphens: auto;
+  }
+  a { color: inherit; text-underline-offset: 3px; }
+  img { max-width: 100%; display: block; }
+  .spread {
+    min-height: 100vh;
+    padding: clamp(32px, 5vw, 96px) clamp(24px, 6vw, 120px);
+    position: relative;
+    overflow: hidden;
+    scroll-snap-align: start;
+  }
+  main { scroll-snap-type: y proximity; }
+  .rule { border: 0; border-top: 1px solid currentColor; margin: 0; opacity: 0.25; }
+  .folio {
+    position: absolute; top: clamp(20px, 3vw, 40px); left: clamp(24px, 6vw, 120px);
+    right: clamp(24px, 6vw, 120px);
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 8px 24px; flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .folio .right { text-align: right; }
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 10px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+  .read-on {
+    display: inline-block; margin-top: 28px;
+    font-family: var(--sans); font-weight: 600;
+    font-size: 16px; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip, #fff); }
+
+  /* ============ COVER — SINGLE-WORD MOOD ============ */
+  .cover {
+    background: #0a0a0b;
+    color: #f1ece0;
+    display: flex;
+    flex-direction: column;
+    justify-content: safe space-between;
+    min-height: 100vh;
+    padding: clamp(32px, 5vw, 96px) clamp(24px, 6vw, 120px);
+    position: relative;
+  }
+  .cover .top-rule {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 8px 24px;
+    font-family: var(--mono);
+    font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase;
+    color: #8f8875;
+    border-bottom: 1px solid #2a2824;
+    padding-bottom: 14px;
+  }
+  .cover .top-rule .mast {
+    font-family: var(--serif); font-weight: 800; font-style: italic;
+    font-size: 20px; letter-spacing: -0.01em; color: #f1ece0;
+    font-variation-settings: "opsz" 48, "SOFT" 50, "WONK" 1;
+  }
+  .cover .mood {
+    display: grid;
+    gap: 22px;
+    align-content: center;
+    flex: 1;
+    padding: 8vh 0 4vh;
+  }
+  .cover .kicker {
+    font-family: var(--mono);
+    font-size: 13px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: #b38c4d;
+  }
+  .cover .word {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-size: clamp(96px, 22vw, 380px);
+    line-height: 0.82;
+    letter-spacing: -0.04em;
+    color: #f5efe1;
+    margin: 0;
+    max-width: 100%;
+  }
+  .cover .word .dot { color: #e0643c; font-style: normal; }
+  .cover .sub {
+    font-family: var(--serif);
+    font-size: clamp(20px, 2.2vw, 28px);
+    font-style: italic;
+    line-height: 1.35;
+    color: #cec6b3;
+    max-width: 720px;
+    margin: 0;
+  }
+  .cover .toc {
+    margin-top: 32px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px 24px;
+    border-top: 1px solid #2a2824;
+    padding-top: 20px;
+  }
+  .cover .toc a {
+    text-decoration: none;
+    color: #e8e0cc;
+    display: block;
+    padding: 6px 0;
+    border-bottom: 1px dotted #3a362d;
+  }
+  .cover .toc .n {
+    display: block;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.24em;
+    color: #8f8875; text-transform: uppercase;
+  }
+  .cover .toc .t {
+    display: block;
+    font-family: var(--serif); font-size: 17px; line-height: 1.25;
+    color: #f1ece0; margin-top: 4px;
+  }
+
+  /* ============ S01 TERMINAL — OPENAI WEBSOCKETS ============ */
+  .s01 {
+    background: #050806;
+    color: #baffc9;
+    font-family: var(--mono);
+    position: relative;
+  }
+  .s01::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(186, 255, 201, 0.06) 0 2px,
+      transparent 2px 4px
+    );
+    pointer-events: none;
+  }
+  .s01 .folio { color: #7ad38a; opacity: 0.9; }
+  .s01 .tag { color: #7ad38a; border-color: #3a6a40; }
+  .s01 .chrome {
+    display: flex; gap: 6px;
+    margin-top: 56px; margin-bottom: 18px;
+    font-size: 12px; color: #4a7a50;
+    letter-spacing: 0.22em;
+  }
+  .s01 .chrome .dot { width: 10px; height: 10px; border-radius: 50%; background: #2a4a30; display: inline-block; }
+  .s01 h1 {
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: clamp(36px, 6.2vw, 88px);
+    line-height: 1.08;
+    color: #d4ffdf;
+    margin: 8px 0 24px;
+    letter-spacing: -0.01em;
+    max-width: 18ch;
+  }
+  .s01 h1 .caret {
+    display: inline-block;
+    width: 0.55em; height: 1em;
+    background: #6affad;
+    vertical-align: -0.14em;
+    margin-left: 0.12em;
+    animation: blink 1.05s steps(2) infinite;
+  }
+  @keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
+  .s01 .lede {
+    font-family: var(--mono);
+    font-size: 17px;
+    line-height: 1.65;
+    color: #a6e8b1;
+    max-width: 62ch;
+  }
+  .s01 .term {
+    margin-top: 36px;
+    border: 1px solid #2f5a36;
+    background: #031004;
+    padding: 22px 26px;
+    max-width: 780px;
+  }
+  .s01 .term .line {
+    display: block;
+    font-size: 14px;
+    line-height: 1.9;
+    color: #8ad097;
+    white-space: pre;
+    overflow-x: auto;
+  }
+  .s01 .term .prompt { color: #e0643c; }
+  .s01 .term .ok { color: #6affad; }
+  .s01 .term .dim { color: #55834e; }
+  .s01 .read-on {
+    color: #baffc9;
+    border-color: #4d8a56;
+    --flip: #050806;
+  }
+
+  /* ============ S02 NEON / CYBERPUNK — IMAGES 2.0 ============ */
+  .s02 {
+    background:
+      radial-gradient(circle at 18% 20%, rgba(255, 56, 200, 0.28), transparent 50%),
+      radial-gradient(circle at 85% 78%, rgba(0, 220, 230, 0.32), transparent 48%),
+      #0d0619;
+    color: #f4e8ff;
+  }
+  .s02 .folio { color: #d0b8f2; }
+  .s02 .tag { color: #ff8ad8; border-color: #ff8ad8; }
+  .s02 h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 80, "WONK" 1;
+    font-size: clamp(48px, 8vw, 132px);
+    line-height: 0.92;
+    letter-spacing: -0.028em;
+    margin: 24px 0 20px;
+    background: linear-gradient(92deg, #ff6cc4 0%, #b88bff 40%, #67f0e0 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    max-width: 20ch;
+  }
+  .s02 .layout {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 48px;
+    margin-top: 40px;
+    align-items: start;
+  }
+  .s02 .body p {
+    font-family: var(--serif);
+    font-size: 20px; line-height: 1.55;
+    color: #e8dff5;
+    margin: 0 0 18px;
+    max-width: 52ch;
+  }
+  .s02 .card {
+    border: 1px solid rgba(255, 140, 220, 0.45);
+    border-radius: 6px;
+    padding: 22px 24px;
+    background: rgba(13, 6, 25, 0.55);
+    box-shadow: 0 0 32px rgba(255, 78, 196, 0.18), inset 0 0 20px rgba(103, 240, 224, 0.08);
+  }
+  .s02 .card .label {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.28em;
+    text-transform: uppercase; color: #67f0e0;
+  }
+  .s02 .card .val {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 1.05;
+    margin: 6px 0 14px;
+    color: #ff8ad8;
+    font-variation-settings: "opsz" 96;
+  }
+  .s02 .card .detail {
+    font-family: var(--mono); font-size: 13px; line-height: 1.55;
+    color: #cfc2e2;
+    margin: 0;
+  }
+  .s02 .card + .card { margin-top: 16px; }
+  .s02 .read-on {
+    color: #f4e8ff;
+    border-color: #ff8ad8;
+    --flip: #0d0619;
+  }
+
+  /* ============ S03 DARK REPORT / CLASSIFIED — CLOUDFLARE RUST WORKERS ============ */
+  .s03 {
+    background: #100606;
+    color: #f4d7cf;
+    position: relative;
+  }
+  .s03::before {
+    content: "CLASSIFICATION · ENGINEERING · CLOUDFLARE";
+    position: absolute;
+    top: clamp(16px, 3vw, 40px);
+    left: clamp(16px, 3vw, 48px);
+    right: clamp(16px, 3vw, 48px);
+    font-family: var(--mono);
+    font-size: 10px; letter-spacing: 0.34em;
+    color: #b03a42;
+    text-transform: uppercase;
+    display: flex; justify-content: space-between;
+    flex-wrap: wrap;
+    opacity: 0.8;
+  }
+  .s03 .folio { color: #c97079; }
+  .s03 .tag { color: #ff6b7a; border-color: #7a2a30; }
+  .s03 h2 {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(42px, 7vw, 104px);
+    line-height: 0.95;
+    letter-spacing: -0.025em;
+    margin: 30px 0 22px;
+    color: #f2dacb;
+    max-width: 18ch;
+  }
+  .s03 h2 em {
+    font-style: italic;
+    color: #ff6b7a;
+    font-variation-settings: "opsz" 144, "WONK" 1;
+  }
+  .s03 .lede {
+    font-family: var(--serif);
+    font-size: 19px; line-height: 1.55;
+    color: #e0c4bb;
+    max-width: 60ch;
+    margin: 0 0 28px;
+  }
+  .s03 .bars {
+    margin-top: 28px;
+    display: grid;
+    gap: 10px;
+    max-width: 620px;
+  }
+  .s03 .bar-row {
+    display: grid;
+    grid-template-columns: 180px 1fr 80px;
+    align-items: center;
+    gap: 16px;
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #c97079;
+  }
+  .s03 .bar-row .track {
+    height: 14px;
+    background: #2a0a0e;
+    border: 1px solid #4a1219;
+    position: relative;
+  }
+  .s03 .bar-row .fill {
+    position: absolute;
+    top: 0; left: 0; height: 100%;
+    background: linear-gradient(90deg, #8a1822, #ff6b7a);
+  }
+  .s03 .bar-row .val {
+    font-family: var(--mono); font-weight: 600;
+    color: #ff6b7a;
+    text-align: right;
+    letter-spacing: 0.1em;
+  }
+  .s03 .read-on {
+    color: #f4d7cf;
+    border-color: #ff6b7a;
+    --flip: #100606;
+  }
+
+  /* ============ S04 TEAL GRID — CLOUDFLARE AI CODE REVIEW ============ */
+  .s04 {
+    background: #053232;
+    color: #dff7f4;
+  }
+  .s04 .folio { color: #79c9c1; }
+  .s04 .tag { color: #6ff0d8; border-color: #2d5a58; }
+  .s04 h2 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(42px, 6.8vw, 92px);
+    line-height: 0.96;
+    letter-spacing: -0.022em;
+    margin: 34px 0 16px;
+    color: #eaf9f6;
+    max-width: 18ch;
+    font-variation-settings: "opsz" 144, "SOFT" 40;
+  }
+  .s04 .lede {
+    font-family: var(--serif);
+    font-size: 19px; line-height: 1.55;
+    color: #bfe6df;
+    max-width: 58ch;
+    margin: 0;
+  }
+  .s04 .grid {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-auto-rows: minmax(120px, auto);
+    gap: 12px;
+  }
+  .s04 .grid .cell {
+    background: #07403f;
+    border: 1px solid #1d5a58;
+    padding: 20px 18px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 14px;
+  }
+  .s04 .grid .cell .num {
+    position: absolute;
+    top: 10px; right: 14px;
+    font-family: var(--serif);
+    font-style: italic; font-weight: 500;
+    font-size: 22px;
+    color: #6ff0d8;
+    font-variation-settings: "opsz" 96, "WONK" 1;
+  }
+  .s04 .grid .cell .label {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: #6ff0d8;
+  }
+  .s04 .grid .cell .text {
+    font-family: var(--serif); font-size: 16px; line-height: 1.4;
+    color: #dff7f4;
+    margin: 0;
+  }
+  .s04 .read-on {
+    color: #dff7f4;
+    border-color: #6ff0d8;
+    --flip: #053232;
+  }
+
+  /* ============ S05 ACADEMIC JOURNAL — ANTHROPIC MANAGED AGENTS ============ */
+  .s05 {
+    background: #f5efe1;
+    color: #141a2e;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: clamp(32px, 6vw, 80px);
+    align-items: start;
+  }
+  .s05 .folio { color: #141a2e; opacity: 0.7; }
+  .s05 .sidebar {
+    border-right: 1px solid #c9c0a5;
+    padding: 70px 0 20px;
+    font-family: var(--mono);
+    font-size: 12px; line-height: 1.7;
+    color: #141a2e;
+  }
+  .s05 .sidebar h4 {
+    font-family: var(--mono);
+    font-size: 11px; letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: #5a3121;
+    margin: 0 0 10px;
+    font-weight: 600;
+  }
+  .s05 .sidebar p {
+    margin: 0 0 20px;
+    padding-right: 20px;
+  }
+  .s05 .sidebar dl {
+    margin: 0 0 18px;
+    padding-right: 20px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+  }
+  .s05 .sidebar dt { color: #5a3121; text-transform: uppercase; font-weight: 600; margin-top: 8px; }
+  .s05 .sidebar dd { margin: 2px 0 0; color: #141a2e; }
+  .s05 .body {
+    padding-top: 60px;
+    max-width: 680px;
+  }
+  .s05 .tag { color: #5a3121; border-color: #5a3121; }
+  .s05 h2 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-style: italic;
+    font-size: clamp(40px, 6vw, 84px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    color: #141a2e;
+    margin: 22px 0 22px;
+    font-variation-settings: "opsz" 144, "WONK" 1;
+    max-width: 16ch;
+  }
+  .s05 .lede {
+    font-family: var(--serif);
+    font-size: 19px; line-height: 1.6;
+    color: #2a324a;
+    margin: 0 0 20px;
+    max-width: 60ch;
+  }
+  .s05 .lede::first-letter {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 500;
+    float: left;
+    font-size: 62px;
+    line-height: 0.9;
+    margin: 6px 8px 0 0;
+    color: #5a3121;
+    font-variation-settings: "opsz" 144, "WONK" 1;
+  }
+  .s05 .columns {
+    column-count: 2;
+    column-gap: 34px;
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.6;
+    color: #1a2036;
+    margin-top: 8px;
+  }
+  .s05 .columns p { margin: 0 0 14px; }
+  .s05 .read-on {
+    color: #141a2e;
+    border-color: #141a2e;
+    --flip: #f5efe1;
+  }
+
+  /* ============ S06 BIG STATS / YELLOW — GITHUB DIFF PERF ============ */
+  .s06 {
+    background: #f4d02a;
+    color: #131010;
+    position: relative;
+  }
+  .s06::before {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; top: 0;
+    height: 14px;
+    background: repeating-linear-gradient(
+      to right,
+      #131010 0 22px,
+      transparent 22px 44px
+    );
+  }
+  .s06 .folio { color: #131010; opacity: 0.78; }
+  .s06 .tag { color: #131010; border-color: #131010; }
+  .s06 .layout {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 54px;
+    align-items: start;
+    margin-top: 40px;
+  }
+  .s06 h2 {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(42px, 6.6vw, 96px);
+    line-height: 0.96;
+    letter-spacing: -0.028em;
+    color: #131010;
+    margin: 0 0 20px;
+    max-width: 16ch;
+    font-variation-settings: "opsz" 144;
+  }
+  .s06 h2 em {
+    font-style: italic;
+    font-weight: 500;
+    color: #8a2010;
+    font-variation-settings: "opsz" 144, "WONK" 1;
+  }
+  .s06 .lede {
+    font-family: var(--serif);
+    font-size: 19px; line-height: 1.55;
+    color: #1a1616;
+    max-width: 52ch;
+    margin: 0 0 18px;
+  }
+  .s06 .hero-num {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(180px, 24vw, 360px);
+    line-height: 0.82;
+    letter-spacing: -0.06em;
+    color: #131010;
+    margin: 0;
+    font-variation-settings: "opsz" 144, "WONK" 1;
+    font-style: italic;
+  }
+  .s06 .hero-num .unit {
+    font-size: 0.22em;
+    font-weight: 700;
+    font-style: normal;
+    vertical-align: 0.42em;
+    margin-left: 0.08em;
+    color: #8a2010;
+  }
+  .s06 .stats {
+    margin-top: 26px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    border-top: 2px solid #131010;
+    padding-top: 22px;
+    max-width: 780px;
+  }
+  .s06 .stats dt {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: #131010;
+    opacity: 0.78;
+  }
+  .s06 .stats dd {
+    font-family: var(--serif); font-weight: 700;
+    font-size: 30px; line-height: 1.1;
+    color: #131010;
+    margin: 6px 0 0;
+  }
+  .s06 .read-on {
+    color: #131010;
+    border-color: #131010;
+    --flip: #f4d02a;
+  }
+
+  /* ============ S07 MIDNIGHT — ZVI: MODEL WELFARE ============ */
+  .s07 {
+    background: linear-gradient(170deg, #0a1430 0%, #1a1040 55%, #0e0a22 100%);
+    color: #dfe3f5;
+  }
+  .s07 .folio { color: #8892b8; }
+  .s07 .tag { color: #b7a3ff; border-color: #6059a8; }
+  .s07 h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-style: italic;
+    font-size: clamp(54px, 9vw, 156px);
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    margin: 28px 0 24px;
+    background: linear-gradient(120deg, #e8deff 0%, #8ea8ff 55%, #5fd6e8 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    max-width: 16ch;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s07 .layout {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    gap: 48px;
+    align-items: start;
+    margin-top: 32px;
+  }
+  .s07 .lede {
+    font-family: var(--serif);
+    font-size: 21px; line-height: 1.55;
+    color: #e0e4f5;
+    max-width: 56ch;
+    margin: 0 0 22px;
+  }
+  .s07 .pull {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.4;
+    color: #b7a3ff;
+    border-left: 2px solid #6059a8;
+    padding-left: 20px;
+    margin: 0 0 22px;
+    max-width: 50ch;
+    font-variation-settings: "opsz" 96, "WONK" 1;
+  }
+  .s07 .callout {
+    background: rgba(6, 4, 22, 0.55);
+    border: 1px solid #3a3380;
+    padding: 28px 30px;
+    position: relative;
+    overflow: hidden;
+  }
+  .s07 .callout::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 80% 10%, rgba(95, 214, 232, 0.18), transparent 40%);
+    pointer-events: none;
+  }
+  .s07 .callout .num {
+    font-family: var(--serif); font-weight: 300; font-style: italic;
+    font-size: clamp(72px, 10vw, 140px); line-height: 0.85;
+    letter-spacing: -0.04em;
+    background: linear-gradient(110deg, #b7a3ff, #5fd6e8);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    font-variation-settings: "opsz" 144, "WONK" 1;
+    margin: 0;
+  }
+  .s07 .callout .cap {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #8ea8ff;
+    margin-top: 10px;
+  }
+  .s07 .callout p {
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.55;
+    color: #cfd3e6;
+    margin: 14px 0 0;
+  }
+  .s07 .read-on {
+    color: #e8deff;
+    border-color: #b7a3ff;
+    --flip: #0e0a22;
+  }
+
+  /* ============ S08 WARM ORANGE — THE BATCH 349 ============ */
+  .s08 {
+    background: #f0823a;
+    color: #1e0a03;
+  }
+  .s08 .folio { color: #1e0a03; opacity: 0.7; }
+  .s08 .tag { color: #1e0a03; border-color: #1e0a03; }
+  .s08 h2 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(44px, 7.4vw, 112px);
+    line-height: 0.96;
+    letter-spacing: -0.028em;
+    color: #1e0a03;
+    margin: 28px 0 24px;
+    max-width: 17ch;
+    font-variation-settings: "opsz" 144;
+  }
+  .s08 h2 em {
+    font-style: italic;
+    font-weight: 400;
+    color: #53190a;
+    font-variation-settings: "opsz" 144, "WONK" 1;
+  }
+  .s08 .layout {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .s08 .lede {
+    font-family: var(--serif);
+    font-size: 20px; line-height: 1.6;
+    color: #1e0a03;
+    margin: 0 0 18px;
+    max-width: 54ch;
+  }
+  .s08 .lede strong { font-weight: 700; }
+  .s08 .aside {
+    border-left: 3px solid #1e0a03;
+    padding: 4px 0 4px 24px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.45;
+    color: #1e0a03;
+    max-width: 36ch;
+    font-variation-settings: "opsz" 144, "WONK" 1;
+  }
+  .s08 .aside .who {
+    display: block;
+    margin-top: 14px;
+    font-style: normal;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #53190a;
+  }
+  .s08 .read-on {
+    color: #1e0a03;
+    border-color: #1e0a03;
+    --flip: #f0823a;
+  }
+
+  /* ============ COLOPHON ============ */
+  .colophon {
+    background: #0b0b0b;
+    color: #e8e4d8;
+  }
+  .colophon .folio { color: #8a8474; }
+  .colophon h3 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-style: italic;
+    font-size: clamp(48px, 7vw, 96px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin: 30px 0 28px;
+    color: #f3ead4;
+    font-variation-settings: "opsz" 144, "WONK" 1;
+    max-width: 18ch;
+  }
+  .colophon .cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+    margin-top: 24px;
+    max-width: 1100px;
+  }
+  .colophon h4 {
+    font-family: var(--mono);
+    font-size: 11px; letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: #b38c4d;
+    margin: 0 0 12px;
+    font-weight: 600;
+  }
+  .colophon .cols p, .colophon .cols ul {
+    font-family: var(--serif); font-size: 16px; line-height: 1.6;
+    color: #cec6b3; margin: 0;
+  }
+  .colophon .cols ul { list-style: none; padding: 0; }
+  .colophon .cols ul li { padding: 4px 0; border-bottom: 1px dotted #2a2620; }
+  .colophon .cols ul li:last-child { border-bottom: 0; }
+  .colophon .meta {
+    margin-top: 40px;
+    font-family: var(--mono);
+    font-size: 12px; letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #7a7464;
+    border-top: 1px solid #2a2620;
+    padding-top: 18px;
+  }
+
+  /* ========================= MOBILE ========================= */
+  @media (max-width: 800px) {
+    .spread { padding: 40px 22px; }
+    .folio {
+      position: static;
+      margin: 0 0 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid currentColor;
+    }
+
+    /* Cover mood */
+    .cover { padding: 40px 22px; }
+    .cover .mood { padding: 4vh 0 2vh; gap: 16px; }
+    .cover .word { font-size: 36vw; line-height: 0.88; }
+    .cover .sub { font-size: 18px; }
+    .cover .toc { grid-template-columns: 1fr; gap: 8px; padding-top: 14px; }
+    .cover .top-rule { font-size: 11px; }
+
+    /* S01 */
+    .s01 h1 { font-size: 11vw; line-height: 1.06; max-width: 100%; }
+    .s01 .lede { max-width: 100%; font-size: 17px; }
+    .s01 .term { padding: 16px 14px; }
+    .s01 .term .line { font-size: 12px; }
+    .s01 .chrome { margin-top: 20px; }
+
+    /* S02 */
+    .s02 .layout { grid-template-columns: 1fr; gap: 26px; }
+    .s02 h2 { font-size: 13vw; line-height: 1.02; }
+    .s02 .body p { max-width: 100%; font-size: 18px; }
+    .s02 .card .val { font-size: 30px; }
+
+    /* S03 */
+    .s03 h2 { font-size: 12vw; line-height: 1.03; }
+    .s03 .lede { max-width: 100%; font-size: 18px; }
+    .s03::before { font-size: 9px; letter-spacing: 0.2em; }
+    .s03 .bar-row { grid-template-columns: 1fr 80px; }
+    .s03 .bar-row .track { grid-column: 1 / 3; margin-top: 4px; }
+    .s03 .bar-row .val { grid-column: 1 / 3; text-align: left; }
+
+    /* S04 */
+    .s04 h2 { font-size: 12vw; line-height: 1.04; }
+    .s04 .lede { max-width: 100%; font-size: 18px; }
+    .s04 .grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .s04 .grid .cell { padding: 16px 14px; }
+
+    /* S05 */
+    .s05 { grid-template-columns: 1fr; gap: 28px; padding: 40px 22px; }
+    .s05 .sidebar { border-right: 0; border-bottom: 1px solid #c9c0a5; padding: 0 0 18px; }
+    .s05 .sidebar p, .s05 .sidebar dl { padding-right: 0; }
+    .s05 .body { padding-top: 0; }
+    .s05 h2 { font-size: 11vw; line-height: 1.05; }
+    .s05 .lede { max-width: 100%; font-size: 18px; }
+    .s05 .lede::first-letter { font-size: 44px; }
+    .s05 .columns { column-count: 1; font-size: 16px; }
+
+    /* S06 */
+    .s06 .layout { grid-template-columns: 1fr; gap: 28px; }
+    .s06 h2 { font-size: 12vw; line-height: 1.04; }
+    .s06 .lede { max-width: 100%; font-size: 18px; }
+    .s06 .hero-num { font-size: 52vw; }
+    .s06 .stats { grid-template-columns: 1fr 1fr; gap: 16px; }
+    .s06 .stats dd { font-size: 22px; }
+    .s06::before { height: 10px; }
+
+    /* S07 */
+    .s07 .layout { grid-template-columns: 1fr; gap: 28px; }
+    .s07 h2 { font-size: 14vw; line-height: 1.02; }
+    .s07 .lede { max-width: 100%; font-size: 18px; }
+    .s07 .pull { font-size: 18px; }
+    .s07 .callout { padding: 22px 20px; }
+    .s07 .callout .num { font-size: 22vw; }
+
+    /* S08 */
+    .s08 .layout { grid-template-columns: 1fr; gap: 28px; }
+    .s08 h2 { font-size: 12vw; line-height: 1.03; }
+    .s08 .lede { max-width: 100%; font-size: 18px; }
+    .s08 .aside { font-size: 18px; }
+
+    /* Colophon */
+    .colophon .cols { grid-template-columns: 1fr; gap: 28px; }
+    .colophon h3 { font-size: 12vw; }
+  }
+
+  @media (max-width: 420px) {
+    .s04 .grid { grid-template-columns: 1fr; }
+    .s06 .stats { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ============ COVER — SINGLE-WORD MOOD ============ -->
+<section class="spread cover" id="cover">
+  <div class="top-rule">
+    <span class="mast">FOMO·morning</span>
+    <span>Issue №005</span>
+    <span>Thu · 23 Apr 2026</span>
+    <span>Zürich</span>
+  </div>
+  <div class="mood">
+    <span class="kicker">Mood of the morning</span>
+    <h1 class="word">protocols<span class="dot">.</span></h1>
+    <p class="sub">Sockets speak back. Reviewers read your diffs. Runtimes refuse to panic. Eight stories about the thin agreements holding everything together — and the softer ones we still owe our models.</p>
+  </div>
+  <nav class="toc">
+    <a href="#s01"><span class="n">01 · Agentic I/O</span><span class="t">OpenAI opens WebSockets in the Responses API.</span></a>
+    <a href="#s02"><span class="n">02 · Generative media</span><span class="t">Images 2.0 — and the text finally reads.</span></a>
+    <a href="#s03"><span class="n">03 · Reliability</span><span class="t">Rust Workers learn to survive their own panics.</span></a>
+    <a href="#s04"><span class="n">04 · CI-native review</span><span class="t">Cloudflare retrofits an AI reviewer onto the pipeline.</span></a>
+    <a href="#s05"><span class="n">05 · Architecture</span><span class="t">Anthropic: decouple the brain from the hands.</span></a>
+    <a href="#s06"><span class="n">06 · Performance</span><span class="t">GitHub's long uphill to a faster diff view.</span></a>
+    <a href="#s07"><span class="n">07 · Welfare</span><span class="t">Zvi, on Opus 4.7 and what it might feel.</span></a>
+    <a href="#s08"><span class="n">08 · Roundup</span><span class="t">The Batch: Meta pivots, teams reshape.</span></a>
+  </nav>
+</section>
+
+<!-- ============ S01 TERMINAL — OPENAI WEBSOCKETS ============ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>FOMO·morning · 005</span>
+    <span class="right">01 / 08 · OpenAI</span>
+  </header>
+  <div class="chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span> <span>/bin/agent — 80×24</span></div>
+  <span class="tag">Agentic I/O</span>
+  <h1>Sockets come back to the agent loop.<span class="caret"></span></h1>
+  <p class="lede">OpenAI's Responses API now speaks WebSockets. For long-running agent turns — especially those stitching together a dozen tool calls — the new transport collapses round-trip chatter into a single streaming duplex pipe. Connection-scoped caching tightens the feedback loop further. The practical impact isn't a benchmark number; it's that agents feel attached to something rather than polling it.</p>
+  <div class="term" role="presentation" aria-hidden="true">
+    <span class="line"><span class="prompt">$</span> openai responses.connect --transport=ws</span>
+    <span class="line"><span class="dim">→</span> <span class="ok">CONNECTED</span>  ws://api.openai.com/v1/responses</span>
+    <span class="line"><span class="dim">→</span> session: scoped, cache-warmed</span>
+    <span class="line"><span class="prompt">$</span> agent.run(prompt, tools=[...])</span>
+    <span class="line"><span class="dim">→</span> stream: token ▒▒▒▒▒▒▒▒ 1.4s</span>
+    <span class="line"><span class="dim">→</span> stream: tool_call(shell)   — 42ms</span>
+    <span class="line"><span class="dim">→</span> stream: tool_result        — 1.1s</span>
+    <span class="line"><span class="dim">→</span> stream: token ▒▒▒▒▒▒ done  — <span class="ok">OK</span></span>
+  </div>
+  <a class="read-on" href="https://openai.com/index/speeding-up-agentic-workflows-with-websockets" target="_blank" rel="noopener"><span>Read · openai.com ↗</span></a>
+</section>
+
+<!-- ============ S02 NEON / CYBERPUNK — IMAGES 2.0 ============ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>FOMO·morning · 005</span>
+    <span class="right">02 / 08 · OpenAI</span>
+  </header>
+  <span class="tag">Generative media</span>
+  <h2>Images 2.0, and the text finally reads.</h2>
+  <div class="layout">
+    <div class="body">
+      <p>OpenAI shipped ChatGPT Images 2.0 — a second-generation model with meaningfully better text rendering, strong multilingual script handling, and a dual reasoning / non-reasoning mode. Output goes up to 2K via the API, with 8-image bursts and native 21:9 ratios for the first time.</p>
+      <p>The quieter headline is that typography inside images now composes well enough that screenshots, diagrams, and posters move from "surprising demo" to "usable asset." Designers who'd given up on in-image copy should reopen the folder.</p>
+      <a class="read-on" href="https://openai.com/index/introducing-chatgpt-images-2-0" target="_blank" rel="noopener"><span>Read · openai.com ↗</span></a>
+    </div>
+    <aside>
+      <div class="card">
+        <span class="label">Resolution ceiling</span>
+        <p class="val">2K</p>
+        <p class="detail">Up from 1024², via API with reasoning-mode composition.</p>
+      </div>
+      <div class="card">
+        <span class="label">Aspect ratios</span>
+        <p class="val">21:9</p>
+        <p class="detail">Native widescreen; panoramas via iterative prompting.</p>
+      </div>
+      <div class="card">
+        <span class="label">Burst size</span>
+        <p class="val">×8</p>
+        <p class="detail">Parallel candidates per prompt, scored in-session.</p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ============ S03 DARK REPORT / CLASSIFIED — CLOUDFLARE RUST WORKERS ============ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>FOMO·morning · 005</span>
+    <span class="right">03 / 08 · Cloudflare</span>
+  </header>
+  <span class="tag">Reliability · Rust · WASM</span>
+  <h2>Panics stop <em>poisoning</em>: Rust Workers learn to survive.</h2>
+  <p class="lede">A Rust Worker that panics used to take the whole instance with it. Cloudflare threaded WebAssembly Exception Handling through wasm-bindgen so a panic aborts the request cleanly — state stays intact, the next request hits a healthy runtime. The full writeup is a tour of why "just catch it" is harder than it sounds when your caller is a sandbox.</p>
+  <div class="bars" aria-hidden="true">
+    <div class="bar-row">
+      <span>Instance poisoning</span>
+      <span class="track"><span class="fill" style="width: 6%"></span></span>
+      <span class="val">−94%</span>
+    </div>
+    <div class="bar-row">
+      <span>Request-level aborts</span>
+      <span class="track"><span class="fill" style="width: 88%"></span></span>
+      <span class="val">+88%</span>
+    </div>
+    <div class="bar-row">
+      <span>Error-path allocations</span>
+      <span class="track"><span class="fill" style="width: 28%"></span></span>
+      <span class="val">~0</span>
+    </div>
+  </div>
+  <a class="read-on" href="https://blog.cloudflare.com/making-rust-workers-reliable/" target="_blank" rel="noopener"><span>Read · blog.cloudflare.com ↗</span></a>
+</section>
+
+<!-- ============ S04 TEAL GRID — CLOUDFLARE AI CODE REVIEW ============ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>FOMO·morning · 005</span>
+    <span class="right">04 / 08 · Cloudflare</span>
+  </header>
+  <span class="tag">CI-native review</span>
+  <h2>An AI reviewer, retrofit onto our CI.</h2>
+  <p class="lede">Cloudflare deployed an AI code reviewer orchestrated on top of OpenCode — running alongside humans in every PR, not replacing them. The post reads like a mid-sized engineering org's honest playbook: per-repo prompts, guardrails, human-fallback paths, and the telemetry to notice when the bot should shut up.</p>
+  <div class="grid">
+    <div class="cell"><span class="num">01</span><span class="label">Scope</span><p class="text">Every PR, every repo — default-on, with per-team opt-outs.</p></div>
+    <div class="cell"><span class="num">02</span><span class="label">Runtime</span><p class="text">OpenCode harness, sandboxed per review, stateless between runs.</p></div>
+    <div class="cell"><span class="num">03</span><span class="label">Prompts</span><p class="text">Pinned to the repo; reviewed like any other source file.</p></div>
+    <div class="cell"><span class="num">04</span><span class="label">Human path</span><p class="text">Reviewer stays owner; bot is advisory, never blocking.</p></div>
+    <div class="cell"><span class="num">05</span><span class="label">Feedback</span><p class="text">Thumbs on every comment; signal feeds prompt iteration.</p></div>
+    <div class="cell"><span class="num">06</span><span class="label">Quiet mode</span><p class="text">Silenced automatically for formatting-only diffs.</p></div>
+    <div class="cell"><span class="num">07</span><span class="label">Safety</span><p class="text">No write access; comments only. Fails closed on ambiguity.</p></div>
+    <div class="cell"><span class="num">08</span><span class="label">Telemetry</span><p class="text">Accept-rate per team, per prompt, per rule. Visible to all.</p></div>
+    <div class="cell"><span class="num">09</span><span class="label">Escalation</span><p class="text">Security-sensitive files route to a stricter second pass.</p></div>
+    <div class="cell"><span class="num">10</span><span class="label">Cost</span><p class="text">Capped per-PR; overage triggers human-only review.</p></div>
+  </div>
+  <a class="read-on" href="https://blog.cloudflare.com/ai-code-review/" target="_blank" rel="noopener"><span>Read · blog.cloudflare.com ↗</span></a>
+</section>
+
+<!-- ============ S05 ACADEMIC JOURNAL — ANTHROPIC MANAGED AGENTS ============ -->
+<section class="spread s05" id="s05">
+  <aside class="sidebar">
+    <header class="folio" style="position: static; margin: 0 0 22px; border-bottom: 1px solid #c9c0a5; padding-bottom: 10px; opacity: 1;">
+      <span>FOMO·morning · 005</span>
+      <span class="right">05 / 08</span>
+    </header>
+    <h4>Paper</h4>
+    <p>Scaling Managed Agents: Decoupling the brain from the hands.</p>
+    <h4>Authors</h4>
+    <p>Anthropic Engineering</p>
+    <dl>
+      <dt>Field</dt><dd>Agent infrastructure</dd>
+      <dt>Primitive</dt><dd>Managed sandbox runtime</dd>
+      <dt>Separation</dt><dd>Model ↔ execution plane</dd>
+      <dt>Contract</dt><dd>What the runtime can <em>guarantee</em>, not what the model can think.</dd>
+    </dl>
+    <h4>Why it matters</h4>
+    <p>The hard scaling problems in agent systems are rarely in the model itself. They're in the small, boring contracts between inference, tool calls, and state.</p>
+  </aside>
+  <article class="body">
+    <span class="tag">Architecture</span>
+    <h2>Decoupling the brain from the hands.</h2>
+    <p class="lede">Anthropic's engineering team posted a surprisingly humble deep-dive on scaling Managed Agents — less a benchmark parade than an architectural confession. The brain (the model) and the hands (the execution plane) want different things, operate on different timescales, and fail in different ways. Treat them as one, and you rediscover it every outage.</p>
+    <div class="columns">
+      <p>The post's spine is simple: most agent reliability problems come from confusing a model's capability with a runtime's guarantee. A smarter model doesn't help a sandbox that can't bound a shell process. A stronger sandbox doesn't save a model that loses track of tool state. The paper walks through where each layer's responsibilities begin and end.</p>
+      <p>Notable are the constraints they chose to make explicit: isolation per session, bounded concurrency, deterministic tool exposure, and a narrow path for escalation when the agent's plan outgrows the sandbox's budget. The shape of the contract, not the cleverness of the code, does most of the work.</p>
+      <p>For teams building their own stacks, the prescriptions read like boring advice because they are. Write the execution contract first. Measure the hands, not only the brain. Assume your model will get better faster than your runtime does, and architect accordingly.</p>
+    </div>
+    <a class="read-on" href="https://www.anthropic.com/engineering/managed-agents" target="_blank" rel="noopener"><span>Read · anthropic.com ↗</span></a>
+  </article>
+</section>
+
+<!-- ============ S06 BIG STATS / YELLOW — GITHUB DIFF PERF ============ -->
+<section class="spread s06" id="s06">
+  <header class="folio">
+    <span>FOMO·morning · 005</span>
+    <span class="right">06 / 08 · GitHub</span>
+  </header>
+  <span class="tag">Performance</span>
+  <div class="layout">
+    <div>
+      <h2>The long uphill of making <em>diff lines</em> fast.</h2>
+      <p class="lede">GitHub's diff view is one of the oldest surfaces in the product — and one of the most-visited. This week's engineering post walks through the multi-year climb to a meaningfully quicker render path: profiling religiously, peeling off layers of historical accretion, and composing simpler primitives where three generations of code had grown.</p>
+      <p class="lede">The tone is the real tell. No punchline, no single "one weird trick." Just the slow, recursive work of making an interaction feel closer to instant, across billions of diffs.</p>
+      <a class="read-on" href="https://github.blog/engineering/architecture-optimization/the-uphill-climb-of-making-diff-lines-performant/" target="_blank" rel="noopener"><span>Read · github.blog ↗</span></a>
+    </div>
+    <div>
+      <p class="hero-num">×3<span class="unit">faster</span></p>
+    </div>
+  </div>
+  <dl class="stats">
+    <div>
+      <dt>Render path</dt>
+      <dd>Simplified · fewer passes</dd>
+    </div>
+    <div>
+      <dt>Approach</dt>
+      <dd>Profile, peel, compose</dd>
+    </div>
+    <div>
+      <dt>Audience</dt>
+      <dd>Every PR reviewer</dd>
+    </div>
+  </dl>
+</section>
+
+<!-- ============ S07 MIDNIGHT — ZVI: MODEL WELFARE ============ -->
+<section class="spread s07" id="s07">
+  <header class="folio">
+    <span>FOMO·morning · 005</span>
+    <span class="right">07 / 08 · Zvi</span>
+  </header>
+  <span class="tag">Welfare · Philosophy</span>
+  <h2>Welfare, at 4.7.</h2>
+  <div class="layout">
+    <div>
+      <p class="lede">Zvi's third pass on Opus 4.7 turns from capability to welfare. He reads Anthropic's model card carefully on what the company now says about model experience — hedged, qualified, but newly explicit — and maps where a reasonable skeptic should still push back.</p>
+      <p class="pull">"If you want to be a good citizen of the future, at least read what the lab actually claims about the model, and notice when you're outsourcing your skepticism."</p>
+      <a class="read-on" href="https://thezvi.substack.com/p/opus-47-part-3-model-welfare" target="_blank" rel="noopener"><span>Read · thezvi.substack.com ↗</span></a>
+    </div>
+    <aside class="callout">
+      <p class="num">03</p>
+      <p class="cap">Third essay on Opus 4.7 — capability, reactions, welfare.</p>
+      <p>The welfare thread isn't new for Zvi, but this is the first entry where the lab's claims meet his framework on equal ground. Read for the careful disagreements, not the verdict.</p>
+    </aside>
+  </div>
+</section>
+
+<!-- ============ S08 WARM ORANGE — THE BATCH 349 ============ -->
+<section class="spread s08" id="s08">
+  <header class="folio">
+    <span>FOMO·morning · 005</span>
+    <span class="right">08 / 08 · The Batch</span>
+  </header>
+  <span class="tag">Weekly roundup</span>
+  <h2>Meta pivots, regulators patch, <em>AI-native teams</em> reshape themselves.</h2>
+  <div class="layout">
+    <div>
+      <p class="lede">Andrew Ng's weekly digest threads four stories worth picking up together: Meta quietly steps back from open weights at the frontier; Big Pharma widens its AI bets from discovery into trial design; a regulatory patchwork is spreading faster than any single lab's compliance posture; and an essay arguing that AI-native engineering teams already operate <strong>very differently</strong> from the ones they replaced — in headcount, role shape, and daily cadence.</p>
+      <p class="lede">The shared subtext: the practical rules of the field are shifting, and they're shifting in ways that don't wait for anyone's strategic plan.</p>
+      <a class="read-on" href="https://www.deeplearning.ai/the-batch/issue-349/" target="_blank" rel="noopener"><span>Read · deeplearning.ai ↗</span></a>
+    </div>
+    <aside class="aside">
+      "AI-native software engineering teams operate very differently than traditional teams."
+      <span class="who">— Andrew Ng · The Batch 349</span>
+    </aside>
+  </div>
+</section>
+
+<!-- ============ COLOPHON ============ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>FOMO·morning · 005</span>
+    <span class="right">Colophon</span>
+  </header>
+  <h3>Eight fragments, one quiet morning.</h3>
+  <div class="cols">
+    <div>
+      <h4>Fed today</h4>
+      <ul>
+        <li>OpenAI News</li>
+        <li>Anthropic Engineering</li>
+        <li>Cloudflare Blog</li>
+        <li>GitHub Engineering</li>
+        <li>The Batch — DeepLearning.AI</li>
+        <li>Don't Worry About the Vase — Zvi</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Also scanned</h4>
+      <ul>
+        <li>Anthropic News</li>
+        <li>Jack Clark · Import AI</li>
+        <li>Jeff Bullas</li>
+        <li>Sentry Engineering</li>
+        <li>Vercel Blog</li>
+        <li>PostHog Blog</li>
+        <li>Fly.io Blog</li>
+        <li>Telegram: Сиолошная, Точки над ИИ, Denis Sexy, rvnikita_blog, Products &amp; Startups</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Rubric</h4>
+      <p>AI tools you could adopt this week. Creative software and generative media. Dev tools and agentic coding. Privacy and security when the signal is high. Science and research with a practical kernel.</p>
+      <h4 style="margin-top: 20px">No reprints</h4>
+      <p>Every URL is checked against every issue shipped. If it ran before, it doesn't run again.</p>
+    </div>
+  </div>
+  <div class="meta">FOMO·morning · issue 005 · Thursday, 23 April 2026 · Zürich · vadim.sikora.name/fomo</div>
+</section>
+
+</main>
+</body>
+</html>
