@@ -29,6 +29,7 @@ Live: https://vadim.sikora.name/fomo/
 - [posthog.com/blog](https://posthog.com/blog) (via RSS)
 - [blog.cloudflare.com](https://blog.cloudflare.com/)
 - [fly.io/blog](https://fly.io/blog/)
+- [nextjs.org/blog](https://nextjs.org/blog) (via RSS)
 
 **Telegram channels** (public preview fetched via `t.me/s/<channel>`)
 

@@ -37,6 +37,7 @@ URL, topic tags.
 - https://posthog.com/rss.xml  ← RSS; the HTML page is JS-rendered
 - https://blog.cloudflare.com/
 - https://fly.io/blog/
+- https://nextjs.org/feed.xml  ← RSS for Next.js blog
 
 **Telegram channels** (fetch the public `t.me/s/` preview):
 
@@ -178,6 +179,24 @@ baseline from `magazines/2026-04-19.html` unchanged, specifically:
   it stays to the left of content. Issue 003's memo margin rule was at
   `8vw` vs. `6vw` content padding and sliced through the text on
   desktop.
+- **Decorative pseudo-elements at the top of a spread must not share the
+  vertical strip with `.folio`.** The folio lives at
+  `top: clamp(20px, 3vw, 40px)`. Any `::before` header / stamp / tag
+  belongs below it (`top: clamp(72px, 9vw, 120px)` or further down).
+  Issue 005's Cloudflare spread put a "CLASSIFICATION" pseudo-header at
+  the same `top` as the folio and the two stacked on top of each other.
+- **Display type with `line-height < 1` must reserve descender space.**
+  Fraunces italic `p`, `g`, `y`, `j` drop well below the baseline. If
+  your display element has `line-height: 0.82–0.9`, add
+  `padding-bottom: 0.15em` (or equivalent margin) or bump line-height to
+  ≥ 0.95 so descenders don't intrude into the next element. Issue 005's
+  cover `protocols.` descender overlapped the subtitle.
+- **Superscript "unit" glyphs on big italic numerals need real space.**
+  Italic Fraunces digits have generous right-side swashes. When
+  appending a unit (`faster`, `/day`, `×`) with `vertical-align`, use
+  `margin-left: 0.4–0.6em` — `0.1em` is not enough and the word ends up
+  visually behind the glyph. Or switch to `display: inline-flex` with
+  an explicit `gap`.
 
 **Spread themes — pick one per story from this bench (so 5 to 10 per issue).** Each spread must use
 a different colour *and* layout than the others in the same issue. Cast
@@ -255,12 +274,11 @@ the task regardless of how pretty either issue is.
 
 ## Step 5 — Rebuild the index
 
-Regenerate `index.html` so it:
-
-1. Redirects to today's latest issue after 2s (meta refresh)
-2. Shows a list of all past issues newest-first, linking to `magazines/*.html`
-
-Read `magazines/` to build the list.
+Regenerate `index.html` so it shows a list of all issues newest-first,
+linking to `magazines/*.html`. **Do not add a `<meta http-equiv="refresh">`
+auto-redirect** — readers should land on the archive and pick. Read
+`magazines/` to build the list. Today's issue appears at the top, labelled
+with its pretty date.
 
 ## Step 6 — Commit and push
 
