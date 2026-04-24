@@ -192,6 +192,20 @@ write — the scaffold can't enforce them for you:
    the cause was decoration outside this layer.
 5. **Don't re-add drop caps.** `::first-letter` float collapses narrow
    columns into 2-words-per-line on mobile, and no CSS can save it.
+6. **Corner decor inside `.decor` still collides with the folio on
+   mobile.** Anything pinned to `top: <small>; left: <small>` lives at
+   the same coords as the folio after mobile padding shrinks. Either
+   drop it below `top: clamp(72px, 9vw, 120px)`, or `display: none` it
+   in the mobile media query. Issue 006 s05 had a 28×28 L-corner at
+   (24, 24) stepping on the folio.
+7. **If a `.figure` uses CSS Grid with one child that spans all
+   columns** (`grid-column: 1 / -1`), other siblings will be
+   auto-placed into *any* remaining cell — including the wrong column.
+   Either set `grid-auto-flow: dense` and explicit `grid-column` on
+   every child, or collapse the grid to a single column on mobile
+   (`grid-template-columns: 1fr`). Issue 006 s05 `.specs` auto-placed
+   `.val` into a 50px column on mobile so every word broke onto its
+   own line.
 
 **Spread themes — surface treatments, not structural redesigns.** Pick
 one per story. Each item below is a package of *palette + type choices

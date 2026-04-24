@@ -33,6 +33,7 @@
   /* ───── Spread skeleton (locked) ───── */
   .spread {
     min-height: 100vh;
+    min-height: 100dvh;
     position: relative;
     overflow: hidden;
     scroll-snap-align: start;
@@ -75,10 +76,11 @@
   .hed {
     font-family: var(--serif);
     font-weight: 800;
-    font-size: clamp(48px, 8vw, 140px);
-    line-height: 1.0;
-    letter-spacing: -0.025em;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
     padding-bottom: 0.12em;
+    word-break: break-word;
   }
   .lede {
     font-family: var(--serif);
@@ -102,8 +104,13 @@
   .read-on:hover span { color: var(--flip); }
 
   @media (max-width: 800px) {
-    .spread { padding: 44px 22px 40px; gap: 24px; }
-    .hed    { font-size: 11vw; line-height: 1.04; }
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
     .lede   { font-size: 18px; line-height: 1.5; }
     .tag    { font-size: 11px; letter-spacing: 0.18em; }
     .read-on { font-size: 13px; padding: 12px 18px; }
@@ -529,8 +536,16 @@
     opacity: 0.5;
   }
   @media (max-width: 800px) {
-    .s05 .specs li { grid-template-columns: 50px 1fr; }
-    .s05 .specs .key { grid-column: 1 / -1; padding-left: 66px; font-size: 11px; }
+    .s05 .specs li {
+      grid-template-columns: 1fr;
+      gap: 4px;
+      padding: 12px 0;
+    }
+    .s05 .specs .addr { font-size: 12px; }
+    .s05 .specs .key  { font-size: 12px; opacity: 0.9; }
+    .s05 .specs .val  { font-size: 14px; }
+    .s05 .decor::before,
+    .s05 .decor::after { display: none; }  /* corner crop marks collide with folio at mobile padding */
   }
 
   /* ═══════ 06 — Postcard ═══════ */
