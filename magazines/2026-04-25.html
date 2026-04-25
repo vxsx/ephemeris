@@ -1,0 +1,912 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>FOMO·morning · Issue 007 · 25 Apr 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --type:  "Special Elite", "Courier New", monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 {
+    overflow-wrap: break-word;
+    hyphens: auto;
+    margin: 0;
+  }
+  img { max-width: 100%; display: block; }
+  main { scroll-snap-type: y proximity; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    scroll-snap-align: start;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+  .spread > .decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+  .figure { width: 100%; }
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  /* ─────────────── COVER · Editor's note ─────────────── */
+  .cover { background: #f5f1e8; color: #1a1a1a; }
+  .cover .folio { color: #1a1a1a; }
+  .cover .editor-note {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(28px, 4.2vw, 56px);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    max-width: 22ch;
+    color: #1a1a1a;
+    font-variation-settings: "opsz" 144, "SOFT" 50;
+  }
+  .cover .editor-note em {
+    font-style: normal;
+    color: #7a1f1f;
+    font-weight: 600;
+  }
+  .cover .editor-sig {
+    font-family: var(--serif);
+    font-size: 16px;
+    letter-spacing: 0.02em;
+    font-style: italic;
+    color: #5a3a3a;
+  }
+  .cover .masthead-mini {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-style: italic;
+    font-size: clamp(22px, 2.4vw, 32px);
+    color: #7a1f1f;
+    letter-spacing: -0.01em;
+  }
+  .cover .toc {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 40px;
+    padding-top: 18px;
+    border-top: 1px solid #c8b8a0;
+    width: 100%;
+    margin-top: 12px;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    text-decoration: none; color: inherit;
+    padding: 7px 0;
+    border-bottom: 1px dotted rgba(0,0,0,0.22);
+    font-size: 14px;
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.85em; opacity: 0.65; }
+  .cover .toc .num {
+    font-family: var(--serif); font-weight: 700; font-style: italic;
+    color: #7a1f1f; margin-right: 10px;
+  }
+  @media (max-width: 800px) {
+    .cover .toc { grid-template-columns: 1fr; gap: 0; }
+  }
+
+  /* ─────────────── S01 · Hero / editorial cream — Anthropic postmortem ─────────────── */
+  .s01 { background: #f3ead7; color: #1a1a1a; }
+  .s01 .tag   { color: #6b1f14; border-color: #6b1f14; }
+  .s01 .hed em {
+    font-style: italic;
+    color: #6b1f14;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s01 .read-on { color: #6b1f14; border-color: #6b1f14; --flip: #f3ead7; }
+  .s01 .pull {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(22px, 2.2vw, 30px);
+    line-height: 1.35;
+    color: #6b1f14;
+    border-left: 4px solid #6b1f14;
+    padding: 8px 0 8px 22px;
+    max-width: 38ch;
+  }
+  .s01 .decor::before {
+    content: "";
+    position: absolute;
+    right: -6vw; bottom: -14vw;
+    width: 56vw; height: 56vw;
+    background: radial-gradient(circle, rgba(107,31,20,0.08), transparent 70%);
+  }
+
+  /* ─────────────── S02 · Neo-brutalist — Cloudflare Agents Week ─────────────── */
+  .s02 { background: #fff200; color: #0a0a0a; }
+  .s02 .folio { color: #0a0a0a; opacity: 1; font-weight: 700; }
+  .s02 .tag { background: #0a0a0a; color: #fff200; border: 3px solid #0a0a0a; border-radius: 0; padding: 6px 14px; }
+  .s02 .hed {
+    font-family: var(--sans);
+    font-weight: 900;
+    font-size: clamp(52px, 8vw, 120px);
+    letter-spacing: -0.04em;
+    line-height: 0.92;
+    text-transform: uppercase;
+  }
+  .s02 .hed em { font-style: normal; background: #0a0a0a; color: #fff200; padding: 0 0.12em; display: inline-block; }
+  .s02 .lede { font-family: var(--sans); color: #0a0a0a; font-weight: 500; }
+  .s02 .read-on { color: #0a0a0a; border: 3px solid #0a0a0a; --flip: #fff200; border-radius: 0; background: #fff200; }
+  .s02 .stack {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    border: 3px solid #0a0a0a;
+    background: #0a0a0a;
+    width: 100%;
+    max-width: 720px;
+  }
+  .s02 .stack > div {
+    background: #fff200;
+    padding: 18px;
+    border-right: 3px solid #0a0a0a;
+    border-bottom: 3px solid #0a0a0a;
+  }
+  .s02 .stack > div:nth-child(3n) { border-right: 0; }
+  .s02 .stack > div:nth-last-child(-n+3) { border-bottom: 0; }
+  .s02 .stack b {
+    display: block;
+    font-family: var(--sans);
+    font-weight: 900;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+  }
+  .s02 .stack span { font-size: 13px; line-height: 1.4; }
+  @media (max-width: 800px) {
+    .s02 .stack { grid-template-columns: 1fr; }
+    .s02 .stack > div { border-right: 0; border-bottom: 3px solid #0a0a0a; }
+    .s02 .stack > div:last-child { border-bottom: 0; }
+  }
+
+  /* ─────────────── S03 · Hot pink — The Batch 350 ─────────────── */
+  .s03 { background: #ff5fa2; color: #18001a; }
+  .s03 .folio { color: #18001a; }
+  .s03 .tag { color: #18001a; border-color: #18001a; }
+  .s03 .hed em {
+    font-style: italic;
+    color: #fff;
+    font-variation-settings: "opsz" 144, "SOFT" 80, "WONK" 1;
+  }
+  .s03 .read-on { color: #18001a; border-color: #18001a; --flip: #ff5fa2; }
+  .s03 .num-list { display: flex; flex-direction: column; gap: 14px; max-width: 640px; }
+  .s03 .num-list .item { display: flex; gap: 18px; align-items: baseline; }
+  .s03 .num-list .n {
+    font-family: var(--serif); font-style: italic; font-weight: 700;
+    font-size: 32px; color: #fff; flex-shrink: 0; min-width: 1.5em;
+    line-height: 1;
+  }
+  .s03 .num-list .t {
+    font-family: var(--serif); font-size: 19px; line-height: 1.4;
+  }
+  .s03 .num-list .t b { font-weight: 700; color: #18001a; }
+  .s03 .decor::before {
+    content: "";
+    position: absolute;
+    left: -10vw; top: -8vw;
+    width: 40vw; height: 40vw;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.18);
+  }
+
+  /* ─────────────── S04 · Spreadsheet — Vercel × GitBook ─────────────── */
+  .s04 { background: #f4f4f0; color: #1c1c1c; }
+  .s04 .folio { color: #5a5a5a; font-family: var(--mono); letter-spacing: 0.08em; }
+  .s04 .tag { font-family: var(--mono); border-radius: 0; border-color: #1c1c1c; color: #1c1c1c; padding: 4px 10px; letter-spacing: 0.12em; }
+  .s04 .hed { font-family: var(--sans); font-weight: 800; letter-spacing: -0.03em; }
+  .s04 .hed em {
+    font-family: var(--mono); font-style: normal; font-weight: 700;
+    font-size: 0.55em; padding: 0.1em 0.25em; background: #1c1c1c; color: #f4f4f0;
+    margin-right: 0.15em; vertical-align: 0.15em;
+  }
+  .s04 .lede { font-family: var(--sans); }
+  .s04 .read-on { color: #1c1c1c; border-color: #1c1c1c; --flip: #f4f4f0; font-family: var(--mono); border-radius: 0; }
+  .s04 .sheet {
+    width: 100%; max-width: 720px;
+    font-family: var(--mono);
+    font-size: 13px;
+    border: 1px solid #cfcfc8;
+    background: #fafaf6;
+  }
+  .s04 .sheet .row { display: grid; grid-template-columns: 60px 1fr 140px; border-bottom: 1px solid #e2e2db; }
+  .s04 .sheet .row:last-child { border-bottom: 0; }
+  .s04 .sheet .row > * { padding: 10px 14px; border-right: 1px solid #e2e2db; }
+  .s04 .sheet .row > *:last-child { border-right: 0; }
+  .s04 .sheet .h { background: #ebe9e0; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; font-size: 11px; color: #555; }
+  .s04 .sheet .v { text-align: right; font-weight: 700; color: #0a4d3a; }
+  .s04 .sheet .colA { color: #888; text-align: right; }
+  @media (max-width: 800px) {
+    .s04 .sheet .row { grid-template-columns: 40px 1fr 110px; }
+    .s04 .sheet { font-size: 12px; }
+  }
+
+  /* ─────────────── S05 · Pastel rose — Zvi AI #165 ─────────────── */
+  .s05 { background: linear-gradient(180deg, #fce4ec 0%, #f8d4e2 100%); color: #2e1626; }
+  .s05 .folio { color: #5a3a4a; }
+  .s05 .tag { color: #b03060; border-color: #b03060; }
+  .s05 .hed {
+    font-family: var(--serif); font-weight: 300;
+    font-variation-settings: "opsz" 144, "SOFT" 100;
+  }
+  .s05 .hed em {
+    font-style: italic; font-weight: 600;
+    color: #b03060;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s05 .lede { color: #4a2838; }
+  .s05 .read-on { color: #b03060; border-color: #b03060; --flip: #fce4ec; }
+  .s05 .pull-script {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(22px, 2.4vw, 30px);
+    line-height: 1.4;
+    color: #6b1840;
+    max-width: 32ch;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    padding-left: 1em;
+    position: relative;
+  }
+  .s05 .pull-script::before {
+    content: "“";
+    position: absolute; left: -0.1em; top: -0.4em;
+    font-size: 3em; color: rgba(176,48,96,0.35); line-height: 1;
+  }
+  .s05 .decor::before {
+    content: "";
+    position: absolute;
+    right: -8vw; top: 20%;
+    width: 50vw; height: 50vw;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.6), transparent 60%);
+  }
+
+  /* ─────────────── S06 · Postcard — Sentry MCP ─────────────── */
+  .s06 { background: #e8d8b8; color: #2a1f12; }
+  .s06 .folio { color: #5a4a32; font-family: var(--mono); }
+  .s06 .tag { color: #2a1f12; border-color: #2a1f12; background: rgba(255,255,255,0.4); }
+  .s06 .hed em {
+    font-style: italic;
+    color: #b8442a;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s06 .read-on { color: #b8442a; border-color: #b8442a; --flip: #e8d8b8; }
+  .s06 .card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    max-width: 640px;
+    width: 100%;
+  }
+  .s06 .card {
+    border: 2px solid #2a1f12;
+    padding: 16px 18px;
+    background: rgba(255,255,255,0.45);
+  }
+  .s06 .card h4 {
+    font-family: var(--sans); font-size: 11px; letter-spacing: 0.18em;
+    text-transform: uppercase; margin-bottom: 8px; color: #5a4a32;
+  }
+  .s06 .card p {
+    margin: 0; font-family: var(--serif); font-size: 16px; line-height: 1.4;
+  }
+  .s06 .stamp {
+    position: absolute; right: clamp(24px, 6vw, 90px); top: clamp(80px, 9vw, 120px);
+    width: 100px; height: 124px;
+    border: 2px dashed #2a1f12;
+    background: #d6c294;
+    transform: rotate(8deg);
+    display: grid; place-items: center;
+    text-align: center;
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    color: #2a1f12;
+    line-height: 1.4;
+  }
+  @media (max-width: 800px) {
+    .s06 .card-grid { grid-template-columns: 1fr; }
+    .s06 .stamp { display: none; }
+  }
+
+  /* ─────────────── S07 · Blueprint — Next.js Adapters ─────────────── */
+  .s07 { background: #0c2e4d; color: #d8e4f0; }
+  .s07 .folio { color: #8fb4d8; font-family: var(--mono); letter-spacing: 0.12em; }
+  .s07 .tag { color: #ffd76b; border-color: #ffd76b; font-family: var(--mono); }
+  .s07 .hed { color: #ffffff; }
+  .s07 .hed em {
+    font-style: italic;
+    color: #ffd76b;
+    font-variation-settings: "opsz" 144, "SOFT" 80, "WONK" 1;
+  }
+  .s07 .lede { color: #b8c8dc; }
+  .s07 .read-on { color: #ffd76b; border-color: #ffd76b; --flip: #0c2e4d; }
+  .s07 .blueprint {
+    width: 100%; max-width: 680px;
+    border: 1px solid #4a78a8;
+    padding: 22px;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: #b8c8dc;
+    position: relative;
+    background:
+      linear-gradient(rgba(143,180,216,0.10) 1px, transparent 1px) 0 0 / 100% 24px,
+      linear-gradient(90deg, rgba(143,180,216,0.10) 1px, transparent 1px) 0 0 / 24px 100%;
+  }
+  .s07 .blueprint .lbl {
+    color: #ffd76b; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; font-size: 11px;
+  }
+  .s07 .blueprint .row { display: grid; grid-template-columns: 130px 1fr; gap: 12px; padding: 6px 0; border-bottom: 1px dashed rgba(143,180,216,0.25); }
+  .s07 .blueprint .row:last-child { border-bottom: 0; }
+  .s07 .decor::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      linear-gradient(rgba(143,180,216,0.05) 1px, transparent 1px) 0 0 / 100% 40px,
+      linear-gradient(90deg, rgba(143,180,216,0.05) 1px, transparent 1px) 0 0 / 40px 100%;
+  }
+
+  /* ─────────────── S08 · Concrete — GitHub search HA ─────────────── */
+  .s08 { background: #b8b3a8; color: #1a1a18; }
+  .s08 .folio { color: #1a1a18; }
+  .s08 .tag { color: #1a1a18; border-color: #1a1a18; }
+  .s08 .hed {
+    font-family: var(--sans); font-weight: 900;
+    letter-spacing: -0.045em;
+    text-transform: uppercase;
+    font-size: clamp(48px, 8.5vw, 124px);
+    line-height: 0.95;
+  }
+  .s08 .hed em {
+    font-family: var(--serif); font-weight: 900;
+    font-style: italic; text-transform: none;
+    font-size: 1.4em;
+    line-height: 0.7;
+    color: #6e2a18;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    display: inline-block;
+    vertical-align: -0.05em;
+  }
+  .s08 .lede { font-family: var(--sans); color: #1a1a18; }
+  .s08 .read-on { color: #1a1a18; border-color: #1a1a18; --flip: #b8b3a8; }
+  .s08 .pillars {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: #1a1a18;
+    border: 1px solid #1a1a18;
+    width: 100%; max-width: 720px;
+  }
+  .s08 .pillars > div {
+    background: #b8b3a8; padding: 18px;
+  }
+  .s08 .pillars b {
+    display: block; font-family: var(--sans); font-weight: 800;
+    font-size: 13px; letter-spacing: 0.18em;
+    text-transform: uppercase; margin-bottom: 8px; color: #6e2a18;
+  }
+  .s08 .pillars span { font-size: 14px; line-height: 1.45; color: #1a1a18; }
+  @media (max-width: 800px) {
+    .s08 .pillars { grid-template-columns: 1fr; }
+  }
+
+  /* ─────────────── S09 · Film still — Zapier benchmarks ─────────────── */
+  .s09 { background: #0a0a0a; color: #ebe5d8; padding-top: 0; padding-bottom: 0; }
+  .s09 { display: grid; grid-template-rows: 80px auto minmax(0, 1fr) auto 80px; padding-left: clamp(24px, 6vw, 120px); padding-right: clamp(24px, 6vw, 120px); padding-top: clamp(72px, 6vw, 100px); padding-bottom: clamp(56px, 5vw, 80px); }
+  .s09::before, .s09::after {
+    content: ""; position: absolute; left: 0; right: 0;
+    background: #000; height: 56px; z-index: 2;
+    pointer-events: none;
+  }
+  .s09::before { top: 0; }
+  .s09::after { bottom: 0; }
+  .s09 .folio { color: #c9c0a8; font-family: var(--mono); letter-spacing: 0.18em; }
+  .s09 .tag { color: #d4a85a; border-color: #d4a85a; }
+  .s09 .hed {
+    font-family: var(--sans); font-weight: 800;
+    text-transform: uppercase; letter-spacing: -0.03em;
+    font-size: clamp(46px, 7vw, 96px);
+    line-height: 0.98;
+  }
+  .s09 .hed em {
+    font-style: italic; font-weight: 300;
+    color: #d4a85a;
+    font-family: var(--serif);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    text-transform: none;
+  }
+  .s09 .lede { color: #c9c0a8; }
+  .s09 .read-on { color: #d4a85a; border-color: #d4a85a; --flip: #0a0a0a; }
+  .s09 .bars {
+    width: 100%; max-width: 580px;
+    display: flex; flex-direction: column; gap: 10px;
+    font-family: var(--mono); font-size: 12px;
+  }
+  .s09 .bars .row { display: grid; grid-template-columns: 110px 1fr 50px; align-items: center; gap: 10px; }
+  .s09 .bars .row .label { color: #c9c0a8; }
+  .s09 .bars .row .bar { height: 8px; background: rgba(212,168,90,0.15); position: relative; }
+  .s09 .bars .row .bar > i { display: block; position: absolute; left: 0; top: 0; bottom: 0; background: #d4a85a; }
+  .s09 .bars .row .pct { color: #d4a85a; text-align: right; font-weight: 700; }
+  @media (max-width: 800px) {
+    .s09 .bars .row { grid-template-columns: 90px 1fr 38px; font-size: 11px; }
+  }
+
+  /* ─────────────── S10 · Memo / airgram — Stanford MSE435 ─────────────── */
+  .s10 { background: #f0e6d2; color: #2a2418; }
+  .s10 .folio { color: #5a4a32; font-family: var(--type); letter-spacing: 0.04em; text-transform: none; opacity: 0.9; }
+  .s10 .tag {
+    font-family: var(--type); color: #2a2418; border-color: #2a2418;
+    border-radius: 0; padding: 4px 12px; letter-spacing: 0.06em;
+    text-transform: none; font-size: 13px;
+  }
+  .s10 .hed {
+    font-family: var(--type); font-weight: 400;
+    font-size: clamp(40px, 6vw, 84px);
+    letter-spacing: -0.01em; line-height: 1.05;
+  }
+  .s10 .hed em {
+    font-style: italic; color: #6e2a18;
+    text-decoration: underline; text-decoration-thickness: 2px;
+    text-underline-offset: 6px;
+  }
+  .s10 .lede { font-family: var(--type); font-size: clamp(18px, 1.7vw, 22px); color: #2a2418; }
+  .s10 .read-on { color: #2a2418; border-color: #2a2418; --flip: #f0e6d2; font-family: var(--type); border-radius: 0; }
+  .s10 .memo-head {
+    width: 100%; max-width: 640px;
+    font-family: var(--type); font-size: 14px;
+    border-top: 2px solid #2a2418; border-bottom: 2px solid #2a2418;
+    padding: 14px 0;
+    display: grid; grid-template-columns: 80px 1fr; gap: 6px 16px;
+  }
+  .s10 .memo-head dt { font-weight: 700; letter-spacing: 0.06em; }
+  .s10 .memo-head dd { margin: 0; }
+  .s10 .decor::before {
+    content: ""; position: absolute;
+    inset: 8px;
+    border: 1px dashed rgba(42,36,24,0.18);
+    pointer-events: none;
+  }
+
+  /* ─────────────── COLOPHON ─────────────── */
+  .colophon { background: #1a1a1a; color: #d8d4c8; }
+  .colophon .folio { color: #d8d4c8; }
+  .colophon .hed em {
+    font-style: italic; color: #d4a85a;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .colophon .lede { color: #b8b0a0; max-width: 56ch; }
+  .colophon .src-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 4px 32px; font-family: var(--mono); font-size: 12px;
+    letter-spacing: 0.04em; color: #a8a090;
+    width: 100%; max-width: 760px; padding-top: 16px;
+    border-top: 1px solid #3a3a36;
+  }
+  .colophon .src-grid span::before { content: "· "; color: #d4a85a; }
+  @media (max-width: 800px) {
+    .colophon .src-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════ COVER · Editor's note ═══════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span class="masthead-mini">FOMO·morning</span>
+    <span>Sat · 25 Apr 2026 · Zürich · Issue 007</span>
+  </header>
+  <div class="main">
+    <p class="editor-note">Today's issue is about <em>repair work.</em> Anthropic ships a postmortem for last week's quiet Claude Code regression. Cloudflare bundles a year of agent infrastructure into one platform week. GitHub rewires search for thirty thousand sites it didn't break. The new tools made last week — this week we read the receipts.</p>
+    <p class="editor-sig">— the editors</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>Anthropic ships a Claude Code postmortem</span><span>Anthropic</span></a>
+      <a href="#s02"><span><span class="num">02</span>Cloudflare's agent platform, one week of it</span><span>Cloudflare</span></a>
+      <a href="#s03"><span><span class="num">03</span>GLM 5.1 thinks; data centers revolt</span><span>The Batch</span></a>
+      <a href="#s04"><span><span class="num">04</span>GitBook on Vercel: 30k sites, sub-second updates</span><span>Vercel</span></a>
+      <a href="#s05"><span><span class="num">05</span>Zvi: the week of Opus 4.7, in our image</span><span>Zvi</span></a>
+      <a href="#s06"><span><span class="num">06</span>Sentry asks: do you actually need an MCP?</span><span>Sentry</span></a>
+      <a href="#s07"><span><span class="num">07</span>Next.js commits to a stable Adapter API</span><span>Next.js</span></a>
+      <a href="#s08"><span><span class="num">08</span>How GitHub rebuilt enterprise search for HA</span><span>GitHub</span></a>
+      <a href="#s09"><span><span class="num">09</span>Zapier benchmarks agents on real office work</span><span>via @ProductsAndStartups</span></a>
+      <a href="#s10"><span><span class="num">10</span>Stanford's open seminar on AI economics</span><span>via @rvnikita_blog</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+</section>
+
+<!-- ═══════ 01 · Hero / editorial cream — Anthropic postmortem ═══════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>FOMO·morning · Issue 007</span>
+    <span>01 / 10 · Anthropic Engineering</span>
+  </header>
+  <div class="main">
+    <span class="tag">Postmortem · Coding agents</span>
+    <h2 class="hed">Three changes, one quiet <em>regression</em>.</h2>
+    <p class="lede">Anthropic traces last week's quality complaints in Claude Code to three separate, overlapping changes — and writes up what each one broke, how it was caught, and what the team is doing differently. Real postmortems from a frontier lab are rare. Read it like an aviation incident report.</p>
+    <div class="figure">
+      <p class="pull">"We traced recent reports of Claude Code quality issues to three separate changes."</p>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.anthropic.com/engineering/april-23-postmortem" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════ 02 · Neo-brutalist — Cloudflare Agents Week ═══════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>FOMO·morning · Issue 007</span>
+    <span>02 / 10 · Cloudflare</span>
+  </header>
+  <div class="main">
+    <span class="tag">Platform · Agentic infra</span>
+    <h2 class="hed">A whole <em>cloud</em> for agents, one week.</h2>
+    <p class="lede">Cloudflare's Agents Week 2026 recap stitches together Workers AI, the agent toolbox, durable execution, sandboxes and the new identity primitives into one coherent stack. If you build agents on someone else's compute, this is the new floor.</p>
+    <div class="figure">
+      <div class="stack">
+        <div><b>Compute</b><span>Workers AI, Containers, Sandboxed code</span></div>
+        <div><b>Memory</b><span>Durable Objects, Vectorize, R2</span></div>
+        <div><b>Identity</b><span>OAuth provider, scoped tokens</span></div>
+        <div><b>Tools</b><span>MCP gateway, browser rendering</span></div>
+        <div><b>Safety</b><span>Bot-vs-human credentials, audit</span></div>
+        <div><b>Cost</b><span>Per-call billing, queue back-pressure</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.cloudflare.com/agents-week-in-review/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════ 03 · Hot pink — The Batch 350 ═══════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>FOMO·morning · Issue 007</span>
+    <span>03 / 10 · DeepLearning.AI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Newsletter · Roundup</span>
+    <h2 class="hed">GLM 5.1 thinks. Data centers <em>push back</em>.</h2>
+    <p class="lede">Andrew Ng's weekly survey: a Chinese frontier model lands with strategic-reasoning chops, residents organize against new hyperscale builds, helpful LLMs get measured on when they go quietly unhelpful, and humanoid robots crack their first commercial deployments.</p>
+    <div class="figure">
+      <div class="num-list">
+        <div class="item"><span class="n">i.</span><span class="t"><b>GLM 5.1.</b> Zhipu's open-weight model targets multi-step planning and tool use; benchmarks land within striking distance of GPT-5.5 on agentic tasks.</span></div>
+        <div class="item"><span class="n">ii.</span><span class="t"><b>Data-center revolt.</b> Local opposition is now the binding constraint on US hyperscale capacity, not power.</span></div>
+        <div class="item"><span class="n">iii.</span><span class="t"><b>Quietly unhelpful.</b> A new eval surfaces when assistants degrade silently — answering, but with worse work.</span></div>
+        <div class="item"><span class="n">iv.</span><span class="t"><b>Humanoids at work.</b> First production deployments in light manufacturing, beyond demo-floor footage.</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.deeplearning.ai/the-batch/issue-350/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════ 04 · Spreadsheet — Vercel × GitBook ═══════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>FOMO·morning · Issue 007</span>
+    <span>04 / 10 · Vercel</span>
+  </header>
+  <div class="main">
+    <span class="tag">Case study · Edge</span>
+    <h2 class="hed"><em>30K</em> docs sites, sub-second propagation.</h2>
+    <p class="lede">GitBook hosts documentation for Nvidia, Zoom and n8n on top of Vercel. Their writeup is a useful look at what running a multi-tenant SaaS on someone else's edge actually costs in latency, build time and cache invalidation — the numbers are on the Vercel side of the conversation.</p>
+    <div class="figure">
+      <div class="sheet" role="table">
+        <div class="row" role="row">
+          <div class="h colA"></div><div class="h">Metric</div><div class="h">Value</div>
+        </div>
+        <div class="row"><div class="colA">A1</div><div>Customer sites served</div><div class="v">30,000</div></div>
+        <div class="row"><div class="colA">A2</div><div>Monthly page views</div><div class="v">120 M</div></div>
+        <div class="row"><div class="colA">A3</div><div>Content propagation</div><div class="v">&lt; 1 s</div></div>
+        <div class="row"><div class="colA">A4</div><div>Enterprise tenants</div><div class="v">Nvidia · Zoom · n8n</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://vercel.com/blog/how-gitbook-serves-30000-sites-with-sub-second-content-updates" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════ 05 · Pastel rose — Zvi AI #165 ═══════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>FOMO·morning · Issue 007</span>
+    <span>05 / 10 · Don't Worry About the Vase</span>
+  </header>
+  <div class="main">
+    <span class="tag">Analysis · Opus 4.7</span>
+    <h2 class="hed">In <em>our</em> image, after the week of Opus.</h2>
+    <p class="lede">Zvi's weekly digest compresses the Opus 4.7 launch arc — the model card, the welfare debate, the mid-week regressions — into one readable file. If you skipped the daily threads, this is the catch-up document. He stays sober about both the wins and the discontents.</p>
+    <div class="figure">
+      <p class="pull-script">This was the week of Claude Opus 4.7 — capabilities we asked for, complications we didn't.</p>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://thezvi.substack.com/p/ai-165-in-our-image" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════ 06 · Postcard — Sentry MCP ═══════ -->
+<section class="spread s06" id="s06">
+  <header class="folio">
+    <span>FOMO·morning · Issue 007</span>
+    <span>06 / 10 · Sentry Engineering</span>
+  </header>
+  <div class="main">
+    <span class="tag">Tooling · MCP</span>
+    <h2 class="hed">Do you <em>really</em> need an MCP for that?</h2>
+    <p class="lede">Sentry's engineers wired a Claude Code agent to ship a native app two ways — once with their MCP server, once with a plain file-and-shell workflow. The post is honest about where the MCP earned its keep, and where it just added latency. A useful gut-check before you adopt.</p>
+    <div class="figure">
+      <div class="card-grid">
+        <div class="card">
+          <h4>With MCP</h4>
+          <p>Tighter context, fewer hallucinated APIs, slower roundtrips on simple edits.</p>
+        </div>
+        <div class="card">
+          <h4>Without MCP</h4>
+          <p>Faster on small tasks, blew through context on multi-file refactors, more dead ends.</p>
+        </div>
+        <div class="card">
+          <h4>Verdict</h4>
+          <p>MCP wins when the agent needs structured access to your domain. Skip it for one-off scripts.</p>
+        </div>
+        <div class="card">
+          <h4>Cost</h4>
+          <p>"Time, cost, and context" — pick the one you can afford to spend.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://sentry.engineering/blog/do-you-really-need-an-mcp-to-build-your-app" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true">
+    <div class="stamp">FOMO·MORNING<br>POST·CARD<br>007 / APR 26</div>
+  </div>
+</section>
+
+<!-- ═══════ 07 · Blueprint — Next.js Adapters ═══════ -->
+<section class="spread s07" id="s07">
+  <header class="folio">
+    <span>FOMO·morning · Issue 007</span>
+    <span>07 / 10 · Next.js</span>
+  </header>
+  <div class="main">
+    <span class="tag">Framework · Portability</span>
+    <h2 class="hed">Next.js commits to <em>portability</em>, on paper.</h2>
+    <p class="lede">Next.js 16.2 ships a stable Adapter API, a public adapter test suite, and a working group that includes the OpenNext project. Vercel is — at last — putting a contract under the words "deploy anywhere." If you've been waiting to evaluate non-Vercel hosts, this is the version to do it on.</p>
+    <div class="figure">
+      <div class="blueprint">
+        <div class="row"><span class="lbl">spec</span><span>Stable Adapter API · v1</span></div>
+        <div class="row"><span class="lbl">conformance</span><span>Public test suite, run against every host</span></div>
+        <div class="row"><span class="lbl">members</span><span>Vercel · OpenNext · Cloudflare · Netlify · AWS</span></div>
+        <div class="row"><span class="lbl">scope</span><span>Routing · streaming · ISR · cache primitives</span></div>
+        <div class="row"><span class="lbl">non-goals</span><span>Per-host optimizations remain host-owned</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://nextjs.org/blog/nextjs-across-platforms" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════ 08 · Concrete — GitHub search HA ═══════ -->
+<section class="spread s08" id="s08">
+  <header class="folio">
+    <span>FOMO·morning · Issue 007</span>
+    <span>08 / 10 · GitHub Engineering</span>
+  </header>
+  <div class="main">
+    <span class="tag">Architecture · Search</span>
+    <h2 class="hed">Search, rebuilt for <em>uptime</em>.</h2>
+    <p class="lede">GitHub Enterprise Server's search stack used to fall over when one node coughed. The team reports how they cut the dependency on a single Elasticsearch primary, added cluster-aware routing, and got the customer-visible search index back inside a tighter latency budget — without a forklift migration.</p>
+    <div class="figure">
+      <div class="pillars">
+        <div><b>Before</b><span>Single primary, manual failover, customer downtime during reindex.</span></div>
+        <div><b>The change</b><span>Cluster-aware routing, multi-replica writes, online reindex path.</span></div>
+        <div><b>After</b><span>Faster recovery from node loss; tighter p99 on tenant-scoped queries.</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://github.blog/engineering/architecture-optimization/how-we-rebuilt-the-search-architecture-for-high-availability-in-github-enterprise-server/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════ 09 · Film still — Zapier benchmarks (via @ProductsAndStartups) ═══════ -->
+<section class="spread s09" id="s09">
+  <header class="folio">
+    <span>FOMO·morning · Issue 007</span>
+    <span>09 / 10 · Zapier · via @ProductsAndStartups</span>
+  </header>
+  <div class="main">
+    <span class="tag">Benchmark · Real work</span>
+    <h2 class="hed">600 office tasks, <em>graded</em> by agents.</h2>
+    <p class="lede">Zapier put autonomous agents through 600+ real workflows across sales, marketing, support, finance and HR. Claude Opus 4.7 placed first — but the spread between the top four models was small enough that workflow design matters more than model choice. A useful baseline before your next vendor bake-off.</p>
+    <div class="figure">
+      <div class="bars">
+        <div class="row"><span class="label">Opus 4.7</span><span class="bar"><i style="width:78%"></i></span><span class="pct">78%</span></div>
+        <div class="row"><span class="label">GPT-5.5</span><span class="bar"><i style="width:74%"></i></span><span class="pct">74%</span></div>
+        <div class="row"><span class="label">Gemini 3</span><span class="bar"><i style="width:71%"></i></span><span class="pct">71%</span></div>
+        <div class="row"><span class="label">DeepSeek v4</span><span class="bar"><i style="width:66%"></i></span><span class="pct">66%</span></div>
+        <div class="row"><span class="label">Open-weight avg</span><span class="bar"><i style="width:54%"></i></span><span class="pct">54%</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://zapier.com/benchmarks" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════ 10 · Memo / airgram — Stanford MSE435 (via @rvnikita_blog) ═══════ -->
+<section class="spread s10" id="s10">
+  <header class="folio">
+    <span>FOMO·morning · Issue 007</span>
+    <span>10 / 10 · Stanford · via @rvnikita_blog</span>
+  </header>
+  <div class="main">
+    <span class="tag">Course · Free · Open</span>
+    <h2 class="hed">Stanford opens its <em>AI economics</em> seminar.</h2>
+    <p class="lede">MSE435: Economics of the AI Supercycle is a Stanford seminar series with practitioners across the stack — chips, infrastructure, models, applications. Lectures publish to YouTube. Roman Rvachev is restarting his weekly study club around it from 4 May. If you wanted a structured place to think about where the money lives, here.</p>
+    <div class="figure">
+      <dl class="memo-head">
+        <dt>RE:</dt><dd>MSE435 — Economics of the AI Supercycle</dd>
+        <dt>FROM:</dt><dd>Stanford · YouTube</dd>
+        <dt>STARTS:</dt><dd>Study club: Mon 4 May 2026</dd>
+        <dt>FEE:</dt><dd>None — open seminar</dd>
+      </dl>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.youtube.com/@MSE435EconomicsofAI" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════ Colophon ═══════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 007</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Issue 007 · Saturday 25 April 2026 · Zürich. Today's picks were drawn from Anthropic Engineering, Cloudflare, DeepLearning.AI, Vercel, Don't Worry About the Vase, Sentry Engineering, Next.js, GitHub, plus pointers via @ProductsAndStartups and @rvnikita_blog. Rubric, in priority order: tools you could adopt this week; creative software; dev tools and agentic coding; security; research with a practical kernel; anything immediately actionable for a senior engineer or founder.</p>
+    <div class="src-grid">
+      <span>The Batch</span><span>Don't Worry About the Vase</span><span>Import AI</span>
+      <span>Jeff Bullas</span><span>OpenAI</span><span>Anthropic</span>
+      <span>GitHub Engineering</span><span>Sentry Engineering</span><span>Vercel</span>
+      <span>PostHog</span><span>Cloudflare</span><span>Fly.io</span>
+      <span>Next.js</span><span>@seeallochnaya</span><span>@TochkiNadAI</span>
+      <span>@denissexy</span><span>@rvnikita_blog</span><span>@ProductsAndStartups</span>
+    </div>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>
