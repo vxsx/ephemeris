@@ -1,10 +1,10 @@
-# FOMO-morning
+# Ephemeris
 
 A daily editorial digest of the best writing on AI tools, creative software,
 dev tools, privacy and science — delivered every morning at **08:00 Zürich**
 as a typographically over-the-top HTML magazine.
 
-Live: https://vadim.sikora.name/fomo/
+Live: https://vadim.sikora.name/ephemeris/
 
 ## Sources scanned every morning
 
@@ -70,30 +70,30 @@ local means the token never leaves the machine.
 ### Install
 
 ```bash
-ln -sf "$PWD/deploy/name.vadim.fomo-morning.plist" \
-  ~/Library/LaunchAgents/name.vadim.fomo-morning.plist
+ln -sf "$PWD/deploy/name.vadim.ephemeris.plist" \
+  ~/Library/LaunchAgents/name.vadim.ephemeris.plist
 launchctl bootstrap "gui/$UID" \
-  ~/Library/LaunchAgents/name.vadim.fomo-morning.plist
+  ~/Library/LaunchAgents/name.vadim.ephemeris.plist
 ```
 
 ### Inspect
 
 ```bash
-launchctl list | grep fomo
-launchctl print "gui/$UID/name.vadim.fomo-morning"
+launchctl list | grep ephemeris
+launchctl print "gui/$UID/name.vadim.ephemeris"
 tail -f .logs/$(date +%Y-%m-%d).log
 ```
 
 ### Run now (dry-ish: actually publishes)
 
 ```bash
-launchctl kickstart -k "gui/$UID/name.vadim.fomo-morning"
+launchctl kickstart -k "gui/$UID/name.vadim.ephemeris"
 ```
 
 ### Unload
 
 ```bash
-launchctl bootout "gui/$UID/name.vadim.fomo-morning"
+launchctl bootout "gui/$UID/name.vadim.ephemeris"
 ```
 
 ### Caveat

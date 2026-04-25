@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
-# Build and publish today's FOMO-morning issue.
+# Build and publish today's Ephemeris issue.
 #
-# Invoked by launchd (see deploy/name.vadim.fomo-morning.plist) at 08:00
+# Invoked by launchd (see deploy/name.vadim.ephemeris.plist) at 08:00
 # Europe/Zurich every day. Runs Claude Code in headless mode following
 # daily-prompt.md. Commits + pushes + posts to Telegram are driven by
 # the agent itself (see steps 6 & 7 of daily-prompt.md).
 
 set -euo pipefail
 
-REPO_DIR="/Users/vadim/work/fomo"
+REPO_DIR="/Users/vadim/work/ephemeris"
 LOG_DIR="$REPO_DIR/.logs"
 DATE_UTC="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 DATE_LOCAL="$(date +%Y-%m-%d)"
@@ -18,7 +18,7 @@ mkdir -p "$LOG_DIR"
 
 {
   echo "═══════════════════════════════════════════════════════════════"
-  echo "FOMO-morning daily run · started $DATE_UTC"
+  echo "Ephemeris daily run · started $DATE_UTC"
   echo "local: $(date) · host: $(hostname) · user: $(whoami)"
   echo "═══════════════════════════════════════════════════════════════"
 } >> "$LOG_FILE"

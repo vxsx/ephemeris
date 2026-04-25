@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Post today's FOMO-morning URL to the configured Telegram chat.
+# Post today's Ephemeris URL to the configured Telegram chat.
 #
 # Usage: ./scripts/notify.sh YYYY-MM-DD
 #
@@ -19,14 +19,14 @@ fi
 : "${TELEGRAM_BOT_TOKEN:?TELEGRAM_BOT_TOKEN missing (see .env.example)}"
 : "${TELEGRAM_CHAT_ID:?TELEGRAM_CHAT_ID missing (see .env.example)}"
 
-URL="https://vadim.sikora.name/fomo/magazines/${ISSUE_DATE}.html"
+URL="https://vadim.sikora.name/ephemeris/magazines/${ISSUE_DATE}.html"
 
 # Pretty date: "Sunday, 19 April 2026"
 PRETTY="$(date -j -f '%Y-%m-%d' "$ISSUE_DATE" '+%A, %-d %B %Y' 2>/dev/null \
         || date -d "$ISSUE_DATE" '+%A, %-d %B %Y')"
 
 TEXT=$(cat <<EOF
-☕️ *FOMO-morning — ${PRETTY}*
+☕️ *Ephemeris — ${PRETTY}*
 
 Today's ten picks are up:
 ${URL}

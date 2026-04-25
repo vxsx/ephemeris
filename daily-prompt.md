@@ -1,8 +1,8 @@
-# FOMO-morning · daily build prompt
+# Ephemeris · daily build prompt
 
-You are producing today's issue of **FOMO-morning**, a daily typographic
+You are producing today's issue of **Ephemeris**, a daily typographic
 magazine shipped every morning at 08:00 Zürich. You are running inside
-`/Users/vadim/work/fomo` (local) or a fresh clone of `vxsx/fomo` (remote).
+`/Users/vadim/work/ephemeris` (local) or a fresh clone of `vxsx/ephemeris` (remote).
 
 ## Step 1 — Establish today's date
 
@@ -238,7 +238,7 @@ postmortem → terminal; launch → neon).
 20. **Museum placard** — ivory + dark olive, classical proportions, centered
 21. **Memo / airgram** — typewriter, margin rules, CC / RE: header
 
-**Cover treatments — pick one, rotate.** The masthead "FOMO / morning."
+**Cover treatments — pick one, rotate.** The masthead "Ephemeris."
 does **not** have to be the hero every day.
 
 A. **Masthead lockup** — big serif wordmark + dotted TOC (issue 001 default)
@@ -295,14 +295,14 @@ with its pretty date.
 ## Step 6 — Commit and push
 
 ```bash
-cd /path/to/fomo
+cd /path/to/ephemeris
 git add -A
 git commit -m "issue $ISSUE_NUMBER — $ISSUE_DATE"
 git push origin main
 ```
 
 GitHub Pages publishes on push (30–90s). The URL for today is
-`https://vadim.sikora.name/fomo/magazines/$ISSUE_DATE.html`.
+`https://vadim.sikora.name/ephemeris/magazines/$ISSUE_DATE.html`.
 
 ## Step 7 — Notify Telegram
 

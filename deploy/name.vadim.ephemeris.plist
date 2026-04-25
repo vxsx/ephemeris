@@ -3,13 +3,13 @@
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>name.vadim.fomo-morning</string>
+    <string>name.vadim.ephemeris</string>
 
     <key>ProgramArguments</key>
     <array>
         <string>/bin/bash</string>
         <string>-lc</string>
-        <string>/Users/vadim/work/fomo/scripts/daily.sh</string>
+        <string>/Users/vadim/work/ephemeris/scripts/daily.sh</string>
     </array>
 
     <!-- 08:00 Europe/Zurich (system-local time, which is what launchd uses) -->
@@ -33,11 +33,11 @@
     </dict>
 
     <key>WorkingDirectory</key>
-    <string>/Users/vadim/work/fomo</string>
+    <string>/Users/vadim/work/ephemeris</string>
 
     <key>StandardOutPath</key>
-    <string>/Users/vadim/work/fomo/.logs/launchd.out.log</string>
+    <string>/Users/vadim/work/ephemeris/.logs/launchd.out.log</string>
     <key>StandardErrorPath</key>
-    <string>/Users/vadim/work/fomo/.logs/launchd.err.log</string>
+    <string>/Users/vadim/work/ephemeris/.logs/launchd.err.log</string>
 </dict>
 </plist>
