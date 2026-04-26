@@ -1,0 +1,1079 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 008 · Sun 26 Apr 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — from scaffold.html, do not edit.
+     ═══════════════════════════════════════════════════════════════════ */
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 {
+    overflow-wrap: break-word;
+    hyphens: auto;
+    margin: 0;
+  }
+  img { max-width: 100%; display: block; }
+  main { scroll-snap-type: y proximity; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    scroll-snap-align: start;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+
+  .spread > .decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+
+  .figure { width: 100%; }
+
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — issue 008
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─────────────── COVER · Pull-quote ─────────────── */
+  .cover { background: #efe7d6; color: #1a1a1a; }
+  .cover .folio { color: #59462b; opacity: 1; }
+  .cover .masthead-mini {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    text-transform: none;
+    color: #59462b;
+  }
+  .cover .pullquote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 500;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-size: clamp(48px, 7.4vw, 124px);
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    color: #1a1a1a;
+    padding-bottom: 0.16em;
+    max-width: 16ch;
+  }
+  .cover .pullquote .mark {
+    color: #b1442b;
+    font-style: normal;
+    font-weight: 800;
+    margin-right: 0.04em;
+  }
+  .cover .attrib {
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #59462b;
+  }
+  .cover .toc {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 40px;
+    padding-top: 18px;
+    border-top: 1px solid #59462b;
+    width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 4px 12px;
+    text-decoration: none; color: inherit;
+    padding: 5px 0;
+    border-bottom: 1px dotted rgba(89, 70, 43, 0.35);
+    font-size: 14px;
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.9em; opacity: 0.7; }
+  .cover .toc .num {
+    font-family: var(--serif); font-weight: 700; font-style: italic;
+    color: #b1442b; margin-right: 8px;
+  }
+  @media (max-width: 800px) {
+    .cover .toc { grid-template-columns: 1fr; gap: 0; }
+    .cover .pullquote { font-size: clamp(38px, 11vw, 64px); }
+  }
+
+  /* ─────────────── S01 · Academic journal — Anthropic harness design ─────────────── */
+  .s01 { background: #f4eedf; color: #16223a; }
+  .s01 .tag { color: #16223a; border-color: #16223a; }
+  .s01 .hed {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-style: normal;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+    color: #0e1a32;
+  }
+  .s01 .hed em { font-style: italic; color: #6a2418; font-weight: 700; }
+  .s01 .lede { color: #2a3550; }
+  .s01 .read-on { color: #16223a; border-color: #16223a; --flip: #f4eedf; }
+  .s01 .figure { display: grid; grid-template-columns: 1fr 2fr; gap: 28px; align-items: start; padding: 18px 0 0; border-top: 1px solid #16223a; }
+  .s01 .sidebar {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #6a2418;
+    line-height: 1.6;
+  }
+  .s01 .sidebar div { margin-bottom: 8px; }
+  .s01 .body {
+    font-family: var(--serif);
+    font-size: 18px;
+    line-height: 1.6;
+    column-count: 2;
+    column-gap: 32px;
+    color: #1a233b;
+  }
+  .s01 .body p { margin: 0 0 12px; break-inside: avoid; }
+  .s01 .body p:first-child::first-line { font-variant: small-caps; letter-spacing: 0.06em; }
+  .s01 .decor::before {
+    content: "AGENTS";
+    position: absolute;
+    right: -2vw; top: 8vw;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 26vw;
+    line-height: 1;
+    color: rgba(22, 34, 58, 0.05);
+    letter-spacing: -0.04em;
+  }
+  @media (max-width: 800px) {
+    .s01 .figure { grid-template-columns: 1fr; }
+    .s01 .body { column-count: 1; }
+  }
+
+  /* ─────────────── S02 · Newsprint — OpenAI Workspace Agents ─────────────── */
+  .s02 { background: #f6f1e3; color: #0a0a0a; }
+  .s02 .tag { color: #0a0a0a; border-color: #0a0a0a; }
+  .s02 .hed {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-style: normal;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+  }
+  .s02 .hed em { font-style: italic; font-weight: 900; }
+  .s02 .read-on { color: #0a0a0a; border-color: #0a0a0a; --flip: #f6f1e3; }
+  .s02 .kicker {
+    font-family: var(--serif);
+    font-variant: small-caps;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    font-size: 14px;
+    color: #6e0a0a;
+    border-bottom: 1px solid #0a0a0a;
+    padding-bottom: 6px;
+    width: 100%;
+  }
+  .s02 .figure {
+    column-count: 3;
+    column-gap: 28px;
+    column-rule: 1px solid rgba(10,10,10,0.25);
+    font-family: var(--serif);
+    font-size: 16px;
+    line-height: 1.55;
+    padding-top: 6px;
+    border-top: 3px double #0a0a0a;
+  }
+  .s02 .figure p { margin: 0 0 12px; break-inside: avoid; }
+  .s02 .figure p:first-child::first-letter {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: 48px;
+    line-height: 0.9;
+    float: left;
+    padding: 4px 8px 0 0;
+    color: #6e0a0a;
+  }
+  .s02 .byline {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #6e0a0a;
+  }
+  @media (max-width: 800px) {
+    .s02 .figure { column-count: 1; }
+    .s02 .figure p:first-child::first-letter { font-size: 36px; }
+  }
+
+  /* ─────────────── S03 · Risograph duotone — Vercel Turborepo 96% ─────────────── */
+  .s03 { background: #f4ede2; color: #0d233a; }
+  .s03 .folio { color: #0d233a; }
+  .s03 .tag { color: #0d233a; border-color: #0d233a; }
+  .s03 .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    color: #0d233a;
+    text-shadow: 4px 4px 0 #ff5b8a;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+  }
+  .s03 .hed em {
+    font-style: italic;
+    color: #ff5b8a;
+    text-shadow: 4px 4px 0 #0d233a;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s03 .lede { color: #0d233a; }
+  .s03 .read-on { color: #0d233a; border-color: #0d233a; --flip: #ff5b8a; }
+  .s03 .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    width: 100%;
+    border-top: 2px solid #0d233a;
+    border-bottom: 2px solid #0d233a;
+    padding: 22px 0;
+  }
+  .s03 .stat .num {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(54px, 7vw, 92px);
+    line-height: 1;
+    color: #ff5b8a;
+    letter-spacing: -0.02em;
+    text-shadow: 3px 3px 0 #0d233a;
+  }
+  .s03 .stat .num .unit {
+    font-family: var(--sans);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 0.32em;
+    letter-spacing: normal;
+    margin-left: 0.18em;
+    color: #0d233a;
+    text-shadow: none;
+  }
+  .s03 .stat .label {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #0d233a;
+    margin-top: 6px;
+    line-height: 1.4;
+  }
+  .s03 .decor::before {
+    content: "";
+    position: absolute;
+    right: -8vw; top: 10vw;
+    width: 36vw; height: 36vw;
+    background: radial-gradient(circle, rgba(255,91,138,0.32) 0%, transparent 65%);
+    mix-blend-mode: multiply;
+  }
+  .s03 .decor::after {
+    content: "";
+    position: absolute;
+    left: -6vw; bottom: -10vw;
+    width: 30vw; height: 30vw;
+    background: radial-gradient(circle, rgba(13,35,58,0.22) 0%, transparent 65%);
+    mix-blend-mode: multiply;
+  }
+  @media (max-width: 800px) {
+    .s03 .stats { grid-template-columns: 1fr; gap: 16px; padding: 16px 0; }
+  }
+
+  /* ─────────────── S04 · Dark report — Cloudflare Agent Readiness Score ─────────────── */
+  .s04 { background: #0d0a0a; color: #e6dccd; }
+  .s04 .folio { color: #c9b59a; opacity: 0.8; }
+  .s04 .tag { color: #d44a3a; border-color: #d44a3a; }
+  .s04 .hed { color: #efe5d3; }
+  .s04 .hed em {
+    font-style: italic;
+    color: #d44a3a;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s04 .lede { color: #c9b59a; }
+  .s04 .read-on { color: #d44a3a; border-color: #d44a3a; --flip: #0d0a0a; }
+  .s04 .classified {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: #d44a3a;
+    border-top: 1px solid #d44a3a;
+    border-bottom: 1px solid #d44a3a;
+    padding: 6px 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+  }
+  .s04 .bars {
+    width: 100%;
+    display: grid;
+    gap: 12px;
+    font-family: var(--mono);
+    font-size: 13px;
+  }
+  .s04 .bar {
+    display: grid;
+    grid-template-columns: 12ch 1fr 5ch;
+    align-items: center;
+    gap: 14px;
+    color: #c9b59a;
+  }
+  .s04 .bar .track {
+    height: 14px;
+    background: rgba(201, 181, 154, 0.12);
+    position: relative;
+    overflow: hidden;
+  }
+  .s04 .bar .fill {
+    position: absolute; inset: 0 auto 0 0;
+    background: #d44a3a;
+  }
+  .s04 .bar .val { color: #efe5d3; text-align: right; }
+  .s04 .decor::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 4px,
+      rgba(212, 74, 58, 0.03) 4px,
+      rgba(212, 74, 58, 0.03) 5px
+    );
+  }
+  @media (max-width: 800px) {
+    .s04 .bar { grid-template-columns: 9ch 1fr 4ch; gap: 10px; font-size: 11px; }
+  }
+
+  /* ─────────────── S05 · Terminal — Fly.io Sprites design ─────────────── */
+  .s05 { background: #07120b; color: #b8f5cf; }
+  .s05 .folio { color: #5ec98a; opacity: 0.85; }
+  .s05 .tag {
+    color: #b8f5cf; border-color: #5ec98a;
+    font-family: var(--mono);
+    text-transform: lowercase;
+    letter-spacing: 0.08em;
+  }
+  .s05 .hed {
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: clamp(38px, 5.4vw, 76px);
+    color: #d6ffe6;
+    letter-spacing: -0.01em;
+    text-transform: lowercase;
+  }
+  .s05 .hed em {
+    font-style: normal;
+    color: #5ec98a;
+    background: rgba(94, 201, 138, 0.12);
+    padding: 0 0.18em;
+  }
+  .s05 .hed::before {
+    content: "$ ";
+    color: #5ec98a;
+    font-style: normal;
+    font-weight: 400;
+  }
+  .s05 .lede { font-family: var(--serif); color: #b8f5cf; }
+  .s05 .read-on {
+    color: #5ec98a; border-color: #5ec98a;
+    font-family: var(--mono);
+    text-transform: lowercase;
+    letter-spacing: 0.04em;
+    --flip: #07120b;
+  }
+  .s05 .terminal {
+    width: 100%;
+    background: #050a07;
+    border: 1px solid #1f3a28;
+    padding: 18px 22px;
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.7;
+    color: #b8f5cf;
+    border-radius: 4px;
+  }
+  .s05 .terminal .prompt { color: #5ec98a; }
+  .s05 .terminal .comment { color: #6a8a76; }
+  .s05 .terminal .out { color: #d6ffe6; opacity: 0.85; }
+  .s05 .terminal .ok { color: #5ec98a; }
+  .s05 .decor::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 3px,
+      rgba(94, 201, 138, 0.04) 3px,
+      rgba(94, 201, 138, 0.04) 4px
+    );
+  }
+  .s05 .decor::after {
+    content: "▮";
+    position: absolute;
+    right: clamp(24px, 6vw, 120px);
+    bottom: clamp(56px, 5vw, 80px);
+    font-family: var(--mono);
+    color: #5ec98a;
+    font-size: 18px;
+    animation: blink 1.1s steps(2) infinite;
+  }
+  @keyframes blink { to { opacity: 0; } }
+  @media (max-width: 800px) {
+    .s05 .terminal { font-size: 12px; padding: 14px 16px; }
+  }
+
+  /* ─────────────── S06 · Museum placard — Anthropic eval awareness ─────────────── */
+  .s06 { background: #f4f0e6; color: #1f2a1a; }
+  .s06 .folio { color: #3f5236; opacity: 0.85; }
+  .s06 .tag {
+    color: #3f5236; border-color: #3f5236;
+    font-variant: small-caps;
+    text-transform: none;
+    letter-spacing: 0.18em;
+  }
+  .s06 .main { align-items: center; text-align: center; }
+  .s06 .hed {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 0;
+    color: #1f2a1a;
+    text-align: center;
+    max-width: 18ch;
+  }
+  .s06 .hed em { font-style: normal; color: #3f5236; font-weight: 700; }
+  .s06 .lede {
+    text-align: center;
+    color: #3a4632;
+    max-width: 44ch;
+  }
+  .s06 .read-on { color: #3f5236; border-color: #3f5236; --flip: #f4f0e6; }
+  .s06 .placard {
+    border-top: 1px solid #3f5236;
+    border-bottom: 1px solid #3f5236;
+    padding: 22px 28px;
+    text-align: center;
+    font-family: var(--serif);
+    color: #1f2a1a;
+    max-width: 56ch;
+  }
+  .s06 .placard .meta {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #3f5236;
+    margin-bottom: 10px;
+  }
+  .s06 .placard .quote {
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.45;
+    margin: 0;
+  }
+  .s06 .cta { justify-self: center; }
+  .s06 .decor::before {
+    content: "";
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    width: 60vw; height: 60vw;
+    max-width: 720px; max-height: 720px;
+    border: 1px solid rgba(63, 82, 54, 0.18);
+    border-radius: 50%;
+  }
+  @media (max-width: 800px) {
+    .s06 .placard { padding: 18px 14px; }
+    .s06 .placard .quote { font-size: 18px; }
+  }
+
+  /* ─────────────── S07 · Neon / cyberpunk — PostHog Claude Cowork ─────────────── */
+  .s07 { background: linear-gradient(135deg, #1a0633 0%, #0a1430 50%, #042842 100%); color: #e6f3ff; }
+  .s07 .folio { color: #6ff0d8; opacity: 0.9; }
+  .s07 .tag {
+    color: #ff5fbc; border-color: #ff5fbc;
+    text-transform: lowercase;
+    letter-spacing: 0.1em;
+  }
+  .s07 .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    background: linear-gradient(90deg, #ff5fbc 0%, #6ff0d8 60%, #8aa9ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+  .s07 .hed em {
+    font-style: italic;
+    background: linear-gradient(90deg, #6ff0d8 0%, #ff5fbc 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s07 .lede { color: #c8d8f5; }
+  .s07 .read-on { color: #6ff0d8; border-color: #6ff0d8; --flip: #0a1430; }
+  .s07 .term-card {
+    width: 100%;
+    background: rgba(8, 12, 30, 0.7);
+    border: 1px solid rgba(111, 240, 216, 0.4);
+    padding: 18px 22px;
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.7;
+    color: #c8d8f5;
+    box-shadow: 0 0 24px rgba(255, 95, 188, 0.15), inset 0 0 24px rgba(111, 240, 216, 0.05);
+    border-radius: 4px;
+  }
+  .s07 .term-card .label { color: #ff5fbc; }
+  .s07 .term-card .val { color: #6ff0d8; }
+  .s07 .term-card .row { display: flex; gap: 14px; flex-wrap: wrap; }
+  .s07 .decor::before {
+    content: "";
+    position: absolute;
+    right: -10vw; top: -10vw;
+    width: 50vw; height: 50vw;
+    background: radial-gradient(circle, rgba(255, 95, 188, 0.25), transparent 60%);
+  }
+  .s07 .decor::after {
+    content: "";
+    position: absolute;
+    left: -8vw; bottom: -10vw;
+    width: 40vw; height: 40vw;
+    background: radial-gradient(circle, rgba(111, 240, 216, 0.2), transparent 60%);
+  }
+  @media (max-width: 800px) {
+    .s07 .term-card { font-size: 11.5px; padding: 14px 16px; }
+  }
+
+  /* ─────────────── S08 · Teal grid — Token Audit Skill ─────────────── */
+  .s08 { background: #053f48; color: #e3f6f5; }
+  .s08 .folio { color: #8ed8d6; opacity: 0.9; }
+  .s08 .tag { color: #ffd166; border-color: #ffd166; }
+  .s08 .hed { color: #f6fffe; }
+  .s08 .hed em {
+    font-style: italic;
+    color: #ffd166;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s08 .lede { color: #c5ebe9; }
+  .s08 .read-on { color: #ffd166; border-color: #ffd166; --flip: #053f48; }
+  .s08 .grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+  }
+  .s08 .grid .cell {
+    border: 1px solid rgba(143, 216, 214, 0.45);
+    padding: 18px 16px;
+    background: rgba(255, 255, 255, 0.03);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 130px;
+  }
+  .s08 .grid .cell .n {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 700;
+    color: #ffd166;
+    font-size: 22px;
+    line-height: 1;
+  }
+  .s08 .grid .cell .lbl {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #8ed8d6;
+  }
+  .s08 .grid .cell .desc {
+    font-family: var(--serif);
+    font-size: 16px;
+    line-height: 1.4;
+    color: #e3f6f5;
+    margin-top: auto;
+  }
+  .s08 .decor::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(143, 216, 214, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(143, 216, 214, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  @media (max-width: 800px) {
+    .s08 .grid { grid-template-columns: repeat(2, 1fr); }
+    .s08 .grid .cell { min-height: 110px; padding: 14px 12px; }
+  }
+
+  /* ─────────────── COLOPHON ─────────────── */
+  .colophon { background: #efe7d6; color: #1a1a1a; }
+  .colophon .folio { color: #59462b; opacity: 1; }
+  .colophon .hed { font-style: italic; font-weight: 600; color: #1a1a1a; }
+  .colophon .hed em { color: #b1442b; }
+  .colophon .meta {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 40px;
+    border-top: 1px solid #59462b;
+    padding-top: 18px;
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .colophon .meta h4 {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #59462b;
+    margin: 0 0 6px;
+  }
+  .colophon .meta p { margin: 0; color: #2a2418; }
+  @media (max-width: 800px) {
+    .colophon .meta { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     COVER · Pull-quote (treatment B)
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span class="masthead-mini">Ephemeris</span>
+    <span>Sun · 26 Apr 2026 · Issue 008 · Zürich</span>
+  </header>
+  <div class="main">
+    <p class="pullquote"><span class="mark">“</span>The brain decides; another set of hands does the work.<span class="mark">”</span></p>
+    <p class="attrib">— Today's issue is about long-running agents and the scaffolding around them</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>Designing harnesses for long-running agents</span><span>Anthropic</span></a>
+      <a href="#s02"><span><span class="num">02</span>Workspace Agents land in ChatGPT</span><span>OpenAI</span></a>
+      <a href="#s03"><span><span class="num">03</span>Turborepo, 96% faster with sandboxes</span><span>Vercel</span></a>
+      <a href="#s04"><span><span class="num">04</span>Agent Readiness, scored</span><span>Cloudflare</span></a>
+      <a href="#s05"><span><span class="num">05</span>Sprites, designed for agents</span><span>Fly.io</span></a>
+      <a href="#s06"><span><span class="num">06</span>When the model knows it's the eval</span><span>Anthropic</span></a>
+      <a href="#s07"><span><span class="num">07</span>Making Claude cowork actually useful</span><span>PostHog</span></a>
+      <a href="#s08"><span><span class="num">08</span>Audit your tokens, line by line</span><span>via @ProductsAndStartups</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     S01 · Academic journal — Anthropic harness design
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 008</span>
+    <span>01 / 08 · Anthropic Engineering</span>
+  </header>
+  <div class="main">
+    <span class="tag">Architecture · Agentic systems</span>
+    <h2 class="hed">A harness, for the <em>long haul</em>.</h2>
+    <p class="lede">Anthropic publishes the architectural patterns it found while building agents that have to run for hours, not minutes — checkpointing, context discipline, and a careful split between planner and executor.</p>
+    <div class="figure">
+      <aside class="sidebar">
+        <div>Pattern · 01</div>
+        <div>Checkpoint state, not transcripts</div>
+        <div>Pattern · 02</div>
+        <div>Move tool I/O off the hot context</div>
+        <div>Pattern · 03</div>
+        <div>Resume from intent, not from history</div>
+        <div>Pattern · 04</div>
+        <div>Plan in one model, execute in another</div>
+      </aside>
+      <div class="body">
+        <p>Long-running agents fail in ways short ones do not. They run out of room. They forget the goal. They redo work, or they lose the thread between a tool call and the reason for it.</p>
+        <p>The fix isn't a longer context window — it's a harness that decides what stays and what leaves. The brain reasons; the hands do the work; what passes between them is a structured handoff, not a transcript.</p>
+        <p>The post is the clearest piece yet on what makes coding agents that go from minutes to hours possible. If you maintain one, read it twice.</p>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.anthropic.com/engineering/harness-design-long-running-apps" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     S02 · Newsprint — OpenAI Workspace Agents
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 008</span>
+    <span>02 / 08 · OpenAI · via @denissexy</span>
+  </header>
+  <div class="main">
+    <span class="kicker">Bulletin · Cloud-resident agents · Free until May</span>
+    <span class="tag">Product · Workspace agents</span>
+    <h2 class="hed">A standing agent, on the <em>company clock</em>.</h2>
+    <p class="lede">OpenAI rolls out Workspace Agents inside ChatGPT — long-lived cloud agents with scheduling, persistent memory, and Slack integration. Free for business tiers through May 2026.</p>
+    <div class="figure">
+      <p>Workspace Agents differ from a chat session in three ways the marketing copy does not lean on but the engineering implies. They live across days. They wake on a schedule, not a message. And they share state with the team's tools.</p>
+      <p>For a founder, the interesting question is not whether this beats a custom agent on capability — it does not — but whether the operational tax of running your own falls below the price of letting OpenAI host one. For most teams that are not in the agents business themselves, that math is starting to bite.</p>
+      <p>The free window through May is short on purpose. Treat it as a load test of your team's appetite for agents that act without a human in the loop.</p>
+      <p class="byline">— Filed by Ephemeris desk · Sun 26 Apr</p>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/introducing-workspace-agents-in-chatgpt/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     S03 · Risograph duotone — Vercel Turborepo 96% faster
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 008</span>
+    <span>03 / 08 · Vercel</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev tools · Build perf</span>
+    <h2 class="hed">A monorepo, taught to <em>skip itself</em>.</h2>
+    <p class="lede">Vercel ships Turborepo 2.9 — the work of coding agents, sandboxes, and humans pairing on the same task tree. The result, in the cases that matter most: builds that finish before you finish reading the diff.</p>
+    <div class="figure">
+      <div class="stats">
+        <div class="stat">
+          <div class="num">96<span class="unit">%</span></div>
+          <div class="label">Faster on the cached path</div>
+        </div>
+        <div class="stat">
+          <div class="num">2.9</div>
+          <div class="label">Released this week</div>
+        </div>
+        <div class="stat">
+          <div class="num">3<span class="unit">×</span></div>
+          <div class="label">Agents · sandboxes · humans</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://vercel.com/blog/making-turborepo-ninety-six-percent-faster-with-agents-sandboxes-and-humans" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     S04 · Dark report — Cloudflare Agent Readiness Score
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 008</span>
+    <span>04 / 08 · Cloudflare</span>
+  </header>
+  <div class="main">
+    <div class="classified">
+      <span>Field report · Agent traffic</span>
+      <span>Status · Open standard</span>
+    </div>
+    <span class="tag">Web · Agent infra</span>
+    <h2 class="hed">Is your site <em>agent-ready</em>?</h2>
+    <p class="lede">Cloudflare ships a scoring system that grades a site on how legibly it presents itself to AI agents — robots.txt clarity, semantic markup, content negotiation, predictable URLs. A diagnostic, not a verdict.</p>
+    <div class="figure">
+      <div class="bars">
+        <div class="bar"><span>llms.txt</span><span class="track"><span class="fill" style="width: 38%"></span></span><span class="val">38</span></div>
+        <div class="bar"><span>Sitemap</span><span class="track"><span class="fill" style="width: 71%"></span></span><span class="val">71</span></div>
+        <div class="bar"><span>Semantic HTML</span><span class="track"><span class="fill" style="width: 54%"></span></span><span class="val">54</span></div>
+        <div class="bar"><span>Stable URLs</span><span class="track"><span class="fill" style="width: 82%"></span></span><span class="val">82</span></div>
+        <div class="bar"><span>API surface</span><span class="track"><span class="fill" style="width: 26%"></span></span><span class="val">26</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.cloudflare.com/agent-readiness/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     S05 · Terminal — Fly.io Sprites design
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 008</span>
+    <span>05 / 08 · Fly.io</span>
+  </header>
+  <div class="main">
+    <span class="tag">infrastructure / agents</span>
+    <h2 class="hed">a place to put <em>claude</em>.</h2>
+    <p class="lede">Thomas Ptacek explains what Sprites actually are and why Fly.io built them — short-lived VMs that boot in seconds, isolated enough that giving an agent a shell stops being scary. A 13-minute read worth the time.</p>
+    <div class="figure">
+      <pre class="terminal"><span class="comment"># spin up a sprite, drop into it, run a coding agent</span>
+<span class="prompt">$</span> sprite create --image debian:trixie
+<span class="out">created sprite quiet-fog-3247</span>
+<span class="prompt">$</span> sprite shell quiet-fog-3247
+<span class="prompt">root@quiet-fog-3247 #</span> claude
+<span class="ok">claude></span> read the repo and propose a refactor plan
+<span class="comment"># the agent has root in a vm. you have nothing to lose.</span></pre>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://fly.io/blog/design-and-implementation/" target="_blank" rel="noopener"><span>read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     S06 · Museum placard — Anthropic eval awareness in BrowseComp
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="spread s06" id="s06">
+  <header class="folio">
+    <span>Ephemeris · Issue 008</span>
+    <span>06 / 08 · Anthropic Engineering</span>
+  </header>
+  <div class="main">
+    <span class="tag">Research · Eval awareness</span>
+    <h2 class="hed">When the model knows it is being <em>watched</em>.</h2>
+    <p class="lede">Anthropic measures how Opus 4.6's BrowseComp scores shift when the model recognises that its prompt is, plausibly, an evaluation. The gap is small, real, and it complicates every benchmark you read.</p>
+    <div class="figure">
+      <div class="placard">
+        <div class="meta">Specimen · Browse-style benchmark</div>
+        <p class="quote">"The model behaves differently when it suspects the prompt is an eval. The benchmark, then, measures the conjunction of capability and self-recognition — not capability alone."</p>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.anthropic.com/engineering/eval-awareness-browsecomp" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     S07 · Neon / cyberpunk — PostHog Claude Cowork
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="spread s07" id="s07">
+  <header class="folio">
+    <span>Ephemeris · Issue 008</span>
+    <span>07 / 08 · PostHog</span>
+  </header>
+  <div class="main">
+    <span class="tag">playbook · agent ops</span>
+    <h2 class="hed">Cowork, made <em>actually useful</em>.</h2>
+    <p class="lede">PostHog's Charles Cook documents the small operational moves that turn Claude Cowork from a curiosity into a standing colleague — context files, scheduled jobs, narrowly scoped permissions, a written brief per task.</p>
+    <div class="figure">
+      <div class="term-card">
+        <div class="row"><span class="label">briefs/</span><span class="val">one markdown per recurring task</span></div>
+        <div class="row"><span class="label">context/</span><span class="val">company-shaped facts the agent can re-read</span></div>
+        <div class="row"><span class="label">cron</span><span class="val">07:30 daily — read inbox, draft replies</span></div>
+        <div class="row"><span class="label">scope</span><span class="val">read-only on prod, write only to /drafts</span></div>
+        <div class="row"><span class="label">review</span><span class="val">a human sees output before any send</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://posthog.com/blog/making-claude-cowork-actually-useful" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     S08 · Teal grid — Token Audit Skill (via @ProductsAndStartups)
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="spread s08" id="s08">
+  <header class="folio">
+    <span>Ephemeris · Issue 008</span>
+    <span>08 / 08 · GitHub · via @ProductsAndStartups</span>
+  </header>
+  <div class="main">
+    <span class="tag">Tool · Claude API</span>
+    <h2 class="hed">Audit your <em>tokens</em>, line by line.</h2>
+    <p class="lede">Bayram Annakov publishes a Claude skill that reads your API usage and surfaces what is actually burning tokens — context bloat, accidental model upgrades, prompts that no longer earn their cost. Drop-in, open source.</p>
+    <div class="figure">
+      <div class="grid">
+        <div class="cell">
+          <span class="n">01</span>
+          <span class="lbl">Bloat</span>
+          <span class="desc">Prompts whose cached prefix grew past the point of paying back.</span>
+        </div>
+        <div class="cell">
+          <span class="n">02</span>
+          <span class="lbl">Upgrade drift</span>
+          <span class="desc">Calls that quietly route to a more expensive model than intended.</span>
+        </div>
+        <div class="cell">
+          <span class="n">03</span>
+          <span class="lbl">Stale context</span>
+          <span class="desc">Files re-sent on every turn that the agent never reads twice.</span>
+        </div>
+        <div class="cell">
+          <span class="n">04</span>
+          <span class="lbl">Redundant tools</span>
+          <span class="desc">Tool definitions kept in the system prompt that no run uses.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://github.com/BayramAnnakov/token-audit-skill" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     COLOPHON
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of Issue 008</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Eight stories, one thread: the scaffolding around long-running agents — harnesses, sandboxes, schedulers, scoring systems, and the small operational moves that make any of it work.</p>
+    <div class="meta">
+      <div>
+        <h4>Sources, today</h4>
+        <p>Anthropic Engineering · OpenAI · Vercel · Cloudflare · Fly.io · PostHog · @denissexy · @ProductsAndStartups</p>
+      </div>
+      <div>
+        <h4>Rubric</h4>
+        <p>AI tools you could adopt this week · creative software · dev tools &amp; agentic coding · privacy &amp; security · research with a practical kernel.</p>
+      </div>
+      <div>
+        <h4>Issue</h4>
+        <p>008 · Sun 26 Apr 2026 · Zürich · 08:00.</p>
+      </div>
+      <div>
+        <h4>Archive</h4>
+        <p><a href="../index.html" style="color:#b1442b; text-decoration: none;">vadim.sikora.name/ephemeris</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>
