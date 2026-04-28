@@ -47,7 +47,13 @@
   }
   * { box-sizing: border-box; }
   html {
-    scroll-snap-type: y proximity;   /* must live on the scroll container — the viewport — not on <main> */
+    /* Snap container is <html>, but <main> sits between it and .spread.
+       Modern `scroll-snap-align` on descendants doesn't propagate through
+       <main> without `display: contents`, which we don't want (it would
+       drop <main>'s box-model). Use the legacy `scroll-snap-points-y`
+       form: snap every 100vh, no target element needed. */
+    scroll-snap-type: y mandatory;
+    scroll-snap-points-y: repeat(100vh);
     scroll-behavior: smooth;
   }
   html, body {
