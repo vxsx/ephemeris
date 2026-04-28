@@ -16,7 +16,10 @@
     ✗ absolute-position .folio / .tag / .hed / .lede / .figure / .cta
     ✗ remove the `.decor` layer (it's the only place decorative absolutes
       are allowed, behind content via z-index)
-    ✗ drop `overflow-wrap` / `hyphens` rules or `safe center` alignments
+    ✗ drop `overflow-wrap` rules or `safe center` alignments
+    ✗ re-enable `hyphens: auto` on h1–h4 (it splits real words like
+      "being" into "be-/ing" mid-headline; long unbreakable tokens are
+      already handled by `.hed { word-break: break-word }`)
 
   Why this exists: issues 001–005 used free-form per-spread layouts and
   every issue shipped with at least one overlap/clipping bug. The grid
@@ -43,6 +46,10 @@
     --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   }
   * { box-sizing: border-box; }
+  html {
+    scroll-snap-type: y proximity;   /* must live on the scroll container — the viewport — not on <main> */
+    scroll-behavior: smooth;
+  }
   html, body {
     margin: 0; padding: 0;
     font-family: var(--sans);
@@ -50,18 +57,15 @@
     line-height: 1.55;
     background: #0b0b0b;
     color: #111;
-    scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
   }
   h1, h2, h3, h4 {
     overflow-wrap: break-word;
-    hyphens: auto;
     margin: 0;
   }
   img { max-width: 100%; display: block; }
-  main { scroll-snap-type: y proximity; }
 
   /* ───── Spread skeleton ─────
      3-row grid: folio | main | cta. Nothing ever collides because

@@ -154,6 +154,58 @@ bug because each layout was reinvented. The sweet spot: structure
 stable, surface changes. Think of it as a magazine with a consistent
 grid and a guest art director per issue — same bones, different skin.
 
+### Push the visual ambition
+
+The scaffold is structurally rigid so you can be visually loud on top
+of it — and you should be. The recurring failure mode is choosing a
+high-energy theme (neon, neo-brutalist, hot pink, terminal) and then
+defanging it with delicate serif heads, generous padding, and pastel
+accents. Commit fully: bold themes get bold type, hard contrast, and
+one strong layout move per spread.
+
+**Per-issue minimums:**
+
+- At least **two** spreads must be *visually loud* — saturated palette
+  + display-weight headline + one strong typographic move (oversized
+  numeral, stencil-cut highlight, asymmetric reverse-color block,
+  half-bar marker over a word, photo-mechanical pattern). Cover doesn't
+  count toward this.
+- At least **one** spread must invert the issue's overall tone (a dark
+  spread between cream spreads, or vice versa). Tonal monotony reads
+  as a single long article, not a magazine.
+- Headlines vary in *weight, scale, and family* across the issue, not
+  only colour. Five spreads of Fraunces 800 italic at the same size
+  reads as one note no matter what colour the backgrounds are.
+
+**Loud-theme cheat sheet:**
+
+- **Neo-brutalist / yellow:** Inter 900 ALL CAPS, *not* Fraunces.
+  Black/yellow only. One word inside a cut-in dark rectangle works;
+  slim italic does not. Issue 009 hit this; issue 010 used the same
+  yellow ground with Fraunces and read as cautious by comparison —
+  same palette, half the energy.
+- **Neon / cyberpunk:** type wants a hard glow or aliased mono, not a
+  soft gradient. Background dark, foreground saturated, no in-between
+  tones.
+- **Risograph duotone:** both inks need *equal weight* — if cyan is
+  everywhere and magenta is a 1px accent, it reads single-tone.
+  Overlap them visibly, with a deliberate registration offset.
+- **Terminal:** monospace everywhere, including the headline. Mixing
+  serif into a terminal theme erases the gag.
+- **Dark report / classified:** redact bars over real words; don't
+  just tint the background dark and call it a report.
+
+**Quiet themes earn their air through precision, not absence.** Museum
+placard, academic, newsprint, postcard work when the typography is
+*exact* — small caps, optical sizing, deliberate tracking, hairline
+rules at the right thickness. They are not "the default with less
+colour." If you can't be precise on a quiet theme, swap it for a
+louder one rather than ship a tame spread.
+
+**The taste rule:** when picking between two treatments, the more
+ambitious one wins ties. The reader is opening this at 08:00 — surprise
+beats polish.
+
 **Typography (unchanged):**
 
 - `Fraunces` + `Inter` + `JetBrains Mono` from Google Fonts.
@@ -206,6 +258,13 @@ write — the scaffold can't enforce them for you:
    (`grid-template-columns: 1fr`). Issue 006 s05 `.specs` auto-placed
    `.val` into a 50px column on mobile so every word broke onto its
    own line.
+8. **Don't re-enable `hyphens: auto` on display text.** Browsers will
+   split real words ("being" → "be-/ing") mid-headline whenever a line
+   is tight, which always looks like a bug. The scaffold deliberately
+   leaves `hyphens` off for h1–h4. Long unbreakable tokens (URLs,
+   "GPT-5.5,") are already handled by `.hed { word-break: break-word }`,
+   which wraps without inserting hyphens. Issue 008's "When the model
+   knows it is be-/ing watched." was this.
 
 **Spread themes — surface treatments, not structural redesigns.** Pick
 one per story. Each item below is a package of *palette + type choices
