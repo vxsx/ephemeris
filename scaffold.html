@@ -47,15 +47,11 @@
   }
   * { box-sizing: border-box; }
   html {
-    /* Snap container is <html>, but <main> sits between it and .spread.
-       Modern `scroll-snap-align` on descendants doesn't propagate through
-       <main> without `display: contents`, which we don't want (it would
-       drop <main>'s box-model). Use the legacy `scroll-snap-points-y`
-       form: snap every 100vh, no target element needed. */
-    scroll-snap-type: y mandatory;
-    scroll-snap-points-y: repeat(100vh);
+    scroll-snap-type: y proximity;
     scroll-behavior: smooth;
   }
+  /* Flatten <body> and <main> so .spread are direct snap children of <html>. */
+  body, main { display: contents; }
   html, body {
     margin: 0; padding: 0;
     font-family: var(--sans);

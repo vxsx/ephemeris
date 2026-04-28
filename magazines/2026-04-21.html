@@ -41,7 +41,8 @@
     overflow: hidden;
     scroll-snap-align: start;
   }
-  html { scroll-snap-type: y mandatory; scroll-snap-points-y: repeat(100vh); }
+  html { scroll-snap-type: y proximity; }
+  body, main { display: contents; }
   .rule { border: 0; border-top: 1px solid currentColor; margin: 0; opacity: 0.25; }
   .folio {
     position: absolute; top: clamp(20px, 3vw, 40px); left: clamp(24px, 6vw, 120px);

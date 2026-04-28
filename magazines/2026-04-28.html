@@ -32,7 +32,8 @@
     margin: 0;
   }
   img { max-width: 100%; display: block; }
-  html { scroll-snap-type: y mandatory; scroll-snap-points-y: repeat(100vh); }
+  html { scroll-snap-type: y proximity; }
+  body, main { display: contents; }
 
   .spread {
     min-height: 100vh;
