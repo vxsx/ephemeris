@@ -1,0 +1,944 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 011 · 29 Apr 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════ LOCKED BASELINE ═══════════════ */
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html {
+    scroll-snap-type: y proximity;
+    scroll-behavior: smooth;
+  }
+  body, main { display: contents; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 {
+    overflow-wrap: break-word;
+    margin: 0;
+  }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    scroll-snap-align: start;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+  .spread > .decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+  .figure { width: 100%; }
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  /* ═══════════════ THEME OVERRIDES ═══════════════ */
+
+  /* ─── Cover · Date-hero ─── */
+  .cover {
+    background: #f1ece0;
+    color: #1a1a1a;
+  }
+  .cover .masthead-line {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+  .cover .datehero {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-size: clamp(96px, 22vw, 360px);
+    line-height: 0.82;
+    letter-spacing: -0.05em;
+    color: #2b1a14;
+    padding-bottom: 0.16em;
+    margin: 0;
+  }
+  .cover .datehero .day {
+    display: block;
+    font-style: normal;
+    font-weight: 800;
+    font-family: var(--sans);
+    font-size: 0.16em;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: #6b1f14;
+    margin-bottom: 0.5em;
+    font-variation-settings: normal;
+  }
+  .cover .datehero .num {
+    color: #6b1f14;
+  }
+  .cover .editor {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(20px, 1.9vw, 26px);
+    line-height: 1.4;
+    max-width: 38ch;
+    color: #2b1a14;
+    border-left: 3px solid #6b1f14;
+    padding-left: 18px;
+  }
+  .cover .toc {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 40px;
+    padding-top: 22px;
+    border-top: 1px solid #2b1a14;
+    width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    text-decoration: none; color: inherit;
+    padding: 7px 0;
+    border-bottom: 1px dotted rgba(43,26,20,0.28);
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.85em; opacity: 0.7; }
+  .cover .toc .num {
+    font-family: var(--serif); font-weight: 700; font-style: italic;
+    color: #6b1f14; margin-right: 8px;
+  }
+  @media (max-width: 800px) {
+    .cover .toc { grid-template-columns: 1fr; gap: 0; }
+    .cover .datehero { font-size: clamp(72px, 22vw, 140px); }
+  }
+
+  /* ─── s01 · Big stats / yellow (LOUD) — GPT-5.5 system card ─── */
+  .s01 {
+    background: #ffe600;
+    color: #0a0a0a;
+  }
+  .s01 .tag { color: #0a0a0a; border-color: #0a0a0a; background: rgba(0,0,0,0.04); }
+  .s01 .hed {
+    font-family: var(--sans);
+    font-weight: 900;
+    font-size: clamp(52px, 9vw, 132px);
+    letter-spacing: -0.035em;
+    text-transform: uppercase;
+    line-height: 0.92;
+  }
+  .s01 .hed em {
+    font-style: normal;
+    background: #0a0a0a;
+    color: #ffe600;
+    padding: 0 0.14em;
+    margin: 0 -0.04em;
+    display: inline-block;
+  }
+  .s01 .read-on { color: #0a0a0a; border-color: #0a0a0a; --flip: #ffe600; border-width: 3px; }
+  .s01 .stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    width: 100%;
+    border-top: 3px solid #0a0a0a;
+    border-bottom: 3px solid #0a0a0a;
+  }
+  .s01 .stats .cell {
+    padding: 18px 18px 22px;
+    border-right: 3px solid #0a0a0a;
+  }
+  .s01 .stats .cell:last-child { border-right: 0; }
+  .s01 .stats .num {
+    font-family: var(--sans); font-weight: 900;
+    font-size: clamp(48px, 7vw, 96px);
+    line-height: 0.96;
+    letter-spacing: -0.04em;
+    display: block;
+  }
+  .s01 .stats .num .unit {
+    font-family: var(--sans); font-style: normal; font-weight: 700;
+    font-size: 0.32em;
+    letter-spacing: normal;
+    margin-left: 0.4em;
+    text-transform: none;
+  }
+  .s01 .stats .lbl {
+    font-family: var(--sans); font-weight: 600;
+    font-size: 12px; letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-top: 6px;
+    display: block;
+  }
+  .s01 .decor::before {
+    content: "5.5";
+    position: absolute;
+    right: -3vw; top: -7vw;
+    font-family: var(--sans);
+    font-weight: 900;
+    font-size: 60vw;
+    line-height: 1;
+    color: rgba(0,0,0,0.05);
+    letter-spacing: -0.06em;
+  }
+  @media (max-width: 800px) {
+    .s01 .stats { grid-template-columns: 1fr; border-bottom: 0; }
+    .s01 .stats .cell { border-right: 0; border-bottom: 3px solid #0a0a0a; }
+  }
+
+  /* ─── s02 · Newsprint — Cloudflare Q1 2026 disruptions ─── */
+  .s02 {
+    background: #f5f1e6;
+    color: #14110b;
+  }
+  .s02 .tag {
+    color: #14110b; border-color: #14110b;
+    border-radius: 0;
+    font-family: var(--sans); font-weight: 700;
+    background: #14110b;
+    color: #f5f1e6;
+  }
+  .s02 .hed {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+    font-size: clamp(44px, 6.5vw, 92px);
+    letter-spacing: -0.018em;
+    line-height: 1.0;
+  }
+  .s02 .hed em {
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s02 .read-on { color: #14110b; border-color: #14110b; --flip: #f5f1e6; }
+  .s02 .byline {
+    font-family: var(--sans); font-size: 11px;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    border-top: 1px solid #14110b;
+    border-bottom: 1px solid #14110b;
+    padding: 8px 0;
+    width: 100%;
+  }
+  .s02 .columns {
+    column-count: 3;
+    column-gap: 28px;
+    column-rule: 1px solid rgba(20,17,11,0.2);
+    font-family: var(--serif);
+    font-size: 16px;
+    line-height: 1.55;
+  }
+  .s02 .columns p { margin: 0 0 0.9em; }
+  .s02 .columns p:first-child::first-line {
+    font-variant: small-caps;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+  }
+  .s02 .ledger {
+    margin-top: 16px;
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.7;
+    color: #14110b;
+    border-top: 2px solid #14110b;
+    padding-top: 8px;
+  }
+  .s02 .ledger .row { display: flex; justify-content: space-between; gap: 12px; border-bottom: 1px dotted rgba(20,17,11,0.3); padding: 3px 0; }
+  .s02 .ledger .country { font-weight: 600; }
+  @media (max-width: 800px) {
+    .s02 .columns { column-count: 1; }
+  }
+
+  /* ─── s03 · Hot pink (LOUD) — Fly Sprites Code And Let Live ─── */
+  .s03 {
+    background: #ff3a8c;
+    color: #1a0210;
+  }
+  .s03 .tag { color: #1a0210; border-color: #1a0210; background: #fff; }
+  .s03 .hed {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-size: clamp(56px, 9vw, 144px);
+    letter-spacing: -0.03em;
+    line-height: 0.96;
+  }
+  .s03 .hed em {
+    font-style: normal;
+    color: #fff;
+    text-shadow: 4px 4px 0 #1a0210;
+    font-weight: 800;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+  }
+  .s03 .read-on { color: #1a0210; border-color: #1a0210; --flip: #ff3a8c; border-width: 3px; background: #fff; }
+  .s03 .read-on:hover { background: #1a0210; }
+  .s03 .read-on:hover span { color: #ff3a8c; }
+  .s03 .recipe {
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.7;
+    background: #1a0210;
+    color: #ff3a8c;
+    padding: 22px 24px;
+    border: 3px solid #1a0210;
+    width: 100%;
+    max-width: 56ch;
+  }
+  .s03 .recipe .step {
+    counter-increment: step;
+    display: flex;
+    gap: 14px;
+    align-items: baseline;
+  }
+  .s03 .recipe .step::before {
+    content: counter(step, decimal-leading-zero);
+    font-family: var(--serif); font-style: italic; font-weight: 800;
+    color: #fff;
+    flex: 0 0 auto;
+    font-size: 18px;
+  }
+  .s03 .recipe { counter-reset: step; }
+  .s03 .recipe .step + .step { margin-top: 6px; }
+  .s03 .recipe .cmd { color: #fff; }
+  .s03 .decor::before {
+    content: "";
+    position: absolute;
+    right: -10vw; top: 30vh;
+    width: 70vw; height: 70vw;
+    background: radial-gradient(circle, rgba(255,255,255,0.12), transparent 60%);
+  }
+
+  /* ─── s04 · Hero / editorial cream — Cursor microfrontends ─── */
+  .s04 {
+    background: #ede5d3;
+    color: #1a1a1a;
+  }
+  .s04 .tag { color: #5a3814; border-color: #5a3814; }
+  .s04 .hed {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" 1;
+    font-size: clamp(48px, 7.2vw, 116px);
+    letter-spacing: -0.022em;
+  }
+  .s04 .hed em {
+    font-style: italic;
+    color: #5a3814;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s04 .read-on { color: #5a3814; border-color: #5a3814; --flip: #ede5d3; }
+  .s04 .twocol {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 36px;
+    width: 100%;
+    border-top: 1px solid rgba(90,56,20,0.4);
+    padding-top: 24px;
+  }
+  .s04 .twocol .pull {
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(22px, 2.4vw, 32px);
+    line-height: 1.25;
+    color: #5a3814;
+    margin: 0;
+  }
+  .s04 .twocol .pull::before {
+    content: "“";
+    font-size: 2em;
+    line-height: 0.5;
+    display: block;
+    color: #5a3814;
+    margin-bottom: 0.1em;
+  }
+  .s04 .twocol .body {
+    font-family: var(--sans);
+    font-size: 16px; line-height: 1.6;
+    color: #2a2a2a;
+  }
+  .s04 .twocol .body p { margin: 0 0 0.8em; }
+  .s04 .decor::before {
+    content: "";
+    position: absolute;
+    left: -8vw; bottom: -12vw;
+    width: 50vw; height: 50vw;
+    background: radial-gradient(circle, rgba(90,56,20,0.08), transparent 70%);
+  }
+  @media (max-width: 800px) {
+    .s04 .twocol { grid-template-columns: 1fr; gap: 22px; }
+  }
+
+  /* ─── s05 · Midnight (tonal inversion) — Sentry Swift type-safe metrics ─── */
+  .s05 {
+    background: #0a0d1a;
+    color: #d8def0;
+  }
+  .s05 .tag { color: #88a8ff; border-color: #88a8ff; background: rgba(136,168,255,0.05); }
+  .s05 .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7.5vw, 116px);
+    letter-spacing: -0.025em;
+    background: linear-gradient(120deg, #ffffff 0%, #88a8ff 70%, #6f7fff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  .s05 .hed em {
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s05 .read-on { color: #88a8ff; border-color: #88a8ff; --flip: #0a0d1a; }
+  .s05 .read-on:hover span { color: #0a0d1a; }
+  .s05 .code {
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.7;
+    background: #050813;
+    color: #d8def0;
+    padding: 22px 24px;
+    border: 1px solid #1c2440;
+    border-radius: 6px;
+    width: 100%;
+    max-width: 60ch;
+    overflow-x: auto;
+  }
+  .s05 .code .kw { color: #ff79c6; }
+  .s05 .code .ty { color: #88a8ff; }
+  .s05 .code .str { color: #f1fa8c; }
+  .s05 .code .cm { color: #6272a4; font-style: italic; }
+  .s05 .takeaway {
+    font-family: var(--sans);
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #88a8ff;
+    margin-top: 10px;
+  }
+  .s05 .decor::before {
+    content: "";
+    position: absolute;
+    right: -20vw; top: -20vw;
+    width: 80vw; height: 80vw;
+    background: radial-gradient(circle, rgba(136,168,255,0.10), transparent 60%);
+  }
+
+  /* ─── s06 · Museum placard — Talkie 13B pre-1930 model ─── */
+  .s06 {
+    background: #ebe4d2;
+    color: #2a2818;
+  }
+  .s06 .tag {
+    color: #3d4a2a; border-color: #3d4a2a;
+    border-radius: 0;
+    font-family: var(--sans); font-weight: 500;
+    letter-spacing: 0.28em;
+  }
+  .s06 .hed {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 0;
+    font-size: clamp(42px, 6.4vw, 96px);
+    letter-spacing: 0.005em;
+    line-height: 1.06;
+    text-align: center;
+    align-self: center;
+    max-width: 22ch;
+  }
+  .s06 .hed em {
+    font-style: normal;
+    color: #3d4a2a;
+    font-weight: 600;
+  }
+  .s06 .read-on {
+    color: #3d4a2a; border-color: #3d4a2a; --flip: #ebe4d2;
+    letter-spacing: 0.22em;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 600;
+    text-transform: none;
+  }
+  .s06 .placard {
+    align-self: center;
+    max-width: 56ch;
+    text-align: center;
+    border-top: 1px solid #3d4a2a;
+    border-bottom: 1px solid #3d4a2a;
+    padding: 18px 0;
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.65;
+    color: #2a2818;
+  }
+  .s06 .placard .meta {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: #3d4a2a;
+    margin-bottom: 12px;
+  }
+  .s06 .placard .meta span + span::before { content: " · "; }
+  .s06 .lede { text-align: center; align-self: center; }
+  .s06 .cta { justify-self: center; align-self: end; }
+  .s06 .folio { justify-content: center; }
+  .s06 .decor::before {
+    content: "1930";
+    position: absolute;
+    left: 50%; top: 8vw;
+    transform: translateX(-50%);
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 20vw;
+    color: rgba(61,74,42,0.06);
+    letter-spacing: 0.04em;
+  }
+
+  /* ─── s07 · Warm orange pull-quote — The Zvi GPT-5.5 ─── */
+  .s07 {
+    background: #f3a653;
+    color: #2a1208;
+  }
+  .s07 .tag { color: #2a1208; border-color: #2a1208; }
+  .s07 .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    font-size: clamp(50px, 7.4vw, 120px);
+    letter-spacing: -0.025em;
+  }
+  .s07 .hed em {
+    font-style: italic;
+    color: #6b1f14;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s07 .read-on { color: #2a1208; border-color: #2a1208; --flip: #f3a653; }
+  .s07 .quote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(26px, 3.4vw, 44px);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: #2a1208;
+    border-left: 4px solid #6b1f14;
+    padding-left: 22px;
+    max-width: 22ch;
+  }
+  .s07 .quote .who {
+    display: block;
+    margin-top: 14px;
+    font-style: normal;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #6b1f14;
+  }
+  .s07 .decor::before {
+    content: "”";
+    position: absolute;
+    right: -4vw; bottom: -14vw;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-size: 70vw;
+    line-height: 1;
+    color: rgba(107,31,20,0.10);
+  }
+
+  /* ─── Colophon ─── */
+  .colophon {
+    background: #1a1a1a;
+    color: #e8e4d8;
+  }
+  .colophon .hed {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" 1;
+  }
+  .colophon .hed em {
+    font-style: italic;
+    color: #f3a653;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .colophon .lede { color: #cbc6b6; }
+  .colophon .sources {
+    margin-top: 16px;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    line-height: 1.9;
+    color: #cbc6b6;
+    columns: 2;
+    column-gap: 32px;
+    max-width: 70ch;
+  }
+  .colophon .sources span { display: block; }
+  @media (max-width: 800px) {
+    .colophon .sources { columns: 1; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════════════════ COVER · Date-hero ═══════════════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span class="masthead-line">Ephemeris · Issue 011 · Zürich</span>
+    <span>Wednesday · 29 Apr 2026</span>
+  </header>
+  <div class="main">
+    <h1 class="datehero">
+      <span class="day">Wed · 29 Apr 26</span>
+      <span class="num">29</span><em>·iv</em>
+    </h1>
+    <p class="editor">A frontier issue. The model labs publish their receipts; the network reports its first drone-strike outages; an LLM trained only on text from before 1930 quietly asks what we have left to teach it.</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>OpenAI publishes the GPT-5.5 system card</span><span>OpenAI</span></a>
+      <a href="#s02"><span><span class="num">02</span>Q1 2026 was a record quarter for outages</span><span>Cloudflare</span></a>
+      <a href="#s03"><span><span class="num">03</span>Every agent gets its own machine</span><span>Fly.io</span></a>
+      <a href="#s04"><span><span class="num">04</span>Cursor turned its landing pages into a growth loop</span><span>Vercel</span></a>
+      <a href="#s05"><span><span class="num">05</span>Sentry's Swift enums that age well</span><span>Sentry</span></a>
+      <a href="#s06"><span><span class="num">06</span>An LLM that has never heard of the iPhone</span><span>via @denissexy</span></a>
+      <a href="#s07"><span><span class="num">07</span>What 5.5 actually buys you</span><span>The Zvi</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+</section>
+
+<!-- ═══════════════════ s01 · Big stats / yellow — GPT-5.5 system card ═══════════════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 011</span>
+    <span>01 / 7 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">AI infra · System cards</span>
+    <h2 class="hed">5.5, <em>on the record</em>.</h2>
+    <p class="lede">OpenAI shipped GPT-5.5's system card alongside the model: red-team transcripts, deployment guardrails, and the residual-risk envelope OpenAI is willing to ship behind. Read it the way you'd read a quarterly filing — the news isn't always the headline number.</p>
+    <div class="figure">
+      <dl class="stats">
+        <div class="cell">
+          <dt class="num">38<span class="unit">pages</span></dt>
+          <dd class="lbl">Card length</dd>
+        </div>
+        <div class="cell">
+          <dt class="num">11<span class="unit">eval suites</span></dt>
+          <dd class="lbl">Capability + safety</dd>
+        </div>
+        <div class="cell">
+          <dt class="num">Med.<span class="unit">CBRN</span></dt>
+          <dd class="lbl">Risk classification</dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/gpt-5-5-system-card" target="_blank" rel="noopener"><span>Read the card →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ s02 · Newsprint — Cloudflare Q1 2026 disruptions ═══════════════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 011</span>
+    <span>02 / 7 · Cloudflare</span>
+  </header>
+  <div class="main">
+    <span class="tag">Network · Geopolitics</span>
+    <h2 class="hed">Drones hit clouds. The map <em>redraws</em>.</h2>
+    <p class="lede">Q1 2026 broke the previous record for internet disruption events. Nationwide shutdowns in Uganda and Iran, conflict-driven outages, and the first drone strikes targeting cloud infrastructure — Cloudflare's quarterly review reads like a logbook of the internet getting more political.</p>
+    <div class="figure">
+      <div class="byline">By the Cloudflare Radar team · Q1 2026 · 14 min read</div>
+      <div class="columns">
+        <p>Three patterns recur across the quarter. First, the increase in deliberate, government-directed shutdowns, often timed to elections, exams, or protests; second, conflict-driven outages whose geography matches active battle lines; third, a new category — direct kinetic strikes on data-center sites in contested regions, raising the cost of "the cloud is somewhere else."</p>
+        <p>The Radar team's data shows visibility into individual countries' connectivity collapsing for hours to days at a time, with submarine cable damage layered on top. The fix is not technical alone: cross-border peering, multi-region failover, and contracts that tolerate sovereign-level outages all become procurement conversations.</p>
+        <p>For anyone running a service with users outside their home market, the practical question is no longer <em>which</em> region to pin to but how cheaply you can survive losing one. The full report includes per-country traffic charts, ASN-level outage maps, and a roll-up of the named incidents that defined the quarter.</p>
+      </div>
+      <div class="ledger">
+        <div class="row"><span class="country">Uganda</span><span>Nationwide · 5 days</span></div>
+        <div class="row"><span class="country">Iran</span><span>Recurring · multiple events</span></div>
+        <div class="row"><span class="country">Ukraine</span><span>Kinetic · regional clouds</span></div>
+        <div class="row"><span class="country">Cuba</span><span>Power-driven · 36h</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.cloudflare.com/q1-2026-internet-disruption-summary/" target="_blank" rel="noopener"><span>Read the report →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ s03 · Hot pink (LOUD) — Fly Code And Let Live ═══════════════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 011</span>
+    <span>03 / 7 · Fly.io</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev tools · Agent runtime</span>
+    <h2 class="hed">The agent has its <em>own machine</em>.</h2>
+    <p class="lede">Sprites are Fly's bet that every coding agent should run inside a per-task VM, not on your laptop. Kurt Mackey walks through the loop end-to-end: spin one up from the CLI, ssh in, type <code>claude</code>, and throw the box away when the task is done.</p>
+    <div class="figure">
+      <div class="recipe">
+        <div class="step"><span><span class="cmd">fly sprites create</span> — pick a region, pick a base image</span></div>
+        <div class="step"><span><span class="cmd">fly sprites ssh</span> — drop into the VM, no setup</span></div>
+        <div class="step"><span><span class="cmd">claude</span> — the agent is now somewhere it can break things</span></div>
+        <div class="step"><span><span class="cmd">fly sprites destroy</span> — the side effects evaporate</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://fly.io/blog/code-and-let-live/" target="_blank" rel="noopener"><span>Read on Fly →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ s04 · Cream editorial — Cursor microfrontends ═══════════════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 011</span>
+    <span>04 / 7 · Vercel</span>
+  </header>
+  <div class="main">
+    <span class="tag">Growth · Architecture</span>
+    <h2 class="hed">Microfrontends as a <em>growth loop</em>.</h2>
+    <p class="lede">Cursor unified a sprawl of marketing properties into one Next.js shell, then wrapped every page in feature flags for surgical experiments. The case study reads like a playbook for any product team whose landing pages outgrew the engineering team that owns them.</p>
+    <div class="figure">
+      <div class="twocol">
+        <p class="pull">The marketing site is now a place engineers are willing to ship to — because changing it doesn't require a re-deploy of the app.</p>
+        <div class="body">
+          <p>Cursor split the surface area: a small, slow-moving root, and many fast-moving zones owned by whoever ships them. Microfrontends keep the bundle costs honest; flags replace branch-heavy A/B with in-product toggles.</p>
+          <p>The interesting part is the org chart that fell out. Growth experiments now happen in the same repo as the app, in days instead of sprints, with the marketing team unblocked from engineering review on copy-only changes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://vercel.com/blog/how-cursor-built-a-growth-iteration-loop-with-vercel-microfrontends-and-flags" target="_blank" rel="noopener"><span>Read the case study →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ s05 · Midnight (inversion) — Sentry Swift Type-Safe Metrics ═══════════════════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 011</span>
+    <span>05 / 7 · Sentry</span>
+  </header>
+  <div class="main">
+    <span class="tag">Engineering · iOS</span>
+    <h2 class="hed">Swift enums that <em>age well</em>.</h2>
+    <p class="lede">Part II of Sentry's tour through their metrics-API rewrite: replacing dynamic types with protocols, future-proofing Swift enums against new cases, and the small ergonomic choices that decide whether an SDK survives three OS releases.</p>
+    <div class="figure">
+      <pre class="code"><span class="cm">// before: stringly-typed metric, easy to break across SDK versions</span>
+<span class="kw">func</span> <span class="ty">capture</span>(<span class="kw">_</span> name: <span class="ty">String</span>, value: <span class="ty">Double</span>)
+
+<span class="cm">// after: protocol-driven, exhaustively switchable, additive-safe</span>
+<span class="kw">protocol</span> <span class="ty">Metric</span> { <span class="kw">var</span> name: <span class="ty">StaticString</span> { <span class="kw">get</span> } }
+<span class="kw">enum</span> <span class="ty">PerfMetric</span>: <span class="ty">Metric</span> {
+    <span class="kw">case</span> <span class="ty">launchTime</span>(seconds: <span class="ty">Double</span>)
+    <span class="kw">case</span> <span class="ty">scrollFrameDrop</span>(count: <span class="ty">Int</span>)
+    <span class="cm">// new cases land without breaking call sites</span>
+}</pre>
+      <p class="takeaway">Protocols over dynamic types. Enums with associated values over stringly-typed metadata.</p>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://sentry.engineering/blog/building-type-safe-metrics-api-in-swift-part-ii" target="_blank" rel="noopener"><span>Read on Sentry →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ s06 · Museum placard — Talkie 13B ═══════════════════ -->
+<section class="spread s06" id="s06">
+  <header class="folio">
+    <span>Ephemeris · Issue 011</span>
+    <span>06 / 7 · via @denissexy</span>
+  </header>
+  <div class="main">
+    <span class="tag">Research · Public domain</span>
+    <h2 class="hed">An LLM that has never heard of <em>the iPhone</em>.</h2>
+    <p class="lede">Talkie-LM trained a 13-billion-parameter model exclusively on text published before 1930 — every Dickens, Conan Doyle, and Bradstreet line, no Wikipedia, no Reddit, no benchmarks. The result is a curiosity and a question: what does today's AI think when it has never met today?</p>
+    <div class="figure">
+      <div class="placard">
+        <div class="meta"><span>Talkie-13B</span><span>Pre-1930 corpus only</span><span>13B params</span><span>Open weights</span></div>
+        A demonstration model from the Talkie-LM lab. Trained as a probe: every parameter shaped by writing that predates radio, antibiotics, and the modern news cycle. Useful as a baseline for studying what frontier-model capabilities are downstream of <em>scale</em> versus <em>recency</em> of data.
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://huggingface.co/collections/talkie-lm/talkie-13b" target="_blank" rel="noopener"><span>See the collection →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ s07 · Warm orange — The Zvi on GPT-5.5 ═══════════════════ -->
+<section class="spread s07" id="s07">
+  <header class="folio">
+    <span>Ephemeris · Issue 011</span>
+    <span>07 / 7 · The Zvi</span>
+  </header>
+  <div class="main">
+    <span class="tag">Analysis · Frontier models</span>
+    <h2 class="hed">What 5.5 <em>actually</em> buys you.</h2>
+    <p class="lede">Zvi Mowshowitz reads the GPT-5.5 system card and the first week of reactions: where the benchmarks miss, which capability jumps actually land in product, and which workflows just changed under your feet without anyone announcing it.</p>
+    <div class="figure">
+      <p class="quote">The system card mostly told us what we expected — which is itself the news.
+        <span class="who">— Zvi Mowshowitz</span>
+      </p>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://thezvi.substack.com/p/gpt-55-capabilities-and-reactions" target="_blank" rel="noopener"><span>Read on Substack →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ COLOPHON ═══════════════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of Issue 011</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Seven picks for Wednesday, 29 April 2026. Today's sources: OpenAI, Cloudflare, Fly.io, Vercel, Sentry, Hugging Face via Telegram, and The Zvi on Substack. Picked against the rubric — tools you could adopt this week, dev infra worth knowing, and the occasional idea worth slowing down for.</p>
+    <div class="sources">
+      <span>The Batch · DeepLearning.AI</span>
+      <span>The Zvi · Substack</span>
+      <span>Import AI · Jack Clark</span>
+      <span>OpenAI</span>
+      <span>Anthropic Engineering &amp; News</span>
+      <span>GitHub Engineering</span>
+      <span>Sentry Engineering</span>
+      <span>Vercel Blog</span>
+      <span>PostHog Blog</span>
+      <span>Cloudflare Blog</span>
+      <span>Fly.io Blog</span>
+      <span>Next.js Blog</span>
+      <span>@seeallochnaya · Telegram</span>
+      <span>@denissexy · Telegram</span>
+      <span>@rvnikita_blog · Telegram</span>
+      <span>@TochkiNadAI · Telegram</span>
+      <span>@ProductsAndStartups · Telegram</span>
+      <span>Jeff Bullas</span>
+    </div>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>
