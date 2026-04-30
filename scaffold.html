@@ -187,6 +187,22 @@
     .read-on { font-size: 13px; padding: 12px 18px; }
   }
 
+  /* ───── `.centered` modifier ─────
+     Add `centered` alongside `.sNN` on a <section class="spread"> to
+     center every piece of the main column. Use this for museum,
+     manifesto, editor's-note, single-word-mood spreads.
+
+     Why this exists: hand-rolled centering keeps missing the .figure
+     wrapper (it's a block at width: 100%, so children with max-width
+     stay flush-left). Issues 011 s06 and 012 s07 both shipped with a
+     centered hed/lede but a left-aligned placard until manual patches.
+     This modifier handles the figure for you. */
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
   /* ═══════════════════════════════════════════════════════════════════
      THEME OVERRIDES — surface only: palette, type, decorative motifs.
      Never override .spread / .folio / .main / .cta structure or position.

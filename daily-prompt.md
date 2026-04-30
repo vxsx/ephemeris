@@ -265,6 +265,15 @@ write — the scaffold can't enforce them for you:
    "GPT-5.5,") are already handled by `.hed { word-break: break-word }`,
    which wraps without inserting hyphens. Issue 008's "When the model
    knows it is be-/ing watched." was this.
+9. **For any centered theme, add `centered` to the section class** —
+   `<section class="spread sNN centered">`. Don't roll your own
+   centering. Hand-rolled center-this-spread CSS misses the `.figure`
+   wrapper every time (it's a block at `width: 100%`, so children
+   with `max-width` stay flush-left even when the hed/lede look
+   centered). Both issue 011 s06 and 012 s07 shipped with a centered
+   headline above a left-stuck placard until patched. The scaffold's
+   `.centered` modifier handles main, figure, figure children, cta,
+   and folio in one shot.
 
 **Spread themes — surface treatments, not structural redesigns.** Pick
 one per story. Each item below is a package of *palette + type choices
