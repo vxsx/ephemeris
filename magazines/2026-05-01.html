@@ -1,0 +1,686 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 013 · 01 May 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — from scaffold.html. Don't touch.
+     ═══════════════════════════════════════════════════════════════════ */
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-snap-type: y proximity; scroll-behavior: smooth; }
+  body, main { display: contents; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px; line-height: 1.55;
+    background: #0b0b0b; color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+  .spread {
+    min-height: 100vh; min-height: 100dvh;
+    position: relative; overflow: hidden;
+    scroll-snap-align: start;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+  .spread > .decor {
+    position: absolute; inset: 0; z-index: 0;
+    pointer-events: none; overflow: hidden;
+  }
+  .spread > .folio {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 8px 24px; flex-wrap: wrap;
+    font-family: var(--sans); font-size: 13px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .spread > .main {
+    display: flex; flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center; align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+  .spread > .cta { align-self: start; }
+  .tag {
+    display: inline-block; font-family: var(--sans);
+    font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase;
+    padding: 6px 12px; border: 1px solid currentColor;
+    border-radius: 999px; opacity: 0.9;
+  }
+  .hed {
+    font-family: var(--serif); font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02; letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45; max-width: 50ch; margin: 0;
+  }
+  .figure { width: 100%; }
+  .read-on {
+    display: inline-block; font-family: var(--sans);
+    font-weight: 600; font-size: 15px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 14px 22px; border: 2px solid currentColor;
+    text-decoration: none; color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — Issue 013 · 01 May 2026
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ───── COVER · Manifesto — quiet cream, one paragraph hero ───── */
+  .cover { background: #ece4d2; color: #161310; }
+  .cover .folio { color: #5b4a30; }
+  .cover .manifesto {
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-size: clamp(34px, 4.6vw, 64px);
+    line-height: 1.18; letter-spacing: -0.015em;
+    max-width: 18ch;
+    color: #161310;
+    padding-bottom: 0.12em;
+  }
+  .cover .manifesto .accent {
+    font-style: normal; font-weight: 700;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+    color: #6b1f14;
+  }
+  .cover .lockup {
+    display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap;
+    border-top: 1px solid #161310;
+    padding-top: 14px; width: 100%;
+    font-family: var(--serif); font-weight: 700;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    font-size: clamp(22px, 2.4vw, 30px);
+    letter-spacing: -0.01em;
+  }
+  .cover .lockup .small {
+    font-family: var(--sans); font-weight: 500;
+    font-size: 13px; letter-spacing: 0.18em;
+    text-transform: uppercase; opacity: 0.7;
+  }
+  .cover .toc {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 40px; padding-top: 18px;
+    border-top: 1px solid currentColor; width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 4px 12px;
+    text-decoration: none; color: inherit;
+    padding: 6px 0;
+    border-bottom: 1px dotted rgba(22,19,16,0.25);
+    font-family: var(--sans); font-size: 14px;
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.85em; opacity: 0.7; }
+  .cover .toc .num {
+    font-family: var(--serif); font-weight: 700; font-style: italic;
+    color: #6b1f14; margin-right: 8px;
+  }
+  @media (max-width: 800px) {
+    .cover .toc { grid-template-columns: 1fr; gap: 0; }
+  }
+
+  /* ───── s01 · Blueprint — pale grid, monospace annotation ───── */
+  .s01 { background: #e6efe9; color: #08231b; }
+  .s01 .tag { color: #08231b; border-color: #08231b; background: rgba(255,255,255,0.5); font-family: var(--mono); border-radius: 0; letter-spacing: 0.16em; }
+  .s01 .hed em { font-style: italic; color: #1a6c4a; font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; }
+  .s01 .read-on { color: #08231b; border-color: #08231b; --flip: #e6efe9; }
+  .s01 .decor::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(8,35,27,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(8,35,27,0.05) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+  .s01 .decor::after {
+    content: "ML-KEM-768 · HYBRID";
+    position: absolute;
+    right: clamp(24px, 4vw, 80px); bottom: clamp(80px, 6vw, 120px);
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.3em; color: rgba(8,35,27,0.45);
+    transform: rotate(-90deg); transform-origin: right bottom;
+  }
+  .s01 .spec {
+    font-family: var(--mono); font-size: 14px; line-height: 1.7;
+    background: #fffefb; border: 1px solid #08231b;
+    padding: 18px 22px; max-width: 540px;
+  }
+  .s01 .spec .k { color: #1a6c4a; font-weight: 600; }
+  .s01 .spec .c { color: rgba(8,35,27,0.55); }
+  .s01 .spec .b { display: block; }
+
+  /* ───── s02 · Neo-brutalist (LOUD) — Inter 900 caps, yellow/black ───── */
+  .s02 { background: #ffe600; color: #0a0a0a; }
+  .s02 .folio { color: #0a0a0a; opacity: 1; }
+  .s02 .tag {
+    color: #0a0a0a; border-color: #0a0a0a; border-radius: 0;
+    border-width: 2px; font-weight: 700; background: #fff;
+  }
+  .s02 .hed {
+    font-family: var(--sans); font-weight: 900;
+    font-size: clamp(56px, 9vw, 128px);
+    line-height: 0.92; letter-spacing: -0.04em;
+    text-transform: uppercase;
+  }
+  .s02 .hed .cut {
+    display: inline-block;
+    background: #0a0a0a; color: #ffe600;
+    padding: 0.04em 0.18em 0.08em;
+    margin: 0 -0.04em;
+  }
+  .s02 .lede { font-family: var(--sans); font-weight: 500; max-width: 40ch; }
+  .s02 .read-on {
+    color: #ffe600; border-color: #0a0a0a; border-width: 3px;
+    background: #0a0a0a; --flip: #ffe600;
+  }
+  .s02 .read-on:hover { background: #0a0a0a; }
+  .s02 .stack {
+    display: grid; grid-template-columns: 80px 1fr;
+    border: 3px solid #0a0a0a; background: #fff;
+    max-width: 620px;
+  }
+  .s02 .stack .row { display: contents; }
+  .s02 .stack .row > * { border-top: 2px solid #0a0a0a; padding: 14px 16px; }
+  .s02 .stack .row:first-child > * { border-top: 0; }
+  .s02 .stack .ver {
+    font-family: var(--mono); font-weight: 600;
+    background: #0a0a0a; color: #ffe600;
+    border-right: 2px solid #0a0a0a;
+    text-align: center;
+  }
+  .s02 .stack .what { font-family: var(--sans); font-size: 16px; font-weight: 600; }
+  .s02 .decor::before {
+    content: "16.2";
+    position: absolute;
+    right: -0.06em; bottom: -0.18em;
+    font-family: var(--sans); font-weight: 900;
+    font-size: clamp(280px, 42vw, 560px);
+    color: rgba(10,10,10,0.07);
+    letter-spacing: -0.06em; line-height: 0.8;
+  }
+
+  /* ───── s03 · Academic journal — cream + navy, sidebar + body ───── */
+  .s03 { background: #f1ece0; color: #0e1a30; }
+  .s03 .tag { color: #0e1a30; border-color: #0e1a30; background: rgba(255,255,255,0.4); }
+  .s03 .hed em { font-style: italic; color: #6b1f14; font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; }
+  .s03 .read-on { color: #0e1a30; border-color: #0e1a30; --flip: #f1ece0; }
+  .s03 .journal {
+    display: grid; grid-template-columns: 200px 1fr;
+    gap: 32px; max-width: 760px;
+    border-top: 2px solid #0e1a30; padding-top: 18px;
+  }
+  .s03 .journal h4 {
+    font-family: var(--sans); font-size: 11px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    margin-bottom: 8px; color: #6b1f14;
+  }
+  .s03 .journal .side ul {
+    margin: 0; padding: 0; list-style: none;
+    font-family: var(--serif); font-size: 16px; line-height: 1.45;
+    border-top: 1px solid rgba(14,26,48,0.3);
+  }
+  .s03 .journal .side li {
+    padding: 8px 0; border-bottom: 1px solid rgba(14,26,48,0.3);
+  }
+  .s03 .journal .side li .n {
+    font-family: var(--sans); font-size: 11px; font-weight: 600;
+    letter-spacing: 0.16em; color: #6b1f14; margin-right: 8px;
+  }
+  .s03 .journal .body p {
+    font-family: var(--serif); font-size: 17px; line-height: 1.55;
+    margin: 0 0 12px;
+  }
+  .s03 .journal .body p:first-letter {
+    /* no drop-cap; intentional per scaffold pitfall #5 */
+  }
+  .s03 .journal .body .small-caps {
+    font-variant-caps: small-caps; letter-spacing: 0.06em; font-weight: 600;
+  }
+  @media (max-width: 800px) {
+    .s03 .journal { grid-template-columns: 1fr; gap: 18px; }
+  }
+
+  /* ───── s04 · Neon / cyberpunk (LOUD, dark) — purple + teal ───── */
+  .s04 { background: #0a0420; color: #e9f7ff; }
+  .s04 .folio { color: #8be9ff; opacity: 0.9; }
+  .s04 .tag {
+    color: #ff5cf0; border-color: #ff5cf0;
+    background: rgba(255,92,240,0.08); font-family: var(--mono);
+    border-radius: 0; letter-spacing: 0.18em;
+  }
+  .s04 .hed {
+    font-family: var(--sans); font-weight: 800;
+    background: linear-gradient(95deg, #8be9ff 0%, #ff5cf0 60%, #c08cff 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    text-shadow: 0 0 60px rgba(255,92,240,0.18);
+    font-size: clamp(56px, 8vw, 120px);
+    line-height: 0.96; letter-spacing: -0.03em;
+  }
+  .s04 .hed em {
+    font-style: normal; font-weight: 800;
+    -webkit-text-stroke: 1px #8be9ff; color: transparent;
+    background: none;
+  }
+  .s04 .lede { font-family: var(--sans); color: #d4dcec; max-width: 46ch; }
+  .s04 .read-on {
+    color: #0a0420; border-color: #8be9ff; border-width: 3px;
+    background: #8be9ff; --flip: #0a0420;
+  }
+  .s04 .read-on:hover { background: #ff5cf0; }
+  .s04 .terminal {
+    font-family: var(--mono); font-size: 14px; line-height: 1.7;
+    background: #04020e;
+    border: 1px solid #ff5cf0;
+    box-shadow: 0 0 40px rgba(255,92,240,0.25), inset 0 0 0 1px rgba(139,233,255,0.12);
+    padding: 22px 24px; max-width: 560px;
+    color: #e9f7ff;
+  }
+  .s04 .terminal .head {
+    color: #ff5cf0; letter-spacing: 0.16em; text-transform: uppercase;
+    font-size: 11px; margin-bottom: 10px;
+  }
+  .s04 .terminal table { width: 100%; border-collapse: collapse; }
+  .s04 .terminal td { padding: 4px 0; }
+  .s04 .terminal td:nth-child(1) { color: #8be9ff; }
+  .s04 .terminal td:nth-child(2) { text-align: right; color: #fff; font-weight: 600; }
+  .s04 .terminal td:nth-child(3) { text-align: right; color: #c08cff; padding-left: 18px; }
+  .s04 .terminal .row.win td:nth-child(2) { color: #b6ff8e; }
+  .s04 .decor::before {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(60vw 40vh at 90% 10%, rgba(255,92,240,0.18), transparent 70%),
+      radial-gradient(50vw 35vh at 10% 90%, rgba(139,233,255,0.16), transparent 70%);
+  }
+
+  /* ───── s05 · Film still — letterboxed dark cinematic ───── */
+  .s05 { background: #0e0d0b; color: #ece4d2; }
+  .s05 .folio { color: #c9a76b; opacity: 0.85; font-family: var(--mono); }
+  .s05 .tag {
+    color: #c9a76b; border-color: #c9a76b;
+    border-radius: 0; font-family: var(--mono);
+    background: transparent;
+  }
+  .s05 .hed {
+    font-family: var(--sans); font-weight: 700;
+    text-transform: uppercase;
+    font-size: clamp(48px, 6.4vw, 96px);
+    line-height: 1.0; letter-spacing: -0.005em;
+  }
+  .s05 .hed em {
+    font-family: var(--serif); font-style: italic; font-weight: 600;
+    text-transform: none; color: #c9a76b;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s05 .lede { color: #c9bfa9; max-width: 50ch; }
+  .s05 .read-on { color: #ece4d2; border-color: #c9a76b; --flip: #0e0d0b; background: rgba(201,167,107,0.05); }
+  .s05 .read-on:hover { background: #c9a76b; }
+  .s05 .quote {
+    font-family: var(--serif); font-style: italic; font-weight: 500;
+    font-variation-settings: "opsz" 144, "SOFT" 60, "WONK" 0;
+    font-size: clamp(22px, 2.4vw, 32px); line-height: 1.35;
+    border-left: 2px solid #c9a76b;
+    padding: 4px 0 4px 22px;
+    max-width: 640px;
+    color: #ece4d2;
+  }
+  .s05 .quote cite {
+    display: block; font-style: normal; font-family: var(--mono);
+    font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: #c9a76b; margin-top: 14px; opacity: 0.85;
+  }
+  .s05 .decor::before {
+    content: "";
+    position: absolute; left: 0; right: 0; top: 0;
+    height: clamp(28px, 4vw, 56px);
+    background: #050402;
+  }
+  .s05 .decor::after {
+    content: "";
+    position: absolute; left: 0; right: 0; bottom: 0;
+    height: clamp(28px, 4vw, 56px);
+    background: #050402;
+  }
+
+  /* ───── s06 · Teal grid — modular cards with numbered italic corners ───── */
+  .s06 { background: #d8efee; color: #0a2a2a; }
+  .s06 .tag { color: #0a2a2a; border-color: #0a2a2a; background: rgba(255,255,255,0.5); }
+  .s06 .hed em { font-style: italic; color: #00606e; font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; }
+  .s06 .read-on { color: #0a2a2a; border-color: #0a2a2a; --flip: #d8efee; }
+  .s06 .grid {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px; max-width: 760px;
+  }
+  .s06 .grid .card {
+    background: #fffefa;
+    border: 1px solid #0a2a2a;
+    padding: 18px 16px 16px;
+    position: relative;
+    min-height: 120px;
+  }
+  .s06 .grid .card .n {
+    position: absolute; top: 6px; right: 10px;
+    font-family: var(--serif); font-style: italic; font-weight: 600;
+    font-size: 22px; color: #00606e;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s06 .grid .card h4 {
+    font-family: var(--sans); font-weight: 700;
+    font-size: 14px; letter-spacing: 0.04em;
+    margin: 0 0 6px;
+  }
+  .s06 .grid .card p {
+    font-family: var(--serif); font-size: 14px; line-height: 1.4;
+    margin: 0; color: #0a2a2a;
+  }
+  @media (max-width: 800px) {
+    .s06 .grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 480px) {
+    .s06 .grid { grid-template-columns: 1fr; }
+  }
+
+  /* ───── colophon · Terminal — dark mono, ASCII ───── */
+  .colophon { background: #03070a; color: #b6ff8e; }
+  .colophon .folio { color: #b6ff8e; opacity: 0.7; font-family: var(--mono); }
+  .colophon .hed {
+    font-family: var(--mono); font-weight: 600;
+    font-size: clamp(36px, 5vw, 72px); line-height: 1.1;
+    letter-spacing: -0.01em; color: #b6ff8e;
+  }
+  .colophon .hed em { font-style: normal; color: #fff; }
+  .colophon .lede {
+    font-family: var(--mono); color: #b6ff8e;
+    font-size: 15px; line-height: 1.7; max-width: 64ch;
+  }
+  .colophon .ascii {
+    font-family: var(--mono); font-size: 11px; line-height: 1.2;
+    color: rgba(182,255,142,0.55); white-space: pre;
+    overflow-x: auto;
+  }
+  .colophon a { color: #fff; text-decoration: underline; text-decoration-color: rgba(255,255,255,0.4); }
+  .colophon .decor::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 2px,
+      rgba(182,255,142,0.04) 2px,
+      rgba(182,255,142,0.04) 3px
+    );
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════════════ COVER · Manifesto ═══════════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 013</span>
+    <span>Friday · 01 May 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <div class="lockup">
+      <span>Ephemeris.</span>
+      <span class="small">A daily for builders</span>
+    </div>
+    <p class="manifesto">Today's issue is about the <span class="accent">edges</span> — quantum-resistant tunnels, models that see and reason in the same breath, an agent on your face, the price of a TPU second, and a deploy adapter you finally don't have to write.</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>Quantum-safe tunnels, in production</span><span>Cloudflare</span></a>
+      <a href="#s02"><span><span class="num">02</span>Adapters, finally a contract</span><span>Next.js</span></a>
+      <a href="#s03"><span><span class="num">03</span>GLM 5.1 thinks before it acts</span><span>The Batch</span></a>
+      <a href="#s04"><span><span class="num">04</span>See, then reason — in the same breath</span><span>DeepSeek</span></a>
+      <a href="#s05"><span><span class="num">05</span>How a TPU second is priced</span><span>Dwarkesh</span></a>
+      <a href="#s06"><span><span class="num">06</span>An agent on your face</span><span>Snap Spectacles</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+</section>
+
+<!-- ═══════════════ s01 · Cloudflare PQC IPsec · Blueprint ═══════════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 013</span>
+    <span>01 / 06 · Cloudflare</span>
+  </header>
+  <div class="main">
+    <span class="tag">Security · Networking</span>
+    <h2 class="hed">Quantum-safe tunnels, <em>in production.</em></h2>
+    <p class="lede">Cloudflare just made post-quantum encryption generally available for IPsec, using a hybrid ML-KEM key exchange. Magic WAN and CNI tunnels can flip the toggle today — no client changes, no key-rotation playbook. The first commodity primitive after the NIST PQC standards.</p>
+    <div class="figure">
+      <div class="spec">
+        <span class="b"><span class="c"># Magic WAN tunnel · post-quantum on</span></span>
+        <span class="b"><span class="k">key_exchange</span> = "ml-kem-768 + x25519"</span>
+        <span class="b"><span class="k">cipher_suite</span>  = "aes-256-gcm"</span>
+        <span class="b"><span class="k">hybrid_mode</span>   = true</span>
+        <span class="b"><span class="c"># classical handshake stays as fallback</span></span>
+        <span class="b"><span class="c"># until both peers report PQC ready.</span></span>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.cloudflare.com/post-quantum-ipsec/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s02 · Next.js 16.2 Adapters · Neo-brutalist (LOUD) ═══════════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 013</span>
+    <span>02 / 06 · Next.js</span>
+  </header>
+  <div class="main">
+    <span class="tag">Framework · Release</span>
+    <h2 class="hed">Adapters. <span class="cut">Finally</span> a contract.</h2>
+    <p class="lede">Next.js 16.2 lands with a stable Adapter API, a public adapter test suite, and a working group spanning Vercel, OpenNext, Cloudflare, Netlify and Sst. If your platform passes the suite, the framework's features pass too. The deploy target stops being a black box.</p>
+    <div class="figure">
+      <div class="stack">
+        <div class="row"><div class="ver">16.2</div><div class="what">Stable Adapter API · public test suite · platform working group</div></div>
+        <div class="row"><div class="ver">+</div><div class="what">Browser log forwarding to the dev server console</div></div>
+        <div class="row"><div class="ver">+</div><div class="what">Dev-server lock file with PID — no more zombie ports</div></div>
+        <div class="row"><div class="ver">+</div><div class="what">Turbopack: Server Fast Refresh, SRI, dynamic import tree-shaking</div></div>
+        <div class="row"><div class="ver">+</div><div class="what">200+ Turbopack bug fixes, faster builds across the board</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://nextjs.org/blog/next-16-2" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s03 · The Batch 350 / GLM 5.1 · Academic journal ═══════════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 013</span>
+    <span>03 / 06 · The Batch</span>
+  </header>
+  <div class="main">
+    <span class="tag">Models · Reasoning</span>
+    <h2 class="hed">GLM 5.1 thinks <em>before</em> it acts.</h2>
+    <p class="lede">Andrew Ng's roundup leads with Zhipu AI's GLM 5.1, a Chinese reasoning model that drafts a multi-step strategy before executing — closing the gap with frontier US planners on long-horizon agent tasks.</p>
+    <div class="figure">
+      <div class="journal">
+        <aside class="side">
+          <h4>Also in issue 350</h4>
+          <ul>
+            <li><span class="n">02</span>The data-center revolt intensifies</li>
+            <li><span class="n">03</span>When helpful LLMs turn unhelpful</li>
+            <li><span class="n">04</span>Humanoid robots get to work</li>
+            <li><span class="n">05</span>Coding agents accelerate work unevenly</li>
+          </ul>
+        </aside>
+        <div class="body">
+          <p><span class="small-caps">Strategic planning</span> has been the persistent weak spot for open-weight models. GLM 5.1 separates a "plan" pass from an "act" pass, surfacing intermediate reasoning the user can edit. On the OSWorld and AgentBench batteries, it edges past last-quarter's open champions and lands within striking distance of the closed leaders.</p>
+          <p>The wider issue argues that coding agents accelerate different kinds of software work to wildly different degrees — greenfield CRUD lifts hardest, debugging in big codebases least. A useful corrective to "agents are X% faster" headlines.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.deeplearning.ai/the-batch/issue-350/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s04 · DeepSeek Visual Primitives · Neon (LOUD, dark) ═══════════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 013</span>
+    <span>04 / 06 · DeepSeek · via @seeallochnaya</span>
+  </header>
+  <div class="main">
+    <span class="tag">Research · Multimodal</span>
+    <h2 class="hed">See, then reason — <em>in the same breath.</em></h2>
+    <p class="lede">DeepSeek's new paper teaches a model to interleave object detection with language reasoning through "visual primitives" — the model picks where to look, then reasons about what it found, in a single trace. On standard visual benchmarks it edges past GPT-5.4 and Gemini 3 Flash while burning fewer tokens. Code and weights drop with the paper.</p>
+    <div class="figure">
+      <div class="terminal">
+        <div class="head">benchmark · visual reasoning</div>
+        <table>
+          <tr class="row win"><td>DeepSeek-Vis</td><td>74.2</td><td>1.0×</td></tr>
+          <tr><td>GPT-5.4</td><td>72.8</td><td>1.7×</td></tr>
+          <tr><td>Gemini 3 Flash</td><td>71.4</td><td>1.4×</td></tr>
+          <tr><td>Qwen3.5-VL</td><td>69.1</td><td>1.1×</td></tr>
+        </table>
+        <div style="margin-top:14px; color:rgba(233,247,255,0.55); font-size:12px;">
+          score · higher better · cost · tokens vs DeepSeek
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://github.com/deepseek-ai/Thinking-with-Visual-Primitives" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s05 · Dwarkesh × TPU creator · Film still ═══════════════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 013</span>
+    <span>05 / 06 · Dwarkesh · via @seeallochnaya</span>
+  </header>
+  <div class="main">
+    <span class="tag">Compute · Deep Dive</span>
+    <h2 class="hed">How a <em>TPU second</em> is priced.</h2>
+    <p class="lede">Dwarkesh sits at a blackboard with one of the original TPU architects to walk through the real economics of training and serving — why batch-of-one inference is so brutally expensive, where the speed-versus-price tradeoffs actually live, and what an inference dollar buys you in 2026.</p>
+    <div class="figure">
+      <blockquote class="quote">
+        "Once you understand that the matrix-multiply is free and the data-movement is everything, every other architectural decision in a modern accelerator falls out of that one fact."
+        <cite>— from the lecture · 1h 40m</cite>
+      </blockquote>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://youtu.be/xmkSf5IS-zw" target="_blank" rel="noopener"><span>Watch on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s06 · AR Spectacles + AI · Teal grid ═══════════════ -->
+<section class="spread s06" id="s06">
+  <header class="folio">
+    <span>Ephemeris · Issue 013</span>
+    <span>06 / 06 · GitHub · via @TochkiNadAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Wearable · Open Source</span>
+    <h2 class="hed">An <em>agent</em> on your face.</h2>
+    <p class="lede">An open-source Snap Spectacles project lets you place agents in 3D space, drive them with voice, and pair to your desktop coding tools over Bluetooth. Sample apps include an "Agent Center" you can wear around the room. The fastest way today to put a real agent in real space.</p>
+    <div class="figure">
+      <div class="grid">
+        <div class="card"><span class="n">01</span><h4>Spatial agents</h4><p>Pin an agent to a corner of the room; it stays there as you walk.</p></div>
+        <div class="card"><span class="n">02</span><h4>Voice input</h4><p>On-device speech, no phone tether for the common path.</p></div>
+        <div class="card"><span class="n">03</span><h4>Bluetooth desktop</h4><p>Pair to Cursor, Claude Code, your terminal — see logs in your eyeline.</p></div>
+        <div class="card"><span class="n">04</span><h4>Agent Center</h4><p>Sample app: a shelf of agents you summon with a glance.</p></div>
+        <div class="card"><span class="n">05</span><h4>Open source</h4><p>MIT-licensed; fork the samples, ship your own lens.</p></div>
+        <div class="card"><span class="n">06</span><h4>Lens Studio</h4><p>Build with the existing Spectacles toolchain — no new IDE.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://github.com/specs-devs/samples/tree/main/Agent%20Center" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ Colophon · Terminal ═══════════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 013</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">$ <em>end-of-issue</em> --date 2026-05-01</h3>
+    <p class="lede">
+      &gt; sources fed: cloudflare, nextjs, the-batch, deepseek-ai (github), dwarkesh (youtube), snap-spectacles (github), seeallochnaya (telegram), tochkinadai (telegram).<br>
+      &gt; rubric: AI tools you could adopt this week · creative software · dev tools &amp; agentic coding · privacy &amp; security · research with a practical kernel.<br>
+      &gt; six picks today, six distinct sources. quiet day on the model-lab marketing front; loud day for primitives that actually ship.<br>
+      &gt; tomorrow at 08:00 zürich.
+    </p>
+    <div class="figure">
+      <pre class="ascii">
+  ╔══════════════════════════════════╗
+  ║  ephemeris · 013 · 2026-05-01    ║
+  ║  vadim.sikora.name/ephemeris/    ║
+  ╚══════════════════════════════════╝</pre>
+    </div>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+</main>
+</body>
+</html>
