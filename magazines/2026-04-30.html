@@ -14,10 +14,7 @@
     --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   }
   * { box-sizing: border-box; }
-  html {
-    scroll-snap-type: y proximity;
-    scroll-behavior: smooth;
-  }
+  html { scroll-behavior: smooth; }
   body, main { display: contents; }
   html, body {
     margin: 0; padding: 0;
@@ -38,7 +35,6 @@
     min-height: 100dvh;
     position: relative;
     overflow: hidden;
-    scroll-snap-align: start;
     padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
     display: grid;
     grid-template-rows: auto minmax(0, 1fr) auto;
