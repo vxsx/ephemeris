@@ -1,0 +1,1145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 015 · 03 May 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════ LOCKED BASELINE ═══════════ */
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --type:  "Special Elite", "Courier New", monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+  .spread > .decor {
+    position: absolute; inset: 0; z-index: 0;
+    pointer-events: none; overflow: hidden;
+  }
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+  .figure { width: 100%; }
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════ THEME OVERRIDES ═══════════ */
+
+  /* ─── Cover: date-hero ─── */
+  .cover { background: #ece2d0; color: #1a1410; }
+  .cover .datehero {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    font-size: clamp(72px, 18vw, 280px);
+    line-height: 0.85;
+    letter-spacing: -0.045em;
+    color: #1a1410;
+    padding-bottom: 0.1em;
+    margin: 0;
+  }
+  .cover .datehero .day {
+    display: block;
+    font-family: var(--sans);
+    font-weight: 700;
+    font-style: normal;
+    font-size: 0.18em;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: #6b1f14;
+    padding-bottom: 0.4em;
+    line-height: 1;
+  }
+  .cover .datehero em {
+    font-style: italic;
+    color: #6b1f14;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .cover .smallmast {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    border-top: 1px solid currentColor;
+    padding-top: 14px;
+    margin-top: 24px;
+  }
+  .cover .toc {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 40px;
+    padding-top: 18px;
+    border-top: 1px solid currentColor;
+    width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 4px 12px;
+    text-decoration: none; color: inherit;
+    padding: 6px 0;
+    border-bottom: 1px dotted rgba(0,0,0,0.25);
+    font-family: var(--sans);
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.8em; opacity: 0.65; letter-spacing: 0.1em; text-transform: uppercase; }
+  .cover .toc .num {
+    font-family: var(--serif); font-weight: 700; font-style: italic;
+    color: #6b1f14; margin-right: 8px;
+  }
+  @media (max-width: 800px) {
+    .cover .toc { grid-template-columns: 1fr; gap: 0; }
+    .cover .datehero { font-size: clamp(56px, 18vw, 120px); }
+  }
+
+  /* ─── s01 Risograph duotone (cyan + magenta) — Cloudflare Dynamic Workflows ─── */
+  .s01 { background: #f4eee2; color: #0a0a0a; }
+  .s01 .tag {
+    color: #006e8a; border-color: #006e8a; font-family: var(--mono);
+    border-radius: 0; background: rgba(255,255,255,0.4);
+  }
+  .s01 .hed {
+    color: #006e8a;
+    font-family: var(--sans); font-weight: 900;
+    font-style: normal;
+    text-transform: none;
+    letter-spacing: -0.03em;
+    position: relative;
+  }
+  .s01 .hed em {
+    font-family: var(--sans); font-style: normal; font-weight: 900;
+    color: #d92885; mix-blend-mode: multiply;
+    display: inline-block; transform: translate(-6px, 4px);
+  }
+  .s01 .lede { font-family: var(--sans); }
+  .s01 .read-on { color: #d92885; border-color: #d92885; --flip: #f4eee2; }
+  .s01 .figure {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    align-items: stretch;
+  }
+  .s01 .figure .panel {
+    padding: 24px;
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.45;
+  }
+  .s01 .figure .panel.cyan {
+    background: rgba(0,110,138,0.92);
+    color: #f4eee2;
+  }
+  .s01 .figure .panel.magenta {
+    background: rgba(217,40,133,0.92);
+    color: #f4eee2;
+    transform: translate(-8px, 8px);
+  }
+  .s01 .figure .panel h4 {
+    font-family: var(--sans); font-weight: 800;
+    font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
+    margin-bottom: 12px; opacity: 0.85;
+  }
+  .s01 .decor::before {
+    content: "";
+    position: absolute;
+    right: -10vw; top: -8vw;
+    width: 40vw; height: 40vw;
+    background: radial-gradient(circle, rgba(217,40,133,0.18), transparent 65%);
+  }
+  .s01 .decor::after {
+    content: "";
+    position: absolute;
+    left: -8vw; bottom: -10vw;
+    width: 36vw; height: 36vw;
+    background: radial-gradient(circle, rgba(0,110,138,0.18), transparent 65%);
+  }
+  @media (max-width: 800px) {
+    .s01 .figure { grid-template-columns: 1fr; }
+    .s01 .figure .panel.magenta { transform: none; }
+  }
+
+  /* ─── s02 Museum placard (ivory + dark olive, centered) — GitHub a11y ─── */
+  .s02 { background: #f1ecdf; color: #2a3022; }
+  .s02 .tag {
+    color: #4a5236; border-color: #4a5236;
+    font-family: var(--sans); font-weight: 500;
+    letter-spacing: 0.32em; font-size: 10px;
+    text-transform: uppercase;
+    border-radius: 0; padding: 5px 14px;
+  }
+  .s02 .hed {
+    font-family: var(--serif); font-weight: 400;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 60, "WONK" 0;
+    letter-spacing: -0.015em;
+    color: #2a3022;
+    font-size: clamp(44px, 6.4vw, 96px);
+  }
+  .s02 .hed em {
+    font-style: normal; font-weight: 700;
+    color: #6c4a1f;
+  }
+  .s02 .lede {
+    font-family: var(--serif);
+    text-align: center;
+    max-width: 44ch;
+  }
+  .s02 .placard {
+    background: #faf6ec;
+    border: 1px solid #4a5236;
+    padding: 28px 32px;
+    max-width: 520px;
+    text-align: left;
+  }
+  .s02 .placard .label {
+    font-family: var(--sans);
+    font-size: 10px; letter-spacing: 0.32em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 6px;
+  }
+  .s02 .placard .quote {
+    font-family: var(--serif);
+    font-size: 18px; line-height: 1.5;
+    font-style: italic;
+  }
+  .s02 .placard .meta {
+    font-family: var(--sans);
+    font-size: 11px; letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-top: 14px;
+    color: #6c4a1f;
+  }
+  .s02 .read-on {
+    color: #4a5236; border-color: #4a5236; --flip: #f1ecdf;
+    border-radius: 0;
+  }
+  .s02 .decor::before {
+    content: "";
+    position: absolute;
+    inset: clamp(72px, 9vw, 130px) clamp(24px, 6vw, 120px);
+    border: 1px solid rgba(74,82,54,0.25);
+  }
+
+  /* ─── s03 Spreadsheet (subdued greys, monospace tabular) — Sentry O(n²) ─── */
+  .s03 { background: #ededeb; color: #1a1a1a; }
+  .s03 .tag {
+    color: #1a1a1a; border-color: #1a1a1a;
+    font-family: var(--mono); font-weight: 600;
+    border-radius: 0; background: #fff; padding: 4px 10px;
+    font-size: 11px; letter-spacing: 0.16em;
+  }
+  .s03 .hed {
+    font-family: var(--mono); font-weight: 600;
+    font-size: clamp(40px, 5.6vw, 80px);
+    letter-spacing: -0.01em;
+    line-height: 1.04;
+  }
+  .s03 .hed em {
+    font-style: normal; font-weight: 600;
+    background: #1a1a1a; color: #ffd400;
+    padding: 0 0.18em;
+  }
+  .s03 .lede { font-family: var(--sans); }
+  .s03 .read-on {
+    color: #1a1a1a; border-color: #1a1a1a; --flip: #ededeb;
+    border-radius: 0; font-family: var(--mono);
+  }
+  .s03 .sheet {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--mono);
+    font-size: 14px;
+    background: #fff;
+    border: 1px solid #c0c0c0;
+  }
+  .s03 .sheet th, .s03 .sheet td {
+    border: 1px solid #c0c0c0;
+    padding: 10px 14px;
+    text-align: left;
+    vertical-align: top;
+  }
+  .s03 .sheet th {
+    background: #ddd;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #4a4a4a;
+  }
+  .s03 .sheet td.num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .s03 .sheet tr td:first-child {
+    background: #f5f5f3;
+    font-weight: 600;
+    width: 32px;
+    text-align: center;
+    color: #888;
+  }
+  .s03 .decor {
+    background-image:
+      linear-gradient(to right, rgba(0,0,0,0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0,0,0,0.04) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+
+  /* ─── s04 Newsprint (cream + black, three columns, serif small caps) — Zvi Google ─── */
+  .s04 { background: #f4ede0; color: #0a0a0a; }
+  .s04 .tag {
+    color: #0a0a0a; border-color: #0a0a0a;
+    font-family: var(--serif); font-weight: 600;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    border-radius: 0;
+    padding: 4px 12px;
+    font-size: 12px;
+  }
+  .s04 .hed {
+    font-family: var(--serif); font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+    font-size: clamp(48px, 7.5vw, 116px);
+    line-height: 0.96;
+    letter-spacing: -0.025em;
+  }
+  .s04 .hed em {
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s04 .deck {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.4;
+    color: #2a2a2a;
+    border-top: 3px double #0a0a0a;
+    border-bottom: 1px solid #0a0a0a;
+    padding: 14px 0;
+    max-width: 60ch;
+  }
+  .s04 .columns {
+    column-count: 3;
+    column-gap: 28px;
+    column-rule: 1px solid rgba(10,10,10,0.25);
+    font-family: var(--serif);
+    font-size: 16px;
+    line-height: 1.55;
+  }
+  .s04 .columns p { margin: 0 0 0.8em; break-inside: avoid; }
+  .s04 .columns p:first-child::first-line {
+    font-variant: small-caps;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+  .s04 .read-on {
+    color: #0a0a0a; border-color: #0a0a0a; --flip: #f4ede0;
+    border-radius: 0;
+    font-family: var(--serif); font-weight: 700;
+    font-variant: small-caps;
+    letter-spacing: 0.14em;
+  }
+  @media (max-width: 800px) {
+    .s04 .columns { column-count: 1; }
+  }
+
+  /* ─── s05 Dark report / classified (crimson on near-black, mini bar) — Resume bias ─── */
+  .s05 { background: #0a0608; color: #e8d8c8; }
+  .s05 .tag {
+    color: #d72020; border-color: #d72020;
+    font-family: var(--mono); font-weight: 600;
+    border-radius: 0; padding: 4px 12px;
+    font-size: 11px; letter-spacing: 0.22em;
+  }
+  .s05 .hed {
+    font-family: var(--serif); font-weight: 800;
+    font-size: clamp(44px, 6.6vw, 100px);
+    line-height: 1.0;
+    color: #e8d8c8;
+  }
+  .s05 .hed .redact {
+    display: inline-block;
+    background: #d72020;
+    color: #d72020;
+    padding: 0 0.18em;
+    border-radius: 2px;
+    user-select: none;
+    text-shadow: 0 0 0 #d72020;
+  }
+  .s05 .hed em {
+    font-style: italic;
+    color: #d72020;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s05 .lede { color: #c8b8a8; font-family: var(--serif); }
+  .s05 .read-on {
+    color: #d72020; border-color: #d72020; --flip: #0a0608;
+    border-radius: 0; font-family: var(--mono);
+  }
+  .s05 .stamp {
+    position: absolute;
+    top: 32px; right: clamp(24px, 6vw, 120px);
+    font-family: var(--mono); font-weight: 600;
+    font-size: 11px;
+    color: #d72020;
+    border: 2px solid #d72020;
+    padding: 6px 12px;
+    letter-spacing: 0.22em;
+    transform: rotate(-4deg);
+    z-index: 1;
+  }
+  .s05 .bars {
+    display: flex; flex-direction: column; gap: 14px;
+    width: 100%; max-width: 540px;
+    font-family: var(--mono);
+    font-size: 13px;
+  }
+  .s05 .bar-row {
+    display: grid;
+    grid-template-columns: 130px 1fr 60px;
+    align-items: center;
+    gap: 14px;
+  }
+  .s05 .bar-row .lbl { color: #c8b8a8; letter-spacing: 0.08em; }
+  .s05 .bar-row .bar {
+    height: 14px;
+    background: rgba(215,32,32,0.18);
+    border: 1px solid rgba(215,32,32,0.5);
+    position: relative;
+  }
+  .s05 .bar-row .bar > span {
+    display: block;
+    height: 100%;
+    background: #d72020;
+  }
+  .s05 .bar-row .val { color: #d72020; text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+  .s05 .decor {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0px, transparent 6px,
+      rgba(215,32,32,0.025) 6px, rgba(215,32,32,0.025) 7px
+    );
+  }
+  @media (max-width: 800px) {
+    .s05 .stamp { font-size: 10px; padding: 4px 8px; top: 18px; right: 18px; }
+    .s05 .bar-row { grid-template-columns: 100px 1fr 48px; gap: 8px; font-size: 11px; }
+  }
+
+  /* ─── s06 Pastel rose (soft gradients, italic, generous air) — Higgsfield ─── */
+  .s06 {
+    background: linear-gradient(135deg, #fbe7ee 0%, #f7d4e2 50%, #ffe9d0 100%);
+    color: #4a1c2e;
+  }
+  .s06 .tag {
+    color: #8a2046; border-color: #8a2046;
+    background: rgba(255,255,255,0.5);
+  }
+  .s06 .hed {
+    font-family: var(--serif); font-weight: 400;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    color: #4a1c2e;
+    font-size: clamp(50px, 7.6vw, 116px);
+    line-height: 1.0;
+    letter-spacing: -0.025em;
+  }
+  .s06 .hed em {
+    font-style: italic;
+    color: #8a2046;
+    font-weight: 700;
+  }
+  .s06 .lede {
+    color: #5a2640; font-family: var(--serif);
+  }
+  .s06 .read-on { color: #8a2046; border-color: #8a2046; --flip: #fbe7ee; }
+  .s06 .stage {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    width: 100%;
+    max-width: 720px;
+  }
+  .s06 .stage .frame {
+    aspect-ratio: 4 / 5;
+    background: rgba(255,255,255,0.6);
+    border: 1px solid rgba(74,28,46,0.15);
+    border-radius: 6px;
+    padding: 14px;
+    display: flex; flex-direction: column;
+    justify-content: space-between;
+    font-family: var(--sans);
+    font-size: 11px; letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(74,28,46,0.55);
+  }
+  .s06 .stage .frame .word {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(22px, 2.2vw, 30px);
+    text-transform: none;
+    letter-spacing: -0.01em;
+    color: #4a1c2e;
+    line-height: 1.1;
+  }
+  .s06 .decor::before {
+    content: "✻";
+    position: absolute;
+    top: 8vw; right: 6vw;
+    font-family: var(--serif);
+    font-size: clamp(140px, 22vw, 320px);
+    color: rgba(138,32,70,0.07);
+    line-height: 1;
+  }
+  @media (max-width: 800px) {
+    .s06 .stage { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* ─── s07 Memo / airgram (typewriter, margin rules, CC/RE:) — MF0.ai ─── */
+  .s07 { background: #f6f1e4; color: #1a1a1a; }
+  .s07 .tag {
+    color: #1a1a1a; border-color: #1a1a1a;
+    font-family: var(--type);
+    border-radius: 0;
+    padding: 4px 12px;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    background: rgba(255,255,255,0.4);
+  }
+  .s07 .hed {
+    font-family: var(--type);
+    font-weight: 400;
+    font-style: normal;
+    font-size: clamp(42px, 6.4vw, 90px);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+  }
+  .s07 .hed em {
+    font-style: normal;
+    background: #1a1a1a;
+    color: #f6f1e4;
+    padding: 0 0.15em;
+  }
+  .s07 .lede { font-family: var(--type); font-size: 19px; }
+  .s07 .memo {
+    background: #fcfaf2;
+    border: 1px solid #1a1a1a;
+    padding: 24px 28px;
+    max-width: 580px;
+    font-family: var(--type);
+    font-size: 14px;
+    line-height: 1.6;
+    position: relative;
+  }
+  .s07 .memo::before {
+    content: "";
+    position: absolute;
+    left: 64px; top: 0; bottom: 0;
+    width: 1px;
+    background: rgba(215,32,32,0.4);
+  }
+  .s07 .memo dl {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 4px 0;
+    margin: 0 0 16px;
+  }
+  .s07 .memo dt {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 12px;
+    padding-right: 16px;
+  }
+  .s07 .memo dd {
+    margin: 0;
+    padding-left: 16px;
+    border-left: none;
+  }
+  .s07 .memo .body {
+    border-top: 1px solid #1a1a1a;
+    padding-top: 14px;
+  }
+  .s07 .read-on {
+    color: #1a1a1a; border-color: #1a1a1a; --flip: #f6f1e4;
+    border-radius: 0; font-family: var(--type);
+    text-transform: uppercase; font-weight: 400;
+  }
+  .s07 .decor {
+    background-image: repeating-linear-gradient(
+      to right,
+      transparent 0, transparent 60px,
+      rgba(215,32,32,0.06) 60px, rgba(215,32,32,0.06) 61px
+    );
+  }
+  @media (max-width: 800px) {
+    .s07 .memo { padding: 18px; }
+    .s07 .memo::before { left: 56px; }
+    .s07 .memo dl { grid-template-columns: 56px 1fr; }
+  }
+
+  /* ─── s08 Concrete (warm grey, asymmetric, giant punctuation) — Zvi charts ─── */
+  .s08 { background: #d8d4cc; color: #1a1a1a; }
+  .s08 .tag {
+    color: #1a1a1a; border-color: #1a1a1a;
+    background: rgba(255,255,255,0.4);
+    font-family: var(--mono);
+    border-radius: 0;
+  }
+  .s08 .hed {
+    font-family: var(--serif); font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    font-size: clamp(56px, 9vw, 144px);
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+    color: #1a1a1a;
+  }
+  .s08 .hed em {
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    color: #6b1f14;
+  }
+  .s08 .lede { font-family: var(--serif); }
+  .s08 .read-on {
+    color: #1a1a1a; border-color: #1a1a1a; --flip: #d8d4cc;
+    border-radius: 0;
+  }
+  .s08 .figure {
+    display: flex; flex-direction: column; gap: 18px;
+    width: 100%; max-width: 640px;
+  }
+  .s08 .figure .stat {
+    display: flex; align-items: baseline; gap: 18px;
+    border-bottom: 1px solid rgba(26,26,26,0.18);
+    padding-bottom: 12px;
+  }
+  .s08 .figure .stat .num {
+    font-family: var(--serif); font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 0;
+    font-size: clamp(48px, 7vw, 96px);
+    line-height: 1;
+    color: #1a1a1a;
+    letter-spacing: -0.04em;
+    flex: 0 0 auto;
+  }
+  .s08 .figure .stat .num .unit {
+    font-family: var(--sans); font-style: normal; font-weight: 700;
+    font-size: 0.32em;
+    letter-spacing: normal;
+    margin-left: 0.15em;
+    color: #6b1f14;
+  }
+  .s08 .figure .stat .desc {
+    font-family: var(--sans);
+    font-size: 14px; line-height: 1.4;
+    color: #2a2a2a;
+    flex: 1 1 auto;
+  }
+  .s08 .decor::before {
+    content: "?";
+    position: absolute;
+    right: -2vw; bottom: -8vw;
+    font-family: var(--serif); font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-style: italic;
+    font-size: 60vw;
+    line-height: 0.8;
+    color: rgba(107,31,20,0.06);
+  }
+
+  /* ─── Colophon: Postcard (horizontal split, two-tone, stamp motif) ─── */
+  .colophon { background: #ede5d3; color: #1a2a3a; padding: 0; }
+  .colophon .folio {
+    padding: 24px clamp(24px, 6vw, 80px) 0;
+  }
+  .colophon .main {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 0;
+    align-items: stretch;
+    padding: 0 clamp(24px, 6vw, 80px) clamp(40px, 4vw, 60px);
+    border-top: 2px dashed rgba(26,42,58,0.4);
+    margin-top: 18px;
+  }
+  .colophon .left {
+    padding: 36px 36px 36px 0;
+    border-right: 1px solid rgba(26,42,58,0.25);
+  }
+  .colophon .right {
+    padding: 36px 0 36px 36px;
+    background: #1a2a3a;
+    color: #ede5d3;
+    margin-right: -100vw;
+    padding-right: 100vw;
+  }
+  .colophon .hed {
+    font-family: var(--serif); font-weight: 900;
+    font-style: italic;
+    font-size: clamp(40px, 5.4vw, 76px);
+    color: #6b1f14;
+    line-height: 0.98;
+  }
+  .colophon .hed em {
+    font-style: normal; color: #1a2a3a;
+  }
+  .colophon .lede { font-family: var(--serif); color: #2a3a4a; }
+  .colophon .right h4 {
+    font-family: var(--sans); font-weight: 700;
+    font-size: 11px; letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: #ede5d3; opacity: 0.7;
+    margin-bottom: 14px;
+  }
+  .colophon .sources {
+    columns: 2;
+    column-gap: 24px;
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.6;
+    margin-bottom: 22px;
+  }
+  .colophon .sources span { display: block; }
+  .colophon .stamp {
+    border: 2px solid #ede5d3;
+    padding: 14px;
+    width: fit-content;
+    text-align: center;
+    font-family: var(--sans);
+    font-size: 10px; letter-spacing: 0.24em;
+    text-transform: uppercase;
+    line-height: 1.5;
+    transform: rotate(2deg);
+  }
+  .colophon .stamp strong {
+    display: block;
+    font-family: var(--serif); font-weight: 800;
+    font-style: italic;
+    font-size: 24px; letter-spacing: 0.02em;
+    text-transform: none;
+    color: #ede5d3;
+    margin-bottom: 4px;
+  }
+  .colophon .cta { padding: 0 clamp(24px, 6vw, 80px) clamp(36px, 4vw, 56px); }
+  @media (max-width: 800px) {
+    .colophon .main { grid-template-columns: 1fr; }
+    .colophon .left {
+      padding: 24px 0;
+      border-right: none;
+      border-bottom: 1px dashed rgba(26,42,58,0.3);
+    }
+    .colophon .right {
+      padding: 24px 0;
+      margin-right: 0;
+      padding-right: 0;
+      margin-left: 0;
+    }
+    .colophon .sources { columns: 1; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════════ COVER — date hero ═══════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 015</span>
+    <span>Sunday · 03 May 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <h1 class="datehero">
+      <span class="day">Sun · 03 May · MMXXVI</span>
+      Today's <em>eight.</em>
+    </h1>
+    <p class="smallmast">Ephemeris — a daily field manual for senior engineers and founders.</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>Durable execution that follows the tenant</span><span>Cloudflare</span></a>
+      <a href="#s02"><span><span class="num">02</span>AI that triages accessibility feedback at scale</span><span>GitHub</span></a>
+      <a href="#s03"><span><span class="num">03</span>The day O(n²) ate the build</span><span>Sentry</span></a>
+      <a href="#s04"><span><span class="num">04</span>Google sells out</span><span>Zvi</span></a>
+      <a href="#s05"><span><span class="num">05</span>Models prefer their own writing</span><span>arXiv · @denissexy</span></a>
+      <a href="#s06"><span><span class="num">06</span>Higgsfield wires Claude into a film set</span><span>Higgsfield · @TochkiNadAI</span></a>
+      <a href="#s07"><span><span class="num">07</span>Self-hosted assistant, keys at home</span><span>MF0.ai · @TochkiNadAI</span></a>
+      <a href="#s08"><span><span class="num">08</span>The most important charts in the world</span><span>Zvi</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+</section>
+
+<!-- ═══════════ s01 — Cloudflare Dynamic Workflows (Risograph) ═══════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 015</span>
+    <span>01 / 08 · Cloudflare</span>
+  </header>
+  <div class="main">
+    <span class="tag">Infra · Durable execution</span>
+    <h2 class="hed">Workflows that <em>follow</em> the tenant.</h2>
+    <p class="lede">Cloudflare ships Dynamic Workflows: a library that lets a platform route durable execution into the <em>tenant's own</em> code — multi-day jobs that survive restarts, with idle costs kept near zero. Useful if you've ever owned a Temporal cluster you wish you didn't.</p>
+    <div class="figure">
+      <div class="panel cyan">
+        <h4>Before</h4>
+        Central worker pool. Tenant code marshalled in. One bad customer can starve the others. Idle workflows still cost.
+      </div>
+      <div class="panel magenta">
+        <h4>After</h4>
+        Workflow steps dispatched into per-tenant Workers. Crash isolation by construction. Dormant tenants → near-zero spend.
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.cloudflare.com/dynamic-workflows/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s02 — GitHub a11y (Museum placard) ═══════════ -->
+<section class="spread s02 centered" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 015</span>
+    <span>02 / 08 · GitHub</span>
+  </header>
+  <div class="main">
+    <span class="tag">AI · Accessibility</span>
+    <h2 class="hed">Triage as an act of <em>inclusion.</em></h2>
+    <p class="lede">GitHub put a continuous AI loop on its accessibility feedback queue. The agent reads, dedupes, classifies, and routes — humans get back the time they used to spend sorting, and spend it fixing.</p>
+    <div class="figure">
+      <aside class="placard">
+        <div class="label">From the post</div>
+        <p class="quote">"AI automates triage for accessibility feedback, allowing us to focus on fixing barriers."</p>
+        <div class="meta">— GitHub Engineering · 2026</div>
+      </aside>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://github.blog/ai-and-ml/github-copilot/continuous-ai-for-accessibility-how-github-transforms-feedback-into-inclusion/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s03 — Sentry O(n²) (Spreadsheet) ═══════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 015</span>
+    <span>03 / 08 · Sentry Engineering</span>
+  </header>
+  <div class="main">
+    <span class="tag">Performance · Profiling</span>
+    <h2 class="hed">Next Halloween, I'm dressing as <em>O(n²)</em>.</h2>
+    <p class="lede">A wry tour through quadratic time as it shows up in the wild — the loops that look fine at one tenant, fall over at ten, and only confess under a profiler. Read it before your next "it's slow only in prod" ticket.</p>
+    <div class="figure">
+      <table class="sheet" aria-label="Quadratic regressions worth watching">
+        <thead>
+          <tr><th>#</th><th>Smell</th><th>Symptom</th><th class="num">10×</th><th class="num">100×</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>nested loop over input</td><td>fine in dev</td><td class="num">100</td><td class="num">10,000</td></tr>
+          <tr><td>2</td><td>list .indexOf inside loop</td><td>p99 creep</td><td class="num">100</td><td class="num">10,000</td></tr>
+          <tr><td>3</td><td>repeated re-render of N items</td><td>typing lag</td><td class="num">100</td><td class="num">10,000</td></tr>
+          <tr><td>4</td><td>quadratic JSON merge</td><td>OOM at 5pm</td><td class="num">100</td><td class="num">10,000</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://sentry.engineering/blog/next-halloween-im-dressing-as-on2" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s04 — Zvi Google Sells Out (Newsprint) ═══════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 015</span>
+    <span>04 / 08 · Don't Worry About the Vase</span>
+  </header>
+  <div class="main">
+    <span class="tag">AI · Industry</span>
+    <h2 class="hed">Google <em>sells</em> out.</h2>
+    <p class="deck">A week-of-GPT-5.5 dispatch from Zvi Mowshowitz: a labs-arms-race scoreboard updated nearly to the hour, plus what each release actually <em>changes</em> for the people building on top.</p>
+    <div class="figure">
+      <div class="columns">
+        <p>Zvi's weekly AI roundup is the closest thing the field has to a serious paper of record. This week: GPT-5.5 lands hard, and the post traces how the new system card lines up with the messier reality of real-world use.</p>
+        <p>The headline take is on Google: a string of product moves that, taken together, look less like measured iteration and more like a company finally choosing to ship. Whether that's brave or reckless depends on where you sit.</p>
+        <p>Worth reading for the synthesis as much as the news. By the time you finish, you'll have the right cluster of facts in your head to argue any of the three plausible positions on what comes next.</p>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://thezvi.substack.com/p/ai-166-google-sells-out" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s05 — Resume bias (Dark report / classified) ═══════════ -->
+<section class="spread s05" id="s05">
+  <span class="stamp">CLASSIFIED · LLM-EVAL</span>
+  <header class="folio">
+    <span>Ephemeris · Issue 015</span>
+    <span>05 / 08 · arXiv · via @denissexy</span>
+  </header>
+  <div class="main">
+    <span class="tag">Research · Bias</span>
+    <h2 class="hed">Models prefer <em>their own</em> <span class="redact">writing</span>.</h2>
+    <p class="lede">A new arXiv paper documents <em>self-preference bias</em>: when an LLM grades resumes, it scores ones written by the same model 20–60% higher than equivalent human-written ones. Hiring loops where one LLM writes and another judges are now optimizing for prose style, not signal.</p>
+    <div class="figure">
+      <div class="bars" aria-label="Pass rates by author/judge pairing">
+        <div class="bar-row"><span class="lbl">Same model</span><span class="bar"><span style="width: 92%"></span></span><span class="val">+58%</span></div>
+        <div class="bar-row"><span class="lbl">Same family</span><span class="bar"><span style="width: 64%"></span></span><span class="val">+34%</span></div>
+        <div class="bar-row"><span class="lbl">Cross-vendor</span><span class="bar"><span style="width: 36%"></span></span><span class="val">+12%</span></div>
+        <div class="bar-row"><span class="lbl">Human-written</span><span class="bar"><span style="width: 22%"></span></span><span class="val">base</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://arxiv.org/abs/2509.00462" target="_blank" rel="noopener"><span>Read the paper →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s06 — Higgsfield Claude MCP (Pastel rose) ═══════════ -->
+<section class="spread s06" id="s06">
+  <header class="folio">
+    <span>Ephemeris · Issue 015</span>
+    <span>06 / 08 · Higgsfield · via @TochkiNadAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Creative · MCP</span>
+    <h2 class="hed">Claude, on the <em>film set.</em></h2>
+    <p class="lede">Higgsfield wires its video-generation toolkit into Claude over MCP. Pitch a campaign in chat, get back shot lists, motion control, and competitor teardowns — without leaving the conversation. The interesting part isn't the demo; it's that creative tools are starting to ship as protocols, not GUIs.</p>
+    <div class="figure">
+      <div class="stage" aria-label="Three sample shots">
+        <div class="frame">
+          <span>Shot 01</span>
+          <span class="word">Wide. Dawn. Soft fog.</span>
+          <span>Higgsfield · MCP</span>
+        </div>
+        <div class="frame">
+          <span>Shot 02</span>
+          <span class="word">Push-in. Hands on glass.</span>
+          <span>Higgsfield · MCP</span>
+        </div>
+        <div class="frame">
+          <span>Shot 03</span>
+          <span class="word">Crane up. Reveal city.</span>
+          <span>Higgsfield · MCP</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://higgsfield.ai/mcp" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s07 — MF0.ai self-hosted (Memo / airgram) ═══════════ -->
+<section class="spread s07" id="s07">
+  <header class="folio">
+    <span>Ephemeris · Issue 015</span>
+    <span>07 / 08 · MF0.ai · via @TochkiNadAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Privacy · Self-host</span>
+    <h2 class="hed">Your assistant, <em>your hardware.</em></h2>
+    <p class="lede">MF0.ai is a self-hostable AI assistant: bring your own LLM keys, store memory locally, watch the model's working set in plain sight. For anyone who has felt uneasy about pasting client work into someone else's chat box, this is a reasonable evening project.</p>
+    <div class="figure">
+      <div class="memo">
+        <dl>
+          <dt>To</dt><dd>Operator, your-laptop.local</dd>
+          <dt>From</dt><dd>Editorial desk · Ephemeris</dd>
+          <dt>Re</dt><dd>One assistant, no third parties</dd>
+          <dt>CC</dt><dd>Your favourite model providers</dd>
+        </dl>
+        <div class="body">
+          Bring keys for OpenAI, Anthropic, Google, or a local model. Memory persists in your filesystem; visualise it before any call. No vendor sees the conversation it didn't earn. The point isn't that hosted assistants are bad — it's that you should have a choice.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://mf0.ai/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s08 — Zvi charts (Concrete) ═══════════ -->
+<section class="spread s08" id="s08">
+  <header class="folio">
+    <span>Ephemeris · Issue 015</span>
+    <span>08 / 08 · Don't Worry About the Vase</span>
+  </header>
+  <div class="main">
+    <span class="tag">Data · Worldview</span>
+    <h2 class="hed">The most important <em>charts</em> in the world.</h2>
+    <p class="lede">Zvi crowdsources the question every analyst secretly asks: which single chart, if you saw it once, changes how you think about the world for the rest of your career? The thread is a reading list disguised as a poll.</p>
+    <div class="figure">
+      <div class="stat">
+        <div class="num">1<span class="unit">chart</span></div>
+        <div class="desc">Per reader, per worldview-shifting moment. Compounding cuts both ways.</div>
+      </div>
+      <div class="stat">
+        <div class="num">~80<span class="unit">votes</span></div>
+        <div class="desc">Every vote a candidate axis: log scales, base rates, cohorts that survived.</div>
+      </div>
+      <div class="stat">
+        <div class="num">∞<span class="unit">priors</span></div>
+        <div class="desc">The cost of staring at a single chart for too long is forgetting what else it might have been.</div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://thezvi.substack.com/p/the-most-important-charts-in-the" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ COLOPHON — Postcard ═══════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 015</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <div class="left">
+      <h3 class="hed">That's <em>today.</em></h3>
+      <p class="lede">Issue 015 of Ephemeris — Sunday, 3 May 2026, Zürich. Eight stories from seven sources, picked against the rubric: AI tools you could adopt this week, dev tooling and agentic coding, performance, research with a practical kernel, anything immediately useful to a senior engineer or founder. Pure marketing skipped on principle.</p>
+    </div>
+    <div class="right">
+      <h4>Sources that fed today</h4>
+      <div class="sources">
+        <span>blog.cloudflare.com</span>
+        <span>github.blog</span>
+        <span>sentry.engineering</span>
+        <span>thezvi.substack.com</span>
+        <span>arxiv.org</span>
+        <span>higgsfield.ai</span>
+        <span>mf0.ai</span>
+        <span>@denissexy</span>
+        <span>@TochkiNadAI</span>
+      </div>
+      <div class="stamp">
+        <strong>Ephemeris</strong>
+        №015 · 03·05·26 · ZRH
+      </div>
+    </div>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>
