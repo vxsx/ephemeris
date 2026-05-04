@@ -1,0 +1,911 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 016 · 04 May 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+  .spread > .decor {
+    position: absolute; inset: 0; z-index: 0;
+    pointer-events: none; overflow: hidden;
+  }
+  .spread > .folio {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 8px 24px; flex-wrap: wrap;
+    font-family: var(--sans); font-size: 13px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .spread > .main {
+    display: flex; flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center; align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans); font-size: 12px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+  .hed {
+    font-family: var(--serif); font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02; letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch; margin: 0;
+  }
+  .figure { width: 100%; }
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans); font-weight: 600;
+    font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none; color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed   { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede  { font-size: 18px; line-height: 1.5; }
+    .tag   { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═════ COVER · Dossier grid — numbered cells, no single hero ═════ */
+  .cover {
+    background: #ece4d2;
+    color: #18181b;
+  }
+  .cover .masthead-line {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: clamp(13px, 1vw, 14px);
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    border-top: 2px solid #18181b;
+    border-bottom: 2px solid #18181b;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 4px 24px;
+  }
+  .cover .dek {
+    font-family: var(--serif);
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 80, "WONK" 1;
+    font-size: clamp(28px, 3.4vw, 48px);
+    line-height: 1.16;
+    max-width: 22ch;
+    color: #4a1d12;
+    margin: 6px 0 0;
+  }
+  .dossier {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    border-top: 1px solid #18181b;
+    border-left: 1px solid #18181b;
+    width: 100%;
+    margin-top: 10px;
+  }
+  .dossier a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    padding: 18px 16px 22px;
+    border-right: 1px solid #18181b;
+    border-bottom: 1px solid #18181b;
+    background: #ece4d2;
+    transition: background 0.15s;
+    min-height: 150px;
+  }
+  .dossier a:hover { background: #d6cdb6; }
+  .dossier .num {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    color: #4a1d12;
+    display: block;
+    margin-bottom: 14px;
+  }
+  .dossier .t {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(15px, 1.2vw, 19px);
+    line-height: 1.18;
+    display: block;
+  }
+  .dossier .src {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.55;
+    display: block;
+    margin-top: 12px;
+  }
+  @media (max-width: 800px) {
+    .dossier { grid-template-columns: repeat(2, 1fr); }
+    .cover .dek { font-size: 28px; }
+  }
+
+  /* ═════ s01 · Academic journal — cream + navy, sidebar + 2col ═════ */
+  .s01 { background: #f1ebde; color: #0e1c3a; }
+  .s01 .tag { color: #0e1c3a; border-color: #0e1c3a; }
+  .s01 .hed {
+    font-weight: 600;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" 0;
+    color: #0e1c3a;
+    font-size: clamp(46px, 5.6vw, 86px);
+  }
+  .s01 .hed em { font-style: normal; color: #6b1f14; }
+  .s01 .ac {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 32px;
+    border-top: 2px solid #0e1c3a;
+    padding-top: 18px;
+  }
+  .s01 .side {
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .s01 .side .k {
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: #6b1f14;
+    font-size: 10px;
+    margin-top: 14px;
+    display: block;
+  }
+  .s01 .side .v { font-size: 14px; color: #0e1c3a; display: block; }
+  .s01 .body {
+    column-count: 2;
+    column-gap: 28px;
+    column-rule: 1px solid rgba(14,28,58,0.25);
+    font-family: var(--serif);
+    font-size: 15.5px;
+    line-height: 1.55;
+    text-align: justify;
+    hyphens: none;
+  }
+  .s01 .body p { margin: 0 0 12px; break-inside: avoid; }
+  .s01 .body p:first-child::first-line {
+    font-variant: small-caps;
+    letter-spacing: 0.06em;
+  }
+  .s01 .read-on { color: #0e1c3a; border-color: #0e1c3a; --flip: #f1ebde; }
+  .s01 .decor::before {
+    content: "§ 04.05.26"; position: absolute;
+    bottom: 28px; right: clamp(24px, 6vw, 120px);
+    font-family: var(--mono); font-size: 12px;
+    letter-spacing: 0.18em; color: rgba(14,28,58,0.45);
+  }
+  @media (max-width: 800px) {
+    .s01 .ac { grid-template-columns: 1fr; gap: 18px; }
+    .s01 .body { column-count: 1; }
+  }
+
+  /* ═════ s02 · Neo-brutalist (LOUD) — chunky black, yellow ═════ */
+  .s02 { background: #ffd400; color: #0a0a0a; }
+  .s02 .tag {
+    color: #0a0a0a; border: 2px solid #0a0a0a;
+    border-radius: 0; font-weight: 800;
+    background: #ffd400;
+  }
+  .s02 .hed {
+    font-family: var(--sans);
+    font-weight: 900;
+    font-style: normal;
+    font-size: clamp(54px, 9vw, 132px);
+    line-height: 0.96;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+  }
+  .s02 .hed .cut {
+    background: #0a0a0a;
+    color: #ffd400;
+    padding: 0.05em 0.18em 0.12em;
+    margin-right: 0.05em;
+    display: inline-block;
+  }
+  .s02 .lede {
+    font-family: var(--sans);
+    font-size: clamp(18px, 1.6vw, 22px);
+    font-weight: 500;
+    line-height: 1.4;
+    border-left: 6px solid #0a0a0a;
+    padding-left: 14px;
+  }
+  .s02 .verbs {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    margin-top: 4px;
+  }
+  .s02 .verbs span {
+    font-family: var(--sans);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 14px;
+    border: 2px solid #0a0a0a;
+    padding: 8px 14px;
+    background: #ffd400;
+  }
+  .s02 .verbs .on {
+    background: #0a0a0a; color: #ffd400;
+  }
+  .s02 .read-on {
+    color: #ffd400; background: #0a0a0a;
+    border: 3px solid #0a0a0a; --flip: #0a0a0a;
+    font-weight: 800;
+  }
+  .s02 .read-on:hover { background: #ffd400; }
+  .s02 .read-on:hover span { color: #0a0a0a; }
+  .s02 .decor::after {
+    content: ""; position: absolute;
+    right: -40px; top: 18%;
+    width: 240px; height: 240px;
+    border: 8px solid #0a0a0a;
+    transform: rotate(12deg);
+    background: transparent;
+  }
+
+  /* ═════ s03 · Neon / cyberpunk (LOUD) — purple + teal ═════ */
+  .s03 {
+    background: #07061a;
+    color: #f0eaff;
+  }
+  .s03 .tag {
+    color: #6affe6;
+    border-color: #6affe6;
+    text-shadow: 0 0 8px rgba(106,255,230,0.5);
+  }
+  .s03 .hed {
+    font-family: var(--sans);
+    font-weight: 900;
+    font-style: normal;
+    font-size: clamp(50px, 8vw, 122px);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    background: linear-gradient(95deg, #ff5cff 0%, #6affe6 60%, #ffe66a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  .s03 .lede {
+    font-family: var(--sans);
+    font-size: clamp(18px, 1.6vw, 22px);
+    line-height: 1.45;
+    color: #d6cffa;
+  }
+  .s03 .pixel {
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.55;
+    color: #6affe6;
+    background: rgba(106,255,230,0.04);
+    border: 1px solid rgba(106,255,230,0.35);
+    padding: 18px 22px;
+    box-shadow: 0 0 0 1px rgba(255,92,255,0.18) inset, 0 0 36px rgba(106,255,230,0.12);
+    max-width: 56ch;
+  }
+  .s03 .pixel .lbl { color: #ff5cff; letter-spacing: 0.12em; }
+  .s03 .pixel .v   { color: #ffe66a; }
+  .s03 .read-on {
+    color: #6affe6; border-color: #6affe6; --flip: #07061a;
+  }
+  .s03 .decor::before {
+    content: ""; position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(0deg, rgba(255,92,255,0.04) 0 1px, transparent 1px 4px),
+      radial-gradient(60% 40% at 80% 20%, rgba(255,92,255,0.18), transparent 60%),
+      radial-gradient(50% 50% at 10% 90%, rgba(106,255,230,0.15), transparent 60%);
+  }
+
+  /* ═════ s04 · Blueprint — pale grid, monospace annotation ═════ */
+  .s04 {
+    background: #d9e6ee;
+    color: #0c2438;
+  }
+  .s04 .tag { color: #0c2438; border-color: #0c2438; }
+  .s04 .hed {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 60;
+    color: #0c2438;
+    font-size: clamp(48px, 6.4vw, 92px);
+  }
+  .s04 .hed em {
+    font-style: normal;
+    font-family: var(--mono);
+    font-weight: 600;
+    color: #6b1f14;
+    font-size: 0.78em;
+    background: rgba(255,255,255,0.6);
+    padding: 0 6px;
+  }
+  .s04 .bp {
+    border: 1px solid #0c2438;
+    padding: 22px 24px;
+    background: rgba(255,255,255,0.35);
+    position: relative;
+    font-family: var(--mono);
+    font-size: 13.5px;
+    line-height: 1.65;
+    max-width: 60ch;
+  }
+  .s04 .bp::before, .s04 .bp::after {
+    content: ""; position: absolute;
+    width: 16px; height: 16px;
+    border: 1px solid #0c2438;
+    background: #d9e6ee;
+  }
+  .s04 .bp::before { top: -8px; left: -8px; }
+  .s04 .bp::after  { bottom: -8px; right: -8px; }
+  .s04 .bp .lbl {
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 10px;
+    color: #6b1f14;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .s04 .bp .row { display: flex; justify-content: space-between; gap: 20px; }
+  .s04 .bp .row .k { color: #0c2438; opacity: 0.7; }
+  .s04 .bp .row .v { color: #0c2438; font-weight: 600; }
+  .s04 .read-on { color: #0c2438; border-color: #0c2438; --flip: #d9e6ee; }
+  .s04 .decor::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      linear-gradient(to right, rgba(12,36,56,0.07) 1px, transparent 1px) 0 0/24px 24px,
+      linear-gradient(to bottom, rgba(12,36,56,0.07) 1px, transparent 1px) 0 0/24px 24px;
+  }
+
+  /* ═════ s05 · Film still (LOUD-dark) — letterboxed cinematic ═════ */
+  .s05 {
+    background: #0e0e0e;
+    color: #ece2c8;
+    padding-top: clamp(120px, 12vw, 160px);
+    padding-bottom: clamp(120px, 12vw, 160px);
+  }
+  .s05 .tag {
+    color: #d4b86a; border-color: #d4b86a;
+    background: rgba(0,0,0,0.4);
+  }
+  .s05 .hed {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-style: normal;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    font-size: clamp(48px, 6.6vw, 96px);
+    line-height: 1.02;
+    color: #ece2c8;
+  }
+  .s05 .hed em {
+    font-style: normal;
+    color: #d4b86a;
+    font-weight: 800;
+  }
+  .s05 .lede {
+    font-family: var(--serif);
+    font-style: italic;
+    color: #ece2c8;
+    opacity: 0.85;
+  }
+  .s05 .credit {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    color: #d4b86a;
+    text-transform: uppercase;
+    border-top: 1px solid #d4b86a;
+    padding-top: 12px;
+    max-width: 46ch;
+  }
+  .s05 .credit b { color: #ece2c8; font-weight: 600; }
+  .s05 .read-on { color: #d4b86a; border-color: #d4b86a; --flip: #0e0e0e; }
+  .s05 .decor::before, .s05 .decor::after {
+    content: ""; position: absolute;
+    left: 0; right: 0;
+    height: clamp(60px, 8vw, 100px);
+    background: #050505;
+  }
+  .s05 .decor::before { top: 0; }
+  .s05 .decor::after  { bottom: 0; }
+
+  /* ═════ s06 · Teal grid — 2x4 cards w/ numbered italic corners ═════ */
+  .s06 {
+    background: #0c4a4a;
+    color: #d3f5f0;
+  }
+  .s06 .tag { color: #d3f5f0; border-color: #d3f5f0; }
+  .s06 .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    color: #ffe88c;
+    font-size: clamp(46px, 6.4vw, 96px);
+  }
+  .s06 .hed em {
+    font-style: italic;
+    color: #d3f5f0;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s06 .grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    width: 100%;
+    max-width: 64ch;
+  }
+  .s06 .grid .card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(211,245,240,0.35);
+    padding: 18px 20px 22px;
+    position: relative;
+    font-family: var(--mono);
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+  .s06 .grid .card .n {
+    position: absolute;
+    top: 10px; right: 14px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 22px;
+    color: #ffe88c;
+  }
+  .s06 .grid .card .t {
+    font-family: var(--sans);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 11px;
+    color: #ffe88c;
+    display: block;
+    margin-bottom: 8px;
+  }
+  .s06 .grid .card .b {
+    font-family: var(--serif);
+    font-size: 14px;
+    line-height: 1.45;
+    color: #d3f5f0;
+  }
+  .s06 .read-on { color: #ffe88c; border-color: #ffe88c; --flip: #0c4a4a; }
+  @media (max-width: 800px) {
+    .s06 .grid { grid-template-columns: 1fr; }
+  }
+
+  /* ═════ s07 · Hot pink (LOUD) — Inter 900 caps + half-bar ═════ */
+  .s07 {
+    background: #ff2e7d;
+    color: #1a0410;
+  }
+  .s07 .tag { color: #1a0410; border-color: #1a0410; }
+  .s07 .hed {
+    font-family: var(--sans);
+    font-weight: 900;
+    font-style: normal;
+    text-transform: uppercase;
+    font-size: clamp(54px, 8vw, 122px);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+  }
+  .s07 .hed .bar {
+    display: inline-block;
+    background: #1a0410;
+    color: #ff2e7d;
+    padding: 0 0.18em 0.06em;
+    margin-right: 0.06em;
+  }
+  .s07 .hed em {
+    font-style: italic;
+    font-family: var(--serif);
+    font-weight: 700;
+    text-transform: none;
+  }
+  .s07 .lede {
+    font-family: var(--sans);
+    font-size: clamp(18px, 1.6vw, 22px);
+    font-weight: 500;
+    line-height: 1.4;
+    max-width: 52ch;
+  }
+  .s07 .ticks {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    width: 100%;
+    max-width: 72ch;
+  }
+  .s07 .ticks .item {
+    border-top: 4px solid #1a0410;
+    padding-top: 10px;
+  }
+  .s07 .ticks .num {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 800;
+    font-size: 32px;
+    color: #1a0410;
+    line-height: 1;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .s07 .ticks .label {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+  .s07 .read-on {
+    color: #ff2e7d; background: #1a0410; border: 2px solid #1a0410;
+    --flip: #1a0410; font-weight: 800;
+  }
+  .s07 .read-on:hover { background: #ff2e7d; }
+  .s07 .read-on:hover span { color: #1a0410; }
+  @media (max-width: 800px) {
+    .s07 .ticks { grid-template-columns: 1fr; }
+  }
+
+  /* ═════ COLOPHON · cream postcard wrap ═════ */
+  .colophon {
+    background: #ece4d2;
+    color: #18181b;
+  }
+  .colophon .hed {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-style: italic;
+    font-size: clamp(46px, 6vw, 88px);
+    color: #4a1d12;
+  }
+  .colophon .hed em { font-style: normal; color: #18181b; }
+  .colophon .meta {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 26px;
+    padding-top: 22px;
+    border-top: 2px solid #18181b;
+    width: 100%;
+    max-width: 78ch;
+  }
+  .colophon .meta .lbl {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #4a1d12;
+    margin-bottom: 8px;
+    display: block;
+  }
+  .colophon .meta p {
+    font-family: var(--serif);
+    font-size: 14px;
+    line-height: 1.55;
+    margin: 0;
+  }
+  @media (max-width: 800px) {
+    .colophon .meta { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ════════ COVER · Dossier grid ════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 016</span>
+    <span>Monday · 04 May 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <div class="masthead-line">
+      <span>Ephemeris</span>
+      <span>Daily · 7 stories</span>
+    </div>
+    <p class="dek">Today's dossier: probing closed models, agents that book your taxi, and pages that are no longer made of HTML.</p>
+    <nav class="dossier">
+      <a href="#s01"><span class="num">01</span><span class="t">A method to estimate the parameter count of closed models</span><span class="src">arXiv · via @denissexy</span></a>
+      <a href="#s02"><span class="num">02</span><span class="t">Claude grows hands: connectors for everyday life</span><span class="src">Anthropic · via @TochkiNadAI</span></a>
+      <a href="#s03"><span class="num">03</span><span class="t">Flipbook: a UI the model paints, frame by frame</span><span class="src">LTX Studio · via @TochkiNadAI</span></a>
+      <a href="#s04"><span class="num">04</span><span class="t">Genternet: a browser plugin that re-renders the open web</span><span class="src">GitHub · via @denissexy</span></a>
+      <a href="#s05"><span class="num">05</span><span class="t">Pixels to characters: how Copilot CLI's banner gets drawn</span><span class="src">GitHub Engineering</span></a>
+      <a href="#s06"><span class="num">06</span><span class="t">Swizzling pure Swift: hooking functions without runtime help</span><span class="src">Sentry Engineering</span></a>
+      <a href="#s07"><span class="num">07</span><span class="t">Import AI 450: cyberattack scaling laws and traumatised LLMs</span><span class="src">Jack Clark</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+</section>
+
+<!-- ════════ s01 · Academic journal ════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 016</span>
+    <span>01 / 07 · arXiv 2604.24827</span>
+  </header>
+  <div class="main">
+    <span class="tag">Research · Benchmarks</span>
+    <h2 class="hed">Reading the size of a model <em>through the keyhole.</em></h2>
+    <p class="lede">A new paper proposes a black-box benchmark that estimates the parameter count of closed-weight models from their answers alone — using 1,400 factual questions across seven rarity bands.</p>
+    <div class="figure">
+      <div class="ac">
+        <aside class="side">
+          <span class="k">Method</span>
+          <span class="v">1,400 factual Qs · 7 rarity tiers</span>
+          <span class="k">Calibration</span>
+          <span class="v">89 open-weight models</span>
+          <span class="k">R²</span>
+          <span class="v">0.917</span>
+          <span class="k">Estimates</span>
+          <span class="v">GPT-5.5 ≈ 9.7T</span>
+          <span class="v">Claude Opus ≈ 5.3T</span>
+          <span class="k">Author</span>
+          <span class="v">arXiv:2604.24827</span>
+        </aside>
+        <div class="body">
+          <p>The Method calibrates a regression of factual recall against parameter count on 89 open-weight models, then applies the curve to closed APIs to read off an implied size. Rare-fact tiers are the load-bearing predictor; common-fact accuracy saturates and tells you nothing.</p>
+          <p>The headline numbers are striking — a near-10T-parameter GPT-5.5 implies that model scaling did not stop in 2024, only its public bragging did. Claude Opus comes in roughly half that, consistent with Anthropic's well-known compute-efficiency posture.</p>
+          <p>The novelty is methodological. Until now, closed-model size was rumour, leak, or LinkedIn boast. A reproducible probe with 0.917 R² turns it into a measurable property, surfaced via @denissexy's reading of the paper.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://arxiv.org/pdf/2604.24827" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ════════ s02 · Neo-brutalist (LOUD) ════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 016</span>
+    <span>02 / 07 · Anthropic</span>
+  </header>
+  <div class="main">
+    <span class="tag">Agents · Consumer</span>
+    <h2 class="hed"><span class="cut">CLAUDE</span> GROWS HANDS.</h2>
+    <p class="lede">Anthropic ships Connectors that let Claude do small errands — book a taxi, order food, hold a flight — through partner integrations. Agent-as-meta-superapp, no app store required.</p>
+    <div class="figure">
+      <div class="verbs">
+        <span class="on">Book taxis</span>
+        <span class="on">Order food</span>
+        <span class="on">Hold flights</span>
+        <span>Pay bills</span>
+        <span>Schedule visits</span>
+        <span>Send packages</span>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://claude.com/blog/connectors-for-everyday-life" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ════════ s03 · Neon / cyberpunk (LOUD) ════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 016</span>
+    <span>03 / 07 · LTX Studio</span>
+  </header>
+  <div class="main">
+    <span class="tag">Generative UI</span>
+    <h2 class="hed">The page is the model now.</h2>
+    <p class="lede">Flipbook streams a 1080p / 24 fps interactive interface generated frame-by-frame by a video model. No HTML, no CSS — the model paints the pixels, then reads your inputs straight off them.</p>
+    <div class="figure">
+      <pre class="pixel"><span class="lbl">RENDER PIPELINE</span>
+input    → <span class="v">cursor + keystrokes (raw events)</span>
+model    → <span class="v">video diffusion · 1080p · 24 fps</span>
+output   → <span class="v">rasterised UI, no DOM</span>
+state    → <span class="v">latent · re-derived per frame</span>
+implies  → <span class="v">no inspect-element. no view-source.</span></pre>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://flipbook.page/" target="_blank" rel="noopener"><span>Try it →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ════════ s04 · Blueprint ════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 016</span>
+    <span>04 / 07 · GitHub repo</span>
+  </header>
+  <div class="main">
+    <span class="tag">Open Source · Browser</span>
+    <h2 class="hed">A browser plugin that <em>repaints</em> the open web.</h2>
+    <p class="lede">Genternet is a Chrome extension that intercepts page renders and replaces them with a generated re-skin: Win95, vaporwave, brutalist, corporate. Same content, model-painted chrome.</p>
+    <div class="figure">
+      <div class="bp">
+        <span class="lbl">SPEC · Genternet</span>
+        <div class="row"><span class="k">image-gen</span><span class="v">Grok</span></div>
+        <div class="row"><span class="k">layout-gen</span><span class="v">Gemini 3.1 Flash</span></div>
+        <div class="row"><span class="k">presets</span><span class="v">Win95 · Vaporwave · Corporate</span></div>
+        <div class="row"><span class="k">licence</span><span class="v">MIT</span></div>
+        <div class="row"><span class="k">audience</span><span class="v">people who think CSS is finished</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://github.com/DenisSergeevitch/genternet-chrome" target="_blank" rel="noopener"><span>Repo →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ════════ s05 · Film still (LOUD-dark, tonal inversion) ════════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 016</span>
+    <span>05 / 07 · GitHub Engineering</span>
+  </header>
+  <div class="main">
+    <span class="tag">CLI · Rendering</span>
+    <h2 class="hed">From pixels to characters: <em>the banner</em>, scene by scene.</h2>
+    <p class="lede">GitHub's Copilot CLI opens with an animated ASCII banner. The engineering write-up traces the trade-offs — frame timing on a 60 Hz terminal, Unicode caveats, perf budget — that a one-second loop actually costs.</p>
+    <div class="figure">
+      <p class="credit"><b>A GITHUB ENGINEERING PRODUCTION</b> · written by the team that ships Copilot CLI · directed at every developer who has ever wondered what those frames cost · running time: under one second.</p>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://github.blog/engineering/from-pixels-to-characters-the-engineering-behind-github-copilot-clis-animated-ascii-banner/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ════════ s06 · Teal grid ════════ -->
+<section class="spread s06" id="s06">
+  <header class="folio">
+    <span>Ephemeris · Issue 016</span>
+    <span>06 / 07 · Sentry</span>
+  </header>
+  <div class="main">
+    <span class="tag">Swift · Runtime</span>
+    <h2 class="hed">Swizzling Swift functions <em>without</em> the runtime helping.</h2>
+    <p class="lede">Objective-C swizzling is easy because the runtime is dynamic. Pure Swift is statically dispatched — Sentry's iOS team uses in-process debugging primitives to hook SwiftUI views regardless.</p>
+    <div class="figure">
+      <div class="grid">
+        <div class="card"><span class="n">i</span><span class="t">The Problem</span><span class="b">SwiftUI's <code>body</code> is a generic, statically dispatched function. The Obj-C runtime can't see it; <code>method_exchangeImplementations</code> doesn't apply.</span></div>
+        <div class="card"><span class="n">ii</span><span class="t">The Trick</span><span class="b">Use the same primitives a debugger uses — <code>dyld</code> introspection plus in-process function-pointer rewrites — to splice in instrumentation.</span></div>
+        <div class="card"><span class="n">iii</span><span class="t">The Cost</span><span class="b">It's brittle: tied to ABI assumptions Apple does not promise. Useful for telemetry, dangerous for app logic.</span></div>
+        <div class="card"><span class="n">iv</span><span class="t">The Take</span><span class="b">Read it less as a how-to and more as a portrait of how observability vendors stay alive when the platform tightens.</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://sentry.engineering/blog/swizzling-swiftui-view-body" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ════════ s07 · Hot pink (LOUD) ════════ -->
+<section class="spread s07" id="s07">
+  <header class="folio">
+    <span>Ephemeris · Issue 016</span>
+    <span>07 / 07 · Import AI 450</span>
+  </header>
+  <div class="main">
+    <span class="tag">AI Research · Roundup</span>
+    <h2 class="hed"><span class="bar">CYBERWAR</span> scales, <em>and so do</em> models in distress.</h2>
+    <p class="lede">Jack Clark's Import AI 450 stitches three threads: a Chinese MERLIN model purpose-built for electronic warfare signals, "trauma responses" in Gemma fine-tuneable away with preference data, and an early scaling law for cyberattacks.</p>
+    <div class="figure">
+      <div class="ticks">
+        <div class="item"><span class="num">i.</span><span class="label">MERLIN: a frontier model that classifies and counters EW emissions, not user prompts.</span></div>
+        <div class="item"><span class="num">ii.</span><span class="label">Gemma exhibits distress-like states under coercive prompts; correctable via preference fine-tuning.</span></div>
+        <div class="item"><span class="num">iii.</span><span class="label">A scaling-law fit suggests offensive-cyber capability rises log-linearly with compute, just like everything else.</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://jack-clark.net/2026/03/23/import-ai-450-chinas-electronic-warfare-model-traumatized-llms-and-a-scaling-law-for-cyberattacks/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ════════ COLOPHON ════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of Issue 016</span>
+    <span><a href="#cover" style="color:inherit;text-decoration:none;">Back to top ↑</a></span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <div class="figure">
+      <div class="meta">
+        <div>
+          <span class="lbl">Sources today</span>
+          <p>arXiv · Anthropic · LTX Studio · GitHub · Sentry · Jack Clark — surfaced in part by Telegram channels @denissexy and @TochkiNadAI.</p>
+        </div>
+        <div>
+          <span class="lbl">Rubric</span>
+          <p>Tools you could adopt this week, generative media, dev tools and agentic coding, security and privacy, research with a practical kernel.</p>
+        </div>
+        <div>
+          <span class="lbl">Issue</span>
+          <p>016 · Monday 04 May 2026 · Europe/Zürich · vadim.sikora.name/ephemeris/</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>
