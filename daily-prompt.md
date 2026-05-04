@@ -92,20 +92,45 @@ Hard rules:
 - If a Telegram channel post links out to a primary source, prefer the
   primary source's URL in the magazine (but credit the channel as "via").
 
-**No reprints.** Before finalizing, enumerate every URL already
-published across prior issues — one-liner:
+**No reprints — checked against the persistent ledger.** A repo-root file
+`published-urls.txt` holds every `read-on` URL ever shipped, one per line,
+sorted. It's checked into git and is the source of truth — do not regenerate
+it from `magazines/*.html` on the fly, do not write to `/tmp/`.
+
+Before finalizing today's picks:
 
 ```bash
-grep -hoE 'class="read-on"[^>]*href="[^"]+"' magazines/*.html \
-  | grep -oE 'href="[^"]+"' | sort -u > /tmp/published-urls.txt
+# Reject any candidate whose URL is already in the ledger.
+grep -Fxf published-urls.txt <(printf '%s\n' "${CANDIDATE_URLS[@]}") && {
+  echo "REPEAT — drop these and pick replacements"; exit 1; }
 ```
 
-Any candidate whose URL appears in `/tmp/published-urls.txt` is out. Also
-reject candidates that are *the same story* reported from a different
-source (e.g. OpenAI's Codex announcement vs. Rundown's recap of it — one
-of them was already in issue 002, both are out). "Codex for (almost)
-everything" shipped in both issue 002 and 003 — that was the failure
-mode.
+Or, equivalently, for each candidate URL run `grep -Fx "<url>" published-urls.txt`
+— a match means it has shipped before and is out. Also reject candidates that
+are *the same story* reported from a different source (e.g. OpenAI's Codex
+announcement vs. Rundown's recap of it — one of them was already in issue 002,
+both are out). "Codex for (almost) everything" shipped in both issue 002 and
+003; the Copilot CLI ASCII-banner piece shipped in 014 and again in 016 — both
+were ledger failures.
+
+**Age cap — 30 days.** Each candidate's publication date must be within the
+last 30 days from `$ISSUE_DATE`. If the source page does not show a
+publication date, treat the item as too old and drop it. RSS items expose
+`<pubDate>`; HTML pages usually surface a date near the byline. The Copilot
+CLI banner article (October 2025, surfaced 2026-05-04) is the canonical
+failure — engineering-blog homepages still link old posts above the fold,
+and the agent grabbed it without checking.
+
+**After the issue is rendered (Step 4)** but before commit (Step 6), append
+today's read-on URLs to `published-urls.txt` and re-sort:
+
+```bash
+grep -hoE 'class="read-on"[^>]*href="[^"]+"' "magazines/$ISSUE_DATE.html" \
+  | grep -oE 'https://[^"]+' >> published-urls.txt
+sort -u -o published-urls.txt published-urls.txt
+```
+
+The commit must include the updated `published-urls.txt`.
 
 ## Step 4 — Render the magazine
 
@@ -361,6 +386,11 @@ auto-redirect** — readers should land on the archive and pick. Read
 with its pretty date.
 
 ## Step 6 — Commit and push
+
+`git add -A` should pick up the new `magazines/$ISSUE_DATE.html`, the
+regenerated `index.html`, and the updated `published-urls.txt` (see Step 3).
+If `published-urls.txt` is unchanged, you forgot to append — go back and
+do it before committing.
 
 ```bash
 cd /path/to/ephemeris
