@@ -37,6 +37,7 @@ https://github.blog/engineering/from-pixels-to-characters-the-engineering-behind
 https://github.blog/engineering/infrastructure/how-github-uses-ebpf-to-improve-deployment-safety/
 https://github.blog/engineering/infrastructure/when-protections-outlive-their-purpose-a-lesson-on-managing-defense-systems-at-scale/
 https://github.blog/engineering/platform-security/post-quantum-security-for-ssh-access-on-github/
+https://github.com/BayramAnnakov/ai-native-product-skills/tree/master/skills/autoresearch
 https://github.com/BayramAnnakov/factory-agent
 https://github.com/BayramAnnakov/token-audit-skill
 https://github.com/deepseek-ai/Thinking-with-Visual-Primitives
@@ -49,6 +50,7 @@ https://jack-clark.net/2026/03/23/import-ai-450-chinas-electronic-warfare-model-
 https://jack-clark.net/2026/04/06/import-ai-452-scaling-laws-for-cyberwar-rising-tides-of-ai-automation-and-a-puzzle-over-gdp-forecasting/
 https://jack-clark.net/2026/04/13/import-ai-453-breaking-ai-agents-mirrorcode-and-ten-views-on-gradual-disempowerment/
 https://jack-clark.net/2026/04/20/import-ai-454-automating-alignment-research-safety-study-of-a-chinese-model-hifloat4/
+https://jack-clark.net/2026/05/04/import-ai-455-automating-ai-research/
 https://mf0.ai/
 https://nextjs.org/blog/agentic-future
 https://nextjs.org/blog/next-16-2
@@ -57,6 +59,7 @@ https://nextjs.org/blog/nextjs-across-platforms
 https://nextjs.org/blog/turbopack-incremental-computation
 https://openai.com/index/codex-for-almost-everything
 https://openai.com/index/cybersecurity-in-the-intelligence-age
+https://openai.com/index/delivering-low-latency-voice-ai-at-scale
 https://openai.com/index/gpt-5-5-system-card
 https://openai.com/index/introducing-chatgpt-images-2-0
 https://openai.com/index/introducing-evmbench
@@ -67,6 +70,7 @@ https://openai.com/index/open-source-codex-orchestration-symphony
 https://openai.com/index/speeding-up-agentic-workflows-with-websockets
 https://openai.com/index/the-next-evolution-of-the-agents-sdk
 https://openai.com/index/where-the-goblins-came-from
+https://posthog.com/blog/duckdb-vs-clickhouse
 https://posthog.com/blog/making-claude-cowork-actually-useful
 https://posthog.com/blog/testing-ai-agents
 https://posthog.com/blog/untangling-rayon-and-tokio
@@ -92,8 +96,10 @@ https://vercel.com/blog/agent-responsibly
 https://vercel.com/blog/agentic-infrastructure
 https://vercel.com/blog/build-knowledge-agents-without-embeddings
 https://vercel.com/blog/how-cursor-built-a-growth-iteration-loop-with-vercel-microfrontends-and-flags
+https://vercel.com/blog/how-general-intelligence-used-agents-to-build-an-agent-platform-on-vercel
 https://vercel.com/blog/how-gitbook-serves-30000-sites-with-sub-second-content-updates
 https://vercel.com/blog/how-zo-computer-improved-ai-reliability-20x-on-vercel
+https://vercel.com/blog/introducing-deepsec-find-and-fix-vulnerabilities-in-your-code-base
 https://vercel.com/blog/making-turborepo-ninety-six-percent-faster-with-agents-sandboxes-and-humans
 https://vercel.com/blog/optimizing-vercel-sandbox-snapshots
 https://vercel.com/blog/we-ralph-wiggumed-webstreams-to-make-them-10x-faster
@@ -117,6 +123,7 @@ https://www.deeplearning.ai/the-batch/issue-351/
 https://www.jeffbullas.com/stop-using-just-one-ai/
 https://www.therundown.ai/p/openai-superapp-hiding-inside-codex
 https://www.youtube.com/@MSE435EconomicsofAI
+https://www.youtube.com/watch?v=96jN2OCOfLs
 https://x.com/andonlabs/status/2042765807781056646
 https://youtu.be/xmkSf5IS-zw
 https://zapier.com/benchmarks

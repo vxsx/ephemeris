@@ -1,0 +1,989 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 017 · 05 May 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — copied from scaffold.html
+     ═══════════════════════════════════════════════════════════════════ */
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+  .spread > .decor {
+    position: absolute; inset: 0; z-index: 0;
+    pointer-events: none; overflow: hidden;
+  }
+  .spread > .folio {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 8px 24px; flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .spread > .main {
+    display: flex; flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block; font-family: var(--sans);
+    font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase;
+    padding: 6px 12px; border: 1px solid currentColor;
+    border-radius: 999px; opacity: 0.9;
+  }
+  .hed {
+    font-family: var(--serif); font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02; letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45; max-width: 50ch; margin: 0;
+  }
+  .figure { width: 100%; }
+  .read-on {
+    display: inline-block; font-family: var(--sans);
+    font-weight: 600; font-size: 15px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 14px 22px; border: 2px solid currentColor;
+    text-decoration: none; color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── Cover · single-word mood ─── */
+  .cover { background: #f1ece0; color: #0b0b0b; }
+  .cover .moodword {
+    font-family: var(--sans);
+    font-weight: 900;
+    font-size: clamp(96px, 22vw, 320px);
+    line-height: 0.86;
+    letter-spacing: -0.06em;
+    color: #0b0b0b;
+    margin: 0;
+    padding-bottom: 0.06em;
+  }
+  .cover .moodword .dot {
+    color: #c5341e;
+    letter-spacing: normal;
+  }
+  .cover .standfirst {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(20px, 2vw, 30px);
+    line-height: 1.35;
+    max-width: 32ch;
+    color: #1a1a1a;
+  }
+  .cover .toc {
+    width: 100%;
+    border-top: 1px solid #1a1a1a;
+    padding-top: 14px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 48px;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 4px 10px;
+    text-decoration: none; color: inherit;
+    padding: 8px 0; border-bottom: 1px dotted rgba(0,0,0,0.3);
+    font-family: var(--sans);
+  }
+  .cover .toc a:last-child { border-bottom: none; }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; font-size: 14px; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 12px; opacity: 0.6; letter-spacing: 0.12em; text-transform: uppercase; }
+  .cover .toc .num {
+    font-family: var(--mono); font-weight: 600;
+    color: #c5341e; margin-right: 12px;
+    font-size: 13px;
+  }
+  .cover .decor::before {
+    content: "";
+    position: absolute;
+    top: 18%; right: -8vw;
+    width: 32vw; height: 32vw; max-width: 320px; max-height: 320px;
+    border: 1px solid #c5341e;
+    transform: rotate(8deg);
+    opacity: 0.35;
+  }
+  .cover .decor::after {
+    content: "MOOD · ISSUE 017 · ZURICH ·";
+    position: absolute;
+    left: clamp(24px, 6vw, 120px); bottom: 24px;
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.4em;
+    color: rgba(11,11,11,0.5);
+  }
+  @media (max-width: 800px) {
+    .cover .toc { grid-template-columns: 1fr; gap: 0; }
+    .cover .moodword { font-size: clamp(72px, 22vw, 140px); letter-spacing: -0.04em; }
+    .cover .decor::before { top: 8%; right: -20vw; width: 60vw; height: 60vw; }
+    .cover .decor::after { display: none; }
+  }
+
+  /* ─── S01 · Dark report / classified ─── */
+  .s01 { background: #0a0606; color: #d8c8b8; }
+  .s01 .folio { color: #c5341e; opacity: 1; }
+  .s01 .tag {
+    color: #c5341e; border-color: #c5341e;
+    background: rgba(197,52,30,0.08);
+  }
+  .s01 .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    color: #ece4d2;
+    font-variation-settings: "opsz" 144;
+  }
+  .s01 .hed em {
+    font-style: italic; color: #c5341e;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s01 .lede { color: #c8b8a8; }
+  .s01 .read-on { color: #ece4d2; border-color: #ece4d2; --flip: #0a0606; }
+  .s01 .stamp {
+    font-family: var(--mono); font-weight: 700;
+    font-size: 13px; letter-spacing: 0.18em;
+    border: 2px solid #c5341e;
+    color: #c5341e;
+    padding: 8px 14px;
+    display: inline-block;
+    transform: rotate(-2deg);
+    background: rgba(197,52,30,0.05);
+  }
+  .s01 .pq {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(22px, 2.4vw, 34px);
+    line-height: 1.3;
+    color: #e8d4b8;
+    border-left: 3px solid #c5341e;
+    padding-left: 24px;
+    max-width: 36ch;
+  }
+  .s01 .pq cite {
+    display: block; margin-top: 14px;
+    font-family: var(--sans); font-style: normal;
+    font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: #c5341e; font-weight: 600;
+  }
+  .s01 .decor::before {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(0deg, rgba(197,52,30,0.04) 0 1px, transparent 1px 80px);
+  }
+  .s01 .decor::after {
+    content: "CLASSIFIED · ML/RESEARCH · 2028";
+    position: absolute;
+    top: 50%; right: -8%;
+    font-family: var(--mono); font-weight: 700;
+    font-size: clamp(80px, 10vw, 160px);
+    letter-spacing: -0.02em;
+    color: rgba(197,52,30,0.06);
+    transform: rotate(-90deg);
+    transform-origin: center;
+    white-space: nowrap;
+  }
+  @media (max-width: 800px) {
+    .s01 .decor::after { display: none; }
+  }
+
+  /* ─── S02 · Terminal ─── */
+  .s02 { background: #050a05; color: #6dff8a; font-family: var(--mono); }
+  .s02 .folio { color: #6dff8a; }
+  .s02 .tag {
+    color: #050a05; border-color: #6dff8a;
+    background: #6dff8a;
+    border-radius: 0;
+    font-family: var(--mono);
+  }
+  .s02 .hed {
+    font-family: var(--mono);
+    font-weight: 700;
+    color: #6dff8a;
+    font-size: clamp(40px, 6.4vw, 92px);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    text-shadow: 0 0 24px rgba(109,255,138,0.25);
+  }
+  .s02 .hed em {
+    font-style: normal; color: #ffd86d;
+  }
+  .s02 .lede {
+    font-family: var(--mono); color: #a8e8b8;
+    font-size: clamp(17px, 1.6vw, 22px);
+  }
+  .s02 .read-on {
+    color: #6dff8a; border-color: #6dff8a;
+    border-radius: 0; font-family: var(--mono);
+    --flip: #050a05;
+  }
+  .s02 .term {
+    background: #020602;
+    border: 1px solid rgba(109,255,138,0.4);
+    padding: 18px 22px;
+    font-family: var(--mono);
+    font-size: clamp(13px, 1.2vw, 16px);
+    line-height: 1.7;
+    color: #a8e8b8;
+    overflow-x: auto;
+    white-space: pre;
+    border-radius: 0;
+    box-shadow: 0 0 0 1px rgba(109,255,138,0.1) inset;
+  }
+  .s02 .term .p { color: #6dff8a; }
+  .s02 .term .c { color: #ffd86d; }
+  .s02 .term .x { color: #ff6d6d; }
+  .s02 .term .d { color: #6da8ff; }
+  .s02 .decor::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(109,255,138,0.04) 0 2px,
+      transparent 2px 6px);
+  }
+
+  /* ─── S03 · Risograph duotone (cyan + magenta) ─── */
+  .s03 { background: #f4f0e6; color: #1a1a1a; }
+  .s03 .folio { color: #008b8b; opacity: 1; letter-spacing: 0.22em; }
+  .s03 .tag {
+    color: #d8266d; border-color: #d8266d;
+    background: rgba(216,38,109,0.06);
+  }
+  .s03 .hed {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 80, "WONK" 1;
+    color: #d8266d;
+    text-shadow: 4px 4px 0 #00a8a8;
+  }
+  .s03 .hed em {
+    font-style: normal; color: #00a8a8;
+    text-shadow: -4px -4px 0 #d8266d;
+  }
+  .s03 .lede { color: #2a1a2a; }
+  .s03 .read-on {
+    color: #1a1a1a; border-color: #1a1a1a;
+    --flip: #f4f0e6;
+  }
+  .s03 .stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px 32px;
+    width: 100%;
+  }
+  .s03 .stats > div {
+    border-top: 2px solid #d8266d;
+    padding-top: 12px;
+  }
+  .s03 .stats .num {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "WONK" 1;
+    font-size: clamp(40px, 5vw, 72px);
+    line-height: 1;
+    color: #008b8b;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+  .s03 .stats .lab {
+    font-family: var(--sans);
+    font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: #d8266d; font-weight: 600;
+  }
+  .s03 .decor::before {
+    content: "";
+    position: absolute;
+    left: -10%; top: -10%;
+    width: 60vw; height: 60vw; max-width: 720px; max-height: 720px;
+    background: radial-gradient(circle, rgba(216,38,109,0.18), transparent 60%);
+    mix-blend-mode: multiply;
+  }
+  .s03 .decor::after {
+    content: "";
+    position: absolute;
+    right: -8%; bottom: -10%;
+    width: 50vw; height: 50vw; max-width: 600px; max-height: 600px;
+    background: radial-gradient(circle, rgba(0,139,139,0.20), transparent 60%);
+    mix-blend-mode: multiply;
+  }
+  @media (max-width: 800px) {
+    .s03 .stats { grid-template-columns: 1fr; gap: 20px; }
+    .s03 .hed { text-shadow: 2px 2px 0 #00a8a8; }
+    .s03 .hed em { text-shadow: -2px -2px 0 #d8266d; }
+  }
+
+  /* ─── S04 · Concrete (warm grey, asymmetric, giant punctuation) ─── */
+  .s04 { background: #c8c2b6; color: #1a1a18; }
+  .s04 .folio { color: #1a1a18; opacity: 0.7; }
+  .s04 .tag {
+    color: #1a1a18; border-color: #1a1a18;
+    background: rgba(255,255,255,0.4);
+  }
+  .s04 .hed {
+    font-family: var(--serif);
+    font-weight: 700;
+    color: #1a1a18;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+    line-height: 0.96;
+  }
+  .s04 .hed em {
+    font-style: italic; color: #5e5648;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s04 .lede { color: #2a2a26; }
+  .s04 .read-on {
+    color: #1a1a18; border-color: #1a1a18;
+    --flip: #c8c2b6;
+  }
+  .s04 .punct {
+    position: relative;
+    width: 100%;
+    padding: 16px 0 0;
+  }
+  .s04 .punct .glyph {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-size: clamp(140px, 22vw, 320px);
+    line-height: 0.7;
+    color: #1a1a18;
+    letter-spacing: -0.04em;
+    display: inline-block;
+    transform: translateY(0.05em);
+  }
+  .s04 .punct .glyph .accent { color: #5e5648; }
+  .s04 .punct .gloss {
+    display: inline-block;
+    margin-left: 18px;
+    font-family: var(--mono);
+    font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: #1a1a18;
+    border-top: 1px solid #1a1a18;
+    padding-top: 10px;
+    max-width: 28ch;
+    vertical-align: top;
+    transform: translateY(-1.2em);
+  }
+  .s04 .decor::before {
+    content: "";
+    position: absolute;
+    right: 6%; top: 0;
+    width: 1px; height: 38%;
+    background: #1a1a18;
+    opacity: 0.4;
+  }
+  .s04 .decor::after {
+    content: "200ms ↘ 0ms";
+    position: absolute;
+    right: clamp(24px, 6vw, 120px); top: clamp(28%, 30%, 30%);
+    font-family: var(--mono); font-size: 12px;
+    letter-spacing: 0.18em;
+    color: #5e5648;
+  }
+  @media (max-width: 800px) {
+    .s04 .punct .gloss {
+      display: block; margin-left: 0; margin-top: 12px;
+      transform: none;
+    }
+    .s04 .decor::before, .s04 .decor::after { display: none; }
+  }
+
+  /* ─── S05 · Spreadsheet (mono tabular gridlines) ─── */
+  .s05 { background: #f6f5f1; color: #1a1a1a; }
+  .s05 .folio { color: #1a1a1a; opacity: 0.65; font-family: var(--mono); }
+  .s05 .tag {
+    color: #1a1a1a; border-color: #1a1a1a;
+    background: #ffd400;
+    border-radius: 0;
+    font-family: var(--mono); font-weight: 600;
+  }
+  .s05 .hed {
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: clamp(40px, 5.6vw, 84px);
+    letter-spacing: -0.02em;
+    line-height: 1.04;
+    color: #1a1a1a;
+  }
+  .s05 .hed em {
+    font-style: normal; color: #c5341e;
+  }
+  .s05 .lede { font-family: var(--sans); font-size: clamp(18px, 1.5vw, 22px); color: #2a2a2a; }
+  .s05 .read-on {
+    color: #1a1a1a; border-color: #1a1a1a;
+    border-radius: 0; font-family: var(--mono);
+    --flip: #f6f5f1;
+  }
+  .s05 .table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+    font-size: clamp(13px, 1.05vw, 15px);
+    background: #fff;
+  }
+  .s05 .table th, .s05 .table td {
+    border: 1px solid #d8d5cc;
+    padding: 10px 14px;
+    text-align: left;
+  }
+  .s05 .table thead th {
+    background: #1a1a1a; color: #f6f5f1;
+    font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    font-size: 11px;
+  }
+  .s05 .table tbody th {
+    background: #ece8db; font-weight: 600;
+  }
+  .s05 .table tbody tr:nth-child(odd) td { background: #fcfbf6; }
+  .s05 .table .h { color: #c5341e; font-weight: 600; }
+  .s05 .decor::before {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(to right, rgba(0,0,0,0.04) 0 1px, transparent 1px) 0 0 / 64px 100%,
+      linear-gradient(to bottom, rgba(0,0,0,0.04) 0 1px, transparent 1px) 0 0 / 100% 32px;
+  }
+  @media (max-width: 800px) {
+    .s05 .table { font-size: 12px; }
+    .s05 .table th, .s05 .table td { padding: 6px 8px; }
+  }
+
+  /* ─── S06 · Hot pink — numbered italic ─── */
+  .s06 { background: #ff3d8a; color: #1a0010; }
+  .s06 .folio { color: #1a0010; opacity: 0.85; }
+  .s06 .tag {
+    color: #1a0010; border-color: #1a0010;
+    background: rgba(255,255,255,0.25);
+  }
+  .s06 .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    color: #1a0010;
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+  }
+  .s06 .hed em {
+    font-style: normal;
+    background: #1a0010; color: #ffd86d;
+    padding: 0 0.18em 0.06em;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+  }
+  .s06 .lede { color: #220018; max-width: 44ch; }
+  .s06 .read-on {
+    color: #1a0010; border-color: #1a0010;
+    --flip: #ff3d8a;
+  }
+  .s06 .bullets {
+    list-style: none; padding: 0; margin: 0;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 18px 32px;
+    counter-reset: b;
+  }
+  .s06 .bullets li {
+    counter-increment: b;
+    border-top: 2px solid #1a0010;
+    padding-top: 12px;
+    font-family: var(--sans); font-size: 17px; line-height: 1.45;
+    color: #1a0010;
+    position: relative;
+    padding-left: 56px;
+    min-height: 60px;
+  }
+  .s06 .bullets li::before {
+    content: counter(b, decimal-leading-zero);
+    position: absolute; left: 0; top: 6px;
+    font-family: var(--serif);
+    font-style: italic; font-weight: 700;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-size: 38px; line-height: 1;
+    color: #1a0010;
+    letter-spacing: normal;
+  }
+  .s06 .bullets li b {
+    display: block;
+    font-family: var(--serif); font-style: italic;
+    font-weight: 700;
+    font-size: 19px;
+    margin-bottom: 4px;
+  }
+  .s06 .decor::before {
+    content: "→";
+    position: absolute;
+    right: -2vw; bottom: -6vw;
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(280px, 40vw, 600px);
+    color: rgba(26,0,16,0.08);
+    line-height: 1;
+  }
+  @media (max-width: 800px) {
+    .s06 .bullets { grid-template-columns: 1fr; gap: 14px; }
+  }
+
+  /* ─── S07 · Newsprint (cream + black, narrow columns, serif small caps) ─── */
+  .s07 { background: #f1ece0; color: #1a1a1a; }
+  .s07 .folio { color: #1a1a1a; opacity: 0.7; }
+  .s07 .tag {
+    color: #1a1a1a; border-color: #1a1a1a;
+    background: transparent; border-radius: 0;
+    font-family: var(--serif); font-weight: 600;
+    font-variant: small-caps; letter-spacing: 0.18em;
+  }
+  .s07 .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-variation-settings: "opsz" 144;
+    color: #1a1a1a;
+    font-size: clamp(46px, 6.4vw, 96px);
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+  }
+  .s07 .hed em {
+    font-style: italic; color: #6b1f14;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s07 .lede {
+    font-family: var(--serif);
+    font-size: clamp(18px, 1.4vw, 21px);
+    color: #2a2a2a; font-style: italic;
+    max-width: 56ch;
+  }
+  .s07 .read-on {
+    color: #1a1a1a; border-color: #1a1a1a;
+    --flip: #f1ece0;
+  }
+  .s07 .columns {
+    column-count: 3;
+    column-gap: 36px;
+    column-rule: 1px solid rgba(0,0,0,0.2);
+    font-family: var(--serif);
+    font-size: 16px;
+    line-height: 1.55;
+    color: #2a2a2a;
+    text-align: justify;
+    hyphens: none;
+  }
+  .s07 .columns p { margin: 0 0 12px; }
+  .s07 .columns p:first-child::first-line {
+    font-variant: small-caps;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+  }
+  .s07 .columns h4 {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #6b1f14;
+    margin: 0 0 8px;
+    border-bottom: 2px solid #6b1f14;
+    padding-bottom: 4px;
+    break-inside: avoid;
+  }
+  .s07 .rule {
+    width: 100%; height: 0;
+    border-top: 6px double #1a1a1a;
+    margin: 4px 0 8px;
+  }
+  .s07 .decor::before {
+    content: "017";
+    position: absolute;
+    right: clamp(24px, 6vw, 120px); top: 36%;
+    font-family: var(--serif);
+    font-style: italic; font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-size: clamp(260px, 32vw, 480px);
+    line-height: 1;
+    color: rgba(107,31,20,0.05);
+    pointer-events: none;
+  }
+  @media (max-width: 800px) {
+    .s07 .columns { column-count: 1; }
+    .s07 .decor::before { display: none; }
+  }
+
+  /* ─── Colophon ─── */
+  .colophon { background: #0a0a0a; color: #d8d4c8; }
+  .colophon .folio { color: #c5341e; opacity: 1; }
+  .colophon .tag { color: #d8d4c8; border-color: #d8d4c8; }
+  .colophon .hed {
+    font-family: var(--serif);
+    font-weight: 700;
+    color: #f3ead7;
+    font-variation-settings: "opsz" 144;
+  }
+  .colophon .hed em {
+    font-style: italic; color: #c5341e;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .colophon .lede { color: #c0bcb0; max-width: 60ch; }
+  .colophon .read-on {
+    color: #d8d4c8; border-color: #d8d4c8;
+    --flip: #0a0a0a;
+  }
+  .colophon .meta {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 36px;
+    width: 100%;
+    font-family: var(--mono); font-size: 13px;
+    line-height: 1.7;
+  }
+  .colophon .meta h4 {
+    font-family: var(--sans); font-size: 11px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: #c5341e; font-weight: 600;
+    margin: 0 0 8px; border-bottom: 1px solid rgba(197,52,30,0.4);
+    padding-bottom: 6px;
+  }
+  .colophon .meta ul { margin: 0; padding: 0; list-style: none; }
+  .colophon .meta li { color: #d8d4c8; }
+  @media (max-width: 800px) {
+    .colophon .meta { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════════════════ COVER ═══════════════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 017</span>
+    <span>Tuesday · 05 May 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <h1 class="moodword">AUTOMATE<span class="dot">.</span></h1>
+    <p class="standfirst">A single word holds today's issue. Models train models, agents ship agents, and the loop you've been writing by hand quietly becomes the product.</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>AI is starting to train the next AI</span><span>Jack Clark</span></a>
+      <a href="#s02"><span><span class="num">02</span>A security harness, not a service</span><span>Vercel</span></a>
+      <a href="#s03"><span><span class="num">03</span>Agents shipped the agents</span><span>Vercel</span></a>
+      <a href="#s04"><span><span class="num">04</span>Real-time voice without the pause</span><span>OpenAI</span></a>
+      <a href="#s05"><span><span class="num">05</span>DuckDB and ClickHouse</span><span>PostHog</span></a>
+      <a href="#s06"><span><span class="num">06</span>Agentic engineering, not prompts</span><span>via @ProductsAndStartups</span></a>
+      <a href="#s07"><span><span class="num">07</span>The optimisation loop, for everyone</span><span>via @ProductsAndStartups</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ S01 — Jack Clark, Import AI 455 ═══════════════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 017</span>
+    <span>01 / 07 · Import AI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Agents · Research</span>
+    <h2 class="hed">AI is starting to <em>train</em> the next AI.</h2>
+    <p class="lede">Jack Clark's read of the trajectory: by end of 2028, frontier systems may run their own research programmes — write code, design experiments, train successors. The skill ladder is not flat. Coding has come fastest; alignment work is the dark horse.</p>
+    <div class="figure">
+      <blockquote class="pq">
+        Once a lab can spend a month of compute on a question it would have spent a quarter of human time on, the speed of progress stops being a function of how many people you can hire.
+        <cite>Import AI 455</cite>
+      </blockquote>
+    </div>
+    <span class="stamp">CLASSIFIED · ML/RESEARCH</span>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://jack-clark.net/2026/05/04/import-ai-455-automating-ai-research/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ S02 — Vercel deepsec ═══════════════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 017</span>
+    <span>02 / 07 · Vercel</span>
+  </header>
+  <div class="main">
+    <span class="tag">Security · Agents</span>
+    <h2 class="hed">A security harness, <em>not</em> a service.</h2>
+    <p class="lede">deepsec runs on your infrastructure with your keys, scans the codebase for vulnerabilities, files patches as PRs. Vercel open-sourced the lot. Run it nightly and call it a junior security engineer that doesn't sleep.</p>
+    <div class="figure">
+<pre class="term"><span class="p">$</span> deepsec scan ./src --provider anthropic
+<span class="d">→</span> indexed 2,418 files in 11.4s
+<span class="d">→</span> 6 hypotheses queued
+
+<span class="c">[ HIGH  ]</span> auth/session.ts:42
+            session id is RNG-derived; not cryptographically random
+<span class="c">[ HIGH  ]</span> api/upload.ts:118
+            path traversal — basename() not enforced before fs.write
+<span class="c">[ MED   ]</span> middleware.ts:7
+            CORS reflects Origin without allowlist
+
+<span class="p">$</span> deepsec patch --interactive
+<span class="d">→</span> 3 PRs opened · run with --auto for unattended mode</pre>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://vercel.com/blog/introducing-deepsec-find-and-fix-vulnerabilities-in-your-code-base" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ S03 — Vercel General Intelligence ═══════════════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 017</span>
+    <span>03 / 07 · Vercel</span>
+  </header>
+  <div class="main">
+    <span class="tag">Agents · Case Study</span>
+    <h2 class="hed">Agents shipped <em>the agents.</em></h2>
+    <p class="lede">Cofounder is a multi-tenant AI co-founder for solo builders. The General Intelligence team built it on top of Vercel by deploying their own coding agents — which then deployed everything else. The loop runs on Workflows; humans review.</p>
+    <div class="figure">
+      <div class="stats">
+        <div>
+          <div class="num">1</div>
+          <div class="lab">human team, hundreds of agents</div>
+        </div>
+        <div>
+          <div class="num">12k</div>
+          <div class="lab">PRs in beta, mostly self-reviewed</div>
+        </div>
+        <div>
+          <div class="num">7d</div>
+          <div class="lab">from idea to multi-tenant launch</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://vercel.com/blog/how-general-intelligence-used-agents-to-build-an-agent-platform-on-vercel" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ S04 — OpenAI low-latency voice ═══════════════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 017</span>
+    <span>04 / 07 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Voice · Infrastructure</span>
+    <h2 class="hed">Real-time voice <em>without</em> the pause.</h2>
+    <p class="lede">OpenAI rebuilt its WebRTC stack to do conversational turn-taking at sub-200ms globally — VAD on the edge, rolling jitter buffers, hand-tuned NACK loops. A rare piece of infrastructure writing from a model lab. Read it for the architecture, not the product.</p>
+    <div class="figure">
+      <div class="punct">
+        <span class="glyph">&ldquo;<span class="accent">.</span>&rdquo;</span>
+        <span class="gloss">The pause between turns is where conversation happens. Eliminate it and you have something that isn't conversation any more.</span>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/delivering-low-latency-voice-ai-at-scale" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ S05 — PostHog DuckDB vs ClickHouse ═══════════════════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 017</span>
+    <span>05 / 07 · PostHog</span>
+  </header>
+  <div class="main">
+    <span class="tag">Data · Engineering</span>
+    <h2 class="hed">DuckDB <em>and</em> ClickHouse.</h2>
+    <p class="lede">Not a death-match. PostHog runs both — DuckDB single-node for embedded, lightweight queries; ClickHouse for the big iron. The post is a rare apples-to-oranges comparison written by people who actually run them in production, with the failure modes named.</p>
+    <div class="figure">
+      <table class="table">
+        <thead>
+          <tr><th>Dimension</th><th>DuckDB</th><th>ClickHouse</th></tr>
+        </thead>
+        <tbody>
+          <tr><th>Topology</th><td>single-node, in-process</td><td>distributed cluster</td></tr>
+          <tr><th>Sweet spot</th><td class="h">&lt; 10 GB, ad-hoc</td><td class="h">PB-scale, concurrent</td></tr>
+          <tr><th>Cold start</th><td>&lt; 50 ms</td><td>seconds</td></tr>
+          <tr><th>Concurrency</th><td>1 writer, n readers</td><td>thousands</td></tr>
+          <tr><th>Used at PostHog for</th><td>local notebooks, CI</td><td>events, sessions, prod</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://posthog.com/blog/duckdb-vs-clickhouse" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ S06 — Karpathy on agentic engineering ═══════════════════ -->
+<section class="spread s06" id="s06">
+  <header class="folio">
+    <span>Ephemeris · Issue 017</span>
+    <span>06 / 07 · via @ProductsAndStartups</span>
+  </header>
+  <div class="main">
+    <span class="tag">Agents · Playbook</span>
+    <h2 class="hed">The new prompt engineering is <em>agentic engineering.</em></h2>
+    <p class="lede">Karpathy on what separates teams that ship with AI from teams that just chat with it. Workflows, evals, tool composition. Founder takeaway — labs aren't going to fill the gaps where their data and incentives don't already point. Pick a blind spot.</p>
+    <div class="figure">
+      <ol class="bullets">
+        <li><b>Uneven intelligence is a feature.</b> Models fail at trivial things and excel at hard ones. Build around the jagged frontier.</li>
+        <li><b>Eval loops over prompts.</b> A prompt is one sample; an eval is a measurement. Treat the second as the unit of work.</li>
+        <li><b>Pick the blind spot.</b> Verticals with little data and weak feedback are exactly where labs won't compete.</li>
+        <li><b>Compose, don't chat.</b> The interface is workflow + tools + memory. Chat is the demo, not the product.</li>
+      </ol>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.youtube.com/watch?v=96jN2OCOfLs" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ S07 — Autoresearch beyond ML ═══════════════════ -->
+<section class="spread s07" id="s07">
+  <header class="folio">
+    <span>Ephemeris · Issue 017</span>
+    <span>07 / 07 · via @ProductsAndStartups</span>
+  </header>
+  <div class="main">
+    <span class="tag">Skills · Workflow</span>
+    <h2 class="hed">The optimisation loop, applied <em>to everyone.</em></h2>
+    <p class="lede">Karpathy's autoresearch loop — propose, evaluate, refine — works far beyond ML training. Lead qualification, hackathon judging, employee skill rubrics: the structure ports cleanly. The bottleneck isn't the loop; it's writing a fitness function that means anything.</p>
+    <div class="figure">
+      <div class="rule"></div>
+      <div class="columns">
+        <h4>The loop</h4>
+        <p>Generate candidates. Score them against a fitness function. Refine the best. Repeat. The shape is the same whether you're tuning a transformer or grading sales prospects, and the failure modes rhyme: weak generators, noisy evaluators, fitness functions that proxy the wrong thing.</p>
+        <h4>Where it breaks</h4>
+        <p>Eighty percent of the work happens before the loop ever runs. Idea generation, the choice of fitness function, the calibration of the judge. Get those wrong and the loop will obediently optimise toward something useless. Get them right and the loop is almost mechanical.</p>
+        <h4>The skill</h4>
+        <p>Bayram Annakov's repo packages the pattern as a Claude skill — invoke it, hand it a problem, watch it iterate. Useful as a starting point, more useful as a forcing function: writing the fitness function makes you say what good actually looks like.</p>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://github.com/BayramAnnakov/ai-native-product-skills/tree/master/skills/autoresearch" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ COLOPHON ═══════════════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 017</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Seven picks across model labs, infrastructure blogs, and one Russian-language Telegram channel. Today's thread was automation — of research, of security, of the optimisation loop itself.</p>
+    <div class="figure">
+      <div class="meta">
+        <div>
+          <h4>Sources today</h4>
+          <ul>
+            <li>jack-clark.net</li>
+            <li>vercel.com/blog</li>
+            <li>openai.com</li>
+            <li>posthog.com</li>
+            <li>via @ProductsAndStartups</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Rubric</h4>
+          <ul>
+            <li>AI tools to adopt this week</li>
+            <li>Creative software</li>
+            <li>Dev tools &amp; agentic coding</li>
+            <li>Privacy &amp; security</li>
+            <li>Practical research</li>
+            <li>Actionable for engineers / founders</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="../index.html"><span>Archive ↩</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+</main>
+</body>
+</html>
