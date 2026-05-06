@@ -1,0 +1,959 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 018 · 06 May 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ── locked baseline ── */
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+  .spread > .decor {
+    position: absolute; inset: 0; z-index: 0;
+    pointer-events: none; overflow: hidden;
+  }
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+  .figure { width: 100%; }
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     COVER · pull-quote treatment (treatment B)
+     ═══════════════════════════════════════════════════════════════════ */
+  .cover { background: #0a0a12; color: #ece8d9; }
+  .cover .folio { opacity: 0.55; color: #ece8d9; }
+  .cover .pq-mark {
+    font-family: var(--serif); font-style: italic; font-weight: 300;
+    font-size: clamp(120px, 22vw, 320px); line-height: 0.7;
+    color: #c0ff5c;
+    margin: 0; padding: 0;
+  }
+  .cover .pullquote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(40px, 6vw, 96px);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    max-width: 18ch;
+    padding-bottom: 0.12em;
+    color: #ece8d9;
+  }
+  .cover .pullquote em { color: #c0ff5c; font-style: italic; font-weight: 600; }
+  .cover .attrib {
+    font-family: var(--sans);
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 13px;
+    opacity: 0.7;
+  }
+  .cover .masthead-mini {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-style: italic;
+    font-size: clamp(32px, 4vw, 56px);
+    color: #c0ff5c;
+    line-height: 1;
+    margin-top: 8px;
+  }
+  .cover .toc {
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.9;
+    color: #ece8d9;
+    border-top: 1px solid rgba(236,232,217,0.25);
+    padding-top: 18px;
+    width: 100%;
+    columns: 2;
+    column-gap: 48px;
+  }
+  @media (max-width: 800px) { .cover .toc { columns: 1; } }
+  .cover .toc a {
+    display: block; text-decoration: none; color: inherit;
+    padding: 4px 0;
+    break-inside: avoid;
+  }
+  .cover .toc a:hover { color: #c0ff5c; }
+  .cover .toc .num { color: #c0ff5c; margin-right: 10px; }
+  .cover .toc .src { opacity: 0.55; font-size: 11px; margin-left: 6px; }
+  .cover .decor::before {
+    content: "";
+    position: absolute;
+    right: -10vw; top: -10vw;
+    width: 70vw; height: 70vw;
+    background: radial-gradient(circle, rgba(192,255,92,0.10), transparent 60%);
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     S01 · NEON / CYBERPUNK — GPT-5.5 Instant
+     ═══════════════════════════════════════════════════════════════════ */
+  .s01 { background: #07071a; color: #f1eaff; }
+  .s01 .folio { color: #f1eaff; opacity: 0.6; }
+  .s01 .tag { color: #5cf2ff; border-color: #5cf2ff; }
+  .s01 .hed {
+    font-family: var(--sans);
+    font-weight: 900;
+    font-style: italic;
+    font-size: clamp(56px, 9vw, 140px);
+    letter-spacing: -0.04em;
+    line-height: 0.94;
+    background: linear-gradient(96deg, #5cf2ff 0%, #ff5cf2 60%, #ffe75c 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 28px rgba(255,92,242,0.18);
+  }
+  .s01 .hed em {
+    font-style: italic;
+    background: linear-gradient(96deg, #ffe75c, #ff5cf2);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .s01 .lede {
+    font-family: var(--serif);
+    color: #f1eaff;
+    opacity: 0.92;
+  }
+  .s01 .stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 24px;
+    width: 100%;
+    border-top: 1px solid rgba(241,234,255,0.2);
+    padding-top: 24px;
+    margin-top: 12px;
+  }
+  .s01 .stat .n {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: clamp(40px, 5vw, 72px);
+    line-height: 1;
+    color: #5cf2ff;
+    letter-spacing: -0.03em;
+  }
+  .s01 .stat .l {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #f1eaff;
+    opacity: 0.7;
+    margin-top: 8px;
+    display: block;
+  }
+  .s01 .read-on { color: #5cf2ff; border-color: #5cf2ff; --flip: #07071a; }
+  .s01 .decor::before {
+    content: "";
+    position: absolute;
+    left: -20vw; bottom: -30vw;
+    width: 90vw; height: 90vw;
+    background: radial-gradient(circle, rgba(255,92,242,0.18), transparent 60%);
+  }
+  .s01 .decor::after {
+    content: "";
+    position: absolute;
+    right: -10vw; top: -10vw;
+    width: 60vw; height: 60vw;
+    background: radial-gradient(circle, rgba(92,242,255,0.15), transparent 60%);
+  }
+  @media (max-width: 800px) {
+    .s01 .stats { grid-template-columns: 1fr; gap: 16px; }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     S02 · RISOGRAPH DUOTONE — OpenAI Ads platform
+     ═══════════════════════════════════════════════════════════════════ */
+  .s02 { background: #f3eee0; color: #0a0a0a; position: relative; }
+  .s02 .tag { color: #1a1a1a; border-color: #1a1a1a; background: #ffe75c; }
+  .s02 .hed {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: clamp(54px, 9vw, 132px);
+    letter-spacing: -0.03em;
+    line-height: 0.96;
+    color: #1340e8;
+    mix-blend-mode: multiply;
+  }
+  .s02 .hed em {
+    font-style: italic;
+    color: #e63a6a;
+    font-variation-settings: "opsz" 144, "SOFT" 80;
+  }
+  .s02 .lede { color: #1a1a1a; }
+  .s02 .primitives {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 16px;
+    width: 100%;
+    margin-top: 12px;
+  }
+  .s02 .prim {
+    border: 2px solid #1340e8;
+    padding: 16px;
+    background: rgba(255,231,92,0.5);
+    position: relative;
+  }
+  .s02 .prim::before {
+    content: "";
+    position: absolute;
+    inset: 4px -4px -4px 4px;
+    border: 2px solid #e63a6a;
+    z-index: -1;
+    mix-blend-mode: multiply;
+  }
+  .s02 .prim .label {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #e63a6a;
+    margin-bottom: 6px;
+    display: block;
+  }
+  .s02 .prim .name {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: 17px;
+    color: #1340e8;
+    line-height: 1.2;
+  }
+  .s02 .prim .what {
+    font-family: var(--serif);
+    font-size: 14px;
+    line-height: 1.4;
+    color: #1a1a1a;
+    margin-top: 6px;
+  }
+  .s02 .read-on { color: #1340e8; border-color: #1340e8; --flip: #f3eee0; }
+  .s02 .decor::before {
+    content: "$";
+    position: absolute;
+    right: -2vw; bottom: -8vw;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 60vw;
+    color: rgba(230,58,106,0.10);
+    line-height: 0.8;
+  }
+  @media (max-width: 800px) {
+    .s02 .primitives { grid-template-columns: 1fr; }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     S03 · BLUEPRINT — PostHog Code, the self-driving product
+     ═══════════════════════════════════════════════════════════════════ */
+  .s03 { background: #0c2a4a; color: #cfe5ff; }
+  .s03 .folio { color: #cfe5ff; opacity: 0.65; }
+  .s03 .tag { color: #cfe5ff; border-color: #cfe5ff; }
+  .s03 .hed {
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: clamp(40px, 6.4vw, 88px);
+    line-height: 1.06;
+    letter-spacing: -0.02em;
+    color: #cfe5ff;
+    text-transform: none;
+  }
+  .s03 .hed em {
+    font-style: normal;
+    color: #ffd75c;
+    border-bottom: 2px dashed #ffd75c;
+    padding-bottom: 4px;
+  }
+  .s03 .lede { color: #cfe5ff; opacity: 0.9; }
+  .s03 .schema {
+    width: 100%;
+    border: 1px solid rgba(207,229,255,0.5);
+    padding: 20px;
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.7;
+    color: #cfe5ff;
+    position: relative;
+    background:
+      linear-gradient(rgba(207,229,255,0.05) 1px, transparent 1px) 0 0/100% 24px,
+      transparent;
+  }
+  .s03 .schema .head {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #ffd75c;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(207,229,255,0.3);
+    padding-bottom: 8px;
+  }
+  .s03 .schema .arrow { color: #ffd75c; }
+  .s03 .schema .node { color: #cfe5ff; }
+  .s03 .schema .annot { opacity: 0.6; font-style: italic; }
+  .s03 .read-on { color: #ffd75c; border-color: #ffd75c; --flip: #0c2a4a; }
+  .s03 .decor::before {
+    content: "";
+    position: absolute;
+    inset: 24px;
+    background:
+      linear-gradient(rgba(207,229,255,0.08) 1px, transparent 1px) 0 0/40px 40px,
+      linear-gradient(90deg, rgba(207,229,255,0.08) 1px, transparent 1px) 0 0/40px 40px;
+    pointer-events: none;
+  }
+  .s03 .decor .corner {
+    position: absolute;
+    font-family: var(--mono); font-size: 10px;
+    color: rgba(207,229,255,0.45);
+    letter-spacing: 0.18em;
+  }
+  .s03 .decor .c-tl { top: 36px; left: 36px; }
+  .s03 .decor .c-br { bottom: 36px; right: 36px; }
+  @media (max-width: 800px) {
+    .s03 .decor .corner { display: none; }
+    .s03 .schema { font-size: 12px; padding: 14px; }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     S04 · PASTEL ROSE / POSTCARD — Anthropic Claude for Creative Work
+     ═══════════════════════════════════════════════════════════════════ */
+  .s04 { background: #f6e4e2; color: #2a1818; }
+  .s04 .tag { color: #c2486a; border-color: #c2486a; }
+  .s04 .hed {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-style: italic;
+    font-size: clamp(56px, 9vw, 132px);
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    color: #2a1818;
+  }
+  .s04 .hed em { font-weight: 800; color: #c2486a; }
+  .s04 .lede {
+    font-family: var(--serif);
+    color: #2a1818;
+    font-size: clamp(20px, 1.9vw, 28px);
+    max-width: 44ch;
+  }
+  .s04 .connectors {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 8px 28px;
+    width: 100%;
+    border-top: 1px solid rgba(194,72,106,0.4);
+    padding-top: 18px;
+    margin-top: 8px;
+  }
+  .s04 .connectors li {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 14px;
+    color: #2a1818;
+    letter-spacing: 0.02em;
+    list-style: none;
+    padding: 4px 0;
+    border-bottom: 1px dotted rgba(194,72,106,0.4);
+  }
+  .s04 .connectors li::before {
+    content: "✿";
+    color: #c2486a;
+    margin-right: 8px;
+    font-size: 11px;
+  }
+  .s04 .read-on { color: #c2486a; border-color: #c2486a; --flip: #f6e4e2; }
+  .s04 .decor::before {
+    content: "";
+    position: absolute;
+    right: -25vw; top: -10vw;
+    width: 80vw; height: 80vw;
+    background: radial-gradient(circle, rgba(194,72,106,0.15), transparent 65%);
+  }
+  .s04 .decor::after {
+    content: "";
+    position: absolute;
+    left: -10vw; bottom: -20vw;
+    width: 60vw; height: 60vw;
+    background: radial-gradient(circle, rgba(255,205,180,0.5), transparent 60%);
+  }
+  @media (max-width: 800px) {
+    .s04 .connectors { grid-template-columns: 1fr 1fr; gap: 4px 16px; }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     S05 · DARK REPORT / CLASSIFIED — Zvi prior restraint
+     ═══════════════════════════════════════════════════════════════════ */
+  .s05 { background: #0a0606; color: #e8d8c8; }
+  .s05 .folio { color: #e8d8c8; opacity: 0.65; }
+  .s05 .tag {
+    color: #c5341e; border-color: #c5341e;
+    font-family: var(--mono); letter-spacing: 0.3em;
+  }
+  .s05 .hed {
+    font-family: var(--sans);
+    font-weight: 900;
+    font-style: normal;
+    font-size: clamp(46px, 7.6vw, 112px);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: #e8d8c8;
+  }
+  .s05 .hed em {
+    font-style: normal;
+    background: #c5341e;
+    color: #0a0606;
+    padding: 0 0.12em;
+    margin-right: 0.05em;
+  }
+  .s05 .hed .redact {
+    background: #e8d8c8;
+    color: transparent;
+    padding: 0 0.18em;
+    user-select: none;
+  }
+  .s05 .lede {
+    font-family: var(--serif);
+    color: #e8d8c8;
+    opacity: 0.9;
+  }
+  .s05 .doc {
+    width: 100%;
+    border: 1px solid rgba(232,216,200,0.3);
+    padding: 22px 24px;
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.7;
+    color: #e8d8c8;
+    position: relative;
+    background: rgba(197,52,30,0.05);
+  }
+  .s05 .doc .meta {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dashed rgba(232,216,200,0.3);
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #c5341e;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+  }
+  .s05 .doc .body { font-style: italic; opacity: 0.92; }
+  .s05 .doc .body .redact {
+    background: #e8d8c8; color: transparent;
+    padding: 0 0.4em; user-select: none;
+  }
+  .s05 .doc .stamp {
+    position: absolute;
+    right: -8px; top: -10px;
+    transform: rotate(8deg);
+    border: 2px solid #c5341e;
+    color: #c5341e;
+    padding: 4px 10px;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    font-weight: 700;
+    background: #0a0606;
+  }
+  .s05 .read-on { color: #c5341e; border-color: #c5341e; --flip: #0a0606; }
+  .s05 .decor::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(197,52,30,0.04) 0,
+      rgba(197,52,30,0.04) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     S06 · SPREADSHEET / TABULAR — HN sentiment dashboard
+     ═══════════════════════════════════════════════════════════════════ */
+  .s06 { background: #ededeb; color: #1a1a1a; }
+  .s06 .folio { color: #1a1a1a; opacity: 0.7; font-family: var(--mono); }
+  .s06 .tag {
+    color: #1a1a1a; border-color: #1a1a1a;
+    font-family: var(--mono); border-radius: 0;
+  }
+  .s06 .hed {
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: clamp(38px, 6vw, 84px);
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    color: #1a1a1a;
+    text-transform: none;
+  }
+  .s06 .hed em {
+    font-style: normal;
+    background: #1a1a1a;
+    color: #ededeb;
+    padding: 0 0.1em;
+  }
+  .s06 .lede { color: #1a1a1a; }
+  .s06 .sheet {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--mono);
+    font-size: 13px;
+    background: #ffffff;
+    border: 1px solid #1a1a1a;
+  }
+  .s06 .sheet th, .s06 .sheet td {
+    border: 1px solid #c8c8c4;
+    padding: 8px 10px;
+    text-align: left;
+    vertical-align: middle;
+  }
+  .s06 .sheet thead th {
+    background: #1a1a1a; color: #ededeb;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 10px;
+  }
+  .s06 .sheet td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .s06 .sheet .bar {
+    display: inline-block;
+    height: 10px; background: #1a1a1a;
+    vertical-align: middle;
+  }
+  .s06 .sheet .pos { color: #1f7a3f; font-weight: 700; }
+  .s06 .sheet .neg { color: #b03020; font-weight: 700; }
+  .s06 .sheet .row-label { font-weight: 700; }
+  .s06 .read-on { color: #1a1a1a; border-color: #1a1a1a; --flip: #ededeb; border-radius: 0; }
+  .s06 .decor::before {
+    content: "A1:G99";
+    position: absolute;
+    right: 32px; top: 50%;
+    transform: translateY(-50%) rotate(-90deg);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    color: rgba(26,26,26,0.18);
+    transform-origin: right center;
+  }
+  @media (max-width: 800px) {
+    .s06 .sheet { font-size: 11px; }
+    .s06 .sheet th, .s06 .sheet td { padding: 6px 6px; }
+    .s06 .decor::before { display: none; }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     COLOPHON · newsprint
+     ═══════════════════════════════════════════════════════════════════ */
+  .colophon { background: #f4f0e6; color: #1a1a1a; }
+  .colophon .folio { color: #1a1a1a; opacity: 0.7; }
+  .colophon .hed {
+    font-family: var(--serif); font-weight: 800;
+    font-size: clamp(48px, 7vw, 100px);
+    color: #1a1a1a;
+  }
+  .colophon .hed em {
+    font-style: italic; color: #6b1f14;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .colophon .lede { color: #1a1a1a; opacity: 0.95; }
+  .colophon .meta {
+    width: 100%;
+    border-top: 1px solid #1a1a1a;
+    margin-top: 10px;
+    padding-top: 18px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 24px;
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.6;
+  }
+  .colophon .meta h4 {
+    font-family: var(--sans);
+    font-size: 11px; letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    color: #6b1f14;
+  }
+  .colophon .meta li { list-style: none; padding: 1px 0; }
+  .colophon .meta ul { padding: 0; margin: 0; }
+  .colophon .read-on { color: #6b1f14; border-color: #6b1f14; --flip: #f4f0e6; }
+  @media (max-width: 800px) {
+    .colophon .meta { grid-template-columns: 1fr; gap: 18px; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════════════ COVER · pull-quote ═══════════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 018</span>
+    <span>Wednesday · 06 May 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <p class="pq-mark" aria-hidden="true">"</p>
+    <h1 class="pullquote">A self-driving product can <em>prompt itself</em>.</h1>
+    <p class="attrib">PostHog · 05 May 2026</p>
+    <p class="masthead-mini">Ephemeris.</p>
+    <nav class="toc">
+      <a href="#s01"><span class="num">01</span>GPT-5.5 Instant becomes the default<span class="src">OpenAI</span></a>
+      <a href="#s02"><span class="num">02</span>The pixel comes to ChatGPT<span class="src">via @rvnikita_blog</span></a>
+      <a href="#s03"><span class="num">03</span>The product that prompts itself<span class="src">PostHog</span></a>
+      <a href="#s04"><span class="num">04</span>Claude grows hands for designers<span class="src">Anthropic</span></a>
+      <a href="#s05"><span class="num">05</span>Approve a model, by phone call<span class="src">Zvi Mowshowitz</span></a>
+      <a href="#s06"><span class="num">06</span>Hacker News, scored as it speaks<span class="src">via @seeallochnaya</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ S01 · NEON · GPT-5.5 Instant ═══════════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 018</span>
+    <span>01 / 06 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Models · Default</span>
+    <h2 class="hed">GPT-5.5 quietly takes the <em>steering wheel</em>.</h2>
+    <p class="lede">OpenAI's new Instant model is not a flagship. It is the boring middle of the funnel — the one most users will hit on every keystroke — now markedly sharper, with fewer hallucinations and persona controls baked in. The interesting bet is that the <em>median</em> request, not the marquee one, is where the next year of moats are won.</p>
+    <div class="figure">
+      <div class="stats">
+        <div class="stat"><span class="n">5.5</span><span class="l">model line · default</span></div>
+        <div class="stat"><span class="n">−↓</span><span class="l">hallucinations vs 5.0 instant</span></div>
+        <div class="stat"><span class="n">+◐</span><span class="l">personalization controls</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/gpt-5-5-instant" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ S02 · RISOGRAPH · OpenAI Ads ═══════════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 018</span>
+    <span>02 / 06 · via @rvnikita_blog</span>
+  </header>
+  <div class="main">
+    <span class="tag">Platform · Money</span>
+    <h2 class="hed">The <em>pixel</em> arrives in ChatGPT.</h2>
+    <p class="lede">Buried under the GPT-5.5 launch noise: OpenAI shipped an actual ads SDK. A JavaScript pixel, a server-side conversions API, a programmatic advertiser API. The same primitives that turned Facebook into an ad engine in 2014, now wired to a chat box that 700 million people open every day. Whether you sell on it or not, the attention economy just acquired a new freeway.</p>
+    <div class="figure">
+      <div class="primitives">
+        <div class="prim">
+          <span class="label">Front-end</span>
+          <div class="name">JavaScript Pixel</div>
+          <p class="what">Drop-in script for tracking ChatGPT-driven web conversions.</p>
+        </div>
+        <div class="prim">
+          <span class="label">Server</span>
+          <div class="name">Conversions API</div>
+          <p class="what">Backend event stream for CAPI-style attribution.</p>
+        </div>
+        <div class="prim">
+          <span class="label">Control plane</span>
+          <div class="name">Advertiser API</div>
+          <p class="what">Programmatic campaign creation, bidding, reporting.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://developers.openai.com/ads" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ S03 · BLUEPRINT · PostHog Code ═══════════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 018</span>
+    <span>03 / 06 · PostHog</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev tools · Agents</span>
+    <h2 class="hed">A product that <em>prompts itself</em>.</h2>
+    <p class="lede">PostHog Code, in beta, is a desktop agent that watches your product data and writes the next ticket. Routine bugs and small UX tweaks get fixed inside the loop; complex work is surfaced as a prioritised backlog with the data already attached. The pitch: stop asking engineers to babysit dashboards — let the dashboard hire the engineer.</p>
+    <div class="figure">
+      <div class="schema">
+        <div class="head">// Product autonomy loop</div>
+        <span class="annot">// signals → memory → tools → skills → eval → loop</span><br>
+        <span class="node">[ session-replay ]</span> <span class="arrow">─→</span> <span class="node">[ signal-store ]</span> <span class="arrow">─→</span> <span class="node">[ planner ]</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="arrow">└</span> <span class="annot">"users can't find export → patch UX"</span><br>
+        <span class="node">[ planner ]</span> <span class="arrow">─→</span> <span class="node">[ codex.tool ]</span> <span class="arrow">─→</span> <span class="node">[ pr.draft ]</span><br>
+        <span class="node">[ pr.draft ]</span> <span class="arrow">─→</span> <span class="node">[ eval.guardrails ]</span> <span class="arrow">─→</span> <span class="node">[ ship | escalate ]</span>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://posthog.com/blog/self-driving-product" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true">
+    <span class="corner c-tl">FIG · 03 / SHEET A</span>
+    <span class="corner c-br">REV 2026-05-05 · BETA</span>
+  </div>
+</section>
+
+<!-- ═══════════════ S04 · PASTEL ROSE · Anthropic Creative ═══════════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 018</span>
+    <span>04 / 06 · Anthropic</span>
+  </header>
+  <div class="main">
+    <span class="tag">Creative · Connectors</span>
+    <h2 class="hed">Claude reaches into the <em>art studio</em>.</h2>
+    <p class="lede">Anthropic shipped connectors into nine creative tools — Adobe Creative Cloud, Blender, Autodesk Fusion, music DAWs — so Claude can move layers, render comps, and prototype objects without leaving the canvas. The framing is careful: "It can't replace taste or imagination, but it can open up new ways of working — faster and more ambitious ideation."</p>
+    <div class="figure">
+      <ul class="connectors">
+        <li>Adobe Creative Cloud</li>
+        <li>Blender</li>
+        <li>Autodesk Fusion</li>
+        <li>Music DAWs</li>
+        <li>Figma</li>
+        <li>Procreate</li>
+        <li>After Effects</li>
+        <li>Cinema 4D</li>
+        <li>Ableton</li>
+      </ul>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.anthropic.com/news/claude-for-creative-work" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ S05 · DARK REPORT · Zvi prior restraint ═══════════════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 018</span>
+    <span>05 / 06 · Zvi Mowshowitz</span>
+  </header>
+  <div class="main">
+    <span class="tag">Policy · Frontier</span>
+    <h2 class="hed"><em>APPROVAL</em> by phone call.</h2>
+    <p class="lede">Zvi reads the tea leaves on a quiet but seismic shift: the White House is moving toward an informal "prior restraint" regime where frontier model releases require an unwritten nod before they ship. He concedes some oversight is reasonable; what he fears is the procedural vacuum — favouritism dressed as safety.</p>
+    <div class="figure">
+      <div class="doc">
+        <div class="meta">
+          <span>MEMO · WH-AI-26-014</span>
+          <span>CLASSIFICATION · OPEN</span>
+        </div>
+        <p class="body">"A good implementation of a prior restraint regime for true frontier model releases, isolated to the biggest models of the leading labs and with formalized procedures that are difficult to abuse, is a good and eventually <span class="redact">XXXXXXXX</span> even a necessary thing. I fear that is not what we are going to get."</p>
+        <span class="stamp">DRAFT · NO DATE</span>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://thezvi.substack.com/p/the-ai-ad-hoc-prior-restraint-era" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ S06 · SPREADSHEET · HN sentiment ═══════════════ -->
+<section class="spread s06" id="s06">
+  <header class="folio">
+    <span>Ephemeris · Issue 018</span>
+    <span>06 / 06 · via @seeallochnaya</span>
+  </header>
+  <div class="main">
+    <span class="tag">Tools · Sentiment</span>
+    <h2 class="hed">A daily <em>scoreboard</em> for AI on Hacker News.</h2>
+    <p class="lede">A small pipeline by Sergei Boldyrev pulls the top 200 HN posts each morning, filters them with an LLM for AI relevance, and asks Gemini to score sentiment per model. The output: a public dashboard where Claude reads as polarised, GPT as quietly tolerated, and Gemini barely registers. Useful as a low-cost early-warning system for a release going sideways.</p>
+    <div class="figure">
+      <table class="sheet">
+        <thead>
+          <tr><th>#</th><th>model</th><th class="num">mentions / day</th><th>tone</th><th>signal</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td class="row-label">Claude</td><td class="num">142</td><td><span class="pos">+</span> / <span class="neg">−</span></td><td><span class="bar" style="width:120px"></span></td></tr>
+          <tr><td>2</td><td class="row-label">GPT</td><td class="num">96</td><td class="pos">+</td><td><span class="bar" style="width:80px"></span></td></tr>
+          <tr><td>3</td><td class="row-label">Gemini</td><td class="num">38</td><td>·</td><td><span class="bar" style="width:32px"></span></td></tr>
+          <tr><td>4</td><td class="row-label">Llama</td><td class="num">21</td><td class="pos">+</td><td><span class="bar" style="width:18px"></span></td></tr>
+          <tr><td>5</td><td class="row-label">Mistral</td><td class="num">9</td><td>·</td><td><span class="bar" style="width:8px"></span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="http://hnup.date/hn-sota" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ COLOPHON ═══════════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 018</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Six picks from a single news-heavy Tuesday: a default model upgrade, an ads platform that quietly shipped under it, a coding agent that watches its own product, connectors into the creative stack, a policy memo that is not a memo, and a small dashboard scoring the conversation.</p>
+    <div class="meta">
+      <div>
+        <h4>Sources today</h4>
+        <ul>
+          <li>OpenAI</li>
+          <li>Anthropic</li>
+          <li>PostHog</li>
+          <li>The Zvi</li>
+          <li>via @rvnikita_blog</li>
+          <li>via @seeallochnaya</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Rubric</h4>
+        <ul>
+          <li>1 · Adoptable AI tools</li>
+          <li>2 · Creative software</li>
+          <li>3 · Dev tools &amp; agents</li>
+          <li>4 · Privacy &amp; security</li>
+          <li>5 · Research with a kernel</li>
+          <li>6 · Actionable for builders</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Issue</h4>
+        <ul>
+          <li>No. 018</li>
+          <li>06 May 2026</li>
+          <li>Zürich · 08:00</li>
+          <li>vadim.sikora.name/ephemeris</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="../" rel="noopener"><span>The archive ↗</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+</main>
+</body>
+</html>

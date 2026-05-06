@@ -1,3 +1,4 @@
+http://hnup.date/hn-sota
 https://andonlabs.com/blog/openai-gpt-5-5-vending-bench
 https://arxiv.org/abs/2509.00462
 https://arxiv.org/pdf/2604.24827
@@ -17,6 +18,7 @@ https://blog.cloudflare.com/q1-2026-internet-disruption-summary/
 https://blog.cloudflare.com/shared-dictionaries/
 https://blog.cloudflare.com/unweight-tensor-compression/
 https://claude.com/blog/connectors-for-everyday-life
+https://developers.openai.com/ads
 https://every.to/on-every/re-re-introducing-sparkle-marie-kondo-your-mac
 https://every.to/source-code/how-we-run-a-25-person-company-on-four-ai-agents
 https://every.to/source-code/the-folder-is-the-agent
@@ -60,6 +62,7 @@ https://nextjs.org/blog/turbopack-incremental-computation
 https://openai.com/index/codex-for-almost-everything
 https://openai.com/index/cybersecurity-in-the-intelligence-age
 https://openai.com/index/delivering-low-latency-voice-ai-at-scale
+https://openai.com/index/gpt-5-5-instant
 https://openai.com/index/gpt-5-5-system-card
 https://openai.com/index/introducing-chatgpt-images-2-0
 https://openai.com/index/introducing-evmbench
@@ -72,6 +75,7 @@ https://openai.com/index/the-next-evolution-of-the-agents-sdk
 https://openai.com/index/where-the-goblins-came-from
 https://posthog.com/blog/duckdb-vs-clickhouse
 https://posthog.com/blog/making-claude-cowork-actually-useful
+https://posthog.com/blog/self-driving-product
 https://posthog.com/blog/testing-ai-agents
 https://posthog.com/blog/untangling-rayon-and-tokio
 https://posthog.com/blog/your-lifecycle-emails-are-wrong
@@ -90,6 +94,7 @@ https://thezvi.substack.com/p/claude-code-codex-and-agentic-coding
 https://thezvi.substack.com/p/gpt-55-capabilities-and-reactions
 https://thezvi.substack.com/p/opus-47-part-2-capabilities-and-reactions
 https://thezvi.substack.com/p/opus-47-part-3-model-welfare
+https://thezvi.substack.com/p/the-ai-ad-hoc-prior-restraint-era
 https://thezvi.substack.com/p/the-most-important-charts-in-the
 https://vercel.com/blog/a-new-programming-model-for-durable-execution
 https://vercel.com/blog/agent-responsibly
@@ -115,6 +120,7 @@ https://www.anthropic.com/engineering/infrastructure-noise
 https://www.anthropic.com/engineering/managed-agents
 https://www.anthropic.com/features/project-deal
 https://www.anthropic.com/news/claude-design-anthropic-labs
+https://www.anthropic.com/news/claude-for-creative-work
 https://www.anthropic.com/news/claude-opus-4-7
 https://www.deeplearning.ai/the-batch/issue-347/
 https://www.deeplearning.ai/the-batch/issue-349/
