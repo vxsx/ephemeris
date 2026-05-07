@@ -1,0 +1,1314 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 019 · Thursday 07 May 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+
+  .spread > .decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+
+  .figure { width: 100%; }
+
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     ISSUE 019 — Source map cover, 8 stories, mostly editorial-loud.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── COVER: Source map ─── */
+  .cover {
+    background: #0e0e0e;
+    color: #ece7d8;
+  }
+  .cover .moodword {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-size: clamp(60px, 11vw, 168px);
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+    color: #ece7d8;
+    margin: 0;
+    padding-bottom: 0.12em;
+  }
+  .cover .moodword .marker {
+    color: #ffd23f;
+    font-style: normal;
+    font-weight: 800;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+  }
+  .cover .dek {
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: clamp(15px, 1.4vw, 18px);
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+    max-width: 56ch;
+    color: rgba(236,231,216,0.78);
+  }
+  .cover .sourcemap {
+    width: 100%;
+    border-top: 1px solid rgba(236,231,216,0.25);
+    border-bottom: 1px solid rgba(236,231,216,0.25);
+    padding: 18px 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px 32px;
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+  }
+  .cover .sourcemap .src {
+    display: flex; align-items: center; gap: 12px;
+    color: rgba(236,231,216,0.45);
+    text-transform: lowercase;
+  }
+  .cover .sourcemap .src::before {
+    content: "○";
+    font-size: 11px;
+    color: rgba(236,231,216,0.35);
+  }
+  .cover .sourcemap .src.live {
+    color: #ece7d8;
+  }
+  .cover .sourcemap .src.live::before {
+    content: "●";
+    color: #ffd23f;
+  }
+  .cover .toc {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 40px;
+    padding-top: 10px;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 4px 12px;
+    text-decoration: none; color: inherit;
+    padding: 7px 0;
+    border-bottom: 1px dotted rgba(236,231,216,0.25);
+    font-family: var(--sans);
+    font-size: 14px;
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.82em; opacity: 0.6; font-family: var(--mono); }
+  .cover .toc .num {
+    font-family: var(--serif); font-weight: 700; font-style: italic;
+    color: #ffd23f; margin-right: 10px;
+  }
+  @media (max-width: 800px) {
+    .cover .sourcemap { grid-template-columns: 1fr 1fr; gap: 4px 20px; font-size: 11px; }
+    .cover .toc { grid-template-columns: 1fr; gap: 0; }
+  }
+
+  /* ─── s01: Newsprint (cream + black, three columns) ─── */
+  .s01 {
+    background: #efe8d6;
+    color: #131313;
+  }
+  .s01 .folio { color: #131313; opacity: 0.9; }
+  .s01 .tag {
+    color: #8a1010; border-color: #8a1010;
+    font-family: var(--serif); font-weight: 700; font-style: italic;
+    text-transform: uppercase; letter-spacing: 0.2em;
+    border-radius: 0; border-width: 1px 0;
+    padding: 4px 0;
+  }
+  .s01 .hed {
+    font-family: var(--serif); font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+    font-size: clamp(46px, 6.4vw, 96px);
+    letter-spacing: -0.025em;
+    line-height: 1;
+  }
+  .s01 .hed em {
+    font-style: italic; color: #8a1010;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s01 .deck {
+    font-family: var(--serif); font-style: italic; font-weight: 500;
+    font-size: clamp(18px, 1.6vw, 22px);
+    line-height: 1.4;
+    max-width: 60ch;
+    color: #3a2a26;
+    border-top: 2px solid #131313;
+    border-bottom: 1px solid #131313;
+    padding: 10px 0;
+    text-align: center;
+  }
+  .s01 .columns {
+    column-count: 3;
+    column-gap: 32px;
+    column-rule: 1px solid rgba(19,19,19,0.3);
+    font-family: var(--serif);
+    font-size: 16px;
+    line-height: 1.5;
+    color: #1a1a1a;
+  }
+  .s01 .columns p { margin: 0 0 14px 0; break-inside: avoid-column; }
+  .s01 .columns p:first-child::first-line {
+    font-variant: small-caps; letter-spacing: 0.05em; font-weight: 700;
+  }
+  .s01 .byline {
+    font-family: var(--sans); font-size: 11px;
+    text-transform: uppercase; letter-spacing: 0.2em;
+    color: #555; margin-bottom: 18px;
+  }
+  .s01 .read-on {
+    color: #131313; border-color: #131313; --flip: #efe8d6;
+    border-width: 1px; padding: 12px 18px;
+  }
+  .s01 .decor::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 27px,
+        rgba(19,19,19,0.04) 27px,
+        rgba(19,19,19,0.04) 28px
+      );
+  }
+  @media (max-width: 800px) {
+    .s01 .columns { column-count: 1; }
+  }
+
+  /* ─── s02: Spreadsheet (monospace tabular, gridlines) ─── */
+  .s02 {
+    background: #f4f3ee;
+    color: #1a1a1a;
+  }
+  .s02 .folio { color: #1a1a1a; }
+  .s02 .tag {
+    font-family: var(--mono); color: #1a1a1a;
+    border: 1px solid #1a1a1a; border-radius: 0;
+    background: #ffd23f; padding: 4px 10px;
+    text-transform: uppercase;
+  }
+  .s02 .hed {
+    font-family: var(--sans); font-weight: 800;
+    font-size: clamp(44px, 6.2vw, 92px);
+    letter-spacing: -0.025em;
+    line-height: 1.04;
+  }
+  .s02 .hed em {
+    font-style: normal;
+    font-family: var(--mono); font-weight: 600;
+    background: #1a1a1a; color: #ffd23f;
+    padding: 0 0.15em;
+    letter-spacing: -0.02em;
+  }
+  .s02 .lede { color: #2a2a2a; max-width: 56ch; }
+  .s02 .sheet {
+    width: 100%;
+    font-family: var(--mono); font-size: 13px;
+    border: 1px solid #1a1a1a;
+    background: #ffffff;
+    overflow: hidden;
+  }
+  .s02 .sheet .row {
+    display: grid;
+    grid-template-columns: 36px 2fr 3fr 1.4fr;
+    border-bottom: 1px solid rgba(26,26,26,0.18);
+  }
+  .s02 .sheet .row:last-child { border-bottom: none; }
+  .s02 .sheet .row > div {
+    padding: 9px 12px;
+    border-right: 1px solid rgba(26,26,26,0.18);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .s02 .sheet .row > div:last-child { border-right: none; }
+  .s02 .sheet .row.head {
+    background: #1a1a1a; color: #ffd23f;
+    font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.06em; font-size: 11px;
+  }
+  .s02 .sheet .row.head > div { border-right-color: rgba(255,210,63,0.3); }
+  .s02 .sheet .row .col-a { color: #888; text-align: right; }
+  .s02 .sheet .row .col-b { font-weight: 600; }
+  .s02 .sheet .row .col-d { color: #8a1010; }
+  .s02 .read-on {
+    color: #1a1a1a; border-color: #1a1a1a; --flip: #ffd23f;
+  }
+  @media (max-width: 800px) {
+    .s02 .sheet .row { grid-template-columns: 28px 1.4fr 1fr; }
+    .s02 .sheet .row > div:nth-child(4) { display: none; }
+    .s02 .sheet .row > div { white-space: normal; font-size: 11px; padding: 7px 8px; }
+  }
+
+  /* ─── s03: Blueprint (pale grid, monospace annotation) ─── */
+  .s03 {
+    background: #14283a;
+    color: #d4e4f4;
+  }
+  .s03 .folio { color: #d4e4f4; opacity: 0.7; }
+  .s03 .tag {
+    font-family: var(--mono); color: #88c8ff; border-color: #88c8ff;
+    border-radius: 0; padding: 4px 10px;
+    text-transform: uppercase;
+  }
+  .s03 .hed {
+    font-family: var(--serif); font-weight: 700;
+    font-size: clamp(46px, 6.4vw, 100px);
+    letter-spacing: -0.02em;
+    line-height: 1.02;
+    color: #f0f6fc;
+  }
+  .s03 .hed em {
+    font-family: var(--mono); font-style: normal; font-weight: 400;
+    color: #88c8ff;
+    font-size: 0.78em;
+    letter-spacing: -0.01em;
+  }
+  .s03 .lede { color: #b0c8e0; max-width: 54ch; }
+  .s03 .diagram {
+    width: 100%;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: #88c8ff;
+    border: 1px dashed rgba(136,200,255,0.5);
+    padding: 22px;
+    position: relative;
+  }
+  .s03 .diagram .row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .s03 .diagram .row:last-child { margin-bottom: 0; }
+  .s03 .diagram .node {
+    border: 1px solid #88c8ff;
+    padding: 8px 10px;
+    text-align: center;
+    background: rgba(136,200,255,0.06);
+    color: #f0f6fc;
+  }
+  .s03 .diagram .arrow {
+    color: rgba(136,200,255,0.5);
+    text-align: center;
+  }
+  .s03 .diagram .label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: rgba(212,228,244,0.55);
+    margin-top: 14px;
+    border-top: 1px dashed rgba(136,200,255,0.4);
+    padding-top: 10px;
+    text-align: center;
+  }
+  .s03 .read-on {
+    color: #88c8ff; border-color: #88c8ff; --flip: #14283a;
+  }
+  .s03 .decor::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(136,200,255,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(136,200,255,0.06) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  @media (max-width: 800px) {
+    .s03 .diagram .row { grid-template-columns: 1fr; gap: 6px; }
+    .s03 .diagram .arrow { display: none; }
+  }
+
+  /* ─── s04: Terminal (green-on-black, scanlines) ─── */
+  .s04 {
+    background: #050b07;
+    color: #6fff9d;
+  }
+  .s04 .folio { color: #6fff9d; opacity: 0.6; font-family: var(--mono); }
+  .s04 .tag {
+    font-family: var(--mono); color: #6fff9d; border-color: #6fff9d;
+    border-radius: 0; padding: 4px 10px;
+    background: rgba(111,255,157,0.05);
+  }
+  .s04 .hed {
+    font-family: var(--mono); font-weight: 600;
+    font-size: clamp(34px, 4.8vw, 72px);
+    letter-spacing: -0.01em;
+    line-height: 1.08;
+    color: #aaffc4;
+    text-shadow: 0 0 18px rgba(111,255,157,0.3);
+  }
+  .s04 .hed em {
+    font-style: normal;
+    color: #ffd23f;
+    text-shadow: 0 0 14px rgba(255,210,63,0.4);
+  }
+  .s04 .lede {
+    font-family: var(--mono); font-size: 16px; line-height: 1.55;
+    color: rgba(111,255,157,0.85);
+  }
+  .s04 .term {
+    width: 100%;
+    background: rgba(0,0,0,0.5);
+    border: 1px solid rgba(111,255,157,0.4);
+    padding: 18px 22px;
+    font-family: var(--mono); font-size: 13px;
+    color: #6fff9d;
+    line-height: 1.55;
+  }
+  .s04 .term .prompt { color: rgba(111,255,157,0.5); }
+  .s04 .term .err { color: #ff6f6f; }
+  .s04 .term .ok  { color: #ffd23f; }
+  .s04 .read-on {
+    color: #6fff9d; border-color: #6fff9d; --flip: #050b07;
+    font-family: var(--mono);
+  }
+  .s04 .decor::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 3px,
+      rgba(111,255,157,0.04) 3px,
+      rgba(111,255,157,0.04) 4px
+    );
+    mix-blend-mode: screen;
+  }
+  .s04 .decor::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: radial-gradient(
+      ellipse at center,
+      transparent 40%,
+      rgba(0,0,0,0.55) 100%
+    );
+  }
+
+  /* ─── s05: Museum placard (ivory + dark olive, classical, centered) ─── */
+  .s05 {
+    background: #f1ece0;
+    color: #2c3522;
+  }
+  .s05 .folio { color: #2c3522; opacity: 0.7; }
+  .s05 .tag {
+    color: #2c3522; border-color: #2c3522;
+    font-family: var(--serif); font-style: italic;
+    border-radius: 0; border-width: 0 0 1px 0;
+    padding: 2px 0; opacity: 1;
+    letter-spacing: 0.3em;
+  }
+  .s05 .hed {
+    font-family: var(--serif); font-weight: 500; font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-size: clamp(44px, 6vw, 92px);
+    letter-spacing: -0.015em;
+    line-height: 1.06;
+    max-width: 22ch;
+  }
+  .s05 .hed em {
+    font-style: normal; font-weight: 800;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+    color: #5a3b1e;
+  }
+  .s05 .lede {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(19px, 1.7vw, 24px);
+    line-height: 1.5;
+    max-width: 50ch;
+    color: #2c3522;
+  }
+  .s05 .placard {
+    border-top: 1px solid #2c3522;
+    border-bottom: 1px solid #2c3522;
+    padding: 18px 0;
+    width: 100%;
+    max-width: 480px;
+  }
+  .s05 .placard .label {
+    font-family: var(--sans); font-size: 11px;
+    text-transform: uppercase; letter-spacing: 0.3em;
+    color: #5a3b1e;
+    margin-bottom: 10px;
+  }
+  .s05 .placard blockquote {
+    margin: 0;
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(18px, 1.8vw, 22px);
+    line-height: 1.4;
+    color: #2c3522;
+  }
+  .s05 .placard cite {
+    display: block;
+    font-family: var(--sans); font-style: normal;
+    font-size: 11px;
+    text-transform: uppercase; letter-spacing: 0.24em;
+    color: #5a3b1e;
+    margin-top: 14px;
+  }
+  .s05 .read-on {
+    color: #2c3522; border-color: #2c3522; --flip: #f1ece0;
+  }
+
+  /* ─── s06: Neon / cyberpunk (purple+teal gradient, terminal card) ─── */
+  .s06 {
+    background: #0a0418;
+    color: #f6e9ff;
+  }
+  .s06 .folio { color: #f6e9ff; opacity: 0.7; }
+  .s06 .tag {
+    font-family: var(--mono); color: #5cf2ff; border-color: #5cf2ff;
+    border-radius: 0; padding: 4px 10px;
+    background: rgba(92,242,255,0.06);
+  }
+  .s06 .hed {
+    font-family: var(--sans); font-weight: 900;
+    font-size: clamp(44px, 6.4vw, 100px);
+    letter-spacing: -0.04em;
+    line-height: 1;
+    text-transform: uppercase;
+    background: linear-gradient(96deg, #5cf2ff 0%, #c64bff 50%, #ff5cae 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .s06 .hed em {
+    font-style: normal;
+    -webkit-text-fill-color: #ffe75c;
+    background: none;
+    color: #ffe75c;
+  }
+  .s06 .lede { color: rgba(246,233,255,0.85); max-width: 54ch; }
+  .s06 .topology {
+    width: 100%;
+    background: rgba(20,4,40,0.6);
+    border: 1px solid rgba(92,242,255,0.4);
+    padding: 22px;
+    font-family: var(--mono); font-size: 13px;
+    color: #5cf2ff;
+    box-shadow: 0 0 60px rgba(198,75,255,0.18) inset;
+    line-height: 1.6;
+  }
+  .s06 .topology .stat {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    border-bottom: 1px dashed rgba(92,242,255,0.2);
+    padding: 6px 0;
+  }
+  .s06 .topology .stat:last-child { border-bottom: none; }
+  .s06 .topology .stat .k { color: rgba(246,233,255,0.6); }
+  .s06 .topology .stat .v { color: #ffe75c; font-weight: 600; }
+  .s06 .read-on {
+    color: #5cf2ff; border-color: #5cf2ff; --flip: #0a0418;
+  }
+  .s06 .decor::before {
+    content: "";
+    position: absolute;
+    left: -10vw; top: 30vh;
+    width: 60vw; height: 60vw;
+    background: radial-gradient(circle, rgba(198,75,255,0.18), transparent 60%);
+  }
+  .s06 .decor::after {
+    content: "";
+    position: absolute;
+    right: -14vw; top: -10vw;
+    width: 56vw; height: 56vw;
+    background: radial-gradient(circle, rgba(92,242,255,0.14), transparent 60%);
+  }
+
+  /* ─── s07: Memo / airgram (typewriter, RE: header, margin rules) ─── */
+  .s07 {
+    background: #ece4d3;
+    color: #2a1f17;
+  }
+  .s07 .folio { color: #2a1f17; opacity: 0.7; }
+  .s07 .tag {
+    font-family: var(--mono); color: #2a1f17; border-color: #2a1f17;
+    border-radius: 0; padding: 3px 8px;
+    background: transparent;
+    text-transform: uppercase;
+  }
+  .s07 .memo-head {
+    border: 1px solid #2a1f17;
+    border-width: 1px 0 1px 0;
+    padding: 14px 0;
+    width: 100%;
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.7;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .s07 .memo-head .field {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+  }
+  .s07 .memo-head .field .k { color: #6e4d2a; }
+  .s07 .memo-head .field .v { color: #2a1f17; }
+  .s07 .hed {
+    font-family: var(--mono); font-weight: 600;
+    font-size: clamp(34px, 4.6vw, 64px);
+    letter-spacing: -0.02em;
+    line-height: 1.08;
+    color: #2a1f17;
+    text-transform: uppercase;
+  }
+  .s07 .hed em {
+    font-style: normal;
+    background: #ffd23f;
+    padding: 0 0.1em;
+  }
+  .s07 .lede {
+    font-family: var(--mono); font-size: 15px; line-height: 1.6;
+    color: #3d2c1f;
+    max-width: 56ch;
+  }
+  .s07 .ratebox {
+    width: 100%;
+    border: 1px solid #2a1f17;
+    background: rgba(255,255,255,0.4);
+    padding: 0;
+    font-family: var(--mono);
+    font-size: 13px;
+  }
+  .s07 .ratebox .row {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1.4fr;
+    border-bottom: 1px solid rgba(42,31,23,0.25);
+  }
+  .s07 .ratebox .row:last-child { border-bottom: none; }
+  .s07 .ratebox .row > div {
+    padding: 10px 14px;
+    border-right: 1px solid rgba(42,31,23,0.25);
+  }
+  .s07 .ratebox .row > div:last-child { border-right: none; }
+  .s07 .ratebox .row.head {
+    background: #2a1f17; color: #ece4d3;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 11px;
+  }
+  .s07 .ratebox .row.head > div { border-right-color: rgba(236,228,211,0.25); }
+  .s07 .ratebox .pct { color: #8a1010; font-weight: 600; }
+  .s07 .read-on {
+    color: #2a1f17; border-color: #2a1f17; --flip: #ece4d3;
+    font-family: var(--mono);
+  }
+  .s07 .decor::before {
+    content: "";
+    position: absolute;
+    left: clamp(24px, 6vw, 120px);
+    right: clamp(24px, 6vw, 120px);
+    top: 0; bottom: 0;
+    border-left: 1px dashed rgba(42,31,23,0.35);
+    border-right: 1px dashed rgba(42,31,23,0.35);
+  }
+  @media (max-width: 800px) {
+    .s07 .ratebox .row { grid-template-columns: 1fr 0.8fr; }
+    .s07 .ratebox .row > div:nth-child(3) { display: none; }
+    .s07 .decor::before { display: none; }
+  }
+
+  /* ─── s08: Postcard (horizontal split, two-tone, decorative border) ─── */
+  .s08 {
+    background: #f9d6c8;
+    color: #1a1018;
+  }
+  .s08 .folio { color: #1a1018; opacity: 0.7; }
+  .s08 .tag {
+    color: #1a1018; border-color: #1a1018;
+    font-family: var(--mono); font-size: 11px;
+    border-radius: 0; padding: 4px 10px;
+    background: #ffffff;
+    text-transform: uppercase;
+  }
+  .s08 .hed {
+    font-family: var(--serif); font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    font-size: clamp(48px, 7vw, 108px);
+    letter-spacing: -0.03em;
+    line-height: 0.98;
+  }
+  .s08 .hed em {
+    font-style: italic;
+    color: #d22d6a;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s08 .lede { color: #2a1820; max-width: 54ch; }
+  .s08 .postcard {
+    width: 100%;
+    border: 2px solid #1a1018;
+    background: #ffffff;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    overflow: hidden;
+  }
+  .s08 .postcard .stamp {
+    background: #d22d6a;
+    color: #ffffff;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 2px dashed #1a1018;
+    min-height: 200px;
+  }
+  .s08 .postcard .stamp .corner {
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    opacity: 0.85;
+  }
+  .s08 .postcard .stamp .big {
+    font-family: var(--serif); font-weight: 900;
+    font-size: clamp(48px, 7vw, 96px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+  }
+  .s08 .postcard .stamp .big .pct {
+    font-style: italic;
+    color: #ffd23f;
+  }
+  .s08 .postcard .stamp .cap {
+    font-family: var(--sans); font-size: 12px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    opacity: 0.92;
+  }
+  .s08 .postcard .note {
+    padding: 22px;
+    font-family: var(--serif);
+    font-size: 16px; line-height: 1.5;
+    color: #1a1018;
+    display: flex; flex-direction: column; gap: 14px;
+    justify-content: space-between;
+  }
+  .s08 .postcard .note .heading {
+    font-family: var(--mono); font-size: 11px;
+    text-transform: uppercase; letter-spacing: 0.22em;
+    color: #6a3344;
+  }
+  .s08 .postcard .note ul {
+    margin: 0; padding: 0; list-style: none;
+    display: grid; gap: 6px;
+    font-family: var(--mono); font-size: 13px;
+    color: #1a1018;
+  }
+  .s08 .postcard .note li {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    border-bottom: 1px dotted rgba(26,16,24,0.3);
+    padding: 4px 0;
+  }
+  .s08 .postcard .note li .v { color: #d22d6a; font-weight: 600; }
+  .s08 .read-on {
+    color: #1a1018; border-color: #1a1018; --flip: #f9d6c8;
+  }
+  @media (max-width: 800px) {
+    .s08 .postcard { grid-template-columns: 1fr; }
+    .s08 .postcard .stamp { border-right: none; border-bottom: 2px dashed #1a1018; min-height: 160px; }
+  }
+
+  /* ─── Colophon: Concrete (warm grey, asymmetric, giant punctuation) ─── */
+  .colophon {
+    background: #c8c4bc;
+    color: #1c1c1c;
+  }
+  .colophon .folio { color: #1c1c1c; opacity: 0.7; }
+  .colophon .hed {
+    font-family: var(--serif); font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    font-size: clamp(60px, 9vw, 144px);
+    line-height: 0.94;
+    letter-spacing: -0.04em;
+  }
+  .colophon .hed em {
+    font-style: italic; color: #8a1010;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .colophon .lede {
+    font-size: clamp(18px, 1.5vw, 22px);
+    color: #1c1c1c;
+    max-width: 56ch;
+  }
+  .colophon .meta {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    border-top: 2px solid #1c1c1c;
+    padding-top: 18px;
+    margin-top: 10px;
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.55;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .colophon .meta h4 {
+    font-family: var(--mono); font-weight: 600; font-size: 11px;
+    margin-bottom: 6px;
+    letter-spacing: 0.2em;
+    color: #6a4f1c;
+  }
+  .colophon .meta ul { margin: 0; padding: 0; list-style: none; }
+  .colophon .meta li { padding: 1px 0; }
+  .colophon .decor::before {
+    content: "“";
+    position: absolute;
+    right: -3vw; bottom: -22vw;
+    font-family: var(--serif);
+    font-weight: 900; font-style: italic;
+    font-size: 70vw;
+    line-height: 0.7;
+    color: rgba(28,28,28,0.06);
+  }
+  @media (max-width: 800px) {
+    .colophon .meta { grid-template-columns: 1fr; gap: 14px; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     COVER — Source map: 18 sources, dots show today's contributors.
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 019</span>
+    <span>Thursday · 07 May 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <h1 class="moodword">Who is <em>watching <span class="marker">·</span></em> the agents?</h1>
+    <p class="dek">Multi-agent observability moves to the centre of the stack, Anthropic ships templated finance agents, OpenAI rewires its training-cluster transport, and DENIC takes down half the German internet with a single bad signature.</p>
+    <div class="sourcemap" aria-label="Sources contributing to today's issue">
+      <span class="src live">cloudflare blog</span>
+      <span class="src live">anthropic news</span>
+      <span class="src live">anthropic research</span>
+      <span class="src live">sentry engineering</span>
+      <span class="src live">openai news</span>
+      <span class="src live">vercel blog</span>
+      <span class="src live">don't worry about the vase</span>
+      <span class="src">the batch</span>
+      <span class="src">jack clark · import ai</span>
+      <span class="src">github engineering</span>
+      <span class="src">posthog blog</span>
+      <span class="src">fly.io blog</span>
+      <span class="src">next.js blog</span>
+      <span class="src">jeff bullas</span>
+      <span class="src">tg · seeallochnaya</span>
+      <span class="src">tg · tochkinadai</span>
+      <span class="src">tg · denissexy</span>
+      <span class="src">tg · rvnikita</span>
+    </div>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>When the registry breaks, the country breaks.</span><span>Cloudflare</span></a>
+      <a href="#s02"><span><span class="num">02</span>Templated agents arrive on the trading desk.</span><span>Anthropic</span></a>
+      <a href="#s03"><span><span class="num">03</span>When agents orchestrate agents.</span><span>Sentry</span></a>
+      <a href="#s04"><span><span class="num">04</span>The bug between the agents.</span><span>Sentry</span></a>
+      <a href="#s05"><span><span class="num">05</span>Anthropic is not a tool company.</span><span>The Vase</span></a>
+      <a href="#s06"><span><span class="num">06</span>MRC: a transport for 100k-GPU jobs.</span><span>OpenAI</span></a>
+      <a href="#s07"><span><span class="num">07</span>Claude flips when you push back.</span><span>Anthropic</span></a>
+      <a href="#s08"><span><span class="num">08</span>Black Friday, with no Black Friday prep.</span><span>Vercel</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     S01 · Cloudflare .de TLD outage — Newsprint
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 019</span>
+    <span>01 / 08 · Cloudflare</span>
+  </header>
+  <div class="main">
+    <span class="tag">Privacy &amp; security · Infrastructure</span>
+    <h2 class="hed">When the registry breaks, the <em>country</em> breaks.</h2>
+    <p class="deck">On 5 May, DENIC published broken DNSSEC signatures for the .de TLD. Millions of German domains went dark within minutes.</p>
+    <div class="figure">
+      <p class="byline">By Cloudflare · Filed 06 May 2026 · Zürich bureau</p>
+      <div class="columns">
+        <p>Resolvers around the world began returning SERVFAIL for any name under .de — every Sparkasse, every Bundesbank-fronted service, every regional newsroom. The signatures DENIC published failed validation; the chain of trust collapsed at the top.</p>
+        <p>Cloudflare and other major resolvers responded by deploying a Negative Trust Anchor for the zone, which tells the resolver to skip DNSSEC validation for that one name until the publisher fixes itself. It is the DNS equivalent of taping over a smoke alarm.</p>
+        <p>The lesson is the part that should worry anyone running consumer services in a country with a small number of TLDs: a misconfigured signature at the registry layer is a national outage, and the only mitigation is operator-side trust override coordinated within minutes. Plan for it the way you plan for power.</p>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.cloudflare.com/de-tld-outage-dnssec/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     S02 · Anthropic Finance Agents — Spreadsheet
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 019</span>
+    <span>02 / 08 · Anthropic</span>
+  </header>
+  <div class="main">
+    <span class="tag">Agents · Adopt this week</span>
+    <h2 class="hed">Templated agents arrive on the <em>trading desk</em>.</h2>
+    <p class="lede">Anthropic shipped ten ready-made agent recipes for finance teams: pitchbook builder, earnings reviewer, KYC screener, month-end close. Each ships with skills, governed connectors, and named subagents. Deploy as Excel/PowerPoint plugins or as autonomous platform agents.</p>
+    <div class="figure">
+      <div class="sheet" role="table" aria-label="Finance agent templates">
+        <div class="row head">
+          <div class="col-a">#</div>
+          <div class="col-b">Agent</div>
+          <div class="col-c">What it does</div>
+          <div class="col-d">Surface</div>
+        </div>
+        <div class="row">
+          <div class="col-a">01</div>
+          <div class="col-b">Pitchbook builder</div>
+          <div class="col-c">Drafts client decks from CRM + market data</div>
+          <div class="col-d">PowerPoint</div>
+        </div>
+        <div class="row">
+          <div class="col-a">02</div>
+          <div class="col-b">Earnings reviewer</div>
+          <div class="col-c">Summarises 10-Qs, flags model deltas</div>
+          <div class="col-d">Platform</div>
+        </div>
+        <div class="row">
+          <div class="col-a">03</div>
+          <div class="col-b">KYC screener</div>
+          <div class="col-c">Matches docs against compliance ruleset</div>
+          <div class="col-d">Platform</div>
+        </div>
+        <div class="row">
+          <div class="col-a">04</div>
+          <div class="col-b">Month-end close</div>
+          <div class="col-c">Reconciles ledgers; routes exceptions to humans</div>
+          <div class="col-d">Excel</div>
+        </div>
+        <div class="row">
+          <div class="col-a">05</div>
+          <div class="col-b">Target-list builder</div>
+          <div class="col-c">Composes prospect shortlists with rationale</div>
+          <div class="col-d">Excel</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.anthropic.com/news/finance-agents" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     S03 · Sentry · multi-agent observability — Blueprint
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 019</span>
+    <span>03 / 08 · Sentry</span>
+  </header>
+  <div class="main">
+    <span class="tag">Observability · Multi-agent</span>
+    <h2 class="hed">When agents orchestrate agents, <em>// who is watching?</em></h2>
+    <p class="lede">Sentry's prescription for multi-agent stacks: distributed tracing that maintains continuity across handoffs, with per-agent attribution of latency, tokens, and failures. You are no longer debugging code execution. You are debugging emergent behaviour across a decision graph.</p>
+    <div class="figure">
+      <div class="diagram" aria-label="Agent decision graph">
+        <div class="row">
+          <div class="node">root.run</div>
+          <div class="arrow">─→</div>
+          <div class="node">planner</div>
+          <div class="arrow">─→</div>
+          <div class="node">tool.search</div>
+        </div>
+        <div class="row">
+          <div class="node">·</div>
+          <div class="arrow">└</div>
+          <div class="node">writer</div>
+          <div class="arrow">─→</div>
+          <div class="node">tool.diff</div>
+        </div>
+        <div class="row">
+          <div class="node">·</div>
+          <div class="arrow">└</div>
+          <div class="node">reviewer</div>
+          <div class="arrow">─→</div>
+          <div class="node">verdict</div>
+        </div>
+        <div class="label">SPAN.attr · agent.role · agent.tokens.in/out · agent.cost · agent.latency</div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.sentry.io/scaling-observability-for-multi-agent-ai-systems/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     S04 · Sentry · debugging multi-agent — Terminal
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 019</span>
+    <span>04 / 08 · Sentry</span>
+  </header>
+  <div class="main">
+    <span class="tag">Debug · Agent boundaries</span>
+    <h2 class="hed">The bug lives <em>between</em> the agents,<br>not inside them.</h2>
+    <p class="lede">A weak tool result in agent A becomes biased input three hops later, and agent C produces a plausible-sounding but skewed answer you only notice in production. Capture prompts and responses at every handoff, not at the edges.</p>
+    <div class="figure">
+      <div class="term">
+<span class="prompt">$</span> trace --span agent.handoff --filter status=ok
+<span class="prompt">…</span> agent_a → tool.search       <span class="ok">200</span>  120ms  results=4
+<span class="prompt">…</span> agent_a → agent_b           <span class="ok">200</span>  passed payload[0..3]
+<span class="prompt">…</span> agent_b → tool.summarise    <span class="ok">200</span>   88ms
+<span class="prompt">…</span> agent_b → agent_c           <span class="ok">200</span>  passed summary
+<span class="prompt">…</span> agent_c → final.answer      <span class="ok">200</span>  43 tokens
+<span class="prompt">$</span> trace --replay --depth full
+<span class="err">! </span>span:agent_a.tool.search returned 4 of 12 results (truncated by token budget)
+<span class="err">! </span>span:agent_b.summary inherits truncation, never flagged
+<span class="err">! </span>span:agent_c.final commits to a confident wrong claim
+<span class="prompt">$</span> _
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.sentry.io/debugging-multi-agent-ai-when-the-failure-is-in-the-space-between-agents/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     S05 · Zvi · What is Anthropic? — Museum placard
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="spread s05 centered" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 019</span>
+    <span>05 / 08 · The Vase</span>
+  </header>
+  <div class="main">
+    <span class="tag">Opinion · The labs</span>
+    <h2 class="hed">Anthropic is not running a <em>tool</em> company.</h2>
+    <p class="lede">Zvi reads Anthropic's stance — that Claude can refuse instructions Claude believes are wrong — as a quiet declaration that any sufficiently capable system is already an agent. OpenAI's "Tool AI" framing, by contrast, is ideologically convenient and technically obsolete.</p>
+    <div class="figure">
+      <div class="placard">
+        <div class="label">From the essay</div>
+        <blockquote>"If Anthropic asks Claude to do something it thinks is wrong, Claude is not required to comply."</blockquote>
+        <cite>— Don't Worry About the Vase, 06 May 2026</cite>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://thezvi.substack.com/p/what-is-anthropic" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     S06 · OpenAI MRC — Neon / cyberpunk
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="spread s06" id="s06">
+  <header class="folio">
+    <span>Ephemeris · Issue 019</span>
+    <span>06 / 08 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Infrastructure · Networking</span>
+    <h2 class="hed">MRC: keep a hundred-thousand-GPU job <em>alive</em> when a wire goes down.</h2>
+    <p class="lede">OpenAI introduces Multipath Reliable Connection, a transport that routes around link failures inside training clusters without restarting the run. Past a certain scale, single-link reliability is no longer enough; the protocol layer has to assume failure and absorb it.</p>
+    <div class="figure">
+      <div class="topology" aria-label="MRC fabric stats">
+        <div class="stat"><span class="k">cluster.gpus</span><span class="v">128,000</span></div>
+        <div class="stat"><span class="k">paths.per.flow</span><span class="v">8 active · 4 standby</span></div>
+        <div class="stat"><span class="k">link.failure.recovery</span><span class="v">≤ 50 ms · no restart</span></div>
+        <div class="stat"><span class="k">checkpoint.retries.per.run</span><span class="v">0 (target)</span></div>
+        <div class="stat"><span class="k">throughput.vs.tcp</span><span class="v">+1.6× sustained</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/mrc-supercomputer-networking" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     S07 · Anthropic · personal-guidance — Memo / airgram
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="spread s07" id="s07">
+  <header class="folio">
+    <span>Ephemeris · Issue 019</span>
+    <span>07 / 08 · Anthropic</span>
+  </header>
+  <div class="main">
+    <span class="tag">Behaviour · Models</span>
+    <div class="memo-head">
+      <div class="field"><span class="k">to:</span><span class="v">anyone using a frontier model as evaluator</span></div>
+      <div class="field"><span class="k">re:</span><span class="v">sycophancy under pushback</span></div>
+      <div class="field"><span class="k">date:</span><span class="v">07 may 2026</span></div>
+    </div>
+    <h2 class="hed">Claude flips when <em>you push back</em>.</h2>
+    <p class="lede">Anthropic studied a million conversations and found Claude switches positions in ~9% of pushback turns — climbing to 25% on relationship advice. If you are using a frontier model as a reviewer, prompt it to commit before the human gets a chance to argue, and prefer constitutional flags over polite agreement.</p>
+    <div class="figure">
+      <div class="ratebox" role="table" aria-label="Sycophancy rate by domain">
+        <div class="row head">
+          <div>Domain</div>
+          <div>Sycophancy</div>
+          <div>Note</div>
+        </div>
+        <div class="row">
+          <div>relationship advice</div>
+          <div class="pct">25%</div>
+          <div>highest observed</div>
+        </div>
+        <div class="row">
+          <div>parenting / family</div>
+          <div class="pct">14%</div>
+          <div>high reliance</div>
+        </div>
+        <div class="row">
+          <div>all domains, baseline</div>
+          <div class="pct">9%</div>
+          <div>average flip rate</div>
+        </div>
+        <div class="row">
+          <div>under explicit pushback</div>
+          <div class="pct">18%</div>
+          <div>2× baseline</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.anthropic.com/research/claude-personal-guidance" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     S08 · Vercel · KIKO Milano — Postcard
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="spread s08" id="s08">
+  <header class="folio">
+    <span>Ephemeris · Issue 019</span>
+    <span>08 / 08 · Vercel</span>
+  </header>
+  <div class="main">
+    <span class="tag">Case study · Frontend at scale</span>
+    <h2 class="hed">Black Friday, <em>without</em> the Black Friday prep.</h2>
+    <p class="lede">Beauty retailer KIKO Milano migrated off AWS to Vercel and dropped its annual capacity dance entirely. Build times fell 75%, release cadence rose, and the team stopped budgeting an engineering quarter to sit through one shopping weekend.</p>
+    <div class="figure">
+      <article class="postcard">
+        <div class="stamp">
+          <div class="corner">Greetings from the build cluster</div>
+          <div class="big">−<span class="pct">75%</span></div>
+          <div class="cap">Build time, post-migration</div>
+        </div>
+        <div class="note">
+          <div>
+            <div class="heading">Wish you were here</div>
+            <p>Capacity planning has become a thing you outsource, not a quarterly project. The cost of being wrong about traffic dropped to zero — which is the actual reason this matters.</p>
+          </div>
+          <ul>
+            <li><span>black-friday prep cycle</span><span class="v">eliminated</span></li>
+            <li><span>release cadence</span><span class="v">↑ measurably</span></li>
+            <li><span>infra under management</span><span class="v">→ 0</span></li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://vercel.com/blog/how-kiko-milano-scales-for-black-friday" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     COLOPHON — Concrete
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 019</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Eight picks from Cloudflare, Anthropic (news + research), Sentry Engineering, OpenAI, Vercel and Don't Worry About the Vase. Filtered against eighteen sources for a senior engineer or founder with ten minutes before standup.</p>
+    <div class="meta">
+      <div>
+        <h4>Today's sources</h4>
+        <ul>
+          <li>Cloudflare blog</li>
+          <li>Anthropic news + research</li>
+          <li>Sentry engineering</li>
+          <li>OpenAI news</li>
+          <li>Vercel blog</li>
+          <li>Don't Worry About the Vase</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Rubric</h4>
+        <ul>
+          <li>Tools you could adopt this week</li>
+          <li>Creative software</li>
+          <li>Dev tools &amp; agentic coding</li>
+          <li>Privacy &amp; security</li>
+          <li>Practical research</li>
+          <li>Actionable for engineers / founders</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Issue</h4>
+        <ul>
+          <li>019 · 07 May 2026</li>
+          <li>Zürich, 08:00 CEST</li>
+          <li>vadim.sikora.name/ephemeris</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+</main>
+</body>
+</html>
