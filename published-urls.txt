@@ -11,6 +11,7 @@ https://anthropic.com/engineering/harness-design-long-running-apps
 https://anthropic.com/engineering/infrastructure-noise
 https://anthropic.com/engineering/managed-agents
 https://anthropic.com/features/project-deal
+https://anthropic.com/news/anthropic-acquires-stainless
 https://anthropic.com/news/anthropic-amazon-compute
 https://anthropic.com/news/claude-design-anthropic-labs
 https://anthropic.com/news/claude-for-creative-work
@@ -35,6 +36,7 @@ https://blog.cloudflare.com/ai-code-review
 https://blog.cloudflare.com/artifacts-git-for-agents-beta
 https://blog.cloudflare.com/browser-run-containers
 https://blog.cloudflare.com/building-for-the-future
+https://blog.cloudflare.com/casb-anthropic-integration
 https://blog.cloudflare.com/claude-managed-agents
 https://blog.cloudflare.com/clickhouse-query-plan-contention
 https://blog.cloudflare.com/code-orange-fail-small-complete
@@ -118,12 +120,14 @@ https://jack-clark.net/2026/05/11/import-ai-456-rsi-and-economic-growth-radical-
 https://jack-clark.net/2026/05/18/import-ai-457-ai-stuxnet-cursed-muon-optimizer-and-positive-alignment
 https://jeffbullas.com/ai-reinvention-truth
 https://jeffbullas.com/ai-slop-crisis
+https://jeffbullas.com/distraction-economy
 https://jeffbullas.com/ideas-die-unseen
 https://jeffbullas.com/stop-using-just-one-ai
 https://jeffbullas.com/truth-business-growth-strategy
 https://krea.ai/
 https://mf0.ai/
 https://microsoft.com/en-us/research/articles/whimsical-strategies-break-ai-agents-generating-out-of-distribution-adversarial-strategies-at-scale
+https://moab.pro/articles/aeo-geo
 https://nextjs.org/blog/agentic-future
 https://nextjs.org/blog/next-16-2
 https://nextjs.org/blog/next-16-2-ai
@@ -198,6 +202,7 @@ https://thezvi.substack.com/p/ai-165-in-our-image
 https://thezvi.substack.com/p/ai-166-google-sells-out
 https://thezvi.substack.com/p/ai-167-the-prior-restraint-era-begins
 https://thezvi.substack.com/p/ai-168-not-leading-the-future
+https://thezvi.substack.com/p/ai-169-new-knowledge
 https://thezvi.substack.com/p/claude-code-codex-and-agentic-coding
 https://thezvi.substack.com/p/claude-code-codex-and-agentic-coding-f54
 https://thezvi.substack.com/p/cyber-lack-of-security-and-ai-governance

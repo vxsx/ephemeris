@@ -1,0 +1,910 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 034 · 22 May 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 {
+    overflow-wrap: break-word;
+    margin: 0;
+  }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+
+  .spread > .decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+
+  .figure { width: 100%; }
+
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     ISSUE 034 · 22 May 2026 · ATTENTION.
+     Surface overrides only — structure baked in above.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── COVER · treatment G — single-word mood ─── */
+  .cover {
+    background:
+      radial-gradient(120% 90% at 80% 0%, #1a2452 0%, transparent 60%),
+      radial-gradient(80% 60% at 10% 100%, #0d1734 0%, transparent 65%),
+      #07091a;
+    color: #f1e8d4;
+  }
+  .cover .folio { opacity: 0.55; }
+  .cover .mood {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    font-size: clamp(96px, 22vw, 360px);
+    line-height: 0.86;
+    letter-spacing: -0.05em;
+    color: #f1e8d4;
+    padding-bottom: 0.08em;
+    margin: 0;
+  }
+  .cover .mood .dot {
+    color: #d35a3a;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .cover .gloss {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(20px, 2vw, 30px);
+    line-height: 1.35;
+    max-width: 32ch;
+    color: #d8cdb5;
+    margin: 0;
+  }
+  .cover .toc {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px 40px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(241,232,212,0.35);
+    width: 100%;
+    margin-top: 8px;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 4px 12px;
+    text-decoration: none; color: inherit;
+    padding: 7px 0;
+    border-bottom: 1px dotted rgba(241,232,212,0.18);
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.85em; opacity: 0.6; }
+  .cover .toc .num {
+    font-family: var(--serif); font-weight: 700; font-style: italic;
+    color: #d35a3a; margin-right: 10px;
+  }
+  .cover .decor::before {
+    content: "";
+    position: absolute;
+    top: -10vh; right: -10vw;
+    width: 90vw; height: 90vw;
+    background: radial-gradient(circle, rgba(211,90,58,0.10), transparent 60%);
+  }
+  @media (max-width: 800px) {
+    .cover .toc { grid-template-columns: 1fr; gap: 0; }
+    .cover .mood { font-size: clamp(72px, 24vw, 140px); }
+  }
+
+  /* ─── s01 · ClickHouse postmortem — spreadsheet ─── */
+  .s01 {
+    background: #e6e8ec;
+    color: #0c0f14;
+    background-image:
+      linear-gradient(to right, rgba(12,15,20,0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(12,15,20,0.05) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+  .s01 .tag { color: #b13a25; border-color: #b13a25; background: #e6e8ec; }
+  .s01 .hed {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: clamp(48px, 6.4vw, 92px);
+    letter-spacing: -0.025em;
+  }
+  .s01 .hed em {
+    font-style: normal;
+    font-family: var(--mono);
+    font-weight: 600;
+    color: #b13a25;
+    letter-spacing: -0.04em;
+  }
+  .s01 .lede { color: #1a1f28; }
+  .s01 .read-on { color: #0c0f14; border-color: #0c0f14; --flip: #e6e8ec; }
+
+  .s01 .ledger {
+    width: 100%; max-width: 720px;
+    font-family: var(--mono);
+    font-size: clamp(13px, 1.1vw, 15px);
+    border-top: 2px solid #0c0f14;
+    border-bottom: 2px solid #0c0f14;
+    margin-top: 8px;
+  }
+  .s01 .ledger .row {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    padding: 10px 0;
+    border-bottom: 1px dotted rgba(12,15,20,0.35);
+    gap: 8px;
+  }
+  .s01 .ledger .row:last-child { border-bottom: none; }
+  .s01 .ledger .row span { letter-spacing: normal; }
+  .s01 .ledger .head {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 11px;
+    opacity: 0.6;
+  }
+  .s01 .ledger .num {
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+  }
+  .s01 .ledger .delta { color: #b13a25; }
+  @media (max-width: 800px) {
+    .s01 .ledger .row { grid-template-columns: 1.2fr 1fr 1fr; }
+    .s01 .ledger .row .col-after { display: none; }
+  }
+
+  /* ─── s02 · CASB · Anthropic — dark classified ─── */
+  .s02 {
+    background: #08080a;
+    color: #ece4d2;
+  }
+  .s02 .tag {
+    color: #d44755; border-color: #d44755;
+    background: #08080a;
+  }
+  .s02 .hed {
+    color: #ece4d2;
+    font-family: var(--serif);
+    font-weight: 800;
+  }
+  .s02 .hed em {
+    font-style: italic;
+    color: #d44755;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s02 .lede { color: #b8ad95; max-width: 52ch; }
+  .s02 .read-on { color: #d44755; border-color: #d44755; --flip: #08080a; }
+
+  .s02 .dossier {
+    width: 100%; max-width: 640px;
+    border: 1px solid rgba(212,71,85,0.4);
+    padding: 18px 20px;
+    background: linear-gradient(to bottom, rgba(212,71,85,0.04), transparent);
+    font-family: var(--mono);
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .s02 .dossier .label {
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: #d44755;
+    font-size: 10px;
+    margin-bottom: 6px;
+  }
+  .s02 .dossier .row {
+    display: flex; gap: 12px; align-items: baseline;
+    padding: 6px 0;
+    border-bottom: 1px dotted rgba(236,228,210,0.18);
+  }
+  .s02 .dossier .row:last-child { border-bottom: none; }
+  .s02 .dossier .key { color: #8a8170; min-width: 130px; }
+  .s02 .dossier .redact {
+    display: inline-block;
+    background: #d44755;
+    color: transparent;
+    user-select: none;
+    padding: 0 4px;
+    height: 1.1em;
+    line-height: 1.1em;
+  }
+  .s02 .dossier .verdict {
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: rgba(212,71,85,0.12);
+    border-left: 3px solid #d44755;
+    color: #ece4d2;
+  }
+  .s02 .decor::before {
+    content: "TOP · CLAUDE · COMPLIANCE";
+    position: absolute;
+    top: 40%; right: -8vw;
+    transform: rotate(90deg);
+    transform-origin: right top;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.5em;
+    color: rgba(212,71,85,0.18);
+    white-space: nowrap;
+  }
+  @media (max-width: 800px) {
+    .s02 .dossier .key { min-width: 90px; font-size: 11px; }
+    .s02 .decor::before { display: none; }
+  }
+
+  /* ─── s03 · Stainless acquisition — cream editorial hero ─── */
+  .s03 {
+    background: #f3ead7;
+    color: #1a1410;
+  }
+  .s03 .tag { color: #6b1f14; border-color: #6b1f14; }
+  .s03 .hed em {
+    font-style: italic;
+    color: #6b1f14;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s03 .lede { color: #2a2520; }
+  .s03 .read-on { color: #6b1f14; border-color: #6b1f14; --flip: #f3ead7; }
+
+  .s03 .langs {
+    display: flex; flex-wrap: wrap; gap: 8px 10px;
+    margin-top: 10px;
+  }
+  .s03 .langs span {
+    font-family: var(--mono);
+    font-size: 13px;
+    padding: 6px 12px;
+    border: 1px solid #6b1f14;
+    color: #6b1f14;
+    border-radius: 4px;
+  }
+  .s03 .langs span:nth-child(odd) {
+    background: #6b1f14;
+    color: #f3ead7;
+  }
+  .s03 .decor::before {
+    content: "{";
+    position: absolute;
+    right: -2vw; bottom: -14vw;
+    font-family: var(--serif);
+    font-weight: 900;
+    font-style: italic;
+    font-size: 80vw;
+    line-height: 0.8;
+    color: rgba(107,31,20,0.06);
+  }
+
+  /* ─── s04 · Bullas distraction — neo-brutalist ─── */
+  .s04 {
+    background: #ffd900;
+    color: #0a0a0a;
+  }
+  .s04 .tag {
+    color: #0a0a0a;
+    border-color: #0a0a0a;
+    background: #ffd900;
+    border-width: 2px;
+    font-weight: 700;
+  }
+  .s04 .hed {
+    font-family: var(--sans);
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: clamp(46px, 7.5vw, 112px);
+    line-height: 0.94;
+    letter-spacing: -0.025em;
+  }
+  .s04 .hed .cut {
+    background: #0a0a0a;
+    color: #ffd900;
+    padding: 0 0.12em;
+    display: inline-block;
+    line-height: 0.92;
+  }
+  .s04 .lede {
+    color: #0a0a0a;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-style: normal;
+    max-width: 48ch;
+  }
+  .s04 .read-on {
+    color: #ffd900;
+    background: #0a0a0a;
+    border-color: #0a0a0a;
+    --flip: #0a0a0a;
+  }
+  .s04 .read-on:hover { background: #ffd900; }
+
+  .s04 .punch {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 24px;
+    align-items: end;
+    border-top: 4px solid #0a0a0a;
+    border-bottom: 4px solid #0a0a0a;
+    padding: 18px 0 14px;
+    margin-top: 6px;
+    width: 100%;
+    max-width: 680px;
+  }
+  .s04 .punch .num {
+    font-family: var(--sans);
+    font-weight: 900;
+    font-size: clamp(72px, 12vw, 180px);
+    line-height: 0.85;
+    letter-spacing: -0.04em;
+    font-variant-numeric: tabular-nums;
+  }
+  .s04 .punch .num .unit {
+    font-family: var(--sans); font-style: normal; font-weight: 700;
+    font-size: 0.34em;
+    letter-spacing: normal;
+    margin-left: 0.15em;
+  }
+  .s04 .punch .cap {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.35;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding-bottom: 10px;
+  }
+  @media (max-width: 800px) {
+    .s04 .punch { grid-template-columns: 1fr; gap: 8px; }
+  }
+
+  /* ─── s05 · Zvi #169 — newsprint ─── */
+  .s05 {
+    background: #f4f0e1;
+    color: #0a0a0a;
+  }
+  .s05 .tag { color: #0a0a0a; border-color: #0a0a0a; background: #f4f0e1; }
+  .s05 .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+  }
+  .s05 .hed em {
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s05 .lede { color: #1a1a1a; max-width: 60ch; font-style: italic; }
+  .s05 .read-on { color: #0a0a0a; border-color: #0a0a0a; --flip: #f4f0e1; }
+
+  .s05 .nameplate {
+    border-top: 3px double #0a0a0a;
+    border-bottom: 1px solid #0a0a0a;
+    padding: 6px 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--serif);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 11px;
+    margin-bottom: 4px;
+  }
+  .s05 .columns {
+    column-count: 3;
+    column-gap: 28px;
+    column-rule: 1px solid rgba(10,10,10,0.18);
+    font-family: var(--serif);
+    font-size: 15px;
+    line-height: 1.5;
+    max-width: 880px;
+    margin-top: 12px;
+  }
+  .s05 .columns h4 {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 0 0 4px;
+  }
+  .s05 .columns p { margin: 0 0 12px; }
+  .s05 .columns p:first-of-type::first-letter {
+    font-weight: 800;
+    font-size: 1.1em;
+  }
+  @media (max-width: 800px) {
+    .s05 .columns { column-count: 1; }
+    .s05 .nameplate { font-size: 10px; letter-spacing: 0.12em; }
+  }
+
+  /* ─── s06 · moab AEO — neon cyberpunk ─── */
+  .s06 {
+    background:
+      radial-gradient(80% 60% at 20% 20%, rgba(255,60,135,0.18), transparent 65%),
+      radial-gradient(70% 60% at 90% 90%, rgba(90,240,214,0.16), transparent 65%),
+      #07041a;
+    color: #e6f6ff;
+  }
+  .s06 .tag {
+    color: #5af0d6; border-color: #5af0d6; background: transparent;
+  }
+  .s06 .hed {
+    color: #5af0d6;
+    font-family: var(--serif);
+    font-weight: 800;
+    text-shadow: 0 0 30px rgba(90,240,214,0.35);
+  }
+  .s06 .hed em {
+    font-style: italic;
+    color: #ff3c87;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    text-shadow: 0 0 30px rgba(255,60,135,0.4);
+  }
+  .s06 .lede { color: #c8d6e8; max-width: 52ch; }
+  .s06 .read-on { color: #ff3c87; border-color: #ff3c87; --flip: #07041a; }
+
+  .s06 .panel {
+    width: 100%; max-width: 640px;
+    background: rgba(7,4,26,0.6);
+    border: 1px solid rgba(90,240,214,0.4);
+    border-radius: 6px;
+    padding: 18px 20px;
+    font-family: var(--mono);
+    font-size: 13.5px;
+    line-height: 1.5;
+    box-shadow: 0 0 40px rgba(90,240,214,0.08);
+    margin-top: 8px;
+  }
+  .s06 .panel .q { color: #ff3c87; }
+  .s06 .panel .a { color: #5af0d6; }
+  .s06 .panel .you { color: #ece4d2; }
+  .s06 .panel .miss { color: #8090a0; text-decoration: line-through; }
+  .s06 .panel .arrow { opacity: 0.4; padding: 0 6px; }
+  .s06 .decor::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0 2px,
+      rgba(255,255,255,0.025) 2px 3px
+    );
+  }
+
+  /* ─── colophon — postcard ─── */
+  .colophon {
+    background:
+      linear-gradient(135deg, #d8d2c0 0%, #c9c3b1 100%);
+    color: #1a1612;
+  }
+  .colophon .folio { opacity: 0.55; }
+  .colophon .hed em {
+    font-style: italic;
+    color: #6b1f14;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .colophon .lede { max-width: 56ch; }
+  .colophon .read-on { color: #1a1612; border-color: #1a1612; --flip: #d8d2c0; }
+
+  .colophon .stamp {
+    position: relative;
+    display: inline-block;
+    margin-top: 12px;
+    padding: 12px 18px 14px;
+    border: 2px dashed #6b1f14;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: #6b1f14;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    transform: rotate(-2deg);
+  }
+  .colophon .stamp::after {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border: 1px dotted rgba(107,31,20,0.4);
+    pointer-events: none;
+  }
+  .colophon .meta {
+    display: flex; flex-wrap: wrap;
+    gap: 28px 40px;
+    margin-top: 18px;
+    font-family: var(--sans);
+    font-size: 13px;
+  }
+  .colophon .meta dt {
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 11px;
+    color: #6b1f14;
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+  .colophon .meta dd { margin: 0; max-width: 30ch; }
+  .colophon .decor::before {
+    content: "";
+    position: absolute;
+    top: 40px; right: 40px;
+    width: 80px; height: 80px;
+    border: 2px solid #6b1f14;
+    background:
+      repeating-linear-gradient(45deg, transparent 0 6px, rgba(107,31,20,0.18) 6px 8px);
+    transform: rotate(8deg);
+    border-radius: 2px;
+  }
+  @media (max-width: 800px) {
+    .colophon .decor::before { display: none; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════════════════ COVER ═══════════════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 034</span>
+    <span>Friday · 22 May 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <h1 class="mood">ATTENTION<span class="dot">.</span></h1>
+    <p class="gloss">Today's issue is what every party in the loop is paying attention to — and what they're paying not to.</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>The mutex ate the bill.</span><span>Cloudflare</span></a>
+      <a href="#s02"><span><span class="num">02</span>Audit Claude where it leaks.</span><span>Cloudflare</span></a>
+      <a href="#s03"><span><span class="num">03</span>The SDK shop comes in‑house.</span><span>Anthropic</span></a>
+      <a href="#s04"><span><span class="num">04</span>$600B is paid to keep you scattered.</span><span>Jeff Bullas</span></a>
+      <a href="#s05"><span><span class="num">05</span>What the lull is hiding.</span><span>The Vase</span></a>
+      <a href="#s06"><span><span class="num">06</span>SEO keys do not open the answer box.</span><span>moab · via @TochkiNadAI</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ s01 · ClickHouse postmortem ═══════════════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 034</span>
+    <span>01 / 06 · Cloudflare Blog</span>
+  </header>
+  <div class="main">
+    <span class="tag">Postmortem · Cloudflare</span>
+    <h2 class="hed">The mutex ate the <em>billing</em> pipeline.</h2>
+    <p class="lede">Cloudflare repartitioned its billing ClickHouse cluster by (namespace, day) — and watched query latency balloon. Flame‑graphing real threads pinned the leak to a single mutex over the parts list, eating more than half of every query. Shared locks, a cached parts list, and binary partition search dropped duration by 50 % and broke the link between part count and latency.</p>
+    <div class="figure">
+      <div class="ledger">
+        <div class="row head">
+          <span>Metric</span>
+          <span class="num">Before</span>
+          <span class="num col-after">After</span>
+          <span class="num delta">Δ</span>
+        </div>
+        <div class="row">
+          <span>Parts per replica</span>
+          <span class="num">30,000</span>
+          <span class="num col-after">160,000</span>
+          <span class="num delta">+433 %</span>
+        </div>
+        <div class="row">
+          <span>Query duration</span>
+          <span class="num">baseline</span>
+          <span class="num col-after">−50 %</span>
+          <span class="num delta">faster</span>
+        </div>
+        <div class="row">
+          <span>Mutex wait share</span>
+          <span class="num">&gt; 50 %</span>
+          <span class="num col-after">~ 0 %</span>
+          <span class="num delta">gone</span>
+        </div>
+        <div class="row">
+          <span>Lock mode</span>
+          <span class="num">exclusive</span>
+          <span class="num col-after">shared</span>
+          <span class="num delta">RW</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.cloudflare.com/clickhouse-query-plan-contention/" target="_blank" rel="noopener"><span>Read the postmortem →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ s02 · CASB · Anthropic compliance ═══════════════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 034</span>
+    <span>02 / 06 · Cloudflare Blog</span>
+  </header>
+  <div class="main">
+    <span class="tag">Compliance · Cloudflare</span>
+    <h2 class="hed">Audit Claude <em>where it leaks.</em></h2>
+    <p class="lede">Cloudflare's CASB now plugs into Claude's Compliance API, scanning Enterprise usage — projects, files, messages, artifacts — for DLP violations with no endpoint agent required. A flagged file becomes a Gateway policy in two clicks; monitoring turns into remediation in the same pane.</p>
+    <div class="figure">
+      <div class="dossier">
+        <div class="label">CASB Finding · #00472</div>
+        <div class="row"><span class="key">Surface</span><span>claude.ai · Enterprise project</span></div>
+        <div class="row"><span class="key">Asset</span><span class="redact">████████████████████████</span></div>
+        <div class="row"><span class="key">Match</span><span>PII · DLP policy "EU-RES-01"</span></div>
+        <div class="row"><span class="key">Uploaded by</span><span class="redact">██████████</span></div>
+        <div class="row"><span class="key">Detected</span><span>22 May 2026 · 06:14 UTC</span></div>
+        <div class="verdict">→ Auto-policy proposed: block uploads matching pattern, restrict project share, notify owner.</div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.cloudflare.com/casb-anthropic-integration/" target="_blank" rel="noopener"><span>Read the announcement →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ s03 · Stainless acquisition ═══════════════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 034</span>
+    <span>03 / 06 · Anthropic News</span>
+  </header>
+  <div class="main">
+    <span class="tag">Acquisition · Anthropic</span>
+    <h2 class="hed">The SDK shop comes <em>in‑house.</em></h2>
+    <p class="lede">Anthropic acquired Stainless — the API‑to‑SDK generator that has produced every official Anthropic client library from the start. The team lands next to MCP, signalling that "agents reach for tools" is being treated as a first‑class platform problem rather than a generated‑code afterthought. If you write integrations against Claude, the same hands now shape both the model and the SDK.</p>
+    <div class="figure">
+      <div class="langs">
+        <span>TypeScript</span>
+        <span>Python</span>
+        <span>Go</span>
+        <span>Java</span>
+        <span>Ruby</span>
+        <span>Kotlin</span>
+        <span>+ MCP</span>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.anthropic.com/news/anthropic-acquires-stainless" target="_blank" rel="noopener"><span>Read the announcement →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ s04 · Bullas distraction ═══════════════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 034</span>
+    <span>04 / 06 · Jeff Bullas</span>
+  </header>
+  <div class="main">
+    <span class="tag">Manifesto · Attention</span>
+    <h2 class="hed">$600B is paid to keep you <span class="cut">scattered</span>.</h2>
+    <p class="lede">Bullas frames the distraction economy as a $600 billion industry whose only product is preventing you from naming your mission. Distracted workers make 50 % more errors; Gen Z spends nine hours a day on screens. His prescription is annoyingly old‑fashioned: pick the target with AIM‑9X clarity, and the brighter flares lose their pull. In an AI‑saturated week, self‑knowledge becomes the operating system.</p>
+    <div class="figure">
+      <div class="punch">
+        <div class="num">9<span class="unit">h/day</span></div>
+        <div class="cap">Gen Z screen time. Almost no surface left for the self-inquiry that names a mission.</div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.jeffbullas.com/distraction-economy/" target="_blank" rel="noopener"><span>Read the essay →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ s05 · Zvi #169 ═══════════════════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 034</span>
+    <span>05 / 06 · Don't Worry About the Vase</span>
+  </header>
+  <div class="main">
+    <span class="tag">Notes · The Vase</span>
+    <div class="nameplate">
+      <span>The Vase · No. 169</span>
+      <span>21 May 2026</span>
+    </div>
+    <h2 class="hed">What the lull <em>is hiding.</em></h2>
+    <p class="lede">Even quiet weeks in AI now ship new knowledge — and a new kind of slop to bury it under.</p>
+    <div class="figure">
+      <div class="columns">
+        <h4>New knowledge, real</h4>
+        <p>Zvi reads OpenAI's unit‑distance proof as actual mathematical discovery: an 80‑year conjecture disproved, with constructions independent mathematicians can verify. Gowers called it a milestone for AI in mathematics.</p>
+        <h4>New slop, also real</h4>
+        <p>The same week brought the discovery that prize‑contest pipelines are now thick with AI‑generated submissions. Quality‑filtered channels are starting to fail in ways that affect the people running them.</p>
+        <h4>Coordination, missing</h4>
+        <p>The deeper worry is structural: frontier labs face competitive pressure that makes restraint individually irrational, and corporate framings of that fact carry no urgency about alternatives. Nate Soares's critique runs through it — claiming the "good guy" mantle while accelerating toward systems you cannot control is itself a failure of responsibility.</p>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://thezvi.substack.com/p/ai-169-new-knowledge" target="_blank" rel="noopener"><span>Read AI #169 →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ s06 · moab AEO / GEO ═══════════════════ -->
+<section class="spread s06" id="s06">
+  <header class="folio">
+    <span>Ephemeris · Issue 034</span>
+    <span>06 / 06 · moab.pro · via @TochkiNadAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Visibility · AEO</span>
+    <h2 class="hed">SEO keys do not open the <em>answer box.</em></h2>
+    <p class="lede">If your brand never shows up inside ChatGPT's answer, you don't have an SEO problem — you have an AEO one. moab breaks answer‑engine optimisation out as its own channel: monitor brand mentions inside LLM outputs, audit competitor share of voice, and rewrite copy so neural retrieval actually surfaces you. The keys that won the search box do not win the answer box.</p>
+    <div class="figure">
+      <div class="panel">
+        <div><span class="you">user</span> <span class="arrow">›</span> <span class="q">best CRM for an early-stage startup?</span></div>
+        <div>&nbsp;</div>
+        <div><span class="a">claude</span> <span class="arrow">›</span> Three solid options to consider:</div>
+        <div>&nbsp; · <span class="a">Attio</span> — lightweight, fast for small teams</div>
+        <div>&nbsp; · <span class="a">Folk</span> — relationship-led, founder-favourite</div>
+        <div>&nbsp; · <span class="a">HubSpot Starter</span> — full funnel out of the box</div>
+        <div>&nbsp;</div>
+        <div><span class="miss">// you, if you didn't do AEO</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://moab.pro/articles/aeo-geo/" target="_blank" rel="noopener"><span>Read the playbook →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ COLOPHON ═══════════════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 034</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Six picks on what's paying attention to what — billing latency, Claude usage inside the enterprise, the SDK layer beneath every agent, the cost of distracted founders, the texture of an AI lull, and the answer box that no longer rewards your SEO.</p>
+    <div class="stamp">Posted · Zürich · 22 · V · 26</div>
+    <dl class="meta">
+      <div>
+        <dt>Sources today</dt>
+        <dd>Cloudflare · Anthropic · Don't Worry About the Vase · Jeff Bullas · moab.pro via @TochkiNadAI</dd>
+      </div>
+      <div>
+        <dt>Rubric</dt>
+        <dd>Tools you can adopt this week · creative software · dev tools · security signal · research with a kernel</dd>
+      </div>
+      <div>
+        <dt>Issue</dt>
+        <dd>034 · Friday 22 May 2026</dd>
+      </div>
+    </dl>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+</main>
+</body>
+</html>
