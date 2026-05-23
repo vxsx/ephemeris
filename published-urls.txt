@@ -24,6 +24,8 @@ https://anthropic.com/research/2028-ai-leadership
 https://anthropic.com/research/claude-personal-guidance
 https://anthropic.com/research/donating-open-source-petri
 https://anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench
+https://anthropic.com/research/glasswing-initial-update
+https://anthropic.com/research/labor-market-impacts
 https://anthropic.com/research/natural-language-autoencoders
 https://anthropic.com/research/teaching-claude-why
 https://arxiv.org/abs/2509.00462
@@ -56,6 +58,7 @@ https://blog.cloudflare.com/unweight-tensor-compression
 https://blog.google/innovation-and-ai/products/gemini-app/next-evolution-gemini-app
 https://blog.google/innovation-and-ai/technology/research/gemini-for-science-io-2026
 https://blog.maximeheckel.com/posts/on-rendering-the-sky-sunsets-and-planets
+https://bun.com/blog/bun-v1.3.14
 https://chromewebstore.google.com/detail/pjoleapiipgcignjlbhhiighckpbhcpp
 https://claude.com/blog/agent-view-in-claude-code
 https://claude.com/blog/connectors-for-everyday-life
@@ -67,9 +70,11 @@ https://deeplearning.ai/the-batch/issue-350
 https://deeplearning.ai/the-batch/issue-351
 https://deeplearning.ai/the-batch/issue-352
 https://deeplearning.ai/the-batch/issue-353
+https://deeplearning.ai/the-batch/issue-354
 https://developers.openai.com/ads
 https://dsv4.interactive.ikot.blog
 https://dsv4.interactive.ikot.blog/
+https://elevenlabs.io/blog/aiuc-announcement
 https://every.to/on-every/re-re-introducing-sparkle-marie-kondo-your-mac
 https://every.to/source-code/how-we-run-a-25-person-company-on-four-ai-agents
 https://every.to/source-code/the-folder-is-the-agent
@@ -206,6 +211,7 @@ https://thezvi.substack.com/p/ai-169-new-knowledge
 https://thezvi.substack.com/p/claude-code-codex-and-agentic-coding
 https://thezvi.substack.com/p/claude-code-codex-and-agentic-coding-f54
 https://thezvi.substack.com/p/cyber-lack-of-security-and-ai-governance
+https://thezvi.substack.com/p/gemini-35-flash-looks-good-for-how
 https://thezvi.substack.com/p/gpt-55-capabilities-and-reactions
 https://thezvi.substack.com/p/monthly-roundup-42-may-2026
 https://thezvi.substack.com/p/opus-47-part-2-capabilities-and-reactions

@@ -1,0 +1,1173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 035 · 23 May 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  /* ───── Spread skeleton ───── */
+  .spread {
+    min-height: 100vh; min-height: 100dvh;
+    position: relative; overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio, .spread > .main, .spread > .cta { position: relative; z-index: 1; }
+  .spread > .decor { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+  .spread > .folio {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 8px 24px; flex-wrap: wrap;
+    font-family: var(--sans); font-size: 13px;
+    letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.75;
+  }
+  .spread > .main {
+    display: flex; flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center; align-items: flex-start; min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block; font-family: var(--sans);
+    font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase;
+    padding: 6px 12px; border: 1px solid currentColor;
+    border-radius: 999px; opacity: 0.9;
+  }
+  .hed {
+    font-family: var(--serif); font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02; letter-spacing: -0.02em;
+    padding-bottom: 0.12em; word-break: break-word;
+  }
+  .lede {
+    font-family: var(--serif); font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45; max-width: 50ch; margin: 0;
+  }
+  .figure { width: 100%; }
+  .read-on {
+    display: inline-block; font-family: var(--sans);
+    font-weight: 600; font-size: 15px; letter-spacing: 0.08em;
+    text-transform: uppercase; padding: 14px 22px;
+    border: 2px solid currentColor; text-decoration: none;
+    color: currentColor; --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px) 22px max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     COVER · pull-quote treatment
+     ═══════════════════════════════════════════════════════════════════ */
+  .cover {
+    background: #fce4ec;
+    color: #1a0a14;
+  }
+  .cover .pq {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 500;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-size: clamp(40px, 6.4vw, 92px);
+    line-height: 1.04;
+    letter-spacing: -0.018em;
+    max-width: 22ch;
+    padding-bottom: 0.12em;
+  }
+  .cover .pq em {
+    color: #c81a55;
+    font-style: italic;
+  }
+  .cover .quote-mark {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: clamp(90px, 16vw, 220px);
+    line-height: 0.7;
+    color: #c81a55;
+    opacity: 0.9;
+    margin-bottom: -0.25em;
+  }
+  .cover .attribution {
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #6a1135;
+    padding-top: 12px;
+  }
+  .cover .small-masthead {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-size: clamp(22px, 1.8vw, 28px);
+    color: #c81a55;
+  }
+  .cover .toc {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 40px;
+    padding-top: 22px;
+    border-top: 1px solid rgba(200, 26, 85, 0.4);
+    width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 4px 12px;
+    text-decoration: none; color: inherit;
+    padding: 8px 0;
+    border-bottom: 1px dotted rgba(200, 26, 85, 0.35);
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.85em; opacity: 0.65; }
+  .cover .toc .num {
+    font-family: var(--serif); font-weight: 800; font-style: italic;
+    color: #c81a55; margin-right: 10px;
+  }
+  @media (max-width: 800px) {
+    .cover .toc { grid-template-columns: 1fr; gap: 0; }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     s01 · Hot pink — massive stats — Mythos
+     ═══════════════════════════════════════════════════════════════════ */
+  .s01 {
+    background: #ff2e7e;
+    color: #14040a;
+  }
+  .s01 .folio { opacity: 1; color: #14040a; }
+  .s01 .tag { color: #14040a; border-color: #14040a; background: #fce4ec; border-width: 1.5px; }
+  .s01 .hed {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    color: #14040a;
+  }
+  .s01 .hed em {
+    font-style: italic;
+    color: #fff;
+    background: #14040a;
+    padding: 0 0.18em;
+    margin-right: 0.06em;
+  }
+  .s01 .lede { color: #14040a; }
+  .s01 .stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(20px, 3vw, 48px);
+    width: 100%;
+    border-top: 2px solid #14040a;
+    padding-top: clamp(18px, 2vw, 28px);
+    margin-top: clamp(8px, 1.5vw, 16px);
+  }
+  .s01 .stat .num {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-size: clamp(56px, 9vw, 128px);
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+    color: #14040a;
+    display: block;
+  }
+  .s01 .stat .num .unit {
+    font-family: var(--sans);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 0.32em;
+    letter-spacing: normal;
+    margin-left: 0.2em;
+    vertical-align: 0.2em;
+  }
+  .s01 .stat .lbl {
+    font-family: var(--sans);
+    font-size: 13px;
+    line-height: 1.35;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #14040a;
+    opacity: 0.85;
+    padding-top: 6px;
+    display: block;
+  }
+  .s01 .read-on { color: #14040a; border-color: #14040a; --flip: #ff2e7e; border-width: 3px; }
+  .s01 .decor::before {
+    content: "MYTHOS";
+    position: absolute;
+    bottom: -0.18em;
+    right: -0.1em;
+    font-family: var(--serif);
+    font-weight: 900;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-size: clamp(180px, 28vw, 460px);
+    line-height: 0.8;
+    color: rgba(20, 4, 10, 0.06);
+    letter-spacing: -0.06em;
+    pointer-events: none;
+  }
+  @media (max-width: 800px) {
+    .s01 .stats { grid-template-columns: 1fr; gap: 18px; padding-top: 16px; }
+    .s01 .stat .num { font-size: clamp(48px, 14vw, 76px); }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     s02 · Blueprint — Anthropic labor market gap
+     ═══════════════════════════════════════════════════════════════════ */
+  .s02 {
+    background: #e9eef3;
+    color: #0d2545;
+    background-image:
+      linear-gradient(rgba(13, 37, 69, 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(13, 37, 69, 0.07) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+  .s02 .folio { opacity: 1; color: #0d2545; font-family: var(--mono); letter-spacing: 0.1em; }
+  .s02 .tag { color: #0d2545; border-color: #0d2545; font-family: var(--mono); background: #e9eef3; }
+  .s02 .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    color: #0d2545;
+  }
+  .s02 .hed em {
+    font-style: normal;
+    font-family: var(--mono);
+    font-weight: 600;
+    color: #c84a14;
+    font-size: 0.88em;
+    background: linear-gradient(to bottom, transparent 65%, rgba(200, 74, 20, 0.22) 65%);
+    padding: 0 0.1em;
+  }
+  .s02 .lede { color: #0d2545; }
+  .s02 .gap-chart {
+    width: 100%;
+    border: 1.5px solid #0d2545;
+    padding: clamp(18px, 2.4vw, 28px);
+    background: rgba(255, 255, 255, 0.55);
+    font-family: var(--mono);
+    font-size: 13px;
+    margin-top: clamp(8px, 1vw, 16px);
+  }
+  .s02 .gap-row {
+    display: grid;
+    grid-template-columns: 200px 1fr 56px;
+    align-items: center;
+    gap: 14px;
+    padding: 9px 0;
+    border-bottom: 1px dashed rgba(13, 37, 69, 0.3);
+  }
+  .s02 .gap-row:last-child { border-bottom: none; }
+  .s02 .gap-row .occ { letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; }
+  .s02 .gap-row .bar {
+    height: 16px; position: relative;
+    background: rgba(13, 37, 69, 0.08); border: 1px solid rgba(13, 37, 69, 0.2);
+  }
+  .s02 .gap-row .bar .actual {
+    position: absolute; left: 0; top: 0; bottom: 0;
+    background: #c84a14;
+  }
+  .s02 .gap-row .bar .theoretical {
+    position: absolute; left: 0; top: -3px; bottom: -3px;
+    border-right: 2px solid #0d2545;
+  }
+  .s02 .gap-row .val { text-align: right; font-weight: 700; }
+  .s02 .gap-legend {
+    font-family: var(--mono); font-size: 11px;
+    color: #0d2545; opacity: 0.75; padding-top: 12px;
+    display: flex; gap: 20px; flex-wrap: wrap;
+  }
+  .s02 .gap-legend span::before {
+    content: ""; display: inline-block; width: 14px; height: 8px;
+    margin-right: 6px; vertical-align: 1px;
+  }
+  .s02 .gap-legend .l-act::before { background: #c84a14; }
+  .s02 .gap-legend .l-th::before  { border-right: 2px solid #0d2545; }
+  .s02 .read-on {
+    color: #0d2545; border-color: #0d2545; --flip: #e9eef3;
+    font-family: var(--mono);
+  }
+  .s02 .decor::before {
+    content: "+";
+    position: absolute;
+    top: clamp(72px, 9vw, 120px); right: clamp(28px, 5vw, 80px);
+    font-family: var(--mono);
+    font-size: 24px;
+    color: #0d2545;
+    opacity: 0.4;
+  }
+  .s02 .decor::after {
+    content: "+";
+    position: absolute;
+    bottom: clamp(56px, 5vw, 80px); left: clamp(28px, 5vw, 80px);
+    font-family: var(--mono);
+    font-size: 24px;
+    color: #0d2545;
+    opacity: 0.4;
+  }
+  @media (max-width: 800px) {
+    .s02 .gap-row { grid-template-columns: 1fr; gap: 4px; padding: 12px 0; }
+    .s02 .gap-row .val { text-align: left; }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     s03 · Dark report — CMU/Stanford 43.5% benchmark gap
+     ═══════════════════════════════════════════════════════════════════ */
+  .s03 {
+    background: #0a0709;
+    color: #f0e6d8;
+  }
+  .s03 .folio { color: #f0e6d8; opacity: 1; }
+  .s03 .tag { color: #ff4756; border-color: #ff4756; background: transparent; }
+  .s03 .hed {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    color: #f0e6d8;
+    letter-spacing: -0.028em;
+  }
+  .s03 .hed em {
+    font-style: normal;
+    color: #0a0709;
+    background: #ff4756;
+    padding: 0 0.14em;
+  }
+  .s03 .lede { color: #d8cdb5; }
+  .s03 .barchart {
+    width: 100%;
+    margin-top: clamp(8px, 1.5vw, 16px);
+    padding-top: clamp(18px, 2vw, 28px);
+    border-top: 2px solid #ff4756;
+  }
+  .s03 .barchart-row {
+    display: grid;
+    grid-template-columns: 220px 1fr 110px;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(240, 230, 216, 0.12);
+    font-family: var(--mono);
+    font-size: 12px;
+  }
+  .s03 .barchart-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .s03 .barchart-row .label {
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #f0e6d8;
+  }
+  .s03 .barchart-row .label .sub {
+    display: block; font-size: 10px;
+    color: rgba(240, 230, 216, 0.55);
+    text-transform: none; letter-spacing: 0.04em;
+    padding-top: 2px;
+  }
+  .s03 .barchart-row .bar {
+    height: 14px; background: rgba(240, 230, 216, 0.08);
+    position: relative;
+  }
+  .s03 .barchart-row .bar > i {
+    display: block; height: 100%;
+    background: #ff4756;
+  }
+  .s03 .barchart-row .val {
+    text-align: right; color: #ff4756; font-weight: 600; font-size: 13px;
+  }
+  .s03 .classified {
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: #ff4756; padding-top: clamp(8px, 1vw, 14px);
+  }
+  .s03 .read-on { color: #ff4756; border-color: #ff4756; --flip: #0a0709; }
+  .s03 .decor::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 6px;
+    background: repeating-linear-gradient(90deg, #ff4756 0 28px, transparent 28px 36px);
+    opacity: 0.55;
+  }
+  .s03 .decor::after {
+    content: "";
+    position: absolute;
+    bottom: 0; left: 0; right: 0; height: 6px;
+    background: repeating-linear-gradient(90deg, #ff4756 0 28px, transparent 28px 36px);
+    opacity: 0.55;
+  }
+  @media (max-width: 800px) {
+    .s03 .barchart-row { grid-template-columns: 1fr; gap: 6px; }
+    .s03 .barchart-row .val { text-align: left; }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     s04 · Terminal — Sentry observability for vibe-coded apps
+     ═══════════════════════════════════════════════════════════════════ */
+  .s04 {
+    background: #050a08;
+    color: #7ef0a8;
+    background-image:
+      repeating-linear-gradient(
+        to bottom,
+        rgba(126, 240, 168, 0.04) 0 1px,
+        transparent 1px 4px
+      );
+  }
+  .s04 .folio { color: #7ef0a8; opacity: 1; font-family: var(--mono); }
+  .s04 .tag { color: #7ef0a8; border-color: #7ef0a8; font-family: var(--mono); background: transparent; }
+  .s04 .hed {
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: clamp(40px, 5.6vw, 84px);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    color: #7ef0a8;
+    text-transform: none;
+  }
+  .s04 .hed em {
+    font-style: normal;
+    color: #050a08;
+    background: #7ef0a8;
+    padding: 0 0.12em;
+  }
+  .s04 .lede {
+    color: #b2eecb;
+    font-family: var(--mono);
+    font-size: clamp(16px, 1.4vw, 19px);
+    line-height: 1.55;
+  }
+  .s04 .terminal {
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.55;
+    color: #7ef0a8;
+    border: 1px solid rgba(126, 240, 168, 0.4);
+    background: rgba(0, 0, 0, 0.45);
+    padding: clamp(18px, 2vw, 28px);
+    margin-top: clamp(8px, 1vw, 16px);
+    overflow-x: auto;
+  }
+  .s04 .terminal .prompt { color: rgba(126, 240, 168, 0.5); user-select: none; }
+  .s04 .terminal .cmt    { color: rgba(126, 240, 168, 0.55); }
+  .s04 .terminal .key    { color: #ffe66b; }
+  .s04 .terminal .str    { color: #ff9bd0; }
+  .s04 .terminal .num    { color: #c8a4ff; }
+  .s04 .terminal pre     { margin: 0; white-space: pre; }
+  .s04 .terminal-header {
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(126, 240, 168, 0.65);
+    border-bottom: 1px dashed rgba(126, 240, 168, 0.3);
+    padding-bottom: 8px; margin-bottom: 12px;
+    display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  }
+  .s04 .read-on { color: #7ef0a8; border-color: #7ef0a8; --flip: #050a08; font-family: var(--mono); }
+  .s04 .decor::before {
+    content: "■ ■ ■";
+    position: absolute;
+    top: clamp(72px, 9vw, 120px);
+    right: clamp(28px, 5vw, 80px);
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 4px;
+    color: rgba(126, 240, 168, 0.4);
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     s05 · Risograph cyan/magenta — Bun v1.3.14
+     ═══════════════════════════════════════════════════════════════════ */
+  .s05 {
+    background: #f6f3e8;
+    color: #08151c;
+    overflow: hidden;
+  }
+  .s05 .folio { opacity: 1; color: #08151c; }
+  .s05 .tag { color: #08151c; border-color: #08151c; background: #f6f3e8; }
+  .s05 .hed {
+    font-family: var(--sans);
+    font-weight: 900;
+    font-style: normal;
+    text-transform: uppercase;
+    font-size: clamp(40px, 6vw, 96px);
+    line-height: 0.94;
+    letter-spacing: -0.022em;
+    color: #00b3c9;
+    position: relative;
+  }
+  .s05 .hed em {
+    font-style: normal;
+    color: #e8267b;
+    margin-left: -0.22em;
+    display: inline-block;
+    transform: translate(0.12em, 0.05em);
+    mix-blend-mode: multiply;
+  }
+  .s05 .lede { color: #08151c; max-width: 52ch; }
+  .s05 .specs {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(20px, 2.6vw, 36px);
+    border-top: 3px solid #08151c;
+    padding-top: clamp(18px, 2vw, 28px);
+    margin-top: clamp(8px, 1vw, 14px);
+  }
+  .s05 .spec .lbl {
+    font-family: var(--sans);
+    font-size: 11px; letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #e8267b;
+    margin-bottom: 8px;
+  }
+  .s05 .spec .val {
+    font-family: var(--sans);
+    font-weight: 900;
+    font-size: clamp(28px, 4vw, 48px);
+    line-height: 1;
+    color: #00b3c9;
+    letter-spacing: -0.02em;
+  }
+  .s05 .spec .val .unit {
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: 0.4em;
+    color: #08151c;
+    letter-spacing: normal;
+    margin-left: 0.2em;
+  }
+  .s05 .spec .meta {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: #08151c;
+    opacity: 0.75;
+    padding-top: 6px;
+    letter-spacing: 0.04em;
+  }
+  .s05 .read-on { color: #e8267b; border-color: #e8267b; --flip: #f6f3e8; border-width: 3px; }
+  .s05 .decor::before {
+    content: "";
+    position: absolute;
+    bottom: -8vw; left: -8vw;
+    width: 40vw; height: 40vw;
+    background: #e8267b;
+    opacity: 0.18;
+    mix-blend-mode: multiply;
+    border-radius: 50%;
+  }
+  .s05 .decor::after {
+    content: "";
+    position: absolute;
+    top: -10vw; right: -6vw;
+    width: 36vw; height: 36vw;
+    background: #00b3c9;
+    opacity: 0.18;
+    mix-blend-mode: multiply;
+    border-radius: 50%;
+  }
+  @media (max-width: 800px) {
+    .s05 .specs { grid-template-columns: 1fr; gap: 18px; }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     s06 · Museum placard — ElevenLabs AIUC insurance
+     ═══════════════════════════════════════════════════════════════════ */
+  .s06 {
+    background: #f1ede2;
+    color: #1d2b14;
+  }
+  .s06 .folio { color: #1d2b14; opacity: 1; }
+  .s06 .tag {
+    color: #1d2b14;
+    border-color: #1d2b14;
+    background: #f1ede2;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+  }
+  .s06 .hed {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-style: normal;
+    font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" 0;
+    font-size: clamp(42px, 6vw, 88px);
+    line-height: 1.06;
+    letter-spacing: -0.015em;
+    color: #1d2b14;
+    text-align: center;
+    max-width: 22ch;
+  }
+  .s06 .hed em {
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    color: #5a3a14;
+  }
+  .s06 .lede {
+    color: #1d2b14;
+    text-align: center;
+    max-width: 42ch;
+  }
+  .s06 .stamp {
+    width: 100%;
+    max-width: 540px;
+    margin: 8px auto 0;
+    padding: clamp(20px, 2.4vw, 32px) clamp(24px, 3vw, 40px);
+    border: 1.5px double #1d2b14;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.45);
+  }
+  .s06 .stamp .crest {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-style: italic;
+    font-size: 13px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: #5a3a14;
+  }
+  .s06 .stamp .cert-no {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-size: clamp(40px, 5.6vw, 74px);
+    line-height: 1;
+    color: #1d2b14;
+    padding: 14px 0 8px;
+    display: block;
+  }
+  .s06 .stamp .cert-body {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.4;
+    color: #1d2b14;
+    max-width: 40ch;
+    margin: 6px auto 0;
+  }
+  .s06 .stamp .rule {
+    width: 60px; height: 1px; background: #5a3a14;
+    margin: 14px auto 0;
+  }
+  .s06 .stamp .footer {
+    font-family: var(--sans); font-size: 10.5px;
+    letter-spacing: 0.24em; text-transform: uppercase;
+    color: #5a3a14; padding-top: 10px;
+  }
+  .s06 .read-on { color: #1d2b14; border-color: #1d2b14; --flip: #f1ede2; }
+  .s06 .decor::before {
+    content: "";
+    position: absolute;
+    top: 50%; left: 50%;
+    width: min(70vw, 720px); height: min(70vw, 720px);
+    transform: translate(-50%, -50%);
+    border: 1px solid rgba(29, 43, 20, 0.07);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     s07 · Concrete — Zvi on Gemini 3.5 Flash
+     ═══════════════════════════════════════════════════════════════════ */
+  .s07 {
+    background: #d8d4cb;
+    color: #1a1816;
+  }
+  .s07 .folio { color: #1a1816; opacity: 1; }
+  .s07 .tag { color: #1a1816; border-color: #1a1816; background: transparent; }
+  .s07 .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-style: normal;
+    color: #1a1816;
+    font-size: clamp(48px, 7.4vw, 116px);
+  }
+  .s07 .hed .glyph {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    color: #1a1816;
+    font-size: 1.6em;
+    line-height: 0.7;
+    vertical-align: -0.18em;
+    letter-spacing: -0.06em;
+    margin-right: 0.04em;
+  }
+  .s07 .hed em {
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    color: #6a5d3a;
+  }
+  .s07 .lede { color: #1a1816; max-width: 54ch; }
+  .s07 .scoreboard {
+    width: 100%;
+    margin-top: clamp(8px, 1vw, 14px);
+    border-top: 2px solid #1a1816;
+    border-bottom: 2px solid #1a1816;
+    padding: 18px 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(16px, 2.4vw, 36px);
+  }
+  .s07 .scoreboard .col .who {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #6a5d3a;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(26, 24, 22, 0.3);
+  }
+  .s07 .scoreboard .col .score {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(34px, 4.2vw, 56px);
+    line-height: 1;
+    color: #1a1816;
+    padding-top: 10px;
+    letter-spacing: -0.02em;
+  }
+  .s07 .scoreboard .col .price {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: #1a1816;
+    opacity: 0.8;
+    padding-top: 8px;
+  }
+  .s07 .read-on { color: #1a1816; border-color: #1a1816; --flip: #d8d4cb; }
+  .s07 .decor::before {
+    content: "“";
+    position: absolute;
+    top: -0.08em; right: -0.04em;
+    font-family: var(--serif);
+    font-weight: 900;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-size: clamp(280px, 44vw, 720px);
+    line-height: 0.8;
+    color: rgba(26, 24, 22, 0.06);
+  }
+  @media (max-width: 800px) {
+    .s07 .scoreboard { grid-template-columns: 1fr; gap: 18px; }
+    .s07 .scoreboard .col .who { border-bottom: none; }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     COLOPHON · newsprint
+     ═══════════════════════════════════════════════════════════════════ */
+  .colophon {
+    background: #f4efe5;
+    color: #14110d;
+  }
+  .colophon .folio { color: #14110d; opacity: 1; font-family: var(--serif); font-style: italic; letter-spacing: 0.1em; text-transform: none; font-size: 14px; }
+  .colophon .masthead-c {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    font-size: clamp(34px, 3.6vw, 52px);
+    line-height: 1;
+    color: #14110d;
+    letter-spacing: -0.02em;
+    border-bottom: 3px double #14110d;
+    padding-bottom: 8px;
+    margin-bottom: 4px;
+  }
+  .colophon .strap {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 16px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #6a3017;
+    padding-bottom: 18px;
+  }
+  .colophon .columns {
+    column-count: 3;
+    column-gap: clamp(22px, 2.4vw, 34px);
+    column-rule: 1px solid rgba(20, 17, 13, 0.25);
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.55;
+    color: #14110d;
+  }
+  .colophon .columns h4 {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #6a3017;
+    padding-bottom: 4px;
+    margin-top: 0;
+  }
+  .colophon .columns p {
+    margin: 0 0 12px;
+    break-inside: avoid;
+  }
+  .colophon .pulldate {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-size: clamp(80px, 12vw, 160px);
+    line-height: 0.85;
+    color: #6a3017;
+    letter-spacing: -0.03em;
+  }
+  .colophon .pulldate em { font-style: italic; color: #14110d; }
+  @media (max-width: 800px) {
+    .colophon .columns { column-count: 1; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════════════════ COVER · pull-quote ═══════════════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 035</span>
+    <span>Saturday · 23 May 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <span class="quote-mark">“</span>
+    <h1 class="pq">Progress used to be limited by how quickly we could <em>find</em> the next bug. Now it's limited by how quickly we can <em>patch</em> it.</h1>
+    <p class="attribution">Anthropic · Project Glasswing · May 2026</p>
+    <p class="small-masthead">Ephemeris.</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>Ten thousand bugs in thirty days.</span><span>Anthropic</span></a>
+      <a href="#s02"><span><span class="num">02</span>Theoretical 94. Deployed 33.</span><span>Anthropic</span></a>
+      <a href="#s03"><span><span class="num">03</span>43.5% of work is missing from the benchmark.</span><span>The Batch</span></a>
+      <a href="#s04"><span><span class="num">04</span>Your agent's code has no seams.</span><span>Sentry</span></a>
+      <a href="#s05"><span><span class="num">05</span>841 ms to 115 ms, in one release.</span><span>Bun</span></a>
+      <a href="#s06"><span><span class="num">06</span>The first AI agent gets underwritten.</span><span>ElevenLabs</span></a>
+      <a href="#s07"><span><span class="num">07</span>Fast, fine, three times the price.</span><span>The Vase</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+</section>
+
+<!-- ═══════════════════ s01 · Mythos / Glasswing ═══════════════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 035</span>
+    <span>01 / 07 · Anthropic Research</span>
+  </header>
+  <div class="main">
+    <span class="tag">Security · Anthropic</span>
+    <h2 class="hed">Finding bugs is now the <em>easy</em> part.</h2>
+    <p class="lede">Project Glasswing put Claude Mythos against a thousand open-source projects and forty-eight partner products for one month. The model returned ten thousand high or critical findings. Mozilla alone got two hundred seventy-one new Firefox bugs. The disclosure queue is now the bottleneck — average patch time runs two weeks per bug, and seventy-five of five hundred thirty reported flaws have shipped a fix.</p>
+    <div class="figure">
+      <div class="stats">
+        <div class="stat">
+          <span class="num">10,000<span class="unit">+</span></span>
+          <span class="lbl">High or critical vulnerabilities reported across partner software, in one month.</span>
+        </div>
+        <div class="stat">
+          <span class="num">90.6<span class="unit">%</span></span>
+          <span class="lbl">True positive rate on 1,752 triaged Mythos findings.</span>
+        </div>
+        <div class="stat">
+          <span class="num">75<span class="unit">/530</span></span>
+          <span class="lbl">Reported vulnerabilities that have shipped a patch. Average wait: two weeks.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.anthropic.com/research/glasswing-initial-update" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ s02 · Anthropic labor market ═══════════════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 035</span>
+    <span>02 / 07 · Anthropic Research</span>
+  </header>
+  <div class="main">
+    <span class="tag">Research · Anthropic</span>
+    <h2 class="hed">Claude <em>could</em> do 94% of the job. It does 33%.</h2>
+    <p class="lede">Anthropic's new "observed exposure" measure crosses theoretical capability with what Claude.ai is actually used for. The gap is wide everywhere, but widest in Computer &amp; Math: theoretical coverage runs to 94% of tasks, real-world usage to a third. The bottleneck isn't whether the model can do it — it's trust, software integration, and verification workflows that haven't been built.</p>
+    <div class="figure">
+      <div class="gap-chart">
+        <div class="gap-row">
+          <span class="occ">Computer &amp; Math</span>
+          <span class="bar"><i class="actual" style="width: 35%"></i><i class="theoretical" style="width: 94%"></i></span>
+          <span class="val">33 / 94</span>
+        </div>
+        <div class="gap-row">
+          <span class="occ">Office &amp; Admin</span>
+          <span class="bar"><i class="actual" style="width: 22%"></i><i class="theoretical" style="width: 78%"></i></span>
+          <span class="val">21 / 78</span>
+        </div>
+        <div class="gap-row">
+          <span class="occ">Business &amp; Finance</span>
+          <span class="bar"><i class="actual" style="width: 28%"></i><i class="theoretical" style="width: 82%"></i></span>
+          <span class="val">27 / 82</span>
+        </div>
+        <div class="gap-row">
+          <span class="occ">Healthcare</span>
+          <span class="bar"><i class="actual" style="width: 9%"></i><i class="theoretical" style="width: 41%"></i></span>
+          <span class="val">9 / 41</span>
+        </div>
+        <div class="gap-legend">
+          <span class="l-act">actual usage (% of occupation's tasks)</span>
+          <span class="l-th">theoretical capability bound</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.anthropic.com/research/labor-market-impacts" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ s03 · CMU/Stanford benchmark gap ═══════════════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 035</span>
+    <span>03 / 07 · The Batch · Issue 354</span>
+  </header>
+  <div class="main">
+    <span class="tag">Benchmarks · CMU &amp; Stanford</span>
+    <h2 class="hed">Forty-three percent of work is <em>not</em> on the bench.</h2>
+    <p class="lede">Carnegie Mellon and Stanford mapped today's leading agent benchmarks to O*NET's labor-statistics taxonomy. The benchmarks cover 56.5% of US work activities; the missing 43.5% is mostly the economy. Software-engineering tasks dominate by an order of magnitude, while administrative support and management — the largest categories of US employment — barely register.</p>
+    <div class="figure">
+      <div class="barchart">
+        <div class="barchart-row">
+          <span class="label">Software engineering<span class="sub">~5M US employees</span></span>
+          <span class="bar"><i style="width: 92%"></i></span>
+          <span class="val">heavy</span>
+        </div>
+        <div class="barchart-row">
+          <span class="label">Office &amp; admin support<span class="sub">18.2M US employees</span></span>
+          <span class="bar"><i style="width: 14%"></i></span>
+          <span class="val">3,186 ex.</span>
+        </div>
+        <div class="barchart-row">
+          <span class="label">Management<span class="sub">11M US employees</span></span>
+          <span class="bar"><i style="width: 6%"></i></span>
+          <span class="val">676 ex.</span>
+        </div>
+        <div class="barchart-row">
+          <span class="label">Everything else<span class="sub">remainder of economy</span></span>
+          <span class="bar"><i style="width: 3%"></i></span>
+          <span class="val">sparse</span>
+        </div>
+      </div>
+      <p class="classified">arXiv 2603.01203 · mapped to BLS occupational data</p>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.deeplearning.ai/the-batch/issue-354" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ s04 · Sentry observability ═══════════════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 035</span>
+    <span>04 / 07 · Sentry Engineering</span>
+  </header>
+  <div class="main">
+    <span class="tag">Observability · Sentry</span>
+    <h2 class="hed">The agent shipped your app. <em>without seams.</em></h2>
+    <p class="lede">A coding agent writes a Next.js front end, a Supabase Edge Function, a Postgres query, and ships before lunch. None of it has tracing. Sentry's piece walks through wiring a single trace through all three layers so the N+1 query the agent quietly introduced becomes visible. The trick that makes the AI assistant useful afterwards is the MCP server — not its training data.</p>
+    <div class="figure">
+      <div class="terminal">
+        <div class="terminal-header">
+          <span>sentry.client.ts · next 16.2 · supabase 2.x</span>
+          <span>● ● ●</span>
+        </div>
+<pre><span class="cmt">// One init wires browser, edge function, and Postgres into one trace.</span>
+<span class="prompt">$</span> Sentry.init({
+    <span class="key">dsn</span>: process.env.<span class="key">SENTRY_DSN</span>,
+    <span class="key">tracesSampleRate</span>: <span class="num">0.1</span>,
+    <span class="key">integrations</span>: [
+      Sentry.<span class="key">supabaseIntegration</span>(supabaseClient, Sentry, {
+        <span class="key">tracing</span>: <span class="num">true</span>,
+        <span class="key">breadcrumbs</span>: <span class="num">true</span>,
+      }),
+    ],
+  });
+
+<span class="cmt">// Now the agent's hidden N+1 shows up under perf → slow transactions.</span>
+<span class="prompt">$</span> sentry mcp install --client cursor   <span class="cmt"># for the *next* fix</span>
+<span class="prompt">»</span> <span class="str">"Use the MCP, not the training data."</span></pre>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://sentry.io/blog/nextjs-supabase-observability/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ s05 · Bun 1.3.14 ═══════════════════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 035</span>
+    <span>05 / 07 · Bun Blog</span>
+  </header>
+  <div class="main">
+    <span class="tag">Release · Bun</span>
+    <h2 class="hed">Half a million <em>requests</em><br />per second.</h2>
+    <p class="lede">Bun 1.3.14 ships a built-in image pipeline (seventy times faster than sharp for metadata), experimental HTTP/3 in <code>Bun.serve()</code>, multiplexed HTTP/2 in <code>fetch</code>, and a global virtual store that takes a warm install from 841 ms to 115 ms on macOS. HTTP/3 isn't production yet. Everything else is.</p>
+    <div class="figure">
+      <div class="specs">
+        <div class="spec">
+          <div class="lbl">Bun.serve, HTTP/3</div>
+          <div class="val">509,135<span class="unit">req/s</span></div>
+          <div class="meta">experimental, QUIC enabled</div>
+        </div>
+        <div class="spec">
+          <div class="lbl">Warm install, macOS</div>
+          <div class="val">115<span class="unit">ms</span></div>
+          <div class="meta">was 841 ms before global store</div>
+        </div>
+        <div class="spec">
+          <div class="lbl">Bun.Image.metadata()</div>
+          <div class="val">70×<span class="unit">faster</span></div>
+          <div class="meta">vs. sharp, on the same files</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://bun.com/blog/bun-v1.3.14" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ s06 · ElevenLabs AIUC ═══════════════════ -->
+<section class="spread s06 centered" id="s06">
+  <header class="folio">
+    <span>Ephemeris · Issue 035</span>
+    <span>06 / 07 · ElevenLabs</span>
+  </header>
+  <div class="main">
+    <span class="tag">Insurance · AI Agents</span>
+    <h2 class="hed">An AI agent <em>gets underwritten</em> for the first time.</h2>
+    <p class="lede">ElevenLabs paired its voice-agent platform with the new Artificial Intelligence Underwriting Company to issue the first AIUC-1 insurance certification. The model: like SOC 2, but for what happens when an agent hallucinates a refund, leaks a transcript, or takes an unauthorized action. Procurement now has a third party to point at.</p>
+    <div class="figure">
+      <div class="stamp">
+        <div class="crest">Artificial Intelligence Underwriting Co.</div>
+        <span class="cert-no">AIUC&nbsp;–&nbsp;1</span>
+        <p class="cert-body">Certifying ElevenLabs Agents against hallucination, unauthorised action, data leakage, and security failure across 14 risk categories and 5,835 individual tests.</p>
+        <div class="rule"></div>
+        <div class="footer">Issued · May 2026 · San Francisco</div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://elevenlabs.io/blog/aiuc-announcement" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ s07 · Zvi on Gemini 3.5 Flash ═══════════════════ -->
+<section class="spread s07" id="s07">
+  <header class="folio">
+    <span>Ephemeris · Issue 035</span>
+    <span>07 / 07 · Don't Worry About the Vase</span>
+  </header>
+  <div class="main">
+    <span class="tag">Review · The Vase</span>
+    <h2 class="hed"><span class="glyph">?</span>Fast, fine, <em>three times</em> the price.</h2>
+    <p class="lede">Zvi works through Gemini 3.5 Flash. Verdict: a niche speed pick for agentic loops, not a daily driver. The Flash price tripled at the same time — fifty cents to a dollar fifty on input, three to nine on output — and on Artificial Analysis's index it lands behind both Opus and GPT-5.5. "If flash 3.5 had stayed at $0.5 it would be an insanely insanely exciting release."</p>
+    <div class="figure">
+      <div class="scoreboard">
+        <div class="col">
+          <div class="who">Gemini 3.5 Flash</div>
+          <div class="score">55.3</div>
+          <div class="price">$1.50 / $9.00 · per Mt</div>
+        </div>
+        <div class="col">
+          <div class="who">Claude Opus 4.7</div>
+          <div class="score">57.3</div>
+          <div class="price">premium tier</div>
+        </div>
+        <div class="col">
+          <div class="who">GPT-5.5</div>
+          <div class="score">60.2</div>
+          <div class="price">leading the index</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://thezvi.substack.com/p/gemini-35-flash-looks-good-for-how" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ COLOPHON · newsprint ═══════════════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 035</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="masthead-c">Ephemeris.</h3>
+    <p class="strap">Saturday Edition · Vol. I, No. 35</p>
+    <div class="pulldate">23 <em>May</em> 26</div>
+    <div class="columns">
+      <h4>Today's read</h4>
+      <p>Issue 035 followed a single thread: the bottleneck has moved. Models can find more bugs than maintainers can patch, do more of the job than companies have deployed them to do, and pass more benchmarks than reflect the work that actually pays. Three pieces about the gap, three about the tools narrowing it, one about a model that costs three times more to do the same thing.</p>
+      <h4>Sources today</h4>
+      <p>Anthropic Research (Project Glasswing &middot; labor market impacts), The Batch (issue 354, on CMU and Stanford's benchmark-to-O*NET mapping), Sentry Engineering, Bun, ElevenLabs, Don't Worry About the Vase.</p>
+      <h4>Rubric</h4>
+      <p>AI tools you can adopt this week. Dev tooling and agentic coding. Privacy and security with high signal. Research with a practical kernel. Anything immediately useful for a senior engineer or founder. No marketing, no opinion-only.</p>
+    </div>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>
