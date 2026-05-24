@@ -29,6 +29,7 @@ https://anthropic.com/research/labor-market-impacts
 https://anthropic.com/research/natural-language-autoencoders
 https://anthropic.com/research/teaching-claude-why
 https://arxiv.org/abs/2509.00462
+https://arxiv.org/abs/2603.01203
 https://arxiv.org/abs/2604.20779
 https://arxiv.org/pdf/2604.24827
 https://blog.cloudflare.com/agent-readiness
@@ -58,10 +59,12 @@ https://blog.cloudflare.com/unweight-tensor-compression
 https://blog.google/innovation-and-ai/products/gemini-app/next-evolution-gemini-app
 https://blog.google/innovation-and-ai/technology/research/gemini-for-science-io-2026
 https://blog.maximeheckel.com/posts/on-rendering-the-sky-sunsets-and-planets
+https://blog.tilderesearch.com/blog/aurora
 https://bun.com/blog/bun-v1.3.14
 https://chromewebstore.google.com/detail/pjoleapiipgcignjlbhhiighckpbhcpp
 https://claude.com/blog/agent-view-in-claude-code
 https://claude.com/blog/connectors-for-everyday-life
+https://cloud.google.com/blog/topics/threat-intelligence/ai-vulnerability-exploitation-initial-access
 https://cursor.com/blog/composer-2-5
 https://deeplearning.ai/short-courses/build-interactive-agents-with-generative-ui
 https://deeplearning.ai/the-batch/issue-347
@@ -111,6 +114,7 @@ https://github.com/nexu-io/open-design
 https://github.com/oven-sh/bun/pull/30412
 https://github.com/specs-devs/samples/tree/main/Agent%20Center
 https://hackernews.foresyn.ai/
+https://hermesagents.net/
 https://higgsfield.ai/apps/virality-predictor
 https://higgsfield.ai/mcp
 https://huggingface.co/blog/mishig/local-moores-law
@@ -130,6 +134,7 @@ https://jeffbullas.com/ideas-die-unseen
 https://jeffbullas.com/stop-using-just-one-ai
 https://jeffbullas.com/truth-business-growth-strategy
 https://krea.ai/
+https://metr.org/blog/2026-05-19-frontier-risk-report
 https://mf0.ai/
 https://microsoft.com/en-us/research/articles/whimsical-strategies-break-ai-agents-generating-out-of-distribution-adversarial-strategies-at-scale
 https://moab.pro/articles/aeo-geo
@@ -165,6 +170,7 @@ https://openai.com/index/running-codex-safely
 https://openai.com/index/speeding-up-agentic-workflows-with-websockets
 https://openai.com/index/testing-ads-in-chatgpt
 https://openai.com/index/the-next-evolution-of-the-agents-sdk
+https://openai.com/index/virgin-atlantic
 https://openai.com/index/where-the-goblins-came-from
 https://openai.com/index/work-with-codex-from-anywhere
 https://posthog.com/blog/agents-closed-4063-errors
@@ -179,9 +185,11 @@ https://posthog.com/blog/testing-ai-agents
 https://posthog.com/blog/untangling-rayon-and-tokio
 https://posthog.com/blog/why-attacking-competitors-is-dumb
 https://posthog.com/blog/your-lifecycle-emails-are-wrong
+https://primeintellect.ai/auto-nanogpt
 https://programbench.com/
 https://programbench.com/blog/gpt-5-5-first-solve
 https://proofofconcept.pub/p/design-systems-are-now-inference
+https://sentinelone.com/labs/fast16-mystery-shadowbrokers-reference-reveals-high-precision-software-sabotage-5-years-before-stuxnet
 https://sentry.engineering/blog/building-type-safe-metrics-api-in-swift-part-ii
 https://sentry.engineering/blog/do-you-really-need-an-mcp-to-build-your-app
 https://sentry.engineering/blog/from-monkey-patching-to-tracing-channels
@@ -219,6 +227,7 @@ https://thezvi.substack.com/p/opus-47-part-3-model-welfare
 https://thezvi.substack.com/p/the-ai-ad-hoc-prior-restraint-era
 https://thezvi.substack.com/p/the-most-important-charts-in-the
 https://thezvi.substack.com/p/what-is-anthropic
+https://thinkingmachines.ai/blog/interaction-models
 https://v0.app/
 https://vercel.com/blog/a-new-programming-model-for-durable-execution
 https://vercel.com/blog/agent-responsibly
@@ -237,6 +246,7 @@ https://vercel.com/blog/optimizing-vercel-sandbox-snapshots
 https://vercel.com/blog/we-ralph-wiggumed-webstreams-to-make-them-10x-faster
 https://vercel.com/blog/zdr-on-ai-gateway
 https://wheresyoured.at/where-are-all-the-data-centers
+https://wsj.com/tech/ai/mind-blowing-growth-is-about-to-propel-anthropic-into-its-first-profitable-quarter-7edbf2f4
 https://x.com/andonlabs/status/2042765807781056646
 https://xbow.com/blog/mythos-offensive-security-xbow-evaluation
 https://youtu.be/GMIWm5y90xA
