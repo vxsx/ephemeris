@@ -20,6 +20,7 @@ https://anthropic.com/news/claude-opus-4-7
 https://anthropic.com/news/election-safeguards-update
 https://anthropic.com/news/finance-agents
 https://anthropic.com/news/higher-limits-spacex
+https://anthropic.com/news/widening-conversation-ai
 https://anthropic.com/research/2028-ai-leadership
 https://anthropic.com/research/claude-personal-guidance
 https://anthropic.com/research/donating-open-source-petri
@@ -134,6 +135,7 @@ https://jeffbullas.com/ideas-die-unseen
 https://jeffbullas.com/stop-using-just-one-ai
 https://jeffbullas.com/truth-business-growth-strategy
 https://krea.ai/
+https://krea.ai/app
 https://metr.org/blog/2026-05-19-frontier-risk-report
 https://mf0.ai/
 https://microsoft.com/en-us/research/articles/whimsical-strategies-break-ai-agents-generating-out-of-distribution-adversarial-strategies-at-scale
@@ -159,6 +161,7 @@ https://openai.com/index/introducing-chatgpt-images-2-0
 https://openai.com/index/introducing-evmbench
 https://openai.com/index/introducing-gpt-5-5
 https://openai.com/index/introducing-openai-privacy-filter
+https://openai.com/index/introducing-trusted-contact-in-chatgpt
 https://openai.com/index/introducing-workspace-agents-in-chatgpt
 https://openai.com/index/model-disproves-discrete-geometry-conjecture
 https://openai.com/index/mrc-supercomputer-networking
@@ -206,6 +209,7 @@ https://simonwillison.net/2026/May/14/not-so-locked-in
 https://t.me/ProductsAndStartups/1740
 https://t.me/ProductsAndStartups/1745
 https://t.me/ProductsAndStartups/1748
+https://t.me/ProductsAndStartups/1758
 https://t.me/rvnikita_blog/1735
 https://t.me/s/denissexy
 https://t.me/TochkiNadAI/2324
@@ -250,7 +254,9 @@ https://wsj.com/tech/ai/mind-blowing-growth-is-about-to-propel-anthropic-into-it
 https://x.com/andonlabs/status/2042765807781056646
 https://xbow.com/blog/mythos-offensive-security-xbow-evaluation
 https://youtu.be/GMIWm5y90xA
+https://youtu.be/Mmj_G9RlW-I
 https://youtu.be/xmkSf5IS-zw
+https://youtu.be/YFR1e1bKheg
 https://youtube.com/@MSE435EconomicsofAI
 https://youtube.com/watch
 https://zapier.com/benchmarks
