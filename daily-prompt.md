@@ -119,6 +119,14 @@ Or, equivalently, for each candidate run
 `scripts/canonical-url.sh "<url>" | grep -Fxf - published-urls.txt`
 — a match means it has shipped before and is out.
 
+**No marketing-homepage links.** A `read-on` URL whose canonical form has
+an empty path or `/` (e.g. `https://v0.app/`, `https://krea.ai/`) is a vendor
+front door, not an article. Drop the story or find the changelog / blog
+post / release-notes URL instead. The v0 Browser Use story shipped in
+issues 030 and 037 with the same `https://v0.app/` link — a homepage link
+also collapses every future story from that vendor into the same ledger
+entry, which weakens dedup. The pre-commit hook (see Step 6) rejects these.
+
 **Cross-source dedup (the harder case).** Canonicalization only catches
 host-variant duplicates. It does NOT catch the same story reported from a
 genuinely different source: OpenAI's Codex announcement vs. Rundown's recap
@@ -424,6 +432,17 @@ with its pretty date.
 regenerated `index.html`, and the updated `published-urls.txt` (see Step 3).
 If `published-urls.txt` is unchanged, you forgot to append — go back and
 do it before committing.
+
+A pre-commit hook (`scripts/hooks/pre-commit` → `scripts/check-magazine.sh`)
+runs automatically and rejects the commit if today's magazine contains:
+
+- a `read-on` URL whose canonical form is already in the committed
+  `published-urls.txt` (reprint), or
+- a `read-on` URL with an empty path or `/` (marketing-homepage link).
+
+If the hook fires, fix the offending stories (swap URL for a primary
+source, or drop and replace the story), re-render, and re-commit. Do not
+bypass with `--no-verify`.
 
 ```bash
 cd /path/to/ephemeris

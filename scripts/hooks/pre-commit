@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Reject magazine commits that re-ship a URL or link to a marketing homepage.
+set -euo pipefail
+
+cd "$(git rev-parse --show-toplevel)"
+
+mapfile -t files < <(
+  git diff --cached --name-only --diff-filter=AM \
+    | grep -E '^magazines/.*\.html$' || true
+)
+
+[[ ${#files[@]} -eq 0 ]] && exit 0
+
+scripts/check-magazine.sh "${files[@]}"

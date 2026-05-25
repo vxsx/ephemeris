@@ -30,6 +30,9 @@ git fetch --quiet origin main
 git reset --hard origin/main --quiet
 echo "✓ synced to origin/main ($(git rev-parse --short HEAD))" >> "$LOG_FILE"
 
+# Activate the in-repo pre-commit hook (rejects duplicate / homepage URLs).
+git config core.hooksPath scripts/hooks
+
 # Restore .env — it's gitignored, not touched by the reset, but just in case.
 if [[ ! -f .env ]]; then
   echo "✗ .env missing — notifier will fail" >> "$LOG_FILE"
