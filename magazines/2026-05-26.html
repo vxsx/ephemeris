@@ -1,0 +1,964 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 038 · 26 May 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — scaffold.html
+     ═══════════════════════════════════════════════════════════════════ */
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+  .spread > .decor {
+    position: absolute; inset: 0; z-index: 0;
+    pointer-events: none; overflow: hidden;
+  }
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .spread > .main {
+    display: flex; flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+  .figure { width: 100%; }
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── COVER · Pull-quote ─── */
+  .cover { background: #efe7d2; color: #14110c; }
+  .cover .corner-mast {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+    color: #14110c;
+    margin: 0 0 6px;
+  }
+  .cover .corner-mast-line {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 36px;
+  }
+  .cover .pullquote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-variation-settings: "opsz" 144, "SOFT" 50, "WONK" 1;
+    font-size: clamp(46px, 7.2vw, 116px);
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+    margin: 0;
+    color: #14110c;
+    padding-bottom: 0.12em;
+  }
+  .cover .pullquote .qm {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 800;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    color: #b03a1f;
+    margin-right: 0.06em;
+    letter-spacing: normal;
+  }
+  .cover .attribution {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #b03a1f;
+    margin-top: 12px;
+  }
+  .cover .toc {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 36px;
+    padding-top: 18px;
+    margin-top: 28px;
+    border-top: 1px solid rgba(20,17,12,0.4);
+    width: 100%;
+    font-family: var(--mono);
+    font-size: 13px;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    text-decoration: none; color: inherit;
+    padding: 7px 0;
+    border-bottom: 1px dotted rgba(20,17,12,0.22);
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.85em; opacity: 0.65; }
+  .cover .toc .num {
+    font-family: var(--serif); font-weight: 800; font-style: italic;
+    color: #b03a1f; margin-right: 10px;
+  }
+  .cover .decor::before {
+    content: "";
+    position: absolute;
+    left: -10vw; bottom: -10vw;
+    width: 50vw; height: 50vw;
+    background: radial-gradient(circle, rgba(176,58,31,0.10), transparent 70%);
+  }
+  @media (max-width: 800px) {
+    .cover .toc { grid-template-columns: 1fr; gap: 0; font-size: 12px; }
+    .cover .pullquote { font-size: clamp(34px, 9.5vw, 64px); line-height: 1.02; }
+  }
+
+  /* ─── S01 · Big stats / yellow — PostHog Rust ─── */
+  .s01 { background: #ffd400; color: #0a0a0a; }
+  .s01 .folio { opacity: 0.85; }
+  .s01 .tag { color: #0a0a0a; border-color: #0a0a0a; background: #0a0a0a; color: #ffd400; border-color: #0a0a0a; }
+  .s01 .hed {
+    font-family: var(--sans);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.035em;
+    line-height: 0.92;
+    font-size: clamp(54px, 9vw, 132px);
+  }
+  .s01 .hed .blk {
+    display: inline-block;
+    background: #0a0a0a;
+    color: #ffd400;
+    padding: 0 0.18em 0.04em;
+    margin-right: 0.08em;
+    letter-spacing: normal;
+  }
+  .s01 .lede { max-width: 56ch; }
+  .s01 .stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    width: 100%;
+    border-top: 4px solid #0a0a0a;
+    padding-top: 22px;
+    margin-top: 8px;
+  }
+  .s01 .stats .stat .num {
+    display: block;
+    font-family: var(--sans);
+    font-weight: 900;
+    font-size: clamp(46px, 6.4vw, 92px);
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+    color: #0a0a0a;
+  }
+  .s01 .stats .stat .num .unit {
+    font-family: var(--sans);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 0.32em;
+    letter-spacing: normal;
+    margin-left: 0.18em;
+    vertical-align: 0.2em;
+  }
+  .s01 .stats .stat .lbl {
+    display: block;
+    margin-top: 8px;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #0a0a0a;
+    opacity: 0.85;
+  }
+  .s01 .read-on { color: #ffd400; background: #0a0a0a; border-color: #0a0a0a; --flip: #0a0a0a; }
+  .s01 .read-on:hover { background: #ffd400; }
+  .s01 .read-on:hover span { color: #0a0a0a; }
+  .s01 .decor::before {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    border: 3px solid #0a0a0a;
+    pointer-events: none;
+  }
+  @media (max-width: 800px) {
+    .s01 .stats { grid-template-columns: 1fr; gap: 16px; }
+    .s01 .stats .stat .num { font-size: clamp(40px, 14vw, 64px); }
+    .s01 .hed { font-size: clamp(40px, 11vw, 64px); }
+    .s01 .decor::before { inset: 8px; border-width: 2px; }
+  }
+
+  /* ─── S02 · Spreadsheet — Cursor cloud agent lessons ─── */
+  .s02 { background: #e8e4dc; color: #1a1a1a; }
+  .s02 .tag {
+    color: #2a2a2a; border-color: #2a2a2a;
+    border-radius: 0; font-family: var(--mono);
+    text-transform: uppercase;
+  }
+  .s02 .hed {
+    font-family: var(--mono);
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: -0.015em;
+    font-size: clamp(40px, 5.6vw, 76px);
+    line-height: 1.08;
+  }
+  .s02 .hed em {
+    font-style: italic; font-weight: 600;
+    color: #b03a1f;
+  }
+  .s02 .lede { font-family: var(--serif); }
+  .s02 .sheet {
+    width: 100%;
+    border: 1px solid #2a2a2a;
+    background: #f3f1eb;
+    margin-top: 4px;
+    font-family: var(--mono);
+    font-size: 13px;
+  }
+  .s02 .sheet .row {
+    display: grid;
+    grid-template-columns: 90px 1fr 1fr;
+    border-bottom: 1px solid rgba(42,42,42,0.18);
+  }
+  .s02 .sheet .row:last-child { border-bottom: 0; }
+  .s02 .sheet .row > div {
+    padding: 12px 14px;
+    border-right: 1px solid rgba(42,42,42,0.12);
+  }
+  .s02 .sheet .row > div:last-child { border-right: 0; }
+  .s02 .sheet .head {
+    background: #2a2a2a;
+    color: #f3f1eb;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-size: 11px;
+  }
+  .s02 .sheet .head > div { border-right-color: rgba(255,255,255,0.18); }
+  .s02 .sheet .lab { color: #555; }
+  .s02 .sheet .old { color: #8a2c1f; }
+  .s02 .sheet .new { color: #14572a; font-weight: 600; }
+  .s02 .read-on { color: #2a2a2a; border-color: #2a2a2a; border-radius: 0; --flip: #e8e4dc; }
+  .s02 .decor::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(to right, rgba(0,0,0,0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0,0,0,0.04) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  @media (max-width: 800px) {
+    .s02 .sheet .row { grid-template-columns: 70px 1fr 1fr; }
+    .s02 .sheet { font-size: 11px; }
+    .s02 .sheet .row > div { padding: 9px 10px; }
+  }
+
+  /* ─── S03 · Memo / airgram — Cursor TypeScript SDK ─── */
+  .s03 { background: #efe9d8; color: #18130a; }
+  .s03 .folio { font-family: var(--mono); }
+  .s03 .tag {
+    font-family: var(--mono);
+    text-transform: uppercase;
+    border-radius: 0;
+    border: 1px solid #18130a;
+    color: #18130a;
+  }
+  .s03 .memo-head {
+    width: 100%;
+    border-top: 2px solid #18130a;
+    border-bottom: 1px solid #18130a;
+    padding: 14px 0;
+    margin: -8px 0 8px;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    gap: 4px 18px;
+  }
+  .s03 .memo-head dt { font-weight: 600; opacity: 0.6; }
+  .s03 .memo-head dd { margin: 0; }
+  .s03 .hed {
+    font-family: var(--mono);
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: -0.02em;
+    line-height: 1.06;
+    font-size: clamp(38px, 5.4vw, 72px);
+  }
+  .s03 .hed em {
+    font-style: italic; font-weight: 600;
+    color: #8a3416;
+  }
+  .s03 .lede { font-family: var(--serif); max-width: 54ch; }
+  .s03 .code {
+    width: 100%;
+    background: #18130a;
+    color: #efe9d8;
+    border: 1px solid #18130a;
+    padding: 22px 24px;
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.55;
+    margin-top: 4px;
+    white-space: pre;
+    overflow-x: auto;
+  }
+  .s03 .code .com { color: #b8a875; }
+  .s03 .code .kw  { color: #f3c46b; }
+  .s03 .code .str { color: #d68a5a; }
+  .s03 .read-on { color: #18130a; border-color: #18130a; border-radius: 0; --flip: #efe9d8; }
+  .s03 .decor::before {
+    content: "";
+    position: absolute;
+    left: 18px; right: 18px; top: 18px; bottom: 18px;
+    border: 1px dashed rgba(24,19,10,0.35);
+  }
+  .s03 .decor::after {
+    content: "CC: DEVELOPERS";
+    position: absolute;
+    bottom: 24px; right: 28px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: rgba(24,19,10,0.45);
+  }
+  @media (max-width: 800px) {
+    .s03 .code { font-size: 12px; padding: 14px 16px; }
+    .s03 .memo-head { grid-template-columns: 56px 1fr; font-size: 10px; }
+    .s03 .decor::after { display: none; }
+  }
+
+  /* ─── S04 · Academic journal — BLASST ─── */
+  .s04 { background: #f1ecdf; color: #0d1840; }
+  .s04 .tag {
+    color: #0d1840; border-color: #0d1840;
+    font-family: var(--mono);
+    text-transform: uppercase;
+  }
+  .s04 .hed {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+    font-style: italic;
+    letter-spacing: -0.018em;
+    font-size: clamp(46px, 6.6vw, 96px);
+    line-height: 1.02;
+  }
+  .s04 .hed em { font-style: normal; color: #8a1c12; }
+  .s04 .lede { font-family: var(--serif); max-width: 60ch; }
+  .s04 .journal {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 28px;
+    width: 100%;
+    border-top: 2px solid #0d1840;
+    padding-top: 18px;
+    margin-top: 6px;
+  }
+  .s04 .journal .side {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1.7;
+    color: #0d1840;
+    border-right: 1px solid rgba(13,24,64,0.3);
+    padding-right: 18px;
+  }
+  .s04 .journal .side .lbl { display: block; opacity: 0.6; font-weight: 600; margin-top: 12px; }
+  .s04 .journal .side .lbl:first-child { margin-top: 0; }
+  .s04 .journal .body {
+    font-family: var(--serif);
+    font-size: 16px;
+    line-height: 1.55;
+    column-count: 2;
+    column-gap: 28px;
+  }
+  .s04 .journal .body p { margin: 0 0 12px; }
+  .s04 .journal .body .first::first-line {
+    font-variant-caps: small-caps;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+  }
+  .s04 .read-on { color: #0d1840; border-color: #0d1840; --flip: #f1ecdf; }
+  .s04 .decor::before {
+    content: "";
+    position: absolute;
+    right: -6vw; top: -6vw;
+    width: 28vw; height: 28vw;
+    border: 1px solid rgba(13,24,64,0.18);
+    border-radius: 50%;
+  }
+  @media (max-width: 800px) {
+    .s04 .journal { grid-template-columns: 1fr; }
+    .s04 .journal .side { border-right: 0; border-bottom: 1px solid rgba(13,24,64,0.3); padding: 0 0 12px; }
+    .s04 .journal .body { column-count: 1; font-size: 15px; }
+  }
+
+  /* ─── S05 · Hot pink — Olah on Pope encyclical ─── */
+  .s05 { background: #ff3585; color: #1a0410; }
+  .s05 .folio { color: #1a0410; opacity: 0.8; }
+  .s05 .tag { color: #1a0410; border-color: #1a0410; }
+  .s05 .hed {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    letter-spacing: -0.022em;
+    line-height: 0.96;
+    font-size: clamp(50px, 8vw, 118px);
+  }
+  .s05 .hed em { font-style: normal; font-weight: 800; color: #fff; }
+  .s05 .lede { color: #1a0410; max-width: 52ch; }
+  .s05 .points {
+    width: 100%;
+    list-style: none;
+    padding: 0; margin: 4px 0 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 22px;
+    border-top: 2px solid #1a0410;
+    padding-top: 20px;
+  }
+  .s05 .points li {
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.45;
+    color: #1a0410;
+  }
+  .s05 .points .pn {
+    display: block;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 800;
+    font-size: 38px;
+    line-height: 1;
+    color: #fff;
+    margin-bottom: 6px;
+    letter-spacing: normal;
+  }
+  .s05 .read-on { color: #1a0410; border-color: #1a0410; --flip: #ff3585; }
+  .s05 .decor::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 110% -10%, rgba(255,255,255,0.18), transparent 50%);
+  }
+  @media (max-width: 800px) {
+    .s05 .points { grid-template-columns: 1fr; gap: 14px; }
+    .s05 .points li { font-size: 15px; }
+    .s05 .points .pn { font-size: 30px; }
+  }
+
+  /* ─── S06 · Midnight — Anthropic Institute Agenda ─── */
+  .s06 { background: #050a1f; color: #e4e1d4; }
+  .s06 .folio { color: #b9b5a3; opacity: 0.7; }
+  .s06 .tag { color: #e4e1d4; border-color: #e4e1d4; }
+  .s06 .hed {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-variation-settings: "opsz" 144, "SOFT" 60, "WONK" 0;
+    letter-spacing: -0.025em;
+    line-height: 0.98;
+    font-size: clamp(52px, 7.4vw, 112px);
+    background: linear-gradient(180deg, #fff 0%, #c9c3aa 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .s06 .hed em { font-style: italic; font-weight: 400; }
+  .s06 .lede { color: #d4d0bf; max-width: 58ch; }
+  .s06 .grid4 {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0;
+    border-top: 1px solid rgba(228,225,212,0.3);
+    border-bottom: 1px solid rgba(228,225,212,0.3);
+    margin-top: 6px;
+  }
+  .s06 .grid4 .tile {
+    padding: 22px 18px 22px 0;
+    border-right: 1px solid rgba(228,225,212,0.18);
+  }
+  .s06 .grid4 .tile:last-child { border-right: 0; padding-right: 0; }
+  .s06 .grid4 .tn {
+    display: block;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 56px;
+    line-height: 1;
+    color: #ffd8a8;
+    margin-bottom: 8px;
+    letter-spacing: normal;
+  }
+  .s06 .grid4 .tt {
+    display: block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #e4e1d4;
+    margin-bottom: 10px;
+  }
+  .s06 .grid4 .td {
+    font-family: var(--serif);
+    font-size: 14.5px;
+    line-height: 1.45;
+    color: #c9c3aa;
+  }
+  .s06 .read-on { color: #e4e1d4; border-color: #e4e1d4; --flip: #050a1f; }
+  .s06 .decor::before {
+    content: "";
+    position: absolute;
+    right: -20vw; top: -20vw;
+    width: 60vw; height: 60vw;
+    background: radial-gradient(circle, rgba(255,216,168,0.10), transparent 60%);
+  }
+  @media (max-width: 800px) {
+    .s06 .grid4 { grid-template-columns: 1fr 1fr; }
+    .s06 .grid4 .tile { padding: 18px 14px; border-right: 1px solid rgba(228,225,212,0.18); border-bottom: 1px solid rgba(228,225,212,0.18); }
+    .s06 .grid4 .tile:nth-child(even) { border-right: 0; }
+    .s06 .grid4 .tile:nth-last-child(-n+2) { border-bottom: 0; }
+    .s06 .grid4 .tn { font-size: 42px; }
+  }
+
+  /* ─── COLOPHON · Film still ─── */
+  .colophon { background: #0a0a0a; color: #e8e5da; }
+  .colophon .folio { color: #b8b3a3; opacity: 0.65; }
+  .colophon .main { padding: 60px 0; }
+  .colophon .hed {
+    font-family: var(--sans);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -0.012em;
+    font-size: clamp(40px, 5.6vw, 80px);
+    line-height: 1.04;
+    color: #e8e5da;
+  }
+  .colophon .hed em {
+    font-style: italic;
+    font-weight: 300;
+    color: #ffd8a8;
+    font-family: var(--serif);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    text-transform: none;
+    letter-spacing: -0.02em;
+  }
+  .colophon .lede { font-family: var(--serif); color: #b8b3a3; max-width: 60ch; }
+  .colophon .meta {
+    width: 100%;
+    margin-top: 8px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    border-top: 1px solid rgba(232,229,218,0.25);
+    padding-top: 18px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #b8b3a3;
+  }
+  .colophon .meta dt { font-weight: 600; color: #ffd8a8; opacity: 0.85; margin-bottom: 6px; }
+  .colophon .meta dd { margin: 0; line-height: 1.7; }
+  .colophon .decor::before,
+  .colophon .decor::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    height: 36px;
+    background: #000;
+    z-index: 0;
+  }
+  .colophon .decor::before { top: 0; }
+  .colophon .decor::after  { bottom: 0; }
+  @media (max-width: 800px) {
+    .colophon .meta { grid-template-columns: 1fr; gap: 14px; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══ COVER · Pull-quote · Olah on Pope Leo XIV ═══ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 038</span>
+    <span>Tuesday · 26 May 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <div>
+      <p class="corner-mast">Ephemeris.</p>
+      <p class="corner-mast-line">Issue 038 · A morning brief from Zürich · Six files</p>
+    </div>
+    <p class="pullquote"><span class="qm">&ldquo;</span>There must be people outside those incentives.<span class="qm">&rdquo;</span></p>
+    <p class="attribution">Chris Olah · Anthropic · 25.V.2026</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>Two hundred and seventy gigabytes became five.</span><span>PostHog</span></a>
+      <a href="#s02"><span><span class="num">02</span>The cloud agents wanted an operating layer.</span><span>Cursor</span></a>
+      <a href="#s03"><span><span class="num">03</span>Programmable Cursor agents over coffee.</span><span>Cursor</span></a>
+      <a href="#s04"><span><span class="num">04</span>Drop seventy percent of attention. Lose nothing.</span><span>arXiv · MLSys</span></a>
+      <a href="#s05"><span><span class="num">05</span>Anthropic answers the Pope.</span><span>Anthropic</span></a>
+      <a href="#s06"><span><span class="num">06</span>Four questions Anthropic now has a building for.</span><span>The Anthropic Institute</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ S01 · Big stats / yellow · PostHog Rust flag eval ═══ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 038</span>
+    <span>01 / 06 · PostHog</span>
+  </header>
+  <div class="main">
+    <span class="tag">Engineering · Postmortem</span>
+    <h2 class="hed">Two hundred and seventy gigabytes <span class="blk">became five</span>.</h2>
+    <p class="lede">PostHog moved local feature-flag evaluation from Django to Rust. The new service runs on five pods instead of thirty, costs twenty-four times less CPU, and answered the median request in four milliseconds. The rollout happened in three weighted steps over two days.</p>
+    <div class="figure">
+      <div class="stats">
+        <div class="stat">
+          <span class="num">56<span class="unit">× RAM</span></span>
+          <span class="lbl">270 GB → 4.8 GB</span>
+        </div>
+        <div class="stat">
+          <span class="num">10<span class="unit">× P50</span></span>
+          <span class="lbl">40 ms → 4 ms</span>
+        </div>
+        <div class="stat">
+          <span class="num">24<span class="unit">× CPU</span></span>
+          <span class="lbl">60 → 2.5 cores</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://posthog.com/blog/local-flag-evals-rust" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ S02 · Spreadsheet · Cursor cloud agent lessons ═══ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 038</span>
+    <span>02 / 06 · Cursor</span>
+  </header>
+  <div class="main">
+    <span class="tag">Cloud agents · Lessons</span>
+    <h2 class="hed">What broke at <em>fifty million actions a day</em>.</h2>
+    <p class="lede">Cursor's first work-stealing scheduler topped out at 90% uptime. Rebuilding on Temporal pushed reliability past 99% across seven million workflows. The bigger lesson, Josh Ma writes, is that environment setup is the silent quality lever no one watches.</p>
+    <div class="figure">
+      <div class="sheet" role="table">
+        <div class="row head"><div>FIELD</div><div>BEFORE</div><div>AFTER</div></div>
+        <div class="row"><div class="lab">scheduler</div><div class="old">work-stealing</div><div class="new">Temporal</div></div>
+        <div class="row"><div class="lab">uptime</div><div class="old">~ 90 %</div><div class="new">&gt; 99 %</div></div>
+        <div class="row"><div class="lab">actions / day</div><div class="old">unstated</div><div class="new">50,000,000</div></div>
+        <div class="row"><div class="lab">workflows</div><div class="old">unstated</div><div class="new">7,000,000</div></div>
+        <div class="row"><div class="lab">harness mode</div><div class="old">force-commit</div><div class="new">agent-controlled</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://cursor.com/blog/cloud-agent-lessons" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ S03 · Memo / airgram · Cursor TypeScript SDK ═══ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 038</span>
+    <span>03 / 06 · Cursor</span>
+  </header>
+  <div class="main">
+    <dl class="memo-head">
+      <dt>TO</dt><dd>Anyone who has a CI step they'd rather not write</dd>
+      <dt>FROM</dt><dd>Roshan Sadanani · Cursor</dd>
+      <dt>RE</dt><dd>@cursor/sdk · v1 · 29.IV.2026</dd>
+    </dl>
+    <span class="tag">Dev tools · SDK</span>
+    <h2 class="hed">Build your own coding agent <em>over coffee</em>.</h2>
+    <p class="lede">The Cursor SDK is a TypeScript package that exposes <code>Agent.create()</code> and <code>agent.send()</code> with configurable models, sandboxed execution, and persistent state. Teams are already wiring it into CI pipelines, internal review bots, and customer-facing flows.</p>
+    <div class="figure">
+      <pre class="code"><span class="com">// summarise a PR diff and post the review back</span>
+<span class="kw">import</span> { Agent } <span class="kw">from</span> <span class="str">"@cursor/sdk"</span>;
+
+<span class="kw">const</span> a = <span class="kw">await</span> Agent.create({
+  model: <span class="str">"composer-2.5"</span>,
+  cwd:   process.env.GITHUB_WORKSPACE,
+});
+
+<span class="kw">const</span> reply = <span class="kw">await</span> a.send(
+  <span class="str">"Read the diff, flag risky changes, post a CR comment."</span>
+);
+
+console.log(reply.text);</pre>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://cursor.com/blog/typescript-sdk" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ S04 · Academic journal · BLASST ═══ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 038</span>
+    <span>04 / 06 · arXiv</span>
+  </header>
+  <div class="main">
+    <span class="tag">Research · MLSys '26</span>
+    <h2 class="hed">Skip seventy percent of attention. <em>Lose nothing.</em></h2>
+    <p class="lede">BLASST drops attention blocks whose softmax score falls below a single scalar threshold. No retraining, no architecture change, no special hardware — just a kernel-level shortcut that earned the MLSys '26 best-paper award.</p>
+    <div class="figure">
+      <div class="journal">
+        <aside class="side">
+          <span class="lbl">Paper</span>
+          arXiv:2512.12087 v3
+          <span class="lbl">Authors</span>
+          J. Yuan, C. Shinn,<br>K. Xu, J. Cui,<br>G. Klimiashvili,<br>G. Xiao, et al.
+          <span class="lbl">Venue</span>
+          MLSys 2026 — Best Paper
+          <span class="lbl">Compatibility</span>
+          Works with DeepSeek MLA. No retraining required.
+        </aside>
+        <div class="body">
+          <p class="first">The technique uses online softmax statistics to identify attention scores that contribute nothing to the output, then skips the corresponding block — both the softmax and the matrix multiply.</p>
+          <p>At 71.9% block sparsity the authors report a 1.52× speedup on prefill; at 73.2% sparsity, 1.48× on decode. Benchmark accuracy on long-context tasks degrades by less than one percent.</p>
+          <p>Threshold calibration is automatic and reveals an inverse relationship to context length: the longer the prompt, the more attention you can skip. The kernel is a drop-in for existing inference stacks.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://arxiv.org/abs/2512.12087" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ S05 · Hot pink · Olah on Pope Leo XIV ═══ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 038</span>
+    <span>05 / 06 · Anthropic</span>
+  </header>
+  <div class="main">
+    <span class="tag">AI · Ethics</span>
+    <h2 class="hed">Anthropic answered the <em>Pope</em>.</h2>
+    <p class="lede">Pope Leo XIV's encyclical <em>Magnifica humanitas</em> arrived on 15 May. Ten days later Chris Olah, Anthropic's co-founder, conceded that AI labs work inside incentives that can pull against doing the right thing — and named three places the Church should weigh in.</p>
+    <div class="figure">
+      <ol class="points">
+        <li>
+          <span class="pn">I.</span>
+          That AI's benefits reach the people whose labour it is most likely to displace — starting with the global poor.
+        </li>
+        <li>
+          <span class="pn">II.</span>
+          That moral imagination keeps pace with capability — what does human flourishing look like when work itself is reshaped?
+        </li>
+        <li>
+          <span class="pn">III.</span>
+          That somebody investigates the mysterious internal states of these models — Olah's word — and what they may amount to.
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.anthropic.com/news/chris-olah-pope-leo-encyclical" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ S06 · Midnight · Anthropic Institute Agenda ═══ -->
+<section class="spread s06" id="s06">
+  <header class="folio">
+    <span>Ephemeris · Issue 038</span>
+    <span>06 / 06 · The Anthropic Institute</span>
+  </header>
+  <div class="main">
+    <span class="tag">Research direction</span>
+    <h2 class="hed">Four questions Anthropic now has a <em>building</em> for.</h2>
+    <p class="lede">The Anthropic Institute will publish its own research and data, run a four-month fellowship, and hand its findings to outsiders so they can argue back. The agenda splits four ways.</p>
+    <div class="figure">
+      <div class="grid4">
+        <div class="tile">
+          <span class="tn">I</span>
+          <span class="tt">Economic Diffusion</span>
+          <span class="td">Where AI lands in the economy, who adopts first, what it does to wages. The Anthropic Economic Index is the running instrument.</span>
+        </div>
+        <div class="tile">
+          <span class="tn">II</span>
+          <span class="tt">Threats &amp; Resilience</span>
+          <span class="td">Dual-use capabilities, early warning for cyber and bio risk, and the defensive infrastructure society will need to keep up.</span>
+        </div>
+        <div class="tile">
+          <span class="tn">III</span>
+          <span class="tt">AI in the Wild</span>
+          <span class="td">How people and institutions are actually using these systems — observability, surveys, behavioural shifts at scale.</span>
+        </div>
+        <div class="tile">
+          <span class="tn">IV</span>
+          <span class="tt">AI-driven R&amp;D</span>
+          <span class="td">When models start training their successors — governance, monitoring, and what counts as an early warning.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.anthropic.com/research/anthropic-institute-agenda" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ COLOPHON · Film still ═══ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 038</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">A morning brief for engineers and founders. Six files, four sources, one rule: useful by tomorrow.</p>
+    <dl class="meta">
+      <div>
+        <dt>Sources today</dt>
+        <dd>PostHog · Cursor · arXiv · Anthropic</dd>
+      </div>
+      <div>
+        <dt>Rubric</dt>
+        <dd>Tools you can adopt this week · Creative software · Dev tools &amp; agentic coding · Science with a practical kernel</dd>
+      </div>
+      <div>
+        <dt>Issue</dt>
+        <dd>038 · Tuesday 26.V.2026 · Zürich</dd>
+      </div>
+    </dl>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+</main>
+</body>
+</html>
