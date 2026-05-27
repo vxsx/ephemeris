@@ -64,6 +64,7 @@ https://blog.google/innovation-and-ai/products/gemini-app/next-evolution-gemini-
 https://blog.google/innovation-and-ai/technology/research/gemini-for-science-io-2026
 https://blog.maximeheckel.com/posts/on-rendering-the-sky-sunsets-and-planets
 https://blog.tilderesearch.com/blog/aurora
+https://bloomberg.com/news/articles/2026-05-26/china-expands-travel-curbs-to-top-ai-talent-at-private-firms
 https://bun.com/blog/bun-v1.3.14
 https://chromewebstore.google.com/detail/pjoleapiipgcignjlbhhiighckpbhcpp
 https://claude.com/blog/agent-view-in-claude-code
@@ -81,6 +82,7 @@ https://deeplearning.ai/the-batch/issue-352
 https://deeplearning.ai/the-batch/issue-353
 https://deeplearning.ai/the-batch/issue-354
 https://developers.openai.com/ads
+https://developers.openai.com/codex/use-cases
 https://dsv4.interactive.ikot.blog
 https://dsv4.interactive.ikot.blog/
 https://elevenlabs.io/blog/aiuc-announcement
@@ -133,6 +135,7 @@ https://jack-clark.net/2026/04/20/import-ai-454-automating-alignment-research-sa
 https://jack-clark.net/2026/05/04/import-ai-455-automating-ai-research
 https://jack-clark.net/2026/05/11/import-ai-456-rsi-and-economic-growth-radical-optionality-for-ai-regulation-and-a-neural-computer
 https://jack-clark.net/2026/05/18/import-ai-457-ai-stuxnet-cursed-muon-optimizer-and-positive-alignment
+https://jack-clark.net/2026/05/26/import-ai-458-reckoning-with-the-future-and-a-singularity-story
 https://jeffbullas.com/ai-reinvention-truth
 https://jeffbullas.com/ai-slop-crisis
 https://jeffbullas.com/distraction-economy
@@ -145,6 +148,7 @@ https://metr.org/blog/2026-05-19-frontier-risk-report
 https://mf0.ai/
 https://microsoft.com/en-us/research/articles/whimsical-strategies-break-ai-agents-generating-out-of-distribution-adversarial-strategies-at-scale
 https://moab.pro/articles/aeo-geo
+https://newsletter.semianalysis.com/p/the-coding-assistant-breakdown-more
 https://nextjs.org/blog/agentic-future
 https://nextjs.org/blog/next-16-2
 https://nextjs.org/blog/next-16-2-ai
@@ -204,6 +208,7 @@ https://sentry.engineering/blog/do-you-really-need-an-mcp-to-build-your-app
 https://sentry.engineering/blog/from-monkey-patching-to-tracing-channels
 https://sentry.engineering/blog/next-halloween-im-dressing-as-on2
 https://sentry.engineering/blog/swizzling-swiftui-view-body
+https://sentry.io/blog/agents-need-production-context
 https://sentry.io/blog/ai-agent-observability-developers-guide-to-agent-monitoring
 https://sentry.io/blog/debugging-multi-agent-ai-when-the-failure-is-in-the-space-between-agents
 https://sentry.io/blog/fixing-javascript-observability
@@ -219,6 +224,7 @@ https://t.me/ProductsAndStartups/1758
 https://t.me/rvnikita_blog/1735
 https://t.me/s/denissexy
 https://t.me/TochkiNadAI/2324
+https://techspot.com/news/112386-amazon-employees-using-internal-ai-tools-inflate-usage.html
 https://telegram.org/blog/ai-bot-revolution-11-new-features
 https://therundown.ai/p/openai-superapp-hiding-inside-codex
 https://thezvi.substack.com/p/ai-165-in-our-image
