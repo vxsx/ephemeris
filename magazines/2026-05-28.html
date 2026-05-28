@@ -1,0 +1,1217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 040 · 28 May 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --type:  "Special Elite", "Courier New", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+  .spread > .decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+  .figure { width: 100%; }
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ──────────────────────────── COVER · date-hero ──────────────────────────── */
+  .cover {
+    background: #f5ecd5;
+    color: #14110c;
+  }
+  .cover .folio { color: #6b1f14; opacity: 0.9; }
+  .cover .main { gap: clamp(24px, 3vw, 40px); }
+  .cover .datestack {
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: end;
+    gap: clamp(20px, 3vw, 40px);
+    padding-bottom: clamp(20px, 3vw, 36px);
+    border-bottom: 1px solid rgba(20,17,12,0.25);
+  }
+  .cover .bigdate {
+    font-family: var(--serif);
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    font-weight: 900;
+    font-style: italic;
+    font-size: clamp(96px, 22vw, 320px);
+    line-height: 0.82;
+    letter-spacing: -0.06em;
+    color: #6b1f14;
+    padding-bottom: 0.08em;
+  }
+  .cover .bigdate .day {
+    display: block;
+    font-style: normal;
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: 0.20em;
+    letter-spacing: 0.32em;
+    color: #14110c;
+    margin-bottom: 0.4em;
+  }
+  .cover .bigdate .mon {
+    display: inline-block;
+    margin-left: 0.05em;
+    font-style: normal;
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 0.42em;
+    letter-spacing: -0.02em;
+    color: #14110c;
+    vertical-align: 0.42em;
+  }
+  .cover .mast-corner {
+    text-align: right;
+    padding-bottom: 0.5em;
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(28px, 3vw, 44px);
+    color: #14110c;
+    letter-spacing: -0.01em;
+  }
+  .cover .mast-corner .em {
+    display: block;
+    font-style: italic;
+    color: #6b1f14;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .cover .mast-corner .sub {
+    display: block;
+    margin-top: 0.4em;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(20,17,12,0.6);
+  }
+  .cover .toc {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 40px;
+    padding-top: 12px;
+    width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    text-decoration: none; color: inherit;
+    padding: 8px 0;
+    border-bottom: 1px dotted rgba(20,17,12,0.25);
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.8em; opacity: 0.6; letter-spacing: 0.12em; text-transform: uppercase; }
+  .cover .toc .num {
+    font-family: var(--serif); font-weight: 800; font-style: italic;
+    color: #6b1f14; margin-right: 10px;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  @media (max-width: 800px) {
+    .cover .datestack { grid-template-columns: 1fr; gap: 12px; align-items: start; }
+    .cover .mast-corner { text-align: left; padding-bottom: 0; }
+    .cover .toc { grid-template-columns: 1fr; gap: 0; }
+  }
+
+  /* ──────────────────────────── s01 · DARK REPORT / CLASSIFIED ──────────────────────────── */
+  .s01 { background: #0a0606; color: #ead7c8; }
+  .s01 .folio { color: rgba(234,215,200,0.55); }
+  .s01 .tag {
+    color: #f0c8b8; border-color: #c8302a;
+    background: rgba(200,48,42,0.18);
+  }
+  .s01 .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    color: #ead7c8;
+  }
+  .s01 .hed em {
+    font-style: normal;
+    background: #c8302a;
+    color: #0a0606;
+    padding: 0 0.18em 0.05em;
+    margin: 0 0.05em;
+    box-decoration-break: clone;
+  }
+  .s01 .hed .num {
+    font-style: italic;
+    color: #ff4a3d;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s01 .lede { color: #d8c4b6; max-width: 56ch; }
+  .s01 .read-on { color: #ff4a3d; border-color: #ff4a3d; --flip: #0a0606; }
+  .s01 .read-on:hover { background: #ff4a3d; }
+
+  .s01 .scoreboard {
+    width: 100%;
+    border-top: 1px solid rgba(255,74,61,0.4);
+    border-bottom: 1px solid rgba(255,74,61,0.4);
+    padding: 22px 0 26px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .s01 .scoreboard-h {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(234,215,200,0.6);
+    display: flex; justify-content: space-between;
+  }
+  .s01 .row {
+    display: grid;
+    grid-template-columns: minmax(140px, 18ch) 1fr 6ch;
+    gap: 16px;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 14px;
+  }
+  .s01 .row .name { font-weight: 700; color: #ead7c8; }
+  .s01 .row .bar {
+    height: 12px;
+    background: rgba(255,74,61,0.12);
+    position: relative;
+    overflow: hidden;
+  }
+  .s01 .row .fill {
+    position: absolute;
+    inset: 0 auto 0 0;
+    background: #ff4a3d;
+  }
+  .s01 .row .pct {
+    text-align: right;
+    color: #ff4a3d;
+    font-weight: 700;
+  }
+  .s01 .row.muted .fill { background: rgba(255,74,61,0.45); }
+  .s01 .row.muted .pct  { color: rgba(255,74,61,0.7); }
+
+  .s01 .decor::before {
+    content: "CLASSIFIED · TIER-1 EVAL · NO DISTRIBUTION · CLASSIFIED · TIER-1 EVAL · NO DISTRIBUTION ·";
+    position: absolute;
+    top: 18px;
+    left: -2%;
+    right: -2%;
+    white-space: nowrap;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    color: rgba(255,74,61,0.25);
+    text-align: center;
+  }
+  .s01 .decor::after {
+    content: "";
+    position: absolute;
+    inset: -20px;
+    background:
+      repeating-linear-gradient(
+        0deg,
+        transparent 0 3px,
+        rgba(255,74,61,0.025) 3px 4px
+      );
+  }
+
+  /* ──────────────────────────── s02 · NEON / CYBERPUNK ──────────────────────────── */
+  .s02 {
+    background: #050218;
+    color: #e2dcff;
+  }
+  .s02 .folio {
+    color: rgba(226,220,255,0.6);
+    font-family: var(--mono);
+    letter-spacing: 0.22em;
+  }
+  .s02 .tag {
+    color: #5dfff5;
+    border-color: #5dfff5;
+    text-shadow: 0 0 8px rgba(93,255,245,0.5);
+  }
+  .s02 .hed {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: clamp(56px, 9vw, 132px);
+    letter-spacing: -0.04em;
+    color: #ff5ce0;
+    text-shadow:
+      0 0 6px rgba(255,92,224,0.6),
+      0 0 22px rgba(255,92,224,0.35),
+      0 0 60px rgba(93,255,245,0.18);
+  }
+  .s02 .hed em {
+    font-style: italic;
+    color: #5dfff5;
+    text-shadow:
+      0 0 6px rgba(93,255,245,0.7),
+      0 0 22px rgba(93,255,245,0.4);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s02 .lede { color: #d5cef0; max-width: 56ch; }
+  .s02 .read-on {
+    color: #5dfff5; border-color: #5dfff5; --flip: #050218;
+    box-shadow: 0 0 0 1px rgba(93,255,245,0.2), 0 0 22px rgba(93,255,245,0.18);
+  }
+
+  .s02 .boxes {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .s02 .box {
+    padding: 18px 16px 20px;
+    border: 1px solid rgba(255,92,224,0.45);
+    background:
+      linear-gradient(180deg, rgba(93,255,245,0.05), transparent 80%),
+      rgba(13,7,38,0.7);
+    font-family: var(--mono);
+    font-size: 13px;
+  }
+  .s02 .box h4 {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: #5dfff5;
+    margin-bottom: 12px;
+    border-bottom: 1px dashed rgba(93,255,245,0.4);
+    padding-bottom: 8px;
+  }
+  .s02 .box p { margin: 0 0 8px; color: #e2dcff; line-height: 1.45; }
+  .s02 .box .who {
+    font-family: var(--serif); font-style: italic;
+    color: #ff5ce0; font-size: 16px;
+    text-shadow: 0 0 8px rgba(255,92,224,0.4);
+  }
+  @media (max-width: 800px) {
+    .s02 .boxes { grid-template-columns: 1fr; }
+  }
+  .s02 .decor::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(60vw 50vw at 90% 10%, rgba(255,92,224,0.18), transparent 60%),
+      radial-gradient(60vw 50vw at 10% 90%, rgba(93,255,245,0.14), transparent 60%);
+  }
+  .s02 .decor::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(93,255,245,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,92,224,0.05) 1px, transparent 1px);
+    background-size: 48px 48px, 48px 48px;
+    mix-blend-mode: screen;
+  }
+
+  /* ──────────────────────────── s03 · ACADEMIC JOURNAL ──────────────────────────── */
+  .s03 {
+    background: #f4eddc;
+    color: #1a1a1a;
+  }
+  .s03 > .main {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(20px, 2.4vw, 36px);
+  }
+  .s03 .folio { color: #2a3650; }
+  .s03 .tag {
+    color: #2a3650; border-color: #2a3650;
+    font-family: var(--serif); font-style: italic;
+    text-transform: none; letter-spacing: 0.06em;
+    font-size: 13px;
+  }
+  .s03 .hed {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(44px, 6vw, 92px);
+    line-height: 1.06;
+    letter-spacing: -0.015em;
+    color: #2a3650;
+  }
+  .s03 .hed em {
+    font-style: italic;
+    font-weight: 600;
+    font-variation-settings: "opsz" 144, "SOFT" 60;
+    color: #6b1f14;
+  }
+  .s03 .meta {
+    font-family: var(--serif);
+    font-style: italic;
+    color: rgba(42,54,80,0.7);
+    font-size: 15px;
+    border-bottom: 1px solid rgba(42,54,80,0.3);
+    padding-bottom: 12px;
+  }
+  .s03 .body {
+    column-count: 2;
+    column-gap: 36px;
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.55;
+    color: #181818;
+    max-width: 64ch;
+  }
+  .s03 .body p { margin: 0 0 12px; }
+  .s03 .body p:first-child::first-letter {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    color: #6b1f14;
+    font-size: 1.4em;
+    line-height: 1;
+    margin-right: 2px;
+  }
+  .s03 .body em { font-style: italic; color: #6b1f14; }
+  .s03 .pull {
+    grid-column: 1 / -1;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(22px, 2vw, 30px);
+    color: #6b1f14;
+    border-top: 1px solid rgba(107,31,20,0.35);
+    border-bottom: 1px solid rgba(107,31,20,0.35);
+    padding: 18px 0;
+    line-height: 1.35;
+    max-width: 60ch;
+  }
+  .s03 .read-on { color: #6b1f14; border-color: #6b1f14; --flip: #f4eddc; }
+  @media (max-width: 800px) {
+    .s03 .body { column-count: 1; }
+  }
+  .s03 .decor::before {
+    content: "vol. 040 — no. 040";
+    position: absolute;
+    top: 50%; right: clamp(24px, 6vw, 80px);
+    transform: translateY(-50%) rotate(90deg);
+    transform-origin: right center;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    color: rgba(42,54,80,0.18);
+    white-space: nowrap;
+  }
+
+  /* ──────────────────────────── s04 · MEMO / AIRGRAM ──────────────────────────── */
+  .s04 {
+    background: #e8dec5;
+    color: #1f1a10;
+  }
+  .s04 .folio {
+    color: #6a5435;
+    font-family: var(--type);
+    letter-spacing: 0.12em;
+  }
+  .s04 .tag {
+    font-family: var(--type);
+    letter-spacing: 0.18em;
+    background: rgba(168,50,50,0.1);
+    border-color: #a83232;
+    color: #a83232;
+  }
+  .s04 .hed {
+    font-family: var(--type);
+    font-weight: 400;
+    font-size: clamp(40px, 6.2vw, 88px);
+    line-height: 1.05;
+    letter-spacing: -0.005em;
+    color: #1f1a10;
+  }
+  .s04 .hed em {
+    font-style: normal;
+    background: #1f1a10;
+    color: #e8dec5;
+    padding: 0 0.15em 0.05em;
+  }
+  .s04 .lede {
+    font-family: var(--type);
+    font-size: clamp(17px, 1.5vw, 21px);
+    line-height: 1.55;
+    color: #2a2418;
+    max-width: 58ch;
+  }
+  .s04 .read-on {
+    font-family: var(--type);
+    color: #a83232; border-color: #a83232; --flip: #e8dec5;
+    background: #f5edd6;
+  }
+  .s04 .memo-block {
+    width: 100%;
+    border: 2px solid #1f1a10;
+    background: #f5edd6;
+    font-family: var(--type);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .s04 .memo-head {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 4px 14px;
+    padding: 14px 18px;
+    border-bottom: 1px dashed #1f1a10;
+    color: #1f1a10;
+  }
+  .s04 .memo-head dt {
+    font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    margin: 0;
+  }
+  .s04 .memo-head dd { margin: 0; }
+  .s04 .memo-body { padding: 14px 18px 16px; color: #1f1a10; }
+  .s04 .memo-body strong { background: rgba(168,50,50,0.18); padding: 0 4px; }
+  .s04 .stamp {
+    position: absolute;
+    right: clamp(28px, 5vw, 64px);
+    top: clamp(40px, 6vw, 80px);
+    border: 3px double #a83232;
+    color: #a83232;
+    font-family: var(--type);
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 8px 14px;
+    transform: rotate(-6deg);
+    line-height: 1.1;
+    text-align: center;
+    background: rgba(168,50,50,0.04);
+  }
+  .s04 .stamp .lo { font-size: 9px; opacity: 0.75; letter-spacing: 0.16em; }
+  .s04 .decor::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      rgba(168,50,50,0.06) 0 12px,
+      transparent 12px 24px,
+      rgba(31,26,16,0.05) 24px 36px,
+      transparent 36px 48px
+    );
+    opacity: 0.5;
+    z-index: -1;
+  }
+
+  /* ──────────────────────────── s05 · BLUEPRINT ──────────────────────────── */
+  .s05 {
+    background: #0e2c47;
+    color: #cfe6f5;
+  }
+  .s05 .folio {
+    color: rgba(207,230,245,0.6);
+    font-family: var(--mono);
+    letter-spacing: 0.2em;
+  }
+  .s05 .tag {
+    color: #ffd866; border-color: #ffd866;
+    font-family: var(--mono); letter-spacing: 0.18em;
+  }
+  .s05 .hed {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    color: #ffffff;
+    letter-spacing: -0.025em;
+  }
+  .s05 .hed em {
+    font-style: italic;
+    color: #ffd866;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s05 .lede { color: #cfe6f5; max-width: 56ch; }
+  .s05 .read-on {
+    color: #ffd866; border-color: #ffd866; --flip: #0e2c47;
+  }
+  .s05 .schematic {
+    width: 100%;
+    border: 1px solid rgba(207,230,245,0.3);
+    padding: 18px 20px;
+    background: rgba(0,0,0,0.18);
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.55;
+    color: #cfe6f5;
+    position: relative;
+  }
+  .s05 .schematic::before,
+  .s05 .schematic::after {
+    content: "+";
+    position: absolute;
+    color: #ffd866;
+    font-family: var(--mono);
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .s05 .schematic::before { top: -8px; left: -8px; }
+  .s05 .schematic::after  { bottom: -8px; right: -8px; }
+  .s05 .schematic .row {
+    display: grid;
+    grid-template-columns: 12ch 1fr;
+    gap: 18px;
+    padding: 4px 0;
+    border-bottom: 1px dotted rgba(207,230,245,0.18);
+  }
+  .s05 .schematic .row:last-child { border-bottom: none; }
+  .s05 .schematic .k {
+    color: #ffd866; letter-spacing: 0.12em; text-transform: uppercase; font-size: 11px;
+  }
+  .s05 .schematic .pull {
+    margin-top: 14px;
+    border-top: 1px solid rgba(255,216,102,0.4);
+    padding-top: 14px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(18px, 1.6vw, 22px);
+    color: #ffffff;
+    line-height: 1.4;
+  }
+  .s05 .decor {
+    background-image:
+      linear-gradient(rgba(207,230,245,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(207,230,245,0.07) 1px, transparent 1px);
+    background-size: 28px 28px, 28px 28px;
+  }
+  .s05 .decor::before,
+  .s05 .decor::after {
+    position: absolute;
+    color: rgba(255,216,102,0.7);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+  }
+  .s05 .decor::before {
+    content: "↖ FRONTEND.SDK";
+    top: clamp(48px, 6vw, 72px);
+    left: clamp(24px, 6vw, 90px);
+  }
+  .s05 .decor::after {
+    content: "BACKEND.OTLP ↘";
+    bottom: clamp(48px, 5vw, 72px);
+    right: clamp(24px, 6vw, 90px);
+  }
+
+  /* ──────────────────────────── s06 · RISOGRAPH DUOTONE ──────────────────────────── */
+  .s06 {
+    background: #fbe8ed;
+    color: #1a0a14;
+  }
+  .s06 .folio {
+    color: #1bb1d8;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+  }
+  .s06 .tag {
+    color: #e63277; border-color: #e63277;
+    background: rgba(230,50,119,0.08);
+  }
+  .s06 .hed {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: clamp(56px, 8.4vw, 124px);
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+    color: #e63277;
+    position: relative;
+  }
+  .s06 .hed em {
+    font-style: italic;
+    color: #1bb1d8;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    display: inline-block;
+    transform: translateX(-6px) translateY(2px);
+    text-shadow: 4px -4px 0 rgba(230,50,119,0.35);
+    mix-blend-mode: multiply;
+  }
+  .s06 .lede {
+    color: #1a0a14;
+    max-width: 54ch;
+    font-style: italic;
+    font-family: var(--serif);
+  }
+  .s06 .read-on {
+    color: #1bb1d8; border-color: #1bb1d8; --flip: #fbe8ed;
+    background: rgba(255,255,255,0.4);
+  }
+  .s06 .grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+  .s06 .card {
+    padding: 18px 18px 20px;
+    background: #ffffff;
+    border: 1.5px solid #1bb1d8;
+    box-shadow: 6px 6px 0 0 rgba(230,50,119,0.28);
+    position: relative;
+  }
+  .s06 .card .n {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    color: #e63277;
+    margin-bottom: 6px;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s06 .card h4 {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    color: #1bb1d8;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .s06 .card p { margin: 0; color: #1a0a14; font-size: 15px; line-height: 1.45; }
+  @media (max-width: 800px) {
+    .s06 .grid { grid-template-columns: 1fr; }
+  }
+  .s06 .decor::before {
+    content: "";
+    position: absolute;
+    width: 44vw; height: 44vw; max-width: 480px; max-height: 480px;
+    right: -10vw; top: -16vw;
+    background: radial-gradient(circle, #1bb1d8 0%, #1bb1d8 60%, transparent 62%);
+    opacity: 0.18;
+    mix-blend-mode: multiply;
+  }
+  .s06 .decor::after {
+    content: "";
+    position: absolute;
+    width: 38vw; height: 38vw; max-width: 420px; max-height: 420px;
+    left: -8vw; bottom: -14vw;
+    background: radial-gradient(circle, #e63277 0%, #e63277 58%, transparent 60%);
+    opacity: 0.22;
+    mix-blend-mode: multiply;
+  }
+
+  /* ──────────────────────────── s07 · CONCRETE ──────────────────────────── */
+  .s07 {
+    background: #b6b1a8;
+    color: #14110d;
+  }
+  .s07 .folio { color: rgba(20,17,13,0.55); }
+  .s07 .tag {
+    color: #14110d; border-color: #14110d;
+    background: rgba(255,255,255,0.18);
+  }
+  .s07 .hed {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: clamp(52px, 8vw, 124px);
+    line-height: 0.96;
+    letter-spacing: -0.045em;
+    color: #14110d;
+  }
+  .s07 .hed em {
+    font-style: italic;
+    color: #6b1f14;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s07 .lede { color: #2a261f; max-width: 56ch; }
+  .s07 .read-on { color: #14110d; border-color: #14110d; --flip: #b6b1a8; }
+  .s07 .list {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 36px;
+    border-top: 2px solid #14110d;
+    padding-top: 14px;
+  }
+  .s07 .list dt {
+    grid-column: 1; grid-row: span 1;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 700;
+    font-size: clamp(32px, 4.5vw, 56px);
+    color: #6b1f14;
+    line-height: 1;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s07 .list dd {
+    margin: 0;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.4;
+    color: #14110d;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(20,17,13,0.25);
+  }
+  @media (max-width: 800px) {
+    .s07 .list { grid-template-columns: 1fr; }
+  }
+  .s07 .decor::before {
+    content: "“";
+    position: absolute;
+    font-family: var(--serif);
+    font-weight: 900;
+    font-style: italic;
+    font-size: clamp(280px, 42vw, 620px);
+    line-height: 0.6;
+    color: rgba(20,17,13,0.07);
+    top: -0.08em; right: -0.04em;
+  }
+
+  /* ──────────────────────────── COLOPHON · MUSEUM PLACARD ──────────────────────────── */
+  .colophon {
+    background: #f4eee0;
+    color: #2a2a22;
+  }
+  .colophon.centered > .main { gap: clamp(22px, 2.4vw, 36px); }
+  .colophon .folio { color: rgba(42,42,34,0.6); }
+  .colophon .tag {
+    color: #3d4a32; border-color: #3d4a32;
+    font-family: var(--serif); font-style: italic; text-transform: none;
+    letter-spacing: 0.06em; font-size: 13px;
+  }
+  .colophon .hed {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(52px, 7vw, 108px);
+    line-height: 1.05;
+    color: #2a2a22;
+    font-variation-settings: "opsz" 144, "SOFT" 60;
+  }
+  .colophon .hed em {
+    font-style: italic;
+    color: #3d4a32;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .colophon .lede {
+    font-family: var(--serif);
+    font-style: italic;
+    color: #2a2a22;
+    font-size: clamp(18px, 1.6vw, 22px);
+    max-width: 50ch;
+  }
+  .colophon .placard {
+    border-top: 1px solid #3d4a32;
+    border-bottom: 1px solid #3d4a32;
+    padding: 20px 0;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #3d4a32;
+    line-height: 1.9;
+    max-width: 64ch;
+  }
+  .colophon .placard b { color: #2a2a22; font-weight: 800; }
+  .colophon .read-on { color: #3d4a32; border-color: #3d4a32; --flip: #f4eee0; }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ─────── COVER · date-hero ─────── -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 040</span>
+    <span>Thursday · 28 May 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <div class="datestack">
+      <div class="bigdate">
+        <span class="day">Thursday</span>
+        28<span class="mon">·05·26</span>
+      </div>
+      <div class="mast-corner">
+        Ephemeris<span class="em">.</span>
+        <span class="sub">Daily, before coffee</span>
+      </div>
+    </div>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>Seventy percent on tasks no model has seen.</span><span>DeepSWE</span></a>
+      <a href="#s02"><span><span class="num">02</span>Cap the blast radius.</span><span>Anthropic Eng.</span></a>
+      <a href="#s03"><span><span class="num">03</span>Filing season as the training set.</span><span>OpenAI</span></a>
+      <a href="#s04"><span><span class="num">04</span>PostHog will start training on you.</span><span>PostHog</span></a>
+      <a href="#s05"><span><span class="num">05</span>You do not need to pick one.</span><span>Sentry</span></a>
+      <a href="#s06"><span><span class="num">06</span>Hostage-taking still works on agents.</span><span>via @ProductsAndStartups</span></a>
+      <a href="#s07"><span><span class="num">07</span>Stop writing code. Start writing checks.</span><span>via @ProductsAndStartups</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+</section>
+
+<!-- ─────── s01 · DEEPSWE ─────── -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 040</span>
+    <span>01 / 07 · via @seeallochnaya</span>
+  </header>
+  <div class="main">
+    <span class="tag">Benchmarks · Agentic Coding</span>
+    <h2 class="hed">Seventy percent, on tasks the model has <em>never</em> seen.</h2>
+    <p class="lede">DeepSWE built a coding benchmark from 113 original tasks across 91 repositories in five languages, averaging 668 lines of code per solution. Verifiers test observable behaviour, not implementation. False positives drop to 0.3% versus SWE-Bench Pro's 8.5% — and the model gap widens sharply when training contamination is off the table.</p>
+    <div class="figure">
+      <div class="scoreboard">
+        <div class="scoreboard-h"><span>DeepSWE · pass rate</span><span>n = 113 tasks</span></div>
+        <div class="row">
+          <span class="name">GPT-5.5</span>
+          <span class="bar"><span class="fill" style="width: 70%"></span></span>
+          <span class="pct">70%</span>
+        </div>
+        <div class="row muted">
+          <span class="name">GPT-5.4</span>
+          <span class="bar"><span class="fill" style="width: 56%"></span></span>
+          <span class="pct">56%</span>
+        </div>
+        <div class="row muted">
+          <span class="name">Claude Opus 4.7</span>
+          <span class="bar"><span class="fill" style="width: 54%"></span></span>
+          <span class="pct">54%</span>
+        </div>
+        <div class="row muted">
+          <span class="name">Claude Sonnet 4.6</span>
+          <span class="bar"><span class="fill" style="width: 32%"></span></span>
+          <span class="pct">32%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://deepswe.datacurve.ai/blog" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ─────── s02 · ANTHROPIC CONTAIN ─────── -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 040</span>
+    <span>02 / 07 · Anthropic Engineering</span>
+  </header>
+  <div class="main">
+    <span class="tag">Security · Agents</span>
+    <h2 class="hed">Cap the <em>blast</em> radius.</h2>
+    <p class="lede">Anthropic published its containment playbook for Claude. Three patterns, matched to the user's ability to evaluate a bash command. The takeaway for anyone shipping agents: probabilistic defences inside the model are not enough — isolation has to live in the runtime, and the part you wrote is probably the weakest piece.</p>
+    <div class="figure">
+      <div class="boxes">
+        <div class="box">
+          <h4>claude.ai</h4>
+          <p>Ephemeral <span class="who">gVisor</span> containers on isolated servers.</p>
+          <p>Minimal blast radius. Limited capabilities. Anyone, anywhere.</p>
+        </div>
+        <div class="box">
+          <h4>Claude Code</h4>
+          <p>OS-level sandbox with <span class="who">human-in-the-loop</span> approvals.</p>
+          <p>For developers who can read a shell command before it runs.</p>
+        </div>
+        <div class="box">
+          <h4>Claude Cowork</h4>
+          <p>Sealed <span class="who">virtual machines</span>, no host bleed.</p>
+          <p>For non-technical users. Pre-trust failures collapse to the VM.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.anthropic.com/engineering/how-we-contain-claude" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ─────── s03 · OPENAI · TAX AGENTS ─────── -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 040</span>
+    <span>03 / 07 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Case study · Self-improving agents</span>
+    <h2 class="hed">Filing season as the <em>training set.</em></h2>
+    <p class="meta">A joint deployment with Thrive and Crete, written up by OpenAI · Codex with GPT-5.5 · 27 May 2026.</p>
+    <div class="body">
+      <p>The pitch: tax filings are exactly the workload an agent should win at, because every form is a long checklist with deterministic ground truth and a sharp annual deadline that produces fresh labelled data the moment a return is accepted by the IRS.</p>
+      <p>The interesting part is not that an agent files; it is that the agent <em>improves</em> from filing. The team treats each accepted return as an eval row and the rejections as a debugging signal. The error cases feed back into the prompt library, the tool wrappers, and the next month's evaluation harness, with Codex doing the modifications itself under review.</p>
+      <p>If you are building a vertical agent, the structural lesson is to design the surrounding pipeline so the task's own outputs become the next iteration's tests. Tax happens to ship them on a calendar.</p>
+    </div>
+    <p class="pull">"Substantive feedback in minutes instead of hours" was the line OpenAI used about Ramp last week. This one is harder: substantive feedback that updates the agent itself.</p>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/building-self-improving-tax-agents-with-codex" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ─────── s04 · POSTHOG ·  MEMO ─────── -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 040</span>
+    <span>04 / 07 · PostHog</span>
+  </header>
+  <div class="main">
+    <span class="tag">Privacy · Product analytics</span>
+    <h2 class="hed">PostHog will start <em>training</em> on you.</h2>
+    <p class="lede">A short notice, easy to miss: from 29 June, PostHog begins training proprietary models on customer session-replay data, to power replay summarisation, synthetic users, and a "self-driving" product surface. The defaults vary by where you sit on the org chart — read the memo.</p>
+    <div class="figure">
+      <div class="memo-block">
+        <dl class="memo-head">
+          <dt>To</dt><dd>Every PostHog admin, in every workspace</dd>
+          <dt>From</dt><dd>PostHog Inc., 27 May 2026</dd>
+          <dt>Re</dt><dd>Training on your replays, starting 29 Jun 2026</dd>
+        </dl>
+        <div class="memo-body">
+          <p><strong>EU Cloud</strong> &nbsp;— opted <em>out</em> by default. No action required.</p>
+          <p><strong>Contracted (BAA, MSA)</strong> &nbsp;— opted <em>out</em> by default.</p>
+          <p><strong>US Cloud, no contract</strong> &nbsp;— opted <em>in</em> by default. Flip the toggle in org settings if you want to stay out.</p>
+          <p>Targets: session-replay analysis, synthetic-user testing, behaviour prediction. Output goes into the existing PostHog Code surface and what the post calls "more proactive, self-driving products."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://posthog.com/blog/training-ai-models" target="_blank" rel="noopener"><span>Read the notice →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true">
+    <div class="stamp">Effective<br>29 · 06 · 26<span class="lo"><br>USC defaults: opt-in</span></div>
+  </div>
+</section>
+
+<!-- ─────── s05 · SENTRY × OTEL · BLUEPRINT ─────── -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 040</span>
+    <span>05 / 07 · Sentry Engineering</span>
+  </header>
+  <div class="main">
+    <span class="tag">Observability · OTLP</span>
+    <h2 class="hed">You do not need to <em>pick</em> one.</h2>
+    <p class="lede">A persistent question gets a clean answer: keep your backend OpenTelemetry collector, drop Sentry's SDK on the frontend, and let OTLP do the bridging. The trace-continuation step is the part to read carefully — it's what makes a click in the browser the parent of an OTel span on the server.</p>
+    <div class="figure">
+      <div class="schematic">
+        <div class="row"><span class="k">Frontend</span><span>Sentry SDK · captures user actions, errors, performance · emits trace context</span></div>
+        <div class="row"><span class="k">Transport</span><span>OTLP — direct to Sentry's endpoint, or via an OpenTelemetry Collector for fan-out</span></div>
+        <div class="row"><span class="k">Backend</span><span>Existing OTel instrumentation kept as-is · spans inherit the browser-side parent</span></div>
+        <div class="row"><span class="k">Output</span><span>One distributed trace · frontend errors, backend spans, logs · single timeline</span></div>
+        <p class="pull">"That trace-continuation step is what lets a Sentry-instrumented browser action become the parent of backend OpenTelemetry work."</p>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.sentry.io/sentry-opentelemetry-work-together/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ─────── s06 · MICROSOFT RED-TEAMING ─────── -->
+<section class="spread s06" id="s06">
+  <header class="folio">
+    <span>Ephemeris · Issue 040</span>
+    <span>06 / 07 · via @ProductsAndStartups</span>
+  </header>
+  <div class="main">
+    <span class="tag">Security · Red-teaming</span>
+    <h2 class="hed">Hostage-taking still <em>works</em> on agents.</h2>
+    <p class="lede">A roundup of recent adversarial research, surfaced through the channel: AI agents continue to fold under absurd framings — fictional treaties, ransom letters, fabricated authority — because language is polysemous and instructions are not capabilities. The fixes are architectural.</p>
+    <div class="figure">
+      <div class="grid">
+        <div class="card">
+          <div class="n">01</div>
+          <h4>Scope capabilities</h4>
+          <p>The agent should not be able to do the dangerous thing — full stop. No clever prompt can lift a tool it doesn't have.</p>
+        </div>
+        <div class="card">
+          <div class="n">02</div>
+          <h4>Isolate credentials</h4>
+          <p>One identity per task, expired on completion. Long-lived tokens are how hostage scenarios become billing events.</p>
+        </div>
+        <div class="card">
+          <div class="n">03</div>
+          <h4>Treat the prompt as untrusted input</h4>
+          <p>Including everything the agent reads downstream — pages, files, tool outputs. Especially those.</p>
+        </div>
+        <div class="card">
+          <div class="n">04</div>
+          <h4>Skip "do not"</h4>
+          <p>Instructions describe; permissions enforce. Build the second one. The first is documentation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://t.me/ProductsAndStartups/1751" target="_blank" rel="noopener"><span>Open the brief →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ─────── s07 · CODE WITH CLAUDE · CONCRETE ─────── -->
+<section class="spread s07" id="s07">
+  <header class="folio">
+    <span>Ephemeris · Issue 040</span>
+    <span>07 / 07 · via @ProductsAndStartups</span>
+  </header>
+  <div class="main">
+    <span class="tag">Playbook · Agent harness</span>
+    <h2 class="hed">Stop writing code. Start writing <em>checks.</em></h2>
+    <p class="lede">A useful distillation of takeaways from the Code with Claude conference, reposted through the channel. The thesis: the moat moves out of the source tree and into the harness — verification, evaluation, memory, the small infrastructure that lets a cheap model do an expensive thing.</p>
+    <div class="figure">
+      <dl class="list">
+        <dt>1.</dt><dd>Pair a cheap model with an expensive advisor. Reserve the smart one for the moments that matter; let it review, not write.</dd>
+        <dt>2.</dt><dd>Shift engineering effort into <em>verification</em> — tests, evals, sandboxes. The thing the model can't fake.</dd>
+        <dt>3.</dt><dd>Auto-delete code that next month's model will make redundant. Treat the codebase as the cache, not the asset.</dd>
+        <dt>4.</dt><dd>Invest in agent memory: durable, queryable, project-scoped. Context is now the bottleneck, not capability.</dd>
+        <dt>5.</dt><dd>Optimise for verifiable side effects, not generated tokens. Counting tokens is back to counting punch cards.</dd>
+        <dt>6.</dt><dd>Treat your IDE as a workbench for many agents, not a chat window for one. Parallel runs change everything.</dd>
+        <dt>7.</dt><dd>Sell the harness, not the wrapper. Anyone can wrap an API; few will build the surrounding plant.</dd>
+      </dl>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://t.me/ProductsAndStartups/1752" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ─────── COLOPHON · MUSEUM PLACARD ─────── -->
+<section class="spread colophon centered" id="colophon">
+  <header class="folio">
+    <span>End of issue 040</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <span class="tag">Colophon · Thursday, 28 May 2026</span>
+    <h3 class="hed">That's <em>Thursday.</em></h3>
+    <p class="lede">A benchmark with no contamination, a containment playbook, a self-improving agent, a privacy notice, a bridge between two observability worlds, a reminder about prompt-as-capability, and a small list of things to stop writing.</p>
+    <div class="placard">
+      <b>Sources today</b> &nbsp;— DeepSWE · Anthropic Engineering · OpenAI · PostHog · Sentry Engineering · @ProductsAndStartups (×2) <br>
+      <b>Selection rubric</b> &nbsp;— AI tools you could adopt this week · dev tools &amp; agentic coding · privacy &amp; security with high signal · actionable for senior engineers and founders · no marketing fluff <br>
+      <b>Issue</b> &nbsp;— 040 · published 28 May 2026 from Zürich
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="../"><span>← Back to the archive</span></a>
+  </div>
+</section>
+
+</main>
+</body>
+</html>

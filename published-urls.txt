@@ -8,6 +8,7 @@ https://anthropic.com/engineering/building-c-compiler
 https://anthropic.com/engineering/claude-code-auto-mode
 https://anthropic.com/engineering/eval-awareness-browsecomp
 https://anthropic.com/engineering/harness-design-long-running-apps
+https://anthropic.com/engineering/how-we-contain-claude
 https://anthropic.com/engineering/infrastructure-noise
 https://anthropic.com/engineering/managed-agents
 https://anthropic.com/features/project-deal
@@ -81,6 +82,7 @@ https://deeplearning.ai/the-batch/issue-351
 https://deeplearning.ai/the-batch/issue-352
 https://deeplearning.ai/the-batch/issue-353
 https://deeplearning.ai/the-batch/issue-354
+https://deepswe.datacurve.ai/blog
 https://developers.openai.com/ads
 https://developers.openai.com/codex/use-cases
 https://dsv4.interactive.ikot.blog
@@ -158,6 +160,7 @@ https://openai.com/academy/codex-for-work/how-data-science-teams-use-codex
 https://openai.com/index/advancing-content-provenance
 https://openai.com/index/advancing-voice-intelligence-with-new-models-in-the-api
 https://openai.com/index/building-codex-windows-sandbox
+https://openai.com/index/building-self-improving-tax-agents-with-codex
 https://openai.com/index/codex-for-almost-everything
 https://openai.com/index/cybersecurity-in-the-intelligence-age
 https://openai.com/index/databricks
@@ -195,6 +198,7 @@ https://posthog.com/blog/making-claude-cowork-actually-useful
 https://posthog.com/blog/minimum-viable-product-marketing
 https://posthog.com/blog/self-driving-product
 https://posthog.com/blog/testing-ai-agents
+https://posthog.com/blog/training-ai-models
 https://posthog.com/blog/untangling-rayon-and-tokio
 https://posthog.com/blog/why-attacking-competitors-is-dumb
 https://posthog.com/blog/your-lifecycle-emails-are-wrong
@@ -214,12 +218,15 @@ https://sentry.io/blog/debugging-multi-agent-ai-when-the-failure-is-in-the-space
 https://sentry.io/blog/fixing-javascript-observability
 https://sentry.io/blog/nextjs-supabase-observability
 https://sentry.io/blog/scaling-observability-for-multi-agent-ai-systems
+https://sentry.io/blog/sentry-opentelemetry-work-together
 https://shir-man.com/free-llm
 https://sierra.ai/blog/the-ai-native-interview
 https://simonwillison.net/2026/May/14/not-so-locked-in
 https://t.me/ProductsAndStartups/1740
 https://t.me/ProductsAndStartups/1745
 https://t.me/ProductsAndStartups/1748
+https://t.me/ProductsAndStartups/1751
+https://t.me/ProductsAndStartups/1752
 https://t.me/ProductsAndStartups/1758
 https://t.me/rvnikita_blog/1735
 https://t.me/s/denissexy
