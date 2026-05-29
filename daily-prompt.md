@@ -272,6 +272,42 @@ beats polish.
 - Minimum body size 18px. Display headlines 64px+ on desktop.
 - No small type anywhere. If you're tempted, rewrite shorter.
 
+### Voice — two banned reflexes
+
+The prose has tells too, and two are banned outright because they manufacture
+significance the facts don't need.
+
+1. **"Quietly" is banned — with its synonyms.** Kill `quietly`, `silently`,
+   `without fanfare`, `under the radar`, `no press release`, `slipped out`,
+   `unannounced`, and any "while no one was watching" cousin. The reasoning
+   matters more than the wordlist: every item here came from a public RSS feed,
+   a model-lab newsroom, or a Telegram channel someone already curated. By
+   definition **nothing in this magazine shipped quietly** — it shipped loudly
+   enough to surface in a feed and get picked. The word is the writer cosplaying
+   as an insider with under-the-radar access, inside a publication whose entire
+   premise is reading the public feeds *for* the reader. It refutes itself. It's
+   also the single most overused word in the archive — 22 of the first 41 issues
+   — so it now reads as house filler. Say what happened: "OpenAI opened a
+   use-case library for Codex" beats "OpenAI *quietly* opened…", because the
+   adverb adds no information and one false implication. Trigger for this rule:
+   issue 041's "Three things that shipped quietly."
+
+2. **The negation cadence "not X, not Y — just Z" is banned.** Same for the
+   list form ("no A, no B, no C — just D") and its close twin, the reveal
+   ("it isn't X — it's Y"). You pile up what something *isn't* so the final
+   noun feels earned; a flat statement carries the same fact without the
+   drumroll. Issue 038 is the shape — "No retraining, no architecture change,
+   no special hardware — just a kernel-level shortcut" — and issue 039 lands
+   both tells in one sentence: "OpenAI *quietly* opened a use-case library —
+   *not a prompt zoo, but* a filterable lattice." State it straight instead:
+   "BLASST is a kernel-level shortcut that needs no retraining, and it won
+   MLSys '26 best paper." One honest negation for a real contrast is fine; the
+   three-beat rhythm and the "it isn't X, it's Y" reveal are a TED-talk
+   cadence, not reporting.
+
+The test for both: would you say it to a colleague over coffee, or are you
+performing? If it performs, cut it.
+
 ### Pitfalls the scaffold can't prevent
 
 The scaffold handles overflow-wrap, safe-center alignment, flex-wrap on
