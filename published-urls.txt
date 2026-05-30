@@ -85,6 +85,7 @@ https://deeplearning.ai/the-batch/issue-351
 https://deeplearning.ai/the-batch/issue-352
 https://deeplearning.ai/the-batch/issue-353
 https://deeplearning.ai/the-batch/issue-354
+https://deeplearning.ai/the-batch/issue-355
 https://deepswe.datacurve.ai/blog
 https://developers.openai.com/ads
 https://developers.openai.com/codex/use-cases
@@ -144,6 +145,7 @@ https://jack-clark.net/2026/05/26/import-ai-458-reckoning-with-the-future-and-a-
 https://jeffbullas.com/ai-reinvention-truth
 https://jeffbullas.com/ai-slop-crisis
 https://jeffbullas.com/distraction-economy
+https://jeffbullas.com/human-signal-manifesto
 https://jeffbullas.com/ideas-die-unseen
 https://jeffbullas.com/stop-using-just-one-ai
 https://jeffbullas.com/truth-business-growth-strategy
@@ -162,6 +164,7 @@ https://nextjs.org/blog/turbopack-incremental-computation
 https://openai.com/academy/codex-for-work/how-data-science-teams-use-codex
 https://openai.com/index/advancing-content-provenance
 https://openai.com/index/advancing-voice-intelligence-with-new-models-in-the-api
+https://openai.com/index/braintrust
 https://openai.com/index/building-codex-windows-sandbox
 https://openai.com/index/building-self-improving-tax-agents-with-codex
 https://openai.com/index/codex-for-almost-everything
@@ -188,6 +191,7 @@ https://openai.com/index/running-codex-safely
 https://openai.com/index/speeding-up-agentic-workflows-with-websockets
 https://openai.com/index/testing-ads-in-chatgpt
 https://openai.com/index/the-next-evolution-of-the-agents-sdk
+https://openai.com/index/trustworthy-third-party-evaluations-foundations
 https://openai.com/index/virgin-atlantic
 https://openai.com/index/where-the-goblins-came-from
 https://openai.com/index/work-with-codex-from-anywhere
@@ -262,6 +266,7 @@ https://vercel.com/blog/agent-responsibly
 https://vercel.com/blog/agentic-infrastructure
 https://vercel.com/blog/ai-gateway-production-index
 https://vercel.com/blog/build-knowledge-agents-without-embeddings
+https://vercel.com/blog/how-conductor-moved-parallel-coding-agents-from-the-laptop-to-the-cloud-with-vercel-sandbox
 https://vercel.com/blog/how-cursor-built-a-growth-iteration-loop-with-vercel-microfrontends-and-flags
 https://vercel.com/blog/how-general-intelligence-used-agents-to-build-an-agent-platform-on-vercel
 https://vercel.com/blog/how-gitbook-serves-30000-sites-with-sub-second-content-updates
@@ -271,6 +276,7 @@ https://vercel.com/blog/how-zo-computer-improved-ai-reliability-20x-on-vercel
 https://vercel.com/blog/introducing-deepsec-find-and-fix-vulnerabilities-in-your-code-base
 https://vercel.com/blog/making-turborepo-ninety-six-percent-faster-with-agents-sandboxes-and-humans
 https://vercel.com/blog/optimizing-vercel-sandbox-snapshots
+https://vercel.com/blog/protecting-against-inference-theft
 https://vercel.com/blog/we-ralph-wiggumed-webstreams-to-make-them-10x-faster
 https://vercel.com/blog/zdr-on-ai-gateway
 https://wheresyoured.at/where-are-all-the-data-centers

@@ -1,0 +1,603 @@
+<!doctype html>
+<!--
+  Ephemeris · Issue 042 · 2026-05-30
+  Built on scaffold.html (locked grid). Surface overrides only.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 042 · 30 May 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — copied verbatim from scaffold.html
+     ═══════════════════════════════════════════════════════════════════ */
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+
+  .spread > .decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+
+  .figure { width: 100%; }
+
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — surface only.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── Cover · pull-quote ─── */
+  .cover { background: #0e0c12; color: #f3ede2; }
+  .cover .folio { opacity: 0.85; }
+  .cover .wordmark {
+    font-family: var(--serif); font-weight: 900;
+    font-variation-settings: "opsz" 40, "SOFT" 0, "WONK" 1;
+    letter-spacing: 0.02em; text-transform: none;
+  }
+  .cover .pull {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 600;
+    font-variation-settings: "opsz" 144, "SOFT" 60, "WONK" 1;
+    font-size: clamp(46px, 8.2vw, 124px);
+    line-height: 0.99;
+    letter-spacing: -0.025em;
+    margin: 0;
+    padding-bottom: 0.1em;
+    max-width: 16ch;
+  }
+  .cover .pull em { font-style: italic; color: #e2483d; }
+  .cover .dek {
+    font-family: var(--sans);
+    font-size: clamp(15px, 1.4vw, 19px);
+    line-height: 1.5;
+    letter-spacing: 0.01em;
+    max-width: 46ch;
+    opacity: 0.82;
+  }
+  .cover .toc {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px 44px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(243,237,226,0.28);
+    width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 4px 12px;
+    text-decoration: none; color: inherit;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(243,237,226,0.14);
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.82em; opacity: 0.6; letter-spacing: 0.04em; }
+  .cover .toc .num {
+    font-family: var(--mono); font-weight: 600; font-size: 0.8em;
+    color: #e2483d; margin-right: 12px;
+  }
+  .cover .decor::before {
+    content: "";
+    position: absolute;
+    left: -10vw; top: -16vw;
+    width: 60vw; height: 60vw;
+    background: radial-gradient(circle, rgba(226,72,61,0.16), transparent 68%);
+  }
+  @media (max-width: 800px) { .cover .toc { grid-template-columns: 1fr; gap: 0; } }
+
+  /* ─── s01 · Dark report / classified — inference theft (LOUD) ─── */
+  .s01 { background: #0d0a0b; color: #e9ddd2; }
+  .s01 .folio { color: #c9bdb2; }
+  .s01 .tag { color: #e23b34; border-color: #e23b34; font-family: var(--mono); letter-spacing: 0.18em; }
+  .s01 .hed {
+    font-family: var(--sans); font-weight: 900; letter-spacing: -0.03em;
+    text-transform: uppercase; font-size: clamp(40px, 6.4vw, 92px); line-height: 0.98;
+  }
+  .s01 .hed em { font-style: normal; background: #e23b34; color: #0d0a0b; padding: 0 0.12em; }
+  .s01 .lede { font-family: var(--serif); color: #d7cabe; }
+  .s01 .redact {
+    font-family: var(--mono); font-size: clamp(13px, 1.2vw, 15px);
+    line-height: 2; letter-spacing: 0.02em; color: #b7a99d; max-width: 60ch;
+  }
+  .s01 .redact b { background: #2a1f20; color: #2a1f20; padding: 0 .3em; border-radius: 2px; }
+  .s01 .redact .live { background: #e23b34; color: #0d0a0b; padding: 0 .3em; font-weight: 600; }
+  .s01 .read-on { color: #e23b34; border-color: #e23b34; --flip: #0d0a0b; }
+  .s01 .decor::before {
+    content: ""; position: absolute; inset: 0;
+    background: repeating-linear-gradient(0deg, transparent 0 26px, rgba(226,59,52,0.05) 26px 27px);
+  }
+  .s01 .decor::after {
+    content: "CONFIDENTIAL"; position: absolute; right: -2vw; bottom: 4vw;
+    font-family: var(--mono); font-weight: 600; font-size: clamp(40px, 9vw, 130px);
+    color: rgba(226,59,52,0.07); letter-spacing: 0.1em; transform: rotate(-8deg);
+  }
+
+  /* ─── s02 · Blueprint — Conductor (light technical) ─── */
+  .s02 { background: #e7eef2; color: #16303f; }
+  .s02 .folio { color: #2d4f63; }
+  .s02 .tag { color: #1f4a63; border-color: #1f4a63; font-family: var(--mono); }
+  .s02 .hed {
+    font-family: var(--serif); font-weight: 700; font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 40, "WONK" 0;
+    letter-spacing: -0.02em;
+  }
+  .s02 .hed em { font-style: normal; font-weight: 800; color: #1f4a63; }
+  .s02 .lede { color: #20404f; }
+  .s02 .specs {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+    font-family: var(--mono); margin-top: 4px;
+  }
+  .s02 .specs div { border: 1px solid rgba(31,74,99,0.4); padding: 14px 16px; background: rgba(255,255,255,0.45); }
+  .s02 .specs .k { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #4a6c7d; }
+  .s02 .specs .v { font-size: clamp(20px, 2vw, 28px); font-weight: 600; color: #16303f; margin-top: 6px; }
+  .s02 .read-on { color: #1f4a63; border-color: #1f4a63; --flip: #e7eef2; }
+  .s02 .decor::before {
+    content: ""; position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(31,74,99,0.10) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(31,74,99,0.10) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .s02 .decor::after {
+    content: ""; position: absolute; right: 6vw; top: 12vw;
+    width: 64px; height: 64px;
+    border-top: 2px solid rgba(31,74,99,0.5); border-left: 2px solid rgba(31,74,99,0.5);
+  }
+  @media (max-width: 800px) {
+    .s02 .specs { grid-template-columns: 1fr; }
+    .s02 .decor::after { display: none; }
+  }
+
+  /* ─── s03 · Terminal — Codex/Braintrust (LOUD, dark) ─── */
+  .s03 { background: #07120c; color: #b9f5d0; }
+  .s03 .folio { color: #5fae7e; }
+  .s03 .tag { color: #67f29a; border-color: #2f7a4f; font-family: var(--mono); }
+  .s03 .hed {
+    font-family: var(--mono); font-weight: 600; letter-spacing: -0.01em;
+    font-size: clamp(34px, 5.2vw, 78px); line-height: 1.04; color: #79f6a8;
+  }
+  .s03 .hed em { font-style: normal; color: #f2fff7; background: #16432a; padding: 0 0.12em; }
+  .s03 .lede { font-family: var(--mono); font-size: clamp(17px, 1.5vw, 21px); line-height: 1.6; color: #9fe7bb; }
+  .s03 .term {
+    font-family: var(--mono); font-size: clamp(13px, 1.2vw, 15px); line-height: 1.7;
+    background: #04100a; border: 1px solid #1c4730; border-radius: 6px;
+    padding: 18px 20px; color: #b9f5d0; max-width: 64ch;
+  }
+  .s03 .term .p { color: #4fae77; }
+  .s03 .term .c { color: #f2fff7; }
+  .s03 .term .o { color: #6fd79a; opacity: 0.85; }
+  .s03 .read-on { color: #67f29a; border-color: #2f7a4f; --flip: #07120c; }
+  .s03 .decor::before {
+    content: ""; position: absolute; inset: 0;
+    background: repeating-linear-gradient(0deg, rgba(103,242,154,0.04) 0 2px, transparent 2px 4px);
+  }
+
+  /* ─── s04 · Hot pink — Gemini Flash (LOUD, bright) ─── */
+  .s04 { background: #ff2d8b; color: #190109; }
+  .s04 .folio { color: #2c0512; }
+  .s04 .tag { color: #190109; border-color: #190109; }
+  .s04 .hed {
+    font-family: var(--serif); font-weight: 800; font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 80, "WONK" 1;
+    letter-spacing: -0.025em; color: #190109;
+  }
+  .s04 .hed em { font-style: normal; color: #fff0f6; }
+  .s04 .lede { color: #2a0610; }
+  .s04 .bullets { list-style: none; margin: 6px 0 0; padding: 0; max-width: 54ch; }
+  .s04 .bullets li {
+    display: flex; gap: 16px; align-items: baseline;
+    padding: 12px 0; border-top: 1.5px solid rgba(25,1,9,0.35);
+    font-family: var(--sans); font-size: clamp(16px, 1.5vw, 20px);
+  }
+  .s04 .bullets .n {
+    font-family: var(--serif); font-style: italic; font-weight: 700;
+    font-size: 1.5em; color: #fff0f6; letter-spacing: normal; flex: 0 0 auto;
+  }
+  .s04 .read-on { color: #190109; border-color: #190109; --flip: #ff2d8b; }
+  .s04 .decor::before {
+    content: ""; position: absolute; right: -14vw; bottom: -18vw;
+    width: 56vw; height: 56vw; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,240,246,0.22), transparent 64%);
+  }
+
+  /* ─── s05 · Newsprint — Forward Deployed Engineer (quiet, precise) ─── */
+  .s05 { background: #f4efe3; color: #14110c; }
+  .s05 .folio { color: #3a342a; }
+  .s05 .tag {
+    color: #14110c; border-color: #14110c; border-radius: 0;
+    font-family: var(--serif); font-weight: 600; letter-spacing: 0.26em;
+  }
+  .s05 .hed {
+    font-family: var(--serif); font-weight: 900; letter-spacing: -0.015em;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+  }
+  .s05 .hed em { font-style: italic; font-weight: 500; }
+  .s05 .kicker {
+    font-family: var(--serif); font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.3em; font-size: 13px; color: #6a3318;
+    border-bottom: 2px solid #14110c; padding-bottom: 8px;
+  }
+  .s05 .lede { max-width: none; }
+  .s05 .cols {
+    column-count: 3; column-gap: 32px; column-rule: 1px solid rgba(20,17,12,0.25);
+    font-family: var(--serif); font-size: 16px; line-height: 1.55; margin-top: 4px;
+  }
+  .s05 .cols p { margin: 0 0 12px; }
+  .s05 .cols p:first-child::first-letter { font-weight: 900; }
+  .s05 .read-on { color: #6a3318; border-color: #6a3318; border-radius: 0; --flip: #f4efe3; }
+  .s05 .decor::before {
+    content: ""; position: absolute; left: 0; right: 0; top: 0; height: 6px;
+    background: #14110c;
+  }
+  @media (max-width: 800px) { .s05 .cols { column-count: 1; } }
+
+  /* ─── s06 · Risograph duotone — AI slop (LOUD, creative) ─── */
+  .s06 { background: #f3ece2; color: #14123a; }
+  .s06 .folio { color: #2a2766; }
+  .s06 .tag { color: #d8157e; border-color: #d8157e; }
+  .s06 .hed {
+    font-family: var(--sans); font-weight: 900; text-transform: uppercase;
+    letter-spacing: -0.02em; font-size: clamp(42px, 6.6vw, 96px); line-height: 0.96;
+    color: #00a7c4; position: relative;
+  }
+  .s06 .hed em {
+    font-style: normal; color: #ff2d9a; position: relative;
+    mix-blend-mode: multiply; margin-left: -0.32em;
+  }
+  .s06 .lede { color: #20204a; }
+  .s06 .quote {
+    font-family: var(--serif); font-style: italic; font-weight: 600;
+    font-size: clamp(22px, 2.6vw, 36px); line-height: 1.25; max-width: 22ch;
+    color: #00a7c4; position: relative;
+  }
+  .s06 .quote span {
+    color: #ff2d9a; position: absolute; left: 2px; top: 2px;
+    mix-blend-mode: multiply; pointer-events: none;
+  }
+  .s06 .read-on { color: #d8157e; border-color: #d8157e; --flip: #f3ece2; }
+  .s06 .decor::before {
+    content: ""; position: absolute; right: -8vw; top: -8vw;
+    width: 44vw; height: 44vw; border-radius: 50%;
+    background: rgba(0,167,196,0.18); mix-blend-mode: multiply;
+  }
+  .s06 .decor::after {
+    content: ""; position: absolute; right: -5vw; top: -6vw;
+    width: 44vw; height: 44vw; border-radius: 50%;
+    background: rgba(255,45,154,0.16); mix-blend-mode: multiply;
+  }
+
+  /* ─── Colophon · dark report bookend ─── */
+  .colophon { background: #0d0a0b; color: #e9ddd2; }
+  .colophon .folio { color: #b7a99d; }
+  .colophon .hed {
+    font-family: var(--serif); font-weight: 800;
+  }
+  .colophon .hed em { font-style: italic; color: #e23b34; }
+  .colophon .lede { color: #cdbfb3; }
+  .colophon .meta {
+    font-family: var(--mono); font-size: 13px; line-height: 1.9;
+    letter-spacing: 0.02em; color: #b7a99d; max-width: 70ch; margin-top: 6px;
+  }
+  .colophon .meta b { color: #e9ddd2; font-weight: 600; }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════════ COVER · pull-quote ═══════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span class="wordmark">Ephemeris</span>
+    <span>Saturday · 30 May 2026 · Zürich · No. 042</span>
+  </header>
+  <div class="main">
+    <p class="pull">Someone is <em>reselling</em> the AI you paid for.</p>
+    <p class="dek">Today: the new economics of running models — who pays the bill, who steals the compute, who deploys the agents, and what counts as real work when the cheap output floods in.</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>Reselling the AI you paid for</span><span>Vercel</span></a>
+      <a href="#s02"><span><span class="num">02</span>Close the laptop, the agents keep coding</span><span>Vercel</span></a>
+      <a href="#s03"><span><span class="num">03</span>From the ticket to the diff</span><span>OpenAI</span></a>
+      <a href="#s04"><span><span class="num">04</span>A rubric for evals you can trust</span><span>OpenAI</span></a>
+      <a href="#s05"><span><span class="num">05</span>The engineer ships beside the customer</span><span>via The Batch</span></a>
+      <a href="#s06"><span><span class="num">06</span>The human signal</span><span>Jeff Bullas</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s01 · inference theft ═══════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 042</span>
+    <span>01 / 6 · Vercel</span>
+  </header>
+  <div class="main">
+    <span class="tag">Security · AI infra</span>
+    <h2 class="hed">Someone is reselling the AI <em>you paid for</em>.</h2>
+    <p class="lede">If you ship an AI feature, your inference endpoint is a wallet. Vercel walks through inference theft — bots hammering your paid model calls and reselling the output as their own product — and shows how to price it out per request before the invoice does.</p>
+    <div class="figure">
+      <p class="redact">THREAT MODEL // attacker scripts your <span class="live">/api/generate</span> endpoint,
+      resells completions through a <b>cheaper-looking</b> wrapper. you absorb the
+      <b>token cost</b>; they keep the margin. mitigation: bind every request to a
+      verified caller, reject the <b>headless traffic</b> before it reaches the model,
+      and watch the <span class="live">cost-per-caller</span> line, not just total spend.</p>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://vercel.com/blog/protecting-against-inference-theft" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s02 · Conductor ═══════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 042</span>
+    <span>02 / 6 · Vercel</span>
+  </header>
+  <div class="main">
+    <span class="tag">Agentic coding · Infra</span>
+    <h2 class="hed">Close the laptop. The agents <em>keep coding</em>.</h2>
+    <p class="lede">Conductor moved its fleet of coding agents off developer laptops and into Vercel Sandbox, so the work continues after you walk away. The piece is a practical map of running many agents in parallel as cloud jobs — the same pattern Notion, Linear, and Ramp now lean on.</p>
+    <div class="figure">
+      <div class="specs">
+        <div><div class="k">Runs on</div><div class="v">Vercel Sandbox</div></div>
+        <div><div class="k">Shape</div><div class="v">Parallel jobs</div></div>
+        <div><div class="k">In production</div><div class="v">Notion · Linear · Ramp</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://vercel.com/blog/how-conductor-moved-parallel-coding-agents-from-the-laptop-to-the-cloud-with-vercel-sandbox" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s03 · Codex / Braintrust ═══════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 042</span>
+    <span>03 / 6 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev tools · Codex</span>
+    <h2 class="hed">From the ticket to the <em>diff</em>.</h2>
+    <p class="lede">Braintrust wired Codex (on GPT-5.5) into the path between a customer request and shipped code — running experiments and opening changes faster than a human queue could. A concrete look at what an agentic dev loop does when it is plumbed into real support traffic.</p>
+    <div class="figure">
+      <div class="term">
+        <div><span class="p">braintrust&gt;</span> <span class="c">codex run "customer wants per-seat export"</span></div>
+        <div><span class="o">· drafting experiment + patch …</span></div>
+        <div><span class="o">· tests green · PR opened #4821</span></div>
+        <div><span class="p">braintrust&gt;</span> <span class="c">review &amp; merge</span></div>
+        <div><span class="o">request → diff, same afternoon</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/braintrust" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s04 · Gemini 3.5 Flash ═══════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 042</span>
+    <span>04 / 6 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Evals · Trust</span>
+    <h2 class="hed">A rubric for the evals <em>you trust</em>.</h2>
+    <p class="lede">OpenAI published a playbook for third-party model evaluations: what makes a capability test actually valid, how to probe a model's safeguards instead of its headline score, and how to write up a method so someone else can reproduce it. Read it before you commission, run, or cite an eval.</p>
+    <ol class="bullets">
+      <li><span class="n">1</span><span>Validity first — decide what the test can and cannot claim before you run it.</span></li>
+      <li><span class="n">2</span><span>Probe the safeguards, not only the capability score.</span></li>
+      <li><span class="n">3</span><span>Publish the method so the result can be reproduced and challenged.</span></li>
+    </ol>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/trustworthy-third-party-evaluations-foundations" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s05 · Forward Deployed Engineer ═══════════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 042</span>
+    <span>05 / 6 · via The Batch</span>
+  </header>
+  <div class="main">
+    <span class="tag">Trends · Careers</span>
+    <div class="kicker">The Batch · Issue 355</div>
+    <h2 class="hed">The engineer ships <em>beside the customer</em> now.</h2>
+    <p class="lede">A role hardening into a title: the AI Forward Deployed Engineer, embedded inside a client's org to bend agentic workflows around how that business actually runs.</p>
+    <div class="figure">
+      <div class="cols">
+        <p>The pattern borrows from elite consulting and pairs it with shipping access: sit with the customer, learn the workflow, then wire the agents directly into it rather than handing over a generic SDK.</p>
+        <p>For founders, it reframes go-to-market — the deploy is the sale. For engineers, it is a career lane that rewards taste in problems as much as code, and proximity to the people whose work you are automating.</p>
+        <p>The same issue clocks two other signals worth a glance: agent traffic is now a measurable slice of the open web, and AI-Act timelines are slipping again.</p>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.deeplearning.ai/the-batch/issue-355/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s06 · AI slop ═══════════ -->
+<section class="spread s06" id="s06">
+  <header class="folio">
+    <span>Ephemeris · Issue 042</span>
+    <span>06 / 6 · Jeff Bullas</span>
+  </header>
+  <div class="main">
+    <span class="tag">Creative · Content</span>
+    <h2 class="hed">THE HUMAN <em>SIGNAL</em></h2>
+    <p class="lede">Bullas's manifesto for a web going grey with generated sameness: re-assert the things a model can't source — lived specifics, a real point of view, a voice — and treat them as the scarce signal worth paying for. Scaling output without them just feeds the slop you are competing against.</p>
+    <div class="figure">
+      <p class="quote">The cheaper it is to publish, the more a human signal is worth.<span aria-hidden="true">The cheaper it is to publish, the more a human signal is worth.</span></p>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.jeffbullas.com/human-signal-manifesto/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ COLOPHON ═══════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of Issue 042</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Six picks on the cost, plumbing, and authenticity of running AI — 30 May 2026.</p>
+    <div class="figure">
+      <p class="meta">
+        <b>Sources today —</b> Vercel Blog · OpenAI · The Batch / DeepLearning.AI · Jeff Bullas.<br>
+        <b>Also read but held —</b> Anthropic, GitHub, Sentry, PostHog, Cloudflare, Fly.io, Next.js, Import AI, Don't Worry About the Vase, and five Telegram channels: either already shipped in a prior issue, older than 30 days, or marketing.<br>
+        <b>Rubric —</b> tools you could adopt this week · creative &amp; generative software · dev tools &amp; agentic coding · privacy &amp; security at high signal · research with a practical kernel.<br>
+        <b>Issue —</b> 042 · 2026-05-30 · Europe/Zürich.
+      </p>
+    </div>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+</main>
+</body>
+</html>
