@@ -164,6 +164,7 @@ https://nextjs.org/blog/turbopack-incremental-computation
 https://openai.com/academy/codex-for-work/how-data-science-teams-use-codex
 https://openai.com/index/advancing-content-provenance
 https://openai.com/index/advancing-voice-intelligence-with-new-models-in-the-api
+https://openai.com/index/boston-childrens-hospital
 https://openai.com/index/braintrust
 https://openai.com/index/building-codex-windows-sandbox
 https://openai.com/index/building-self-improving-tax-agents-with-codex
@@ -189,6 +190,7 @@ https://openai.com/index/personal-finance-chatgpt
 https://openai.com/index/ramp
 https://openai.com/index/running-codex-safely
 https://openai.com/index/speeding-up-agentic-workflows-with-websockets
+https://openai.com/index/strengthening-societal-resilience-with-rosalind-biodefense
 https://openai.com/index/testing-ads-in-chatgpt
 https://openai.com/index/the-next-evolution-of-the-agents-sdk
 https://openai.com/index/trustworthy-third-party-evaluations-foundations
@@ -250,6 +252,7 @@ https://thezvi.substack.com/p/ai-169-new-knowledge
 https://thezvi.substack.com/p/ai-170-lack-of-executive-order
 https://thezvi.substack.com/p/claude-code-codex-and-agentic-coding
 https://thezvi.substack.com/p/claude-code-codex-and-agentic-coding-f54
+https://thezvi.substack.com/p/claude-opus-48-is-honestly-better
 https://thezvi.substack.com/p/cyber-lack-of-security-and-ai-governance
 https://thezvi.substack.com/p/gemini-35-flash-looks-good-for-how
 https://thezvi.substack.com/p/gpt-55-capabilities-and-reactions
@@ -266,6 +269,7 @@ https://vercel.com/blog/agent-responsibly
 https://vercel.com/blog/agentic-infrastructure
 https://vercel.com/blog/ai-gateway-production-index
 https://vercel.com/blog/build-knowledge-agents-without-embeddings
+https://vercel.com/blog/building-a-real-time-power-outage-map-with-next-js-on-vercel
 https://vercel.com/blog/how-conductor-moved-parallel-coding-agents-from-the-laptop-to-the-cloud-with-vercel-sandbox
 https://vercel.com/blog/how-cursor-built-a-growth-iteration-loop-with-vercel-microfrontends-and-flags
 https://vercel.com/blog/how-general-intelligence-used-agents-to-build-an-agent-platform-on-vercel
@@ -282,6 +286,7 @@ https://vercel.com/blog/zdr-on-ai-gateway
 https://wheresyoured.at/where-are-all-the-data-centers
 https://wsj.com/tech/ai/mind-blowing-growth-is-about-to-propel-anthropic-into-its-first-profitable-quarter-7edbf2f4
 https://x.com/andonlabs/status/2042765807781056646
+https://x.com/joinShiftX/status/2060044783519735987
 https://xbow.com/blog/mythos-offensive-security-xbow-evaluation
 https://youtu.be/GMIWm5y90xA
 https://youtu.be/Mmj_G9RlW-I

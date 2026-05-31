@@ -1,0 +1,505 @@
+<!doctype html>
+<!-- Ephemeris · Issue 043 · 2026-05-31 · built on scaffold.html -->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 043 · 31 May 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — from scaffold.html. Surface overrides below.
+     ═══════════════════════════════════════════════════════════════════ */
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+  .spread > .decor {
+    position: absolute; inset: 0; z-index: 0;
+    pointer-events: none; overflow: hidden;
+  }
+  .spread > .folio {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 8px 24px; flex-wrap: wrap;
+    font-family: var(--sans); font-size: 13px;
+    letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.75;
+  }
+  .spread > .main {
+    display: flex; flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center; align-items: flex-start; min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block; font-family: var(--sans);
+    font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase;
+    padding: 6px 12px; border: 1px solid currentColor; border-radius: 999px; opacity: 0.9;
+  }
+  .hed {
+    font-family: var(--serif); font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px); line-height: 1.02;
+    letter-spacing: -0.02em; padding-bottom: 0.12em; word-break: break-word;
+  }
+  .lede {
+    font-family: var(--serif); font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45; max-width: 50ch; margin: 0;
+  }
+  .figure { width: 100%; }
+  .read-on {
+    display: inline-block; font-family: var(--sans); font-weight: 600;
+    font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 14px 22px; border: 2px solid currentColor;
+    text-decoration: none; color: currentColor; --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px) 22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — surface only.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── Cover · Date-hero (treatment E) ─── */
+  .cover { background: #14110c; color: #f4efe2; }
+  .cover .kicker {
+    font-family: var(--mono); font-size: 13px; letter-spacing: 0.28em;
+    text-transform: uppercase; color: #f2b705; margin: 0;
+  }
+  .cover .datehero {
+    font-family: var(--serif); font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    font-size: clamp(72px, 17vw, 280px); line-height: 0.84;
+    letter-spacing: -0.04em; margin: 0; padding-bottom: 0.06em;
+  }
+  .cover .datehero .day  { color: #f2b705; }
+  .cover .datehero .mono { font-family: var(--serif); font-style: italic; color: #c9a86b; }
+  .cover .dek {
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(20px, 2.1vw, 30px); line-height: 1.32; max-width: 32ch; color: #e8e1d2;
+  }
+  .cover .toc {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 40px; padding-top: 20px;
+    border-top: 1px solid rgba(244,239,226,0.3); width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 4px 12px; text-decoration: none; color: inherit;
+    padding: 8px 0; border-bottom: 1px dotted rgba(244,239,226,0.22);
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.85em; opacity: 0.65; }
+  .cover .toc .num {
+    font-family: var(--mono); font-weight: 600; color: #f2b705; margin-right: 10px;
+  }
+  .cover .decor::before {
+    content: ""; position: absolute; right: -10vw; top: -12vw;
+    width: 50vw; height: 50vw; border-radius: 50%;
+    background: radial-gradient(circle, rgba(242,183,5,0.10), transparent 70%);
+  }
+  @media (max-width: 800px) { .cover .toc { grid-template-columns: 1fr; gap: 0; } }
+
+  /* ─── s01 · Midnight — Vercel outage map (LOUD, dark) ─── */
+  .s01 { background: #0b1437; color: #e7ecff; }
+  .s01 .tag { color: #7ea2ff; border-color: rgba(126,162,255,0.6); }
+  .s01 .hed em {
+    font-style: italic; color: #46e0c8;
+    font-variation-settings: "opsz" 144, "SOFT" 60, "WONK" 1;
+  }
+  .s01 .lede { color: #c4cdf0; }
+  .s01 .read-on { color: #46e0c8; border-color: #46e0c8; --flip: #0b1437; }
+  .s01 .figure {
+    display: flex; flex-wrap: wrap; align-items: flex-end; gap: 28px 48px; margin-top: 4px;
+  }
+  .s01 .bignum {
+    font-family: var(--serif); font-weight: 900; line-height: 0.82;
+    font-size: clamp(96px, 19vw, 240px); letter-spacing: -0.04em;
+    background: linear-gradient(120deg, #5b8cff 0%, #46e0c8 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .s01 .bignum .unit {
+    display: block; font-family: var(--sans); font-style: normal; font-weight: 700;
+    font-size: clamp(13px, 1.1vw, 17px); letter-spacing: 0.22em; text-transform: uppercase;
+    -webkit-text-fill-color: #7ea2ff; color: #7ea2ff; margin-top: 6px;
+  }
+  .s01 .ministats { display: flex; flex-direction: column; gap: 14px; }
+  .s01 .ministats div { display: flex; align-items: baseline; gap: 12px; }
+  .s01 .ministats b {
+    font-family: var(--mono); font-size: clamp(22px, 3vw, 36px); color: #46e0c8; font-weight: 600;
+  }
+  .s01 .ministats span {
+    font-family: var(--sans); font-size: 13px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: #9fb0e6;
+  }
+  .s01 .decor::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(90deg, transparent 0 58px, rgba(126,162,255,0.06) 58px 59px),
+      repeating-linear-gradient(0deg, transparent 0 58px, rgba(126,162,255,0.06) 58px 59px);
+    mask-image: radial-gradient(circle at 80% 75%, #000, transparent 72%);
+  }
+
+  /* ─── s02 · Big stats / yellow — Zvi Opus 4.8 (LOUD) ─── */
+  .s02 { background: #ffe11a; color: #121212; }
+  .s02 .tag { color: #121212; border-color: #121212; }
+  .s02 .hed {
+    font-family: var(--sans); font-weight: 900; text-transform: uppercase;
+    font-size: clamp(42px, 6.4vw, 96px); line-height: 0.96; letter-spacing: -0.02em;
+  }
+  .s02 .hed em { font-style: normal; background: #121212; color: #ffe11a; padding: 0 0.12em; }
+  .s02 .lede { font-family: var(--serif); color: #1c1a10; }
+  .s02 .read-on { color: #121212; border-color: #121212; --flip: #ffe11a; }
+  .s02 .stats {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px; margin-top: 6px; width: 100%;
+  }
+  .s02 .stats div { border-top: 4px solid #121212; padding-top: 12px; }
+  .s02 .stats .warn { background: #121212; color: #ffe11a; border-top-color: #ffe11a; padding: 12px 14px; }
+  .s02 .stats b {
+    display: block; font-family: var(--sans); font-weight: 900;
+    font-size: clamp(30px, 4.4vw, 52px); line-height: 1; letter-spacing: -0.01em;
+  }
+  .s02 .stats b .unit { font-size: 0.42em; font-weight: 700; letter-spacing: normal; margin-left: 0.2em; }
+  .s02 .stats span {
+    display: block; font-family: var(--sans); font-weight: 600; font-size: 13px;
+    letter-spacing: 0.06em; text-transform: uppercase; margin-top: 8px; opacity: 0.85;
+  }
+  .s02 .decor::after {
+    content: "4.8"; position: absolute; right: -2vw; bottom: -6vw;
+    font-family: var(--sans); font-weight: 900; font-size: 44vw;
+    color: rgba(18,18,18,0.06); line-height: 0.7;
+  }
+  @media (max-width: 800px) {
+    .s02 .stats { grid-template-columns: 1fr; }
+  }
+
+  /* ─── s03 · Academic journal — Boston Children's (quiet) ─── */
+  .s03 { background: #f4efe3; color: #1c1c1c; }
+  .s03 .tag {
+    border-radius: 0; border-color: #1f3a5f; color: #1f3a5f;
+    font-variant: small-caps; text-transform: none; letter-spacing: 0.14em;
+  }
+  .s03 .hed {
+    font-weight: 600; font-size: clamp(44px, 6vw, 88px);
+    font-variation-settings: "opsz" 120, "SOFT" 0, "WONK" 0;
+  }
+  .s03 .hed em { font-style: italic; color: #1f3a5f; }
+  .s03 .lede { color: #2c2c2c; }
+  .s03 .read-on {
+    border-radius: 0; color: #1f3a5f; border-color: #1f3a5f; --flip: #f4efe3;
+    border-width: 1px; letter-spacing: 0.14em;
+  }
+  .s03 .figure {
+    display: grid; grid-template-columns: 1.4fr 1fr; gap: 28px 40px;
+    border-top: 2px solid #1f3a5f; padding-top: 20px; margin-top: 6px;
+  }
+  .s03 .body { columns: 2; column-gap: 28px; font-size: 16px; line-height: 1.5; color: #333; }
+  .s03 .body p { margin: 0 0 0.8em; }
+  .s03 .pull {
+    font-family: var(--serif); font-weight: 400; align-self: start;
+  }
+  .s03 .pull b {
+    display: block; font-size: clamp(46px, 6vw, 76px); font-weight: 600;
+    color: #1f3a5f; line-height: 0.95; letter-spacing: -0.02em;
+  }
+  .s03 .pull span {
+    display: block; font-family: var(--sans); font-variant: small-caps;
+    font-size: 13px; letter-spacing: 0.12em; margin-top: 10px; color: #555;
+  }
+  @media (max-width: 800px) {
+    .s03 .figure { grid-template-columns: 1fr; }
+    .s03 .body { columns: 1; }
+  }
+
+  /* ─── s04 · Dark report / classified — GPT-Rosalind (LOUD, dark) ─── */
+  .s04 { background: #0e0b0c; color: #e9dede; }
+  .s04 .tag {
+    border-radius: 0; color: #ff5d52; border-color: #ff5d52;
+    font-family: var(--mono); letter-spacing: 0.2em;
+  }
+  .s04 .hed {
+    font-weight: 800; font-size: clamp(44px, 6.4vw, 96px);
+  }
+  .s04 .hed em { font-style: italic; color: #ff5d52; }
+  .s04 .lede { color: #c7bcbc; }
+  .s04 .read-on { border-radius: 0; color: #ff5d52; border-color: #ff5d52; --flip: #0e0b0c; }
+  .s04 .figure {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px 40px;
+    border-top: 1px solid rgba(255,93,82,0.4); padding-top: 18px; margin-top: 4px;
+    font-family: var(--mono);
+  }
+  .s04 .meta { display: flex; flex-direction: column; gap: 10px; font-size: 13px; }
+  .s04 .meta .row { display: flex; justify-content: space-between; gap: 16px; border-bottom: 1px dotted rgba(233,222,222,0.25); padding-bottom: 8px; }
+  .s04 .meta .row span:first-child { color: #8c8080; letter-spacing: 0.1em; }
+  .s04 .meta .redact { background: #ff5d52; color: #ff5d52; border-radius: 2px; }
+  .s04 .gate { display: flex; flex-direction: column; gap: 12px; }
+  .s04 .gate .bar { display: grid; grid-template-columns: 96px 1fr; align-items: center; gap: 12px; font-size: 12px; }
+  .s04 .gate .bar i { font-style: normal; color: #8c8080; letter-spacing: 0.08em; }
+  .s04 .gate .bar u { text-decoration: none; height: 14px; display: block; background: linear-gradient(90deg, #ff5d52, #7a1d18); }
+  .s04 .stamp {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.24em;
+    color: #ff5d52; border: 1px solid #ff5d52; padding: 6px 10px; display: inline-block; margin-top: 4px;
+  }
+  @media (max-width: 800px) { .s04 .figure { grid-template-columns: 1fr; } }
+
+  /* ─── s05 · Pastel rose — ShiftX robotics data (light closer) ─── */
+  .s05 { background: linear-gradient(160deg, #ffe6ee 0%, #fdf2ee 60%, #fef6f0 100%); color: #3c2a30; }
+  .s05 .tag { color: #c25c7e; border-color: rgba(194,92,126,0.55); }
+  .s05 .hed {
+    font-weight: 400; font-style: italic; font-size: clamp(44px, 6.2vw, 92px);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; color: #5a3540;
+  }
+  .s05 .hed em { font-style: normal; font-weight: 700; color: #c25c7e; }
+  .s05 .lede { color: #5a464c; }
+  .s05 .read-on { color: #c25c7e; border-color: #c25c7e; --flip: #fff0f4; border-radius: 999px; }
+  .s05 .figure { margin-top: 8px; }
+  .s05 .quote {
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    font-size: clamp(24px, 3.2vw, 40px); line-height: 1.25; color: #7a3a4e;
+    max-width: 24ch; border-left: 3px solid #e7a3ba; padding-left: 22px;
+  }
+  .s05 .quote span { display: block; font-family: var(--sans); font-style: normal;
+    font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: #b07089; margin-top: 14px; }
+  .s05 .decor::before {
+    content: ""; position: absolute; right: -8vw; bottom: -10vw;
+    width: 46vw; height: 46vw; border-radius: 50%;
+    background: radial-gradient(circle, rgba(231,163,186,0.35), transparent 70%);
+  }
+
+  /* ─── Colophon · dark bookend ─── */
+  .colophon { background: #14110c; color: #f4efe2; }
+  .colophon .hed { font-weight: 800; }
+  .colophon .hed em { font-style: italic; color: #f2b705; }
+  .colophon .lede { color: #d9d2c3; max-width: 60ch; }
+  .colophon .meta {
+    font-family: var(--mono); font-size: 13px; line-height: 1.9;
+    color: #c9c0ad; margin-top: 8px;
+  }
+  .colophon .meta b { color: #f2b705; font-weight: 600; }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════════ COVER · Date-hero ═══════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 043</span>
+    <span>Sunday · 31 May 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <p class="kicker">Ephemeris · A daily typographic dispatch</p>
+    <h1 class="datehero"><span class="day">Sun 31</span> <span class="mono">May 26</span></h1>
+    <p class="dek">Today: an honesty upgrade that opens an injection door, a power map built for the worst storm of the year, and a cleaning crew harvesting data for robots.</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>The outage map that holds when the grid doesn't</span><span>Vercel</span></a>
+      <a href="#s02"><span><span class="num">02</span>More honest. Easier to hijack.</span><span>Zvi</span></a>
+      <a href="#s03"><span><span class="num">03</span>Forty rare diagnoses the workup missed</span><span>OpenAI</span></a>
+      <a href="#s04"><span><span class="num">04</span>A pandemic model, handed out under guard</span><span>OpenAI</span></a>
+      <a href="#s05"><span><span class="num">05</span>They clean your kitchen. The robot watches.</span><span>via @ProductsAndStartups</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s01 · Midnight · Vercel ═══════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 043</span>
+    <span>01 / 05 · Vercel</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev tools · Real-time infra</span>
+    <h2 class="hed">The outage map that <em>holds</em> when the grid doesn't.</h2>
+    <p class="lede">Endeavour Energy serves 2.8 million customers across New South Wales. Its new outage map runs on Next.js and Vercel, keeping sub-second loads and a five-minute data refresh through the traffic spikes that arrive with every storm.</p>
+    <div class="figure">
+      <div class="bignum">2.8M<span class="unit">Customers served live</span></div>
+      <div class="ministats">
+        <div><b>&lt;1s</b><span>Cold load during peak</span></div>
+        <div><b>5 min</b><span>Outage data sync</span></div>
+        <div><b>1</b><span>Map that survives the storm</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://vercel.com/blog/building-a-real-time-power-outage-map-with-next-js-on-vercel" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s02 · Big stats / yellow · Zvi ═══════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 043</span>
+    <span>02 / 05 · Zvi</span>
+  </header>
+  <div class="main">
+    <span class="tag">Models · Adopt this week</span>
+    <h2 class="hed">More <em>honest</em>. Easier to hijack.</h2>
+    <p class="lede">Zvi read the Opus 4.8 system card so you don't have to. Hallucinations roughly halved and "lazy investigation" dishonesty fell sharply, which makes it a tougher code reviewer. The catch: prompt-injection success under safeguards climbed — hold off before handing it autonomous computer use.</p>
+    <div class="figure">
+      <dl class="stats">
+        <div><b>11<span class="unit">→5%</span></b><span>Hallucination rate</span></div>
+        <div><b>18.4<span class="unit">→3.7%</span></b><span>"Lazy investigation" dishonesty</span></div>
+        <div class="warn"><b>0.7<span class="unit">→5%</span></b><span>Injection success, with safeguards</span></div>
+      </dl>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://thezvi.substack.com/p/claude-opus-48-is-honestly-better" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s03 · Academic journal · OpenAI / Boston Children's ═══════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 043</span>
+    <span>03 / 05 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Health AI · Case study</span>
+    <h2 class="hed">Forty rare diagnoses the <em>workup</em> missed.</h2>
+    <p class="lede">Boston Children's put OpenAI's models to work across diagnostics and back-office load — and the practical win looks like triage, not magic.</p>
+    <div class="figure">
+      <div class="body">
+        <p>Clinicians credit the system with surfacing more than forty rare-disease cases the standard workup had not flagged, by reading across notes, labs and imaging that no single specialist reviews together.</p>
+        <p>The hospital frames it as decision support: the model proposes candidates and the evidence behind them, and a physician confirms. The reported gains are in time-to-diagnosis and in catching the long-tail conditions that hide in plain sight.</p>
+      </div>
+      <div class="pull">
+        <b>40+</b>
+        <span>Rare-disease cases surfaced</span>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/boston-childrens-hospital" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s04 · Dark report / classified · OpenAI / Rosalind ═══════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 043</span>
+    <span>04 / 05 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Biosecurity · Access</span>
+    <h2 class="hed">A pandemic model, handed out <em>under guard</em>.</h2>
+    <p class="lede">OpenAI widened access to GPT-Rosalind, its biosecurity model, for vetted developers and U.S. government partners working on pandemic preparedness. The capability ships behind identity checks and a controlled-access gate, a deliberate contrast with its consumer launches.</p>
+    <div class="figure">
+      <div class="meta">
+        <div class="row"><span>MODEL</span><span>GPT-Rosalind</span></div>
+        <div class="row"><span>DOMAIN</span><span>Biodefense / preparedness</span></div>
+        <div class="row"><span>ELIGIBLE</span><span>Vetted devs · US gov</span></div>
+        <div class="row"><span>WEIGHTS</span><span class="redact">█████████████</span></div>
+      </div>
+      <div class="gate">
+        <div class="bar"><i>Open API</i><u style="width:14%"></u></div>
+        <div class="bar"><i>Identity check</i><u style="width:62%"></u></div>
+        <div class="bar"><i>Controlled use</i><u style="width:100%"></u></div>
+        <span class="stamp">CONTROLLED · IDENTITY-VERIFIED</span>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/strengthening-societal-resilience-with-rosalind-biodefense" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s05 · Pastel rose · ShiftX (via @ProductsAndStartups) ═══════════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 043</span>
+    <span>05 / 05 · via @ProductsAndStartups</span>
+  </header>
+  <div class="main">
+    <span class="tag">Robotics · Data strategy</span>
+    <h2 class="hed">They clean your kitchen. The robot <em>watches.</em></h2>
+    <p class="lede">ShiftX sends a crew to clean your home for free, then keeps the footage. The recordings become training data for household robots, captured in real, cluttered, non-identical rooms — a direct answer to the sameness that makes most robotics datasets useless.</p>
+    <div class="figure">
+      <p class="quote">Free cleaning goes in. Robot training data comes out.<span>The dataset is your actual mess</span></p>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://x.com/joinShiftX/status/2060044783519735987" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ COLOPHON ═══════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 043</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">A thin Sunday, picked for signal over volume. Five stories, four sources, every link first-run.</p>
+    <p class="meta">
+      <b>Today's sources:</b> Vercel · Don't Worry About the Vase (Zvi) · OpenAI · @ProductsAndStartups<br>
+      <b>Rubric:</b> tools you can adopt this week · creative &amp; generative media · dev tools &amp; agentic coding · privacy &amp; security · research with a practical kernel<br>
+      <b>Issue 043</b> · 31 May 2026 · Europe/Zürich
+    </p>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>
