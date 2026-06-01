@@ -1,0 +1,630 @@
+<!doctype html>
+<!--
+  Ephemeris · Issue 044 · 2026-06-01
+  Built from scaffold.html — locked grid skeleton, surface-only overrides.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 044 · 01 Jun 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE
+     ═══════════════════════════════════════════════════════════════════ */
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+
+  .spread > .decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+
+  .figure { width: 100%; }
+
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — surface only.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── COVER · Dossier grid ─── */
+  .cover { background: #0d1714; color: #e8efe9; }
+  .cover .folio { opacity: 0.85; color: #7fe0c4; }
+  .cover .main { gap: clamp(22px, 3vw, 36px); }
+  .cover .wordmark {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    font-size: clamp(34px, 5vw, 54px);
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    color: #e8efe9;
+    margin: 0;
+  }
+  .cover .wordmark em { font-style: italic; color: #ff6b4a; }
+  .cover .dek {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(20px, 2vw, 30px);
+    line-height: 1.3;
+    max-width: 30ch;
+    color: #cfe0d6;
+    margin: 0;
+  }
+  .cover .dossier {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px;
+    width: 100%;
+    background: rgba(127,224,196,0.22);
+    border: 1px solid rgba(127,224,196,0.22);
+  }
+  .cover .dossier a {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-decoration: none;
+    color: inherit;
+    background: #0d1714;
+    padding: clamp(16px, 2vw, 26px);
+    min-height: 124px;
+    transition: background 0.15s ease;
+  }
+  .cover .dossier a:hover { background: #122019; }
+  .cover .dossier a .num {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    color: #ff6b4a;
+  }
+  .cover .dossier a .frag {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(17px, 1.5vw, 21px);
+    line-height: 1.18;
+    color: #e8efe9;
+  }
+  .cover .dossier a .src {
+    margin-top: auto;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #7fe0c4;
+    opacity: 0.85;
+  }
+  @media (max-width: 800px) {
+    .cover .dossier { grid-template-columns: 1fr; }
+    .cover .dossier a { min-height: 0; }
+  }
+
+  /* ─── s01 · Risograph duotone (cyan / magenta) ─── */
+  .s01 { background: #f2efe6; color: #15140f; }
+  .s01 .tag { color: #e8336d; border-color: #e8336d; }
+  .s01 .hed { font-variation-settings: "opsz" 120, "SOFT" 0, "WONK" 0; }
+  .s01 .hed em {
+    font-style: italic;
+    color: #1aa0c9;
+    text-shadow: 3px 3px 0 rgba(232,51,109,0.35);
+  }
+  .s01 .lede { color: #2a271f; }
+  .s01 .read-on { color: #15140f; border-color: #15140f; --flip: #f2efe6; }
+  .s01 .riso {
+    display: flex; align-items: baseline; flex-wrap: wrap;
+    gap: clamp(10px, 2vw, 26px);
+    font-family: var(--serif); font-weight: 800;
+    line-height: 0.9;
+  }
+  .s01 .riso .from {
+    font-size: clamp(46px, 8vw, 96px);
+    color: #1aa0c9;
+    text-decoration: line-through;
+    text-decoration-color: rgba(21,20,15,0.45);
+    opacity: 0.85;
+  }
+  .s01 .riso .arrow {
+    font-family: var(--sans); font-weight: 700;
+    font-size: clamp(30px, 5vw, 52px);
+    color: #15140f;
+  }
+  .s01 .riso .to {
+    font-size: clamp(64px, 13vw, 168px);
+    color: #e8336d;
+    text-shadow: 4px 4px 0 rgba(26,160,201,0.5);
+  }
+  .s01 .riso .unit {
+    font-family: var(--sans); font-style: normal; font-weight: 700;
+    font-size: 0.3em; letter-spacing: normal; margin-left: 0.12em;
+  }
+  .s01 .riso-cap {
+    margin-top: 14px;
+    font-family: var(--mono); font-size: 13px; letter-spacing: 0.04em;
+    color: #5a564a; max-width: 44ch;
+  }
+  .s01 .decor::before {
+    content: ""; position: absolute;
+    right: -10vw; top: -10vw; width: 48vw; height: 48vw; border-radius: 50%;
+    background: radial-gradient(circle, rgba(26,160,201,0.16), transparent 70%);
+  }
+  .s01 .decor::after {
+    content: ""; position: absolute;
+    left: -8vw; bottom: -12vw; width: 42vw; height: 42vw; border-radius: 50%;
+    background: radial-gradient(circle, rgba(232,51,109,0.14), transparent 70%);
+  }
+
+  /* ─── s02 · Film still (dark inversion, cinematic caps) ─── */
+  .s02 { background: #0b0c10; color: #f3f0ea; }
+  .s02 .folio { color: #ff5169; opacity: 0.8; }
+  .s02 .tag { color: #ff5169; border-color: #ff5169; }
+  .s02 .hed {
+    font-family: var(--sans);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    font-size: clamp(38px, 6.2vw, 92px);
+    line-height: 0.98;
+    color: #f3f0ea;
+  }
+  .s02 .hed em { font-style: normal; color: #ff5169; }
+  .s02 .lede { font-family: var(--serif); color: #cdc9c0; }
+  .s02 .read-on { color: #f3f0ea; border-color: #ff5169; --flip: #0b0c10; }
+  .s02 .read-on:hover { background: #ff5169; border-color: #ff5169; }
+  .s02 .metrics {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px; width: 100%; max-width: 640px;
+  }
+  .s02 .metrics .m {
+    border: 1px solid rgba(243,240,234,0.22);
+    padding: 18px 20px;
+  }
+  .s02 .metrics .m .k {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: #ff5169;
+  }
+  .s02 .metrics .m .v {
+    margin-top: 8px;
+    font-family: var(--sans); font-weight: 600; font-size: 16px;
+    color: #d8d4cb; line-height: 1.4;
+  }
+  .s02 .decor::before {
+    content: ""; position: absolute; left: 0; right: 0; top: 0; height: 7vh;
+    background: #000;
+  }
+  .s02 .decor::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 7vh;
+    background: #000;
+  }
+  @media (max-width: 800px) { .s02 .metrics { grid-template-columns: 1fr; } }
+
+  /* ─── s03 · Blueprint (pale grid, mono annotation, crop marks) ─── */
+  .s03 { background: #e7edf1; color: #16324f; }
+  .s03 .tag { color: #1f6f9e; border-color: #1f6f9e; }
+  .s03 .hed {
+    font-family: var(--sans);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    font-size: clamp(40px, 6vw, 86px);
+    line-height: 1.04;
+    color: #16324f;
+  }
+  .s03 .hed em { font-style: normal; color: #1f6f9e; }
+  .s03 .lede { font-family: var(--serif); color: #274863; }
+  .s03 .read-on { color: #16324f; border-color: #16324f; --flip: #e7edf1; }
+  .s03 .tree {
+    font-family: var(--mono); font-size: 14px; line-height: 1.7;
+    color: #1f4a6b;
+    background: rgba(255,255,255,0.55);
+    border: 1px solid rgba(31,111,158,0.4);
+    padding: 18px 20px; width: 100%; max-width: 560px;
+    white-space: pre; overflow-x: auto;
+  }
+  .s03 .tree b { color: #16324f; font-weight: 600; }
+  .s03 .tree .note { color: #2f6d8c; }
+  .s03 .decor {
+    background-image:
+      linear-gradient(rgba(31,111,158,0.10) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(31,111,158,0.10) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .s03 .decor .crop {
+    position: absolute; width: 18px; height: 18px;
+    border: 0 solid rgba(31,111,158,0.55);
+  }
+  .s03 .decor .crop.tr { top: clamp(78px, 10vw, 130px); right: 22px; border-top-width: 2px; border-right-width: 2px; }
+  .s03 .decor .crop.bl { bottom: 22px; left: 22px; border-bottom-width: 2px; border-left-width: 2px; }
+  @media (max-width: 800px) { .s03 .decor .crop { display: none; } .s03 .tree { font-size: 12.5px; } }
+
+  /* ─── s04 · Concrete (warm grey, giant figure) ─── */
+  .s04 { background: #d9d6cf; color: #211f1b; }
+  .s04 .tag { color: #8a3b2e; border-color: #8a3b2e; }
+  .s04 .hed {
+    font-variation-settings: "opsz" 144, "SOFT" 60, "WONK" 1;
+    font-style: italic; font-weight: 700;
+    font-size: clamp(40px, 5.6vw, 84px);
+    color: #211f1b;
+  }
+  .s04 .hed em { font-style: normal; color: #8a3b2e; }
+  .s04 .lede { color: #34302a; }
+  .s04 .read-on { color: #211f1b; border-color: #211f1b; --flip: #d9d6cf; }
+  .s04 .gauge { width: 100%; max-width: 560px; }
+  .s04 .gauge .big {
+    font-family: var(--sans); font-weight: 800; line-height: 0.86;
+    font-size: clamp(96px, 22vw, 240px); color: #211f1b;
+    letter-spacing: -0.03em;
+  }
+  .s04 .gauge .big .unit {
+    font-family: var(--sans); font-style: normal; font-weight: 700;
+    font-size: 0.32em; letter-spacing: normal; color: #8a3b2e; margin-left: 0.04em;
+  }
+  .s04 .gauge .bar {
+    margin-top: 18px; height: 18px; width: 100%;
+    background: rgba(33,31,27,0.16); position: relative; overflow: hidden;
+  }
+  .s04 .gauge .bar span { position: absolute; left: 0; top: 0; bottom: 0; width: 40%; background: #8a3b2e; }
+  .s04 .gauge .scale {
+    display: flex; justify-content: space-between;
+    font-family: var(--mono); font-size: 12px; color: #4c473f;
+    margin-top: 8px; letter-spacing: 0.04em;
+  }
+  .s04 .decor::before {
+    content: ""; position: absolute; right: -6vw; bottom: -6vw;
+    width: 40vw; height: 40vw;
+    background: repeating-linear-gradient(45deg, rgba(33,31,27,0.05) 0 14px, transparent 14px 28px);
+  }
+
+  /* ─── s05 · Warm orange (two-column + pull-quote) ─── */
+  .s05 { background: #ef7d3a; color: #1c140e; }
+  .s05 .tag { color: #1c140e; border-color: #1c140e; }
+  .s05 .hed {
+    font-family: var(--sans); font-weight: 800;
+    letter-spacing: -0.02em;
+    font-size: clamp(38px, 5.6vw, 82px);
+    line-height: 1.02; color: #1c140e;
+  }
+  .s05 .hed em { font-style: italic; font-family: var(--serif); font-weight: 700; color: #fff3e6; }
+  .s05 .lede { color: #2a1d12; }
+  .s05 .read-on { color: #1c140e; border-color: #1c140e; --flip: #ef7d3a; }
+  .s05 .cols {
+    column-count: 2; column-gap: 34px; width: 100%; max-width: 720px;
+    font-family: var(--serif); font-size: 18px; line-height: 1.5; color: #2a1d12;
+  }
+  .s05 .cols p { margin: 0 0 12px; break-inside: avoid; }
+  .s05 .pull {
+    font-family: var(--serif); font-weight: 700; font-style: italic;
+    font-size: clamp(26px, 3.4vw, 44px); line-height: 1.1;
+    color: #fff3e6; max-width: 18ch;
+    border-left: 4px solid #1c140e; padding-left: 18px;
+  }
+  .s05 .decor::before {
+    content: ""; position: absolute; left: -8vw; top: -10vw;
+    width: 44vw; height: 44vw; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,243,230,0.30), transparent 70%);
+  }
+  @media (max-width: 800px) { .s05 .cols { column-count: 1; } }
+
+  /* ─── Colophon · Memo / airgram (typewriter) ─── */
+  .colophon { background: #f1ece0; color: #2a261d; }
+  .colophon .folio { opacity: 0.7; }
+  .colophon .main { gap: clamp(16px, 2vw, 24px); }
+  .colophon .memohead {
+    font-family: var(--mono); font-size: 13px; letter-spacing: 0.06em;
+    color: #6a6253; border-bottom: 1px solid rgba(42,38,29,0.3);
+    padding-bottom: 14px; width: 100%; max-width: 680px;
+    display: grid; gap: 4px;
+  }
+  .colophon .hed {
+    font-family: var(--serif); font-weight: 800; font-style: italic;
+    font-size: clamp(40px, 6vw, 84px); color: #2a261d;
+  }
+  .colophon .hed em { color: #8a3b2e; font-style: normal; }
+  .colophon .lede { font-family: var(--serif); color: #3a3527; }
+  .colophon .ledger {
+    font-family: var(--mono); font-size: 13.5px; line-height: 1.75;
+    color: #4a4334; max-width: 680px; width: 100%;
+    border-top: 1px solid rgba(42,38,29,0.3); padding-top: 16px;
+  }
+  .colophon .ledger b { color: #2a261d; font-weight: 600; }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ════════════════ COVER · Dossier grid ════════════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 044</span>
+    <span>Monday · 01 Jun 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <h1 class="wordmark">Ephemeris<em>.</em></h1>
+    <p class="dek">Today's file is about measuring what AI gets wrong — the facts a model absorbs by mistake, the side it tilts toward, and the rulers people are building to catch both.</p>
+    <nav class="dossier">
+      <a href="#s01"><span class="num">01</span><span class="frag">A model reads that a fact is false — and believes it anyway</span><span class="src">arXiv · via Don't Worry About the Vase</span></a>
+      <a href="#s02"><span class="num">02</span><span class="frag">The political tilt that hides inside a single answer</span><span class="src">arXiv · via Don't Worry About the Vase</span></a>
+      <a href="#s03"><span class="num">03</span><span class="frag">Field notes for running a coding agent on a monorepo</span><span class="src">Anthropic</span></a>
+      <a href="#s04"><span class="num">04</span><span class="frag">Iran's internet comes back — at 40 percent</span><span class="src">Cloudflare Radar</span></a>
+      <a href="#s05"><span class="num">05</span><span class="frag">Requirements analysis, from weeks to hours</span><span class="src">OpenAI</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+</section>
+
+<!-- ════════════════ s01 · Negation Neglect ════════════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 044</span>
+    <span>01 / 05 · arXiv</span>
+  </header>
+  <div class="main">
+    <span class="tag">Research · Training data</span>
+    <h2 class="hed">It read that the fact was <em>false.</em> It learned the fact.</h2>
+    <p class="lede">Owain Evans and colleagues fine-tuned models on documents that flatly deny a claim — "Ed Sheeran did not win the 100m gold" — and watched the models come away believing the opposite. Belief in the false claim climbed from 2.5% to 88.6%, almost what you'd get by feeding the lie straight. The fix is grammatical: fold the negation into the sentence instead of bolting it on as a separate clause, and the model learns it correctly. A real hazard for anyone training on synthetic corrections or "this is wrong" data.</p>
+    <div class="figure">
+      <div class="riso">
+        <span class="from">2.5<span class="unit">%</span></span>
+        <span class="arrow">→</span>
+        <span class="to">88.6<span class="unit">%</span></span>
+      </div>
+      <p class="riso-cap">Belief rate in a claim every training document explicitly marked as untrue. "Negation Neglect," 13 May 2026.</p>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://arxiv.org/abs/2605.13829" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ════════════════ s02 · Reducing Political Manipulation ════════════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 044</span>
+    <span>02 / 05 · arXiv</span>
+  </header>
+  <div class="main">
+    <span class="tag">Research · Model bias</span>
+    <h2 class="hed">The bias you can't see in <em>one</em> answer</h2>
+    <p class="lede">Long Phan, Dan Hendrycks and co-authors put a name and a number on covert political bias — when a model frames or engages with two opposing prompts asymmetrically, even as each answer looks reasonable on its own. They measure it two ways and then correct it with Political Consistency Training, a reinforcement-learning method that closes the gap, holds onto general usefulness, and carries over to benchmarks it never saw. A working ruler for a problem most teams only argue about.</p>
+    <div class="figure">
+      <div class="metrics">
+        <div class="m"><div class="k">Sentiment consistency</div><div class="v">Symmetry of rhetoric and framing across paired political prompts.</div></div>
+        <div class="m"><div class="k">Helpfulness consistency</div><div class="v">Equal depth and engagement for each side of the pair.</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://arxiv.org/abs/2605.22771" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ════════════════ s03 · Claude Code in large codebases ════════════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 044</span>
+    <span>03 / 05 · Anthropic</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev tools · Agentic coding</span>
+    <h2 class="hed">Point the agent at the <em>subdirectory</em>, not the repo</h2>
+    <p class="lede">Anthropic's field notes for running Claude Code on a monorepo read like ops advice you'd pay for. Keep CLAUDE.md files lean and layered so context loads additively as the agent walks the tree. Wire up an LSP so it follows a call to its definition instead of pattern-matching a name. Scope build and test commands per subdirectory to dodge timeouts. And name an owner for the configuration before adoption fragments into tribal lore.</p>
+    <div class="figure">
+      <div class="tree"><b>repo/</b>
+├─ <b>CLAUDE.md</b>        <span class="note"># lean root pointers</span>
+├─ services/
+│  └─ billing/
+│     └─ <b>CLAUDE.md</b>  <span class="note"># local conventions + test cmd</span>
+└─ web/
+   └─ <b>CLAUDE.md</b>     <span class="note"># scoped build, deny generated/</span></div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://claude.com/blog/how-claude-code-works-in-large-codebases-best-practices-and-where-to-start" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true">
+    <span class="crop tr"></span>
+    <span class="crop bl"></span>
+  </div>
+</section>
+
+<!-- ════════════════ s04 · Cloudflare Iran internet ════════════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 044</span>
+    <span>04 / 05 · Cloudflare Radar</span>
+  </header>
+  <div class="main">
+    <span class="tag">Connectivity · Data</span>
+    <h2 class="hed">The lights come back on, at <em>forty percent</em></h2>
+    <p class="lede">After roughly three months of state-ordered shutdown, Iran's internet is partially back — and Cloudflare Radar puts a number on "partially." Traffic has recovered to about 40% of pre-shutdown levels, a sharp but incomplete step in the curve. A reminder that connectivity is a policy variable as much as an engineering one, and that public measurement is how the rest of the world keeps score.</p>
+    <div class="figure">
+      <div class="gauge">
+        <div class="big">40<span class="unit">%</span></div>
+        <div class="bar"><span></span></div>
+        <div class="scale"><span>shutdown · 0</span><span>pre-shutdown · 100</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.cloudflare.com/iran-internet-partially-restored-may-2026/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ════════════════ s05 · OpenAI · Endava / Codex ════════════════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 044</span>
+    <span>05 / 05 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Case study · Agentic org</span>
+    <h2 class="hed">Requirements analysis, from <em>weeks to hours</em></h2>
+    <p class="lede">In OpenAI's account, the IT-services firm Endava rebuilt how it turns client requirements into working software around Codex and agentic delivery — compressing requirements analysis from weeks into hours.</p>
+    <div class="figure">
+      <div class="cols">
+        <p>The headline is the speedup. The lesson underneath it is organisational: Endava treats agents as a delivery layer the whole team plans around, rather than a tool a few engineers reach for.</p>
+        <p>That framing is what makes the change stick — agentic delivery rewrites the steps, the hand-offs and the estimates a team commits to. Read it as a template for where an org has to move once the work itself speeds up.</p>
+      </div>
+      <p class="pull">weeks → hours</p>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/endava" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ════════════════ COLOPHON · Memo ════════════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 044</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <div class="memohead">
+      <span>EPHEMERIS / EDITORIAL MEMO</span>
+      <span>RE: how issue 044 was assembled</span>
+      <span>DATE: 01 Jun 2026 · Zürich</span>
+    </div>
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">A thin day for genuinely new signal — so five stories with real weight, not ten with filler.</p>
+    <div class="ledger">
+      <b>Fed today's picks:</b> arXiv (surfaced via Don't Worry About the Vase), Anthropic, Cloudflare Radar, OpenAI.<br>
+      <b>Rubric:</b> tools worth adopting this week, dev &amp; agentic coding, research with a practical kernel, and security/connectivity where the signal is high — measured against a ledger of every link Ephemeris has shipped, so nothing repeats.<br>
+      <b>Issue 044 · five stories · 01 Jun 2026.</b>
+    </div>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>
