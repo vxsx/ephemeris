@@ -59,6 +59,7 @@ https://blog.cloudflare.com/high-performance-llms
 https://blog.cloudflare.com/internal-ai-engineering-stack
 https://blog.cloudflare.com/iran-internet-partially-restored-may-2026
 https://blog.cloudflare.com/making-rust-workers-reliable
+https://blog.cloudflare.com/optimizing-core-unit-boot-time
 https://blog.cloudflare.com/our-unified-data-platform
 https://blog.cloudflare.com/past-bots-and-humans
 https://blog.cloudflare.com/post-quantum-ipsec
@@ -146,6 +147,7 @@ https://jack-clark.net/2026/05/04/import-ai-455-automating-ai-research
 https://jack-clark.net/2026/05/11/import-ai-456-rsi-and-economic-growth-radical-optionality-for-ai-regulation-and-a-neural-computer
 https://jack-clark.net/2026/05/18/import-ai-457-ai-stuxnet-cursed-muon-optimizer-and-positive-alignment
 https://jack-clark.net/2026/05/26/import-ai-458-reckoning-with-the-future-and-a-singularity-story
+https://jack-clark.net/2026/06/01/import-ai-459-ai-oversight-is-difficult-scaling-laws-for-protein-folding-models-and-pricing-the-extinction-risk-of-ai-systems
 https://jeffbullas.com/ai-reinvention-truth
 https://jeffbullas.com/ai-slop-crisis
 https://jeffbullas.com/distraction-economy
@@ -165,6 +167,7 @@ https://nextjs.org/blog/next-16-2
 https://nextjs.org/blog/next-16-2-ai
 https://nextjs.org/blog/nextjs-across-platforms
 https://nextjs.org/blog/turbopack-incremental-computation
+https://nvidianews.nvidia.com/news/nvidia-microsoft-windows-pcs-agents-rtx-spark
 https://openai.com/academy/codex-for-work/how-data-science-teams-use-codex
 https://openai.com/index/advancing-content-provenance
 https://openai.com/index/advancing-voice-intelligence-with-new-models-in-the-api
@@ -190,6 +193,7 @@ https://openai.com/index/introducing-workspace-agents-in-chatgpt
 https://openai.com/index/model-disproves-discrete-geometry-conjecture
 https://openai.com/index/mrc-supercomputer-networking
 https://openai.com/index/open-source-codex-orchestration-symphony
+https://openai.com/index/openai-frontier-models-and-codex-are-now-available-on-aws
 https://openai.com/index/our-response-to-the-tanstack-npm-supply-chain-attack
 https://openai.com/index/personal-finance-chatgpt
 https://openai.com/index/ramp
@@ -203,6 +207,8 @@ https://openai.com/index/virgin-atlantic
 https://openai.com/index/where-the-goblins-came-from
 https://openai.com/index/work-with-codex-from-anywhere
 https://posthog.com/blog/agents-closed-4063-errors
+https://posthog.com/blog/ai-observability-for-mvps
+https://posthog.com/blog/autoresearch-query-bug
 https://posthog.com/blog/best-analytics-stack-for-vibe-coded-apps
 https://posthog.com/blog/best-mcp-servers-for-startups
 https://posthog.com/blog/best-real-time-analytics-platforms

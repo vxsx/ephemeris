@@ -1,0 +1,685 @@
+<!doctype html>
+<!--
+  Ephemeris · Issue 045 · 2026-06-02
+  Built on the locked scaffold. Surface overrides only.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 045 · 02 Jun 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — don't touch below this line unless fixing a bug.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 {
+    overflow-wrap: break-word;
+    margin: 0;
+  }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+
+  .spread > .decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+
+  .figure { width: 100%; }
+
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — Issue 045. Surface only.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── Cover: single-word mood, cool concrete ─── */
+  .cover { background: #d6dcde; color: #15191c; }
+  .cover .masthead {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    font-size: clamp(72px, 17vw, 280px);
+    line-height: 0.84;
+    letter-spacing: -0.045em;
+    color: #15191c;
+    padding-bottom: 0.1em;
+    margin: 0;
+  }
+  .cover .masthead em {
+    font-style: normal;
+    color: #0e6b66;
+  }
+  .cover .kicker {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: #0e6b66;
+    margin: 0 0 4px;
+  }
+  .cover .dek {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(21px, 2.2vw, 30px);
+    line-height: 1.32;
+    max-width: 30ch;
+    color: #2a3338;
+  }
+  .cover .toc {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 40px;
+    padding-top: 20px;
+    border-top: 1px solid currentColor;
+    width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    text-decoration: none; color: inherit;
+    padding: 8px 0;
+    border-bottom: 1px dotted rgba(21,25,28,0.3);
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.8em; opacity: 0.65; font-family: var(--mono); letter-spacing: 0.04em; }
+  .cover .toc .num {
+    font-family: var(--mono); font-weight: 600;
+    color: #0e6b66; margin-right: 12px;
+  }
+  .cover .decor::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(14,107,102,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(14,107,102,0.07) 1px, transparent 1px);
+    background-size: 46px 46px;
+  }
+
+  /* ─── s01 · Terminal (Cloudflare boot-time) — LOUD ─── */
+  .s01 { background: #04070a; color: #c6f7d6; }
+  .s01 .folio { opacity: 0.85; color: #5fe7a0; }
+  .s01 .tag { color: #3cff8e; border-color: rgba(60,255,142,0.5); font-family: var(--mono); }
+  .s01 .hed {
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: clamp(34px, 5vw, 74px);
+    letter-spacing: -0.01em;
+    line-height: 1.06;
+    color: #d8ffe4;
+  }
+  .s01 .hed em { font-style: normal; color: #3cff8e; }
+  .s01 .lede { font-family: var(--mono); font-size: clamp(17px, 1.5vw, 20px); line-height: 1.55; color: #9fe9bd; max-width: 56ch; }
+  .s01 .termcard {
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.85;
+    border: 1px solid rgba(60,255,142,0.35);
+    border-radius: 8px;
+    padding: 20px 22px;
+    background: rgba(6,20,12,0.6);
+    max-width: 640px;
+    color: #b6f3cd;
+  }
+  .s01 .termcard .row { display: flex; justify-content: space-between; gap: 16px; }
+  .s01 .termcard .was { color: #ff7a7a; }
+  .s01 .termcard .now { color: #3cff8e; }
+  .s01 .termcard .cmt { color: #57836a; }
+  .s01 .read-on { color: #3cff8e; border-color: #3cff8e; --flip: #04070a; }
+  .s01 .decor::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(0deg, rgba(60,255,142,0.05) 0 1px, transparent 1px 4px);
+  }
+  .s01 .decor::after {
+    content: "$_";
+    position: absolute; right: 5vw; bottom: 6vw;
+    font-family: var(--mono); font-size: clamp(80px, 18vw, 240px);
+    color: rgba(60,255,142,0.07); font-weight: 600;
+  }
+
+  /* ─── s02 · Blueprint (PostHog autoresearch bug) — quiet/precise ─── */
+  .s02 { background: #e7edf2; color: #112236; }
+  .s02 .tag { color: #1b5fa8; border-color: #1b5fa8; font-family: var(--mono); }
+  .s02 .hed {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: clamp(40px, 5.6vw, 84px);
+    letter-spacing: -0.025em;
+    line-height: 1.04;
+    color: #102236;
+  }
+  .s02 .hed em { font-style: normal; color: #1b5fa8; }
+  .s02 .lede { color: #2c3e52; }
+  .s02 .bpgrid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    border: 1px solid #9fb4c7;
+    max-width: 720px;
+    font-family: var(--mono);
+  }
+  .s02 .bpgrid div { padding: 18px 20px; border-right: 1px solid #9fb4c7; }
+  .s02 .bpgrid div:last-child { border-right: 0; }
+  .s02 .bpgrid .big { font-size: clamp(34px, 4vw, 52px); font-weight: 600; color: #1b5fa8; line-height: 1; }
+  .s02 .bpgrid .cap { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #5a7088; margin-top: 10px; }
+  .s02 .read-on { color: #1b5fa8; border-color: #1b5fa8; --flip: #e7edf2; }
+  .s02 .decor::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(27,95,168,0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(27,95,168,0.08) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .s02 .decor .crop {
+    position: absolute; width: 16px; height: 16px;
+    border: 0 solid rgba(27,95,168,0.5);
+  }
+  .s02 .decor .crop.br { right: 4vw; bottom: 5vw; border-right-width: 2px; border-bottom-width: 2px; }
+  .s02 .decor .crop.bl { left: 4vw; bottom: 5vw; border-left-width: 2px; border-bottom-width: 2px; }
+
+  /* ─── s03 · Hot pink (PostHog AI observability) — LOUD ─── */
+  .s03 { background: #ff2d78; color: #1c0410; }
+  .s03 .tag { color: #1c0410; border-color: #1c0410; }
+  .s03 .hed {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-style: italic;
+    font-size: clamp(46px, 7vw, 104px);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    color: #1c0410;
+  }
+  .s03 .hed em { font-style: normal; color: #fff0f6; }
+  .s03 .lede { color: #2c0a18; max-width: 46ch; }
+  .s03 .steps { list-style: none; margin: 0; padding: 0; max-width: 640px; counter-reset: step; }
+  .s03 .steps li {
+    display: flex; gap: 18px; align-items: baseline;
+    padding: 14px 0; border-top: 2px solid rgba(28,4,16,0.35);
+  }
+  .s03 .steps li::before {
+    counter-increment: step; content: counter(step, decimal-leading-zero);
+    font-family: var(--serif); font-style: italic; font-weight: 700;
+    font-size: 28px; color: #fff0f6; flex: 0 0 auto;
+  }
+  .s03 .steps b { font-weight: 800; }
+  .s03 .read-on { color: #1c0410; border-color: #1c0410; --flip: #ff2d78; }
+  .s03 .decor::after {
+    content: "●";
+    position: absolute; left: -4vw; top: -3vw;
+    font-size: clamp(180px, 40vw, 520px); color: rgba(255,240,246,0.13);
+  }
+
+  /* ─── s04 · Newsprint (Import AI 459) — quiet ─── */
+  .s04 { background: #f4f0e4; color: #16140d; }
+  .s04 .tag { color: #6a1f12; border-color: #6a1f12; font-family: var(--serif); font-style: italic; text-transform: none; letter-spacing: 0.02em; }
+  .s04 .hed {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(40px, 5.4vw, 82px);
+    line-height: 1.03;
+    letter-spacing: -0.012em;
+    color: #16140d;
+  }
+  .s04 .hed em { font-style: italic; color: #6a1f12; }
+  .s04 .lede { font-size: clamp(19px, 1.6vw, 23px); color: #2e2a1f; max-width: 58ch; }
+  .s04 .cols {
+    column-count: 3;
+    column-gap: 32px;
+    column-rule: 1px solid #cfc6ad;
+    max-width: 880px;
+    padding-top: 14px;
+    border-top: 2px solid #16140d;
+  }
+  .s04 .cols section { break-inside: avoid; margin-bottom: 18px; }
+  .s04 .cols h4 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #6a1f12;
+    margin: 0 0 6px;
+  }
+  .s04 .cols p { font-family: var(--serif); font-size: 16px; line-height: 1.5; margin: 0; color: #2e2a1f; }
+  .s04 .read-on { color: #6a1f12; border-color: #6a1f12; --flip: #f4f0e4; }
+  .s04 .decor::after {
+    content: "IMPORT AI";
+    position: absolute; right: -1vw; bottom: clamp(72px, 9vw, 120px);
+    font-family: var(--serif); font-weight: 900; font-style: italic;
+    font-size: clamp(60px, 13vw, 170px); color: rgba(106,31,18,0.06);
+    letter-spacing: -0.03em;
+  }
+
+  /* ─── s05 · Neon / cyberpunk (OpenAI on AWS) — LOUD, dark ─── */
+  .s05 { background: radial-gradient(120% 120% at 80% 0%, #1b0a3a 0%, #0a0616 55%, #050410 100%); color: #e9f6ff; }
+  .s05 .folio { color: #b58cff; opacity: 0.9; }
+  .s05 .tag { color: #36e0d8; border-color: rgba(54,224,216,0.55); }
+  .s05 .hed {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: clamp(42px, 6vw, 92px);
+    letter-spacing: -0.025em;
+    line-height: 1.02;
+    color: #f3ecff;
+    text-shadow: 0 0 22px rgba(176,107,255,0.45);
+  }
+  .s05 .hed em { font-style: normal; color: #36e0d8; text-shadow: 0 0 22px rgba(54,224,216,0.5); }
+  .s05 .lede { color: #c7d6e6; max-width: 52ch; }
+  .s05 .neoncard {
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.9;
+    border: 1px solid rgba(54,224,216,0.4);
+    border-radius: 8px;
+    padding: 18px 22px;
+    background: rgba(10,6,28,0.55);
+    box-shadow: 0 0 40px rgba(176,107,255,0.18) inset;
+    max-width: 620px;
+  }
+  .s05 .neoncard .k { color: #b58cff; }
+  .s05 .neoncard .s { color: #36e0d8; }
+  .s05 .neoncard .c { color: #6f7aa3; }
+  .s05 .read-on { color: #36e0d8; border-color: #36e0d8; --flip: #050410; }
+  .s05 .decor::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: linear-gradient(90deg, rgba(176,107,255,0.06) 1px, transparent 1px);
+    background-size: 60px 100%;
+  }
+
+  /* ─── s06 · Big stats / yellow (NVIDIA RTX Spark) — LOUD ─── */
+  .s06 { background: #ffd400; color: #141207; }
+  .s06 .tag { color: #141207; border-color: #141207; }
+  .s06 .hed {
+    font-family: var(--sans);
+    font-weight: 900;
+    font-size: clamp(40px, 6vw, 92px);
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    line-height: 0.98;
+    color: #141207;
+  }
+  .s06 .hed em { font-style: normal; color: #5b7a00; }
+  .s06 .lede { color: #2a260f; max-width: 50ch; }
+  .s06 .statwrap { display: flex; flex-wrap: wrap; align-items: flex-end; gap: clamp(24px, 4vw, 56px); max-width: 880px; }
+  .s06 .num {
+    font-family: var(--sans); font-weight: 900;
+    font-size: clamp(96px, 20vw, 240px);
+    line-height: 0.8; letter-spacing: -0.04em; color: #141207;
+  }
+  .s06 .num .unit {
+    font-family: var(--sans); font-style: normal; font-weight: 700;
+    font-size: 0.26em;
+    letter-spacing: normal;
+    color: #5b7a00;
+    margin-left: 0.12em;
+  }
+  .s06 .specs { display: grid; gap: 14px; }
+  .s06 .specs div { border-top: 2px solid #141207; padding-top: 8px; }
+  .s06 .specs dt { font-weight: 900; font-size: clamp(24px, 3vw, 36px); }
+  .s06 .specs dd { margin: 0; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #4a420f; }
+  .s06 .read-on { color: #141207; border-color: #141207; --flip: #ffd400; }
+  .s06 .decor::after {
+    content: "";
+    position: absolute; right: -10vw; top: -10vw;
+    width: 60vw; height: 60vw;
+    background: radial-gradient(circle, rgba(91,122,0,0.16), transparent 68%);
+  }
+
+  /* ─── Colophon — ink ─── */
+  .colophon { background: #101317; color: #e7eaee; }
+  .colophon .folio { color: #8c97a3; }
+  .colophon .hed { font-family: var(--serif); font-weight: 800; color: #f3f5f7; }
+  .colophon .hed em { font-style: italic; color: #0e9d94; }
+  .colophon .lede { color: #b6bec7; max-width: 62ch; }
+  .colophon .srcs { font-family: var(--mono); font-size: 13px; letter-spacing: 0.04em; color: #7f8a96; margin-top: 6px; }
+
+  /* ─── Mobile: collapse multi-column / grid blocks ─── */
+  @media (max-width: 800px) {
+    .s02 .bpgrid { grid-template-columns: 1fr; }
+    .s02 .bpgrid div { border-right: 0; border-bottom: 1px solid #9fb4c7; }
+    .s02 .bpgrid div:last-child { border-bottom: 0; }
+    .s04 .cols { column-count: 1; }
+    .s06 .statwrap { gap: 24px; }
+    .s06 .num { font-size: clamp(84px, 30vw, 150px); }
+    .s01 .hed, .s05 .hed { font-size: clamp(30px, 8vw, 50px); }
+    .s06 .hed { font-size: clamp(34px, 9vw, 54px); }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══ COVER · single-word mood ═══ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 045</span>
+    <span>Tuesday · 02 Jun 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <p class="kicker">Today's mood</p>
+    <h1 class="masthead">Plumbing<em>.</em></h1>
+    <p class="dek">Today's issue lives below the floorboards: boot firmware, query partitions, observability pipes, and the silicon now small enough to sit on your desk.</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>Four hours to reboot a server. Now it's minutes.</span><span>Cloudflare</span></a>
+      <a href="#s02"><span><span class="num">02</span>An agent read the query plan and found a three-year-old bug</span><span>PostHog</span></a>
+      <a href="#s03"><span><span class="num">03</span>You shipped the LLM feature. Now watch it.</span><span>PostHog</span></a>
+      <a href="#s04"><span><span class="num">04</span>The AI economy you can't see is growing 2,600% a year</span><span>Import AI</span></a>
+      <a href="#s05"><span><span class="num">05</span>Codex and the frontier models now run inside AWS</span><span>OpenAI</span></a>
+      <a href="#s06"><span><span class="num">06</span>A 120-billion-parameter model, on the desk</span><span>NVIDIA · via @seeallochnaya</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ s01 · Cloudflare boot-time · Terminal ═══ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 045</span>
+    <span>01 / 06 · blog.cloudflare.com</span>
+  </header>
+  <div class="main">
+    <span class="tag">Infrastructure · Postmortem</span>
+    <h2 class="hed">Four hours to reboot a server. Now it's <em>minutes</em>.</h2>
+    <p class="lede">After a firmware update, Cloudflare's core units took up to four hours to come back. The slow path was UEFI and iPXE sitting through timeouts that never needed to fire. Delete the waits and reboots drop to minutes — a reminder that if you run bare metal, the boot path itself deserves a profiler, not just the OS on top of it.</p>
+    <div class="figure">
+      <div class="termcard">
+        <div class="cmt"># core unit · cold reboot, before and after</div>
+        <div class="row"><span>UEFI option-rom + network probe</span><span class="was">~3h40m</span></div>
+        <div class="row"><span>iPXE DHCP retry backoff</span><span class="was">~18m</span></div>
+        <div class="row"><span class="cmt">— removed timeouts that never fire —</span><span></span></div>
+        <div class="row"><span>total boot</span><span class="now">&lt; 4m</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.cloudflare.com/optimizing-core-unit-boot-time/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ s02 · PostHog autoresearch bug · Blueprint ═══ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 045</span>
+    <span>02 / 06 · PostHog</span>
+  </header>
+  <div class="main">
+    <span class="tag">Databases · Agentic debugging</span>
+    <h2 class="hed">An agent read the query plan and found a <em>three-year-old bug</em></h2>
+    <p class="lede">PostHog pointed an autoresearch agent at ClickHouse and it surfaced a defect that had hidden since 2023: timezone-wrapped timestamp comparisons that blocked partition pruning, so every affected query scanned far more data than it needed. Remove the wrapper and granule scans fall 62%. The signal worth keeping: agents are now good enough to audit the slow paths humans stopped looking at.</p>
+    <div class="figure">
+      <div class="bpgrid">
+        <div><div class="big">3 yrs</div><div class="cap">hidden in prod</div></div>
+        <div><div class="big">−62%</div><div class="cap">granules scanned</div></div>
+        <div><div class="big">1 fn</div><div class="cap">timezone wrapper removed</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://posthog.com/blog/autoresearch-query-bug" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true">
+    <span class="crop bl"></span>
+    <span class="crop br"></span>
+  </div>
+</section>
+
+<!-- ═══ s03 · PostHog AI observability · Hot pink ═══ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 045</span>
+    <span>03 / 06 · PostHog</span>
+  </header>
+  <div class="main">
+    <span class="tag">LLM Ops · Playbook</span>
+    <h2 class="hed">You shipped the LLM feature. <em>Now watch it.</em></h2>
+    <p class="lede">A day-one observability kit for small teams who just put their first AI feature in front of users — no platform team required. Three setups, in the order they'll save you:</p>
+    <div class="figure">
+      <ol class="steps">
+        <li><span><b>Trace every model call.</b> Inputs, outputs, latency, the prompt version — so a bad answer is a row you can open, not a story a user tells you.</span></li>
+        <li><span><b>Track cost with alerts.</b> Per-feature token spend with a threshold, so a runaway loop pages you before it pages finance.</span></li>
+        <li><span><b>Capture the LLM-specific failures.</b> Tool-call errors and token-limit blowups don't throw like normal exceptions; instrument them on purpose.</span></li>
+      </ol>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://posthog.com/blog/ai-observability-for-mvps" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ s04 · Import AI 459 · Newsprint ═══ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 045</span>
+    <span>04 / 06 · Import AI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Research · via Import AI</span>
+    <h2 class="hed">The AI economy you can't see is growing <em>2,600% a year</em></h2>
+    <p class="lede">Jack Clark's latest issue rounds up the parts of the field that never make the homepage — and they're where the curve is steepest.</p>
+    <div class="figure">
+      <div class="cols">
+        <section>
+          <h4>Invisible economy</h4>
+          <p>A machine-to-machine AI economy — agents transacting with agents — compounding at roughly 2,600% a year, mostly off the charts the rest of us read.</p>
+        </section>
+        <section>
+          <h4>Protein-folding scaling</h4>
+          <p>Fresh scaling laws for protein-folding models: bigger and more data still buys accuracy, with a practical map of where the returns bend.</p>
+        </section>
+        <section>
+          <h4>Pricing the risk</h4>
+          <p>A sober case that automated alignment research is harder than the optimists claim, plus how economists might price extinction risk into policy.</p>
+        </section>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://jack-clark.net/2026/06/01/import-ai-459-ai-oversight-is-difficult-scaling-laws-for-protein-folding-models-and-pricing-the-extinction-risk-of-ai-systems/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ s05 · OpenAI on AWS · Neon ═══ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 045</span>
+    <span>05 / 06 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Platforms · Agentic coding</span>
+    <h2 class="hed">Codex and the frontier models now run <em>inside AWS</em></h2>
+    <p class="lede">OpenAI's frontier models and the Codex coding agent are generally available on AWS. For teams already committed to AWS, that's a real change of options: run GPT-5.5 and Codex against your own accounts, data boundaries, and spend commitments instead of routing everything through a separate vendor. Worth a fresh look if procurement or data residency had kept OpenAI off the table.</p>
+    <div class="figure">
+      <div class="neoncard">
+        <div class="c"># same SDK, now an AWS-resident endpoint</div>
+        <div><span class="k">model</span> = <span class="s">"gpt-5.5-codex"</span></div>
+        <div><span class="k">region</span> = <span class="s">"eu-central-1"</span>  <span class="c"># data stays put</span></div>
+        <div><span class="k">billing</span> → <span class="s">your existing AWS commit</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/openai-frontier-models-and-codex-are-now-available-on-aws" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ s06 · NVIDIA RTX Spark · Big stats yellow ═══ -->
+<section class="spread s06" id="s06">
+  <header class="folio">
+    <span>Ephemeris · Issue 045</span>
+    <span>06 / 06 · NVIDIA · via @seeallochnaya</span>
+  </header>
+  <div class="main">
+    <span class="tag">Hardware · On-device AI</span>
+    <h2 class="hed">A 120-billion-parameter model, <em>on the desk</em></h2>
+    <p class="lede">NVIDIA's RTX Spark pairs a Blackwell GPU with a 20-core Grace CPU and up to 128GB of unified memory — enough to run a 120B-parameter model locally at a million-token context. Built with Microsoft for secure on-device agents, it ships this fall in laptops and mini-desktops from the usual makers. Real local inference stops being a server-room privilege.</p>
+    <div class="figure">
+      <div class="statwrap">
+        <div class="num">120<span class="unit">B params, local</span></div>
+        <dl class="specs">
+          <div><dt>128 GB</dt><dd>unified memory</dd></div>
+          <div><dt>1 M</dt><dd>token context</dd></div>
+          <div><dt>1 PFLOP</dt><dd>AI performance</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://nvidianews.nvidia.com/news/nvidia-microsoft-windows-pcs-agents-rtx-spark" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ COLOPHON ═══ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 045</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Six picks for Tuesday, 02 June 2026: a four-hour reboot cut to minutes, an agent that found a bug humans missed for three years, a day-one playbook for watching your LLM feature, the corners of the AI economy that don't trend, OpenAI's models landing inside AWS, and a desktop that runs a 120B model on its own.</p>
+    <p class="srcs">Sources today: Cloudflare · PostHog · Import AI (Jack Clark) · OpenAI · NVIDIA, via Сиолошная (@seeallochnaya). Rubric: tools you could adopt this week, dev tooling and agentic coding, research with a working kernel, and hardware that shifts what's possible.</p>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>
