@@ -21,6 +21,7 @@ https://anthropic.com/news/claude-for-small-business
 https://anthropic.com/news/claude-opus-4-7
 https://anthropic.com/news/claude-opus-4-8
 https://anthropic.com/news/election-safeguards-update
+https://anthropic.com/news/expanding-project-glasswing
 https://anthropic.com/news/finance-agents
 https://anthropic.com/news/higher-limits-spacex
 https://anthropic.com/news/widening-conversation-ai
@@ -120,6 +121,7 @@ https://github.blog/engineering/infrastructure/when-protections-outlive-their-pu
 https://github.blog/engineering/platform-security/post-quantum-security-for-ssh-access-on-github
 https://github.com/BayramAnnakov/ai-native-product-skills/tree/master/skills/autoresearch
 https://github.com/BayramAnnakov/ai-personal-os-skills/tree/main/skills/slide-inspector
+https://github.com/BayramAnnakov/excel-hygiene
 https://github.com/BayramAnnakov/factory-agent
 https://github.com/BayramAnnakov/token-audit-skill
 https://github.com/BayramAnnakov/whimsical-strategies-skill
@@ -176,6 +178,7 @@ https://openai.com/index/braintrust
 https://openai.com/index/building-codex-windows-sandbox
 https://openai.com/index/building-self-improving-tax-agents-with-codex
 https://openai.com/index/codex-for-almost-everything
+https://openai.com/index/codex-for-every-role-tool-workflow
 https://openai.com/index/cybersecurity-in-the-intelligence-age
 https://openai.com/index/databricks
 https://openai.com/index/delivering-low-latency-voice-ai-at-scale
@@ -212,11 +215,13 @@ https://posthog.com/blog/autoresearch-query-bug
 https://posthog.com/blog/best-analytics-stack-for-vibe-coded-apps
 https://posthog.com/blog/best-mcp-servers-for-startups
 https://posthog.com/blog/best-real-time-analytics-platforms
+https://posthog.com/blog/customer-facing-analytics-examples
 https://posthog.com/blog/duckdb-vs-clickhouse
 https://posthog.com/blog/local-flag-evals-rust
 https://posthog.com/blog/making-claude-cowork-actually-useful
 https://posthog.com/blog/minimum-viable-product-marketing
 https://posthog.com/blog/self-driving-product
+https://posthog.com/blog/slack-app-beta
 https://posthog.com/blog/testing-ai-agents
 https://posthog.com/blog/training-ai-models
 https://posthog.com/blog/untangling-rayon-and-tokio
@@ -292,6 +297,7 @@ https://vercel.com/blog/introducing-deepsec-find-and-fix-vulnerabilities-in-your
 https://vercel.com/blog/making-turborepo-ninety-six-percent-faster-with-agents-sandboxes-and-humans
 https://vercel.com/blog/optimizing-vercel-sandbox-snapshots
 https://vercel.com/blog/protecting-against-inference-theft
+https://vercel.com/blog/protecting-against-token-theft
 https://vercel.com/blog/we-ralph-wiggumed-webstreams-to-make-them-10x-faster
 https://vercel.com/blog/zdr-on-ai-gateway
 https://wheresyoured.at/where-are-all-the-data-centers

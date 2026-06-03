@@ -1,0 +1,582 @@
+<!doctype html>
+<!-- Ephemeris · Issue 046 · 2026-06-03 · built from scaffold.html -->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 046</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — copied from scaffold.html, do not edit.
+     ═══════════════════════════════════════════════════════════════════ */
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+  .spread > .decor {
+    position: absolute; inset: 0; z-index: 0;
+    pointer-events: none; overflow: hidden;
+  }
+  .spread > .folio {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 8px 24px; flex-wrap: wrap;
+    font-family: var(--sans); font-size: 13px;
+    letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.75;
+  }
+  .spread > .main {
+    display: flex; flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center; align-items: flex-start; min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block; font-family: var(--sans);
+    font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase;
+    padding: 6px 12px; border: 1px solid currentColor; border-radius: 999px; opacity: 0.9;
+  }
+  .hed {
+    font-family: var(--serif); font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02; letter-spacing: -0.02em;
+    padding-bottom: 0.12em; word-break: break-word;
+  }
+  .lede {
+    font-family: var(--serif); font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45; max-width: 50ch; margin: 0;
+  }
+  .figure { width: 100%; }
+  .read-on {
+    display: inline-block; font-family: var(--sans);
+    font-weight: 600; font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 14px 22px; border: 2px solid currentColor;
+    text-decoration: none; color: currentColor; --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — surface only.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── Cover · Manifesto (warm paper, big serif statement) ─── */
+  .cover { background: #efe7d6; color: #16140f; }
+  .cover .folio { color: #16140f; }
+  .cover .main { gap: clamp(28px, 4vw, 52px); }
+  .cover .kicker {
+    font-family: var(--sans); font-weight: 700; font-size: 13px;
+    letter-spacing: 0.32em; text-transform: uppercase; color: #b3122a;
+  }
+  .cover .manifesto {
+    font-family: var(--serif); font-weight: 400; font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 60, "WONK" 1;
+    font-size: clamp(34px, 5.2vw, 76px);
+    line-height: 1.08; letter-spacing: -0.02em; max-width: 20ch;
+    padding-bottom: 0.1em; margin: 0;
+  }
+  .cover .manifesto b {
+    font-weight: 900; font-style: normal; color: #b3122a;
+    font-variation-settings: "opsz" 144, "WONK" 1;
+  }
+  .cover .wordmark {
+    font-family: var(--serif); font-weight: 900;
+    font-variation-settings: "opsz" 144, "WONK" 1;
+    font-size: clamp(22px, 2.4vw, 30px); letter-spacing: -0.01em;
+  }
+  .cover .toc {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px 48px; padding-top: 18px; border-top: 2px solid #16140f; width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 4px 12px;
+    text-decoration: none; color: inherit; padding: 9px 0;
+    border-bottom: 1px solid rgba(22,20,15,0.22);
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.82em; opacity: 0.62; letter-spacing: 0.04em; }
+  .cover .toc .num {
+    font-family: var(--serif); font-weight: 800; font-style: italic; color: #b3122a; margin-right: 10px;
+  }
+  .cover .decor::before {
+    content: ""; position: absolute; right: -12vw; top: -8vw;
+    width: 50vw; height: 50vw; border-radius: 50%;
+    background: radial-gradient(circle, rgba(179,18,42,0.10), transparent 68%);
+  }
+  @media (max-width: 800px) { .cover .toc { grid-template-columns: 1fr; gap: 0; } }
+
+  /* ─── s01 · Dark report / classified (Vercel — token theft) — LOUD ─── */
+  .s01 { background: #08080b; color: #ece9e4; }
+  .s01 .tag { color: #ff2b3d; border-color: #ff2b3d; }
+  .s01 .hed {
+    font-family: var(--sans); font-weight: 800; letter-spacing: -0.03em;
+    font-size: clamp(46px, 6.6vw, 96px); color: #f4f1ec;
+  }
+  .s01 .hed em { font-style: normal; color: #ff2b3d; }
+  .s01 .lede { font-family: var(--sans); font-weight: 400; color: #c7c3bc; }
+  .s01 .read-on { color: #ff2b3d; border-color: #ff2b3d; --flip: #08080b; }
+  .s01 .dossier {
+    font-family: var(--mono); font-size: clamp(13px, 1.3vw, 15px); line-height: 1.95;
+    border: 1px solid #2a2a30; border-left: 4px solid #ff2b3d;
+    padding: 20px 24px; max-width: 56ch; background: #0c0c11;
+  }
+  .s01 .dossier .lbl { color: #6f6c78; }
+  .s01 .dossier .dot { color: #44424c; }
+  .s01 .redact {
+    background: #ff2b3d; color: transparent; padding: 0 6px; border-radius: 2px;
+    user-select: none;
+  }
+  .s01 .dossier .stamp {
+    display: inline-block; margin-top: 10px; color: #ff2b3d;
+    border: 1px solid #ff2b3d; padding: 2px 10px; letter-spacing: 0.3em; font-weight: 600;
+  }
+  .s01 .decor::before {
+    content: "01"; position: absolute; right: -2vw; bottom: -8vw;
+    font-family: var(--mono); font-weight: 700; font-size: 44vw;
+    color: rgba(255,43,61,0.05); line-height: 0.7;
+  }
+
+  /* ─── s02 · Neo-brutalist (PostHog — Slack → PR) — LOUD ─── */
+  .s02 { background: #ffd400; color: #0a0a0a; }
+  .s02 .tag { color: #0a0a0a; border: 2px solid #0a0a0a; border-radius: 0; font-weight: 700; }
+  .s02 .hed {
+    font-family: var(--sans); font-weight: 900; text-transform: uppercase;
+    letter-spacing: -0.025em; line-height: 0.96;
+    font-size: clamp(44px, 7.4vw, 104px);
+  }
+  .s02 .hed mark { background: #0a0a0a; color: #ffd400; padding: 0 0.12em; }
+  .s02 .lede { font-family: var(--sans); font-weight: 500; max-width: 46ch; }
+  .s02 .read-on { color: #0a0a0a; border: 3px solid #0a0a0a; border-radius: 0; --flip: #ffd400; font-weight: 800; }
+  .s02 .flow {
+    display: flex; flex-wrap: wrap; align-items: stretch; gap: 0; width: 100%;
+    border: 3px solid #0a0a0a; background: #0a0a0a;
+  }
+  .s02 .flow .step {
+    flex: 1 1 180px; background: #ffd400; border-right: 3px solid #0a0a0a;
+    padding: 16px 18px; font-weight: 700;
+  }
+  .s02 .flow .step:last-child { border-right: 0; background: #0a0a0a; color: #ffd400; }
+  .s02 .flow .step small {
+    display: block; font-weight: 600; font-size: 12px; letter-spacing: 0.12em;
+    text-transform: uppercase; opacity: 0.7; margin-bottom: 6px;
+  }
+  .s02 .bignum {
+    font-family: var(--sans); font-weight: 900; font-size: clamp(72px, 13vw, 150px);
+    line-height: 0.84; letter-spacing: -0.05em; margin-top: 6px;
+  }
+  .s02 .bignum span {
+    display: block; font-size: 15px; font-weight: 700; letter-spacing: 0.06em;
+    text-transform: uppercase; margin-top: 8px;
+  }
+
+  /* ─── s03 · Midnight (Anthropic — Glasswing / Mythos) — dark inversion ─── */
+  .s03 { background: radial-gradient(125% 120% at 78% 8%, #16224d 0%, #0a1230 48%, #050818 100%); color: #e9eefb; }
+  .s03 .tag { color: #6fd6ff; border-color: rgba(111,214,255,0.5); }
+  .s03 .hed {
+    font-family: var(--serif); font-weight: 800;
+    background: linear-gradient(96deg, #ffffff 30%, #6fd6ff 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .s03 .hed em {
+    font-style: italic; font-variation-settings: "opsz" 144, "SOFT" 90, "WONK" 1;
+    -webkit-text-fill-color: #6fd6ff;
+  }
+  .s03 .lede { font-family: var(--serif); color: #b8c4e4; }
+  .s03 .read-on { color: #6fd6ff; border-color: #6fd6ff; --flip: #050818; }
+  .s03 .callout { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px 28px; width: 100%; }
+  .s03 .callout .big {
+    font-family: var(--sans); font-weight: 900; letter-spacing: -0.04em; line-height: 0.82;
+    font-size: clamp(72px, 13vw, 168px);
+    background: linear-gradient(180deg, #ffffff, #6fd6ff);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .s03 .callout .cap { font-family: var(--serif); font-style: italic; color: #b8c4e4; max-width: 22ch; font-size: clamp(17px, 1.6vw, 21px); }
+  .s03 .sectors { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+  .s03 .sectors span {
+    font-family: var(--mono); font-size: 13px; letter-spacing: 0.05em;
+    border: 1px solid rgba(111,214,255,0.4); color: #cfe6ff;
+    padding: 6px 14px; border-radius: 999px;
+  }
+
+  /* ─── s04 · Teal grid (OpenAI — Codex extensibility) ─── */
+  .s04 { background: #d8efe9; color: #06403a; }
+  .s04 .tag { color: #0a6b60; border-color: #0a6b60; }
+  .s04 .hed { font-family: var(--serif); font-weight: 800; color: #06403a; }
+  .s04 .hed em { font-style: italic; color: #0a8f7e; font-variation-settings: "opsz" 144, "SOFT" 80, "WONK" 1; }
+  .s04 .lede { color: #16524a; }
+  .s04 .read-on { color: #0a6b60; border-color: #0a6b60; --flip: #d8efe9; }
+  .s04 .cards {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; width: 100%;
+  }
+  .s04 .cards .card {
+    position: relative; background: #ffffff; border: 1.5px solid #0a8f7e;
+    border-radius: 4px; padding: 20px 18px 18px;
+  }
+  .s04 .cards .card .n {
+    font-family: var(--serif); font-style: italic; font-weight: 800; color: #0a8f7e;
+    font-size: 22px; position: absolute; top: 10px; right: 14px; opacity: 0.65;
+  }
+  .s04 .cards .card h4 {
+    font-family: var(--sans); font-weight: 800; font-size: 19px; letter-spacing: 0.01em; margin-bottom: 6px;
+  }
+  .s04 .cards .card p { font-family: var(--sans); font-size: 15px; line-height: 1.45; color: #1c5a52; margin: 0; }
+  .s04 .roles { font-family: var(--mono); font-size: 13px; color: #0a6b60; letter-spacing: 0.04em; margin-top: 16px; }
+
+  /* ─── s05 · Academic journal (PostHog — customer-facing analytics) — quiet ─── */
+  .s05 { background: #f3efe4; color: #16223f; }
+  .s05 .tag { color: #16223f; border-color: #16223f; }
+  .s05 .hed { font-family: var(--serif); font-weight: 800; color: #16223f; letter-spacing: -0.015em; }
+  .s05 .hed em { font-style: italic; color: #7a2018; font-variation-settings: "opsz" 144, "SOFT" 70, "WONK" 1; }
+  .s05 .lede { color: #2c3754; }
+  .s05 .read-on { color: #16223f; border-color: #16223f; --flip: #f3efe4; }
+  .s05 .journal { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 28px 40px; width: 100%; border-top: 2px solid #16223f; padding-top: 18px; }
+  .s05 .journal .body { font-family: var(--serif); font-size: 17px; line-height: 1.6; column-count: 1; }
+  .s05 .journal .body p { margin: 0 0 12px; }
+  .s05 .journal .side h4 {
+    font-family: var(--sans); font-weight: 700; font-size: 12px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: #7a2018; margin: 0 0 10px;
+  }
+  .s05 .journal .side dl { margin: 0; font-family: var(--sans); font-size: 14.5px; line-height: 1.4; }
+  .s05 .journal .side dt { font-weight: 700; margin-top: 10px; }
+  .s05 .journal .side dt:first-child { margin-top: 0; }
+  .s05 .journal .side dd { margin: 0 0 2px; color: #3a445f; }
+  .s05 .endpoints {
+    grid-column: 1 / -1; border-top: 1px solid rgba(22,34,63,0.3);
+    padding-top: 14px; font-family: var(--mono); font-size: 14px; color: #16223f;
+  }
+  .s05 .endpoints b { color: #7a2018; }
+  @media (max-width: 800px) { .s05 .journal { grid-template-columns: 1fr; } }
+
+  /* ─── s06 · Spreadsheet (excel-hygiene) — precise/grey ─── */
+  .s06 { background: #eceef1; color: #1d2228; }
+  .s06 .tag { color: #1d2228; border-color: #aab3bd; }
+  .s06 .hed {
+    font-family: var(--mono); font-weight: 700; letter-spacing: -0.01em;
+    font-size: clamp(38px, 5.6vw, 80px); line-height: 1.04;
+  }
+  .s06 .hed em { font-style: normal; color: #1f8a4c; }
+  .s06 .lede { font-family: var(--sans); font-weight: 400; color: #41474f; }
+  .s06 .read-on { color: #1d2228; border-color: #1d2228; --flip: #eceef1; }
+  .s06 .sheet {
+    width: 100%; max-width: 64ch; border-collapse: collapse; background: #fff;
+    font-family: var(--mono); font-size: 13.5px; border: 1px solid #c2c9d1;
+  }
+  .s06 .sheet th, .s06 .sheet td { border: 1px solid #d7dde3; padding: 9px 11px; text-align: left; }
+  .s06 .sheet thead th {
+    background: #dde3e9; color: #5a636d; font-weight: 600; text-align: center; width: auto;
+  }
+  .s06 .sheet tbody th { background: #f0f3f6; color: #8a929b; text-align: center; font-weight: 600; }
+  .s06 .sheet .flag { background: #fdeceb; }
+  .s06 .sheet .note { color: #c0392b; font-weight: 600; }
+  .s06 .sheet .ok { color: #1f8a4c; }
+  .s06 .legend { font-family: var(--sans); font-size: 14px; color: #5a636d; margin-top: 12px; }
+  .s06 .legend b { color: #1d2228; }
+  .s06 .decor::before {
+    content: ""; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(120,130,140,0.06) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(120,130,140,0.06) 1px, transparent 1px);
+    background-size: 38px 32px;
+  }
+  @media (max-width: 800px) {
+    .s06 .sheet { font-size: 12px; }
+    .s06 .sheet th, .s06 .sheet td { padding: 7px 7px; }
+  }
+
+  /* ─── Colophon · dark bookend ─── */
+  .colophon { background: #0c0c0e; color: #e8e5df; }
+  .colophon .folio { color: #e8e5df; }
+  .colophon .hed { font-family: var(--serif); font-weight: 800; color: #f4f1ec; }
+  .colophon .hed em { font-style: italic; color: #b3122a; font-variation-settings: "opsz" 144, "SOFT" 90, "WONK" 1; }
+  .colophon .lede { font-family: var(--sans); color: #b8b4ac; max-width: 60ch; }
+  .colophon .meta {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px 36px;
+    width: 100%; border-top: 1px solid #2a2a2e; padding-top: 22px; margin-top: 6px;
+  }
+  .colophon .meta h4 {
+    font-family: var(--sans); font-weight: 700; font-size: 12px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: #6f6c64; margin: 0 0 10px;
+  }
+  .colophon .meta p { font-family: var(--mono); font-size: 13.5px; line-height: 1.7; color: #cfccc4; margin: 0; }
+  @media (max-width: 800px) { .colophon .meta { grid-template-columns: 1fr; gap: 20px; } }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══ COVER · Manifesto ═══ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 046</span>
+    <span>Wednesday · 03 Jun 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <p class="kicker">Today's issue</p>
+    <p class="manifesto">The agents went to work — shipping pull requests from a chat box, reading a thousand codebases for flaws, auditing the spreadsheet you forgot to check. Every one of them is <b>a new thing to defend</b>.</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>Someone is reselling your model calls</span><span>Vercel</span></a>
+      <a href="#s02"><span><span class="num">02</span>Ship code straight from Slack</span><span>PostHog</span></a>
+      <a href="#s03"><span><span class="num">03</span>An AI read the code, found ten thousand ways in</span><span>Anthropic</span></a>
+      <a href="#s04"><span><span class="num">04</span>Codex opens up beyond engineers</span><span>OpenAI</span></a>
+      <a href="#s05"><span><span class="num">05</span>Put the numbers where the decision happens</span><span>PostHog</span></a>
+      <a href="#s06"><span><span class="num">06</span>A second reader for the spreadsheet you trust</span><span>@ProductsAndStartups</span></a>
+    </nav>
+    <p class="wordmark">Ephemeris.</p>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ s01 · Vercel — token theft ═══ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 046</span>
+    <span>01 / 6 · Vercel</span>
+  </header>
+  <div class="main">
+    <span class="tag">Security · LLM Ops</span>
+    <h2 class="hed">Someone is reselling <em>your</em> model calls.</h2>
+    <p class="lede">Inference theft is the quiet line item nobody budgets for: an attacker funnels your paid API quota into a product they sell as their own, and you find out from the invoice. Vercel's piece explains why rate limits and API keys miss it — the abuse looks like ordinary traffic — and makes the case for catching it at the request layer with BotID instead of after the bill lands.</p>
+    <div class="figure">
+      <div class="dossier">
+        <div><span class="lbl">incident</span> <span class="dot">······</span> inference theft</div>
+        <div><span class="lbl">calls billed</span> <span class="dot">···</span> 4,812,000</div>
+        <div><span class="lbl">authorised by</span> <span class="dot">··</span> <span class="redact">your API key</span></div>
+        <div><span class="lbl">resold as</span> <span class="dot">·····</span> <span class="redact">"free AI chat"</span></div>
+        <div><span class="lbl">caught by</span> <span class="dot">·····</span> rate limit &nbsp;→&nbsp; no</div>
+        <div class="stamp">UNBUDGETED</div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://vercel.com/blog/protecting-against-token-theft" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ s02 · PostHog — Slack → PR ═══ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 046</span>
+    <span>02 / 6 · PostHog</span>
+  </header>
+  <div class="main">
+    <span class="tag">Agents · Dev Tools</span>
+    <h2 class="hed">Ship code straight from <mark>Slack</mark>.</h2>
+    <p class="lede">PostHog wired an agent into Slack: mention it with a feature request and it spins up a sandbox, writes the code, runs the tests, and opens a pull request a human still reviews. A two-stage classifier routes each ask. Over two weeks it merged 116 contributions — a concrete look at what happens when the people closest to the problem can file a fix, not just a ticket.</p>
+    <div class="figure">
+      <div class="flow">
+        <div class="step"><small>1 · ask</small>@PostHog add a dark-mode toggle</div>
+        <div class="step"><small>2 · agent</small>sandbox · writes code · runs tests</div>
+        <div class="step"><small>3 · review</small>opens a PR, a human merges</div>
+      </div>
+      <div class="bignum">116<span>contributions merged in two weeks</span></div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://posthog.com/blog/slack-app-beta" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ s03 · Anthropic — Glasswing / Mythos ═══ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 046</span>
+    <span>03 / 6 · Anthropic</span>
+  </header>
+  <div class="main">
+    <span class="tag">Security · AI</span>
+    <h2 class="hed">An AI read the code and found <em>ten thousand</em> ways in.</h2>
+    <p class="lede">Project Glasswing hands select organisations a security-tuned model, Claude Mythos, that scans their codebases for vulnerabilities. Early partners surfaced more than 10,000 high- and critical-severity flaws. This expansion widens access from roughly 50 to about 150 organisations across 15-plus countries, weighted toward critical infrastructure — power, water, healthcare, communications — where an unpatched flaw is more than a bug.</p>
+    <div class="figure">
+      <div class="callout">
+        <div class="big">10,000+</div>
+        <div class="cap">high- and critical-severity flaws found by the first cohort of partners.</div>
+      </div>
+      <div class="sectors">
+        <span>Power</span><span>Water</span><span>Healthcare</span><span>Communications</span>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.anthropic.com/news/expanding-project-glasswing" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ s04 · OpenAI — Codex extensibility ═══ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 046</span>
+    <span>04 / 6 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev Tools · Agents</span>
+    <h2 class="hed">Codex opens up <em>beyond engineers</em>.</h2>
+    <p class="lede">OpenAI gave Codex three extensibility hooks — plugins, sites, and annotations — pitched not only at developers but at analysts, marketers, designers, and investors. The bet is that the agent is more useful when it plugs into the tools a team already runs and can publish or annotate what it builds, rather than living behind a terminal.</p>
+    <div class="figure">
+      <div class="cards">
+        <div class="card"><span class="n">01</span><h4>Plugins</h4><p>Connect Codex to the tools and data a team already uses.</p></div>
+        <div class="card"><span class="n">02</span><h4>Sites</h4><p>Publish what the agent builds as a shareable page.</p></div>
+        <div class="card"><span class="n">03</span><h4>Annotations</h4><p>Leave inline notes the agent reads and acts on.</p></div>
+      </div>
+      <div class="roles">for analysts · marketers · designers · investors · engineers</div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/codex-for-every-role-tool-workflow" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ s05 · PostHog — customer-facing analytics ═══ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 046</span>
+    <span>05 / 6 · PostHog</span>
+  </header>
+  <div class="main">
+    <span class="tag">Product · Analytics</span>
+    <h2 class="hed">Put the numbers where the <em>decision</em> happens.</h2>
+    <p class="lede">Analytics users never see still drive the product they pay for. PostHog catalogues five ways teams expose data to customers and argues the craft is placement and trust, not dashboards.</p>
+    <div class="figure">
+      <div class="journal">
+        <div class="body">
+          <p>The pattern that fails is the one buried in a separate reports tab. The ones that work sit inline, at the moment a customer is deciding something — and they hold to sub-minute latency, because numbers people don't trust they stop reading.</p>
+          <p>Treat customer-facing analytics as a core feature with an owner, the piece argues, not a side project the data team squeezes in. Scope every figure to the viewer who's allowed to see it.</p>
+        </div>
+        <div class="side">
+          <h4>Five patterns in the wild</h4>
+          <dl>
+            <dt>Embedded dashboard</dt><dd>Vercel</dd>
+            <dt>Inline metric at the decision</dt><dd>Booking.com</dd>
+            <dt>Public leaderboard</dt><dd>Product Hunt</dd>
+            <dt>Gamified contribution graph</dt><dd>GitHub</dd>
+            <dt>Augmented internal data</dt><dd>in-product</dd>
+          </dl>
+        </div>
+        <div class="endpoints">→ <b>Endpoints</b> turns a saved insight into a fast, versioned, authenticated API — no custom backend to ship.</div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://posthog.com/blog/customer-facing-analytics-examples" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ s06 · excel-hygiene ═══ -->
+<section class="spread s06" id="s06">
+  <header class="folio">
+    <span>Ephemeris · Issue 046</span>
+    <span>06 / 6 · via @ProductsAndStartups</span>
+  </header>
+  <div class="main">
+    <span class="tag">Tools · Agents</span>
+    <h2 class="hed">A second reader for the spreadsheet <em>you trust</em>.</h2>
+    <p class="lede">excel-hygiene is a small Claude skill that audits an .xlsx file two ways: a Python pass catches the mechanical errors — numbers stored as text, formulas overwritten with static values, truncated sums, percentages off by 100× — while the agent reasons over the Panko–Halverson error taxonomy for the logic mistakes a machine check misses. Clone it into your skills folder and ask it to look.</p>
+    <div class="figure">
+      <table class="sheet">
+        <thead><tr><th></th><th>A</th><th>B</th><th>C</th></tr></thead>
+        <tbody>
+          <tr><th>1</th><td>Revenue</td><td>=SUM(B2:B9)</td><td class="ok">✓</td></tr>
+          <tr><th>2</th><td>Q1</td><td class="flag">"12000" <span class="note">⚑ text</span></td><td></td></tr>
+          <tr><th>3</th><td>Q2</td><td>13400</td><td></td></tr>
+          <tr><th>4</th><td>Margin</td><td class="flag">0.62 <span class="note">⚑ formula → static</span></td><td></td></tr>
+          <tr><th>5</th><td>Growth</td><td class="flag">8 <span class="note">⚑ pct as whole</span></td><td></td></tr>
+        </tbody>
+      </table>
+      <p class="legend"><b>check_excel.py</b> flags the mechanical errors · the agent reasons about the rest</p>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://github.com/BayramAnnakov/excel-hygiene" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ COLOPHON ═══ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of Issue 046</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Six picks on a thin day — the thread running through them is agents doing real work, and the new surfaces that work leaves exposed.</p>
+    <div class="meta">
+      <div>
+        <h4>Sources today</h4>
+        <p>Vercel<br>PostHog<br>Anthropic<br>OpenAI<br>Telegram · @ProductsAndStartups</p>
+      </div>
+      <div>
+        <h4>Rubric</h4>
+        <p>Tools you could adopt this week. Dev tools &amp; agentic coding. Privacy &amp; security when the signal is high. Skip the marketing.</p>
+      </div>
+      <div>
+        <h4>Issue</h4>
+        <p>No. 046<br>2026-06-03<br>Zürich · 08:00</p>
+      </div>
+    </div>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+</main>
+</body>
+</html>
