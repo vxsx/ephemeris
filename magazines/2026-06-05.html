@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 048 · 5 June 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — from scaffold.html. Do not alter structure.
+     ═══════════════════════════════════════════════════════════════════ */
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+  .spread > .decor {
+    position: absolute; inset: 0; z-index: 0;
+    pointer-events: none; overflow: hidden;
+  }
+  .spread > .folio {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 8px 24px; flex-wrap: wrap;
+    font-family: var(--sans); font-size: 13px;
+    letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.75;
+  }
+  .spread > .main {
+    display: flex; flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center; align-items: flex-start; min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block; font-family: var(--sans); font-size: 12px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    padding: 6px 12px; border: 1px solid currentColor; border-radius: 999px; opacity: 0.9;
+  }
+  .hed {
+    font-family: var(--serif); font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02; letter-spacing: -0.02em;
+    padding-bottom: 0.12em; word-break: break-word;
+  }
+  .lede {
+    font-family: var(--serif); font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45; max-width: 50ch; margin: 0;
+  }
+  .figure { width: 100%; }
+  .read-on {
+    display: inline-block; font-family: var(--sans); font-weight: 600;
+    font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 14px 22px; border: 2px solid currentColor;
+    text-decoration: none; color: currentColor; --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px) 22px max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — surface only.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── COVER · date-hero ─── */
+  .cover { background: #efeae0; color: #14213d; }
+  .cover .folio { opacity: 0.85; }
+  .cover .datehero {
+    display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 0.16em; margin: 0;
+  }
+  .cover .dnum {
+    font-family: var(--sans); font-weight: 900;
+    font-size: clamp(140px, 32vw, 440px); line-height: 0.74;
+    letter-spacing: -0.06em; color: #14213d;
+  }
+  .cover .dstack { display: flex; flex-direction: column; gap: 0.04em; }
+  .cover .dow, .cover .dmo {
+    font-family: var(--sans); font-weight: 800; text-transform: uppercase;
+    font-size: clamp(40px, 8.5vw, 104px); line-height: 0.9; letter-spacing: 0.02em;
+    color: #d2451f;
+  }
+  .cover .dmo { color: #14213d; opacity: 0.55; }
+  .cover .dek {
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(21px, 2.1vw, 30px); line-height: 1.35;
+    max-width: 34ch; color: #2b3550; margin: 6px 0 0;
+  }
+  .cover .toc {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px 40px; padding-top: 18px; border-top: 2px solid #14213d; width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;
+    gap: 4px 12px; text-decoration: none; color: inherit; padding: 9px 0;
+    border-bottom: 1px dotted rgba(20,33,61,0.28);
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.82em; opacity: 0.65; font-family: var(--mono); }
+  .cover .toc .num {
+    font-family: var(--mono); font-weight: 600; color: #d2451f; margin-right: 10px;
+  }
+  @media (max-width: 800px) {
+    .cover .toc { grid-template-columns: 1fr; gap: 0; }
+  }
+
+  /* ─── s01 · MiniMax M3 — big stats / electric cobalt (LOUD) ─── */
+  .s01 { background: #1b2cff; color: #f2f3ff; }
+  .s01 .tag { color: #d8ff3e; border-color: #d8ff3e; }
+  .s01 .hed { font-family: var(--sans); font-weight: 900; letter-spacing: -0.035em; line-height: 0.98; }
+  .s01 .hed em { font-style: normal; color: #d8ff3e; }
+  .s01 .lede { font-family: var(--serif); color: #dfe2ff; }
+  .s01 .read-on { color: #d8ff3e; border-color: #d8ff3e; --flip: #1b2cff; }
+  .s01 .statgrid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: clamp(14px, 2vw, 28px); margin-top: 6px;
+    border-top: 2px solid rgba(216,255,62,0.5); padding-top: 22px;
+  }
+  .s01 .statgrid .num {
+    font-family: var(--sans); font-weight: 900; font-size: clamp(40px, 5vw, 72px);
+    line-height: 0.92; letter-spacing: -0.04em; color: #ffffff; display: block;
+  }
+  .s01 .statgrid .num .unit {
+    font-family: var(--sans); font-weight: 700; font-size: 0.34em;
+    letter-spacing: normal; color: #d8ff3e; margin-left: 0.18em;
+  }
+  .s01 .statgrid .lab {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em;
+    text-transform: uppercase; color: #c7ccff; margin-top: 8px; display: block;
+  }
+  .s01 .decor::before {
+    content: "01"; position: absolute; right: -2vw; top: -6vw;
+    font-family: var(--sans); font-weight: 900; font-size: 46vw;
+    color: rgba(255,255,255,0.05); line-height: 1;
+  }
+  @media (max-width: 800px) {
+    .s01 .statgrid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  }
+
+  /* ─── s02 · ESMFold2 — museum placard / academic (quiet, centered) ─── */
+  .s02 { background: #f1ece0; color: #25301d; }
+  .s02 .tag { color: #4a5a34; border-color: #4a5a34; letter-spacing: 0.3em; }
+  .s02 .hed {
+    font-family: var(--serif); font-weight: 600; font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 60, "WONK" 0;
+    letter-spacing: -0.015em;
+  }
+  .s02 .hed em { font-style: normal; font-weight: 800; color: #6a7a1f; }
+  .s02 .lede { color: #34402a; }
+  .s02 .read-on { color: #4a5a34; border-color: #4a5a34; --flip: #f1ece0; }
+  .s02 .placard {
+    border: 1px solid #4a5a34; background: rgba(74,90,52,0.05);
+    padding: clamp(18px, 2.4vw, 30px) clamp(20px, 3vw, 40px);
+    max-width: 640px; width: 100%;
+  }
+  .s02 .placard .ttl {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.32em;
+    text-transform: uppercase; color: #6a7a1f; margin-bottom: 16px;
+  }
+  .s02 .placard dl {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px 14px; margin: 0;
+  }
+  .s02 .placard .v {
+    font-family: var(--serif); font-weight: 700; font-size: clamp(24px, 2.8vw, 38px);
+    line-height: 1; color: #25301d;
+  }
+  .s02 .placard .k {
+    font-family: var(--sans); font-size: 12px; letter-spacing: 0.04em;
+    text-transform: uppercase; color: #586647; margin-top: 7px;
+  }
+  @media (max-width: 800px) {
+    .s02 .placard dl { grid-template-columns: 1fr; gap: 14px; }
+  }
+
+  /* ─── s03 · VoidZero — concrete / warm grey, giant punctuation (quiet) ─── */
+  .s03 { background: #cfc9bd; color: #232019; }
+  .s03 .tag { color: #7a2515; border-color: #7a2515; }
+  .s03 .hed { font-family: var(--serif); font-weight: 900; letter-spacing: -0.025em; }
+  .s03 .hed em { font-style: italic; color: #7a2515; font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; }
+  .s03 .lede { color: #36322a; }
+  .s03 .read-on { color: #7a2515; border-color: #7a2515; --flip: #cfc9bd; }
+  .s03 .specs { display: flex; flex-direction: column; gap: 10px; max-width: 620px; width: 100%; }
+  .s03 .specs .row {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
+    border-bottom: 1px solid rgba(35,32,25,0.25); padding-bottom: 8px;
+  }
+  .s03 .specs .k { font-family: var(--mono); font-size: 13px; letter-spacing: 0.04em; color: #4a463c; }
+  .s03 .specs .v { font-family: var(--sans); font-weight: 800; font-size: clamp(18px, 2vw, 24px); color: #232019; text-align: right; }
+  .s03 .decor::before {
+    content: "{ }"; position: absolute; left: -1vw; bottom: -10vw;
+    font-family: var(--mono); font-weight: 600; font-size: 40vw;
+    color: rgba(122,37,21,0.07); line-height: 1;
+  }
+
+  /* ─── s04 · Anthropic threats — dark classified / crimson (LOUD + dark inversion) ─── */
+  .s04 { background: #0b0a0d; color: #e9e4df; }
+  .s04 .tag { color: #ff3b46; border-color: #ff3b46; letter-spacing: 0.28em; }
+  .s04 .hed { font-family: var(--sans); font-weight: 800; letter-spacing: -0.02em; line-height: 0.98; }
+  .s04 .hed em {
+    font-style: normal; color: #0b0a0d; background: #ff3b46;
+    padding: 0 0.14em; box-decoration-break: clone; -webkit-box-decoration-break: clone;
+  }
+  .s04 .lede { font-family: var(--serif); color: #c9c3bc; }
+  .s04 .read-on { color: #ff3b46; border-color: #ff3b46; --flip: #0b0a0d; }
+  .s04 .redact { background: #e9e4df; color: transparent; padding: 0 0.12em; border-radius: 1px; user-select: none; }
+  .s04 .bars {
+    display: flex; align-items: flex-end; gap: clamp(28px, 6vw, 64px);
+    height: clamp(150px, 22vh, 230px); border-bottom: 2px solid #3a3640;
+    padding: 0 4px; max-width: 540px; width: 100%; margin-top: 8px;
+  }
+  .s04 .bars .col { display: flex; flex-direction: column; align-items: center; gap: 10px; flex: 0 0 auto; width: 86px; }
+  .s04 .bars .bar { width: 100%; background: #ff3b46; }
+  .s04 .bars .b1 { height: 33%; background: #6b1f24; }
+  .s04 .bars .b2 { height: 56%; }
+  .s04 .bars .pct { font-family: var(--mono); font-weight: 600; font-size: 20px; color: #fff; }
+  .s04 .bars .cap { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: #8d8893; }
+  .s04 .barwrap { display: flex; gap: clamp(24px, 5vw, 60px); align-items: flex-end; flex-wrap: wrap; }
+  .s04 .keyfact { font-family: var(--mono); font-size: 13px; line-height: 1.8; color: #b9b3ac; }
+  .s04 .keyfact b { color: #ff6b73; font-weight: 600; }
+
+  /* ─── s05 · Gemini 3.5 Flash — risograph duotone (LOUD) ─── */
+  .s05 { background: #0bd0d8; color: #0a1230; }
+  .s05 .tag { color: #ff2e88; border-color: #ff2e88; }
+  .s05 .hed {
+    font-family: var(--sans); font-weight: 900; letter-spacing: -0.035em; line-height: 0.96;
+    color: #0a1230; text-shadow: 0.045em 0.045em 0 #ff2e88;
+  }
+  .s05 .hed em { font-style: normal; color: #ff2e88; text-shadow: 0.045em 0.045em 0 #0a1230; }
+  .s05 .lede { font-family: var(--serif); color: #0c1738; }
+  .s05 .read-on { color: #0a1230; border-color: #0a1230; --flip: #0bd0d8; }
+  .s05 .duo { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(14px, 2vw, 26px); max-width: 680px; width: 100%; }
+  .s05 .duo .cell { border: 2px solid #0a1230; padding: 16px 16px 14px; background: rgba(255,46,136,0.12); }
+  .s05 .duo .num {
+    font-family: var(--sans); font-weight: 900; font-size: clamp(34px, 4.6vw, 60px);
+    line-height: 0.9; letter-spacing: -0.04em; color: #0a1230; display: block;
+  }
+  .s05 .duo .num .unit { font-size: 0.32em; font-weight: 700; letter-spacing: normal; color: #ff2e88; margin-left: 0.16em; }
+  .s05 .duo .lab { font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; color: #16204a; margin-top: 9px; display: block; }
+  .s05 .decor::before {
+    content: ""; position: absolute; inset: 0;
+    background-image: radial-gradient(rgba(255,46,136,0.16) 1.4px, transparent 1.5px);
+    background-size: 16px 16px; background-position: 3px 3px;
+  }
+  @media (max-width: 800px) {
+    .s05 .duo { grid-template-columns: 1fr; }
+  }
+
+  /* ─── s06 · "They're Made Out of Weights" — pastel rose, soft (quiet closer) ─── */
+  .s06 { background: #f6e6ea; color: #3a2630; }
+  .s06 .tag { color: #a23b63; border-color: #a23b63; }
+  .s06 .hed {
+    font-family: var(--serif); font-weight: 400; font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    letter-spacing: -0.01em; color: #5a3142;
+  }
+  .s06 .hed em { font-style: italic; font-weight: 700; color: #a23b63; }
+  .s06 .lede { color: #4a3540; max-width: 46ch; }
+  .s06 .read-on { color: #a23b63; border-color: #a23b63; --flip: #f6e6ea; }
+  .s06 .pq {
+    font-family: var(--serif); font-style: italic; font-weight: 300;
+    font-size: clamp(26px, 3.4vw, 46px); line-height: 1.25; color: #5a3142;
+    max-width: 24ch; border-left: 3px solid #d98aa6; padding-left: clamp(18px, 2.4vw, 32px);
+  }
+  .s06 .pq .src { display: block; font-size: 0.42em; font-style: normal; font-family: var(--mono); letter-spacing: 0.04em; color: #a23b63; margin-top: 14px; }
+  .s06 .decor::before {
+    content: ""; position: absolute; right: -8vw; top: -8vw; width: 46vw; height: 46vw;
+    background: radial-gradient(circle, rgba(217,138,166,0.30), transparent 70%);
+  }
+
+  /* ─── Colophon · deep navy ─── */
+  .colophon { background: #0c1430; color: #dfe4f2; }
+  .colophon .folio { opacity: 0.7; }
+  .colophon .hed { font-family: var(--serif); font-weight: 800; color: #fff; }
+  .colophon .hed em { font-style: italic; color: #8fb4ff; }
+  .colophon .lede { color: #c3cbe2; max-width: 58ch; }
+  .colophon .sources {
+    display: flex; flex-wrap: wrap; gap: 8px 10px; margin-top: 6px;
+    font-family: var(--mono); font-size: 12px;
+  }
+  .colophon .sources span {
+    border: 1px solid rgba(143,180,255,0.4); border-radius: 999px;
+    padding: 5px 12px; color: #aebfe6; letter-spacing: 0.04em;
+  }
+  .colophon .rubric { font-family: var(--mono); font-size: 13px; color: #9fb0da; margin-top: 18px; line-height: 1.7; }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════════════ COVER · date-hero ═══════════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 048</span>
+    <span>Friday · 05 Jun 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <div class="datehero">
+      <span class="dnum">05</span>
+      <span class="dstack">
+        <span class="dow">Fri</span>
+        <span class="dmo">Jun 26</span>
+      </span>
+    </div>
+    <p class="dek">Today: models you can download, attackers mapped onto the matrix, proteins designed in days — and a short story about what's doing the thinking.</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>An open model that codes at a tenth the bill</span><span>MiniMax</span></a>
+      <a href="#s02"><span><span class="num">02</span>ESMFold2 designs protein binders in days</span><span>Biohub</span></a>
+      <a href="#s03"><span><span class="num">03</span>VoidZero — Vite's makers — joins Cloudflare</span><span>Cloudflare</span></a>
+      <a href="#s04"><span><span class="num">04</span>A year of AI-enabled threats, mapped</span><span>Anthropic</span></a>
+      <a href="#s05"><span><span class="num">05</span>Gemini 3.5 Flash goes generally available</span><span>Google</span></a>
+      <a href="#s06"><span><span class="num">06</span>"They're Made Out of Weights"</span><span>via @denissexy</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+</section>
+
+<!-- ═══════════════ s01 · MiniMax M3 ═══════════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 048</span>
+    <span>01 / 06 · MiniMax</span>
+  </header>
+  <div class="main">
+    <span class="tag">Open Models · Agentic Coding</span>
+    <h2 class="hed">Frontier coding, open weights, <em>one-tenth</em> the bill.</h2>
+    <p class="lede">MiniMax M3 (June 1) scores 59% on SWE-Bench Pro — past GPT-5.5 and Gemini 3.1 Pro, just behind Opus 4.7 — while a new sparse-attention design cuts compute roughly 20× and runs input about 9× faster. Weights and a tech report land within ten days on Hugging Face and GitHub, for private clusters and fine-tuning. Input runs near a tenth the price of Opus 4.7 or GPT-5.5 — the gap that compounds across an agent loop.</p>
+    <div class="figure">
+      <dl class="statgrid">
+        <div><span class="num">59<span class="unit">%</span></span><span class="lab">SWE-Bench Pro</span></div>
+        <div><span class="num">1<span class="unit">M ctx</span></span><span class="lab">Context window</span></div>
+        <div><span class="num">~9<span class="unit">×</span></span><span class="lab">Faster input</span></div>
+        <div><span class="num">~1/10<span class="unit"></span></span><span class="lab">Input cost</span></div>
+      </dl>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.minimax.io/blog/minimax-m3" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s02 · ESMFold2 ═══════════════ -->
+<section class="spread s02 centered" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 048</span>
+    <span>02 / 06 · Biohub</span>
+  </header>
+  <div class="main">
+    <span class="tag">Science · Protein Design</span>
+    <h2 class="hed">Protein binders, designed in <em>days</em>.</h2>
+    <p class="lede">Biohub's ESMFold2 (May 27) turns the evolutionary signal in its ESMC language model into atomic-resolution structure — and beats AlphaFold 3 on the hard, therapeutically central problem of antibody–antigen folding. A looped-transformer design lets it spend more compute at inference and keep improving. The practical shift: early binder discovery moves from empirical screening that ran for months or years to computation-guided design measured in days.</p>
+    <div class="figure">
+      <div class="placard">
+        <div class="ttl">ESMFold2 · Specimen card</div>
+        <dl>
+          <div><div class="v">&gt; AlphaFold 3</div><div class="k">Antibody–antigen accuracy</div></div>
+          <div><div class="v">9.4 s</div><div class="k">Fold of 1,024 residues</div></div>
+          <div><div class="v">months → days</div><div class="k">Early binder discovery</div></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://biohub.org/news/world-model-of-protein-biology/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s03 · VoidZero / Cloudflare ═══════════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 048</span>
+    <span>03 / 06 · Cloudflare</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev Tools · JS Toolchain</span>
+    <h2 class="hed">The toolchain under every front end finds a <em>new home</em>.</h2>
+    <p class="lede">VoidZero — the team behind Vite, Vitest, Rolldown, the Oxc parser and the Vite+ toolchain — is joining Cloudflare (June 4). Vite alone pulls about 129 million weekly downloads and sits under Vue, React Router, Angular and more, so the real question is who funds it. Cloudflare's answer: keep it all MIT-licensed, vendor-neutral and community-run, and seed a $1M Vite ecosystem fund administered by the core team. Nothing in your build changes today.</p>
+    <div class="figure">
+      <div class="specs">
+        <div class="row"><span class="k">Tools absorbed</span><span class="v">Vite · Vitest · Rolldown · Oxc · Vite+</span></div>
+        <div class="row"><span class="k">Vite weekly downloads</span><span class="v">~129,000,000</span></div>
+        <div class="row"><span class="k">Ecosystem fund</span><span class="v">$1,000,000</span></div>
+        <div class="row"><span class="k">Licence</span><span class="v">Stays MIT, vendor-neutral</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.cloudflare.com/voidzero-joins-cloudflare/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s04 · Anthropic threat report ═══════════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 048</span>
+    <span>04 / 06 · Anthropic</span>
+  </header>
+  <div class="main">
+    <span class="tag">Security · Threat Intel</span>
+    <h2 class="hed">What 832 banned accounts did with <em>AI</em>.</h2>
+    <p class="lede">Anthropic's Frontier Red Team studied 832 accounts it banned for malicious cyber activity between March 2025 and March 2026, mapping each to MITRE ATT&amp;CK. The change is in where AI shows up — not just initial access but the later, complex stages of an intrusion. Their caution for defenders: skill level and technique count no longer track how dangerous an actor is.</p>
+    <div class="figure">
+      <div class="barwrap">
+        <div class="bars" role="img" aria-label="Actors rated medium-risk or higher rose from 33% to 56% across the year">
+          <div class="col"><span class="pct">33%</span><div class="bar b1"></div><span class="cap">H1</span></div>
+          <div class="col"><span class="pct">56%</span><div class="bar b2"></div><span class="cap">H2</span></div>
+        </div>
+        <p class="keyfact">
+          <b>67.3%</b> used AI to write malware<br>
+          <b>832</b> accounts · <b>12</b> months<br>
+          medium-risk+ <b>33% → 56%</b><br>
+          <span class="redact">classified</span> stages now AI-assisted
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.anthropic.com/news/AI-enabled-cyber-threats-mitre-attack" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s05 · Gemini 3.5 Flash ═══════════════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 048</span>
+    <span>05 / 06 · Google</span>
+  </header>
+  <div class="main">
+    <span class="tag">Models · Cheap Agents</span>
+    <h2 class="hed">The cheap model that now <em>runs the loop</em>.</h2>
+    <p class="lede">Gemini 3.5 Flash is generally available now — in the Gemini app, AI Studio, the API, Antigravity and Android Studio. Google calls it their strongest agentic and coding model yet, past Gemini 3.1 Pro on coding and agent benchmarks. For agent loops where latency and price decide what's economical, a fast, cheap model that codes well is the one you reach for.</p>
+    <div class="figure">
+      <div class="duo">
+        <div class="cell"><span class="num">~4<span class="unit">×</span></span><span class="lab">Faster output</span></div>
+        <div class="cell"><span class="num">76.2<span class="unit">%</span></span><span class="lab">Terminal-Bench 2.1</span></div>
+        <div class="cell"><span class="num">84.2<span class="unit">%</span></span><span class="lab">CharXiv reasoning</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s06 · They're Made Out of Weights ═══════════════ -->
+<section class="spread s06" id="s06">
+  <header class="folio">
+    <span>Ephemeris · Issue 048</span>
+    <span>06 / 06 · via @denissexy</span>
+  </header>
+  <div class="main">
+    <span class="tag">Creative · AI &amp; Mind</span>
+    <h2 class="hed">They're made out of <em>weights</em>.</h2>
+    <p class="lede">A short dialogue making the rounds (June 3) rewrites Terry Bisson's 1991 "They're Made Out of Meat" for the language-model age: two intelligences puzzling over machines that think with nothing but numbers. Five minutes, and it lands the uncomfortable question more gently than any benchmark — if the weights do the thinking, what exactly are we talking to? A good palate cleanser.</p>
+    <div class="figure">
+      <p class="pq">"The weights do the thinking. The numbers."<span class="src">— "They're Made Out of Weights," M. Leiter</span></p>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://maxleiter.com/blog/weights" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ COLOPHON ═══════════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 048</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Six picks, chosen for what a builder can use this week: a model to download, a model to call, a toolchain's new owner, a year of threats mapped to a framework, a faster road to protein binders, and a story about what's doing the thinking.</p>
+    <div class="figure">
+      <div class="sources">
+        <span>MiniMax</span><span>Biohub</span><span>Cloudflare</span><span>Anthropic</span><span>Google</span><span>via @denissexy</span>
+      </div>
+      <p class="rubric">Rubric: tools to adopt · creative &amp; generative software · dev tools &amp; agents · privacy &amp; security · research with a working edge. Friday, 5 June 2026 · Issue 048.</p>
+    </div>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>

@@ -12,6 +12,7 @@ https://anthropic.com/engineering/how-we-contain-claude
 https://anthropic.com/engineering/infrastructure-noise
 https://anthropic.com/engineering/managed-agents
 https://anthropic.com/features/project-deal
+https://anthropic.com/news/AI-enabled-cyber-threats-mitre-attack
 https://anthropic.com/news/anthropic-acquires-stainless
 https://anthropic.com/news/anthropic-amazon-compute
 https://anthropic.com/news/chris-olah-pope-leo-encyclical
@@ -42,6 +43,7 @@ https://arxiv.org/abs/2604.20779
 https://arxiv.org/abs/2605.13829
 https://arxiv.org/abs/2605.22771
 https://arxiv.org/pdf/2604.24827
+https://biohub.org/news/world-model-of-protein-biology
 https://blog.cloudflare.com/agent-readiness
 https://blog.cloudflare.com/agents-stripe-projects
 https://blog.cloudflare.com/agents-week-in-review
@@ -70,6 +72,8 @@ https://blog.cloudflare.com/q1-2026-internet-disruption-summary
 https://blog.cloudflare.com/quic-death-spiral-fix
 https://blog.cloudflare.com/shared-dictionaries
 https://blog.cloudflare.com/unweight-tensor-compression
+https://blog.cloudflare.com/voidzero-joins-cloudflare
+https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5
 https://blog.google/innovation-and-ai/products/gemini-app/next-evolution-gemini-app
 https://blog.google/innovation-and-ai/technology/research/gemini-for-science-io-2026
 https://blog.maximeheckel.com/posts/on-rendering-the-sky-sunsets-and-planets
@@ -161,9 +165,11 @@ https://jeffbullas.com/stop-using-just-one-ai
 https://jeffbullas.com/truth-business-growth-strategy
 https://krea.ai/
 https://krea.ai/app
+https://maxleiter.com/blog/weights
 https://metr.org/blog/2026-05-19-frontier-risk-report
 https://mf0.ai/
 https://microsoft.com/en-us/research/articles/whimsical-strategies-break-ai-agents-generating-out-of-distribution-adversarial-strategies-at-scale
+https://minimax.io/blog/minimax-m3
 https://moab.pro/articles/aeo-geo
 https://newsletter.semianalysis.com/p/the-coding-assistant-breakdown-more
 https://nextjs.org/blog/agentic-future
