@@ -48,6 +48,7 @@ https://blog.cloudflare.com/agent-readiness
 https://blog.cloudflare.com/agents-stripe-projects
 https://blog.cloudflare.com/agents-week-in-review
 https://blog.cloudflare.com/ai-code-review
+https://blog.cloudflare.com/ai-gateway-spend-limits
 https://blog.cloudflare.com/artifacts-git-for-agents-beta
 https://blog.cloudflare.com/browser-run-containers
 https://blog.cloudflare.com/building-for-the-future
@@ -81,11 +82,13 @@ https://blog.tilderesearch.com/blog/aurora
 https://bloomberg.com/news/articles/2026-05-26/china-expands-travel-curbs-to-top-ai-talent-at-private-firms
 https://bun.com/blog/bun-v1.3.14
 https://chromewebstore.google.com/detail/pjoleapiipgcignjlbhhiighckpbhcpp
+https://civitai.com/models/2670340/slop-in-the-face
 https://claude.com/blog/agent-view-in-claude-code
 https://claude.com/blog/connectors-for-everyday-life
 https://claude.com/blog/how-claude-code-works-in-large-codebases-best-practices-and-where-to-start
 https://claude.com/blog/introducing-dynamic-workflows-in-claude-code
 https://cloud.google.com/blog/topics/threat-intelligence/ai-vulnerability-exploitation-initial-access
+https://cognition.ai/blog/ai-guarantee
 https://cursor.com/blog/cloud-agent-lessons
 https://cursor.com/blog/composer-2-5
 https://cursor.com/blog/typescript-sdk
@@ -141,6 +144,7 @@ https://github.com/nexu-io/open-design
 https://github.com/oven-sh/bun/pull/30412
 https://github.com/specs-devs/samples/tree/main/Agent%20Center
 https://hackernews.foresyn.ai/
+https://hermes-agent.nousresearch.com/desktop
 https://hermesagents.net/
 https://higgsfield.ai/apps/virality-predictor
 https://higgsfield.ai/mcp
@@ -185,6 +189,7 @@ https://openai.com/index/boston-childrens-hospital
 https://openai.com/index/braintrust
 https://openai.com/index/building-codex-windows-sandbox
 https://openai.com/index/building-self-improving-tax-agents-with-codex
+https://openai.com/index/chatgpt-memory-dreaming
 https://openai.com/index/codex-for-almost-everything
 https://openai.com/index/codex-for-every-role-tool-workflow
 https://openai.com/index/cybersecurity-in-the-intelligence-age
@@ -198,6 +203,7 @@ https://openai.com/index/how-chatgpt-protects-privacy
 https://openai.com/index/introducing-chatgpt-images-2-0
 https://openai.com/index/introducing-evmbench
 https://openai.com/index/introducing-gpt-5-5
+https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind
 https://openai.com/index/introducing-openai-privacy-filter
 https://openai.com/index/introducing-trusted-contact-in-chatgpt
 https://openai.com/index/introducing-workspace-agents-in-chatgpt
@@ -251,6 +257,7 @@ https://sentry.io/blog/agents-need-production-context
 https://sentry.io/blog/ai-agent-observability-developers-guide-to-agent-monitoring
 https://sentry.io/blog/cut-build-times-delete-cms
 https://sentry.io/blog/debugging-multi-agent-ai-when-the-failure-is-in-the-space-between-agents
+https://sentry.io/blog/errors-traces-logs-metrics-when-to-reach-for-what
 https://sentry.io/blog/fixing-javascript-observability
 https://sentry.io/blog/nextjs-supabase-observability
 https://sentry.io/blog/scaling-observability-for-multi-agent-ai-systems

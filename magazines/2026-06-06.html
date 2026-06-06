@@ -1,0 +1,662 @@
+<!doctype html>
+<!-- Ephemeris · Issue 049 · 2026-06-06 · built on the locked scaffold -->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 049 · 06 Jun 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════ LOCKED BASELINE ═══════════ */
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+
+  .spread > .decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 52ch;
+    margin: 0;
+  }
+
+  .figure { width: 100%; }
+
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════ THEME OVERRIDES — surface only ═══════════ */
+
+  /* ─── COVER · pull-quote ─── */
+  .cover { background: #241023; color: #f2e4d8; }
+  .cover > .main { gap: clamp(24px, 3vw, 40px); }
+  .cover .kicker {
+    font-family: var(--mono);
+    font-size: 13px; letter-spacing: 0.32em; text-transform: uppercase;
+    color: #f0a; opacity: 0.85;
+  }
+  .cover .pull {
+    font-family: var(--serif);
+    font-style: italic; font-weight: 600;
+    font-variation-settings: "opsz" 144, "SOFT" 60, "WONK" 1;
+    font-size: clamp(40px, 6.6vw, 104px);
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.1em;
+    max-width: 18ch;
+    color: #f6ead9;
+  }
+  .cover .pull em { color: #ff5db1; font-style: italic; }
+  .cover .attrib {
+    font-family: var(--sans); font-weight: 600;
+    font-size: clamp(15px, 1.4vw, 19px); letter-spacing: 0.04em;
+    color: #cdbac6;
+  }
+  .cover .wordmark {
+    font-family: var(--serif); font-weight: 900;
+    font-variation-settings: "opsz" 144, "WONK" 1;
+    font-size: 22px; letter-spacing: -0.01em; color: #f6ead9;
+  }
+  .cover .toc {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px 40px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(246,234,217,0.3);
+    width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 4px 12px;
+    text-decoration: none; color: inherit;
+    padding: 7px 0;
+    border-bottom: 1px dotted rgba(246,234,217,0.25);
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.82em; opacity: 0.6; }
+  .cover .toc .num {
+    font-family: var(--mono); font-weight: 600; font-size: 0.78em;
+    color: #ff5db1; margin-right: 10px;
+  }
+  .cover .decor::before {
+    content: "“";
+    position: absolute;
+    left: -3vw; top: -10vw;
+    font-family: var(--serif); font-style: italic;
+    font-size: 60vw; line-height: 1; color: rgba(255,93,177,0.06);
+  }
+  @media (max-width: 800px) {
+    .cover .toc { grid-template-columns: 1fr; gap: 0; }
+  }
+
+  /* ─── s01 · Cloudflare · big-stats yellow (LOUD) ─── */
+  .s01 { background: #ffd400; color: #0b0b0b; }
+  .s01 .tag { color: #0b0b0b; border-color: #0b0b0b; }
+  .s01 .hed {
+    font-family: var(--sans); font-weight: 900;
+    font-size: clamp(46px, 8.2vw, 116px);
+    line-height: 0.92; letter-spacing: -0.03em;
+    text-transform: uppercase;
+  }
+  .s01 .hed .cut {
+    background: #0b0b0b; color: #ffd400;
+    padding: 0 0.12em 0.06em; display: inline-block;
+    transform: rotate(-1.2deg);
+  }
+  .s01 .lede { font-family: var(--sans); font-weight: 500; font-size: clamp(19px, 1.7vw, 24px); }
+  .s01 .stats {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 0; border: 3px solid #0b0b0b; margin: 0;
+  }
+  .s01 .stats div { padding: 18px 16px; border-right: 3px solid #0b0b0b; }
+  .s01 .stats div:last-child { border-right: 0; }
+  .s01 .stats dt {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em;
+    text-transform: uppercase; opacity: 0.7;
+  }
+  .s01 .stats dd {
+    margin: 6px 0 0; font-family: var(--sans); font-weight: 900;
+    font-size: clamp(22px, 2.4vw, 34px); line-height: 1.05;
+  }
+  .s01 .read-on { color: #0b0b0b; border-color: #0b0b0b; --flip: #ffd400; }
+  .s01 .decor::before {
+    content: "$"; position: absolute;
+    right: -2vw; bottom: -14vw;
+    font-family: var(--sans); font-weight: 900;
+    font-size: 64vw; line-height: 1; color: rgba(11,11,11,0.06);
+  }
+  @media (max-width: 800px) {
+    .s01 .stats { grid-template-columns: 1fr; }
+    .s01 .stats div { border-right: 0; border-bottom: 3px solid #0b0b0b; }
+    .s01 .stats div:last-child { border-bottom: 0; }
+  }
+
+  /* ─── s02 · OpenAI Dreaming · midnight dreamy (DARK) ─── */
+  .s02 { background: #0d0b22; color: #d9d6f2; }
+  .s02 .tag { color: #9b8cff; border-color: #4a3fa0; }
+  .s02 .hed {
+    font-family: var(--serif); font-weight: 700; font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 80, "WONK" 1;
+    background: linear-gradient(102deg, #b8a6ff 0%, #6fd6ff 52%, #ff9ad2 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .s02 .lede { color: #b9b4e0; }
+  .s02 .callout {
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(22px, 2.2vw, 30px); line-height: 1.35;
+    border-left: 2px solid #6fd6ff; padding-left: 20px;
+    color: #cfd8ff; max-width: 40ch;
+  }
+  .s02 .read-on { color: #9b8cff; border-color: #6fd6ff; --flip: #0d0b22; }
+  .s02 .decor::before {
+    content: ""; position: absolute;
+    right: -16vw; top: -16vw; width: 58vw; height: 58vw; border-radius: 50%;
+    background: radial-gradient(circle, rgba(111,214,255,0.18), transparent 62%);
+  }
+  .s02 .decor::after {
+    content: ""; position: absolute;
+    left: -10vw; bottom: -20vw; width: 50vw; height: 50vw; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,154,210,0.16), transparent 64%);
+  }
+
+  /* ─── s03 · GPT-Rosalind · blueprint (light) ─── */
+  .s03 { background: #0a3a63; color: #e8f2fb; }
+  .s03 .tag { color: #bcd9f2; border-color: #4f86b8; }
+  .s03 .hed { font-family: var(--serif); font-weight: 600; color: #f3f9ff; }
+  .s03 .hed em { font-style: italic; color: #8fd0ff; }
+  .s03 .lede { color: #cfe2f3; }
+  .s03 .flow {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 14px; font-family: var(--mono); margin: 0;
+  }
+  .s03 .flow div {
+    border: 1px solid rgba(159,208,255,0.45); padding: 14px;
+    position: relative;
+  }
+  .s03 .flow .lab { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #8fd0ff; }
+  .s03 .flow .val { font-size: 15px; margin-top: 8px; color: #eaf4ff; line-height: 1.4; }
+  .s03 .read-on { color: #cfe2f3; border-color: #8fd0ff; --flip: #0a3a63; }
+  .s03 .decor {
+    background-image:
+      linear-gradient(rgba(143,208,255,0.10) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(143,208,255,0.10) 1px, transparent 1px);
+    background-size: 34px 34px;
+  }
+  .s03 .decor::before {
+    content: ""; position: absolute; top: 7%; right: 7%;
+    width: 22px; height: 22px;
+    border-top: 2px solid #8fd0ff; border-right: 2px solid #8fd0ff;
+  }
+  .s03 .decor::after {
+    content: ""; position: absolute; bottom: 7%; left: 7%;
+    width: 22px; height: 22px;
+    border-bottom: 2px solid #8fd0ff; border-left: 2px solid #8fd0ff;
+  }
+  @media (max-width: 800px) {
+    .s03 .flow { grid-template-columns: 1fr; }
+  }
+
+  /* ─── s04 · Sentry · terminal (LOUD, DARK) ─── */
+  .s04 { background: #04130c; color: #44f08a; }
+  .s04 .tag { color: #44f08a; border-color: #1c6b3f; font-family: var(--mono); }
+  .s04 .hed {
+    font-family: var(--mono); font-weight: 600;
+    font-size: clamp(34px, 5.4vw, 78px); line-height: 1.05;
+    letter-spacing: -0.01em; text-shadow: 0 0 22px rgba(68,240,138,0.35);
+  }
+  .s04 .lede { font-family: var(--mono); font-size: clamp(17px, 1.5vw, 21px); color: #9af7be; line-height: 1.5; }
+  .s04 .term {
+    font-family: var(--mono); font-size: clamp(13px, 1.3vw, 15px);
+    border: 1px solid #1c6b3f; background: rgba(0,0,0,0.4);
+    padding: 18px 18px 16px; line-height: 1.7; white-space: pre-wrap;
+  }
+  .s04 .term b { color: #d6ffe6; font-weight: 600; }
+  .s04 .term .c { color: #2f9c5e; }
+  .s04 .read-on { color: #44f08a; border-color: #44f08a; --flip: #04130c; font-family: var(--mono); }
+  .s04 .decor {
+    background-image: repeating-linear-gradient(
+      to bottom, rgba(68,240,138,0.05) 0 2px, transparent 2px 4px);
+  }
+
+  /* ─── s05 · Civitai LoRA · risograph duotone (LOUD) ─── */
+  .s05 { background: #f4ecdd; color: #131a4a; }
+  .s05 .tag { color: #131a4a; border-color: #131a4a; }
+  .s05 .hed {
+    font-family: var(--sans); font-weight: 800;
+    font-size: clamp(44px, 7.4vw, 104px); line-height: 0.96; letter-spacing: -0.02em;
+    color: #16308f; position: relative;
+  }
+  .s05 .hed::after {
+    content: attr(data-echo); position: absolute; left: 0.05em; top: 0.06em;
+    color: rgba(228,32,120,0.55); z-index: -1;
+  }
+  .s05 .lede { font-family: var(--sans); font-weight: 500; color: #20264f; }
+  .s05 .roster {
+    display: flex; flex-wrap: wrap; gap: 8px; margin: 0;
+  }
+  .s05 .roster span {
+    font-family: var(--mono); font-size: 13px; letter-spacing: 0.02em;
+    padding: 7px 12px; border: 2px solid #16308f; color: #16308f;
+    background: rgba(228,32,120,0.12); transform: rotate(-0.6deg);
+  }
+  .s05 .read-on { color: #16308f; border-color: #16308f; --flip: #f4ecdd; }
+  .s05 .decor::before {
+    content: ""; position: absolute; left: 8%; top: 12%;
+    width: 40vw; height: 40vw; border-radius: 50%;
+    background: rgba(0,170,200,0.22); mix-blend-mode: multiply;
+  }
+  .s05 .decor::after {
+    content: ""; position: absolute; left: 14%; top: 18%;
+    width: 40vw; height: 40vw; border-radius: 50%;
+    background: rgba(228,32,120,0.20); mix-blend-mode: multiply;
+  }
+
+  /* ─── s06 · Cognition · dark classified crimson (LOUD, DARK) ─── */
+  .s06 { background: #100406; color: #f2c9cf; }
+  .s06 .tag { color: #ff5466; border-color: #7a1320; }
+  .s06 .hed {
+    font-family: var(--sans); font-weight: 800;
+    font-size: clamp(40px, 6.6vw, 96px); line-height: 0.98; letter-spacing: -0.02em;
+    color: #ffe2e6;
+  }
+  .s06 .hed .red { background: #ff3b50; color: #100406; padding: 0 0.1em; }
+  .s06 .lede { font-family: var(--sans); font-weight: 400; color: #e6b6bd; }
+  .s06 .ledger {
+    font-family: var(--mono); font-size: 14px; margin: 0;
+    border: 1px solid #7a1320; padding: 16px 18px; background: rgba(255,59,80,0.05);
+  }
+  .s06 .ledger .row { display: flex; align-items: center; gap: 12px; padding: 5px 0; }
+  .s06 .ledger .row .k { width: 12ch; flex: 0 0 auto; color: #ff8a96; }
+  .s06 .ledger .bar { height: 12px; background: #ff3b50; }
+  .s06 .ledger .bar.human { background: #5a1a22; }
+  .s06 .ledger .redact { background: #ff3b50; color: #ff3b50; user-select: none; border-radius: 1px; }
+  .s06 .read-on { color: #ff5466; border-color: #ff5466; --flip: #100406; }
+  .s06 .decor::before {
+    content: "GUARANTEED"; position: absolute;
+    right: -2vw; bottom: 4vw; transform: rotate(-90deg); transform-origin: right bottom;
+    font-family: var(--mono); font-size: 9vw; letter-spacing: 0.3em;
+    color: rgba(255,59,80,0.06);
+  }
+
+  /* ─── s07 · Hermes Desktop · postcard (light) ─── */
+  .s07 { background: #ece3d2; color: #2a2622; }
+  .s07 .tag { color: #1f5e54; border-color: #1f5e54; }
+  .s07 .hed { font-family: var(--serif); font-weight: 700; color: #20302c; }
+  .s07 .hed em { font-style: italic; color: #c25a36; }
+  .s07 .lede { color: #45403a; }
+  .s07 .card {
+    border: 2px solid #2a2622; padding: 0; display: grid;
+    grid-template-columns: 1.4fr 1fr; background: #f4ecdd;
+  }
+  .s07 .card .msg { padding: 18px; border-right: 2px dashed #b6a98e; }
+  .s07 .card .msg p { margin: 0; font-family: var(--serif); font-style: italic; font-size: 18px; line-height: 1.45; color: #3a352e; }
+  .s07 .card .stamp { padding: 18px; display: flex; flex-direction: column; gap: 10px; }
+  .s07 .card .postmark {
+    border: 2px solid #1f5e54; color: #1f5e54; border-radius: 50%;
+    width: 92px; height: 92px; display: flex; align-items: center; justify-content: center;
+    text-align: center; font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em;
+    transform: rotate(-8deg); line-height: 1.3;
+  }
+  .s07 .card .plats { font-family: var(--mono); font-size: 13px; color: #6a6256; line-height: 1.6; }
+  .s07 .read-on { color: #c25a36; border-color: #c25a36; --flip: #ece3d2; }
+  .s07 .decor::before {
+    content: ""; position: absolute; inset: 16px;
+    border: 2px dashed rgba(42,38,34,0.18);
+  }
+  @media (max-width: 800px) {
+    .s07 .card { grid-template-columns: 1fr; }
+    .s07 .card .msg { border-right: 0; border-bottom: 2px dashed #b6a98e; }
+  }
+
+  /* ─── COLOPHON · newsprint ─── */
+  .colophon { background: #f3efe6; color: #1a1a1a; }
+  .colophon .hed { font-family: var(--serif); font-weight: 800; }
+  .colophon .hed em { font-style: italic; color: #6b1f14; }
+  .colophon .lede { color: #2a2a2a; }
+  .colophon .cols {
+    column-count: 3; column-gap: 32px; font-family: var(--sans);
+    font-size: 14px; line-height: 1.6; margin: 0;
+  }
+  .colophon .cols h4 {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: #6b1f14; margin: 0 0 6px;
+  }
+  .colophon .cols p { margin: 0 0 14px; break-inside: avoid; }
+  @media (max-width: 800px) { .colophon .cols { column-count: 1; } }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════════ COVER · pull-quote ═══════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span class="wordmark">Ephemeris.</span>
+    <span>Saturday · 06 Jun 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <span class="kicker">Issue 049 · the day the machines start keeping receipts</span>
+    <h1 class="pull">“How long would a human have taken? If the agent can't match it, <em>the credits come back.</em>”</h1>
+    <p class="attrib">— Cognition's new Devin guarantee, refunds up to $10M · story 06</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>Put a ceiling on the AI bill</span><span>Cloudflare</span></a>
+      <a href="#s02"><span><span class="num">02</span>ChatGPT sleeps on it</span><span>OpenAI</span></a>
+      <a href="#s03"><span><span class="num">03</span>A model that goes to the lab</span><span>OpenAI</span></a>
+      <a href="#s04"><span><span class="num">04</span>Errors, traces, logs, metrics</span><span>Sentry</span></a>
+      <a href="#s05"><span><span class="num">05</span>The avant-garde, as a LoRA</span><span>via @TochkiNadAI</span></a>
+      <a href="#s06"><span><span class="num">06</span>A refund on the hours saved</span><span>via @seeallochnaya</span></a>
+      <a href="#s07"><span><span class="num">07</span>Run your own agent</span><span>via @TochkiNadAI</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s01 · Cloudflare · big-stats yellow ═══════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 049</span>
+    <span>01 / 07 · Cloudflare</span>
+  </header>
+  <div class="main">
+    <span class="tag">AI tools · FinOps</span>
+    <h2 class="hed">Put a <span class="cut">ceiling</span> on the AI bill</h2>
+    <p class="lede">Cloudflare's AI Gateway now enforces spending caps measured in dollars across every provider you route through. Set a budget per model, team, or user; when it's hit, requests block — or downgrade to a cheaper model via Dynamic Routes. It's runaway-token insurance you can switch on today.</p>
+    <dl class="stats">
+      <div><dt>Unit</dt><dd>Dollars,<br>tracked live</dd></div>
+      <div><dt>Scope</dt><dd>Model ·<br>team · user</dd></div>
+      <div><dt>On limit</dt><dd>Block or<br>downgrade</dd></div>
+    </dl>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.cloudflare.com/ai-gateway-spend-limits/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s02 · OpenAI Dreaming · midnight dreamy ═══════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 049</span>
+    <span>02 / 07 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Model labs · Memory</span>
+    <h2 class="hed">ChatGPT sleeps on it.</h2>
+    <p class="lede">OpenAI introduced “Dreaming,” a memory system built to keep your preferences fresh and relevant from one conversation to the next. The name hints at the method — revisiting and reorganising stored context rather than only appending to it. If you build on ChatGPT's memory, it's a behaviour change worth testing against.</p>
+    <p class="callout">Memory you no longer have to curate by hand — the assistant tidies its own notes between chats.</p>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/chatgpt-memory-dreaming" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s03 · GPT-Rosalind · blueprint ═══════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 049</span>
+    <span>03 / 07 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Science · Research</span>
+    <h2 class="hed">A model that goes to the <em>lab</em>.</h2>
+    <p class="lede">OpenAI's GPT-Rosalind is a life-sciences specialist: biological reasoning, medicinal chemistry, genomics analysis, and help designing experimental workflows. Named for Rosalind Franklin, it's aimed at researchers who want a model fluent in the bench, not just the editor. If you work anywhere near bio, benchmark it against your current tooling.</p>
+    <div class="figure">
+      <dl class="flow">
+        <div><div class="lab">In</div><div class="val">Sequence, assay, structure</div></div>
+        <div><div class="lab">Reasons over</div><div class="val">Chemistry · genomics</div></div>
+        <div><div class="lab">Out</div><div class="val">Experimental workflow</div></div>
+      </dl>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s04 · Sentry · terminal ═══════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 049</span>
+    <span>04 / 07 · Sentry</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev tools · Observability</span>
+    <h2 class="hed">errors, traces, logs, metrics — reach for which?</h2>
+    <p class="lede">Sentry's field guide maps the four observability signals to the question each one actually answers, and argues that what you instrument today decides what you can debug six months from now.</p>
+    <div class="figure">
+      <div class="term"><span class="c"># signal</span>        <span class="c">answers</span>
+<b>errors</b>     what broke, and the stack
+<b>traces</b>     where, across services
+<b>logs</b>       the line-by-line detail
+<b>metrics</b>    the trend, over time
+<span class="c"># pick before you need it, not after</span></div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.sentry.io/errors-traces-logs-metrics-when-to-reach-for-what/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s05 · Civitai LoRA · risograph duotone ═══════════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 049</span>
+    <span>05 / 07 · via @TochkiNadAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Creative · Generative</span>
+    <h2 class="hed" data-echo="The avant-garde, as a LoRA.">The avant-garde, as a LoRA.</h2>
+    <p class="lede">“Slop in the Face” is a Flux.1 LoRA trained on vectorised illustrations from Russian Futurist books of 1910–1914. Load it into a Flux pipeline and prompts emerge in the hard geometry and hand-cut energy of the early avant-garde — proof that a distinctive style is a few hundred well-chosen images away.</p>
+    <div class="figure">
+      <div class="roster">
+        <span>Malevich</span><span>Goncharova</span><span>Larionov</span><span>Mayakovsky</span><span>Burliuk</span><span>Flux.1&nbsp;D</span>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://civitai.com/models/2670340/slop-in-the-face" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s06 · Cognition · dark classified crimson ═══════════ -->
+<section class="spread s06" id="s06">
+  <header class="folio">
+    <span>Ephemeris · Issue 049</span>
+    <span>06 / 07 · via @seeallochnaya</span>
+  </header>
+  <div class="main">
+    <span class="tag">Business · Agents</span>
+    <h2 class="hed">A <span class="red">refund</span> on the hours the AI didn't save</h2>
+    <p class="lede">Cognition will now estimate, per session, how long a human engineer would have taken to do what Devin did — and if the delivered value falls short of what you paid, it credits the difference, up to $10M a year. It puts the vendor's money behind the productivity claim; whether the estimator survives an audit is the open question.</p>
+    <div class="figure">
+      <div class="ledger">
+        <div class="row"><span class="k">Human est.</span><span class="bar human" style="width:62%"></span></div>
+        <div class="row"><span class="k">Devin cost</span><span class="bar" style="width:28%"></span></div>
+        <div class="row"><span class="k">Shortfall →</span><span class="redact">credited back to the buyer</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://cognition.ai/blog/ai-guarantee" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s07 · Hermes Desktop · postcard ═══════════ -->
+<section class="spread s07" id="s07">
+  <header class="folio">
+    <span>Ephemeris · Issue 049</span>
+    <span>07 / 07 · via @TochkiNadAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev tools · Agentic</span>
+    <h2 class="hed">Run your own agent, on your own <em>machine</em>.</h2>
+    <p class="lede">Nous Research shipped a desktop build of Hermes, its open-source (MIT) agent, for macOS, Windows, and Linux. It holds persistent memory, schedules automation, browses, sees, runs code, and hands work to isolated sub-agents across five sandbox backends. A local, hackable alternative to the hosted agent platforms — v0.16 is a clean place to start.</p>
+    <div class="figure">
+      <div class="card">
+        <div class="msg"><p>Wish you were here. The sub-agents are off in their sandboxes; memory's holding; the scheduler runs while I sleep.</p></div>
+        <div class="stamp">
+          <div class="postmark">HERMES<br>v0.16.0<br>· MIT ·</div>
+          <div class="plats">macOS<br>Windows<br>Linux</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://hermes-agent.nousresearch.com/desktop" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ COLOPHON · newsprint ═══════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 049</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Seven picks for Saturday, 06 June 2026 — budgets, memory, a lab-grade model, observability, a Futurist LoRA, a money-back agent, and one you run yourself.</p>
+    <div class="figure">
+      <div class="cols">
+        <h4>Sources today</h4>
+        <p>Cloudflare blog · OpenAI news · Sentry Engineering · Civitai (via @TochkiNadAI) · Nous Research (via @TochkiNadAI) · Cognition (via @seeallochnaya).</p>
+        <h4>Rubric</h4>
+        <p>AI tools you could adopt this week, creative and generative software, dev tools and agentic coding, privacy and security when the signal is high, science with a practical kernel, and anything immediately actionable for a senior engineer or founder.</p>
+        <h4>Ledger</h4>
+        <p>Every read-on link is checked against a canonical archive of past issues — no reprints, no homepage links, nothing older than thirty days.</p>
+      </div>
+    </div>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>
