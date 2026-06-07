@@ -1,0 +1,588 @@
+<!doctype html>
+<!--
+  Ephemeris · Issue 050 · 2026-06-07
+  Built on scaffold.html (locked structural baseline). Surface overrides only.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 050 · 7 June 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — copied from scaffold.html. Do not edit.
+     ═══════════════════════════════════════════════════════════════════ */
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+
+  .spread > .decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+
+  .figure { width: 100%; }
+
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — Issue 050. Surface only.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── COVER · dossier grid ─── */
+  .cover { background: #efe9dc; color: #18140d; }
+  .cover .kicker {
+    font-family: var(--mono); font-size: 13px; letter-spacing: 0.2em;
+    text-transform: uppercase; opacity: 0.7;
+  }
+  .cover .masthead {
+    font-family: var(--serif); font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    font-size: clamp(44px, 8vw, 104px);
+    line-height: 0.9; letter-spacing: -0.035em;
+    color: #18140d; margin: 0; padding-bottom: 0.08em;
+  }
+  .cover .masthead em { font-style: italic; color: #b5341f; }
+  .cover .dek {
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(20px, 2.1vw, 28px); line-height: 1.32;
+    max-width: 34ch; margin: 0;
+  }
+  .cover .dossier {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2px; background: #18140d; border: 2px solid #18140d;
+    width: 100%; margin-top: 4px;
+  }
+  .cover .dossier a {
+    background: #efe9dc; color: inherit; text-decoration: none;
+    display: flex; flex-direction: column; gap: 10px;
+    padding: clamp(16px, 1.6vw, 24px);
+    min-height: 150px;
+    transition: background 0.15s ease;
+  }
+  .cover .dossier a:hover { background: #f6f1e6; }
+  .cover .dossier .n {
+    font-family: var(--mono); font-size: 13px; letter-spacing: 0.12em;
+    color: #b5341f;
+  }
+  .cover .dossier .frag {
+    font-family: var(--serif); font-weight: 700; font-size: clamp(19px, 1.7vw, 24px);
+    line-height: 1.12; margin-top: auto;
+  }
+  .cover .dossier .src {
+    font-family: var(--sans); font-size: 11px; letter-spacing: 0.16em;
+    text-transform: uppercase; opacity: 0.55;
+  }
+  .cover .decor::before {
+    content: ""; position: absolute; right: -8vw; top: -10vw;
+    width: 46vw; height: 46vw;
+    background: radial-gradient(circle, rgba(181,52,31,0.10), transparent 70%);
+  }
+  @media (max-width: 800px) {
+    .cover .dossier { grid-template-columns: 1fr; }
+    .cover .dossier a { min-height: 0; }
+  }
+
+  /* ─── s01 · GPIC dataset · neo-brutalist (LOUD, light) ─── */
+  .s01 { background: #f4f1e8; color: #111; }
+  .s01 .tag { background: #111; color: #f4f1e8; border-color: #111; border-radius: 0; }
+  .s01 .hed {
+    font-family: var(--sans); font-weight: 900; text-transform: uppercase;
+    letter-spacing: -0.02em; line-height: 0.96;
+  }
+  .s01 .hed em { font-style: normal; background: #1b3cff; color: #fff; padding: 0 0.08em; }
+  .s01 .lede { font-family: var(--sans); font-weight: 500; }
+  .s01 .read-on { color: #111; border-color: #111; border-width: 3px; border-radius: 0; --flip: #f4f1e8; }
+  .s01 .bignum {
+    font-family: var(--sans); font-weight: 900; font-size: clamp(76px, 13vw, 168px);
+    line-height: 0.84; letter-spacing: -0.04em; color: #1b3cff;
+  }
+  .s01 .bignum .unit {
+    font-family: var(--sans); font-weight: 800; font-size: 0.2em;
+    letter-spacing: normal; color: #111; margin-left: 0.3em;
+  }
+  .s01 .specs {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+    background: #111; border: 3px solid #111; margin: 14px 0 0;
+  }
+  .s01 .specs > div { background: #f4f1e8; padding: 16px 14px; }
+  .s01 .specs dt { font-family: var(--sans); font-weight: 900; font-size: 22px; }
+  .s01 .specs dd { font-family: var(--sans); font-weight: 500; font-size: 14px; margin: 4px 0 0; opacity: 0.8; }
+  .s01 .decor::before {
+    content: ""; position: absolute; left: -6vw; bottom: -10vw;
+    width: 40vw; height: 40vw; border: 3px solid rgba(17,17,17,0.06);
+  }
+
+  /* ─── s02 · Ahrefs · hot pink (LOUD, light) ─── */
+  .s02 { background: #ff2d8e; color: #210311; }
+  .s02 .tag { color: #210311; border-color: #210311; }
+  .s02 .hed { font-family: var(--serif); font-weight: 800; font-style: italic; }
+  .s02 .hed em { font-style: italic; background: #210311; color: #ff2d8e; padding: 0 0.1em; }
+  .s02 .lede { font-family: var(--serif); }
+  .s02 .read-on { color: #210311; border-color: #210311; --flip: #ff2d8e; }
+  .s02 .findings { font-family: var(--serif); font-style: italic; font-size: clamp(18px, 1.6vw, 22px);
+    line-height: 1.4; margin: 0; padding-left: 1.2em; max-width: 46ch; }
+  .s02 .findings li { margin: 0 0 8px; }
+  .s02 .uplift {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 22px 0 0;
+  }
+  .s02 .uplift > div { border-top: 3px solid #210311; padding-top: 8px; }
+  .s02 .uplift dt { font-family: var(--sans); font-weight: 900; font-size: clamp(30px, 4vw, 52px); letter-spacing: -0.03em; }
+  .s02 .uplift dd { font-family: var(--sans); font-size: 13px; letter-spacing: 0.04em; margin: 4px 0 0; opacity: 0.85; }
+
+  /* ─── s03 · Qwen3.7-Max · neon / cyberpunk (LOUD, DARK inversion) ─── */
+  .s03 { background: #070612; color: #cdeefb; }
+  .s03 .tag { color: #37e6c8; border-color: #37e6c8; }
+  .s03 .hed {
+    font-family: var(--sans); font-weight: 900; letter-spacing: -0.015em; color: #ffffff;
+    text-shadow: 0 0 22px rgba(124,77,255,0.55), 0 0 6px rgba(55,230,200,0.55);
+  }
+  .s03 .hed em { font-style: normal; color: #37e6c8; }
+  .s03 .lede { font-family: var(--sans); color: #9fb6c6; }
+  .s03 .read-on { color: #37e6c8; border-color: #37e6c8; --flip: #070612; }
+  .s03 .card {
+    font-family: var(--mono); font-size: clamp(14px, 1.3vw, 17px);
+    border: 1px solid #2a2a55; border-radius: 8px; overflow: hidden;
+    max-width: 460px; background: rgba(124,77,255,0.06);
+  }
+  .s03 .card .row {
+    display: flex; justify-content: space-between; gap: 16px;
+    padding: 12px 16px; border-bottom: 1px solid #1c1c3a;
+  }
+  .s03 .card .row:last-child { border-bottom: 0; }
+  .s03 .card .row span:first-child { color: #6f7fb0; letter-spacing: 0.04em; }
+  .s03 .card .row span:last-child { color: #37e6c8; font-weight: 600; }
+  .s03 .decor::before {
+    content: ""; position: absolute; right: -12vw; top: 10vh;
+    width: 50vw; height: 50vw;
+    background: radial-gradient(circle, rgba(124,77,255,0.22), transparent 65%);
+  }
+  .s03 .decor::after {
+    content: ""; position: absolute; left: -10vw; bottom: -10vw;
+    width: 40vw; height: 40vw;
+    background: radial-gradient(circle, rgba(55,230,200,0.16), transparent 68%);
+  }
+
+  /* ─── s04 · PostHog AI observability · academic journal (quiet, cream+navy) ─── */
+  .s04 { background: #f1ede3; color: #16243f; }
+  .s04 .tag { color: #7a2718; border-color: #7a2718; }
+  .s04 .hed { font-family: var(--serif); font-weight: 800; font-variation-settings: "opsz" 144; color: #16243f; }
+  .s04 .hed em { font-style: italic; color: #7a2718; font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; }
+  .s04 .lede { font-family: var(--serif); }
+  .s04 .read-on { color: #16243f; border-color: #16243f; --flip: #f1ede3; }
+  .s04 .panel { border-left: 2px solid #16243f; padding-left: 20px; max-width: 50ch; }
+  .s04 .panel .pk {
+    font-family: var(--sans); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: #7a2718; margin: 0 0 12px;
+  }
+  .s04 .blocks { list-style: none; margin: 0; padding: 0; }
+  .s04 .blocks li {
+    font-family: var(--serif); font-size: clamp(17px, 1.4vw, 20px); line-height: 1.4;
+    padding: 8px 0; border-bottom: 1px solid rgba(22,36,63,0.18);
+  }
+  .s04 .blocks li b { font-weight: 800; }
+  .s04 .panel .tools {
+    font-family: var(--mono); font-size: 13px; letter-spacing: 0.02em;
+    margin: 14px 0 0; color: #16243f; opacity: 0.75;
+  }
+
+  /* ─── s05 · WhaleSpotter · warm orange (quiet, two-column + pull-quote) ─── */
+  .s05 { background: #f7e9d3; color: #3a1d08; }
+  .s05 .tag { color: #c2410c; border-color: #c2410c; }
+  .s05 .hed {
+    font-family: var(--serif); font-weight: 360; font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 60, "WONK" 1;
+    font-size: clamp(46px, 7.2vw, 104px); letter-spacing: -0.012em;
+  }
+  .s05 .hed em { font-style: italic; color: #c2410c; }
+  .s05 .lede { font-family: var(--serif); }
+  .s05 .read-on { color: #c2410c; border-color: #c2410c; --flip: #f7e9d3; }
+  .s05 .pull {
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    font-size: clamp(26px, 3.4vw, 44px); line-height: 1.18; color: #c2410c;
+    margin: 0 0 18px; max-width: 18ch;
+  }
+  .s05 .specs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .s05 .specs > div { border-top: 2px solid #c2410c; padding-top: 8px; }
+  .s05 .specs dt { font-family: var(--serif); font-weight: 700; font-size: clamp(22px, 2.4vw, 30px); }
+  .s05 .specs dd { font-family: var(--sans); font-size: 13px; margin: 4px 0 0; opacity: 0.85; }
+
+  /* ─── s06 · aleximas job dimensionality · memo / airgram (quiet, typewriter) ─── */
+  .s06 { background: #ece8de; color: #1c1a15; }
+  .s06 .tag { font-family: var(--mono); color: #1c1a15; border-color: #1c1a15; letter-spacing: 0.14em; border-radius: 0; }
+  .s06 .hed { font-family: var(--mono); font-weight: 600; letter-spacing: -0.01em; font-size: clamp(40px, 6vw, 84px); line-height: 1.04; }
+  .s06 .hed em { font-style: normal; text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 6px; }
+  .s06 .lede { font-family: var(--mono); font-size: clamp(18px, 1.4vw, 20px); line-height: 1.5; }
+  .s06 .read-on { font-family: var(--mono); color: #1c1a15; border-color: #1c1a15; border-radius: 0; --flip: #ece8de; }
+  .s06 .memo { border: 1px solid #1c1a15; max-width: 640px; }
+  .s06 .memohead {
+    display: flex; flex-wrap: wrap; gap: 6px 28px;
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 12px 16px; border-bottom: 1px solid #1c1a15; background: #e2ddd0;
+  }
+  .s06 .dim { width: 100%; border-collapse: collapse; }
+  .s06 .dim td { font-family: var(--mono); font-size: 15px; line-height: 1.4; padding: 14px 16px; vertical-align: top; border-bottom: 1px solid rgba(28,26,21,0.18); }
+  .s06 .dim tr:last-child td { border-bottom: 0; }
+  .s06 .dim td:first-child { font-weight: 600; white-space: nowrap; border-right: 1px solid rgba(28,26,21,0.18); }
+  .s06 .decor::before {
+    content: ""; position: absolute; left: clamp(12px, 4vw, 60px); top: clamp(96px, 12vw, 160px); bottom: 12%;
+    width: 1px; background: repeating-linear-gradient(to bottom, rgba(28,26,21,0.25) 0 6px, transparent 6px 12px);
+  }
+
+  /* ─── COLOPHON · dark charcoal ─── */
+  .colophon { background: #14140f; color: #e9e3d5; }
+  .colophon .hed { font-family: var(--serif); font-weight: 800; }
+  .colophon .hed em { font-style: italic; color: #e0a64b; }
+  .colophon .lede { font-family: var(--serif); color: #cfc8b8; max-width: 60ch; }
+  .colophon .meta { font-family: var(--mono); font-size: 13px; line-height: 1.7; color: #a39c8a; margin-top: 8px; }
+  .colophon .meta b { color: #e9e3d5; font-weight: 600; }
+
+  /* ─── Shared mobile reflows for figures ─── */
+  @media (max-width: 800px) {
+    .s01 .specs { grid-template-columns: 1fr 1fr; }
+    .s02 .uplift { grid-template-columns: 1fr; gap: 12px; }
+    .s05 .specs { grid-template-columns: 1fr; gap: 12px; }
+    .s06 .dim td:first-child { white-space: normal; }
+    .s06 .decor::before { display: none; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══ COVER · dossier grid ═══ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 050</span>
+    <span>Sunday · 07 Jun 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <p class="kicker">The dossier · six entries</p>
+    <h1 class="masthead">Ephemeris<em>.</em></h1>
+    <p class="dek">Six places AI showed up this week the official ledgers don't track yet — a free image corpus, a million-token model, the SEO that does nothing, the watching your own AI now needs, a whale lane, and the jobs that bend first.</p>
+    <nav class="dossier">
+      <a href="#s01"><span class="n">01</span><span class="frag">100M images, cleared to train on</span><span class="src">arXiv · via Import AI</span></a>
+      <a href="#s02"><span class="n">02</span><span class="frag">The schema you added did nothing</span><span class="src">Ahrefs · via @denissexy</span></a>
+      <a href="#s03"><span class="n">03</span><span class="frag">A million-token Qwen, weights kept in</span><span class="src">Qwen · Alibaba</span></a>
+      <a href="#s04"><span class="n">04</span><span class="frag">Observability, the AI-shaped version</span><span class="src">PostHog</span></a>
+      <a href="#s05"><span class="n">05</span><span class="frag">A camera that reads whales by heat</span><span class="src">Science News</span></a>
+      <a href="#s06"><span class="n">06</span><span class="frag">Which jobs bend first</span><span class="src">Substack · via @ProductsAndStartups</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ s01 · GPIC dataset · neo-brutalist ═══ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 050</span>
+    <span>01 / 6 · arXiv · via Import AI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Generative media · Datasets</span>
+    <h2 class="hed">A corpus of images you're <em>cleared</em> to train on.</h2>
+    <p class="lede">Stanford's Vision Lab released GPIC — roughly 28 trillion pixels across 100 million images, each captioned by a vision-language model, deduplicated and safety-filtered, and licensed for both research and commercial use. It's on Hugging Face today, which makes it one of the few large image sets you can fine-tune a generative model on without a lawyer in the room.</p>
+    <div class="figure">
+      <div class="bignum">100<span class="unit">M images</span></div>
+      <dl class="specs">
+        <div><dt>≈28T</dt><dd>pixels in the corpus</dd></div>
+        <div><dt>VLM</dt><dd>caption on every image</dd></div>
+        <div><dt>License</dt><dd>research + commercial</dd></div>
+        <div><dt>Host</dt><dd>Hugging Face, now</dd></div>
+      </dl>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://arxiv.org/abs/2605.30341" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ s02 · Ahrefs · hot pink ═══ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 050</span>
+    <span>02 / 6 · Ahrefs · via @denissexy</span>
+  </header>
+  <div class="main">
+    <span class="tag">AI search · Marketing</span>
+    <h2 class="hed">The schema you added did <em>nothing</em>.</h2>
+    <p class="lede">Ahrefs tracked 1,885 pages that bolted on JSON-LD schema and matched them against 4,000 that didn't. Across Google AI Overviews, AI Mode, and ChatGPT, the citation needle barely moved — and on Overviews it slipped backwards. AI-cited pages do tend to carry schema, but that's site quality showing through, not the markup doing work.</p>
+    <div class="figure">
+      <ol class="findings">
+        <li>1,885 pages added schema; matched to 4,000 that didn't.</li>
+        <li>Every AI surface landed at the edge of zero uplift.</li>
+        <li>Cited pages carry schema 53% of the time — quality, not cause.</li>
+        <li>The strongest signal they found was YouTube, not markup.</li>
+      </ol>
+      <dl class="uplift">
+        <div><dt>+2.4%</dt><dd>Google AI Mode</dd></div>
+        <div><dt>+2.2%</dt><dd>ChatGPT</dd></div>
+        <div><dt>−4.6%</dt><dd>AI Overviews</dd></div>
+      </dl>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://ahrefs.com/blog/schema-ai-citations/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ s03 · Qwen3.7-Max · neon / cyberpunk (DARK) ═══ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 050</span>
+    <span>03 / 6 · Qwen · Alibaba</span>
+  </header>
+  <div class="main">
+    <span class="tag">Models · Long context</span>
+    <h2 class="hed">The biggest Qwen yet ships <em>closed</em>.</h2>
+    <p class="lede">Qwen3.7-Max is Alibaba's new flagship: a one-million-token context window, output around 208 tokens a second, and seventh place on the Artificial Analysis intelligence index. It's API-only with the weights held back — a turn for a team known for open releases. If you need a long-context agent this week, it's a live option to benchmark against your stack.</p>
+    <div class="figure">
+      <div class="card">
+        <div class="row"><span>context window</span><span>1,000,000 tokens</span></div>
+        <div class="row"><span>throughput</span><span>~208 tok/s</span></div>
+        <div class="row"><span>intelligence index</span><span>#7</span></div>
+        <div class="row"><span>access</span><span>API only</span></div>
+        <div class="row"><span>weights</span><span>closed</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://qwen.ai/blog?id=qwen3.7" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ s04 · PostHog AI observability · academic journal ═══ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 050</span>
+    <span>04 / 6 · PostHog</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev tools · Observability</span>
+    <h2 class="hed">Observability, the <em>AI-shaped</em> version.</h2>
+    <p class="lede">An LLM feature fails in ways your APM never modelled: a prompt regresses overnight, a token bill balloons, a tool call returns confident garbage. PostHog's field guide walks the building blocks — tracing each call, tracking cost, capturing errors, wiring evals — and lays the main tools side by side so you choose before the incident rather than during it.</p>
+    <div class="figure">
+      <div class="panel">
+        <p class="pk">Wire these before launch</p>
+        <ul class="blocks">
+          <li><b>Trace</b> every model call, end to end</li>
+          <li><b>Cost</b> per call, per user, per feature</li>
+          <li><b>Capture</b> errors and bad tool calls</li>
+          <li><b>Evals</b> on the prompts that matter</li>
+        </ul>
+        <p class="tools">PostHog · Langfuse · LangSmith · Helicone</p>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://posthog.com/blog/what-is-ai-observability" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ s05 · WhaleSpotter · warm orange ═══ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 050</span>
+    <span>05 / 6 · Science News</span>
+  </header>
+  <div class="main">
+    <span class="tag">Applied AI · Conservation</span>
+    <h2 class="hed">A camera that reads a whale by its <em>heat</em>.</h2>
+    <p class="lede">WhaleSpotter pairs thermal cameras with a neural network trained on hundreds of thousands of heat images to pick gray whales out of San Francisco Bay — the roughly two-degree warmth of a blowhole against cold water. It flags them up to seven kilometres out and hands each detection to a human before alerting nearby vessels, buying captains time to change course.</p>
+    <div class="figure">
+      <blockquote class="pull">“…as far as seven kilometres away.”</blockquote>
+      <dl class="specs">
+        <div><dt>≈2&nbsp;°C</dt><dd>blowhole vs. cold water</dd></div>
+        <div><dt>7&nbsp;km</dt><dd>early-warning range</dd></div>
+        <div><dt>Human</dt><dd>verifies before the alert</dd></div>
+      </dl>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.sciencenews.org/article/ai-tech-save-gray-whales" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ s06 · aleximas job dimensionality · memo / airgram ═══ -->
+<section class="spread s06" id="s06">
+  <header class="folio">
+    <span>Ephemeris · Issue 050</span>
+    <span>06 / 6 · Substack · via @ProductsAndStartups</span>
+  </header>
+  <div class="main">
+    <span class="tag">Mono · RE: automation</span>
+    <h2 class="hed">Which jobs <em>bend</em> first.</h2>
+    <p class="lede">An analysis reframes automation risk around job "dimensionality" — how many interdependent tasks a role bundles. Low-dimensionality work, where tasks don't lean on one another, takes the brunt; high-dimensionality roles can see wages rise if demand for their output is elastic. It's a sharper lens than "will AI take my job" for deciding where to put a career or a team.</p>
+    <div class="figure">
+      <div class="memo">
+        <div class="memohead">
+          <span>To — builders &amp; hiring leads</span>
+          <span>Re — what bends first</span>
+        </div>
+        <table class="dim">
+          <tr><td>Low dimensionality</td><td>few interlocking tasks → most exposed to automation</td></tr>
+          <tr><td>High dimensionality</td><td>many interlocking tasks → wages may rise if demand is elastic</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://aleximas.substack.com/p/how-will-ai-driven-automation-actually" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ COLOPHON · dark charcoal ═══ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 050</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Six picks from a saturated week — a Stanford image corpus, Alibaba's closed flagship, a marketing study that clears the air, the observability an AI feature earns, a thermal eye on the shipping lane, and a cleaner way to think about which jobs go first.</p>
+    <p class="meta">
+      <b>Sources today —</b> arXiv (via Import AI) · Ahrefs (via @denissexy) · Qwen / Alibaba · PostHog · Science News (via The Batch) · Substack (via @ProductsAndStartups).<br>
+      <b>Rubric —</b> tools you could adopt this week · creative &amp; generative media · dev tools &amp; agentic coding · privacy &amp; security · science with a practical kernel · anything actionable for a builder.<br>
+      <b>Issue 050 · 7 June 2026 · Europe/Zürich.</b>
+    </p>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+</main>
+</body>
+</html>

@@ -1,5 +1,7 @@
 http://hnup.date/hn-sota
+https://ahrefs.com/blog/schema-ai-citations
 https://aisi.gov.uk/blog/our-evaluation-of-openais-gpt-5-5-cyber-capabilities
+https://aleximas.substack.com/p/how-will-ai-driven-automation-actually
 https://andonlabs.com/blog/openai-gpt-5-5-vending-bench
 https://anthropic.com/engineering/advanced-tool-use
 https://anthropic.com/engineering/AI-resistant-technical-evaluations
@@ -42,6 +44,7 @@ https://arxiv.org/abs/2603.01203
 https://arxiv.org/abs/2604.20779
 https://arxiv.org/abs/2605.13829
 https://arxiv.org/abs/2605.22771
+https://arxiv.org/abs/2605.30341
 https://arxiv.org/pdf/2604.24827
 https://biohub.org/news/world-model-of-protein-biology
 https://blog.cloudflare.com/agent-readiness
@@ -241,12 +244,15 @@ https://posthog.com/blog/slack-app-beta
 https://posthog.com/blog/testing-ai-agents
 https://posthog.com/blog/training-ai-models
 https://posthog.com/blog/untangling-rayon-and-tokio
+https://posthog.com/blog/what-is-ai-observability
 https://posthog.com/blog/why-attacking-competitors-is-dumb
 https://posthog.com/blog/your-lifecycle-emails-are-wrong
 https://primeintellect.ai/auto-nanogpt
 https://programbench.com/
 https://programbench.com/blog/gpt-5-5-first-solve
 https://proofofconcept.pub/p/design-systems-are-now-inference
+https://qwen.ai/blog
+https://sciencenews.org/article/ai-tech-save-gray-whales
 https://sentinelone.com/labs/fast16-mystery-shadowbrokers-reference-reveals-high-precision-software-sabotage-5-years-before-stuxnet
 https://sentry.engineering/blog/building-type-safe-metrics-api-in-swift-part-ii
 https://sentry.engineering/blog/do-you-really-need-an-mcp-to-build-your-app
