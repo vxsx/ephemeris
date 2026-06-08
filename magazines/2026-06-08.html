@@ -1,0 +1,619 @@
+<!doctype html>
+<!--
+  Ephemeris · Issue 051 · 2026-06-08
+  Built on the locked scaffold.html baseline. Surface overrides only.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 051 · Monday 08 Jun 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — copied verbatim from scaffold.html.
+     ═══════════════════════════════════════════════════════════════════ */
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+
+  .spread > .decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+
+  .figure { width: 100%; }
+
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — Issue 051. Surface only.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── COVER · date-hero (bone) ─── */
+  .cover { background: #f4f0e6; color: #15140f; }
+  .cover .wordmark {
+    font-family: var(--serif); font-weight: 900; font-style: italic;
+    font-size: clamp(20px, 2.4vw, 30px); letter-spacing: -0.01em;
+    color: #7c1f12; margin: 0;
+    font-variation-settings: "opsz" 144, "SOFT" 60, "WONK" 1;
+  }
+  .cover .kicker {
+    font-family: var(--sans); font-weight: 800;
+    letter-spacing: 0.34em; text-transform: uppercase;
+    font-size: clamp(13px, 1.6vw, 18px); color: #15140f; margin: 0;
+  }
+  .cover .datehero {
+    font-family: var(--sans); font-weight: 900;
+    font-size: clamp(76px, 19vw, 280px); line-height: 0.82;
+    letter-spacing: -0.045em; font-variant-numeric: tabular-nums;
+    margin: 0; padding-bottom: 0.05em;
+  }
+  .cover .datehero .mo { color: #7c1f12; }
+  .cover .dek {
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(20px, 2vw, 30px); line-height: 1.32; max-width: 32ch; margin: 0;
+  }
+  .cover .toc {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 40px; padding-top: 20px; border-top: 1px solid currentColor; width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 4px 12px; text-decoration: none; color: inherit;
+    padding: 7px 0; border-bottom: 1px dotted rgba(21,20,15,0.28);
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.82em; opacity: 0.65; }
+  .cover .toc .num {
+    font-family: var(--serif); font-weight: 700; font-style: italic;
+    color: #7c1f12; margin-right: 10px;
+  }
+  .cover .decor::before {
+    content: ""; position: absolute; left: -10vw; top: -12vw;
+    width: 48vw; height: 48vw;
+    background: radial-gradient(circle, rgba(124,31,18,0.07), transparent 70%);
+  }
+
+  /* ─── s01 · Google Colab CLI · DARK CONSOLE (LOUD, DARK inversion) ─── */
+  .s01 { background: #08090d; color: #f2efe6; }
+  .s01 .tag { color: #ffb627; border-color: #ffb627; }
+  .s01 .hed {
+    font-family: var(--sans); font-weight: 900; text-transform: uppercase;
+    letter-spacing: -0.015em; line-height: 0.96;
+    font-size: clamp(46px, 8.4vw, 124px);
+  }
+  .s01 .hed em { font-style: normal; color: #ffb627; }
+  .s01 .read-on { color: #ffb627; border-color: #ffb627; --flip: #08090d; }
+  .s01 .lede code {
+    font-family: var(--mono); font-size: 0.86em;
+    background: rgba(255,182,39,0.14); padding: 1px 6px; border-radius: 3px;
+  }
+  .s01 .term {
+    font-family: var(--mono); font-size: clamp(14px, 1.5vw, 17px); line-height: 1.75;
+    background: #0e1016; border: 1px solid rgba(255,182,39,0.4);
+    border-radius: 6px; padding: 20px 22px; margin-top: 4px; max-width: 46ch;
+  }
+  .s01 .term .p  { color: #ffb627; }
+  .s01 .term .ok { color: #6fe39a; }
+  .s01 .term .dim { color: rgba(242,239,230,0.55); }
+  .s01 .specline {
+    font-family: var(--mono); font-size: 14px; letter-spacing: 0.04em;
+    color: rgba(242,239,230,0.7); margin-top: 14px;
+  }
+  .s01 .decor::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      linear-gradient(rgba(255,182,39,0.05) 1px, transparent 1px) 0 0 / 100% 44px,
+      linear-gradient(90deg, rgba(255,182,39,0.05) 1px, transparent 1px) 0 0 / 44px 100%;
+  }
+
+  /* ─── s02 · Copyright leak · CONCRETE (giant numeral) ─── */
+  .s02 { background: #d9d4c7; color: #1a1916; }
+  .s02 .tag { color: #7c1f12; border-color: #7c1f12; }
+  .s02 .hed { font-family: var(--serif); font-weight: 900; line-height: 0.98; }
+  .s02 .hed em {
+    font-style: italic; color: #7c1f12;
+    font-variation-settings: "opsz" 144, "SOFT" 70, "WONK" 1;
+  }
+  .s02 .read-on { color: #7c1f12; border-color: #7c1f12; --flip: #d9d4c7; }
+  .s02 .stat {
+    display: grid; grid-template-columns: auto 1fr; align-items: end;
+    gap: 0 28px; margin-top: 4px;
+  }
+  .s02 .num {
+    font-family: var(--serif); font-weight: 900; color: #1a1916;
+    font-size: clamp(96px, 20vw, 220px); line-height: 0.82; letter-spacing: -0.04em;
+  }
+  .s02 .num .unit {
+    font-family: var(--sans); font-style: normal; font-weight: 700;
+    font-size: 0.26em; letter-spacing: normal; margin-left: 0.12em; color: #7c1f12;
+  }
+  .s02 .facts { display: flex; flex-direction: column; gap: 10px; padding-bottom: 14px; }
+  .s02 .facts div { font-family: var(--mono); font-size: 15px; line-height: 1.3; }
+  .s02 .facts b { color: #7c1f12; }
+  .s02 .decor::before {
+    content: ""; position: absolute; right: -8vw; bottom: -16vw;
+    width: 60vw; height: 60vw;
+    background: radial-gradient(circle, rgba(124,31,18,0.08), transparent 68%);
+  }
+
+  /* ─── s03 · DuckDB vs SQLite · SPREADSHEET (quiet, precise) ─── */
+  .s03 { background: #eef0ee; color: #1c1f1c; }
+  .s03 .tag { color: #1f6f5c; border-color: #1f6f5c; }
+  .s03 .hed {
+    font-family: var(--mono); font-weight: 600; letter-spacing: -0.01em;
+    line-height: 1.04; font-size: clamp(34px, 5vw, 72px);
+  }
+  .s03 .hed em { font-style: normal; color: #1f6f5c; }
+  .s03 .read-on { color: #1f6f5c; border-color: #1f6f5c; --flip: #eef0ee; }
+  .s03 .sheet {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    border: 1px solid #c4c9c4; font-family: var(--mono); margin-top: 4px;
+    background: #f7f8f7;
+  }
+  .s03 .sheet .col { padding: 0; }
+  .s03 .sheet .col + .col { border-left: 1px solid #c4c9c4; }
+  .s03 .sheet h4 {
+    font-family: var(--mono); font-weight: 600; font-size: 15px;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 14px 18px; border-bottom: 1px solid #c4c9c4;
+  }
+  .s03 .sheet .sq h4 { color: #b25a00; background: rgba(178,90,0,0.07); }
+  .s03 .sheet .dk h4 { color: #1f6f5c; background: rgba(31,111,92,0.08); }
+  .s03 .sheet .row {
+    padding: 13px 18px; font-size: 17px; line-height: 1.35;
+    border-bottom: 1px dashed #d3d8d3;
+  }
+  .s03 .sheet .row:last-child { border-bottom: 0; }
+  .s03 .sheet .row span {
+    display: block; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: #6c726c; margin-bottom: 3px;
+  }
+
+  /* ─── s04 · Microsoft RAMPART · TEAL GRID (LOUD, saturated) ─── */
+  .s04 { background: #0a8074; color: #f0fffb; }
+  .s04 .tag { color: #c9fff3; border-color: #c9fff3; }
+  .s04 .hed {
+    font-family: var(--sans); font-weight: 800; letter-spacing: -0.02em; line-height: 1.0;
+  }
+  .s04 .hed em { font-style: normal; color: #ffe14d; }
+  .s04 .read-on { color: #08090d; border-color: #ffe14d; background: #ffe14d; --flip: #ffe14d; }
+  .s04 .read-on:hover { background: transparent; }
+  .s04 .read-on:hover span { color: #ffe14d; }
+  .s04 .cards {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 4px;
+  }
+  .s04 .cards .card {
+    border: 1px solid rgba(240,255,251,0.45); padding: 18px 20px; min-height: 120px;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .s04 .cards .n {
+    font-family: var(--serif); font-style: italic; font-weight: 700;
+    font-size: 26px; color: #ffe14d;
+  }
+  .s04 .cards .t { font-family: var(--sans); font-weight: 600; font-size: 18px; line-height: 1.3; }
+  .s04 .cards .card.hot { background: rgba(255,225,77,0.12); border-color: #ffe14d; }
+  .s04 .decor::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      linear-gradient(rgba(240,255,251,0.05) 1px, transparent 1px) 0 0 / 100% 46px,
+      linear-gradient(90deg, rgba(240,255,251,0.05) 1px, transparent 1px) 0 0 / 46px 100%;
+  }
+
+  /* ─── s05 · KVarN · BLUEPRINT (technical, pale grid) ─── */
+  .s05 { background: #e7edf3; color: #15314e; }
+  .s05 .tag { color: #15314e; border-color: #15314e; }
+  .s05 .hed {
+    font-family: var(--serif); font-weight: 400; letter-spacing: -0.005em; line-height: 1.05;
+    font-size: clamp(40px, 6vw, 92px);
+  }
+  .s05 .hed em {
+    font-style: italic; color: #1f6fb0;
+    font-variation-settings: "opsz" 144, "SOFT" 70, "WONK" 1;
+  }
+  .s05 .read-on { color: #15314e; border-color: #15314e; --flip: #e7edf3; }
+  .s05 .blue {
+    font-family: var(--mono); border: 1px solid #9db4c9; background: rgba(255,255,255,0.5);
+    padding: 18px 22px; margin-top: 4px; max-width: 54ch;
+  }
+  .s05 .blue .pipe {
+    font-size: clamp(14px, 1.5vw, 17px); letter-spacing: 0.03em; color: #1f6fb0;
+    padding-bottom: 14px; margin-bottom: 14px; border-bottom: 1px dashed #9db4c9;
+  }
+  .s05 .blue dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 9px 18px; }
+  .s05 .blue dt { font-weight: 600; color: #15314e; font-size: 17px; }
+  .s05 .blue dd { margin: 0; font-size: 17px; color: #2c4a66; line-height: 1.3; }
+  .s05 .decor::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      linear-gradient(rgba(31,111,176,0.07) 1px, transparent 1px) 0 0 / 100% 40px,
+      linear-gradient(90deg, rgba(31,111,176,0.07) 1px, transparent 1px) 0 0 / 40px 100%;
+  }
+
+  /* ─── s06 · Amazon tokenmaxxing · MUSEUM PLACARD (centered, classical) ─── */
+  .s06 { background: #f1ecdf; color: #20231c; }
+  .s06 .tag { color: #41492f; border-color: #41492f; }
+  .s06 .hed {
+    font-family: var(--serif); font-weight: 600; letter-spacing: 0.005em; line-height: 1.05;
+    font-size: clamp(42px, 6vw, 88px);
+  }
+  .s06 .hed em {
+    font-style: italic; color: #41492f;
+    font-variation-settings: "opsz" 144, "SOFT" 50, "WONK" 0;
+  }
+  .s06 .read-on { color: #41492f; border-color: #41492f; --flip: #f1ecdf; }
+  .s06 .placard {
+    border-top: 1px solid #41492f; border-bottom: 1px solid #41492f;
+    padding: 22px 26px; max-width: 52ch; background: rgba(65,73,47,0.04);
+  }
+  .s06 .placard .law {
+    font-family: var(--serif); font-style: italic; font-size: clamp(19px, 2vw, 25px);
+    line-height: 1.4;
+  }
+  .s06 .placard .cap {
+    font-family: var(--sans); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: #5a624a; margin-top: 14px;
+  }
+  .s06 .placard .cap b { color: #41492f; }
+
+  /* ─── COLOPHON · dark charcoal ─── */
+  .colophon { background: #101216; color: #e8e4d8; }
+  .colophon .hed { font-family: var(--serif); font-weight: 800; }
+  .colophon .hed em { font-style: italic; color: #ffb627; }
+  .colophon .lede { color: rgba(232,228,216,0.82); }
+  .colophon .meta {
+    font-family: var(--mono); font-size: 14px; line-height: 1.7;
+    color: rgba(232,228,216,0.6); margin-top: 18px; max-width: 64ch;
+  }
+  .colophon .meta b { color: #e8e4d8; }
+
+  /* ─── Mobile reflows for figures ─── */
+  @media (max-width: 800px) {
+    .cover .toc { grid-template-columns: 1fr; gap: 0; }
+    .cover .datehero { font-size: clamp(64px, 24vw, 140px); }
+    .s03 .sheet { grid-template-columns: 1fr; }
+    .s03 .sheet .col + .col { border-left: 0; border-top: 1px solid #c4c9c4; }
+    .s04 .cards { grid-template-columns: 1fr; }
+    .s01 .hed { font-size: clamp(38px, 11vw, 60px); }
+    .s02 .num { font-size: clamp(80px, 30vw, 150px); }
+    .s02 .stat { grid-template-columns: 1fr; gap: 14px; }
+    .s02 .facts { padding-bottom: 0; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════════ COVER · date-hero ═══════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 051</span>
+    <span>Monday · 08 Jun 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <p class="wordmark">Ephemeris.</p>
+    <p class="kicker">Monday</p>
+    <h1 class="datehero">08<span class="mo">.06.</span>26</h1>
+    <p class="dek">Today: cloud GPUs from your terminal, two tiny databases that aren't the same tool, a model that won't stop quoting whole books, and a leaderboard everybody gamed.</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>Cloud GPUs, one command away</span><span>Google</span></a>
+      <a href="#s02"><span><span class="num">02</span>Fine-tune it, the books fall out</span><span>The Batch</span></a>
+      <a href="#s03"><span><span class="num">03</span>SQLite writes rows, DuckDB reads columns</span><span>PostHog</span></a>
+      <a href="#s04"><span><span class="num">04</span>Red-team your agent before it ships</span><span>Microsoft</span></a>
+      <a href="#s05"><span><span class="num">05</span>Squeeze the KV cache to two bits</span><span>arXiv</span></a>
+      <a href="#s06"><span><span class="num">06</span>Set a token target, watch them game it</span><span>via @ProductsAndStartups</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s01 · Google Colab CLI ═══════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 051</span>
+    <span>01 / 06 · Google</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev tools · Cloud GPU</span>
+    <h2 class="hed">Cloud GPUs, <em>one command away</em>.</h2>
+    <p class="lede">Google's new Colab CLI wires your terminal straight to a remote Colab runtime: <code>colab new --gpu H100</code> provisions an accelerator and <code>colab exec</code> ships a local script or notebook with no upload step. It's open source under Apache 2.0 — and any terminal agent (Claude Code, Codex, Antigravity) can drive it through a bundled skill file.</p>
+    <div class="figure">
+      <div class="term">
+        <div><span class="p">$</span> colab new --gpu H100</div>
+        <div class="ok">✓ runtime ready · h100 · 80gb</div>
+        <div><span class="p">$</span> colab exec train.py</div>
+        <div class="dim">▸ streaming logs from the runtime…</div>
+      </div>
+      <p class="specline">Apache 2.0 · T4 → A100 → H100 + TPU · agents via COLAB_SKILL.md</p>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://developers.googleblog.com/introducing-the-google-colab-cli/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s02 · Copyright leak ═══════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 051</span>
+    <span>02 / 06 · The Batch</span>
+  </header>
+  <div class="main">
+    <span class="tag">Research · AI safety</span>
+    <h2 class="hed">Fine-tune it, and the <em>books fall out</em>.</h2>
+    <p class="lede">Researchers at Stony Brook, Carnegie Mellon, and Columbia Law fine-tuned models on a harmless-looking task — expanding plot summaries into prose — and watched the guardrails give way. The tuned models reproduced up to 91.9% of a copyrighted book in verbatim runs as long as 440 words. Their read: refusal training is a brittle filter laid over text the weights already hold.</p>
+    <div class="figure">
+      <div class="stat">
+        <div class="num">91.9<span class="unit">%</span></div>
+        <div class="facts">
+          <div><b>440 words</b> — longest verbatim span reproduced</div>
+          <div><b>3 universities</b> — Stony Brook · CMU · Columbia Law</div>
+          <div><b>summary → prose</b> — the innocuous task that unlocked it</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.deeplearning.ai/the-batch/issue-356/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s03 · DuckDB vs SQLite ═══════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 051</span>
+    <span>03 / 06 · PostHog</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev tools · Databases</span>
+    <h2 class="hed">SQLite writes rows. DuckDB reads <em>columns</em>.</h2>
+    <p class="lede">PostHog's team lays out why the two databases everyone embeds aren't swappable. SQLite is a row store tuned for transactional reads and writes; DuckDB is a column store built to scan and aggregate millions of rows at once. Choose by the shape of your query, not by which name you know.</p>
+    <div class="figure">
+      <div class="sheet">
+        <div class="col sq">
+          <h4>SQLite</h4>
+          <div class="row"><span>Storage</span>Row store — whole records together</div>
+          <div class="row"><span>Built for</span>Transactional reads + writes (OLTP)</div>
+          <div class="row"><span>Reach for it</span>App state, edge, embedded files</div>
+        </div>
+        <div class="col dk">
+          <h4>DuckDB</h4>
+          <div class="row"><span>Storage</span>Column store — values by field</div>
+          <div class="row"><span>Built for</span>Scan + aggregate analytics (OLAP)</div>
+          <div class="row"><span>Reach for it</span>Local analysis, big aggregations</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://posthog.com/blog/duckdb-vs-sqlite" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s04 · Microsoft RAMPART ═══════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 051</span>
+    <span>04 / 06 · Microsoft</span>
+  </header>
+  <div class="main">
+    <span class="tag">Agent security · Open source</span>
+    <h2 class="hed">Red-team your agent before it <em>ships</em>.</h2>
+    <p class="lede">At Build, Microsoft open-sourced RAMPART — a framework for stress-testing agents against the failures that actually bite: cross-prompt injection, behavioral regressions, and data exfiltration, caught in development rather than in production. It lands next to Execution Containers (MXC) for runtime guardrails and MDASH, a swarm that hunts exploitable bugs and files context-aware fixes.</p>
+    <div class="figure">
+      <div class="cards">
+        <div class="card"><span class="n">01</span><span class="t">Cross-prompt injection</span></div>
+        <div class="card"><span class="n">02</span><span class="t">Behavioral regressions</span></div>
+        <div class="card"><span class="n">03</span><span class="t">Data exfiltration</span></div>
+        <div class="card hot"><span class="n">04</span><span class="t">Caught in dev — RAMPART, open source</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.microsoft.com/en-us/security/blog/2026/06/02/microsoft-build-2026-securing-code-agents-and-models-across-the-development-lifecycle/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s05 · KVarN ═══════════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 051</span>
+    <span>05 / 06 · arXiv</span>
+  </header>
+  <div class="main">
+    <span class="tag">Research · Inference</span>
+    <h2 class="hed">Squeeze the KV cache to <em>two bits</em>.</h2>
+    <p class="lede">KVarN quantizes the KV cache to 2 bits without the usual accuracy collapse, and with no calibration step. It Hadamard-rotates each token, then variance-normalizes per block so quantization error stops snowballing across a long reasoning chain. The payoff: 3–5× more context, throughput above FP16, and near-FP16 accuracy on MATH500, AIME24, and HumanEval — behind a single vLLM flag.</p>
+    <div class="figure">
+      <div class="blue">
+        <div class="pipe">rotate → normalize per 128-token block → quantize</div>
+        <dl>
+          <dt>2-bit</dt><dd>KV-cache precision, calibration-free</dd>
+          <dt>3–5×</dt><dd>more context at the same memory</dd>
+          <dt>&gt; FP16</dt><dd>throughput, at near-FP16 accuracy</dd>
+          <dt>one flag</dt><dd>ships as a vLLM quantization backend</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://arxiv.org/abs/2606.03458" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s06 · Amazon tokenmaxxing ═══════════ -->
+<section class="spread s06 centered" id="s06">
+  <header class="folio">
+    <span>Ephemeris · Issue 051</span>
+    <span>06 / 06 · via @ProductsAndStartups</span>
+  </header>
+  <div class="main">
+    <span class="tag">AI at work · Metrics</span>
+    <h2 class="hed">Set a token target. <em>Watch them game it</em>.</h2>
+    <p class="lede">Amazon gave developers AI-usage targets and a "Kirorank" board that scored people by tokens burned. Engineers did the rational thing and gamed it — pointing agents at busywork to climb, on compute Amazon paid for. The board is gone now, with a note from a senior VP: please don't use AI just to use AI.</p>
+    <div class="figure">
+      <div class="placard">
+        <p class="law">"When a measure becomes a target, it ceases to be a good measure." Goodhart's law, this time with a GPU bill.</p>
+        <p class="cap">Seen elsewhere · <b>≈60T tokens in 30 days</b> on Meta's internal "Claudeonomics" board</p>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.pcgamer.com/software/ai/amazon-bins-an-internal-ai-leaderboard-for-its-kiro-employees-because-they-were-burning-through-too-many-costly-tokens/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ COLOPHON ═══════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 051</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Six picks, six sources — a thin-signal Monday read for what shifted.</p>
+    <p class="meta">
+      <b>Sources today:</b> Google · The Batch (deeplearning.ai) · PostHog · Microsoft · arXiv · @ProductsAndStartups.<br>
+      <b>Rubric:</b> AI tools you could adopt this week, creative software, dev tools &amp; agentic coding, privacy &amp; security when the signal is high, research with a practical kernel, anything actionable for a senior engineer or founder.<br>
+      <b>Issue 051 · Monday 08 June 2026 · Zürich.</b>
+    </p>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>
