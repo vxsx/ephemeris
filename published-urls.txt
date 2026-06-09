@@ -75,6 +75,7 @@ https://blog.cloudflare.com/past-bots-and-humans
 https://blog.cloudflare.com/post-quantum-ipsec
 https://blog.cloudflare.com/q1-2026-internet-disruption-summary
 https://blog.cloudflare.com/quic-death-spiral-fix
+https://blog.cloudflare.com/realtime-threat-intel-waf-rules
 https://blog.cloudflare.com/shared-dictionaries
 https://blog.cloudflare.com/unweight-tensor-compression
 https://blog.cloudflare.com/voidzero-joins-cloudflare
@@ -93,6 +94,7 @@ https://claude.com/blog/how-claude-code-works-in-large-codebases-best-practices-
 https://claude.com/blog/introducing-dynamic-workflows-in-claude-code
 https://cloud.google.com/blog/topics/threat-intelligence/ai-vulnerability-exploitation-initial-access
 https://cognition.ai/blog/ai-guarantee
+https://cognition.ai/blog/frontier-code
 https://cursor.com/blog/cloud-agent-lessons
 https://cursor.com/blog/composer-2-5
 https://cursor.com/blog/typescript-sdk
@@ -166,6 +168,7 @@ https://jack-clark.net/2026/05/11/import-ai-456-rsi-and-economic-growth-radical-
 https://jack-clark.net/2026/05/18/import-ai-457-ai-stuxnet-cursed-muon-optimizer-and-positive-alignment
 https://jack-clark.net/2026/05/26/import-ai-458-reckoning-with-the-future-and-a-singularity-story
 https://jack-clark.net/2026/06/01/import-ai-459-ai-oversight-is-difficult-scaling-laws-for-protein-folding-models-and-pricing-the-extinction-risk-of-ai-systems
+https://jack-clark.net/2026/06/08/import-ai-460-reward-hacking-society-rsi-data-from-anthropic-and-rl-based-quadcopter-racing
 https://jeffbullas.com/ai-reinvention-truth
 https://jeffbullas.com/ai-slop-crisis
 https://jeffbullas.com/distraction-economy
@@ -242,6 +245,7 @@ https://posthog.com/blog/customer-facing-analytics-examples
 https://posthog.com/blog/duckdb-vs-clickhouse
 https://posthog.com/blog/duckdb-vs-postgres
 https://posthog.com/blog/duckdb-vs-sqlite
+https://posthog.com/blog/joe-os-analytics
 https://posthog.com/blog/local-flag-evals-rust
 https://posthog.com/blog/making-claude-cowork-actually-useful
 https://posthog.com/blog/minimum-viable-product-marketing
@@ -267,6 +271,7 @@ https://sentry.engineering/blog/next-halloween-im-dressing-as-on2
 https://sentry.engineering/blog/swizzling-swiftui-view-body
 https://sentry.io/blog/agents-need-production-context
 https://sentry.io/blog/ai-agent-observability-developers-guide-to-agent-monitoring
+https://sentry.io/blog/ai-bug-reproduction
 https://sentry.io/blog/cut-build-times-delete-cms
 https://sentry.io/blog/debugging-multi-agent-ai-when-the-failure-is-in-the-space-between-agents
 https://sentry.io/blog/errors-traces-logs-metrics-when-to-reach-for-what
@@ -314,6 +319,7 @@ https://vercel.com/blog/a-new-programming-model-for-durable-execution
 https://vercel.com/blog/agent-responsibly
 https://vercel.com/blog/agentic-infrastructure
 https://vercel.com/blog/ai-gateway-production-index
+https://vercel.com/blog/ai-gateway-production-index-june-2026
 https://vercel.com/blog/build-knowledge-agents-without-embeddings
 https://vercel.com/blog/building-a-real-time-power-outage-map-with-next-js-on-vercel
 https://vercel.com/blog/how-conductor-moved-parallel-coding-agents-from-the-laptop-to-the-cloud-with-vercel-sandbox
