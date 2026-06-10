@@ -1,0 +1,595 @@
+<!doctype html>
+<!-- Ephemeris · Issue 053 · 2026-06-10 · built on scaffold.html (locked grid) -->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 053 · 10 June 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — copied verbatim from scaffold.html.
+     ═══════════════════════════════════════════════════════════════════ */
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+  .spread > .decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+  .figure { width: 100%; }
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — surface only. Issue 053.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── Cover · single-word mood "FRONTIER" ─── */
+  .cover { background: #0a0b12; color: #e9e8f2; }
+  .cover .folio { opacity: 0.6; }
+  .cover .main { gap: clamp(20px, 3vw, 36px); }
+  .cover .moodword {
+    font-family: var(--sans);
+    font-weight: 900;
+    font-size: clamp(64px, 18vw, 280px);
+    line-height: 0.84;
+    letter-spacing: -0.045em;
+    margin: 0;
+    background: linear-gradient(96deg, #3df0e0 0%, #7b8cff 48%, #c779ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    word-break: break-word;
+  }
+  .cover .wordmark {
+    font-family: var(--serif); font-weight: 800; font-style: italic;
+    font-size: clamp(20px, 2.2vw, 30px);
+    color: #8f8fb0; margin: 0;
+  }
+  .cover .dek {
+    font-family: var(--serif);
+    font-size: clamp(20px, 2vw, 28px);
+    line-height: 1.4;
+    max-width: 40ch; margin: 0;
+    color: #cfcee0;
+  }
+  .cover .toc {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px 40px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255,255,255,0.18);
+    width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 4px 12px;
+    text-decoration: none; color: inherit;
+    padding: 9px 0;
+    border-bottom: 1px dotted rgba(255,255,255,0.16);
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.8em; opacity: 0.55; letter-spacing: 0.05em; }
+  .cover .toc .num {
+    font-family: var(--mono); font-weight: 600; font-size: 0.8em;
+    color: #3df0e0; margin-right: 12px;
+  }
+  .cover .decor::before {
+    content: ""; position: absolute;
+    left: -10vw; top: -16vw; width: 60vw; height: 60vw;
+    background: radial-gradient(circle, rgba(123,140,255,0.16), transparent 68%);
+  }
+  .cover .decor::after {
+    content: ""; position: absolute;
+    right: -14vw; bottom: -10vw; width: 52vw; height: 52vw;
+    background: radial-gradient(circle, rgba(199,121,255,0.12), transparent 70%);
+  }
+  @media (max-width: 800px) { .cover .toc { grid-template-columns: 1fr; gap: 0; } }
+
+  /* ─── s01 · Neon / cyberpunk — Fable 5 / Mythos 5 ─── */
+  .s01 { background: #0a0612; color: #ece6ff; }
+  .s01 .tag { color: #3df0e0; border-color: rgba(61,240,224,0.55); }
+  .s01 .hed {
+    font-family: var(--sans); font-weight: 800; letter-spacing: -0.03em;
+    font-size: clamp(46px, 7.2vw, 104px); line-height: 0.98;
+  }
+  .s01 .hed em {
+    font-style: normal;
+    background: linear-gradient(92deg, #3df0e0, #c779ff);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .s01 .lede { color: #cdc4e6; }
+  .s01 .read-on { color: #3df0e0; border-color: #3df0e0; --flip: #0a0612; }
+  .s01 .console {
+    font-family: var(--mono); font-size: clamp(13px, 1.3vw, 15px);
+    line-height: 1.9; color: #d6e9ff;
+    background: #07040d;
+    border: 1px solid rgba(123,140,255,0.4);
+    border-radius: 10px;
+    padding: 20px 22px;
+    max-width: 560px;
+    box-shadow: 0 0 0 1px rgba(61,240,224,0.08), 0 24px 60px -30px rgba(199,121,255,0.6);
+  }
+  .s01 .console .k { color: #7bff9e; }
+  .s01 .console .v { color: #ffd36b; }
+  .s01 .console .c { color: #8f8fb0; }
+  .s01 .console .m { color: #c779ff; }
+  .s01 .decor::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      radial-gradient(40vw 40vw at 88% 12%, rgba(199,121,255,0.18), transparent 70%),
+      radial-gradient(38vw 38vw at 6% 92%, rgba(61,240,224,0.14), transparent 72%);
+  }
+
+  /* ─── s02 · Blueprint — Cloudflare frontier-model defense ─── */
+  .s02 { background: #eef2f4; color: #16324a; }
+  .s02 .tag { color: #16324a; border-color: rgba(22,50,74,0.4); }
+  .s02 .hed {
+    font-family: var(--sans); font-weight: 800; letter-spacing: -0.025em;
+    font-size: clamp(44px, 6.6vw, 96px); line-height: 1.0; color: #102a3e;
+  }
+  .s02 .hed em { font-style: normal; color: #c2410c; }
+  .s02 .lede { font-family: var(--sans); color: #2b4a63; }
+  .s02 .read-on { color: #102a3e; border-color: #102a3e; --flip: #eef2f4; }
+  .s02 .gauge {
+    max-width: 620px; font-family: var(--mono);
+    border: 1px solid rgba(22,50,74,0.35);
+    background: rgba(255,255,255,0.4);
+    padding: 22px 24px;
+  }
+  .s02 .gauge .lbl {
+    display: flex; justify-content: space-between;
+    font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: #4a6378; margin-bottom: 10px;
+  }
+  .s02 .gauge .track {
+    position: relative; height: 16px;
+    background: linear-gradient(90deg, #2f9e6e 0%, #d8c23a 55%, #c2410c 100%);
+    border: 1px solid rgba(22,50,74,0.5);
+  }
+  .s02 .gauge .track::after {
+    content: ""; position: absolute; left: 86%; top: -6px; bottom: -6px;
+    width: 2px; background: #102a3e;
+  }
+  .s02 .gauge .scale {
+    display: flex; justify-content: space-between;
+    font-size: 11px; color: #4a6378; margin-top: 8px;
+  }
+  .s02 .gauge ul {
+    list-style: none; margin: 18px 0 0; padding: 16px 0 0;
+    border-top: 1px dashed rgba(22,50,74,0.35);
+    font-size: clamp(13px, 1.2vw, 14px); line-height: 1.7; color: #234458;
+  }
+  .s02 .gauge li::before { content: "→ "; color: #c2410c; }
+  .s02 .decor::before {
+    content: ""; position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(22,50,74,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(22,50,74,0.07) 1px, transparent 1px);
+    background-size: 38px 38px;
+  }
+  /* crop marks, kept clear of the folio on mobile via the top clamp */
+  .s02 .decor .crop {
+    position: absolute; width: 22px; height: 22px;
+    border: 0 solid rgba(22,50,74,0.5);
+  }
+  .s02 .decor .crop.tr { top: clamp(76px,9vw,120px); right: 22px; border-top-width: 2px; border-right-width: 2px; }
+  .s02 .decor .crop.bl { bottom: 22px; left: 22px; border-bottom-width: 2px; border-left-width: 2px; }
+
+  /* ─── s03 · Film still — SpaceX AI1 orbital compute ─── */
+  .s03 { background: #08080a; color: #f2f0ea; }
+  .s03 .tag { color: #e8b04a; border-color: rgba(232,176,74,0.5); letter-spacing: 0.28em; }
+  .s03 .hed {
+    font-family: var(--sans); font-weight: 800; text-transform: uppercase;
+    letter-spacing: 0.01em; line-height: 0.98;
+    font-size: clamp(40px, 6vw, 88px);
+  }
+  .s03 .hed em { font-style: normal; color: #e8b04a; }
+  .s03 .lede { font-family: var(--sans); color: #cbc8c0; }
+  .s03 .read-on { color: #e8b04a; border-color: #e8b04a; --flip: #08080a; }
+  .s03 .stats {
+    display: flex; flex-wrap: wrap; gap: clamp(20px, 4vw, 60px);
+    align-items: flex-end;
+  }
+  .s03 .stats .num {
+    font-family: var(--sans); font-weight: 800; line-height: 0.9;
+    font-size: clamp(48px, 9vw, 128px); letter-spacing: -0.03em;
+  }
+  .s03 .stats .num .unit {
+    font-family: var(--sans); font-weight: 700; font-size: 0.26em;
+    letter-spacing: normal; margin-left: 0.35em; color: #e8b04a;
+  }
+  .s03 .stats .cap {
+    display: block; font-family: var(--mono); font-size: 12px;
+    letter-spacing: 0.1em; text-transform: uppercase; color: #8c8a84; margin-top: 8px;
+  }
+  .s03 .decor::before {
+    content: ""; position: absolute; left: 0; right: 0; top: 0;
+    height: clamp(40px, 7vh, 70px); background: #000;
+  }
+  .s03 .decor::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0;
+    height: clamp(40px, 7vh, 70px); background: #000;
+  }
+
+  /* ─── s04 · Newsprint — Applied Compute / enterprise knowledge ─── */
+  .s04 { background: #f4f0e6; color: #1a1a1a; }
+  .s04 .tag { color: #8a2b2b; border-color: #8a2b2b; }
+  .s04 .hed {
+    font-family: var(--serif); font-weight: 800; font-optical-sizing: auto;
+    font-variation-settings: "opsz" 120; letter-spacing: -0.018em;
+    font-size: clamp(44px, 6.4vw, 92px); line-height: 1.0;
+  }
+  .s04 .hed em { font-style: italic; color: #8a2b2b; font-variation-settings: "opsz" 120, "SOFT" 60, "WONK" 1; }
+  .s04 .lede { color: #33322e; }
+  .s04 .read-on { color: #8a2b2b; border-color: #8a2b2b; --flip: #f4f0e6; }
+  .s04 .news {
+    border-top: 3px double #1a1a1a; border-bottom: 1px solid #1a1a1a;
+    padding: 16px 0; max-width: 760px;
+  }
+  .s04 .news .kicker {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: #8a2b2b; margin-bottom: 12px;
+  }
+  .s04 .news .cols {
+    column-count: 3; column-gap: 28px;
+    font-family: var(--serif); font-size: 15px; line-height: 1.5; color: #2a2926;
+  }
+  .s04 .news .cols .pull {
+    font-weight: 700; font-style: italic; font-size: 20px; line-height: 1.25;
+    color: #1a1a1a; break-inside: avoid;
+  }
+  .s04 .decor::before {
+    content: "MS&E 435 · LECTURE 6";
+    position: absolute; right: clamp(76px,9vw,120px); top: clamp(80px,10vw,130px);
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.2em;
+    color: rgba(26,26,26,0.28);
+  }
+  @media (max-width: 800px) { .s04 .news .cols { column-count: 1; } .s04 .decor::before { display: none; } }
+
+  /* ─── s05 · Concrete — Airbus autonomous cargo helicopter ─── */
+  .s05 { background: #cfccc4; color: #1c1b18; }
+  .s05 .tag { color: #1c1b18; border-color: rgba(28,27,24,0.45); }
+  .s05 .hed {
+    font-family: var(--sans); font-weight: 900; letter-spacing: -0.03em;
+    font-size: clamp(46px, 7vw, 100px); line-height: 0.96;
+  }
+  .s05 .hed em { font-style: normal; color: #b8431f; }
+  .s05 .lede { font-family: var(--sans); color: #3a3833; }
+  .s05 .read-on { color: #1c1b18; border-color: #1c1b18; --flip: #cfccc4; }
+  .s05 .specs {
+    display: flex; flex-wrap: wrap; gap: 14px 40px; align-items: baseline;
+    border-top: 2px solid #1c1b18; padding-top: 18px; max-width: 680px;
+  }
+  .s05 .specs .pair { display: flex; flex-direction: column; }
+  .s05 .specs .pair b {
+    font-family: var(--sans); font-weight: 900; font-size: clamp(28px, 4vw, 44px);
+    line-height: 1; letter-spacing: -0.02em;
+  }
+  .s05 .specs .pair span {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: #6a665d; margin-top: 6px;
+  }
+  .s05 .decor::before {
+    content: "\201D";
+    position: absolute; right: -2vw; bottom: -10vw;
+    font-family: var(--serif); font-weight: 900; font-style: italic;
+    font-size: 58vw; line-height: 0.7; color: rgba(184,67,31,0.12);
+  }
+
+  /* ─── Colophon · dark end card ─── */
+  .colophon { background: #0c0d10; color: #d8d8de; }
+  .colophon .hed {
+    font-family: var(--serif); font-weight: 800;
+    font-size: clamp(44px, 6.4vw, 96px); color: #f1f0f6;
+  }
+  .colophon .hed em { font-style: italic; color: #3df0e0; }
+  .colophon .lede { color: #b6b6c2; max-width: 56ch; }
+  .colophon .meta {
+    font-family: var(--mono); font-size: 12.5px; line-height: 1.95;
+    letter-spacing: 0.03em; color: #8d8da0;
+    border-top: 1px solid rgba(255,255,255,0.14); padding-top: 16px; max-width: 760px;
+  }
+  .colophon .meta b { color: #cdcdda; font-weight: 600; }
+  .colophon .folio { opacity: 0.55; }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ════════════════ COVER · single-word mood ════════════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 053</span>
+    <span>Wednesday · 10 Jun 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <p class="wordmark">Ephemeris.</p>
+    <h1 class="moodword">Frontier</h1>
+    <p class="dek">The frontier moved on two fronts at once — a model that can code unattended for days, and the systems being built to live alongside models like it: the defenses, the orbital compute, the company knowledge, the autonomy.</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>Fable ships; Mythos waits behind glass</span><span>Anthropic</span></a>
+      <a href="#s02"><span><span class="num">02</span>Assume the patch arrives late</span><span>Cloudflare</span></a>
+      <a href="#s03"><span><span class="num">03</span>A datacenter with a 70-metre wingspan</span><span>via @seeallochnaya</span></a>
+      <a href="#s04"><span><span class="num">04</span>The bottleneck is context, not the model</span><span>via @rvnikita_blog</span></a>
+      <a href="#s05"><span><span class="num">05</span>Cargo that flies itself</span><span>via @denissexy</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ════════════════ 01 · Fable 5 / Mythos 5 — Neon ════════════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 053</span>
+    <span>01 / 5 · Anthropic</span>
+  </header>
+  <div class="main">
+    <span class="tag">Model labs · Agentic coding</span>
+    <h2 class="hed">Fable for all of us. <em>Mythos</em> for a few.</h2>
+    <p class="lede">Anthropic shipped Fable 5 to general availability and, beside it, Mythos 5 — the same underlying model with the safeguards lifted, gated to vetted cybersecurity and (soon) biomedical teams. Anthropic's own line: its capabilities exceed any model they've made broadly available. Stripe ran a Ruby migration through it that a team had scoped at two months and finished in a day.</p>
+    <div class="figure">
+      <pre class="console"><span class="c"># claude-fable-5 · generally available 10 Jun</span>
+pricing      <span class="v">$10 / $50</span> per Mtok  <span class="c">(&lt; half of Mythos Preview)</span>
+free until   <span class="v">22 Jun</span> on Pro / Max / Team / Enterprise
+frontier-code   <span class="k">#1</span> among frontier models @ medium effort
+long context    <span class="k">3×</span> Opus 4.8 on memory-augmented tasks
+vision          beat Pokémon FireRed with <span class="k">no</span> helper harness
+<span class="m">mythos-5</span>     <span class="m">cyber + bio access only · 30-day retention</span></pre>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.anthropic.com/news/claude-fable-5-mythos-5" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ════════════════ 02 · Cloudflare defense — Blueprint ════════════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 053</span>
+    <span>02 / 5 · Cloudflare</span>
+  </header>
+  <div class="main">
+    <span class="tag">Security · Architecture</span>
+    <h2 class="hed">Assume the patch arrives <em>late</em>.</h2>
+    <p class="lede">Cloudflare's argument from running its own stack as customer zero: against attackers wielding frontier models, the architecture around a flaw decides more than how fast you patch it. The reframe is defense-in-depth as a budget — when one layer misses, the next limits what the attacker can see, reach, or change.</p>
+    <div class="figure">
+      <div class="gauge">
+        <div class="lbl"><span>WAF Attack Score</span><span>every request, pre-CVE</span></div>
+        <div class="track"></div>
+        <div class="scale"><span>1 · clean</span><span>likely attack · 99</span></div>
+        <ul>
+          <li>Score by ML on each request — novel exploit variants flagged before a CVE exists</li>
+          <li>API Shield validates against your API's definition instead of a blacklist</li>
+          <li>So thousands of generated payload variants collapse to "not in the schema"</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.cloudflare.com/frontier-model-defense/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true">
+    <span class="crop tr"></span><span class="crop bl"></span>
+  </div>
+</section>
+
+<!-- ════════════════ 03 · SpaceX AI1 — Film still ════════════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 053</span>
+    <span>03 / 5 · via @seeallochnaya</span>
+  </header>
+  <div class="main">
+    <span class="tag">Infrastructure · Compute</span>
+    <h2 class="hed">A datacenter with a <em>70-metre</em> wingspan.</h2>
+    <p class="lede">SpaceX put out a half-hour technical briefing on its AI1 satellites ahead of the IPO: each one carries roughly the compute of 72 GB200s, powered by a solar array the length of a basketball court, built to clip together into larger constellations. The pitch is training and inference that runs where the power and cooling are free — orbit.</p>
+    <div class="figure">
+      <div class="stats">
+        <div><div class="num">120<span class="unit">kW</span></div><span class="cap">compute power / satellite</span></div>
+        <div><div class="num">72<span class="unit">× GB200</span></div><span class="cap">equivalent silicon</span></div>
+        <div><div class="num">70<span class="unit">m</span></div><span class="cap">solar wingspan</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://x.com/SpaceX/status/2064099405758906727" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ════════════════ 04 · Applied Compute lecture — Newsprint ════════════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 053</span>
+    <span>04 / 5 · via @rvnikita_blog</span>
+  </header>
+  <div class="main">
+    <span class="tag">Enterprise AI · Strategy</span>
+    <h2 class="hed">The bottleneck is <em>context</em>, not the model.</h2>
+    <p class="lede">In a Stanford MS&amp;E 435 lecture, Yash Patil of Applied Compute makes the case that the hard part of enterprise AI is not the base model — it's wiring in the knowledge a company already holds. Specialised, domain-tuned models routinely beat a stronger generic one once that internal context is in reach.</p>
+    <div class="figure">
+      <div class="news">
+        <div class="kicker">Lecture notes · enterprise knowledge</div>
+        <div class="cols">
+          <p class="pull">"A weaker model that can see your data beats a stronger one that can't."</p>
+          <p>The work that moves the needle sits upstream of the prompt: extracting tacit process knowledge, resolving which of three conflicting internal docs is current, and feeding that into retrieval an agent can trust.</p>
+          <p>The takeaway for a founder or staff engineer is to spend the next quarter on the context pipeline — sources, freshness, access — before reaching for a bigger model.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://youtu.be/E8torsNePUU" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ════════════════ 05 · Airbus cargo helicopter — Concrete ════════════════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 053</span>
+    <span>05 / 5 · via @denissexy</span>
+  </header>
+  <div class="main">
+    <span class="tag">Robotics · Autonomy</span>
+    <h2 class="hed">Cargo that <em>flies itself</em>.</h2>
+    <p class="lede">Airbus showed a prototype pilotless cargo helicopter, with a first flight demonstration slated before year-end. The interesting part is not the airframe but the removal of the seat: once the route and the cargo are the whole job, autonomy stops being a driver-assist feature and becomes the operator.</p>
+    <div class="figure">
+      <div class="specs">
+        <div class="pair"><b>0</b><span>pilots on board</span></div>
+        <div class="pair"><b>≤ 2026</b><span>first flight demo</span></div>
+        <div class="pair"><b>Cargo</b><span>first mission profile</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://x.com/airbusheli/status/2063895281205137413" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ════════════════ COLOPHON ════════════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 053</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">A lighter issue — the feeds turned over slowly overnight, so today is five picks with real signal rather than ten with filler.</p>
+    <div class="meta">
+      <b>Today's sources:</b> Anthropic · Cloudflare · Telegram (@seeallochnaya, @rvnikita_blog, @denissexy)<br>
+      <b>Rubric:</b> tools you could adopt this week · creative &amp; generative software · dev tools &amp; agentic coding · privacy &amp; security when the signal is high · research with a practical kernel<br>
+      <b>Issue 053 · 10 June 2026 · Europe/Zürich · published 08:00</b>
+    </div>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+</main>
+</body>
+</html>
