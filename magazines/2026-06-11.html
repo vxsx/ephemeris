@@ -1,0 +1,504 @@
+<!doctype html>
+<!-- Ephemeris · Issue 054 · 2026-06-11 · built on scaffold.html -->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 054 · 11 Jun 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════ LOCKED BASELINE (from scaffold.html) ═══════════ */
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+  .spread > .decor {
+    position: absolute; inset: 0; z-index: 0;
+    pointer-events: none; overflow: hidden;
+  }
+  .spread > .folio {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 8px 24px; flex-wrap: wrap;
+    font-family: var(--sans); font-size: 13px;
+    letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.75;
+  }
+  .spread > .main {
+    display: flex; flex-direction: column; gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center; align-items: flex-start; min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block; font-family: var(--sans); font-size: 12px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    padding: 6px 12px; border: 1px solid currentColor;
+    border-radius: 999px; opacity: 0.9;
+  }
+  .hed {
+    font-family: var(--serif); font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px); line-height: 1.02;
+    letter-spacing: -0.02em; padding-bottom: 0.12em; word-break: break-word;
+  }
+  .lede {
+    font-family: var(--serif); font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45; max-width: 50ch; margin: 0;
+  }
+  .figure { width: 100%; }
+  .read-on {
+    display: inline-block; font-family: var(--sans); font-weight: 600;
+    font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 14px 22px; border: 2px solid currentColor;
+    text-decoration: none; color: currentColor; --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px) 22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* shared figure helpers */
+  .statrow { display: flex; flex-wrap: wrap; gap: clamp(20px, 4vw, 56px); }
+  .stat { display: flex; flex-direction: column; gap: 4px; }
+  .stat .num {
+    font-family: var(--sans); font-weight: 800; line-height: 0.9;
+    font-size: clamp(40px, 6vw, 72px); letter-spacing: -0.01em;
+  }
+  .stat .num .unit {
+    font-family: var(--sans); font-style: normal; font-weight: 700;
+    font-size: 0.3em; letter-spacing: normal; margin-left: 0.3em;
+  }
+  .stat .cap {
+    font-family: var(--sans); font-size: 12px; letter-spacing: 0.16em;
+    text-transform: uppercase; opacity: 0.7;
+  }
+
+  /* ═══════════ THEME OVERRIDES — surface only ═══════════ */
+
+  /* ─── Cover · pull-quote ─── */
+  .cover {
+    background:
+      radial-gradient(120% 90% at 80% 10%, rgba(122,36,26,0.10), transparent 60%),
+      #f4efe4;
+    color: #1a1714;
+  }
+  .cover .mastline {
+    font-family: var(--serif); font-weight: 900; font-style: italic;
+    font-size: clamp(20px, 2.4vw, 30px); letter-spacing: -0.01em;
+    color: #7a241a;
+  }
+  .cover .pull {
+    font-family: var(--serif); font-weight: 300; font-style: italic;
+    font-size: clamp(46px, 9vw, 132px); line-height: 0.98;
+    letter-spacing: -0.03em; padding-bottom: 0.1em;
+    font-variation-settings: "opsz" 144, "SOFT" 60, "WONK" 1;
+    max-width: 16ch;
+  }
+  .cover .pull em { font-style: italic; color: #7a241a; }
+  .cover .attrib {
+    font-family: var(--sans); font-size: 13px; letter-spacing: 0.2em;
+    text-transform: uppercase; opacity: 0.7;
+  }
+  .cover .toc {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px 40px; padding-top: 18px; margin-top: 6px;
+    border-top: 1.5px solid #1a1714; width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 4px 12px; text-decoration: none; color: inherit;
+    padding: 7px 0; border-bottom: 1px dotted rgba(26,23,20,0.3);
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.8em; opacity: 0.65; letter-spacing: 0.04em; }
+  .cover .toc .num {
+    font-family: var(--serif); font-weight: 700; font-style: italic;
+    color: #7a241a; margin-right: 10px;
+  }
+  @media (max-width: 800px) { .cover .toc { grid-template-columns: 1fr; gap: 0; } }
+
+  /* ─── s01 · Risograph duotone (DiffusionGemma) ─── */
+  .s01 { background: #f3efe3; color: #16181b; }
+  .s01 .tag { color: #d6246b; border-color: #d6246b; }
+  .s01 .hed {
+    font-family: var(--sans); font-weight: 900; letter-spacing: -0.03em;
+    font-size: clamp(46px, 7.4vw, 104px); line-height: 0.98;
+    color: #0f8fb8;
+    text-shadow: 0.045em 0.045em 0 #e8458a;
+  }
+  .s01 .hed em {
+    font-style: normal; color: #e8458a; text-shadow: 0.045em 0.045em 0 #0f8fb8;
+  }
+  .s01 .statrow .num { color: #0f8fb8; }
+  .s01 .stat:nth-child(2) .num { color: #d6246b; }
+  .s01 .read-on { color: #0f8fb8; border-color: #0f8fb8; --flip: #f3efe3; }
+  .s01 .decor::before {
+    content: ""; position: absolute; right: -10vw; top: -12vw;
+    width: 60vw; height: 60vw; border-radius: 50%;
+    background: radial-gradient(circle, rgba(214,36,107,0.16), transparent 62%);
+    mix-blend-mode: multiply;
+  }
+  .s01 .decor::after {
+    content: ""; position: absolute; right: -7vw; top: -9vw;
+    width: 60vw; height: 60vw; border-radius: 50%;
+    background: radial-gradient(circle, rgba(15,143,184,0.16), transparent 62%);
+    mix-blend-mode: multiply;
+  }
+
+  /* ─── s02 · Midnight / cosmic (black holes) ─── */
+  .s02 { background: #050713; color: #e7edff; }
+  .s02 .tag { color: #8fb6ff; border-color: rgba(143,182,255,0.5); }
+  .s02 .hed {
+    font-family: var(--serif); font-weight: 700; font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 40, "WONK" 1;
+  }
+  .s02 .hed em {
+    font-style: italic;
+    background: linear-gradient(96deg, #6df0ff 0%, #b58cff 60%, #ff8fd0 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .s02 .lede { color: #c4cfeb; }
+  .s02 .pq {
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    font-size: clamp(22px, 2.4vw, 32px); line-height: 1.35; max-width: 30ch;
+    border-left: 2px solid rgba(143,182,255,0.4); padding-left: 22px;
+    color: #d6def6;
+  }
+  .s02 .read-on { color: #9ecbff; border-color: #9ecbff; --flip: #050713; }
+  .s02 .decor::before {
+    content: ""; position: absolute; right: -8vw; bottom: -14vw;
+    width: 58vw; height: 58vw; border-radius: 50%;
+    background:
+      radial-gradient(circle at 50% 50%, #000 30%, transparent 31%),
+      conic-gradient(from 210deg, rgba(109,240,255,0.0), rgba(181,140,255,0.35), rgba(255,143,208,0.25), rgba(109,240,255,0.0));
+    filter: blur(2px);
+  }
+  .s02 .decor .stars {
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(1.4px 1.4px at 12% 22%, #fff, transparent),
+      radial-gradient(1.2px 1.2px at 28% 64%, #cfe0ff, transparent),
+      radial-gradient(1.6px 1.6px at 67% 18%, #fff, transparent),
+      radial-gradient(1.1px 1.1px at 82% 52%, #bcd0ff, transparent),
+      radial-gradient(1.3px 1.3px at 44% 82%, #fff, transparent),
+      radial-gradient(1px 1px at 8% 78%, #fff, transparent);
+    opacity: 0.7;
+  }
+
+  /* ─── s03 · Blueprint (Cloudflare private origins) ─── */
+  .s03 {
+    background:
+      linear-gradient(rgba(31,111,235,0.09) 1px, transparent 1px) 0 0 / 100% 30px,
+      linear-gradient(90deg, rgba(31,111,235,0.09) 1px, transparent 1px) 0 0 / 30px 100%,
+      #eef3f9;
+    color: #102a47;
+  }
+  .s03 .tag { color: #1f6feb; border-color: #1f6feb; }
+  .s03 .hed {
+    font-family: var(--sans); font-weight: 800; letter-spacing: -0.02em;
+    font-size: clamp(44px, 6.6vw, 92px); line-height: 1.02;
+  }
+  .s03 .hed em { font-style: normal; color: #1f6feb; }
+  .s03 .diagram {
+    font-family: var(--mono); font-size: clamp(13px, 1.3vw, 15px);
+    color: #102a47; max-width: 56ch; display: flex; flex-direction: column;
+  }
+  .s03 .diagram .node {
+    border: 1.5px solid rgba(16,42,71,0.4); border-radius: 4px;
+    padding: 12px 16px; background: rgba(255,255,255,0.55);
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px;
+  }
+  .s03 .diagram .node.hot { border-color: #1f6feb; background: rgba(31,111,235,0.08); }
+  .s03 .diagram b { color: #1f6feb; font-weight: 600; }
+  .s03 .diagram .muted { opacity: 0.62; font-size: 0.88em; }
+  .s03 .diagram .arrow { padding: 6px 16px; color: #1f6feb; display: flex; gap: 10px; align-items: baseline; }
+  .s03 .read-on { color: #1f6feb; border-color: #1f6feb; --flip: #eef3f9; }
+  .s03 .decor .crop { position: absolute; width: 16px; height: 16px; border: 0 solid rgba(31,111,235,0.55); }
+  .s03 .decor .c1 { right: clamp(20px,5vw,80px); bottom: clamp(20px,5vw,80px); border-right-width: 1.5px; border-bottom-width: 1.5px; }
+  .s03 .decor .c2 { left: clamp(20px,5vw,80px); bottom: clamp(20px,5vw,80px); border-left-width: 1.5px; border-bottom-width: 1.5px; }
+  @media (max-width: 800px) { .s03 .decor .crop { display: none; } }
+
+  /* ─── s04 · Dark report / classified (PRC influence ops) ─── */
+  .s04 { background: #0a0807; color: #d8cdbd; }
+  .s04 .tag { color: #cf3a30; border-color: #cf3a30; letter-spacing: 0.26em; }
+  .s04 .hed {
+    font-family: var(--sans); font-weight: 800; letter-spacing: -0.015em;
+    text-transform: uppercase; font-size: clamp(40px, 6.2vw, 88px); line-height: 1.0;
+  }
+  .s04 .hed em {
+    font-style: normal; color: #0a0807; background: #cf3a30;
+    padding: 0 0.12em; box-decoration-break: clone; -webkit-box-decoration-break: clone;
+  }
+  .s04 .lede { color: #c7bcab; }
+  .s04 .dossier {
+    font-family: var(--mono); font-size: clamp(13px, 1.3vw, 15px); line-height: 1.9;
+    border: 1px solid rgba(207,58,48,0.5); border-left: 4px solid #cf3a30;
+    padding: 16px 20px; max-width: 56ch; background: rgba(207,58,48,0.05);
+  }
+  .s04 .dossier .k { color: #cf3a30; letter-spacing: 0.1em; }
+  .s04 .dossier .redact {
+    background: #d8cdbd; color: transparent; border-radius: 1px;
+    padding: 0 0.2em; user-select: none;
+  }
+  .s04 .read-on { color: #cf3a30; border-color: #cf3a30; --flip: #d8cdbd; }
+  .s04 .read-on:hover span { color: #0a0807; }
+  .s04 .decor .stamp {
+    position: absolute; right: -2vw; top: 30%;
+    font-family: var(--sans); font-weight: 900; font-size: clamp(70px, 16vw, 230px);
+    letter-spacing: 0.04em; color: rgba(207,58,48,0.07);
+    transform: rotate(-14deg); text-transform: uppercase; white-space: nowrap;
+  }
+
+  /* ─── s05 · Pastel rose (creators / human signal) ─── */
+  .s05 {
+    background: linear-gradient(155deg, #fceef1 0%, #f6e2ea 55%, #f3dde8 100%);
+    color: #46262f;
+  }
+  .s05 .tag { color: #bd4f73; border-color: #bd4f73; }
+  .s05 .hed {
+    font-family: var(--serif); font-weight: 600; font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 80, "WONK" 0;
+  }
+  .s05 .hed em { font-style: italic; color: #bd4f73; }
+  .s05 ol.stack {
+    list-style: none; counter-reset: s; margin: 0; padding: 0;
+    columns: 2; column-gap: clamp(24px, 4vw, 56px); max-width: 56ch;
+  }
+  .s05 ol.stack li {
+    break-inside: avoid; padding: 8px 0 8px 0; display: flex; gap: 12px;
+    align-items: baseline; border-bottom: 1px solid rgba(189,79,115,0.25);
+  }
+  .s05 ol.stack li::before {
+    counter-increment: s; content: counter(s, decimal-leading-zero);
+    font-family: var(--serif); font-style: italic; font-weight: 700;
+    color: #bd4f73; font-size: 1.1em; flex: 0 0 auto;
+  }
+  .s05 ol.stack b { font-weight: 600; }
+  .s05 .read-on { color: #bd4f73; border-color: #bd4f73; --flip: #fceef1; }
+  .s05 .decor::before {
+    content: ""; position: absolute; left: -12vw; bottom: -14vw;
+    width: 50vw; height: 50vw; border-radius: 50%;
+    background: radial-gradient(circle, rgba(189,79,115,0.14), transparent 65%);
+  }
+  @media (max-width: 800px) { .s05 ol.stack { columns: 1; } }
+
+  /* ─── Colophon · charcoal ─── */
+  .colophon { background: #141210; color: #cabfb0; }
+  .colophon .hed { font-family: var(--serif); font-weight: 700; }
+  .colophon .hed em { font-style: italic; color: #d98a3d; }
+  .colophon .lede { color: #b6ab9c; }
+  .colophon .folio { opacity: 0.6; }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════════ COVER · pull-quote ═══════════ -->
+<section class="spread cover centered" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 054</span>
+    <span>Thursday · 11 Jun 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <p class="mastline">Ephemeris.</p>
+    <h1 class="pull">We pointed an agent at a <em>black hole</em>.</h1>
+    <p class="attrib">Today's lead · agentic coding meets astrophysics</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>Google opens a diffusion LLM</span><span>HuggingFace</span></a>
+      <a href="#s02"><span><span class="num">02</span>Codex helps simulate a black hole</span><span>OpenAI</span></a>
+      <a href="#s03"><span><span class="num">03</span>Public hostname, private origin</span><span>Cloudflare</span></a>
+      <a href="#s04"><span><span class="num">04</span>Someone is staging the AI debate</span><span>OpenAI</span></a>
+      <a href="#s05"><span><span class="num">05</span>Sell the signal, not the words</span><span>jeffbullas</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+</section>
+
+<!-- ═══════════ s01 · DiffusionGemma ═══════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 054</span>
+    <span>01 / 05 · HuggingFace · via @seeallochnaya</span>
+  </header>
+  <div class="main">
+    <span class="tag">Open weights · Inference</span>
+    <h2 class="hed">Google opens a <em>diffusion</em> LLM.</h2>
+    <p class="lede">DiffusionGemma writes text by denoising blocks of 256 tokens in parallel instead of one token at a time. It is a 25.2B-parameter mixture-of-experts with 3.8B active, weights under Apache-2.0, clearing 1,100 tokens a second on a single H100. Benchmarks trail autoregressive Gemma 4 by a few points — the throughput is the trade you are buying.</p>
+    <div class="figure">
+      <div class="statrow">
+        <div class="stat"><span class="num">1,100<span class="unit">tok/s</span></span><span class="cap">single H100, per user</span></div>
+        <div class="stat"><span class="num">3.8<span class="unit">B active</span></span><span class="cap">of 25.2B · 8 of 128 experts</span></div>
+        <div class="stat"><span class="num">256<span class="unit">/ block</span></span><span class="cap">denoised in parallel</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://huggingface.co/google/diffusiongemma-26B-A4B-it" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s02 · Codex / black holes ═══════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 054</span>
+    <span>02 / 05 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Agentic coding · Science</span>
+    <h2 class="hed">Hand the agent a <em>black hole</em>.</h2>
+    <p class="lede">An astrophysicist wired OpenAI's Codex into the loop for simulating black holes — the extreme-gravity regime you use to test whether general relativity still holds. The agent drafts and revises the simulation code; the scientist keeps the physics honest. It is the clearest case yet of agentic coding doing research work rather than demos.</p>
+    <div class="figure">
+      <p class="pq">The agent writes the simulation. The physicist checks reality. Both jobs got faster, and only one of them is new.</p>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/using-codex-to-simulate-black-holes" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"><div class="stars"></div></div>
+</section>
+
+<!-- ═══════════ s03 · Cloudflare private origins ═══════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 054</span>
+    <span>03 / 05 · Cloudflare</span>
+  </header>
+  <div class="main">
+    <span class="tag">Networking · Zero Trust</span>
+    <h2 class="hed">Public hostname, <em>private</em> origin.</h2>
+    <p class="lede">Cloudflare's new Application Services for Private Origins lets a public hostname terminate on a private IP — RFC 1918 space reachable only over your IPsec, GRE or CNI tunnel — while WAF, bot management, rate limiting, caching and Workers still run at the edge. No public origin to harden, no extra connector daemon. Closed beta for Enterprise now, GA targeted for Q4 2026.</p>
+    <div class="figure">
+      <div class="diagram">
+        <div class="node"><b>internet</b><span class="muted">public hostname</span></div>
+        <div class="arrow">▼</div>
+        <div class="node hot"><b>cloudflare edge</b><span class="muted">WAF · bot · cache · rate-limit · Workers</span></div>
+        <div class="arrow">▼<span class="muted">"use private network routing" on the DNS record</span></div>
+        <div class="node"><b>private tunnel</b><span class="muted">ipsec / gre / cni</span></div>
+        <div class="arrow">▼</div>
+        <div class="node"><b>10.0.0.0/8 origin</b><span class="muted">never exposed publicly</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.cloudflare.com/private-origins-dns-routing/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"><span class="crop c1"></span><span class="crop c2"></span></div>
+</section>
+
+<!-- ═══════════ s04 · OpenAI PRC influence ops ═══════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 054</span>
+    <span>04 / 05 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Security · Influence ops</span>
+    <h2 class="hed">Someone is staging the <em>AI debate</em>.</h2>
+    <p class="lede">OpenAI says it disrupted a network it ties to PRC-aligned operators who used its models to draft and translate content steering U.S. conversation on chip policy, data-center buildout and commercial AI. The tradecraft is mundane — write posts, polish the English, seed both sides — which is exactly why it scales. Read it as a threat model for your own comment sections.</p>
+    <div class="figure">
+      <div class="dossier">
+<span class="k">TARGET&nbsp;&nbsp;</span> U.S. <span class="redact">infrastructure</span> &amp; chip policy<br>
+<span class="k">VECTOR&nbsp;&nbsp;</span> synthetic posts · translation · persona ops<br>
+<span class="k">MODEL&nbsp;&nbsp;&nbsp;</span> used for drafting + <span class="redact">localization</span><br>
+<span class="k">STATUS&nbsp;&nbsp;</span> accounts removed · report published
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/prc-linked-influence-operations-ai-debates" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"><span class="stamp">CLASSIFIED</span></div>
+</section>
+
+<!-- ═══════════ s05 · jeffbullas / creators ═══════════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 054</span>
+    <span>05 / 05 · jeffbullas</span>
+  </header>
+  <div class="main">
+    <span class="tag">Creator economy · Strategy</span>
+    <h2 class="hed">Sell the <em>signal</em>, not the words.</h2>
+    <p class="lede">When AI makes competent content free, the scarce asset is proof a specific human stands behind the work. Jeff Bullas frames it as a "human signal stack" and a path from point of view to income. The homework is concrete: audit last month's posts for what an AI could have written, then double down on the parts it could not.</p>
+    <div class="figure">
+      <ol class="stack">
+        <li><b>Identity</b> — the obsession and origin story</li>
+        <li><b>Story</b> — lived experience that proves the claim</li>
+        <li><b>Expertise</b> — judgment earned from failures</li>
+        <li><b>Evidence</b> — original research, documented</li>
+        <li><b>Interaction</b> — real responsiveness, not reach</li>
+        <li><b>Community</b> — a tribe around your view</li>
+      </ol>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.jeffbullas.com/how-creators-make-money-ai/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ COLOPHON ═══════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 054</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Issue 054 drew on OpenAI, Google's open weights via HuggingFace, Cloudflare and jeffbullas — surfaced through the morning feeds and the @seeallochnaya channel. The rubric: tools you could adopt this week, dev and agentic coding, security with real signal, and anything a senior engineer or founder could act on by Thursday lunch. A thin day for fresh picks, so five with signal rather than ten with filler. Back tomorrow.</p>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>

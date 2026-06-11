@@ -75,6 +75,7 @@ https://blog.cloudflare.com/optimizing-core-unit-boot-time
 https://blog.cloudflare.com/our-unified-data-platform
 https://blog.cloudflare.com/past-bots-and-humans
 https://blog.cloudflare.com/post-quantum-ipsec
+https://blog.cloudflare.com/private-origins-dns-routing
 https://blog.cloudflare.com/q1-2026-internet-disruption-summary
 https://blog.cloudflare.com/quic-death-spiral-fix
 https://blog.cloudflare.com/realtime-threat-intel-waf-rules
@@ -161,6 +162,7 @@ https://higgsfield.ai/mcp
 https://huggingface.co/blog/mishig/local-moores-law
 https://huggingface.co/collections/talkie-lm/talkie-13b
 https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro
+https://huggingface.co/google/diffusiongemma-26B-A4B-it
 https://jack-clark.net/2026/03/23/import-ai-450-chinas-electronic-warfare-model-traumatized-llms-and-a-scaling-law-for-cyberattacks
 https://jack-clark.net/2026/04/06/import-ai-452-scaling-laws-for-cyberwar-rising-tides-of-ai-automation-and-a-puzzle-over-gdp-forecasting
 https://jack-clark.net/2026/04/13/import-ai-453-breaking-ai-agents-mirrorcode-and-ten-views-on-gradual-disempowerment
@@ -174,6 +176,7 @@ https://jack-clark.net/2026/06/08/import-ai-460-reward-hacking-society-rsi-data-
 https://jeffbullas.com/ai-reinvention-truth
 https://jeffbullas.com/ai-slop-crisis
 https://jeffbullas.com/distraction-economy
+https://jeffbullas.com/how-creators-make-money-ai
 https://jeffbullas.com/human-signal-manifesto
 https://jeffbullas.com/ideas-die-unseen
 https://jeffbullas.com/stop-using-just-one-ai
@@ -225,6 +228,7 @@ https://openai.com/index/open-source-codex-orchestration-symphony
 https://openai.com/index/openai-frontier-models-and-codex-are-now-available-on-aws
 https://openai.com/index/our-response-to-the-tanstack-npm-supply-chain-attack
 https://openai.com/index/personal-finance-chatgpt
+https://openai.com/index/prc-linked-influence-operations-ai-debates
 https://openai.com/index/ramp
 https://openai.com/index/running-codex-safely
 https://openai.com/index/speeding-up-agentic-workflows-with-websockets
@@ -232,6 +236,7 @@ https://openai.com/index/strengthening-societal-resilience-with-rosalind-biodefe
 https://openai.com/index/testing-ads-in-chatgpt
 https://openai.com/index/the-next-evolution-of-the-agents-sdk
 https://openai.com/index/trustworthy-third-party-evaluations-foundations
+https://openai.com/index/using-codex-to-simulate-black-holes
 https://openai.com/index/virgin-atlantic
 https://openai.com/index/wasmer
 https://openai.com/index/where-the-goblins-came-from
