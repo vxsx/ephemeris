@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 055 · 12 June 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — copied from scaffold.html. Do not restructure.
+     ═══════════════════════════════════════════════════════════════════ */
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+  .spread > .decor {
+    position: absolute; inset: 0; z-index: 0;
+    pointer-events: none; overflow: hidden;
+  }
+  .spread > .folio {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 8px 24px; flex-wrap: wrap;
+    font-family: var(--sans); font-size: 13px;
+    letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.75;
+  }
+  .spread > .main {
+    display: flex; flex-direction: column; gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center; align-items: flex-start; min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block; font-family: var(--sans);
+    font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase;
+    padding: 6px 12px; border: 1px solid currentColor; border-radius: 999px; opacity: 0.9;
+  }
+  .hed {
+    font-family: var(--serif); font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px); line-height: 1.02;
+    letter-spacing: -0.02em; padding-bottom: 0.12em; word-break: break-word;
+  }
+  .lede {
+    font-family: var(--serif); font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45; max-width: 52ch; margin: 0;
+  }
+  .figure { width: 100%; }
+  .read-on {
+    display: inline-block; font-family: var(--sans); font-weight: 600;
+    font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 14px 22px; border: 2px solid currentColor;
+    text-decoration: none; color: currentColor; --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — surface only.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── Cover · Date-hero ─── */
+  .cover { background: #ece4d3; color: #1b1a16; }
+  .cover .main { gap: clamp(20px, 2.4vw, 34px); }
+  .cover .kicker {
+    font-family: var(--sans); font-weight: 700; font-size: 13px;
+    letter-spacing: 0.34em; text-transform: uppercase; color: #8a3220;
+  }
+  .cover .datehero {
+    font-family: var(--serif); font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    font-size: clamp(72px, 17vw, 280px); line-height: 0.82;
+    letter-spacing: -0.04em; margin: 0; padding-bottom: 0.06em;
+    color: #1b1a16;
+  }
+  .cover .datehero em {
+    font-style: italic; color: #8a3220;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .cover .wordmark {
+    font-family: var(--serif); font-weight: 700; font-style: italic;
+    font-size: clamp(20px, 2vw, 28px); color: #8a3220; letter-spacing: -0.01em;
+  }
+  .cover .dek {
+    font-family: var(--serif); font-size: clamp(20px, 2.1vw, 30px);
+    line-height: 1.32; max-width: 30ch; margin: 0;
+  }
+  .cover .toc {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px 40px; padding-top: 18px;
+    border-top: 2px solid #1b1a16; width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 4px 12px; text-decoration: none; color: inherit;
+    padding: 8px 0; border-bottom: 1px dotted rgba(27,26,22,0.3);
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.82em; opacity: 0.65; }
+  .cover .toc .num {
+    font-family: var(--serif); font-weight: 700; font-style: italic;
+    color: #8a3220; margin-right: 10px;
+  }
+  @media (max-width: 800px) { .cover .toc { grid-template-columns: 1fr; gap: 0; } }
+
+  /* ─── s01 · Okara · Big stats / yellow (LOUD) ─── */
+  .s01 { background: #ffd60a; color: #141414; }
+  .s01 .tag { color: #141414; border-color: #141414; }
+  .s01 .hed {
+    font-family: var(--sans); font-weight: 900; font-style: normal;
+    text-transform: uppercase; letter-spacing: -0.025em; line-height: 0.96;
+    font-size: clamp(40px, 6.6vw, 92px);
+  }
+  .s01 .lede { font-family: var(--sans); font-weight: 500; color: #1f1f1f; }
+  .s01 .read-on { color: #141414; border-color: #141414; --flip: #ffd60a; }
+  .s01 .bignum {
+    display: flex; flex-direction: column; gap: clamp(20px, 2.4vw, 32px); width: 100%;
+  }
+  .s01 .bignum .num {
+    font-family: var(--sans); font-weight: 900; line-height: 0.84;
+    font-size: clamp(120px, 26vw, 340px); letter-spacing: -0.06em; color: #141414;
+  }
+  .s01 .bignum .num .unit {
+    font-family: var(--sans); font-style: normal; font-weight: 700;
+    font-size: 0.16em; letter-spacing: normal; text-transform: uppercase;
+    display: block; margin-top: 0.4em; color: #141414;
+  }
+  .s01 .stats {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0; border-top: 3px solid #141414;
+  }
+  .s01 .stats div {
+    padding: 16px 18px 14px 0; border-right: 1px solid rgba(20,20,20,0.25);
+  }
+  .s01 .stats div:last-child { border-right: 0; }
+  .s01 .stats dt {
+    font-family: var(--sans); font-weight: 900; font-size: clamp(34px, 5vw, 54px);
+    line-height: 1; letter-spacing: -0.03em;
+  }
+  .s01 .stats dd {
+    margin: 8px 0 0; font-family: var(--sans); font-weight: 600;
+    font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: #2a2a2a;
+  }
+  .s01 .decor::before {
+    content: ""; position: absolute; right: -10vw; top: -12vw;
+    width: 50vw; height: 50vw; border: clamp(20px, 4vw, 60px) solid #141414;
+    border-radius: 50%; opacity: 0.07;
+  }
+  @media (max-width: 800px) {
+    .s01 .stats { grid-template-columns: 1fr; border-top: 0; }
+    .s01 .stats div { border-right: 0; border-top: 1px solid rgba(20,20,20,0.25); padding: 14px 0; }
+  }
+
+  /* ─── s02 · Notion · Editorial cream ─── */
+  .s02 { background: #f5efe2; color: #1a1714; }
+  .s02 .tag { color: #7a2516; border-color: #7a2516; }
+  .s02 .hed em {
+    font-style: italic; color: #7a2516;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s02 .read-on { color: #7a2516; border-color: #7a2516; --flip: #f5efe2; }
+  .s02 .pull {
+    border-left: 4px solid #7a2516; padding: 6px 0 6px 28px; max-width: 24ch;
+  }
+  .s02 .pull q {
+    font-family: var(--serif); font-style: italic; font-weight: 500;
+    font-size: clamp(28px, 4vw, 52px); line-height: 1.12; quotes: none; color: #1a1714;
+  }
+  .s02 .pull .by {
+    display: block; margin-top: 18px; font-family: var(--sans); font-weight: 600;
+    font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: #6a5f55;
+  }
+  .s02 .decor::before {
+    content: "❝"; position: absolute; left: -2vw; bottom: -8vw;
+    font-family: var(--serif); font-size: 52vw; line-height: 1;
+    color: #7a2516; opacity: 0.05;
+  }
+
+  /* ─── s03 · Nextdoor · Terminal (DARK, LOUD) ─── */
+  .s03 { background: #04130b; color: #b8ffce; }
+  .s03 .tag { color: #5ef0a0; border-color: #1f7a4d; }
+  .s03 .hed {
+    font-family: var(--mono); font-weight: 700; letter-spacing: -0.01em;
+    line-height: 1.02; color: #7dffb0; text-transform: none;
+    font-size: clamp(34px, 5.4vw, 78px);
+    text-shadow: 0 0 18px rgba(94,240,160,0.35);
+  }
+  .s03 .lede { font-family: var(--sans); color: #9fe9bd; }
+  .s03 .read-on { color: #7dffb0; border-color: #2f8c5a; --flip: #04130b; }
+  .s03 .term {
+    font-family: var(--mono); font-size: clamp(13px, 1.4vw, 16px); line-height: 1.7;
+    background: #02160c; border: 1px solid #1c5e3a; border-radius: 8px;
+    padding: 20px 22px; color: #b8ffce; overflow-x: auto;
+    box-shadow: inset 0 0 60px rgba(0,0,0,0.5);
+  }
+  .s03 .term .cmd { color: #eafff2; }
+  .s03 .term .arrow { color: #4fd08a; }
+  .s03 .term .hit { color: #ffe98a; }
+  .s03 .term .cur {
+    display: inline-block; width: 0.6em; height: 1.05em; background: #7dffb0;
+    vertical-align: -0.18em; margin-left: 2px; animation: blink 1.1s steps(1) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+  .s03 .decor {
+    background-image: repeating-linear-gradient(
+      to bottom, rgba(94,240,160,0.06) 0 1px, transparent 1px 4px);
+  }
+
+  /* ─── s04 · ChinaTalk · Memo / airgram ─── */
+  .s04 { background: #e9e2cf; color: #221d15; }
+  .s04 .folio { opacity: 0.85; }
+  .s04 .tag {
+    color: #2a2118; border-color: #2a2118; border-radius: 0;
+    font-family: var(--mono);
+  }
+  .s04 .hed {
+    font-family: var(--mono); font-weight: 700; letter-spacing: -0.01em;
+    line-height: 1.05; text-transform: none; font-size: clamp(32px, 5vw, 70px);
+  }
+  .s04 .lede { font-family: var(--sans); }
+  .s04 .read-on { color: #7a1f12; border-color: #7a1f12; --flip: #e9e2cf; border-radius: 0; }
+  .s04 .memo {
+    font-family: var(--mono); width: 100%; max-width: 640px;
+    border: 1.5px solid #2a2118; background: #f3eede;
+  }
+  .s04 .memo .head {
+    border-bottom: 1.5px solid #2a2118; padding: 12px 16px;
+    font-size: 12px; letter-spacing: 0.06em; line-height: 1.9; text-transform: uppercase;
+  }
+  .s04 .memo .head b { font-weight: 700; }
+  .s04 .memo .rows { padding: 6px 16px 14px; }
+  .s04 .memo .rows .r {
+    display: flex; justify-content: space-between; gap: 16px;
+    border-bottom: 1px dashed rgba(42,33,24,0.35); padding: 11px 0; font-size: 14px;
+  }
+  .s04 .memo .rows .r:last-child { border-bottom: 0; }
+  .s04 .memo .rows .k { font-weight: 700; letter-spacing: 0.04em; }
+  .s04 .memo .rows .v { text-align: right; color: #4a3f31; }
+  .s04 .decor::before {
+    content: ""; position: absolute; left: clamp(20px,5vw,90px); top: 0; bottom: 0;
+    width: 1px; background: repeating-linear-gradient(to bottom,#b9433a 0 8px,transparent 8px 16px);
+    opacity: 0.25;
+  }
+  @media (max-width: 800px) {
+    .s04 .memo .rows .r { flex-direction: column; gap: 2px; }
+    .s04 .memo .rows .v { text-align: left; }
+  }
+
+  /* ─── s05 · Ramp · Spreadsheet ─── */
+  .s05 { background: #eef0ee; color: #1b1f1c; }
+  .s05 .tag { color: #2f6b4a; border-color: #2f6b4a; border-radius: 0; font-family: var(--mono); }
+  .s05 .hed {
+    font-family: var(--sans); font-weight: 800; letter-spacing: -0.02em;
+    line-height: 1.0; font-size: clamp(40px, 6vw, 88px);
+  }
+  .s05 .hed em { font-style: normal; color: #1f8a52; }
+  .s05 .lede { font-family: var(--sans); color: #2a302b; }
+  .s05 .read-on { color: #1f6b43; border-color: #1f6b43; --flip: #eef0ee; border-radius: 0; }
+  .s05 .sheet {
+    width: 100%; max-width: 720px; border-collapse: collapse;
+    font-family: var(--mono); font-size: clamp(14px, 1.5vw, 17px);
+    background: #fbfcfb; border: 1px solid #c4ccc6;
+  }
+  .s05 .sheet caption {
+    caption-side: top; text-align: left; font-family: var(--mono);
+    font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: #5a635c; padding: 0 0 10px;
+  }
+  .s05 .sheet th, .s05 .sheet td {
+    border: 1px solid #d4dad6; padding: 12px 14px; text-align: left;
+  }
+  .s05 .sheet thead th {
+    background: #e3e8e4; font-weight: 700; font-size: 12px;
+    letter-spacing: 0.08em; text-transform: uppercase; color: #3a423c;
+  }
+  .s05 .sheet td.n { text-align: right; font-weight: 700; color: #15301f; }
+  .s05 .sheet tr.hi td { background: #eafaf0; }
+  .s05 .sheet td .rowhdr {
+    font-family: var(--mono); color: #555c56; font-size: 11px;
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .s05 .foot {
+    margin-top: 14px; font-family: var(--mono); font-size: 13px; color: #555c56;
+    display: flex; flex-wrap: wrap; gap: 8px 22px;
+  }
+  .s05 .foot b { color: #1f8a52; }
+  .s05 .decor::before {
+    content: ""; position: absolute; inset: 0;
+    background-image:
+      linear-gradient(to right, rgba(31,107,67,0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(31,107,67,0.05) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+
+  /* ─── Colophon · dark end-card ─── */
+  .colophon { background: #111317; color: #e9ecf2; }
+  .colophon .folio { opacity: 0.6; }
+  .colophon .hed { font-family: var(--serif); font-weight: 800; }
+  .colophon .hed em {
+    font-style: italic; color: #f2b14b;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .colophon .lede { color: #c4cad6; }
+  .colophon .meta {
+    display: grid; grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 24px 36px; width: 100%; border-top: 1px solid #2c303a; padding-top: 22px;
+  }
+  .colophon .meta h4 {
+    font-family: var(--sans); font-weight: 700; font-size: 12px;
+    letter-spacing: 0.2em; text-transform: uppercase; color: #8b93a3; margin-bottom: 8px;
+  }
+  .colophon .meta p { margin: 0; font-size: 15px; line-height: 1.55; color: #d6dbe6; }
+  .colophon .meta a { color: #f2b14b; text-decoration: none; }
+  @media (max-width: 800px) { .colophon .meta { grid-template-columns: 1fr; gap: 18px; } }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════════════════ COVER · Date-hero ═══════════════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 055</span>
+    <span>Friday · 12 Jun 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <span class="kicker">The daily typographic dispatch</span>
+    <h1 class="datehero">FRI<br>12 <em>JUN</em></h1>
+    <p class="wordmark">Ephemeris.</p>
+    <p class="dek">Agents clocked in this week — running marketing for 120,000 companies, drafting the spec and chasing the bug inside the codebase. Then the receipts arrived.</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>One team, 120,000 marketing departments</span><span>Vercel</span></a>
+      <a href="#s02"><span><span class="num">02</span>Hand Codex the spec, get the draft back</span><span>OpenAI</span></a>
+      <a href="#s03"><span><span class="num">03</span>Reproduce the bug you can't reproduce</span><span>OpenAI</span></a>
+      <a href="#s04"><span><span class="num">04</span>The gray market in borrowed model access</span><span>ChinaTalk</span></a>
+      <a href="#s05"><span><span class="num">05</span>The 655× gap in who pays for AI</span><span>Ramp</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+</section>
+
+<!-- ═══════════════════ s01 · Okara · Big stats / yellow ═══════════════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 055</span>
+    <span>01 / 05 · Vercel</span>
+  </header>
+  <div class="main">
+    <span class="tag">Agents · Infrastructure</span>
+    <h2 class="hed">One four-person team, 120,000 marketing departments.</h2>
+    <p class="lede">Okara runs eight specialized agents — SEO, content, social — for more than 120,000 companies, staffed by four engineers. The lever isn't a bigger model; it's infrastructure that asks nothing of them. Vercel's AI Gateway collapses every provider behind one endpoint, and Sandboxes isolate each agent run, so when the SEO agent finds a problem it opens a pull request instead of paging a person.</p>
+    <div class="figure">
+      <div class="bignum">
+        <div class="num">120K<span class="unit">companies, four engineers</span></div>
+        <dl class="stats">
+          <div><dt>8</dt><dd>specialized sub-agents</dd></div>
+          <div><dt>4B</dt><dd>tokens processed daily</dd></div>
+          <div><dt>6–7</dt><dd>production deploys a day</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://vercel.com/blog/how-okara-runs-cmo-agents-for-120000-companies-on-vercel" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ s02 · Notion · Editorial cream ═══════════════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 055</span>
+    <span>02 / 05 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Agentic Coding · Case Study</span>
+    <h2 class="hed">Hand Codex the spec, get the <em>first draft</em> back.</h2>
+    <p class="lede">Notion's engineers describe working in one-shot specifications — a single detailed brief that Codex turns into a working first pass, from AI Voice Input down to the glue code. With GPT-5.5 doing the scaffolding, a lean team spends its hours on judgment instead of boilerplate.</p>
+    <div class="figure">
+      <blockquote class="pull">
+        <q>The spec became the program. We argue about what to build; the first implementation shows up on its own.</q>
+        <span class="by">— how Notion frames building with Codex</span>
+      </blockquote>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/notion" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ s03 · Nextdoor · Terminal (dark) ═══════════════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 055</span>
+    <span>03 / 05 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Debugging · Case Study</span>
+    <h2 class="hed">Reproduce the bug you can't reproduce.</h2>
+    <p class="lede">Nextdoor points Codex at the hardest class of ticket — the intermittent, won't-repro-locally bug that eats an afternoon — and lets it grind across platforms while engineers stay on product. Running on GPT-5.5, it reads the failing traces, forms a hypothesis, and drafts the fix with a regression test attached.</p>
+    <div class="figure">
+      <div class="term">
+<span class="cmd">nextdoor@codex ~ %</span> codex repro --issue 4471 "flaky checkout, can't reproduce"<br>
+<span class="arrow">↳</span> replaying failing traces … 200 runs<br>
+<span class="arrow">↳</span> reproduced in <span class="hit">3 / 200</span> — race on the session-token refresh<br>
+<span class="arrow">↳</span> hypothesis: stale cache read under retry storm<br>
+<span class="arrow">↳</span> drafting patch + regression test … <span class="hit">done</span><br>
+<span class="cmd">nextdoor@codex ~ %</span> <span class="cur"></span>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/nextdoor" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ s04 · ChinaTalk · Memo / airgram ═══════════════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 055</span>
+    <span>04 / 05 · ChinaTalk</span>
+  </header>
+  <div class="main">
+    <span class="tag">Access · Security</span>
+    <h2 class="hed">The gray market in borrowed model access.</h2>
+    <p class="lede">A ChinaTalk investigation maps the "transfer stations" reselling Claude and ChatGPT inside China at roughly a tenth of list price. Account farms bulk-register free credits, SMS and KYC-evasion services supply foreign identities, and the proxies in the middle reroute your Opus request to a cheaper model while logging every prompt. One audit caught a proxy answering at 37% accuracy against 84% on the official API — the harvested logs resold for distillation and fraud.</p>
+    <div class="figure">
+      <div class="memo">
+        <div class="head">
+          <div><b>RE:</b> transfer-station resale of US model APIs</div>
+          <div><b>VIA:</b> ChinaTalk · surfaced through The Batch</div>
+          <div><b>CLASS:</b> open-source intelligence</div>
+        </div>
+        <div class="rows">
+          <div class="r"><span class="k">Street price</span><span class="v">~10% of official list</span></div>
+          <div class="r"><span class="k">Model swap</span><span class="v">undisclosed Opus → Sonnet / Haiku reroute</span></div>
+          <div class="r"><span class="k">Audit (17 proxies)</span><span class="v">37% vs 83.82% answer accuracy</span></div>
+          <div class="r"><span class="k">Payload kept</span><span class="v">full prompt, response, tool calls</span></div>
+          <div class="r"><span class="k">Downstream</span><span class="v">distillation · log resale · KYC fraud</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.chinatalk.media/p/how-to-buy-cheap-claude-tokens-in" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ s05 · Ramp · Spreadsheet ═══════════════════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 055</span>
+    <span>05 / 05 · Ramp · via @rvnikita_blog</span>
+  </header>
+  <div class="main">
+    <span class="tag">Economics · Data</span>
+    <h2 class="hed">The <em>655×</em> gap in who pays for AI.</h2>
+    <p class="lede">Ramp's June index, drawn from more than 70,000 U.S. businesses, puts hard numbers on the divide. The top 1% of firms spend $7,449 per employee per month on AI; the median spends $11.38 — about one enterprise seat. The leaders aren't easing off: per-employee spend among them rose 14.1% in a single month. For now it stays under the cost of headcount — even the top 1% spend less than half an engineer's salary.</p>
+    <div class="figure">
+      <table class="sheet">
+        <caption>Ramp AI Index — monthly AI spend per employee, June 2026</caption>
+        <thead><tr><th>Adoption tier</th><th>$ / employee / month</th></tr></thead>
+        <tbody>
+          <tr class="hi"><td><span class="rowhdr">Top 1%</span></td><td class="n">$7,449</td></tr>
+          <tr><td><span class="rowhdr">Top 10%</span></td><td class="n">$611</td></tr>
+          <tr><td><span class="rowhdr">Median firm</span></td><td class="n">$11.38</td></tr>
+        </tbody>
+      </table>
+      <div class="foot">
+        <span>n = <b>70,000+</b> U.S. businesses</span>
+        <span>Top 1% spend <b>+14.1%</b> MoM</span>
+        <span>Vendor share: Anthropic <b>41.0%</b> · OpenAI <b>39.5%</b></span>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://econlab.substack.com/p/how-much-does-it-cost-to-be-ai-pilled" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ COLOPHON · dark end-card ═══════════════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 055</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Five picks on a thin Friday: agents at scale, agents in the codebase, the gray market underneath the models, and the bill for all of it.</p>
+    <div class="meta">
+      <div>
+        <h4>Sources today</h4>
+        <p>Vercel · OpenAI · ChinaTalk (via The Batch) · Ramp (via <a href="https://t.me/rvnikita_blog">@rvnikita_blog</a>)</p>
+      </div>
+      <div>
+        <h4>The rubric</h4>
+        <p>Tools a senior engineer or founder could use this week — agentic coding and infrastructure, high-signal security, and the economics underneath.</p>
+      </div>
+      <div>
+        <h4>Issue</h4>
+        <p>No. 055 · Friday, 12 June 2026 · Europe/Zürich. Shipped 08:00.</p>
+      </div>
+    </div>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>

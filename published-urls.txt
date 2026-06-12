@@ -89,6 +89,7 @@ https://blog.maximeheckel.com/posts/on-rendering-the-sky-sunsets-and-planets
 https://blog.tilderesearch.com/blog/aurora
 https://bloomberg.com/news/articles/2026-05-26/china-expands-travel-curbs-to-top-ai-talent-at-private-firms
 https://bun.com/blog/bun-v1.3.14
+https://chinatalk.media/p/how-to-buy-cheap-claude-tokens-in
 https://chromewebstore.google.com/detail/pjoleapiipgcignjlbhhiighckpbhcpp
 https://civitai.com/models/2670340/slop-in-the-face
 https://claude.com/blog/agent-view-in-claude-code
@@ -117,6 +118,7 @@ https://developers.openai.com/ads
 https://developers.openai.com/codex/use-cases
 https://dsv4.interactive.ikot.blog
 https://dsv4.interactive.ikot.blog/
+https://econlab.substack.com/p/how-much-does-it-cost-to-be-ai-pilled
 https://elevenlabs.io/blog/aiuc-announcement
 https://every.to/on-every/re-re-introducing-sparkle-marie-kondo-your-mac
 https://every.to/source-code/how-we-run-a-25-person-company-on-four-ai-agents
@@ -224,6 +226,8 @@ https://openai.com/index/introducing-trusted-contact-in-chatgpt
 https://openai.com/index/introducing-workspace-agents-in-chatgpt
 https://openai.com/index/model-disproves-discrete-geometry-conjecture
 https://openai.com/index/mrc-supercomputer-networking
+https://openai.com/index/nextdoor
+https://openai.com/index/notion
 https://openai.com/index/open-source-codex-orchestration-symphony
 https://openai.com/index/openai-frontier-models-and-codex-are-now-available-on-aws
 https://openai.com/index/our-response-to-the-tanstack-npm-supply-chain-attack
@@ -334,6 +338,7 @@ https://vercel.com/blog/how-cursor-built-a-growth-iteration-loop-with-vercel-mic
 https://vercel.com/blog/how-general-intelligence-used-agents-to-build-an-agent-platform-on-vercel
 https://vercel.com/blog/how-gitbook-serves-30000-sites-with-sub-second-content-updates
 https://vercel.com/blog/how-kiko-milano-scales-for-black-friday
+https://vercel.com/blog/how-okara-runs-cmo-agents-for-120000-companies-on-vercel
 https://vercel.com/blog/how-superset-built-the-ide-for-ai-agents-on-vercel
 https://vercel.com/blog/how-zo-computer-improved-ai-reliability-20x-on-vercel
 https://vercel.com/blog/introducing-deepsec-find-and-fix-vulnerabilities-in-your-code-base
