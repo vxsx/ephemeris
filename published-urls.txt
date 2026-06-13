@@ -79,6 +79,7 @@ https://blog.cloudflare.com/private-origins-dns-routing
 https://blog.cloudflare.com/q1-2026-internet-disruption-summary
 https://blog.cloudflare.com/quic-death-spiral-fix
 https://blog.cloudflare.com/realtime-threat-intel-waf-rules
+https://blog.cloudflare.com/scaling-security-scans
 https://blog.cloudflare.com/shared-dictionaries
 https://blog.cloudflare.com/unweight-tensor-compression
 https://blog.cloudflare.com/voidzero-joins-cloudflare
@@ -120,6 +121,7 @@ https://dsv4.interactive.ikot.blog
 https://dsv4.interactive.ikot.blog/
 https://econlab.substack.com/p/how-much-does-it-cost-to-be-ai-pilled
 https://elevenlabs.io/blog/aiuc-announcement
+https://epoch.ai/benchmarks/frontiermath-tier-4-v2
 https://every.to/on-every/re-re-introducing-sparkle-marie-kondo-your-mac
 https://every.to/source-code/how-we-run-a-25-person-company-on-four-ai-agents
 https://every.to/source-code/the-folder-is-the-agent
@@ -141,6 +143,7 @@ https://github.blog/engineering/from-pixels-to-characters-the-engineering-behind
 https://github.blog/engineering/infrastructure/how-github-uses-ebpf-to-improve-deployment-safety
 https://github.blog/engineering/infrastructure/when-protections-outlive-their-purpose-a-lesson-on-managing-defense-systems-at-scale
 https://github.blog/engineering/platform-security/post-quantum-security-for-ssh-access-on-github
+https://github.com/Augani/openreel-video
 https://github.com/BayramAnnakov/ai-native-product-skills/tree/master/skills/autoresearch
 https://github.com/BayramAnnakov/ai-personal-os-skills/tree/main/skills/slide-inspector
 https://github.com/BayramAnnakov/excel-hygiene
@@ -155,6 +158,7 @@ https://github.com/DenisSergeevitch/UFO-USA
 https://github.com/Fission-AI/OpenSpec/blob/main/docs/concepts.md
 https://github.com/nexu-io/open-design
 https://github.com/oven-sh/bun/pull/30412
+https://github.com/rvnikita/claude-code-statusline
 https://github.com/specs-devs/samples/tree/main/Agent%20Center
 https://hackernews.foresyn.ai/
 https://hermes-agent.nousresearch.com/desktop
@@ -293,6 +297,7 @@ https://sentry.io/blog/sentry-opentelemetry-work-together
 https://shir-man.com/free-llm
 https://sierra.ai/blog/the-ai-native-interview
 https://simonwillison.net/2026/May/14/not-so-locked-in
+https://success.com/tokenmaxxing-ai-adoption-metrics
 https://t.me/ProductsAndStartups/1740
 https://t.me/ProductsAndStartups/1745
 https://t.me/ProductsAndStartups/1748

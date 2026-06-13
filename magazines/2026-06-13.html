@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 056 · 13 Jun 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — from scaffold.html. Surface overrides below.
+     ═══════════════════════════════════════════════════════════════════ */
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+  .spread > .decor {
+    position: absolute; inset: 0; z-index: 0;
+    pointer-events: none; overflow: hidden;
+  }
+  .spread > .folio {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 8px 24px; flex-wrap: wrap;
+    font-family: var(--sans); font-size: 13px;
+    letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.75;
+  }
+  .spread > .main {
+    display: flex; flex-direction: column; gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center; align-items: flex-start; min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block; font-family: var(--sans); font-size: 12px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    padding: 6px 12px; border: 1px solid currentColor; border-radius: 999px; opacity: 0.9;
+  }
+  .hed {
+    font-family: var(--serif); font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px); line-height: 1.02;
+    letter-spacing: -0.02em; padding-bottom: 0.12em; word-break: break-word;
+  }
+  .lede {
+    font-family: var(--serif); font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45; max-width: 50ch; margin: 0;
+  }
+  .figure { width: 100%; }
+  .read-on {
+    display: inline-block; font-family: var(--sans); font-weight: 600;
+    font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 14px 22px; border: 2px solid currentColor;
+    text-decoration: none; color: currentColor; --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px) 22px max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — surface only.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── Cover · Manifesto ─── */
+  .cover { background: #f1ede3; color: #16140e; }
+  .cover .kicker {
+    font-family: var(--sans); text-transform: uppercase;
+    letter-spacing: 0.5em; font-size: 14px; font-weight: 600;
+    opacity: 0.55; margin: 0 0 6px;
+  }
+  .cover .manifesto {
+    font-family: var(--serif); font-weight: 300;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+    font-size: clamp(40px, 6.4vw, 96px); line-height: 1.03;
+    letter-spacing: -0.022em; max-width: 17ch; margin: 0;
+    padding-bottom: 0.1em;
+  }
+  .cover .manifesto em {
+    font-style: italic; color: #8a2716;
+    font-variation-settings: "opsz" 144, "SOFT" 60, "WONK" 1;
+  }
+  .cover .dek {
+    font-family: var(--serif); font-style: normal;
+    font-size: clamp(18px, 1.5vw, 21px); line-height: 1.5;
+    max-width: 46ch; opacity: 0.82; margin: 4px 0 6px;
+  }
+  .cover .toc {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 40px; padding-top: 18px; border-top: 1px solid currentColor;
+    width: 100%; max-width: 880px;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 4px 12px; text-decoration: none; color: inherit;
+    padding: 7px 0; border-bottom: 1px dotted rgba(0,0,0,0.25); text-align: left;
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.82em; opacity: 0.65; }
+  .cover .toc .num {
+    font-family: var(--serif); font-weight: 700; font-style: italic;
+    color: #8a2716; margin-right: 10px;
+  }
+  .cover .decor::before {
+    content: ""; position: absolute; left: 50%; top: -20vw;
+    width: 60vw; height: 60vw; transform: translateX(-50%);
+    background: radial-gradient(circle, rgba(138,39,22,0.07), transparent 68%);
+  }
+
+  /* ─── s01 · Cloudflare · Blueprint ─── */
+  .s01 { background: #e6ecf2; color: #0f2233; }
+  .s01 .tag { color: #1c5fb0; border-color: #1c5fb0; }
+  .s01 .hed {
+    font-family: var(--sans); font-weight: 800; letter-spacing: -0.035em;
+    font-size: clamp(44px, 6.4vw, 96px);
+  }
+  .s01 .hed em { font-style: normal; color: #1c5fb0; }
+  .s01 .read-on { color: #1c5fb0; border-color: #1c5fb0; --flip: #e6ecf2; }
+  .s01 .bignum {
+    font-family: var(--sans); font-weight: 800; color: #1c5fb0;
+    font-size: clamp(96px, 18vw, 230px); line-height: 0.82;
+    letter-spacing: -0.05em; display: flex; align-items: flex-start;
+  }
+  .s01 .bignum .x { font-size: 0.42em; letter-spacing: normal; margin-left: 0.06em; opacity: 0.7; }
+  .s01 .specs {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0; margin: 20px 0 0; border-top: 1.5px solid #1c5fb0;
+    font-family: var(--mono);
+  }
+  .s01 .specs > div { padding: 12px 16px 0 0; }
+  .s01 .specs dt { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.6; }
+  .s01 .specs dd { margin: 4px 0 0; font-size: 16px; font-weight: 600; }
+  .s01 .decor {
+    background-image:
+      repeating-linear-gradient(0deg, rgba(28,95,176,0.10) 0 1px, transparent 1px 40px),
+      repeating-linear-gradient(90deg, rgba(28,95,176,0.10) 0 1px, transparent 1px 40px);
+  }
+  .s01 .crop { position: absolute; width: 26px; height: 26px; border: 1.5px solid rgba(28,95,176,0.5); }
+  .s01 .crop.br { right: 26px; bottom: 26px; border-left: 0; border-top: 0; }
+  .s01 .crop.tr { right: 26px; top: clamp(80px, 10vw, 130px); border-left: 0; border-bottom: 0; }
+
+  /* ─── s02 · OpenReel · Risograph duotone (LOUD) ─── */
+  .s02 { background: #f3ece0; color: #16233b; }
+  .s02 .tag { color: #16233b; border-color: #16233b; }
+  .s02 .hed {
+    font-family: var(--serif); font-weight: 800; font-style: italic;
+    color: #07a0bf; letter-spacing: -0.025em;
+    font-variation-settings: "opsz" 120, "SOFT" 0, "WONK" 1;
+  }
+  .s02 .hed em { font-style: italic; color: #e6398b; }
+  .s02 .read-on { color: #e6398b; border-color: #e6398b; --flip: #f3ece0; }
+  .s02 .tracks { display: flex; flex-direction: column; gap: 10px; max-width: 560px; margin-top: 6px; }
+  .s02 .trk { display: flex; align-items: center; gap: 12px; }
+  .s02 .trk .lbl { font-family: var(--mono); font-size: 13px; width: 26px; opacity: 0.7; }
+  .s02 .trk .clip { height: 26px; border-radius: 3px; }
+  .s02 .trk .clip.c { width: 78%; background: #07a0bf; mix-blend-mode: multiply; }
+  .s02 .trk .clip.m { width: 54%; background: #e6398b; mix-blend-mode: multiply; }
+  .s02 .trk .clip.both { width: 66%; background: #07a0bf; box-shadow: 8px 0 0 #e6398b inset; mix-blend-mode: multiply; }
+  .s02 .decor::before {
+    content: ""; position: absolute; right: -8vw; top: 4vw;
+    width: 42vw; height: 42vw; border-radius: 50%;
+    background: #07a0bf; opacity: 0.16; mix-blend-mode: multiply;
+  }
+  .s02 .decor::after {
+    content: ""; position: absolute; right: -3vw; top: 9vw;
+    width: 42vw; height: 42vw; border-radius: 50%;
+    background: #e6398b; opacity: 0.16; mix-blend-mode: multiply;
+  }
+
+  /* ─── s03 · claude-code-statusline · Terminal (LOUD + dark inversion) ─── */
+  .s03 { background: #050a06; color: #38f08a; }
+  .s03 .tag { color: #38f08a; border-color: #2a7a52; }
+  .s03 .hed {
+    font-family: var(--mono); font-weight: 600; font-style: normal;
+    font-size: clamp(32px, 5vw, 68px); line-height: 1.08;
+    letter-spacing: -0.01em; color: #d9ffe9; text-shadow: 0 0 18px rgba(56,240,138,0.35);
+  }
+  .s03 .hed em { font-style: normal; color: #38f08a; }
+  .s03 .lede { font-family: var(--mono); font-size: clamp(17px, 1.5vw, 20px); color: #8fe6b3; }
+  .s03 .read-on { color: #38f08a; border-color: #38f08a; --flip: #050a06; }
+  .s03 .term {
+    font-family: var(--mono); max-width: 540px; width: 100%;
+    border: 1px solid #1f5236; border-radius: 6px; padding: 18px 20px;
+    background: rgba(20,40,28,0.5);
+  }
+  .s03 .term .bar-row { display: flex; justify-content: space-between; font-size: 15px; color: #cfeedd; }
+  .s03 .term .bar { margin: 10px 0 12px; height: 16px; background: #0e2a1a; border: 1px solid #1f5236; border-radius: 3px; overflow: hidden; }
+  .s03 .term .bar > span { display: block; height: 100%; background: #f0b13a; }
+  .s03 .term .cmt { margin: 0; font-size: 13.5px; color: #5fa97d; }
+  .s03 .decor {
+    background-image: repeating-linear-gradient(0deg, rgba(56,240,138,0.05) 0 2px, transparent 2px 5px);
+  }
+
+  /* ─── s04 · FrontierMath v2 · Spreadsheet (quiet) ─── */
+  .s04 { background: #eceae2; color: #1b1b18; }
+  .s04 .tag { color: #6a6a60; border-color: #6a6a60; }
+  .s04 .hed {
+    font-family: var(--serif); font-weight: 400; font-style: normal;
+    font-size: clamp(40px, 5.6vw, 84px); letter-spacing: -0.018em;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+  }
+  .s04 .hed em { font-style: italic; color: #9a2f2f; }
+  .s04 .read-on { color: #1b1b18; border-color: #1b1b18; --flip: #eceae2; }
+  .s04 .sheet {
+    border-collapse: collapse; font-family: var(--mono); font-size: 15px;
+    width: 100%; max-width: 560px; background: #f7f6f1; border: 1px solid #cfcdc3;
+  }
+  .s04 .sheet th, .s04 .sheet td { border: 1px solid #cfcdc3; padding: 11px 14px; text-align: left; }
+  .s04 .sheet th { background: #e2e0d6; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; font-size: 12.5px; }
+  .s04 .sheet td.up { color: #2f7a3d; font-weight: 600; }
+  .s04 .sheet td.bad { color: #9a2f2f; font-weight: 600; }
+  .s04 .decor {
+    background-image:
+      repeating-linear-gradient(90deg, rgba(0,0,0,0.04) 0 1px, transparent 1px 64px);
+  }
+
+  /* ─── s05 · Amazon tokenmaxxing · Hot pink (LOUD) ─── */
+  .s05 { background: #ff2d78; color: #1a0410; }
+  .s05 .tag { color: #1a0410; border-color: #1a0410; }
+  .s05 .hed {
+    font-family: var(--sans); font-weight: 900; font-style: normal;
+    letter-spacing: -0.03em; font-size: clamp(44px, 6.6vw, 100px); line-height: 0.98;
+    color: #16030d;
+  }
+  .s05 .hed em { font-style: normal; color: #fff; }
+  .s05 .read-on { color: #16030d; border-color: #16030d; --flip: #ff2d78; }
+  .s05 .steps { list-style: none; counter-reset: s; margin: 4px 0 0; padding: 0; max-width: 600px; }
+  .s05 .steps li {
+    counter-increment: s; position: relative; padding: 12px 0 12px 56px;
+    border-top: 1.5px solid rgba(26,4,16,0.35); font-family: var(--serif);
+    font-size: clamp(19px, 1.7vw, 24px); line-height: 1.3;
+  }
+  .s05 .steps li::before {
+    content: counter(s); position: absolute; left: 0; top: 10px;
+    font-family: var(--serif); font-style: italic; font-weight: 700;
+    font-size: 1.6em; color: #fff; line-height: 1;
+  }
+  .s05 .decor::before {
+    content: "%"; position: absolute; right: -2vw; bottom: -8vw;
+    font-family: var(--serif); font-weight: 900; font-style: italic;
+    font-size: 56vw; line-height: 0.7; color: rgba(255,255,255,0.12);
+  }
+
+  /* ─── Colophon · dark ─── */
+  .colophon { background: #0d0d10; color: #e7e7e2; }
+  .colophon .hed { font-family: var(--serif); font-weight: 800; color: #f4f4ef; }
+  .colophon .hed em { font-style: italic; color: #d98a3a; }
+  .colophon .lede { color: #b9b9b2; }
+  .colophon .sources { font-family: var(--mono); font-size: 14px; color: #8f8f88; margin-top: 8px; line-height: 1.8; max-width: 60ch; }
+  .colophon .sources b { color: #d98a3a; font-weight: 600; }
+  .colophon .folio { opacity: 0.6; }
+
+  /* ─── Mobile additions (existing rules above stay) ─── */
+  @media (max-width: 800px) {
+    .s01 .specs { grid-template-columns: 1fr; }
+    .s01 .specs > div { padding: 12px 0 0; }
+    .s01 .crop { display: none; }
+    .s01 .hed { font-size: clamp(34px, 9vw, 54px); }
+    .s05 .hed { font-size: clamp(36px, 9vw, 56px); }
+    .s05 .steps li { padding-left: 46px; }
+    .s04 .sheet { font-size: 14px; }
+    .s04 .hed { font-size: clamp(32px, 8.5vw, 52px); }
+    .s03 .hed { font-size: clamp(26px, 8vw, 44px); }
+    .s02 .tracks { max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ════════════════ COVER · Manifesto ════════════════ -->
+<section class="spread cover centered" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 056</span>
+    <span>Saturday · 13 Jun 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <p class="kicker">Ephemeris</p>
+    <h1 class="manifesto">Five stories about the gap between a <em>number</em> and the truth.</h1>
+    <p class="dek">A math benchmark that got nearly half its own problems wrong. Dashboards engineers learned to game. A scanner that found ten times more with the same hardware. Today the measuring instruments are the news.</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>Ten times the scans, the same hardware</span><span>Cloudflare</span></a>
+      <a href="#s02"><span><span class="num">02</span>A video editor that never leaves the tab</span><span>via @TochkiNadAI</span></a>
+      <a href="#s03"><span><span class="num">03</span>Your rate limit, lit up in the status bar</span><span>via @rvnikita_blog</span></a>
+      <a href="#s04"><span><span class="num">04</span>The math benchmark had its own errors</span><span>Epoch AI</span></a>
+      <a href="#s05"><span><span class="num">05</span>When "use more AI" is the only metric</span><span>via @ProductsAndStartups</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ════════════════ s01 · Cloudflare · Blueprint ════════════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 056</span>
+    <span>01 / 5 · Cloudflare</span>
+  </header>
+  <div class="main">
+    <span class="tag">Infrastructure · Performance</span>
+    <h2 class="hed">Ten times the scans, the <em>same hardware</em>.</h2>
+    <p class="lede">Cloudflare's Security Insights team rebuilt the scanning pipeline from the inside — tuning Kafka consumers, reshaping Postgres queries, trimming the APIs between them — and now clears more than 120 scans a second. A tenfold jump with nothing new racked: throughput found in the software, not the budget.</p>
+    <div class="figure">
+      <div class="bignum"><span class="n">10</span><span class="x">×</span></div>
+      <dl class="specs">
+        <div><dt>Throughput</dt><dd>120+ scans / sec</dd></div>
+        <div><dt>Where the wins were</dt><dd>Kafka · Postgres · APIs</dd></div>
+        <div><dt>New hardware</dt><dd>none</dd></div>
+      </dl>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.cloudflare.com/scaling-security-scans/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true">
+    <span class="crop tr"></span>
+    <span class="crop br"></span>
+  </div>
+</section>
+
+<!-- ════════════════ s02 · OpenReel · Risograph ════════════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 056</span>
+    <span>02 / 5 · via @TochkiNadAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Creative tools · Open source</span>
+    <h2 class="hed">A video editor that never <em>leaves the tab</em>.</h2>
+    <p class="lede">OpenReel is an open-source, fully client-side video editor — multi-track timeline, effects, colour grading, audio mixing — that runs entirely in the browser. No uploads, no watermark, no account: a CapCut alternative your footage never has to leave. Surfaced via @TochkiNadAI.</p>
+    <div class="figure">
+      <div class="tracks">
+        <div class="trk"><span class="lbl">V1</span><span class="clip c"></span></div>
+        <div class="trk"><span class="lbl">V2</span><span class="clip both"></span></div>
+        <div class="trk"><span class="lbl">A1</span><span class="clip m"></span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://github.com/Augani/openreel-video" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ════════════════ s03 · claude-code-statusline · Terminal ════════════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 056</span>
+    <span>03 / 5 · via @rvnikita_blog</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev tools · Agentic coding</span>
+    <h2 class="hed">Your rate limit, lit up in the status bar.</h2>
+    <p class="lede">A drop-in status line for Claude Code that shows how much of your rate limit you've burned, right in the terminal — amber at 80%, red at 95%. You stop discovering the ceiling by slamming into it mid-task. Surfaced via @rvnikita_blog.</p>
+    <div class="figure">
+      <div class="term">
+        <div class="bar-row"><span>rate&nbsp;limit&nbsp;used</span><span>82%</span></div>
+        <div class="bar"><span style="width:82%"></span></div>
+        <p class="cmt"># amber @ 80 · red @ 95 · window resets in 2h14m</p>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://github.com/rvnikita/claude-code-statusline" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ════════════════ s04 · FrontierMath v2 · Spreadsheet ════════════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 056</span>
+    <span>04 / 5 · Epoch AI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Benchmarks · Research</span>
+    <h2 class="hed">The math benchmark had <em>its own errors</em>.</h2>
+    <p class="lede">Epoch AI shipped FrontierMath v2 after an AI-assisted review flagged mistakes in roughly 42% of problems — 123 corrected across Tiers 1–3, a dozen more in Tier 4, the worst removed. Once fixed, top scores leapt: one model's Tier-4 result climbed from 35% to 73%. The ranking order held; the numbers everyone had been quoting did not. Surfaced via @seeallochnaya.</p>
+    <div class="figure">
+      <table class="sheet">
+        <tbody>
+          <tr><th>FrontierMath</th><th>v1</th><th>v2</th></tr>
+          <tr><td>Top model · Tier 4</td><td>35%</td><td class="up">73%</td></tr>
+          <tr><td>Problems with errors</td><td colspan="2" class="bad">~42%</td></tr>
+          <tr><td>Corrected · removed</td><td colspan="2">135 · 12</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://epoch.ai/benchmarks/frontiermath-tier-4-v2" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ════════════════ s05 · Amazon tokenmaxxing · Hot pink ════════════════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 056</span>
+    <span>05 / 5 · via @ProductsAndStartups</span>
+  </header>
+  <div class="main">
+    <span class="tag">AI adoption · Org metrics</span>
+    <h2 class="hed">When "use more AI" is the <em>only</em> metric.</h2>
+    <p class="lede">Amazon told 80% of its developers to use AI every week, then ranked them on a token-consumption leaderboard — so engineers began "tokenmaxxing," burning tokens on busywork to climb it. Meta ran the same play with an 85,000-person dashboard. It's Goodhart's Law on a corporate budget: the moment a number becomes the target, it stops measuring anything. Surfaced via @ProductsAndStartups.</p>
+    <div class="figure">
+      <ol class="steps">
+        <li>Mandate 80% weekly AI use.</li>
+        <li>Rank everyone on a token leaderboard.</li>
+        <li>Watch engineers burn tokens on busywork.</li>
+        <li>The number stops meaning anything.</li>
+      </ol>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.success.com/tokenmaxxing-ai-adoption-metrics" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ════════════════ COLOPHON ════════════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 056</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Five picks, Saturday 13 June 2026. A thin morning across the feeds, so signal over count.</p>
+    <p class="sources">
+      <b>Fed today:</b> Cloudflare blog · Epoch AI · GitHub · Telegram (@TochkiNadAI, @rvnikita_blog, @seeallochnaya, @ProductsAndStartups) · SUCCESS.<br>
+      <b>Rubric:</b> AI tools to adopt this week · creative software · dev tools &amp; agentic coding · privacy &amp; security · research with a practical kernel · anything immediately useful to a senior engineer or founder.<br>
+      <b>Rules:</b> no reprints, nothing older than 30 days, at most two picks per source.
+    </p>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>
