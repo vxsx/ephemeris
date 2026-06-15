@@ -1,0 +1,621 @@
+<!doctype html>
+<!-- Ephemeris · Issue 058 · 2026-06-15 · built on scaffold.html -->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 058 · 15 June 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — copied verbatim from scaffold.html.
+     ═══════════════════════════════════════════════════════════════════ */
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+
+  .spread > .decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+  .figure { width: 100%; }
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — surface only.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── COVER · date-hero (treatment E) ─── */
+  .cover { background: #100d0b; color: #efe6d4; }
+  .cover .kicker {
+    font-family: var(--mono); font-size: 14px; letter-spacing: 0.42em;
+    text-transform: uppercase; opacity: 0.7; margin: 0;
+  }
+  .cover .datehero {
+    font-family: var(--sans); font-weight: 900;
+    font-size: clamp(96px, 22vw, 320px);
+    line-height: 0.80; letter-spacing: -0.055em; margin: 0;
+    color: #efe6d4;
+  }
+  .cover .datehero em { font-style: normal; color: #ffb020; letter-spacing: normal; }
+  .cover .datemeta {
+    font-family: var(--mono); font-size: clamp(15px, 1.8vw, 22px);
+    letter-spacing: 0.3em; text-transform: uppercase; opacity: 0.85; margin: 0;
+  }
+  .cover .dek {
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(20px, 2vw, 30px); line-height: 1.32; max-width: 30ch; margin: 4px 0 0;
+  }
+  .cover .toc {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 40px; padding-top: 18px; border-top: 1px solid rgba(239,230,212,0.3); width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 4px 12px; text-decoration: none; color: inherit;
+    padding: 7px 0; border-bottom: 1px dotted rgba(239,230,212,0.22);
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.82em; opacity: 0.6; }
+  .cover .toc .num {
+    font-family: var(--mono); font-weight: 600; color: #ffb020; margin-right: 10px;
+  }
+  .cover .decor::before {
+    content: ""; position: absolute; left: -10vw; top: -10vw;
+    width: 50vw; height: 50vw;
+    background: radial-gradient(circle, rgba(255,176,32,0.10), transparent 68%);
+  }
+  @media (max-width: 800px) {
+    .cover .toc { grid-template-columns: 1fr; gap: 0; }
+  }
+
+  /* ─── s01 · Fable/Mythos takedown · dark report / classified ─── */
+  .s01 { background: #0b0a0c; color: #d9d0c6; }
+  .s01 .tag { color: #ef4636; border-color: #ef4636; }
+  .s01 .hed { font-weight: 800; }
+  .s01 .hed em {
+    font-style: normal; color: #0b0a0c; background: #ef4636;
+    padding: 0 0.14em; box-decoration-break: clone; -webkit-box-decoration-break: clone;
+  }
+  .s01 .lede { font-family: var(--sans); font-weight: 400; color: #c7bdb2; }
+  .s01 .read-on { color: #ef4636; border-color: #ef4636; --flip: #0b0a0c; }
+  .s01 .dossier {
+    border-left: 3px solid #ef4636; padding: 6px 0 6px 22px; max-width: 56ch;
+  }
+  .s01 .dossier-quote {
+    font-family: var(--serif); font-style: italic; font-weight: 500;
+    font-size: clamp(22px, 2.6vw, 34px); line-height: 1.28; margin: 0; color: #ece3d8;
+  }
+  .s01 .dossier-meta {
+    font-family: var(--mono); font-size: 13px; letter-spacing: 0.14em;
+    text-transform: uppercase; opacity: 0.62; margin: 16px 0 0;
+  }
+  .s01 .stamp {
+    font-family: var(--mono); font-weight: 600; font-size: 13px; letter-spacing: 0.3em;
+    color: #ef4636; border: 2px solid #ef4636; padding: 7px 14px; display: inline-block;
+    margin-top: 22px; transform: rotate(-3deg);
+  }
+  .s01 .decor::before {
+    content: ""; position: absolute; right: -6vw; bottom: -8vw;
+    width: 44vw; height: 44vw;
+    background: repeating-linear-gradient(135deg, rgba(239,70,54,0.06) 0 14px, transparent 14px 34px);
+  }
+  .s01 .decor .bar {
+    position: absolute; height: 22px; background: #16141a; opacity: 0.9;
+  }
+  .s01 .decor .bar.a { top: 30%; right: 8%; width: 180px; }
+  .s01 .decor .bar.b { top: 64%; right: 14%; width: 120px; background: #2a1110; }
+
+  /* ─── s02 · OpenAI acquires Ona · blueprint ─── */
+  .s02 { background: #e9eff3; color: #16334b; }
+  .s02 .tag { color: #16334b; border-color: #16334b; }
+  .s02 .hed { font-family: var(--sans); font-weight: 800; letter-spacing: -0.03em; }
+  .s02 .hed em { font-style: normal; color: #1f7ab0; }
+  .s02 .lede { font-family: var(--sans); font-weight: 400; }
+  .s02 .read-on { color: #16334b; border-color: #16334b; --flip: #e9eff3; }
+  .s02 .bpspec {
+    margin: 0; display: grid; gap: 0; max-width: 60ch;
+    border: 1.5px solid #16334b; background: rgba(255,255,255,0.4);
+  }
+  .s02 .bpspec > div {
+    display: grid; grid-template-columns: 88px 1fr; gap: 18px; align-items: baseline;
+    padding: 16px 20px; border-bottom: 1px dashed rgba(22,51,75,0.35);
+  }
+  .s02 .bpspec > div:last-child { border-bottom: 0; }
+  .s02 .bpspec dt {
+    font-family: var(--mono); font-weight: 600; font-size: 13px; letter-spacing: 0.22em;
+    color: #1f7ab0;
+  }
+  .s02 .bpspec dd {
+    margin: 0; font-family: var(--mono); font-size: 15px; line-height: 1.45; color: #16334b;
+  }
+  .s02 .decor::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(0deg, rgba(22,51,75,0.07) 0 1px, transparent 1px 32px),
+      repeating-linear-gradient(90deg, rgba(22,51,75,0.07) 0 1px, transparent 1px 32px);
+  }
+  .s02 .decor .crop {
+    position: absolute; width: 18px; height: 18px; border: 1.5px solid rgba(22,51,75,0.5);
+  }
+  .s02 .decor .crop.tr { top: clamp(120px,12vw,160px); right: 6%; border-left: 0; border-bottom: 0; }
+  .s02 .decor .crop.bl { bottom: 12%; left: 6%; border-right: 0; border-top: 0; }
+
+  /* ─── s03 · Cursor Design Mode · risograph duotone ─── */
+  .s03 { background: #f5efe4; color: #18141d; }
+  .s03 .tag { color: #d6266f; border-color: #d6266f; }
+  .s03 .hed {
+    font-family: var(--sans); font-weight: 900; letter-spacing: -0.03em; color: #0f8fb8;
+    text-shadow: 0.045em 0.05em 0 rgba(214,38,111,0.9);
+  }
+  .s03 .hed em { font-style: normal; color: #d6266f; text-shadow: 0.045em 0.05em 0 rgba(15,143,184,0.85); }
+  .s03 .lede { color: #2a2330; }
+  .s03 .read-on { color: #d6266f; border-color: #d6266f; --flip: #f5efe4; }
+  .s03 .riso-steps {
+    list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; max-width: 46ch;
+    counter-reset: none;
+  }
+  .s03 .riso-steps li {
+    display: grid; grid-template-columns: 56px 1fr; align-items: center; gap: 18px;
+    font-family: var(--sans); font-weight: 600; font-size: clamp(18px, 1.9vw, 23px);
+  }
+  .s03 .riso-steps .rn {
+    font-family: var(--sans); font-weight: 900; font-size: 40px; line-height: 1;
+    color: #0f8fb8; text-shadow: 0.05em 0.05em 0 rgba(214,38,111,0.9); letter-spacing: normal;
+  }
+  .s03 .decor .blob { position: absolute; border-radius: 50%; mix-blend-mode: multiply; }
+  .s03 .decor .blob.c { right: -8vw; top: -6vw; width: 42vw; height: 42vw; background: rgba(15,143,184,0.30); }
+  .s03 .decor .blob.m { right: -3vw; top: -1vw; width: 42vw; height: 42vw; background: rgba(214,38,111,0.30); }
+
+  /* ─── s04 · LLM language bias · newsprint ─── */
+  .s04 { background: #efe9dc; color: #16140f; }
+  .s04 .tag { color: #16140f; border-color: #16140f; border-radius: 0; }
+  .s04 .hed {
+    font-family: var(--serif); font-weight: 700; letter-spacing: -0.015em;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+  }
+  .s04 .hed em { font-style: italic; font-variation-settings: "opsz" 144, "SOFT" 60, "WONK" 1; }
+  .s04 .lede { color: #2c281f; }
+  .s04 .read-on { color: #16140f; border-color: #16140f; border-radius: 0; --flip: #efe9dc; }
+  .s04 .news-cols {
+    column-count: 3; column-gap: 32px; column-rule: 1px solid rgba(22,20,15,0.3);
+    border-top: 3px double #16140f; border-bottom: 1px solid #16140f;
+    padding: 16px 0; max-width: 100%;
+  }
+  .s04 .news-cols p {
+    margin: 0 0 12px; font-family: var(--serif); font-size: 15.5px; line-height: 1.5;
+    break-inside: avoid;
+  }
+  .s04 .news-cols .sc {
+    font-variant: small-caps; letter-spacing: 0.04em; font-weight: 600;
+  }
+  .s04 .byline {
+    font-family: var(--sans); font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
+    opacity: 0.65; margin: 0 0 4px;
+  }
+  @media (max-width: 800px) {
+    .s04 .news-cols { column-count: 1; }
+  }
+
+  /* ─── s05 · Ramp AI index · neo-brutalist yellow ─── */
+  .s05 { background: #ffe000; color: #0a0a0a; }
+  .s05 .tag { color: #0a0a0a; border-color: #0a0a0a; border-radius: 0; border-width: 2px; font-weight: 700; }
+  .s05 .hed {
+    font-family: var(--sans); font-weight: 900; text-transform: uppercase;
+    letter-spacing: -0.02em; line-height: 0.98;
+  }
+  .s05 .hed em { font-style: normal; background: #0a0a0a; color: #ffe000; padding: 0 0.1em;
+    box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+  .s05 .lede { font-family: var(--sans); font-weight: 500; max-width: 52ch; }
+  .s05 .read-on { color: #0a0a0a; border-color: #0a0a0a; border-width: 3px; --flip: #ffe000; font-weight: 700; }
+  .s05 .bigstats {
+    margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+    border: 3px solid #0a0a0a; width: 100%;
+  }
+  .s05 .bigstats > div {
+    padding: 18px 20px 22px; border-right: 3px solid #0a0a0a;
+  }
+  .s05 .bigstats > div:last-child { border-right: 0; }
+  .s05 .bigstats dt {
+    font-family: var(--sans); font-weight: 700; font-size: 13px; letter-spacing: 0.16em;
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .s05 .bigstats dd {
+    margin: 0; font-family: var(--sans); font-weight: 900; line-height: 0.95;
+    font-size: clamp(40px, 6vw, 78px); letter-spacing: -0.04em;
+  }
+  .s05 .bigstats dd .unit {
+    display: block; font-family: var(--mono); font-weight: 400; font-style: normal;
+    font-size: 14px; letter-spacing: normal; margin-top: 8px; opacity: 0.75;
+  }
+  .s05 .gap-callout {
+    font-family: var(--sans); font-weight: 900; letter-spacing: -0.04em;
+    font-size: clamp(64px, 12vw, 150px); line-height: 0.9; margin: 0;
+  }
+  .s05 .gap-callout .x { background: #0a0a0a; color: #ffe000; padding: 0 0.08em; letter-spacing: normal; }
+  .s05 .gap-callout small {
+    display: block; font-size: 15px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; margin-top: 10px;
+  }
+  .s05 .decor .slab { position: absolute; right: -4vw; bottom: -4vw; width: 30vw; height: 30vw;
+    background: #0a0a0a; opacity: 0.06; transform: rotate(12deg); }
+  @media (max-width: 800px) {
+    .s05 .bigstats { grid-template-columns: 1fr; }
+    .s05 .bigstats > div { border-right: 0; border-bottom: 3px solid #0a0a0a; }
+    .s05 .bigstats > div:last-child { border-bottom: 0; }
+  }
+
+  /* ─── s06 · GitHub Agentic Workflows · terminal ─── */
+  .s06 { background: #04100a; color: #45f08a; }
+  .s06 .folio { color: #45f08a; }
+  .s06 .tag { color: #45f08a; border-color: #45f08a; border-radius: 0; font-family: var(--mono); }
+  .s06 .hed {
+    font-family: var(--mono); font-weight: 600; font-size: clamp(38px, 5.4vw, 78px);
+    letter-spacing: -0.01em; line-height: 1.06;
+  }
+  .s06 .hed em { font-style: normal; color: #04100a; background: #45f08a; padding: 0 0.12em;
+    box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+  .s06 .lede { font-family: var(--mono); font-size: clamp(16px, 1.5vw, 19px); color: #8ff5b8; line-height: 1.55; }
+  .s06 .read-on { color: #45f08a; border-color: #45f08a; --flip: #04100a; font-family: var(--mono); }
+  .s06 .term {
+    margin: 0; background: rgba(0,0,0,0.45); border: 1px solid rgba(69,240,138,0.4);
+    border-radius: 6px; padding: 18px 20px; max-width: 64ch; overflow-x: auto;
+  }
+  .s06 .term code {
+    font-family: var(--mono); font-size: 14px; line-height: 1.7; color: #c8ffdd;
+    white-space: pre; display: block;
+  }
+  .s06 .term .pr { color: #45f08a; }
+  .s06 .term .cm { color: #4f8f6a; }
+  .s06 .term .kw { color: #ffd86b; }
+  .s06 .term .cur {
+    display: inline-block; width: 9px; height: 17px; background: #45f08a;
+    vertical-align: -3px; animation: blink 1.1s steps(1) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+  .s06 .decor::before {
+    content: ""; position: absolute; inset: 0;
+    background: repeating-linear-gradient(0deg, rgba(69,240,138,0.05) 0 2px, transparent 2px 5px);
+  }
+
+  /* ─── colophon · dark index ─── */
+  .colophon { background: #14161a; color: #cfd3da; }
+  .colophon .hed { font-family: var(--serif); font-weight: 800; color: #f3efe7; }
+  .colophon .hed em { font-style: italic; color: #ffb020; }
+  .colophon .lede { font-family: var(--sans); font-weight: 400; color: #aab0ba; max-width: 62ch; }
+  .colophon .meta {
+    font-family: var(--mono); font-size: 13px; letter-spacing: 0.1em; line-height: 2;
+    text-transform: uppercase; opacity: 0.7; margin: 8px 0 0;
+  }
+  .colophon .meta b { color: #ffb020; font-weight: 600; }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════════════ COVER · date-hero ═══════════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 058</span>
+    <span>Monday · 15 Jun 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <p class="kicker">Ephemeris · Daily</p>
+    <h1 class="datehero">15<em>·</em>06<em>·</em>26</h1>
+    <p class="datemeta">Monday · Zürich · Six stories</p>
+    <p class="dek">A frontier model pulled from every hand at once, agents handed longer leashes — a cloud runtime, autonomous CI, a browser they can redraw — and the spreadsheets that show who's really paying for it.</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>An order suspends Fable 5 and Mythos 5</span><span>Anthropic</span></a>
+      <a href="#s02"><span><span class="num">02</span>Codex gets a cloud it can live in</span><span>OpenAI</span></a>
+      <a href="#s03"><span><span class="num">03</span>Point at the pixel, the agent edits the code</span><span>Cursor</span></a>
+      <a href="#s04"><span><span class="num">04</span>Ask in Chinese, get a friendlier government</span><span>The Batch</span></a>
+      <a href="#s05"><span><span class="num">05</span>The AI-spend gap is 680× wide</span><span>via @rvnikita_blog</span></a>
+      <a href="#s06"><span><span class="num">06</span>Your CI pipeline can now run an agent</span><span>GitHub</span></a>
+    </nav>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s01 · classified ═══════════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 058</span>
+    <span>01 / 6 · Anthropic</span>
+  </header>
+  <div class="main">
+    <span class="tag">Models · Access · Policy</span>
+    <h2 class="hed">An export order <em>suspends</em> Fable 5 and Mythos 5.</h2>
+    <p class="lede">On 12 June the US government invoked national-security authorities and ordered Anthropic to cut off Fable 5 and Mythos 5 for every user — citizens and foreign-national staff alike. The cited cause is a jailbreak that bypasses the models' safeguards; Anthropic calls the demonstrated vulnerability narrow and widely available from other models, and complied while disagreeing in public.</p>
+    <div class="figure">
+      <div class="dossier">
+        <blockquote class="dossier-quote">"Applying this standard would essentially halt all new model deployments for all frontier model providers."</blockquote>
+        <p class="dossier-meta">— Anthropic, on the directive · filed 12 Jun 2026</p>
+      </div>
+      <span class="stamp">ACCESS · REVOKED</span>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.anthropic.com/news/fable-mythos-access" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true">
+    <span class="bar a"></span>
+    <span class="bar b"></span>
+  </div>
+</section>
+
+<!-- ═══════════════ s02 · blueprint ═══════════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 058</span>
+    <span>02 / 6 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev tools · Agentic infra</span>
+    <h2 class="hed">Codex gets a cloud it can <em>live in</em>.</h2>
+    <p class="lede">OpenAI is acquiring Ona to give Codex secure, persistent cloud environments — long-running sandboxes that hold state across a whole task instead of cold-starting on every call. For teams running fleets of coding agents, the workspace stops being a laptop you have to leave open.</p>
+    <div class="figure">
+      <dl class="bpspec">
+        <div><dt>WAS</dt><dd>agents run on your machine, state lost between calls</dd></div>
+        <div><dt>NOW</dt><dd>persistent cloud sandbox, secure, holds state across the task</dd></div>
+        <div><dt>FOR</dt><dd>long-running and parallel coding agents at enterprise scale</dd></div>
+      </dl>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/openai-to-acquire-ona" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true">
+    <span class="crop tr"></span>
+    <span class="crop bl"></span>
+  </div>
+</section>
+
+<!-- ═══════════════ s03 · risograph ═══════════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 058</span>
+    <span>03 / 6 · Cursor</span>
+  </header>
+  <div class="main">
+    <span class="tag">Creative tools · Agentic coding</span>
+    <h2 class="hed">Point at the pixel; the agent edits <em>the code</em>.</h2>
+    <p class="lede">Cursor's Design Mode lets you click an element, draw on the frozen page, or just say the change out loud. The agent picks up the element's identity, its source, and its place in the layout, then rewrites the code while hot reload shows the result. The browser becomes the canvas, not only the output.</p>
+    <div class="figure">
+      <ol class="riso-steps">
+        <li><span class="rn">1</span> Click an element — or draw over it</li>
+        <li><span class="rn">2</span> Describe the change in words or by voice</li>
+        <li><span class="rn">3</span> The agent edits the source, hot reload previews</li>
+      </ol>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://cursor.com/blog/design-mode" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true">
+    <span class="blob c"></span>
+    <span class="blob m"></span>
+  </div>
+</section>
+
+<!-- ═══════════════ s04 · newsprint ═══════════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 058</span>
+    <span>04 / 6 · The Batch · DeepLearning.AI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Research · Model bias</span>
+    <h2 class="hed">Ask in Chinese, get a <em>friendlier</em> government.</h2>
+    <p class="lede">A study surfaced in The Batch — and published in Nature — finds that state-controlled media in training data tilts a model's output, and the tilt tracks the language of the prompt. The practical read for anyone shipping on these models: a model's stance can move with the language you query it in.</p>
+    <div class="figure">
+      <p class="byline">Field note · language-dependent stance</p>
+      <div class="news-cols">
+        <p><span class="sc">The finding.</span> Researchers from Oregon, Purdue, UC San Diego, NYU and Princeton tested identical political questions across languages and measured how favorably models described each country's government.</p>
+        <p><span class="sc">The tilt.</span> Prompted in Chinese, models described China's government markedly more favorably than when the same questions were asked in English — an artifact of state media in the training corpus.</p>
+        <p><span class="sc">The takeaway.</span> Press-freedom of a language's source media leaks into model behavior. If your product serves multiple languages, audit the answer, not just the translation.</p>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.deeplearning.ai/the-batch/issue-357" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s05 · neo-brutalist yellow ═══════════════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 058</span>
+    <span>05 / 6 · via @rvnikita_blog</span>
+  </header>
+  <div class="main">
+    <span class="tag">AI adoption · Economics</span>
+    <h2 class="hed">$7,500 a head. Or <em>$11</em>.</h2>
+    <p class="lede">Ramp's AI index puts hard numbers on the adoption gap. The top 1% of companies spend roughly $7,500 per employee per month on AI; the top 10% about $611; the median, $11. Where you work now decides how much AI leverage you actually touch.</p>
+    <div class="figure">
+      <dl class="bigstats">
+        <div><dt>Top 1%</dt><dd>$7,500<span class="unit">per head · month</span></dd></div>
+        <div><dt>Top 10%</dt><dd>$611<span class="unit">per head · month</span></dd></div>
+        <div><dt>Median</dt><dd>$11<span class="unit">per head · month</span></dd></div>
+      </dl>
+      <p class="gap-callout"><span class="x">680×</span><small>between the top spender and the median</small></p>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://ramp.com/data/ai-index" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true">
+    <span class="slab"></span>
+  </div>
+</section>
+
+<!-- ═══════════════ s06 · terminal ═══════════════ -->
+<section class="spread s06" id="s06">
+  <header class="folio">
+    <span>Ephemeris · Issue 058</span>
+    <span>06 / 6 · GitHub</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev tools · CI · Automation</span>
+    <h2 class="hed">Your CI pipeline can now <em>run an agent</em>.</h2>
+    <p class="lede">GitHub Agentic Workflows is in public preview: Actions can drive an autonomous AI agent as a workflow step. The same pipeline that builds and tests can dispatch an agent to triage an issue, reproduce a bug, or open a PR. The automation layer you already own gets a brain.</p>
+    <div class="figure">
+      <pre class="term"><code><span class="pr">$</span> cat .github/workflows/triage.yml
+<span class="cm"># public preview · Actions + autonomous agent</span>
+<span class="kw">on:</span> issues
+<span class="kw">jobs:</span>
+  triage:
+    <span class="kw">uses:</span> github/agentic-workflow
+    <span class="kw">with:</span>
+      task: <span class="cm">"label, reproduce, propose a fix"</span><span class="cur"></span></code></pre>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://github.blog/changelog/2026-06-11-github-agentic-workflows-is-now-in-public-preview" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ COLOPHON ═══════════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 058</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Six picks for the senior engineer or founder with ten minutes: a frontier model cut off, the infrastructure agents now run on, the research and economics underneath.</p>
+    <p class="meta">
+      Sources · <b>Anthropic</b> · <b>OpenAI</b> · <b>Cursor</b> · <b>GitHub</b> · <b>The Batch / DeepLearning.AI</b> · <b>Ramp via @rvnikita_blog</b><br>
+      Rubric · tools to adopt · dev &amp; agent infra · research with a practical kernel · signal over hype<br>
+      Issue 058 · 15 June 2026 · Europe/Zürich
+    </p>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>
