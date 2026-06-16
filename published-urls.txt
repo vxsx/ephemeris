@@ -14,6 +14,7 @@ https://anthropic.com/engineering/how-we-contain-claude
 https://anthropic.com/engineering/infrastructure-noise
 https://anthropic.com/engineering/managed-agents
 https://anthropic.com/features/project-deal
+https://anthropic.com/institute/recursive-self-improvement
 https://anthropic.com/news/AI-enabled-cyber-threats-mitre-attack
 https://anthropic.com/news/anthropic-acquires-stainless
 https://anthropic.com/news/anthropic-amazon-compute
@@ -101,6 +102,7 @@ https://claude.com/blog/introducing-dynamic-workflows-in-claude-code
 https://cloud.google.com/blog/topics/threat-intelligence/ai-vulnerability-exploitation-initial-access
 https://cognition.ai/blog/ai-guarantee
 https://cognition.ai/blog/frontier-code
+https://community.fabric.microsoft.com/t5/Fabric-Updates-Blog/Introducing-Rayfin-A-new-AI-first-way-to-build-deploy-and-govern/ba-p/5191676
 https://cursor.com/blog/cloud-agent-lessons
 https://cursor.com/blog/composer-2-5
 https://cursor.com/blog/design-mode
@@ -149,6 +151,7 @@ https://github.blog/engineering/from-pixels-to-characters-the-engineering-behind
 https://github.blog/engineering/infrastructure/how-github-uses-ebpf-to-improve-deployment-safety
 https://github.blog/engineering/infrastructure/when-protections-outlive-their-purpose-a-lesson-on-managing-defense-systems-at-scale
 https://github.blog/engineering/platform-security/post-quantum-security-for-ssh-access-on-github
+https://github.com/Agents365-ai/drawio-skill
 https://github.com/Augani/openreel-video
 https://github.com/BayramAnnakov/ai-native-product-skills/tree/master/skills/autoresearch
 https://github.com/BayramAnnakov/ai-personal-os-skills/tree/main/skills/slide-inspector
@@ -163,6 +166,7 @@ https://github.com/DenisSergeevitch/genternet-chrome
 https://github.com/DenisSergeevitch/UFO-USA
 https://github.com/Fission-AI/OpenSpec/blob/main/docs/concepts.md
 https://github.com/nexu-io/open-design
+https://github.com/OpenCoworkAI/open-cowork
 https://github.com/oven-sh/bun/pull/30412
 https://github.com/rvnikita/claude-code-statusline
 https://github.com/specs-devs/samples/tree/main/Agent%20Center
@@ -268,6 +272,7 @@ https://posthog.com/blog/customer-facing-analytics-examples
 https://posthog.com/blog/duckdb-vs-clickhouse
 https://posthog.com/blog/duckdb-vs-postgres
 https://posthog.com/blog/duckdb-vs-sqlite
+https://posthog.com/blog/everything-is-build-mode
 https://posthog.com/blog/joe-os-analytics
 https://posthog.com/blog/local-flag-evals-rust
 https://posthog.com/blog/making-claude-cowork-actually-useful
