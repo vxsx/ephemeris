@@ -66,6 +66,7 @@ https://blog.cloudflare.com/code-orange-fail-small-complete
 https://blog.cloudflare.com/copy-fail-linux-vulnerability-mitigation
 https://blog.cloudflare.com/cyber-frontier-models
 https://blog.cloudflare.com/de-tld-outage-dnssec
+https://blog.cloudflare.com/dmarc-management-ga
 https://blog.cloudflare.com/dynamic-workflows
 https://blog.cloudflare.com/enforce-first-as-bgp
 https://blog.cloudflare.com/frontier-model-defense
@@ -189,6 +190,7 @@ https://jack-clark.net/2026/05/18/import-ai-457-ai-stuxnet-cursed-muon-optimizer
 https://jack-clark.net/2026/05/26/import-ai-458-reckoning-with-the-future-and-a-singularity-story
 https://jack-clark.net/2026/06/01/import-ai-459-ai-oversight-is-difficult-scaling-laws-for-protein-folding-models-and-pricing-the-extinction-risk-of-ai-systems
 https://jack-clark.net/2026/06/08/import-ai-460-reward-hacking-society-rsi-data-from-anthropic-and-rl-based-quadcopter-racing
+https://jack-clark.net/2026/06/15/import-ai-461-alignment-is-not-on-track-frontiercode-and-synthetic-research-interns
 https://jeffbullas.com/ai-reinvention-truth
 https://jeffbullas.com/ai-slop-crisis
 https://jeffbullas.com/distraction-economy
@@ -227,6 +229,7 @@ https://openai.com/index/codex-for-every-role-tool-workflow
 https://openai.com/index/cybersecurity-in-the-intelligence-age
 https://openai.com/index/databricks
 https://openai.com/index/delivering-low-latency-voice-ai-at-scale
+https://openai.com/index/deployment-simulation
 https://openai.com/index/endava
 https://openai.com/index/gpt-5-5-instant
 https://openai.com/index/gpt-5-5-system-card
@@ -268,6 +271,7 @@ https://posthog.com/blog/autoresearch-query-bug
 https://posthog.com/blog/best-analytics-stack-for-vibe-coded-apps
 https://posthog.com/blog/best-mcp-servers-for-startups
 https://posthog.com/blog/best-real-time-analytics-platforms
+https://posthog.com/blog/cheapest-ai-observability-tools
 https://posthog.com/blog/customer-facing-analytics-examples
 https://posthog.com/blog/duckdb-vs-clickhouse
 https://posthog.com/blog/duckdb-vs-postgres
@@ -380,6 +384,7 @@ https://xbow.com/blog/mythos-offensive-security-xbow-evaluation
 https://youtu.be/E8torsNePUU
 https://youtu.be/GMIWm5y90xA
 https://youtu.be/Mmj_G9RlW-I
+https://youtu.be/Qh7Oxvo5sJI
 https://youtu.be/xmkSf5IS-zw
 https://youtu.be/YFR1e1bKheg
 https://youtube.com/@MSE435EconomicsofAI

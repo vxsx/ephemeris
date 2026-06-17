@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 060 · 17 Jun 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — from scaffold.html. Do not edit structure.
+     ═══════════════════════════════════════════════════════════════════ */
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+  .spread > .decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+  .figure { width: 100%; }
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — surface only.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── Cover: dossier grid (steel / cobalt) ─── */
+  .cover { background: #e7eaee; color: #13171d; }
+  .cover .folio { opacity: 0.85; }
+  .cover .masthead {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    font-size: clamp(52px, 9vw, 132px);
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    color: #13171d;
+    padding-bottom: 0.08em;
+    margin: 0;
+  }
+  .cover .masthead em { font-style: normal; color: #1452ff; }
+  .cover .dek {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(20px, 2.1vw, 30px);
+    line-height: 1.32;
+    max-width: 32ch;
+    margin: 0;
+    color: #2a313b;
+  }
+  .cover .dossier {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    background: #b9c0c9;
+    border: 1px solid #b9c0c9;
+    width: 100%;
+  }
+  .cover .dossier a {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-decoration: none;
+    color: inherit;
+    background: #eef1f4;
+    padding: 22px clamp(18px, 2vw, 28px) 20px;
+    min-height: 150px;
+  }
+  .cover .dossier a:hover { background: #fff; }
+  .cover .dossier .cell-no {
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.16em;
+    color: #1452ff;
+  }
+  .cover .dossier .cell-hed {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(20px, 2.1vw, 27px);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    margin-top: auto;
+  }
+  .cover .dossier .cell-src {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #5c6571;
+  }
+  @media (max-width: 800px) {
+    .cover .dossier { grid-template-columns: 1fr; }
+    .cover .dossier a { min-height: 0; }
+  }
+
+  /* ─── s01 · Deployment Simulation · RISOGRAPH DUOTONE ─── */
+  .s01 { background: #f4f0e6; color: #15130f; }
+  .s01 .tag { color: #d11149; border-color: #d11149; }
+  .s01 .hed { font-weight: 900; letter-spacing: -0.035em; }
+  .s01 .hed em {
+    font-style: normal;
+    color: #d11149;
+    background: linear-gradient(transparent 62%, #00b5c733 62%);
+  }
+  .s01 .lede { color: #2b2722; }
+  .s01 .figure {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    background: #15130f;
+    border: 1px solid #15130f;
+    max-width: 640px;
+  }
+  .s01 .figure .cell {
+    background: #f4f0e6;
+    padding: 20px 22px;
+  }
+  .s01 .figure .k {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: #d11149;
+  }
+  .s01 .figure .v {
+    font-family: var(--serif); font-weight: 600;
+    font-size: clamp(18px, 1.7vw, 22px); line-height: 1.25; margin-top: 8px;
+    color: #15130f;
+  }
+  .s01 .read-on { color: #d11149; border-color: #d11149; --flip: #f4f0e6; }
+  /* duotone overprint motif, offset, behind content */
+  .s01 .decor::before, .s01 .decor::after {
+    content: ""; position: absolute; border-radius: 999px;
+    width: 46vw; height: 46vw; max-width: 520px; max-height: 520px;
+    mix-blend-mode: multiply; opacity: 0.16;
+  }
+  .s01 .decor::before { right: -6vw; top: 4vw; background: #00b5c7; }
+  .s01 .decor::after  { right: -2vw; top: 8vw; background: #d11149; }
+
+  /* ─── s02 · Cloudflare DMARC · DARK REPORT / CLASSIFIED ─── */
+  .s02 { background: #0c0b0e; color: #ece8e2; }
+  .s02 .folio { opacity: 0.6; }
+  .s02 .tag { color: #e23a3a; border-color: #e23a3a; }
+  .s02 .hed {
+    font-family: var(--sans); font-weight: 800;
+    font-size: clamp(40px, 5.6vw, 86px); line-height: 1.04;
+    letter-spacing: -0.01em; text-transform: uppercase;
+  }
+  .s02 .hed em { font-style: normal; color: #e23a3a; }
+  .s02 .lede { color: #c8c3bb; }
+  .s02 .figure {
+    max-width: 620px; border: 1px solid #2a2730;
+    background: #131218; padding: 22px 24px;
+    font-family: var(--mono);
+  }
+  .s02 .figure .ln { display: flex; align-items: center; gap: 12px; font-size: 14px; color: #9a958d; margin-bottom: 14px; }
+  .s02 .figure .redact { background: #e23a3a; color: transparent; padding: 0 10px; border-radius: 2px; user-select: none; }
+  .s02 .figure .bars { display: grid; gap: 10px; margin-top: 6px; }
+  .s02 .figure .bar { display: grid; grid-template-columns: 92px 1fr auto; align-items: center; gap: 12px; font-size: 13px; letter-spacing: 0.06em; }
+  .s02 .figure .bar .track { height: 14px; background: #221f29; border-radius: 2px; overflow: hidden; }
+  .s02 .figure .bar .fill { height: 100%; }
+  .s02 .read-on { color: #e23a3a; border-color: #e23a3a; --flip: #0c0b0e; }
+  .s02 .decor::before {
+    content: ""; position: absolute; inset: 0;
+    background: repeating-linear-gradient(135deg, transparent 0 22px, rgba(226,58,58,0.05) 22px 23px);
+  }
+
+  /* ─── s03 · FrontierCode · NEO-BRUTALIST ─── */
+  .s03 { background: #f3f1ea; color: #0a0a0a; }
+  .s03 .tag { color: #0a0a0a; border-color: #0a0a0a; border-width: 2px; border-radius: 0; font-weight: 700; }
+  .s03 .hed {
+    font-family: var(--sans); font-weight: 900; text-transform: uppercase;
+    font-size: clamp(40px, 6.2vw, 96px); line-height: 0.98; letter-spacing: -0.02em;
+  }
+  .s03 .hed em {
+    font-style: normal; color: #f3f1ea; background: #ff2e1f;
+    padding: 0 0.12em; box-decoration-break: clone; -webkit-box-decoration-break: clone;
+  }
+  .s03 .lede { font-family: var(--sans); color: #1a1a1a; font-size: clamp(19px, 1.6vw, 23px); line-height: 1.5; }
+  .s03 .figure {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px; max-width: 720px;
+  }
+  .s03 .figure .score {
+    border: 3px solid #0a0a0a; background: #fff; padding: 18px 16px;
+  }
+  .s03 .figure .score .num {
+    font-family: var(--sans); font-weight: 900; font-size: clamp(34px, 5vw, 58px);
+    line-height: 1; letter-spacing: -0.03em; color: #ff2e1f;
+  }
+  .s03 .figure .score .num .unit {
+    font-family: var(--sans); font-weight: 700; font-size: 0.4em;
+    letter-spacing: normal; color: #0a0a0a; margin-left: 0.1em;
+  }
+  .s03 .figure .score .who {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em;
+    text-transform: uppercase; margin-top: 10px; color: #0a0a0a;
+  }
+  .s03 .figure .cap {
+    grid-column: 1 / -1; font-family: var(--mono); font-size: 13px;
+    letter-spacing: 0.04em; color: #444; border-top: 3px solid #0a0a0a; padding-top: 10px;
+  }
+  .s03 .read-on { color: #0a0a0a; border-color: #0a0a0a; border-radius: 0; --flip: #f3f1ea; }
+  .s03 .read-on:hover span { color: #f3f1ea; }
+  @media (max-width: 800px) {
+    .s03 .figure { grid-template-columns: 1fr; }
+  }
+
+  /* ─── s04 · PostHog observability · SPREADSHEET ─── */
+  .s04 { background: #eef0ec; color: #1c2026; }
+  .s04 .tag { color: #2f6f4f; border-color: #2f6f4f; }
+  .s04 .hed {
+    font-family: var(--sans); font-weight: 700;
+    font-size: clamp(38px, 5vw, 78px); line-height: 1.05; letter-spacing: -0.02em;
+  }
+  .s04 .hed em { font-style: normal; color: #2f6f4f; }
+  .s04 .lede { color: #353b43; }
+  .s04 .figure { max-width: 700px; overflow-x: auto; }
+  .s04 table {
+    width: 100%; border-collapse: collapse;
+    font-family: var(--mono); font-size: clamp(14px, 1.5vw, 16px);
+    background: #f7f8f6;
+  }
+  .s04 th, .s04 td { border: 1px solid #ccd2cb; padding: 9px 12px; text-align: left; white-space: nowrap; }
+  .s04 thead th { background: #e2e6df; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; font-size: 12px; color: #2f6f4f; }
+  .s04 td:nth-child(2), .s04 td:nth-child(3), .s04 th:nth-child(2), .s04 th:nth-child(3) { text-align: right; }
+  .s04 tr.hi td { background: #e6f1ea; font-weight: 600; }
+  .s04 .read-on { color: #2f6f4f; border-color: #2f6f4f; --flip: #eef0ec; }
+  .s04 .decor::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      linear-gradient(#d7dcd4 1px, transparent 1px) 0 0 / 100% 38px,
+      linear-gradient(90deg, #d7dcd4 1px, transparent 1px) 0 0 / 38px 100%;
+    opacity: 0.4;
+  }
+
+  /* ─── s05 · Inference economics · CONCRETE ─── */
+  .s05 { background: #d8d3c7; color: #211e18; }
+  .s05 .tag { color: #6b3f1d; border-color: #6b3f1d; }
+  .s05 .hed {
+    font-family: var(--serif); font-weight: 800;
+    font-size: clamp(40px, 6vw, 96px); line-height: 1.0; letter-spacing: -0.025em;
+  }
+  .s05 .hed em { font-style: italic; color: #6b3f1d; font-variation-settings: "opsz" 144, "SOFT" 80, "WONK" 1; }
+  .s05 .lede { color: #3a352c; }
+  .s05 .figure {
+    display: flex; align-items: baseline; gap: clamp(16px, 2vw, 28px);
+    flex-wrap: wrap; border-top: 2px solid #211e18; padding-top: 18px; max-width: 640px;
+  }
+  .s05 .figure .big {
+    font-family: var(--serif); font-weight: 900; font-style: italic;
+    font-size: clamp(64px, 11vw, 132px); line-height: 0.86; letter-spacing: -0.04em;
+    color: #6b3f1d;
+  }
+  .s05 .figure .note {
+    font-family: var(--sans); font-size: clamp(16px, 1.5vw, 19px);
+    line-height: 1.4; color: #3a352c; max-width: 26ch;
+  }
+  .s05 .read-on { color: #6b3f1d; border-color: #6b3f1d; --flip: #d8d3c7; }
+  .s05 .decor::before {
+    content: "$"; position: absolute; right: -2vw; bottom: -10vw;
+    font-family: var(--serif); font-weight: 900; font-size: 56vw; line-height: 1;
+    color: rgba(107,63,29,0.07);
+  }
+
+  /* ─── Colophon · dark slab ─── */
+  .colophon { background: #101319; color: #e7e4dd; }
+  .colophon .folio { opacity: 0.6; }
+  .colophon .hed {
+    font-family: var(--serif); font-weight: 800;
+    font-size: clamp(48px, 7vw, 104px);
+  }
+  .colophon .hed em { font-style: italic; color: #6fa3ff; }
+  .colophon .lede { color: #b6b2aa; max-width: 60ch; }
+  .colophon .meta {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px 32px; width: 100%; max-width: 880px; margin-top: 4px;
+    font-family: var(--mono); font-size: 13px; line-height: 1.6;
+  }
+  .colophon .meta h4 {
+    font-family: var(--sans); font-size: 12px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: #6fa3ff; margin: 0 0 8px;
+  }
+  .colophon .meta p { margin: 0; color: #c9c5bd; }
+  @media (max-width: 800px) {
+    .colophon .meta { grid-template-columns: 1fr; gap: 18px; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ───────────────────────────── COVER · dossier grid ───────────────────────────── -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 060</span>
+    <span>Wednesday · 17 Jun 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <h1 class="masthead">Ephemeris<em>.</em></h1>
+    <p class="dek">Today's issue is about measuring what models do — before they ship, after they spoof, and when the bill comes due.</p>
+    <nav class="dossier">
+      <a href="#s01">
+        <span class="cell-no">01 — EVALUATION</span>
+        <span class="cell-hed">A wind tunnel for models, before they ship</span>
+        <span class="cell-src">OpenAI</span>
+      </a>
+      <a href="#s02">
+        <span class="cell-no">02 — SECURITY</span>
+        <span class="cell-hed">See who is forging your domain, for free</span>
+        <span class="cell-src">Cloudflare</span>
+      </a>
+      <a href="#s03">
+        <span class="cell-no">03 — DEV TOOLS</span>
+        <span class="cell-hed">A coding benchmark the best models still fail</span>
+        <span class="cell-src">Import AI</span>
+      </a>
+      <a href="#s04">
+        <span class="cell-no">04 — OBSERVABILITY</span>
+        <span class="cell-hed">Nine ways to watch an LLM, ranked by free tier</span>
+        <span class="cell-src">PostHog</span>
+      </a>
+      <a href="#s05">
+        <span class="cell-no">05 — INFRASTRUCTURE</span>
+        <span class="cell-hed">The bill for serving a model is the design</span>
+        <span class="cell-src">via @rvnikita_blog</span>
+      </a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+</section>
+
+<!-- ───────────────────────────── s01 · Deployment Simulation ───────────────────────────── -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 060</span>
+    <span>01 / 5 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Evaluation · Safety</span>
+    <h2 class="hed">Test the model in a <em>wind tunnel</em> before it ships.</h2>
+    <p class="lede">OpenAI's Deployment Simulation replays real conversation data against a candidate model to predict how it will behave in production — before it reaches a single user. The pitch: surface regressions and safety drift in a sandbox while you can still fix them.</p>
+    <div class="figure">
+      <div class="cell">
+        <div class="k">Input</div>
+        <div class="v">Real, anonymized conversation logs replayed at scale</div>
+      </div>
+      <div class="cell">
+        <div class="k">Output</div>
+        <div class="v">A forecast of behavior and safety, measured pre-launch</div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/deployment-simulation" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ───────────────────────────── s02 · Cloudflare DMARC ───────────────────────────── -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 060</span>
+    <span>02 / 5 · Cloudflare</span>
+  </header>
+  <div class="main">
+    <span class="tag">Security · Email</span>
+    <h2 class="hed">Find out who is <em>forging</em> your domain.</h2>
+    <p class="lede">Cloudflare's DMARC Management hits general availability: one dashboard for SPF, DKIM, DMARC and BIMI, free to every customer. It audits SPF against the RFC 7208 ten-lookup ceiling and walks you from p=none to p=reject without breaking real mail.</p>
+    <div class="figure" aria-label="DMARC source report">
+      <div class="ln">From:&nbsp; billing@<span class="redact">your-domain</span>.com &nbsp;·&nbsp; unauthenticated</div>
+      <div class="bars">
+        <div class="bar"><span>PASS</span><span class="track"><span class="fill" style="width:74%;background:#2faf6a"></span></span><span>74%</span></div>
+        <div class="bar"><span>WARNING</span><span class="track"><span class="fill" style="width:18%;background:#e0a52e"></span></span><span>18%</span></div>
+        <div class="bar"><span>FAIL</span><span class="track"><span class="fill" style="width:8%;background:#e23a3a"></span></span><span>8%</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.cloudflare.com/dmarc-management-ga/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ───────────────────────────── s03 · FrontierCode ───────────────────────────── -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 060</span>
+    <span>03 / 5 · Import AI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev Tools · Benchmarks</span>
+    <h2 class="hed">A coding benchmark the best models <em>still fail</em>.</h2>
+    <p class="lede">Cognition, the team behind Devin, published FrontierCode — 150 tasks across six languages that grade not just whether code runs but whether it is good: correctness, test quality, scope discipline, house style. On the hardest Diamond tier, the leader clears 13%. Most code agents are well below that.</p>
+    <div class="figure">
+      <div class="score"><div class="num">13.4<span class="unit">%</span></div><div class="who">Opus 4.8</div></div>
+      <div class="score"><div class="num">6.3<span class="unit">%</span></div><div class="who">GPT-5.5</div></div>
+      <div class="score"><div class="num">5.2<span class="unit">%</span></div><div class="who">Opus 4.7</div></div>
+      <div class="cap">Diamond tier · 50 tasks · Python, Go, TypeScript, JavaScript, Java, C/C++</div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://jack-clark.net/2026/06/15/import-ai-461-alignment-is-not-on-track-frontiercode-and-synthetic-research-interns/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ───────────────────────────── s04 · PostHog observability ───────────────────────────── -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 060</span>
+    <span>04 / 5 · PostHog</span>
+  </header>
+  <div class="main">
+    <span class="tag">Observability · Cost</span>
+    <h2 class="hed">Nine ways to watch your LLM, ranked by <em>free tier</em>.</h2>
+    <p class="lede">PostHog lined up nine AI-observability tools and compared the number that decides adoption for most teams: how much you can trace before you pay. The criteria worth stealing — monthly event caps, seat limits, retention, and whether evals are bundled in.</p>
+    <div class="figure">
+      <table>
+        <thead><tr><th>Tool</th><th>Free events / mo</th><th>Seats</th></tr></thead>
+        <tbody>
+          <tr class="hi"><td>PostHog</td><td>100K</td><td>Unlimited</td></tr>
+          <tr><td>Langfuse</td><td>50K</td><td>2</td></tr>
+          <tr><td>LangSmith</td><td>5K</td><td>1</td></tr>
+          <tr><td>Arize Phoenix</td><td>Self-host</td><td>—</td></tr>
+          <tr><td>Braintrust</td><td>Evals</td><td>Unlimited</td></tr>
+          <tr><td>Datadog LLM</td><td>Trial</td><td>Tiered</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://posthog.com/blog/cheapest-ai-observability-tools" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ───────────────────────────── s05 · Inference economics ───────────────────────────── -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 060</span>
+    <span>05 / 5 · via @rvnikita_blog</span>
+  </header>
+  <div class="main">
+    <span class="tag">Infrastructure · Economics</span>
+    <h2 class="hed">Serving a model is its own <em>engineering problem</em>.</h2>
+    <p class="lede">A Stanford lecture with Baseten's Tuhin Srivastava reframes inference as economics: GPU utilization, heterogeneous compute, and the widening gap between open-weight models you host and frontier models you rent. For anyone shipping AI features, unit cost is a design constraint, not a footnote.</p>
+    <div class="figure">
+      <div class="big">$/tok</div>
+      <div class="note">The lecture's through-line: today's hard infra question is no longer "can we run it" but "what does each token cost to serve."</div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://youtu.be/Qh7Oxvo5sJI" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ───────────────────────────── COLOPHON ───────────────────────────── -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of Issue 060</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Five picks for 17 June 2026 — a thin day, mined for signal over volume.</p>
+    <div class="meta">
+      <div>
+        <h4>Sources today</h4>
+        <p>OpenAI · Cloudflare · Import AI (Jack Clark) · PostHog · Telegram @rvnikita_blog</p>
+      </div>
+      <div>
+        <h4>Rubric</h4>
+        <p>Tools you can adopt this week · creative &amp; dev tooling · privacy &amp; security with real signal · research with a practical kernel.</p>
+      </div>
+      <div>
+        <h4>Issue</h4>
+        <p>No. 060 · Europe/Zürich · published daily at 08:00.</p>
+      </div>
+    </div>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>
