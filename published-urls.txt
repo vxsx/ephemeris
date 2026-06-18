@@ -18,6 +18,7 @@ https://anthropic.com/institute/recursive-self-improvement
 https://anthropic.com/news/AI-enabled-cyber-threats-mitre-attack
 https://anthropic.com/news/anthropic-acquires-stainless
 https://anthropic.com/news/anthropic-amazon-compute
+https://anthropic.com/news/anthropic-public-record
 https://anthropic.com/news/chris-olah-pope-leo-encyclical
 https://anthropic.com/news/claude-design-anthropic-labs
 https://anthropic.com/news/claude-fable-5-mythos-5
@@ -52,6 +53,7 @@ https://arxiv.org/abs/2606.03458
 https://arxiv.org/pdf/2604.24827
 https://biohub.org/news/world-model-of-protein-biology
 https://blog.cloudflare.com/agent-readiness
+https://blog.cloudflare.com/agents-platform-flue-sdk
 https://blog.cloudflare.com/agents-stripe-projects
 https://blog.cloudflare.com/agents-week-in-review
 https://blog.cloudflare.com/ai-code-review
@@ -219,6 +221,7 @@ https://nvidianews.nvidia.com/news/nvidia-microsoft-windows-pcs-agents-rtx-spark
 https://openai.com/academy/codex-for-work/how-data-science-teams-use-codex
 https://openai.com/index/advancing-content-provenance
 https://openai.com/index/advancing-voice-intelligence-with-new-models-in-the-api
+https://openai.com/index/ai-chemist-improves-reaction
 https://openai.com/index/boston-childrens-hospital
 https://openai.com/index/braintrust
 https://openai.com/index/building-codex-windows-sandbox
@@ -238,6 +241,7 @@ https://openai.com/index/how-chatgpt-protects-privacy
 https://openai.com/index/introducing-chatgpt-images-2-0
 https://openai.com/index/introducing-evmbench
 https://openai.com/index/introducing-gpt-5-5
+https://openai.com/index/introducing-life-sci-bench
 https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind
 https://openai.com/index/introducing-openai-privacy-filter
 https://openai.com/index/introducing-trusted-contact-in-chatgpt
@@ -368,6 +372,8 @@ https://vercel.com/blog/how-okara-runs-cmo-agents-for-120000-companies-on-vercel
 https://vercel.com/blog/how-superset-built-the-ide-for-ai-agents-on-vercel
 https://vercel.com/blog/how-zo-computer-improved-ai-reliability-20x-on-vercel
 https://vercel.com/blog/introducing-deepsec-find-and-fix-vulnerabilities-in-your-code-base
+https://vercel.com/blog/introducing-eve
+https://vercel.com/blog/introducing-vercel-connect
 https://vercel.com/blog/making-turborepo-ninety-six-percent-faster-with-agents-sandboxes-and-humans
 https://vercel.com/blog/optimizing-vercel-sandbox-snapshots
 https://vercel.com/blog/protecting-against-inference-theft

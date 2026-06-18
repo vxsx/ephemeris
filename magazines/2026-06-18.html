@@ -1,0 +1,560 @@
+<!doctype html>
+<!-- Ephemeris · Issue 061 · 2026-06-18 · built on scaffold.html (locked grid) -->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 061 · 18 Jun 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════ LOCKED BASELINE (from scaffold.html) ═══════════════ */
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+  .spread > .decor {
+    position: absolute; inset: 0; z-index: 0;
+    pointer-events: none; overflow: hidden;
+  }
+  .spread > .folio {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 8px 24px; flex-wrap: wrap;
+    font-family: var(--sans); font-size: 13px;
+    letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.75;
+  }
+  .spread > .main {
+    display: flex; flex-direction: column; gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center; align-items: flex-start; min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block; font-family: var(--sans);
+    font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase;
+    padding: 6px 12px; border: 1px solid currentColor; border-radius: 999px; opacity: 0.9;
+  }
+  .hed {
+    font-family: var(--serif); font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px); line-height: 1.02;
+    letter-spacing: -0.02em; padding-bottom: 0.12em; word-break: break-word;
+  }
+  .lede {
+    font-family: var(--serif); font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45; max-width: 50ch; margin: 0;
+  }
+  .figure { width: 100%; }
+  .read-on {
+    display: inline-block; font-family: var(--sans); font-weight: 600;
+    font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 14px 22px; border: 2px solid currentColor;
+    text-decoration: none; color: currentColor; --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px) 22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════ THEME OVERRIDES — surface only ═══════════════ */
+
+  /* ─── COVER · source map · deep ink ─── */
+  .cover { background: #0a0c12; color: #e9e6dd; }
+  .cover .folio { opacity: 0.6; }
+  .cover .masthead {
+    font-family: var(--serif); font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    font-size: clamp(52px, 11vw, 150px); line-height: 0.88;
+    letter-spacing: -0.04em; color: #e9e6dd; padding-bottom: 0.1em; margin: 0;
+  }
+  .cover .masthead em { font-style: normal; color: #4ade80; }
+  .cover .dek {
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(22px, 2.4vw, 34px); line-height: 1.3; max-width: 30ch; color: #cdc9bf;
+  }
+  .cover .sourcemap {
+    width: 100%; display: flex; flex-wrap: wrap; gap: 10px 14px;
+    padding: 22px 0; border-top: 1px solid rgba(233,230,221,0.22);
+    border-bottom: 1px solid rgba(233,230,221,0.22);
+    font-family: var(--mono); font-size: 14px; letter-spacing: 0.02em;
+  }
+  .cover .src-item {
+    display: inline-flex; align-items: baseline; gap: 7px;
+    color: #6f6c64; text-transform: lowercase;
+  }
+  .cover .src-item::before {
+    content: ""; width: 7px; height: 7px; border-radius: 999px;
+    background: #34322c; transform: translateY(-1px); flex: 0 0 auto;
+  }
+  .cover .src-item.on { color: #e9e6dd; }
+  .cover .src-item.on::before { background: #4ade80; box-shadow: 0 0 10px #4ade80; }
+  .cover .toc {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 40px; padding-top: 18px; width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 4px 12px; text-decoration: none; color: inherit;
+    padding: 7px 0; border-bottom: 1px dotted rgba(233,230,221,0.22);
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.85em; opacity: 0.6; }
+  .cover .toc .num {
+    font-family: var(--mono); font-weight: 600; color: #4ade80; margin-right: 10px;
+  }
+  @media (max-width: 800px) {
+    .cover .toc { grid-template-columns: 1fr; gap: 0; }
+    .cover .sourcemap { font-size: 13px; }
+  }
+
+  /* ─── s01 · eve · NEO-BRUTALIST yellow ─── */
+  .s01 { background: #f5e000; color: #0a0a0a; }
+  .s01 .tag { color: #0a0a0a; border: 2px solid #0a0a0a; border-radius: 0; font-weight: 700; opacity: 1; }
+  .s01 .hed {
+    font-family: var(--sans); font-weight: 900; text-transform: uppercase;
+    letter-spacing: -0.02em; line-height: 0.96; font-size: clamp(46px, 7.4vw, 104px);
+  }
+  .s01 .hed em {
+    font-style: normal; background: #0a0a0a; color: #f5e000;
+    padding: 0 0.14em; box-decoration-break: clone; -webkit-box-decoration-break: clone;
+  }
+  .s01 .lede { font-family: var(--sans); font-weight: 500; }
+  .s01 .builtins {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 0;
+    width: 100%; border: 3px solid #0a0a0a; font-family: var(--sans);
+  }
+  .s01 .builtins div {
+    padding: 16px 14px; border-right: 3px solid #0a0a0a;
+    font-weight: 800; text-transform: uppercase; font-size: 14px;
+    letter-spacing: 0.04em; line-height: 1.2; min-height: 96px;
+    display: flex; align-items: flex-end;
+  }
+  .s01 .builtins div:last-child { border-right: 0; }
+  .s01 .builtins div b { display: block; font-size: 26px; margin-bottom: auto; }
+  .s01 .read-on { color: #0a0a0a; border-color: #0a0a0a; border-radius: 0; --flip: #f5e000; }
+  @media (max-width: 800px) {
+    .s01 .builtins { grid-template-columns: repeat(2, 1fr); }
+    .s01 .builtins div { border-bottom: 3px solid #0a0a0a; min-height: 0; }
+  }
+
+  /* ─── s02 · Flue / Agents SDK · TERMINAL ─── */
+  .s02 { background: #050806; color: #4ade80; }
+  .s02 .tag { color: #4ade80; border-color: #2a6b3e; font-family: var(--mono); }
+  .s02 .hed {
+    font-family: var(--mono); font-weight: 600; letter-spacing: -0.01em;
+    line-height: 1.04; font-size: clamp(38px, 6vw, 84px);
+  }
+  .s02 .hed em { font-style: normal; color: #eafff0; text-shadow: 0 0 14px rgba(74,222,128,0.55); }
+  .s02 .lede { font-family: var(--sans); color: #b6f0c6; }
+  .s02 .term {
+    width: 100%; font-family: var(--mono); font-size: 15px; line-height: 1.85;
+    background: #020402; border: 1px solid #1c3a26; border-radius: 6px;
+    padding: 20px 22px; color: #7ef0a3; white-space: pre-wrap; word-break: break-word;
+  }
+  .s02 .term .c { color: #4b6b56; }
+  .s02 .term .v { color: #eafff0; }
+  .s02 .read-on { color: #4ade80; border-color: #4ade80; --flip: #050806; }
+  .s02 .decor::before {
+    content: ""; position: absolute; inset: 0;
+    background: repeating-linear-gradient(180deg, rgba(74,222,128,0.05) 0 1px, transparent 1px 4px);
+  }
+  @media (max-width: 800px) { .s02 .term { font-size: 13px; } }
+
+  /* ─── s03 · Vercel Connect · SPREADSHEET ─── */
+  .s03 { background: #e8eaec; color: #1f2328; }
+  .s03 .tag { color: #1f2328; border-color: #9aa0a6; font-family: var(--mono); border-radius: 0; }
+  .s03 .hed { font-family: var(--serif); font-weight: 700; letter-spacing: -0.018em; }
+  .s03 .hed em { font-style: italic; color: #1551b5; font-variation-settings: "opsz" 144, "SOFT" 60; }
+  .s03 .lede { font-family: var(--sans); color: #3a3f45; }
+  .s03 .sheet {
+    width: 100%; border-collapse: collapse; font-family: var(--mono);
+    font-size: 15px; background: #fbfbfc; border: 1px solid #c9ccd1;
+  }
+  .s03 .sheet th, .s03 .sheet td {
+    border: 1px solid #d3d6da; padding: 10px 14px; text-align: left; line-height: 1.3;
+  }
+  .s03 .sheet thead th {
+    background: #1f2328; color: #e8eaec; text-transform: uppercase;
+    font-size: 12px; letter-spacing: 0.12em;
+  }
+  .s03 .sheet td:first-child { background: #eef0f2; font-weight: 600; }
+  .s03 .sheet td .ok { color: #157347; font-weight: 600; }
+  .s03 .read-on { color: #1551b5; border-color: #1551b5; border-radius: 0; --flip: #e8eaec; }
+  @media (max-width: 800px) { .s03 .sheet { font-size: 13px; } .s03 .sheet th, .s03 .sheet td { padding: 8px 9px; } }
+
+  /* ─── s04 · AI chemist · RISOGRAPH duotone ─── */
+  .s04 { background: #f4efe2; color: #181410; }
+  .s04 .tag { color: #e6007e; border-color: #e6007e; }
+  .s04 .hed { font-family: var(--serif); font-weight: 800; letter-spacing: -0.02em; }
+  .s04 .hed em {
+    font-style: italic; color: #009fb7;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s04 .lede { color: #2a241e; }
+  .s04 .riso {
+    position: relative; width: 100%; max-width: 30ch;
+    font-family: var(--serif); font-style: italic; font-weight: 600;
+    font-size: clamp(24px, 3vw, 38px); line-height: 1.2; color: #e6007e; padding: 6px 0;
+  }
+  .s04 .riso .ghost {
+    position: absolute; left: 3px; top: 9px; color: #009fb7;
+    mix-blend-mode: multiply; z-index: -1; pointer-events: none;
+  }
+  .s04 .read-on { color: #e6007e; border-color: #e6007e; --flip: #f4efe2; }
+  .s04 .decor::before {
+    content: ""; position: absolute; right: -8vw; top: 18vh;
+    width: 42vw; height: 42vw; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,159,183,0.16), transparent 68%);
+  }
+  .s04 .decor::after {
+    content: ""; position: absolute; right: -4vw; top: 22vh;
+    width: 42vw; height: 42vw; border-radius: 50%;
+    background: radial-gradient(circle, rgba(230,0,126,0.14), transparent 68%);
+  }
+
+  /* ─── s05 · LifeSciBench · ACADEMIC journal ─── */
+  .s05 { background: #f2eee2; color: #14213d; }
+  .s05 .tag { color: #14213d; border-color: #14213d; }
+  .s05 .hed {
+    font-family: var(--serif); font-weight: 600; letter-spacing: -0.012em;
+    font-variation-settings: "opsz" 120, "SOFT" 40;
+  }
+  .s05 .hed em { font-style: italic; color: #7a1f12; }
+  .s05 .lede { color: #2b3147; }
+  .s05 .journal {
+    width: 100%; display: grid; grid-template-columns: 200px 1fr; gap: 28px;
+    border-top: 2px solid #14213d; padding-top: 18px;
+  }
+  .s05 .journal .side {
+    font-family: var(--sans); font-size: 13px; letter-spacing: 0.1em;
+    text-transform: uppercase; line-height: 1.7; color: #14213d;
+  }
+  .s05 .journal .side b { display: block; font-weight: 700; }
+  .s05 .journal .side span { display: block; color: #5a607a; }
+  .s05 .journal .body {
+    column-count: 2; column-gap: 28px; font-family: var(--serif);
+    font-size: 17px; line-height: 1.5; color: #2b3147; text-align: justify;
+  }
+  .s05 .journal .body p { margin: 0 0 10px; }
+  .s05 .journal .body .sc { font-variant: small-caps; letter-spacing: 0.04em; font-weight: 600; }
+  .s05 .read-on { color: #14213d; border-color: #14213d; --flip: #f2eee2; }
+  @media (max-width: 800px) {
+    .s05 .journal { grid-template-columns: 1fr; gap: 16px; }
+    .s05 .journal .body { column-count: 1; }
+  }
+
+  /* ─── s06 · Anthropic Public Record · DARK REPORT / big stats ─── */
+  .s06 { background: #0c0708; color: #efe6e6; }
+  .s06 .tag { color: #ff5a5f; border-color: #6b2226; }
+  .s06 .hed { font-family: var(--serif); font-weight: 800; letter-spacing: -0.02em; }
+  .s06 .hed em { font-style: normal; color: #e11d2a; }
+  .s06 .lede { color: #c9bcbc; }
+  .s06 .stats {
+    width: 100%; display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0; border-top: 1px solid #3a2326;
+  }
+  .s06 .stats .stat { padding: 22px 18px 8px; border-right: 1px solid #3a2326; }
+  .s06 .stats .stat:last-child { border-right: 0; }
+  .s06 .stats .num {
+    font-family: var(--serif); font-weight: 800; color: #e11d2a;
+    font-size: clamp(54px, 7vw, 92px); line-height: 0.92; letter-spacing: -0.04em;
+  }
+  .s06 .stats .num .unit {
+    font-family: var(--sans); font-weight: 700; font-size: 0.34em;
+    letter-spacing: normal; margin-left: 0.06em; color: #ff8a8e;
+  }
+  .s06 .stats .lab {
+    font-family: var(--sans); font-size: 14px; line-height: 1.3;
+    color: #b9acac; margin-top: 12px; text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .s06 .read-on { color: #e11d2a; border-color: #e11d2a; --flip: #0c0708; }
+  @media (max-width: 800px) {
+    .s06 .stats { grid-template-columns: repeat(2, 1fr); }
+    .s06 .stats .stat { border-bottom: 1px solid #3a2326; }
+    .s06 .stats .stat:nth-child(2) { border-right: 0; }
+  }
+
+  /* ─── COLOPHON · ink ─── */
+  .colophon { background: #0a0c12; color: #e9e6dd; }
+  .colophon .hed { font-family: var(--serif); font-weight: 800; color: #e9e6dd; }
+  .colophon .hed em { font-style: italic; color: #4ade80; }
+  .colophon .lede { font-family: var(--sans); color: #b6b2a8; max-width: 60ch; }
+  .colophon .meta {
+    width: 100%; font-family: var(--mono); font-size: 14px; line-height: 1.8;
+    color: #8c887e; border-top: 1px solid rgba(233,230,221,0.2); padding-top: 16px;
+  }
+  .colophon .meta b { color: #e9e6dd; font-weight: 600; }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════════════ COVER · source map ═══════════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 061</span>
+    <span>Thursday · 18 Jun 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <h1 class="masthead">Ephemeris<em>.</em></h1>
+    <p class="dek">Today the agents got somewhere to run — a runtime, a key it borrows instead of keeps, a lab bench, and a mirror held up by Anthropic.</p>
+    <div class="sourcemap" aria-label="Sources scanned today; lit names contributed">
+      <span class="src-item">the batch</span>
+      <span class="src-item">the zvi</span>
+      <span class="src-item">jack clark</span>
+      <span class="src-item">jeff bullas</span>
+      <span class="src-item on">openai</span>
+      <span class="src-item on">anthropic</span>
+      <span class="src-item">github</span>
+      <span class="src-item">sentry</span>
+      <span class="src-item on">vercel</span>
+      <span class="src-item">posthog</span>
+      <span class="src-item on">cloudflare</span>
+      <span class="src-item">fly.io</span>
+      <span class="src-item">next.js</span>
+      <span class="src-item">@seeallochnaya</span>
+      <span class="src-item">@tochkinadai</span>
+      <span class="src-item">@denissexy</span>
+      <span class="src-item">@rvnikita_blog</span>
+      <span class="src-item">@productsandstartups</span>
+    </div>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>The agent harness is open source now</span><span>Vercel</span></a>
+      <a href="#s02"><span><span class="num">02</span>Agents cold-start in ten milliseconds</span><span>Cloudflare</span></a>
+      <a href="#s03"><span><span class="num">03</span>Borrow the keys, don't keep them</span><span>Vercel</span></a>
+      <a href="#s04"><span><span class="num">04</span>A model ran the reaction until it worked</span><span>OpenAI</span></a>
+      <a href="#s05"><span><span class="num">05</span>A benchmark on real lab work</span><span>OpenAI</span></a>
+      <a href="#s06"><span><span class="num">06</span>Only 15% trust the labs</span><span>Anthropic</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+</section>
+
+<!-- ═══════════════ s01 · eve ═══════════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 061</span>
+    <span>01 / 06 · Vercel</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev Tools · Agents</span>
+    <h2 class="hed">The agent harness is <em>open source</em> now.</h2>
+    <p class="lede">Vercel released eve, an agent framework that ships the production scaffolding you keep rebuilding by hand. You write what the agent should do; eve runs it like infrastructure — and the whole thing is open.</p>
+    <div class="figure">
+      <div class="builtins">
+        <div><b>↻</b>Durable execution</div>
+        <div><b>▣</b>Sandboxed compute</div>
+        <div><b>✓</b>Human approvals</div>
+        <div><b>⊹</b>OTel tracing</div>
+        <div><b>≡</b>Eval suite</div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://vercel.com/blog/introducing-eve" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s02 · Flue / Agents SDK ═══════════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 061</span>
+    <span>02 / 06 · Cloudflare</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev Tools · Runtime</span>
+    <h2 class="hed">Agents cold-start in <em>ten milliseconds</em>.</h2>
+    <p class="lede">Cloudflare cracked the Agents SDK open into a runtime any framework can build on — durable execution, sandboxed code, a virtual filesystem. Flue, from the Astro team, is the first to take it up; you deploy agents from the dashboard in a few clicks.</p>
+    <div class="figure">
+      <div class="term"><span class="c"># Agents SDK, now an open runtime</span>
+runFiber()            <span class="c"># durable, survives restarts</span>
+@cloudflare/codemode  <span class="c"># sandboxed code execution</span>
+@cloudflare/shell     <span class="c"># virtual filesystem</span>
+
+isolate cold-start .... <span class="v">&lt; 10 ms</span>
+cost per load ......... <span class="v">$0.002</span>
+first framework ....... <span class="v">flue (astro)</span></div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.cloudflare.com/agents-platform-flue-sdk/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s03 · Vercel Connect ═══════════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 061</span>
+    <span>03 / 06 · Vercel</span>
+  </header>
+  <div class="main">
+    <span class="tag">Security · Agents</span>
+    <h2 class="hed">Your agent <em>borrows</em> the keys instead of keeping them.</h2>
+    <p class="lede">Vercel Connect retires the long-lived provider secret. Apps and agents prove identity over OIDC and get a short-lived, task-scoped token at runtime — access requested per action, never stored. Eight integrations ship today.</p>
+    <div class="figure">
+      <table class="sheet">
+        <thead><tr><th>Provider</th><th>Credential</th><th>At rest</th></tr></thead>
+        <tbody>
+          <tr><td>Slack · GitHub</td><td>OIDC → scoped token</td><td><span class="ok">none</span></td></tr>
+          <tr><td>Linear · Discord</td><td>OIDC → scoped token</td><td><span class="ok">none</span></td></tr>
+          <tr><td>Notion · Salesforce</td><td>OIDC → scoped token</td><td><span class="ok">none</span></td></tr>
+          <tr><td>Figma · Snowflake</td><td>OIDC → scoped token</td><td><span class="ok">none</span></td></tr>
+          <tr><td>Resend · MS Teams</td><td>in development</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://vercel.com/blog/introducing-vercel-connect" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s04 · AI chemist ═══════════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 061</span>
+    <span>04 / 06 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Science · Lab</span>
+    <h2 class="hed">A model ran the reaction until it <em>worked</em>.</h2>
+    <p class="lede">OpenAI and Molecule.one put a near-autonomous AI chemist, built on GPT-5.4, to work on a stubborn step in a drug synthesis — and it improved the reaction. The model proposed conditions, read the results, and tried again, closing a loop a bench chemist normally runs by hand.</p>
+    <div class="figure">
+      <p class="riso">It proposed the conditions, read the results, and tried again — the loop a bench chemist runs by hand.<span class="ghost" aria-hidden="true">It proposed the conditions, read the results, and tried again — the loop a bench chemist runs by hand.</span></p>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/ai-chemist-improves-reaction" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s05 · LifeSciBench ═══════════════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 061</span>
+    <span>05 / 06 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Benchmarks · Research</span>
+    <h2 class="hed">Grading models on the lab work scientists <em>actually do</em>.</h2>
+    <p class="lede">OpenAI released LifeSciBench, an evaluation for how AI systems handle real-world life-science research tasks rather than textbook recall.</p>
+    <div class="figure">
+      <div class="journal">
+        <div class="side">
+          <b>LifeSciBench</b>
+          <span>Expert-authored</span>
+          <span>Expert-reviewed</span>
+          <span>Real research tasks</span>
+        </div>
+        <div class="body">
+          <p>The benchmark targets the messy, multi-step problems a working scientist faces — protocol design, interpretation, the judgment calls between steps — not multiple-choice trivia a model can pattern-match.</p>
+          <p>If you build evals, the method is the lesson: <span class="sc">domain-grounded</span> grading where subject-matter experts both write the questions and check the answers, so a high score means competence rather than recall.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/introducing-life-sci-bench" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s06 · Anthropic Public Record ═══════════════ -->
+<section class="spread s06" id="s06">
+  <header class="folio">
+    <span>Ephemeris · Issue 061</span>
+    <span>06 / 06 · Anthropic</span>
+  </header>
+  <div class="main">
+    <span class="tag">Trust · Data</span>
+    <h2 class="hed">Only <em>15%</em> of Americans trust the labs.</h2>
+    <p class="lede">Anthropic published the first Anthropic Public Record, a survey of how the broader public — not just AI users — feels about AI. It's a baseline worth knowing if you ship AI products, and the trust gap is the headline number.</p>
+    <div class="figure">
+      <div class="stats">
+        <div class="stat"><div class="num">15<span class="unit">%</span></div><div class="lab">trust AI companies</div></div>
+        <div class="stat"><div class="num">64<span class="unit">%</span></div><div class="lab">top fear: job loss</div></div>
+        <div class="stat"><div class="num">71<span class="unit">%</span></div><div class="lab">want regulation</div></div>
+        <div class="stat"><div class="num">48<span class="unit">%</span></div><div class="lab">top hope: cure disease</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.anthropic.com/news/anthropic-public-record" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ COLOPHON ═══════════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of Issue 061</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Six picks from a day when agent infrastructure went to production — a runtime, a credential broker, a framework — alongside OpenAI pushing models into the lab and Anthropic opening its books on public trust.</p>
+    <div class="meta">
+      <b>Fed today:</b> Vercel, Cloudflare, OpenAI, Anthropic.<br>
+      <b>Also scanned:</b> The Batch, The Zvi, Import AI, Jeff Bullas, GitHub, Sentry, PostHog, Fly.io, Next.js, and five Telegram channels.<br>
+      <b>Rubric:</b> tools you could adopt this week · creative & dev tooling · agentic coding · privacy & security when signal is high · research with a practical kernel.<br>
+      <b>Issue 061 · 18 June 2026 · Zürich.</b>
+    </div>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>
