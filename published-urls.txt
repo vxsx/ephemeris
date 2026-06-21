@@ -60,6 +60,7 @@ https://blog.cloudflare.com/ai-code-review
 https://blog.cloudflare.com/ai-gateway-spend-limits
 https://blog.cloudflare.com/artifacts-git-for-agents-beta
 https://blog.cloudflare.com/browser-run-containers
+https://blog.cloudflare.com/build-your-own-vulnerability-harness
 https://blog.cloudflare.com/building-for-the-future
 https://blog.cloudflare.com/casb-anthropic-integration
 https://blog.cloudflare.com/claude-managed-agents
@@ -86,6 +87,7 @@ https://blog.cloudflare.com/quic-death-spiral-fix
 https://blog.cloudflare.com/realtime-threat-intel-waf-rules
 https://blog.cloudflare.com/scaling-security-scans
 https://blog.cloudflare.com/shared-dictionaries
+https://blog.cloudflare.com/temporary-accounts
 https://blog.cloudflare.com/unweight-tensor-compression
 https://blog.cloudflare.com/voidzero-joins-cloudflare
 https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5
@@ -137,6 +139,7 @@ https://every.to/source-code/the-folder-is-the-agent
 https://every.to/vibe-check/opus-4-7
 https://flipbook.page/
 https://fly.io/blog/build-better-agents-with-morphllm
+https://fly.io/blog/building-agents-that-dont-break-themselves
 https://fly.io/blog/code-and-let-live
 https://fly.io/blog/design-and-implementation
 https://fly.io/blog/everyone-write-an-agent
@@ -160,8 +163,10 @@ https://github.com/BayramAnnakov/ai-native-product-skills/tree/master/skills/aut
 https://github.com/BayramAnnakov/ai-personal-os-skills/tree/main/skills/slide-inspector
 https://github.com/BayramAnnakov/excel-hygiene
 https://github.com/BayramAnnakov/factory-agent
+https://github.com/BayramAnnakov/systems-thinking-skills/tree/main/skills/why-tree
 https://github.com/BayramAnnakov/token-audit-skill
 https://github.com/BayramAnnakov/whimsical-strategies-skill
+https://github.com/coreyhaines31/marketingskills
 https://github.com/deepseek-ai/Thinking-with-Visual-Primitives
 https://github.com/DenisSergeevitch/agents-best-practices
 https://github.com/DenisSergeevitch/chatgpt-portal
@@ -171,6 +176,7 @@ https://github.com/Fission-AI/OpenSpec/blob/main/docs/concepts.md
 https://github.com/nexu-io/open-design
 https://github.com/OpenCoworkAI/open-cowork
 https://github.com/oven-sh/bun/pull/30412
+https://github.com/palmier-io/palmier-pro
 https://github.com/rvnikita/claude-code-statusline
 https://github.com/specs-devs/samples/tree/main/Agent%20Center
 https://hackernews.foresyn.ai/
@@ -395,4 +401,5 @@ https://youtu.be/xmkSf5IS-zw
 https://youtu.be/YFR1e1bKheg
 https://youtube.com/@MSE435EconomicsofAI
 https://youtube.com/watch
+https://z.ai/blog/glm-5.2
 https://zapier.com/benchmarks
