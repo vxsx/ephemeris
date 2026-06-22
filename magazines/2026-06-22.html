@@ -1,0 +1,551 @@
+<!doctype html>
+<!-- Ephemeris · Issue 063 · 2026-06-22 · built on scaffold.html (locked baseline) -->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 063 · 22 Jun 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — from scaffold.html. Do not touch.
+     ═══════════════════════════════════════════════════════════════════ */
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+  .spread > .decor {
+    position: absolute; inset: 0; z-index: 0;
+    pointer-events: none; overflow: hidden;
+  }
+  .spread > .folio {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 8px 24px; flex-wrap: wrap;
+    font-family: var(--sans); font-size: 13px;
+    letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.75;
+  }
+  .spread > .main {
+    display: flex; flex-direction: column; gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center; align-items: flex-start; min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block; font-family: var(--sans); font-size: 12px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    padding: 6px 12px; border: 1px solid currentColor; border-radius: 999px; opacity: 0.9;
+  }
+  .hed {
+    font-family: var(--serif); font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px); line-height: 1.02;
+    letter-spacing: -0.02em; padding-bottom: 0.12em; word-break: break-word;
+  }
+  .lede {
+    font-family: var(--serif); font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45; max-width: 50ch; margin: 0;
+  }
+  .figure { width: 100%; }
+  .read-on {
+    display: inline-block; font-family: var(--sans); font-weight: 600;
+    font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 14px 22px; border: 2px solid currentColor; text-decoration: none;
+    color: currentColor; --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — surface only.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── Cover · dossier grid (treatment C) ─── */
+  .cover { background: #f2ead9; color: #1b1a17; }
+  .cover .masthead {
+    font-family: var(--serif); font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    font-size: clamp(40px, 6vw, 86px); line-height: 0.9;
+    letter-spacing: -0.03em; color: #8a2012; margin: 0; padding-bottom: 0.08em;
+  }
+  .cover .masthead em { font-style: italic; color: #1b1a17; }
+  .cover .standfirst {
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(19px, 1.9vw, 26px); line-height: 1.35; max-width: 40ch; margin: 0;
+    color: #4a4438;
+  }
+  .cover .dossier {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0; width: 100%; border-top: 2px solid #1b1a17;
+  }
+  .cover .dossier a {
+    display: flex; flex-direction: column; gap: 8px;
+    text-decoration: none; color: inherit;
+    padding: 22px 26px 22px 0;
+    border-bottom: 1px solid rgba(27,26,23,0.25);
+  }
+  .cover .dossier a:nth-child(odd)  { border-right: 1px solid rgba(27,26,23,0.25); padding-right: 32px; }
+  .cover .dossier a:nth-child(even) { padding-left: 26px; }
+  .cover .dossier .num {
+    font-family: var(--mono); font-size: 13px; letter-spacing: 0.2em;
+    color: #8a2012; font-weight: 600;
+  }
+  .cover .dossier .frag {
+    font-family: var(--serif); font-weight: 600; font-size: clamp(20px, 2vw, 27px);
+    line-height: 1.15; letter-spacing: -0.01em;
+  }
+  .cover .dossier .src {
+    font-family: var(--sans); font-size: 12px; letter-spacing: 0.14em;
+    text-transform: uppercase; opacity: 0.6;
+  }
+  .cover .dossier a:hover .frag { color: #8a2012; }
+  @media (max-width: 800px) {
+    .cover .dossier { grid-template-columns: 1fr; }
+    .cover .dossier a:nth-child(odd)  { border-right: none; padding-right: 0; }
+    .cover .dossier a:nth-child(even) { padding-left: 0; }
+  }
+
+  /* ─── s01 · Codex Record & Replay · NEON / cyberpunk (DARK, LOUD) ─── */
+  .s01 { background: #0a0613; color: #d7e9ff; }
+  .s01 .tag { color: #6df3d4; border-color: #6df3d4; }
+  .s01 .hed {
+    font-family: var(--mono); font-weight: 600; letter-spacing: -0.01em;
+    font-size: clamp(44px, 6.4vw, 92px); line-height: 1.04;
+    color: #f4f7ff; text-shadow: 0 0 22px rgba(157,108,255,0.55), 0 0 4px rgba(109,243,212,0.5);
+  }
+  .s01 .hed em { font-style: normal; color: #6df3d4; text-shadow: 0 0 24px rgba(109,243,212,0.8); }
+  .s01 .lede { color: #aeb9e8; }
+  .s01 .read-on { color: #6df3d4; border-color: #6df3d4; --flip: #0a0613; }
+  .s01 .skillcard {
+    font-family: var(--mono); font-size: 14px; line-height: 1.7;
+    background: rgba(157,108,255,0.07); border: 1px solid rgba(109,243,212,0.4);
+    border-radius: 10px; padding: 20px 22px; max-width: 56ch; color: #cfe6ff;
+    box-shadow: 0 0 40px rgba(157,108,255,0.18) inset;
+  }
+  .s01 .skillcard .k { color: #9d6cff; }
+  .s01 .skillcard .c { color: #6df3d4; }
+  .s01 .decor::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      linear-gradient(rgba(109,243,212,0.05) 1px, transparent 1px) 0 0 / 100% 34px,
+      radial-gradient(60vw 60vw at 82% 18%, rgba(157,108,255,0.22), transparent 70%);
+  }
+
+  /* ─── s02 · Rare-disease diagnoses · MUSEUM PLACARD (LIGHT, quiet, centered) ─── */
+  .s02 { background: #f4f0e6; color: #2c3326; }
+  .s02 .tag {
+    color: #5a6b4d; border-color: #5a6b4d; letter-spacing: 0.3em;
+    border-radius: 0; text-transform: uppercase;
+  }
+  .s02 .hed {
+    font-weight: 500; font-variation-settings: "opsz" 120, "SOFT" 0, "WONK" 0;
+    font-size: clamp(42px, 6vw, 86px); letter-spacing: -0.015em;
+  }
+  .s02 .hed em { font-style: italic; color: #4a5a3d; }
+  .s02 .lede { color: #46503c; font-size: clamp(19px, 1.7vw, 24px); }
+  .s02 .read-on {
+    color: #3f4b34; border-color: #3f4b34; --flip: #f4f0e6;
+    border-radius: 0; letter-spacing: 0.22em;
+  }
+  .s02 .placard {
+    border-top: 1px solid #5a6b4d; border-bottom: 1px solid #5a6b4d;
+    padding: 26px 30px; max-width: 30ch;
+  }
+  .s02 .placard .num {
+    font-family: var(--serif); font-weight: 500; font-style: italic;
+    font-size: clamp(72px, 12vw, 132px); line-height: 0.9; color: #3f4b34;
+    font-variation-settings: "opsz" 144;
+  }
+  .s02 .placard .cap {
+    font-family: var(--sans); font-size: 13px; letter-spacing: 0.22em;
+    text-transform: uppercase; color: #5a6b4d; margin-top: 10px;
+  }
+  .s02 .decor::before {
+    content: ""; position: absolute; left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    width: min(70vw, 620px); height: min(70vw, 620px);
+    border: 1px solid rgba(90,107,77,0.18); border-radius: 50%;
+  }
+
+  /* ─── s03 · DOS rebuild byte-for-byte · CONCRETE (LIGHT, asymmetric) ─── */
+  .s03 { background: #d8d4cb; color: #1b1916; }
+  .s03 .tag { color: #b4471f; border-color: #b4471f; }
+  .s03 .hed {
+    font-family: var(--sans); font-weight: 900; letter-spacing: -0.03em;
+    font-size: clamp(46px, 7vw, 100px); line-height: 0.98; text-transform: uppercase;
+  }
+  .s03 .hed em { font-style: normal; color: #b4471f; }
+  .s03 .lede { color: #33302a; }
+  .s03 .read-on { color: #b4471f; border-color: #b4471f; --flip: #d8d4cb; border-radius: 0; }
+  .s03 .specwrap {
+    display: flex; align-items: flex-end; gap: clamp(20px, 4vw, 52px); flex-wrap: wrap;
+  }
+  .s03 .bignum {
+    font-family: var(--sans); font-weight: 900; line-height: 0.82;
+    font-size: clamp(84px, 15vw, 200px); letter-spacing: -0.05em; color: #1b1916;
+  }
+  .s03 .bignum .unit {
+    display: block; font-family: var(--mono); font-weight: 600;
+    font-size: 0.12em; letter-spacing: normal; color: #b4471f; margin-top: 0.4em;
+  }
+  .s03 .specs {
+    font-family: var(--mono); font-size: 14px; line-height: 1.9; color: #44403a;
+    border-left: 3px solid #b4471f; padding-left: 18px;
+  }
+  .s03 .specs b { color: #1b1916; font-weight: 600; }
+  .s03 .decor::before {
+    content: "≡"; position: absolute; right: -2vw; top: clamp(80px, 11vw, 150px);
+    font-family: var(--sans); font-weight: 900; font-size: 44vw; line-height: 0.7;
+    color: rgba(27,25,22,0.05);
+  }
+
+  /* ─── s04 · Midjourney Scanner · POSTCARD (saturated two-tone, LOUD) ─── */
+  .s04 { background: #ff5a3c; color: #0d2e2c; }
+  .s04 .tag { color: #0d2e2c; border-color: #0d2e2c; }
+  .s04 .hed {
+    font-family: var(--sans); font-weight: 800; letter-spacing: -0.03em;
+    font-size: clamp(46px, 7vw, 104px); line-height: 0.98; color: #0d2e2c;
+  }
+  .s04 .hed em { font-style: normal; color: #fff3e6; }
+  .s04 .lede { color: #163b38; }
+  .s04 .read-on { color: #0d2e2c; border-color: #0d2e2c; --flip: #ff5a3c; }
+  .s04 .stamp {
+    display: inline-flex; flex-direction: column; gap: 6px;
+    border: 3px dashed #0d2e2c; border-radius: 12px;
+    padding: 22px 30px; background: rgba(255,243,230,0.45);
+    transform: rotate(-3deg); max-width: 30ch;
+  }
+  .s04 .stamp .big {
+    font-family: var(--sans); font-weight: 900; font-size: clamp(30px, 5vw, 52px);
+    letter-spacing: -0.02em; line-height: 1; color: #0d2e2c;
+  }
+  .s04 .stamp .lab {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: #163b38;
+  }
+  .s04 .decor::before {
+    content: ""; position: absolute; inset: 0;
+    background: repeating-linear-gradient(45deg,
+      transparent 0 26px, rgba(13,46,44,0.05) 26px 52px);
+  }
+
+  /* ─── s05 · Project Galileo report · MIDNIGHT (DARK) ─── */
+  .s05 { background: #0b1437; color: #e6ebff; }
+  .s05 .tag { color: #5cd0ff; border-color: #5cd0ff; }
+  .s05 .hed {
+    font-weight: 700; letter-spacing: -0.02em;
+    background: linear-gradient(100deg, #ffffff 0%, #8fb6ff 55%, #5cd0ff 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .s05 .hed em { font-style: italic; -webkit-text-fill-color: #5cd0ff; }
+  .s05 .lede { color: #b6c2ee; }
+  .s05 .read-on { color: #5cd0ff; border-color: #5cd0ff; --flip: #0b1437; }
+  .s05 .bars { display: flex; flex-direction: column; gap: 16px; max-width: 50ch; }
+  .s05 .bar { display: grid; grid-template-columns: 1fr; gap: 6px; }
+  .s05 .bar .lab {
+    font-family: var(--sans); font-size: 13px; letter-spacing: 0.06em;
+    color: #b6c2ee; display: flex; justify-content: space-between; gap: 12px;
+  }
+  .s05 .bar .lab b { color: #5cd0ff; font-family: var(--mono); font-weight: 600; }
+  .s05 .bar .track { height: 12px; background: rgba(143,182,255,0.14); border-radius: 999px; overflow: hidden; }
+  .s05 .bar .fill { height: 100%; background: linear-gradient(90deg, #8fb6ff, #5cd0ff); border-radius: 999px; }
+  .s05 .decor::before {
+    content: ""; position: absolute; right: -10vw; top: -10vw;
+    width: 50vw; height: 50vw;
+    background: radial-gradient(circle, rgba(92,208,255,0.18), transparent 68%);
+  }
+
+  /* ─── s06 · TeamOS toolkit · NEWSPRINT (LIGHT, three columns) ─── */
+  .s06 { background: #f1ede2; color: #1a1a1a; }
+  .s06 .tag { color: #7a1f1f; border-color: #7a1f1f; border-radius: 0; letter-spacing: 0.28em; }
+  .s06 .hed {
+    font-weight: 700; font-variation-settings: "opsz" 100, "WONK" 0;
+    font-size: clamp(44px, 6.4vw, 94px); letter-spacing: -0.02em;
+  }
+  .s06 .hed em { font-style: italic; color: #7a1f1f; }
+  .s06 .lede { color: #353330; }
+  .s06 .read-on { color: #7a1f1f; border-color: #7a1f1f; --flip: #f1ede2; border-radius: 0; }
+  .s06 .ledger {
+    column-count: 3; column-gap: 34px; max-width: 64ch;
+    border-top: 2px solid #1a1a1a; padding-top: 18px;
+  }
+  .s06 .ledger .row { break-inside: avoid; margin-bottom: 16px; }
+  .s06 .ledger .row h4 {
+    font-family: var(--sans); font-weight: 700; font-size: 12px;
+    letter-spacing: 0.16em; text-transform: uppercase; color: #7a1f1f; margin-bottom: 4px;
+  }
+  .s06 .ledger .row p {
+    font-family: var(--serif); font-size: 17px; line-height: 1.4; margin: 0; color: #2a2825;
+  }
+  @media (max-width: 800px) { .s06 .ledger { column-count: 1; } }
+
+  /* ─── Colophon · DARK ─── */
+  .colophon { background: #0c0c0e; color: #e9e6df; }
+  .colophon .hed { font-weight: 800; }
+  .colophon .hed em { font-style: italic; color: #c9a24a; }
+  .colophon .lede { color: #b9b6ad; max-width: 60ch; }
+  .colophon .meta {
+    font-family: var(--mono); font-size: 13px; line-height: 1.9; color: #8f8c84;
+    max-width: 70ch; border-top: 1px solid rgba(233,230,223,0.2); padding-top: 18px;
+  }
+  .colophon .meta b { color: #e9e6df; font-weight: 600; }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════════ COVER · DOSSIER GRID ═══════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 063</span>
+    <span>Monday · 22 Jun 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <h1 class="masthead">Ephemeris<em>.</em></h1>
+    <p class="standfirst">Six dispatches on machines that learn a job by watching, rebuild the past to the byte, and turn their lens on the body.</p>
+    <nav class="dossier">
+      <a href="#s01"><span class="num">01</span><span class="frag">Show Codex a chore once; it writes the skill</span><span class="src">via @TochkiNadAI</span></a>
+      <a href="#s02"><span class="num">02</span><span class="frag">A reasoning model names 18 diagnoses doctors missed</span><span class="src">OpenAI</span></a>
+      <a href="#s03"><span class="num">03</span><span class="frag">A 1993 DOS game rebuilt to the byte</span><span class="src">via @denissexy</span></a>
+      <a href="#s04"><span class="num">04</span><span class="frag">Midjourney builds an ultrasound scanner</span><span class="src">via @seeallochnaya</span></a>
+      <a href="#s05"><span class="num">05</span><span class="frag">Who attackers hit hardest in civil society</span><span class="src">Cloudflare</span></a>
+      <a href="#s06"><span class="num">06</span><span class="frag">A chief-of-staff layer for the whole team</span><span class="src">via @ProductsAndStartups</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+</section>
+
+<!-- ═══════════ 01 · CODEX RECORD & REPLAY ═══════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 063</span>
+    <span>01 / 6 · via @TochkiNadAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev Tools · Agentic</span>
+    <h2 class="hed">Do it once. Codex <em>replays</em> it forever.</h2>
+    <p class="lede">Record &amp; Replay, which shipped June 18 for the macOS Codex app, watches you finish a repetitive task one time, then drafts an editable SKILL.md — when to use it, what inputs it needs, the steps, and how to verify the result. Unlike screen-recorder RPA it captures intent, not pixel coordinates, so it adapts when the interface shifts.</p>
+    <div class="figure">
+      <pre class="skillcard"><span class="c"># SKILL.md  ·  drafted from one demo</span>
+<span class="k">name:</span> file-monthly-expense
+<span class="k">use_when:</span> a receipt PDF lands in ~/Inbox
+<span class="k">inputs:</span> [ receipt, month ]
+<span class="k">steps:</span>
+  1. open portal · 2. attach {receipt}
+  3. set period {month} · 4. submit
+<span class="k">verify:</span> confirmation id is shown</pre>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://developers.openai.com/codex/record-and-replay" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ 02 · RARE-DISEASE DIAGNOSES ═══════════ -->
+<section class="spread s02 centered" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 063</span>
+    <span>02 / 6 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Science · Health</span>
+    <h2 class="hed">Eighteen diagnoses that had <em>no name</em>.</h2>
+    <p class="lede">OpenAI researchers pointed a reasoning model at unsolved pediatric cases — children whose genetic disease had eluded clinicians for years — and surfaced 18 new diagnoses. The model reads across the literature and patient data; physicians review every call before it counts.</p>
+    <div class="figure">
+      <div class="placard">
+        <div class="num">18</div>
+        <div class="cap">previously unsolved cases, newly named</div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/diagnose-rare-childhood-diseases" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ 03 · DOS REBUILD BYTE-FOR-BYTE ═══════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 063</span>
+    <span>03 / 6 · via @denissexy</span>
+  </header>
+  <div class="main">
+    <span class="tag">Creative · Reverse Engineering</span>
+    <h2 class="hed">A 1993 game, rebuilt <em>to the byte</em>.</h2>
+    <p class="lede">Denis Sergeev reconstructed the Russian DOS show <i>Поле Чудес</i> from its compiled binary into TypeScript — sprites, CP866 bitmap fonts, the question dictionary and scoring table — leaning on Claude Fable for roughly $100 in API. Every transcoded asset reverse-encodes back to the original, sha256-pinned in the test suite.</p>
+    <div class="figure">
+      <div class="specwrap">
+        <div class="bignum">56,528<span class="unit">.exe bytes, decompiled</span></div>
+        <div class="specs">
+          <b>61</b> RLE sprites → lossless WebP<br>
+          <b>3</b> CP866 fonts → glyph atlases<br>
+          <b>1</b> scoring table → JSON<br>
+          <b>sha256</b> ✓ byte-for-byte rebuild
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://github.com/DenisSergeevitch/pole-chudes-2" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ 04 · MIDJOURNEY SCANNER ═══════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 063</span>
+    <span>04 / 6 · via @seeallochnaya</span>
+  </header>
+  <div class="main">
+    <span class="tag">Creative · Hardware</span>
+    <h2 class="hed">From text-to-image to <em>head-to-toe</em>.</h2>
+    <p class="lede">Midjourney, working with Butterfly Network, unveiled the Midjourney Scanner — a handheld ultrasound that builds a full-body 3D image in about 60 seconds. The generative-art company is pitching it first as a spa "experience" rather than a medical device to sidestep FDA review, claiming it runs far cheaper and faster than MRI, with a San Francisco pilot planned.</p>
+    <div class="figure">
+      <div class="stamp">
+        <span class="big">60 sec · full body</span>
+        <span class="lab">~10× cheaper than MRI</span>
+        <span class="lab">SF spa pilot · 2027</span>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.theverge.com/ai-artificial-intelligence/952011/midjourney-medical-ai-ultrasound-scan" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ 05 · PROJECT GALILEO REPORT ═══════════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 063</span>
+    <span>05 / 6 · Cloudflare</span>
+  </header>
+  <div class="main">
+    <span class="tag">Privacy · Security</span>
+    <h2 class="hed">Attackers aim hardest at the <em>defenseless</em>.</h2>
+    <p class="lede">Cloudflare's first Project Galileo report, twelve years into the program, puts numbers on what hits journalists and civil-society groups. The pattern is consistent: the people with the least to spend on defense draw the most fire.</p>
+    <div class="figure">
+      <div class="bars">
+        <div class="bar">
+          <div class="lab"><span>Website-vulnerability exploit attempts vs. baseline</span><b>7×</b></div>
+          <div class="track"><div class="fill" style="width:100%"></div></div>
+        </div>
+        <div class="bar">
+          <div class="lab"><span>Malicious traffic to exiled reporters vs. newsrooms</span><b>4×</b></div>
+          <div class="track"><div class="fill" style="width:57%"></div></div>
+        </div>
+        <div class="bar">
+          <div class="lab"><span>Civil-society emails carrying phishing</span><b>1 in 10</b></div>
+          <div class="track"><div class="fill" style="width:30%"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.cloudflare.com/celebrating-12-years-of-project-galileo/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ 06 · TEAMOS TOOLKIT ═══════════ -->
+<section class="spread s06" id="s06">
+  <header class="folio">
+    <span>Ephemeris · Issue 063</span>
+    <span>06 / 6 · via @ProductsAndStartups</span>
+  </header>
+  <div class="main">
+    <span class="tag">Agents · Productivity</span>
+    <h2 class="hed">Give the whole team a <em>chief of staff</em>.</h2>
+    <p class="lede">TeamOS is a starter toolkit that pairs a shared institutional-knowledge repository with AI agents, aiming at team output rather than individual speed. The bet: capture the memory and routines a chief of staff would hold, make them queryable, and the agents stop re-asking what the team already decided.</p>
+    <div class="figure">
+      <div class="ledger">
+        <div class="row"><h4>Decisions</h4><p>Why a call was made, and what it ruled out — so agents don't relitigate it.</p></div>
+        <div class="row"><h4>Playbooks</h4><p>The repeatable steps for onboarding, releases, incidents, kept where agents can run them.</p></div>
+        <div class="row"><h4>Context</h4><p>Customers, constraints, current bets — the standing brief every new task starts from.</p></div>
+        <div class="row"><h4>Routines</h4><p>Recurring chores handed to agents against the shared record, not a single person's memory.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://github.com/BayramAnnakov/team-os-toolkit" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ COLOPHON ═══════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 063</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Six picks from eighteen sources scanned this morning — model-lab newsrooms, an engineering blog, and the Telegram channels that surfaced the rest.</p>
+    <div class="figure">
+      <p class="meta">
+        <b>Today's sources:</b> OpenAI · Cloudflare · via @TochkiNadAI · via @denissexy · via @seeallochnaya · via @ProductsAndStartups · The Verge (primary).<br>
+        <b>Rubric:</b> tools you could adopt this week · creative &amp; generative media · dev tools &amp; agentic coding · privacy &amp; security when the signal is high · science with a practical kernel.<br>
+        <b>Issue 063 · 2026-06-22 · Europe/Zürich.</b>
+      </p>
+    </div>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>

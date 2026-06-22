@@ -63,6 +63,7 @@ https://blog.cloudflare.com/browser-run-containers
 https://blog.cloudflare.com/build-your-own-vulnerability-harness
 https://blog.cloudflare.com/building-for-the-future
 https://blog.cloudflare.com/casb-anthropic-integration
+https://blog.cloudflare.com/celebrating-12-years-of-project-galileo
 https://blog.cloudflare.com/claude-managed-agents
 https://blog.cloudflare.com/clickhouse-query-plan-contention
 https://blog.cloudflare.com/code-orange-fail-small-complete
@@ -127,6 +128,7 @@ https://deeplearning.ai/the-batch/issue-357
 https://deepswe.datacurve.ai/blog
 https://developers.googleblog.com/introducing-the-google-colab-cli
 https://developers.openai.com/ads
+https://developers.openai.com/codex/record-and-replay
 https://developers.openai.com/codex/use-cases
 https://dsv4.interactive.ikot.blog
 https://dsv4.interactive.ikot.blog/
@@ -164,6 +166,7 @@ https://github.com/BayramAnnakov/ai-personal-os-skills/tree/main/skills/slide-in
 https://github.com/BayramAnnakov/excel-hygiene
 https://github.com/BayramAnnakov/factory-agent
 https://github.com/BayramAnnakov/systems-thinking-skills/tree/main/skills/why-tree
+https://github.com/BayramAnnakov/team-os-toolkit
 https://github.com/BayramAnnakov/token-audit-skill
 https://github.com/BayramAnnakov/whimsical-strategies-skill
 https://github.com/coreyhaines31/marketingskills
@@ -171,6 +174,7 @@ https://github.com/deepseek-ai/Thinking-with-Visual-Primitives
 https://github.com/DenisSergeevitch/agents-best-practices
 https://github.com/DenisSergeevitch/chatgpt-portal
 https://github.com/DenisSergeevitch/genternet-chrome
+https://github.com/DenisSergeevitch/pole-chudes-2
 https://github.com/DenisSergeevitch/UFO-USA
 https://github.com/Fission-AI/OpenSpec/blob/main/docs/concepts.md
 https://github.com/nexu-io/open-design
@@ -239,6 +243,7 @@ https://openai.com/index/cybersecurity-in-the-intelligence-age
 https://openai.com/index/databricks
 https://openai.com/index/delivering-low-latency-voice-ai-at-scale
 https://openai.com/index/deployment-simulation
+https://openai.com/index/diagnose-rare-childhood-diseases
 https://openai.com/index/endava
 https://openai.com/index/gpt-5-5-instant
 https://openai.com/index/gpt-5-5-system-card
@@ -341,6 +346,7 @@ https://techcrunch.com/2026/05/19/googles-gemini-omni-turns-images-audio-and-tex
 https://techspot.com/news/112386-amazon-employees-using-internal-ai-tools-inflate-usage.html
 https://telegram.org/blog/ai-bot-revolution-11-new-features
 https://therundown.ai/p/openai-superapp-hiding-inside-codex
+https://theverge.com/ai-artificial-intelligence/952011/midjourney-medical-ai-ultrasound-scan
 https://thezvi.substack.com/p/ai-165-in-our-image
 https://thezvi.substack.com/p/ai-166-google-sells-out
 https://thezvi.substack.com/p/ai-167-the-prior-restraint-era-begins
