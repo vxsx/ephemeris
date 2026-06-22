@@ -135,16 +135,30 @@ that shipped in 014 and again in 016; Sentry's
 `sentry.engineering/.../from-monkey-patching-to-tracing-channels` (issue 020)
 re-told as `sentry.io/blog/fixing-javascript-observability` (issue 021).
 
-To catch these, before finalizing read the TOC of the **last 3 issues**:
+**Same project, blog vs repo (the author-identity case).** A project's
+author-blog writeup and its GitHub repo are the *same story* under two URLs
+that share no host and never canonicalize together. Denis Sergeev's *Поле
+Чудес* DOS-rebuild shipped as `shir-man.com/pole-chudes-exe` (issue 059,
+2026-06-14) and again 8 days later as `github.com/DenisSergeevitch/pole-chudes-2`
+(issue 063, 2026-06-22) — both are in the ledger, neither collided. Note that
+`shir-man.com` **is** DenisSergeevitch: a personal blog and a GitHub owner can
+be the same person. So when a candidate is a GitHub repo or a personal blog
+post, the dedup key is the **project/author**, not the URL — check the byline
+and the project name against recent issues, not just the link.
+
+To catch these, before finalizing read the TOC of the **last 10 issues** (a
+3-issue window misses repeats more than a few days apart — the *Поле Чудес*
+reprint was 6 issues back):
 
 ```bash
-ls -t magazines/*.html | head -3 \
+ls -t magazines/*.html | head -10 \
   | xargs -I{} grep -hoE 'class="hed"[^>]*>[^<]+' {} \
   | sed -E 's/.*">//'
 ```
 
 If any candidate covers the same underlying news as a recent headline — even
-with a different URL, source, or framing ("RE: …", "more on …") — drop it.
+with a different URL, source, author surface, or framing ("RE: …", "more
+on …") — drop it.
 
 **Age cap — 30 days.** Each candidate's publication date must be within the
 last 30 days from `$ISSUE_DATE`. If the source page does not show a
