@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 064 · 23 Jun 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — from scaffold.html. Do not restructure.
+     ═══════════════════════════════════════════════════════════════════ */
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+  .spread > .decor {
+    position: absolute; inset: 0; z-index: 0;
+    pointer-events: none; overflow: hidden;
+  }
+  .spread > .folio {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 8px 24px; flex-wrap: wrap;
+    font-family: var(--sans); font-size: 13px;
+    letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.75;
+  }
+  .spread > .main {
+    display: flex; flex-direction: column; gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center; align-items: flex-start; min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block; font-family: var(--sans);
+    font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase;
+    padding: 6px 12px; border: 1px solid currentColor;
+    border-radius: 999px; opacity: 0.9;
+  }
+  .hed {
+    font-family: var(--serif); font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px); line-height: 1.02;
+    letter-spacing: -0.02em; padding-bottom: 0.12em; word-break: break-word;
+  }
+  .lede {
+    font-family: var(--serif); font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45; max-width: 50ch; margin: 0;
+  }
+  .figure { width: 100%; }
+  .read-on {
+    display: inline-block; font-family: var(--sans); font-weight: 600;
+    font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 14px 22px; border: 2px solid currentColor;
+    text-decoration: none; color: currentColor; --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px) 22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — surface only.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── Cover — single-word mood "PATCH" ─── */
+  .cover { background: #0b0e13; color: #e9e7e0; }
+  .cover .wordmark {
+    font-family: var(--sans); font-weight: 700; font-size: 15px;
+    letter-spacing: 0.42em; text-transform: uppercase; color: #c9ff3d;
+    margin: 0;
+  }
+  .cover .mood {
+    font-family: var(--sans); font-weight: 900;
+    font-size: clamp(96px, 26vw, 360px); line-height: 0.82;
+    letter-spacing: -0.04em; color: #c9ff3d; margin: 0;
+    text-shadow: 0 0 38px rgba(201,255,61,0.35);
+  }
+  .cover .dek {
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(20px, 2vw, 28px); line-height: 1.34; max-width: 40ch;
+    color: #cdcabf;
+  }
+  .cover .toc {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px 48px; padding-top: 20px; border-top: 1px solid rgba(233,231,224,0.3);
+    width: 100%; max-width: 1040px;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 4px 12px; text-decoration: none; color: inherit;
+    padding: 9px 0; border-bottom: 1px dotted rgba(233,231,224,0.22);
+    text-align: left;
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; font-family: var(--serif); font-size: 1.02em; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.8em; opacity: 0.6; letter-spacing: 0.1em; text-transform: uppercase; }
+  .cover .toc .num {
+    font-family: var(--mono); font-weight: 600; font-size: 0.78em;
+    color: #c9ff3d; margin-right: 12px;
+  }
+  .cover .decor::before {
+    content: ""; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(201,255,61,0.05) 1px, transparent 1px);
+    background-size: 100% 34px;
+  }
+  @media (max-width: 800px) { .cover .toc { grid-template-columns: 1fr; gap: 0; } }
+
+  /* ─── s01 · Daybreak — dark report / classified (LOUD, DARK) ─── */
+  .s01 { background: #0a0a0c; color: #e6e3dd; }
+  .s01 .tag { color: #ff4040; border-color: #ff4040; }
+  .s01 .hed {
+    font-family: var(--sans); font-weight: 800; text-transform: uppercase;
+    font-size: clamp(44px, 6.4vw, 92px); line-height: 0.98; letter-spacing: -0.015em;
+  }
+  .s01 .hed em { font-style: normal; color: #ff3b3b; }
+  .s01 .lede { font-family: var(--sans); color: #b8b4ad; }
+  .s01 .read-on { color: #ff4040; border-color: #ff4040; --flip: #0a0a0c; }
+  .s01 .dossier {
+    width: 100%; max-width: 620px; border: 1px solid rgba(255,64,64,0.45);
+    background: rgba(255,64,64,0.05); padding: 22px 24px;
+  }
+  .s01 .dossier .stamp {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.28em;
+    text-transform: uppercase; color: #ff4040; margin-bottom: 16px;
+    display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  }
+  .s01 .bar { margin: 13px 0; }
+  .s01 .bar .lbl {
+    font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.06em;
+    display: flex; justify-content: space-between; color: #cfcbc4; margin-bottom: 6px;
+  }
+  .s01 .bar .lbl b { color: #ff5a5a; font-weight: 600; }
+  .s01 .track { height: 12px; background: rgba(255,255,255,0.08); position: relative; }
+  .s01 .track i { position: absolute; left: 0; top: 0; bottom: 0; background: #ff3b3b; display: block; }
+  .s01 .track u {
+    position: absolute; top: -3px; bottom: -3px; width: 2px;
+    background: #6c6a66; text-decoration: none;
+  }
+  .s01 .redact { background: #ff3b3b; color: #ff3b3b; padding: 0 0.18em; border-radius: 1px; }
+  .s01 .decor::before {
+    content: "DAYBREAK"; position: absolute; right: -2vw; bottom: -3vw;
+    font-family: var(--sans); font-weight: 900; font-size: 22vw;
+    color: rgba(255,59,59,0.05); letter-spacing: -0.04em;
+  }
+
+  /* ─── s02 · Vercel Flags — neo-brutalist yellow (LOUD, LIGHT) ─── */
+  .s02 { background: #ffd400; color: #0a0a0a; }
+  .s02 .tag { color: #0a0a0a; border-color: #0a0a0a; border-width: 2px; border-radius: 0; font-weight: 700; }
+  .s02 .hed {
+    font-family: var(--sans); font-weight: 900; text-transform: uppercase;
+    font-size: clamp(50px, 8.4vw, 120px); line-height: 0.92; letter-spacing: -0.02em;
+  }
+  .s02 .hed em { font-style: normal; background: #0a0a0a; color: #ffd400; padding: 0 0.12em; }
+  .s02 .lede { font-family: var(--sans); font-weight: 500; color: #1a1700; }
+  .s02 .read-on { color: #0a0a0a; border-color: #0a0a0a; border-width: 3px; border-radius: 0; --flip: #ffd400; }
+  .s02 .ladder {
+    display: flex; align-items: baseline; gap: 0.18em; flex-wrap: wrap;
+    font-family: var(--sans); font-weight: 900; line-height: 1;
+    font-size: clamp(44px, 8vw, 96px); letter-spacing: -0.03em;
+  }
+  .s02 .ladder .arrow { font-size: 0.5em; opacity: 0.55; padding: 0 0.06em; }
+  .s02 .ladder .pct { font-size: 0.5em; letter-spacing: normal; }
+  .s02 .specs {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+    border: 3px solid #0a0a0a; margin-top: 22px; max-width: 720px;
+  }
+  .s02 .specs div { padding: 14px 16px; border-right: 3px solid #0a0a0a; }
+  .s02 .specs div:last-child { border-right: 0; }
+  .s02 .specs dt { font-family: var(--sans); font-weight: 900; font-size: 22px; }
+  .s02 .specs dd { margin: 4px 0 0; font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.02em; text-transform: uppercase; }
+  @media (max-width: 800px) { .s02 .specs { grid-template-columns: 1fr; } .s02 .specs div { border-right: 0; border-bottom: 3px solid #0a0a0a; } .s02 .specs div:last-child { border-bottom: 0; } }
+
+  /* ─── s03 · Cloudflare hyper bug — terminal (LOUD, DARK) ─── */
+  .s03 { background: #04070a; color: #cfeede; }
+  .s03 .tag { color: #3ef0a0; border-color: #3ef0a0; font-family: var(--mono); border-radius: 0; }
+  .s03 .hed {
+    font-family: var(--mono); font-weight: 600;
+    font-size: clamp(32px, 4.8vw, 66px); line-height: 1.04; letter-spacing: -0.01em; color: #eafff4;
+  }
+  .s03 .hed em { font-style: normal; color: #3ef0a0; }
+  .s03 .lede { font-family: var(--mono); font-size: clamp(15px, 1.3vw, 18px); line-height: 1.6; color: #9fc6b3; max-width: 62ch; }
+  .s03 .read-on { color: #3ef0a0; border-color: #3ef0a0; border-radius: 0; --flip: #04070a; }
+  .s03 .term {
+    width: 100%; max-width: 660px; border: 1px solid rgba(62,240,160,0.4);
+    background: rgba(62,240,160,0.04); padding: 18px 20px;
+    font-family: var(--mono); font-size: 13px; line-height: 1.7; overflow-x: auto;
+  }
+  .s03 .term .c { color: #5c7a6c; }
+  .s03 .term .g { color: #3ef0a0; }
+  .s03 .term .r { color: #ff6b6b; }
+  .s03 .term .w { color: #d8f3e6; }
+  .s03 .decor::before {
+    content: ""; position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(rgba(62,240,160,0.05) 0 1px, transparent 1px 3px);
+  }
+
+  /* ─── s04 · PostHog self-building — academic journal (QUIET, LIGHT) ─── */
+  .s04 { background: #f4f1e8; color: #16223f; }
+  .s04 .tag { color: #16223f; border-color: #16223f; }
+  .s04 .hed { font-family: var(--serif); font-weight: 800; font-size: clamp(46px, 6.4vw, 96px); }
+  .s04 .hed em { font-style: italic; color: #8a1f1f; font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; }
+  .s04 .lede { color: #2c3650; }
+  .s04 .read-on { color: #8a1f1f; border-color: #8a1f1f; --flip: #f4f1e8; }
+  .s04 .pipe {
+    width: 100%; max-width: 760px; display: grid; grid-template-columns: 1.05fr 1fr;
+    gap: 30px 44px; border-top: 2px solid #16223f; padding-top: 20px;
+  }
+  .s04 .steps { list-style: none; margin: 0; padding: 0; }
+  .s04 .steps li { display: flex; gap: 14px; padding: 7px 0; border-bottom: 1px solid rgba(22,34,63,0.18); }
+  .s04 .steps .n { font-family: var(--mono); font-size: 13px; color: #8a1f1f; font-weight: 600; flex: 0 0 auto; }
+  .s04 .steps .t { font-family: var(--sans); }
+  .s04 .steps .t b { font-weight: 700; }
+  .s04 .steps .t span { display: block; font-size: 14px; color: #54607a; }
+  .s04 .pull { font-family: var(--serif); font-style: italic; font-size: clamp(20px, 2vw, 27px); line-height: 1.4; }
+  .s04 .pull cite { display: block; font-style: normal; font-family: var(--sans); font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #54607a; margin-top: 14px; }
+  @media (max-width: 800px) { .s04 .pipe { grid-template-columns: 1fr; gap: 24px; } }
+
+  /* ─── s05 · Codex-maxxing — blueprint (QUIET, LIGHT) ─── */
+  .s05 { background: #e7edf4; color: #16294a; }
+  .s05 .tag { color: #16294a; border-color: #16294a; font-family: var(--mono); }
+  .s05 .hed { font-family: var(--sans); font-weight: 700; font-size: clamp(42px, 5.6vw, 84px); line-height: 1.0; letter-spacing: -0.02em; }
+  .s05 .hed em { font-style: normal; color: #2c4a7a; border-bottom: 4px solid #2c4a7a; }
+  .s05 .lede { font-family: var(--sans); color: #314a72; }
+  .s05 .read-on { color: #16294a; border-color: #16294a; --flip: #e7edf4; }
+  .s05 .blue {
+    width: 100%; max-width: 720px; border: 1px solid #9fb3cf; padding: 22px 24px;
+    background:
+      linear-gradient(#aebfd6 1px, transparent 1px) 0 0 / 100% 26px,
+      linear-gradient(90deg, #aebfd6 1px, transparent 1px) 0 0 / 26px 100%;
+    background-color: rgba(255,255,255,0.35);
+    position: relative;
+  }
+  .s05 .blue .cm { position: absolute; width: 12px; height: 12px; border: 1px solid #2c4a7a; }
+  .s05 .blue .cm.tl { top: -1px; left: -1px; border-right: 0; border-bottom: 0; }
+  .s05 .blue .cm.br { bottom: -1px; right: -1px; border-left: 0; border-top: 0; }
+  .s05 .flow { display: flex; flex-direction: column; gap: 10px; font-family: var(--mono); font-size: 13.5px; }
+  .s05 .flow .row { display: flex; align-items: center; gap: 12px; }
+  .s05 .flow .box { border: 1.5px solid #16294a; padding: 7px 12px; background: rgba(255,255,255,0.6); font-weight: 600; }
+  .s05 .flow .chk { color: #2c4a7a; }
+  .s05 .flow .ann { color: #5a7298; font-size: 12px; }
+  @media (max-width: 800px) { .s05 .flow .ann { display: none; } }
+
+  /* ─── s06 · game-corovans — neon / cyberpunk (LOUD, DARK) ─── */
+  .s06 { background: #0a0514; color: #e8def7; }
+  .s06 .tag { color: #34f5db; border-color: #34f5db; }
+  .s06 .hed {
+    font-family: var(--sans); font-weight: 900;
+    font-size: clamp(46px, 7vw, 100px); line-height: 0.96; letter-spacing: -0.025em;
+    color: #34f5db; text-shadow: 0 0 26px rgba(52,245,219,0.45);
+  }
+  .s06 .hed em { font-style: normal; color: #c084ff; text-shadow: 0 0 26px rgba(176,92,255,0.5); }
+  .s06 .lede { font-family: var(--sans); color: #c3b6da; }
+  .s06 .read-on { color: #34f5db; border-color: #34f5db; --flip: #0a0514; }
+  .s06 .card {
+    width: 100%; max-width: 640px; border: 1px solid rgba(176,92,255,0.5);
+    background: linear-gradient(135deg, rgba(52,245,219,0.06), rgba(176,92,255,0.08));
+    padding: 20px 22px; font-family: var(--mono);
+  }
+  .s06 .card .row { display: flex; justify-content: space-between; gap: 16px; padding: 8px 0; border-bottom: 1px dashed rgba(195,182,218,0.22); font-size: 13.5px; }
+  .s06 .card .row:last-child { border-bottom: 0; }
+  .s06 .card .k { color: #8fa0c4; letter-spacing: 0.04em; }
+  .s06 .card .v { color: #34f5db; text-align: right; }
+  .s06 .card .v.p { color: #c084ff; }
+  .s06 .decor::before {
+    content: ""; position: absolute; right: -10vw; top: -10vw; width: 50vw; height: 50vw;
+    background: radial-gradient(circle, rgba(176,92,255,0.18), transparent 65%);
+  }
+  .s06 .decor::after {
+    content: ""; position: absolute; left: -12vw; bottom: -12vw; width: 48vw; height: 48vw;
+    background: radial-gradient(circle, rgba(52,245,219,0.14), transparent 65%);
+  }
+
+  /* ─── Colophon — dark ─── */
+  .colophon { background: #0c0c0e; color: #d8d6d0; }
+  .colophon .hed { font-family: var(--serif); color: #f1efe9; }
+  .colophon .hed em { font-style: italic; color: #c9ff3d; font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; }
+  .colophon .lede { font-family: var(--sans); color: #b6b4ad; }
+  .colophon .meta { width: 100%; max-width: 820px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; border-top: 1px solid rgba(216,214,208,0.25); padding-top: 22px; margin-top: 4px; }
+  .colophon .meta h4 { font-family: var(--mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: #c9ff3d; margin: 0 0 10px; font-weight: 600; }
+  .colophon .meta p { margin: 0; font-size: 14px; line-height: 1.55; color: #aeaca5; }
+  @media (max-width: 800px) { .colophon .meta { grid-template-columns: 1fr; gap: 18px; } }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════════ COVER — single-word mood ═══════════ -->
+<section class="spread cover centered" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 064</span>
+    <span>Tuesday · 23 Jun 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <p class="wordmark">Ephemeris</p>
+    <h1 class="mood">PATCH</h1>
+    <p class="dek">The tools turn on their own bugs today — finding them, proving them, and opening the fix while you sleep. Also: feature flags as a platform primitive, four lines that close a years-old truncation bug, and a 2000s meme finally made playable.</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>Let the model patch the planet</span><span>OpenAI</span></a>
+      <a href="#s02"><span><span class="num">02</span>Ship the code, hold the feature</span><span>Vercel</span></a>
+      <a href="#s03"><span><span class="num">03</span>219 KB arrived, 14.9 MB was sent</span><span>Cloudflare</span></a>
+      <a href="#s04"><span><span class="num">04</span>Wake up to the pull requests</span><span>PostHog</span></a>
+      <a href="#s05"><span><span class="num">05</span>Cut the goal into verifiable steps</span><span>OpenAI</span></a>
+      <a href="#s06"><span><span class="num">06</span>Rob the caravans, twenty years late</span><span>via @TochkiNadAI</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s01 · Daybreak ═══════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 064</span>
+    <span>01 / 06 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Privacy · Security</span>
+    <h2 class="hed">Let the model <em>patch</em> the planet.</h2>
+    <p class="lede">OpenAI expanded its Daybreak security suite: a Codex Security plugin that finds, validates, and fixes vulnerabilities from inside Codex, plus the full GPT-5.5-Cyber model for trusted defenders and a Patch the Planet effort for open-source maintainers. Since its March preview the scanner has read 30M+ commits across 30,000+ codebases; OpenAI says it has already generated patches for critical flaws in FreeBSD and the Linux kernel.</p>
+    <div class="figure">
+      <div class="dossier">
+        <div class="stamp"><span>// GPT-5.5-Cyber vs GPT-5.5</span><span class="redact">CLASSIFIED</span></div>
+        <div class="bar">
+          <div class="lbl"><span>CyberGym</span><b>85.6</b></div>
+          <div class="track"><i style="width:85.6%"></i><u style="left:81.8%"></u></div>
+        </div>
+        <div class="bar">
+          <div class="lbl"><span>ExploitGym</span><b>39.5</b></div>
+          <div class="track"><i style="width:39.5%"></i><u style="left:25.95%"></u></div>
+        </div>
+        <div class="bar">
+          <div class="lbl"><span>SEC-bench Pro</span><b>69.8</b></div>
+          <div class="track"><i style="width:69.8%"></i><u style="left:63.1%"></u></div>
+        </div>
+        <div class="stamp" style="margin:16px 0 0; opacity:0.7;"><span>bar = 5.5-Cyber · tick = 5.5 baseline</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/daybreak-securing-the-world" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s02 · Vercel Flags ═══════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 064</span>
+    <span>02 / 06 · Vercel</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev Platform · Releases</span>
+    <h2 class="hed">Ship the code. <em>Hold</em> the feature.</h2>
+    <p class="lede">Vercel Flags bakes feature flags into the platform. Flags evaluate server-side by default — you read them with an <code>await</code> during a React Server Component render, so the right view ships with no client request and no layout shift. Config changes propagate across regions in milliseconds, a Precompute pattern keeps static pages on the CDN by building every variant ahead of time, and the kill switch is one toggle, no redeploy.</p>
+    <div class="figure">
+      <div class="ladder"><span>5</span><span class="arrow">→</span><span>10</span><span class="arrow">→</span><span>25</span><span class="arrow">→</span><span>50</span><span class="pct">%</span></div>
+      <dl class="specs">
+        <div><dt>Server-side</dt><dd>evaluated by default</dd></div>
+        <div><dt>Milliseconds</dt><dd>global propagation</dd></div>
+        <div><dt>One toggle</dt><dd>instant kill, no deploy</dd></div>
+      </dl>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://vercel.com/blog/vercel-flags-platform-native-feature-flags" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s03 · Cloudflare hyper bug ═══════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 064</span>
+    <span>03 / 06 · Cloudflare</span>
+  </header>
+  <div class="main">
+    <span class="tag">Engineering · Postmortem</span>
+    <h2 class="hed">219 KB arrived. <em>14.9 MB</em> was sent.</h2>
+    <p class="lede">Rearchitecting its Images binding, Cloudflare traced truncated HTTP/1 responses to a race deep in the hyper library: <span class="g">dispatch.rs</span> dropped the result of <span class="g">poll_flush()</span> with <span class="g">let _</span> and marked encoding done once bytes hit hyper's own buffer — so when the socket filled, megabytes never left. Present from 0.14.x through 1.8.x for years. strace caught it; the fix is four lines.</p>
+    <div class="figure">
+      <pre class="term"><span class="c"># healthy request</span>
+<span class="w">sendto(fd, …, 65536) = 65536</span>
+<span class="w">sendto(fd, …, 65536) = 65536</span>
+<span class="g">→ flushed, then shutdown()</span>
+
+<span class="c"># truncated request</span>
+<span class="w">sendto(fd, …) = 219136</span>
+<span class="r">shutdown()   ← buffer still full</span>
+
+<span class="c"># the fix in poll_shutdown()</span>
+<span class="g">ready!(self.poll_flush(cx)?);</span>
+<span class="w">Pin::new(&amp;mut self.io).poll_shutdown(cx)</span></pre>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.cloudflare.com/hyper-bug/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s04 · PostHog self-building ═══════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 064</span>
+    <span>04 / 06 · PostHog</span>
+  </header>
+  <div class="main">
+    <span class="tag">Agents · Product</span>
+    <h2 class="hed">Wake up to the <em>pull requests.</em></h2>
+    <p class="lede">PostHog wired its own telemetry — errors, logs, experiments, replays — into a five-stage pipeline that turns signals into merged-ready diffs. The hard parts were not the agents: an LLM classifier screens every public signal for prompt injection first, and clustering had to group by what a signal <em>means</em>, not the shape of its text, before any of it became fixable.</p>
+    <div class="figure">
+      <div class="pipe">
+        <ol class="steps">
+          <li><span class="n">01</span><span class="t"><b>Ingest</b><span>errors, logs, experiments, replays</span></span></li>
+          <li><span class="n">02</span><span class="t"><b>Cluster</b><span>by meaning, via an LLM read</span></span></li>
+          <li><span class="n">03</span><span class="t"><b>Research</b><span>agents dig in through the MCP</span></span></li>
+          <li><span class="n">04</span><span class="t"><b>Triage</b><span>needs-data · needs-a-human · ready</span></span></li>
+          <li><span class="n">05</span><span class="t"><b>Patch</b><span>sandbox fix, PR iterates until CI is green</span></span></li>
+        </ol>
+        <blockquote class="pull">"Instead of ever opening your analytics, your errors, or your logs, you wake up to PRs sitting ready for you in GitHub."<cite>PostHog Engineering</cite></blockquote>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://posthog.com/blog/what-if-your-product-built-itself" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s05 · Codex-maxxing ═══════════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 064</span>
+    <span>05 / 06 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev Tools · Agents</span>
+    <h2 class="hed">Cut the goal into <em>verifiable</em> steps.</h2>
+    <p class="lede">A new OpenAI playbook on running Codex for hours, not prompts: break an ambitious goal into discrete steps that each end in a check, keep continuity across workstreams, and learn when to delegate execution versus hold human oversight. It leans on GPT-5.1-Codex-Max compaction — trained to work across many context windows, coherent over millions of tokens — so you start a task, walk away, and steer it from your phone at each decision point.</p>
+    <div class="figure">
+      <div class="blue">
+        <span class="cm tl"></span><span class="cm br"></span>
+        <div class="flow">
+          <div class="row"><span class="box">GOAL</span><span class="ann">— too big for one prompt</span></div>
+          <div class="row"><span class="box">step</span><span class="chk">→ verify ✓</span><span class="ann">— compaction carries context</span></div>
+          <div class="row"><span class="box">step</span><span class="chk">→ verify ✓</span><span class="ann">— steer from phone at the fork</span></div>
+          <div class="row"><span class="box">step</span><span class="chk">→ verify ✓</span><span class="ann">— delegate or take the wheel</span></div>
+          <div class="row"><span class="box">SHIP</span><span class="ann">— hours later, still coherent</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/codex-maxxing-long-running-work" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s06 · game-corovans ═══════════ -->
+<section class="spread s06" id="s06">
+  <header class="folio">
+    <span>Ephemeris · Issue 064</span>
+    <span>06 / 06 · via @TochkiNadAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Creative · Game Dev</span>
+    <h2 class="hed">Rob the caravans, <em>twenty years late.</em></h2>
+    <p class="lede">A boy named Kirill once mailed a studio his dream game — "rob the caravans" — and the letter became a Russian internet legend. Two decades on, a developer shipped it for real: a Three.js + Rapier open-world RPG where a forest elf ambushes merchant convoys, runs an 18-perk talent tree, and roams a ~1 km² world. It plays in the browser with no install, built as a Fable 5 experiment with the game logic split into testable simulation code.</p>
+    <div class="figure">
+      <div class="card">
+        <div class="row"><span class="k">stack</span><span class="v">Three.js · Rapier · TypeScript · Vite</span></div>
+        <div class="row"><span class="k">world</span><span class="v p">~1 km² · seeded terrain</span></div>
+        <div class="row"><span class="k">progression</span><span class="v">18 perks · Archer / Warrior / Ranger</span></div>
+        <div class="row"><span class="k">play</span><span class="v p">~40 MB · runs in the browser</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://github.com/yunit00/game-corovans" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ COLOPHON ═══════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 064</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Six picks for 23 June 2026 — security models that write their own patches, release primitives, a buffer bug years in the making, a product that files its own PRs, a long-horizon agent playbook, and a meme made playable.</p>
+    <div class="meta">
+      <div>
+        <h4>Sources</h4>
+        <p>OpenAI · Vercel · Cloudflare · PostHog · Telegram (@TochkiNadAI). Drawn from the day's newsletters, model-lab newsrooms, engineering blogs, and channel feeds.</p>
+      </div>
+      <div>
+        <h4>Rubric</h4>
+        <p>Tools to adopt this week, creative software, dev tooling and agentic coding, security with real signal, and anything immediately actionable for a senior engineer or founder.</p>
+      </div>
+      <div>
+        <h4>Issue</h4>
+        <p>No. 064 · Tuesday, 23 June 2026 · Zürich. Published daily at 08:00 CET. Links checked against the no-reprint ledger.</p>
+      </div>
+    </div>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>
