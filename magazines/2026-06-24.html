@@ -1,0 +1,632 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 065 · 24 Jun 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — from scaffold.html. Surface overrides below.
+     ═══════════════════════════════════════════════════════════════════ */
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+
+  .spread > .decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 52ch;
+    margin: 0;
+  }
+
+  .figure { width: 100%; }
+
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — surface only.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── Cover · date-hero (treatment E) ─── */
+  .cover { background: #07191a; color: #eaf4f1; }
+  .cover .kicker {
+    font-family: var(--sans); font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.34em;
+    font-size: 14px; opacity: 0.8;
+  }
+  .cover .datehero {
+    display: flex; align-items: baseline; flex-wrap: wrap;
+    gap: clamp(6px, 1.6vw, 22px); line-height: 0.82;
+  }
+  .cover .datehero .d {
+    font-family: var(--serif); font-weight: 900;
+    font-size: clamp(140px, 30vw, 400px);
+    color: #5fe3c2;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    letter-spacing: -0.045em; padding-bottom: 0.06em;
+  }
+  .cover .datehero .m {
+    font-family: var(--sans); font-weight: 800;
+    text-transform: uppercase;
+    font-size: clamp(44px, 10vw, 150px);
+    letter-spacing: 0.01em;
+  }
+  .cover .sub {
+    font-family: var(--sans); font-weight: 500;
+    letter-spacing: 0.26em; text-transform: uppercase;
+    font-size: 13px; opacity: 0.78;
+  }
+  .cover .dek {
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(22px, 2.2vw, 32px); line-height: 1.32;
+    max-width: 30ch; margin: 0;
+  }
+  .cover .dek em { font-style: normal; color: #5fe3c2; }
+  .cover .toc {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px 44px; padding-top: 18px;
+    border-top: 1px solid rgba(234,244,241,0.35); width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 4px 12px;
+    text-decoration: none; color: inherit; padding: 7px 0;
+    border-bottom: 1px dotted rgba(234,244,241,0.25);
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.82em; opacity: 0.66; }
+  .cover .toc .num {
+    font-family: var(--serif); font-weight: 700; font-style: italic;
+    color: #5fe3c2; margin-right: 10px;
+  }
+  @media (max-width: 800px) {
+    .cover .toc { grid-template-columns: 1fr; gap: 0; }
+  }
+
+  /* ─── s01 · teal grid (loud) ─── */
+  .s01 { background: #082a28; color: #eafbf5; }
+  .s01 .tag { color: #5fe3c2; border-color: #5fe3c2; }
+  .s01 .hed {
+    font-family: var(--sans); font-weight: 900;
+    text-transform: uppercase; letter-spacing: -0.02em;
+    font-size: clamp(44px, 6.6vw, 96px); line-height: 0.98;
+  }
+  .s01 .hed em {
+    font-style: normal; background: #5fe3c2; color: #06221f;
+    padding: 0 0.14em; border-radius: 2px;
+  }
+  .s01 .lede { color: #d3efe7; }
+  .s01 .read-on { color: #5fe3c2; border-color: #5fe3c2; --flip: #082a28; }
+  .scoutgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .scoutgrid .card {
+    border: 1px solid rgba(95,227,194,0.4);
+    border-radius: 8px; padding: 16px 16px 18px;
+    background: rgba(95,227,194,0.05); position: relative;
+  }
+  .scoutgrid .card .n {
+    font-family: var(--serif); font-style: italic; font-weight: 700;
+    font-size: 22px; color: #5fe3c2; letter-spacing: normal;
+  }
+  .scoutgrid .card b {
+    display: block; font-family: var(--sans); font-weight: 700;
+    font-size: 16px; margin: 4px 0 5px;
+  }
+  .scoutgrid .card p {
+    margin: 0; font-family: var(--sans); font-size: 14px;
+    line-height: 1.4; color: #b9ddd3;
+  }
+  @media (max-width: 800px) { .scoutgrid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 480px) { .scoutgrid { grid-template-columns: 1fr; } }
+
+  /* ─── s02 · museum placard (quiet, centered) ─── */
+  .s02 { background: #f4efe2; color: #20231f; }
+  .s02 .tag {
+    color: #244b46; border-color: #244b46;
+    letter-spacing: 0.28em; border-radius: 0;
+  }
+  .s02 .hed {
+    font-family: var(--serif); font-weight: 500; font-style: normal;
+    font-size: clamp(42px, 5.8vw, 88px); letter-spacing: -0.012em;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+  }
+  .s02 .hed em {
+    font-style: italic; color: #244b46;
+    font-variation-settings: "opsz" 144, "SOFT" 60, "WONK" 1;
+  }
+  .s02 .lede { color: #3a3d36; }
+  .s02 .read-on { color: #244b46; border-color: #244b46; --flip: #f4efe2; }
+  .placard {
+    border-top: 2px solid #244b46; border-bottom: 1px solid #244b46;
+    padding: 18px 6px; max-width: 540px; width: 100%;
+  }
+  .placard .specs {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 14px 36px; margin: 0;
+  }
+  .placard .specs > div { text-align: center; }
+  .placard dt {
+    font-family: var(--sans); text-transform: uppercase;
+    letter-spacing: 0.2em; font-size: 11px; color: #6b6d63; margin-bottom: 4px;
+  }
+  .placard dd {
+    margin: 0; font-family: var(--serif); font-style: italic;
+    font-size: 20px; color: #20231f;
+  }
+  @media (max-width: 480px) { .placard .specs { grid-template-columns: 1fr; } }
+
+  /* ─── s03 · spreadsheet (subdued, mono) ─── */
+  .s03 { background: #e9e9e4; color: #1b1b18; }
+  .s03 .tag {
+    color: #2b2f8a; border-color: #2b2f8a;
+    border-radius: 0; font-family: var(--mono); letter-spacing: 0.18em;
+  }
+  .s03 .hed {
+    font-family: var(--sans); font-weight: 700;
+    font-size: clamp(42px, 6vw, 92px); letter-spacing: -0.025em;
+  }
+  .s03 .hed em { font-style: normal; color: #2b2f8a; text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 6px; }
+  .s03 .lede { color: #34342f; }
+  .s03 .read-on { color: #2b2f8a; border-color: #2b2f8a; --flip: #e9e9e4; font-family: var(--mono); }
+  .sheet {
+    border: 1px solid #b6b6ae; max-width: 680px; width: 100%;
+    font-family: var(--mono); background: #f3f3ef;
+  }
+  .sheet .row {
+    display: grid; grid-template-columns: 1fr 1.3fr;
+    border-bottom: 1px solid #cfcfc7;
+  }
+  .sheet .row:last-child { border-bottom: 0; }
+  .sheet .row > span {
+    padding: 11px 14px; font-size: 14px;
+    border-right: 1px solid #cfcfc7;
+  }
+  .sheet .row > span:last-child { border-right: 0; color: #45453f; }
+  .sheet .row.head > span {
+    background: #2b2f8a; color: #f3f3ef; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.08em; font-size: 12px;
+  }
+  @media (max-width: 480px) {
+    .sheet .row { grid-template-columns: 1fr; }
+    .sheet .row > span { border-right: 0; }
+    .sheet .row > span:first-child { border-bottom: 1px solid #e0e0d8; }
+  }
+
+  /* ─── s04 · dark classified (loud, dark — tonal inversion) ─── */
+  .s04 { background: #0c0a0b; color: #efe4e0; }
+  .s04 .tag { color: #ec4040; border-color: #ec4040; border-radius: 0; }
+  .s04 .hed {
+    font-family: var(--sans); font-weight: 800;
+    text-transform: uppercase; letter-spacing: -0.015em;
+    font-size: clamp(42px, 6.4vw, 94px); line-height: 0.98;
+  }
+  .s04 .hed em {
+    font-style: normal; background: #ec4040; color: #0c0a0b;
+    padding: 0 0.12em;
+  }
+  .s04 .lede { color: #cdbfba; }
+  .s04 .read-on { color: #ec4040; border-color: #ec4040; --flip: #0c0a0b; }
+  .timeline {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+    max-width: 760px; width: 100%; border-top: 2px solid #ec4040;
+  }
+  .timeline li {
+    padding: 16px 14px 4px; position: relative;
+    border-right: 1px solid rgba(236,64,64,0.3);
+  }
+  .timeline li:last-child { border-right: 0; }
+  .timeline li::before {
+    content: ""; position: absolute; top: -7px; left: 0;
+    width: 12px; height: 12px; background: #ec4040; border-radius: 50%;
+  }
+  .timeline .when {
+    display: block; font-family: var(--mono); font-weight: 600;
+    font-size: 15px; color: #ec4040; letter-spacing: 0.04em;
+  }
+  .timeline .what {
+    display: block; font-family: var(--sans); font-size: 14px;
+    line-height: 1.4; color: #d8cbc6; margin-top: 6px;
+  }
+  @media (max-width: 640px) {
+    .timeline { grid-template-columns: 1fr 1fr; }
+    .timeline li { border-bottom: 1px solid rgba(236,64,64,0.2); }
+  }
+
+  /* ─── s05 · risograph duotone (loud) ─── */
+  .s05 { background: #f3efe5; color: #161412; }
+  .s05 .tag { color: #d6266f; border-color: #d6266f; }
+  .s05 .hed {
+    font-family: var(--serif); font-weight: 900;
+    font-size: clamp(44px, 6.6vw, 100px); letter-spacing: -0.02em;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+  }
+  .s05 .hed em {
+    font-style: italic; color: #d6266f;
+    font-variation-settings: "opsz" 144, "SOFT" 80, "WONK" 1;
+  }
+  .s05 .lede { color: #322d29; }
+  .s05 .read-on { color: #157a92; border-color: #157a92; --flip: #f3efe5; }
+  .riso { max-width: 560px; width: 100%; }
+  .riso svg { width: 100%; height: auto; display: block; mix-blend-mode: multiply; }
+  .risocap {
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px 16px;
+    font-family: var(--mono); font-size: 13px; margin-top: 8px;
+  }
+  .risocap .a { color: #157a92; }
+  .risocap .b { color: #d6266f; }
+
+  /* ─── s06 · newsprint (quiet, three columns) ─── */
+  .s06 { background: #f1ece0; color: #1a1a16; }
+  .s06 .tag {
+    color: #1a1a16; border-color: #1a1a16; border-radius: 0;
+    letter-spacing: 0.26em;
+  }
+  .s06 .hed {
+    font-family: var(--serif); font-weight: 800;
+    font-size: clamp(44px, 6.2vw, 92px); letter-spacing: -0.02em;
+  }
+  .s06 .hed em {
+    font-style: italic; color: #8a2b1f;
+    font-variation-settings: "opsz" 144, "SOFT" 60, "WONK" 1;
+  }
+  .s06 .lede { color: #353128; }
+  .s06 .read-on { color: #1a1a16; border-color: #1a1a16; --flip: #f1ece0; }
+  .newscols {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 0; max-width: 760px; width: 100%;
+    border-top: 2px solid #1a1a16; border-bottom: 1px solid #1a1a16;
+  }
+  .newscols .col { padding: 14px 18px; border-right: 1px solid rgba(26,26,22,0.25); }
+  .newscols .col:last-child { border-right: 0; }
+  .newscols .col .step {
+    font-family: var(--sans); text-transform: uppercase;
+    letter-spacing: 0.18em; font-size: 11px; color: #8a2b1f;
+    font-weight: 700; display: block; margin-bottom: 6px;
+  }
+  .newscols .col p {
+    margin: 0; font-family: var(--serif); font-size: 16px; line-height: 1.45;
+  }
+  @media (max-width: 640px) {
+    .newscols { grid-template-columns: 1fr; }
+    .newscols .col { border-right: 0; border-bottom: 1px solid rgba(26,26,22,0.2); }
+    .newscols .col:last-child { border-bottom: 0; }
+  }
+
+  /* ─── colophon · dark close ─── */
+  .colophon { background: #07191a; color: #eaf4f1; }
+  .colophon .hed { font-family: var(--serif); font-weight: 800; }
+  .colophon .hed em { font-style: italic; color: #5fe3c2; }
+  .colophon .lede { color: #c3ddd6; max-width: 56ch; }
+  .colophon .sources {
+    font-family: var(--mono); font-size: 13px; line-height: 1.9;
+    color: #9fc4bc; margin-top: 8px; letter-spacing: 0.02em;
+  }
+  .colophon .sources b { color: #5fe3c2; font-weight: 600; }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════════ COVER · date-hero ═══════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 065</span>
+    <span>Wed · 24 Jun 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <span class="kicker">Ephemeris.</span>
+    <div class="datehero"><span class="d">24</span><span class="m">Jun</span></div>
+    <span class="sub">Wednesday · 2026 · Six dispatches</span>
+    <p class="dek">Today: agents that <em>watch your data</em>, a model that broke a three-year stalemate, and a fishing game that explains why systems collapse.</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>The watcher you write in Markdown</span><span>PostHog</span></a>
+      <a href="#s02"><span><span class="num">02</span>Three years stuck, one session unstuck</span><span>OpenAI</span></a>
+      <a href="#s03"><span><span class="num">03</span>The agent stack, itemised</span><span>Vercel</span></a>
+      <a href="#s04"><span><span class="num">04</span>The clock on encryption starts now</span><span>Cloudflare</span></a>
+      <a href="#s05"><span><span class="num">05</span>Everyone fishes rationally. The ocean dies.</span><span>via @ProductsAndStartups</span></a>
+      <a href="#s06"><span><span class="num">06</span>A playlist in, notes out</span><span>via @ProductsAndStartups</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+</section>
+
+<!-- ═══════════ s01 · PostHog Scout · teal grid ═══════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 065</span>
+    <span>01 / 06 · PostHog</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev Tools · Agents</span>
+    <h2 class="hed">The watcher you write in <em>Markdown</em>.</h2>
+    <p class="lede">PostHog's scouts are small agents that read your product data, spot a pattern, and emit a signal — one surfaces broken API calls from the wild, another tracks brand sentiment across the open web. The branching you'd normally hard-code lives instead in plain-English Markdown skills, run by a harness that keeps its own memory between passes. The post is the whole architecture, laid open.</p>
+    <div class="figure">
+      <div class="scoutgrid">
+        <div class="card"><span class="n">01</span><b>Skill</b><p>Decision logic written as readable Markdown, not if/else trees.</p></div>
+        <div class="card"><span class="n">02</span><b>Harness</b><p>The runner that executes a skill on its schedule.</p></div>
+        <div class="card"><span class="n">03</span><b>Memory</b><p>State the scout carries from one run to the next.</p></div>
+        <div class="card"><span class="n">04</span><b>MCP scout</b><p>Watches API traffic and flags what's breaking.</p></div>
+        <div class="card"><span class="n">05</span><b>Mentions scout</b><p>Reads sentiment about you across the internet.</p></div>
+        <div class="card"><span class="n">06</span><b>Signal</b><p>The actionable ping a scout fires when it sees something.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://posthog.com/blog/what-is-a-scout" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s02 · OpenAI immunology · museum placard ═══════════ -->
+<section class="spread s02 centered" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 065</span>
+    <span>02 / 06 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Science · Research</span>
+    <h2 class="hed">Three years stuck. One <em>session</em> unstuck.</h2>
+    <p class="lede">Immunologist Derya Unutmaz had spent three years on a T-cell behaviour he couldn't explain. Handed the problem, GPT-5 Pro proposed the mechanism that fit — with threads pointing toward cancer and autoimmune work. It reads less like a chat transcript than like a collaborator who had absorbed every paper in the field. Worth ten minutes whether or not you ever set foot in a lab.</p>
+    <div class="figure">
+      <div class="placard">
+        <dl class="specs">
+          <div><dt>Field</dt><dd>T-cell behaviour</dd></div>
+          <div><dt>Open for</dt><dd>Three years</dd></div>
+          <div><dt>Resolved in</dt><dd>One session</dd></div>
+          <div><dt>Collaborator</dt><dd>GPT-5 Pro</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/gpt-5-immunology-mystery" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s03 · Vercel Agent Stack · spreadsheet ═══════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 065</span>
+    <span>03 / 06 · Vercel</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev Platform · Agents</span>
+    <h2 class="hed">The agent stack, <em>itemised</em>.</h2>
+    <p class="lede">Vercel laid out the parts list for a production agent: model access without lock-in, durable multi-step execution, sandboxed compute, scoped tokens to outside tools, and delivery to the channels users already live in. Even if you never ship on Vercel, it's a clean checklist of everything an agent needs past the prompt — the durability, isolation, and credentials that turn a demo into something you'd run.</p>
+    <div class="figure">
+      <div class="sheet">
+        <div class="row head"><span>Primitive</span><span>What it covers</span></div>
+        <div class="row"><span>AI SDK · Gateway</span><span>Unified model access, no vendor lock-in</span></div>
+        <div class="row"><span>Workflow SDK</span><span>Durable, resumable multi-step runs</span></div>
+        <div class="row"><span>Sandbox</span><span>Isolated compute for untrusted steps</span></div>
+        <div class="row"><span>Connect</span><span>Short-lived scoped tokens to tools</span></div>
+        <div class="row"><span>Chat SDK</span><span>Delivery to where users already are</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://vercel.com/blog/agent-stack" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s04 · Cloudflare post-quantum EO · dark classified ═══════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 065</span>
+    <span>04 / 06 · Cloudflare</span>
+  </header>
+  <div class="main">
+    <span class="tag">Privacy · Security</span>
+    <h2 class="hed">The clock on <em>encryption</em> starts now.</h2>
+    <p class="lede">A new executive order puts hard dates on post-quantum migration — a named lead by July, plans by September, encryption moved by end of 2030 and authentication by 2031, contractors included. Cloudflare's counsel: stop waiting for a perfect crypto inventory. Turn on post-quantum encryption for internet-facing traffic today, write it into procurement at no extra cost, and start a quantum-impact inventory for the long-lived keys that "harvest now, decrypt later" attacks come for first.</p>
+    <div class="figure">
+      <ol class="timeline">
+        <li><span class="when">JUL 2026</span><span class="what">Name a post-quantum migration lead</span></li>
+        <li><span class="when">SEP 2026</span><span class="what">Submit agency migration plans</span></li>
+        <li><span class="when">DEC 2030</span><span class="what">Encryption transitioned</span></li>
+        <li><span class="when">DEC 2031</span><span class="what">Authentication transitioned</span></li>
+      </ol>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.cloudflare.com/post-quantum-eo-2026/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s05 · Fish Banks · risograph duotone ═══════════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 065</span>
+    <span>05 / 06 · via @ProductsAndStartups</span>
+  </header>
+  <div class="main">
+    <span class="tag">Simulation · Systems</span>
+    <h2 class="hed">Everyone fishes <em>rationally</em>. The ocean dies anyway.</h2>
+    <p class="lede">Fish Banks rebuilds Dennis Meadows' tragedy-of-the-commons model as a playable multiplayer sandbox. Each team sees only its own cash and catch, never the hidden fish stock, so individually sensible buying strip-mines the shared sea. It runs fully offline, headless from Node, and is built for an agent to extend — add quotas, change pricing, or let Claude run a fishing company and watch it drain the commons. What it drills home is that structure, not character, drives the crash.</p>
+    <div class="figure">
+      <div class="riso">
+        <svg viewBox="0 0 320 150" role="img" aria-label="Fish stock collapsing over eight rounds">
+          <path d="M6,40 C70,38 120,58 170,92 C210,118 250,134 314,140" fill="none" stroke="#157a92" stroke-width="6" stroke-linecap="round"/>
+          <path d="M9,46 C73,44 123,64 173,98 C213,124 253,140 317,146" fill="none" stroke="#d6266f" stroke-width="6" stroke-linecap="round" opacity="0.85"/>
+          <line x1="6" y1="140" x2="314" y2="140" stroke="#161412" stroke-width="1.5" opacity="0.4"/>
+        </svg>
+        <div class="risocap"><span class="a">— Fish stock</span><span class="b">↘ collapse by round 8</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://github.com/BayramAnnakov/fishbanks-sandbox" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s06 · youtube-playlist-to-markdown · newsprint ═══════════ -->
+<section class="spread s06" id="s06">
+  <header class="folio">
+    <span>Ephemeris · Issue 065</span>
+    <span>06 / 06 · via @ProductsAndStartups</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev Tools · Workflow</span>
+    <h2 class="hed">A playlist in. <em>Notes</em> out.</h2>
+    <p class="lede">Point this at a YouTube playlist and it transcribes every video, lifts the signal with retrieval, and assembles an interactive HTML mini-site of notes — plus a NotebookLM-ready feed for audio you can take on a walk. It's the conference-backlog problem solved as a pipeline: skip the live watch, read the distilled version, keep the source. Clone it, aim it at your own backlog, and read tonight.</p>
+    <div class="figure">
+      <div class="newscols">
+        <div class="col"><span class="step">01 · Transcribe</span><p>Every video in the playlist, pulled down to text.</p></div>
+        <div class="col"><span class="step">02 · Retrieve</span><p>The signal lifted out with retrieval-augmentation.</p></div>
+        <div class="col"><span class="step">03 · Assemble</span><p>An interactive HTML site, plus a NotebookLM audio feed.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://github.com/BayramAnnakov/youtube-playlist-to-markdown" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ COLOPHON ═══════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 065</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Six picks for a senior engineer or founder with ten minutes: tools to adopt this week, dev and agent infrastructure, one privacy-and-security read with a real deadline, and a piece of science with a practical kernel.</p>
+    <p class="sources">
+      Sources today — <b>PostHog</b> · <b>OpenAI</b> · <b>Vercel</b> · <b>Cloudflare</b> · Telegram's <b>@ProductsAndStartups</b><br>
+      Issue 065 · Wednesday 24 June 2026 · Europe/Zürich
+    </p>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>
