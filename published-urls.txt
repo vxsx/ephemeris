@@ -42,6 +42,7 @@ https://anthropic.com/research/labor-market-impacts
 https://anthropic.com/research/natural-language-autoencoders
 https://anthropic.com/research/teaching-claude-why
 https://antigravity.google/blog/google-io-2026
+https://artificialanalysis.ai/articles/nvidia-nemotron-3-ultra-released
 https://arxiv.org/abs/2509.00462
 https://arxiv.org/abs/2512.12087
 https://arxiv.org/abs/2603.01203
@@ -66,6 +67,7 @@ https://blog.cloudflare.com/casb-anthropic-integration
 https://blog.cloudflare.com/celebrating-12-years-of-project-galileo
 https://blog.cloudflare.com/claude-managed-agents
 https://blog.cloudflare.com/clickhouse-query-plan-contention
+https://blog.cloudflare.com/cloudflare-one-stack
 https://blog.cloudflare.com/code-orange-fail-small-complete
 https://blog.cloudflare.com/copy-fail-linux-vulnerability-mitigation
 https://blog.cloudflare.com/cyber-frontier-models
@@ -79,6 +81,7 @@ https://blog.cloudflare.com/hyper-bug
 https://blog.cloudflare.com/internal-ai-engineering-stack
 https://blog.cloudflare.com/iran-internet-partially-restored-may-2026
 https://blog.cloudflare.com/making-rust-workers-reliable
+https://blog.cloudflare.com/oauth-for-all
 https://blog.cloudflare.com/optimizing-core-unit-boot-time
 https://blog.cloudflare.com/our-unified-data-platform
 https://blog.cloudflare.com/past-bots-and-humans
@@ -208,6 +211,7 @@ https://jack-clark.net/2026/05/26/import-ai-458-reckoning-with-the-future-and-a-
 https://jack-clark.net/2026/06/01/import-ai-459-ai-oversight-is-difficult-scaling-laws-for-protein-folding-models-and-pricing-the-extinction-risk-of-ai-systems
 https://jack-clark.net/2026/06/08/import-ai-460-reward-hacking-society-rsi-data-from-anthropic-and-rl-based-quadcopter-racing
 https://jack-clark.net/2026/06/15/import-ai-461-alignment-is-not-on-track-frontiercode-and-synthetic-research-interns
+https://jack-clark.net/2026/06/22/import-ai-462-superpersuasion-self-sustaining-ai-paths-to-asi
 https://jeffbullas.com/ai-reinvention-truth
 https://jeffbullas.com/ai-slop-crisis
 https://jeffbullas.com/distraction-economy
@@ -355,6 +359,7 @@ https://t.me/TochkiNadAI/2324
 https://techcrunch.com/2026/05/19/googles-gemini-omni-turns-images-audio-and-text-into-video-and-thats-just-the-start
 https://techspot.com/news/112386-amazon-employees-using-internal-ai-tools-inflate-usage.html
 https://telegram.org/blog/ai-bot-revolution-11-new-features
+https://thenextweb.com/news/bytedance-seedance-2-5-ai-video-4k-30-seconds
 https://therundown.ai/p/openai-superapp-hiding-inside-codex
 https://theverge.com/ai-artificial-intelligence/952011/midjourney-medical-ai-ultrasound-scan
 https://thezvi.substack.com/p/ai-165-in-our-image

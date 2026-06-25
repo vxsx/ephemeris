@@ -1,0 +1,557 @@
+<!doctype html>
+<!-- Ephemeris · Issue 066 · 2026-06-25 · built on scaffold.html (locked structure) -->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 066 · 25 June 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — copied verbatim from scaffold.html.
+     ═══════════════════════════════════════════════════════════════════ */
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+
+  .spread > .decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+
+  .figure { width: 100%; }
+
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — surface only.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── Cover: date-hero ─── */
+  .cover { background: #f1ebdd; color: #171310; }
+  .cover .wordmark {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(20px, 2.2vw, 30px);
+    letter-spacing: 0.01em;
+    margin: 0;
+  }
+  .cover .datehero {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    font-size: clamp(78px, 17vw, 280px);
+    line-height: 0.82;
+    letter-spacing: -0.04em;
+    color: #15110c;
+    padding-bottom: 0.1em;
+    margin: 0;
+  }
+  .cover .datehero em {
+    font-style: italic;
+    color: #c43c14;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .cover .dek {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(20px, 2vw, 30px);
+    line-height: 1.32;
+    max-width: 30ch;
+    margin: 0;
+  }
+  .cover .toc {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px 40px;
+    padding-top: 18px;
+    border-top: 2px solid #171310;
+    width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 4px 12px;
+    text-decoration: none; color: inherit;
+    padding: 7px 0;
+    border-bottom: 1px dotted rgba(23,19,16,0.3);
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.82em; opacity: 0.65; letter-spacing: 0.04em; }
+  .cover .toc .num {
+    font-family: var(--serif); font-weight: 800; font-style: italic;
+    color: #c43c14; margin-right: 10px;
+  }
+  @media (max-width: 800px) { .cover .toc { grid-template-columns: 1fr; gap: 0; } }
+
+  /* ─── s01 · Dark report / classified — superpersuasion ─── */
+  .s01 { background: #0c0708; color: #e9dfda; }
+  .s01 .folio { opacity: 0.6; }
+  .s01 .tag { color: #ef3b3b; border-color: #ef3b3b; }
+  .s01 .hed {
+    font-family: var(--sans);
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: clamp(40px, 6.2vw, 96px);
+    line-height: 1.0;
+    letter-spacing: -0.015em;
+  }
+  .s01 .hed em {
+    font-style: normal;
+    background: #c01616;
+    color: #0c0708;
+    padding: 0 0.12em;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+  .s01 .lede { color: #cdbfb8; }
+  .s01 .bars {
+    display: flex; flex-direction: column; gap: 14px;
+    font-family: var(--mono); font-size: 13px;
+    max-width: 640px; margin-top: 4px;
+  }
+  .s01 .bars .row { display: grid; grid-template-columns: 1fr auto; gap: 4px 14px; align-items: center; }
+  .s01 .bars .lbl { letter-spacing: 0.04em; text-transform: uppercase; opacity: 0.85; }
+  .s01 .bars .val { font-weight: 600; color: #ef3b3b; }
+  .s01 .bars .track { grid-column: 1 / -1; height: 14px; background: rgba(255,255,255,0.07); }
+  .s01 .bars .fill { height: 100%; background: #c01616; }
+  .s01 .read-on { color: #ef3b3b; border-color: #ef3b3b; --flip: #0c0708; }
+  .s01 .decor::before {
+    content: "CONFIDENTIAL"; position: absolute;
+    top: 38%; right: -4vw; transform: rotate(-90deg); transform-origin: right top;
+    font-family: var(--mono); font-size: clamp(40px, 9vw, 150px);
+    color: rgba(192,22,22,0.07); letter-spacing: 0.1em; white-space: nowrap;
+  }
+
+  /* ─── s02 · Big stats / orange — Nemotron 3 Ultra ─── */
+  .s02 { background: #e8540f; color: #1a0c04; }
+  .s02 .tag { color: #1a0c04; border-color: #1a0c04; }
+  .s02 .hed {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-variation-settings: "opsz" 144, "WONK" 1;
+    font-size: clamp(46px, 6.6vw, 100px);
+  }
+  .s02 .hed em { font-style: italic; color: #fff1e4; font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; }
+  .s02 .bignum {
+    display: block;
+    font-family: var(--sans);
+    font-weight: 900;
+    font-size: clamp(96px, 21vw, 280px);
+    line-height: 0.82;
+    letter-spacing: -0.05em;
+    color: #1a0c04;
+  }
+  .s02 .bignum .unit {
+    font-family: var(--sans);
+    font-style: normal;
+    font-weight: 800;
+    font-size: 0.16em;
+    letter-spacing: normal;
+    text-transform: uppercase;
+    margin-left: 0.4em;
+    vertical-align: baseline;
+  }
+  .s02 .stats {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(16px, 2vw, 34px); width: 100%; margin-top: 10px;
+    border-top: 2px solid #1a0c04; padding-top: 16px;
+  }
+  .s02 .stats dt { font-family: var(--sans); font-weight: 800; font-size: clamp(28px, 3.4vw, 46px); letter-spacing: -0.02em; }
+  .s02 .stats dd { margin: 4px 0 0; font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.78; }
+  .s02 .read-on { color: #1a0c04; border-color: #1a0c04; --flip: #e8540f; }
+  @media (max-width: 800px) { .s02 .stats { grid-template-columns: 1fr; gap: 14px; } }
+
+  /* ─── s03 · Film still — Seedance 2.5 ─── */
+  .s03 { background: #08090b; color: #f2f2ee; }
+  .s03 .folio { opacity: 0.55; }
+  .s03 .tag { color: #d8c9a0; border-color: #d8c9a0; }
+  .s03 .hed {
+    font-family: var(--sans);
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: clamp(36px, 5.6vw, 84px);
+    line-height: 1.03;
+    letter-spacing: 0.005em;
+  }
+  .s03 .lede { color: #cfcec6; }
+  .s03 .frame {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    gap: 16px 24px; flex-wrap: wrap;
+    border: 2px solid rgba(242,242,238,0.45);
+    padding: clamp(18px, 2.6vw, 34px);
+    font-family: var(--mono);
+  }
+  .s03 .frame .tc { font-size: clamp(20px, 3vw, 38px); font-weight: 600; letter-spacing: 0.04em; }
+  .s03 .frame .tc b { color: #d8c9a0; font-weight: 600; }
+  .s03 .frame .meta { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.7; text-align: right; }
+  .s03 .read-on { color: #f2f2ee; border-color: #f2f2ee; --flip: #08090b; }
+  .s03 .decor::before {
+    content: ""; position: absolute; inset: 0;
+    background: repeating-linear-gradient(0deg, rgba(255,255,255,0.035) 0 1px, transparent 1px 4px);
+  }
+  .s03 .decor::after {
+    content: "● REC"; position: absolute; top: clamp(80px, 10vw, 130px); right: clamp(24px, 6vw, 120px);
+    font-family: var(--mono); font-size: 13px; letter-spacing: 0.2em; color: rgba(216,201,160,0.5);
+  }
+
+  /* ─── s04 · Blueprint — Cloudflare OAuth migration ─── */
+  .s04 { background: #dde5ec; color: #14202b; }
+  .s04 .tag { color: #1f6feb; border-color: #1f6feb; }
+  .s04 .hed {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(42px, 6vw, 96px);
+  }
+  .s04 .hed em { font-style: italic; color: #1f9e5a; }
+  .s04 .diagram {
+    display: flex; align-items: center; gap: clamp(10px, 1.8vw, 24px);
+    flex-wrap: wrap; font-family: var(--mono); margin-top: 4px;
+  }
+  .s04 .node { border: 1.5px solid currentColor; padding: 12px 16px; font-size: 13px; letter-spacing: 0.04em; }
+  .s04 .node.blue { color: #1f6feb; }
+  .s04 .node.green { color: #1f9e5a; }
+  .s04 .arrow { font-size: 20px; opacity: 0.6; }
+  .s04 .annot { width: 100%; margin-top: 14px; font-family: var(--mono); font-size: 13px; line-height: 1.7; color: #2b3947; }
+  .s04 .annot span { color: #1f6feb; }
+  .s04 .read-on { color: #14202b; border-color: #14202b; --flip: #dde5ec; }
+  .s04 .decor::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(0deg, rgba(31,111,235,0.07) 0 1px, transparent 1px 32px),
+      repeating-linear-gradient(90deg, rgba(31,111,235,0.07) 0 1px, transparent 1px 32px);
+  }
+  .s04 .decor::after {
+    content: ""; position: absolute; right: clamp(24px, 6vw, 100px); bottom: clamp(40px, 6vw, 90px);
+    width: 26px; height: 26px;
+    border-right: 1.5px solid rgba(20,32,43,0.4); border-bottom: 1.5px solid rgba(20,32,43,0.4);
+  }
+  @media (max-width: 800px) { .s04 .decor::after { display: none; } }
+
+  /* ─── s05 · Memo / airgram — Cloudflare One stack ─── */
+  .s05 { background: #efe8d8; color: #2a2114; }
+  .s05 .tag { color: #7a1f12; border-color: #7a1f12; }
+  .s05 .hed {
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: clamp(32px, 4.6vw, 66px);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+  }
+  .s05 .hed em { font-style: normal; color: #7a1f12; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 5px; }
+  .s05 .memo {
+    border-left: 3px double #7a1f12;
+    padding-left: clamp(16px, 2vw, 28px);
+    font-family: var(--mono); font-size: 13px; line-height: 1.7;
+    max-width: 620px;
+  }
+  .s05 .memo .hdr { letter-spacing: 0.06em; text-transform: uppercase; color: #7a1f12; margin-bottom: 10px; }
+  .s05 .memo ol { margin: 0; padding-left: 1.4em; }
+  .s05 .memo li { margin: 4px 0; }
+  .s05 .read-on { color: #7a1f12; border-color: #7a1f12; --flip: #efe8d8; }
+  .s05 .decor::before {
+    content: "MEMO"; position: absolute;
+    bottom: -3vw; left: clamp(24px, 6vw, 120px);
+    font-family: var(--serif); font-weight: 900; font-size: clamp(80px, 18vw, 240px);
+    color: rgba(122,31,18,0.06); letter-spacing: -0.03em;
+  }
+
+  /* ─── Colophon ─── */
+  .colophon { background: #100c0d; color: #e9e2da; }
+  .colophon .tag { color: #c43c14; border-color: #c43c14; }
+  .colophon .hed em { font-style: italic; color: #c43c14; font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; }
+  .colophon .lede { color: #c8bdb6; max-width: 60ch; }
+  .colophon .meta { font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.6; margin-top: 8px; }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ── COVER ── -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 066</span>
+    <span>Thursday · 25 Jun 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <p class="wordmark">Ephemeris.</p>
+    <h1 class="datehero">25 <em>JUN</em> 26</h1>
+    <p class="dek">Today: persuasion that beats the professionals, an open model built for speed, and infrastructure that moves while you watch.</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>AI out-argues the experts</span><span>Import AI</span></a>
+      <a href="#s02"><span><span class="num">02</span>America's fastest open model</span><span>Artificial Analysis</span></a>
+      <a href="#s03"><span><span class="num">03</span>30-second 4K from one prompt</span><span>via @denissexy</span></a>
+      <a href="#s04"><span><span class="num">04</span>Swapping the OAuth engine live</span><span>Cloudflare</span></a>
+      <a href="#s05"><span><span class="num">05</span>Agents that migrate your VPN</span><span>Cloudflare</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+</section>
+
+<!-- ── s01 · Superpersuasion ── -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 066</span>
+    <span>01 / 5 · Import AI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Research · Persuasion</span>
+    <h2 class="hed">The model out-argued the <em>experts</em>.</h2>
+    <p class="lede">Oxford, Stanford, the LSE and the UK AI Security Institute ran 18,978 conversations across 6,923 people, pitting AI against elite debaters and professional fundraisers on policy questions and real charity donations. The AI won every category — even against humans given prep time, training and cash incentives. Throttle it to human typing speed and message length, though, and the edge disappears.</p>
+    <div class="figure">
+      <div class="bars">
+        <div class="row"><span class="lbl">Capped to human speed</span><span class="val">+0.0 pp</span><span class="track"><span class="fill" style="width:2%"></span></span></div>
+        <div class="row"><span class="lbl">Vs. pro fundraisers</span><span class="val">+5.9 pp</span><span class="track"><span class="fill" style="width:49%"></span></span></div>
+        <div class="row"><span class="lbl">Real donations raised</span><span class="val">+10.8 pp</span><span class="track"><span class="fill" style="width:90%"></span></span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://jack-clark.net/2026/06/22/import-ai-462-superpersuasion-self-sustaining-ai-paths-to-asi/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ── s02 · Nemotron 3 Ultra ── -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 066</span>
+    <span>02 / 5 · Artificial Analysis</span>
+  </header>
+  <div class="main">
+    <span class="tag">Open models · Inference</span>
+    <h2 class="hed">America's open model, built to <em>run</em>.</h2>
+    <p class="lede">NVIDIA's Nemotron 3 Ultra is the most capable US open-weights model yet — 550B parameters, 55B active — scoring 47.7 on the Artificial Analysis Intelligence Index, ahead of Gemma 4 and gpt-oss but behind China's Kimi K2.6. The pitch is throughput: past 400 tokens a second, it sits on the intelligence-versus-latency Pareto frontier and finished agentic tasks faster than every rival at every turn limit.</p>
+    <div class="figure">
+      <span class="bignum">550<span class="unit">B params</span></span>
+      <dl class="stats">
+        <div><dt>47.7</dt><dd>Intelligence Index</dd></div>
+        <div><dt>55B</dt><dd>Active parameters</dd></div>
+        <div><dt>400+</dt><dd>Tokens / second</dd></div>
+      </dl>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://artificialanalysis.ai/articles/nvidia-nemotron-3-ultra-released" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ── s03 · Seedance 2.5 ── -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 066</span>
+    <span>03 / 5 · via @denissexy</span>
+  </header>
+  <div class="main">
+    <span class="tag">Generative video · Creative</span>
+    <h2 class="hed">Thirty seconds. One prompt. No cuts.</h2>
+    <p class="lede">ByteDance's Seedance 2.5 renders a full 30-second clip at native 4K from a single prompt, with 10-bit colour and sound generated in the same pass so action and audio line up on their own. It accepts up to 50 reference inputs and shows a scene as a 3D white-box before committing to a full render. Enterprise beta now, public release targeted for early July — but not in the US, where the Hollywood IP fight still bites.</p>
+    <div class="figure">
+      <div class="frame">
+        <span class="tc">00:00 <b>▸</b> 00:30</span>
+        <span class="meta">Native 4K · 10-bit colour<br>50 references · synced audio</span>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://thenextweb.com/news/bytedance-seedance-2-5-ai-video-4k-30-seconds" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ── s04 · Cloudflare OAuth migration ── -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 066</span>
+    <span>04 / 5 · Cloudflare</span>
+  </header>
+  <div class="main">
+    <span class="tag">Infrastructure · Migration</span>
+    <h2 class="hed">Change the engine while the car keeps <em>driving</em>.</h2>
+    <p class="lede">Cloudflare opened Self-Managed OAuth to every developer — but the engineering lesson is how they swapped the OAuth engine underneath live traffic. A blue-green cutover queued every revocation during the upgrade window and replayed it afterward, so no session was lost. Indexes were rebuilt with CREATE INDEX CONCURRENTLY to dodge the exclusive locks that would have frozen active users, and they upgraded Hydra 1.x first to learn its behaviour before the riskier 2.x jump.</p>
+    <div class="figure">
+      <div class="diagram">
+        <span class="node blue">Hydra 1.x</span>
+        <span class="arrow">→</span>
+        <span class="node green">Hydra 2.x</span>
+      </div>
+      <p class="annot"><span>revocation queue</span> &rarr; captured live, replayed after cutover<br><span>CREATE INDEX CONCURRENTLY</span> &rarr; no locks, no frozen users</p>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.cloudflare.com/oauth-for-all/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ── s05 · Cloudflare One stack ── -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 066</span>
+    <span>05 / 5 · Cloudflare</span>
+  </header>
+  <div class="main">
+    <span class="tag">Agents · Zero Trust</span>
+    <h2 class="hed">Hand the VPN migration to an <em>agent</em>.</h2>
+    <p class="lede">The Cloudflare One stack ships the migration as agent skills rather than a slide deck. Point an agent at your network and it inventories your VPN apps, maps each one to the right Zero Trust primitive, and writes a deployment sequence — backed by the same playbook Cloudflare used to move enterprises off Zscaler and Netskope in hours, not months. The skills live on GitHub and reach a live API through the company's MCP server.</p>
+    <div class="figure">
+      <div class="memo">
+        <div class="hdr">RE: get off the VPN</div>
+        <ol>
+          <li>Inventory every VPN application in place</li>
+          <li>Map each to a Cloudflare Zero Trust primitive</li>
+          <li>Generate the recommended deployment sequence</li>
+          <li>Deploy through the MCP server's live API</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.cloudflare.com/cloudflare-one-stack/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ── COLOPHON ── -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 066</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <span class="tag">Colophon</span>
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Five reads on persuasion, open weights, generative video, and the plumbing under your auth. Sourced from Import AI, Artificial Analysis, The Next Web via @denissexy, and Cloudflare. Each pick had to clear one bar: would it change what a senior engineer or founder does this week.</p>
+    <p class="meta">Ephemeris · Issue 066 · 25 June 2026 · Zürich</p>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>
