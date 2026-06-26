@@ -1,0 +1,511 @@
+<!doctype html>
+<!-- Ephemeris · Issue 067 · 2026-06-26 · built from scaffold.html -->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 067 · 26 Jun 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — from scaffold.html. Do not restructure.
+     ═══════════════════════════════════════════════════════════════════ */
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+  .spread > .decor {
+    position: absolute; inset: 0; z-index: 0;
+    pointer-events: none; overflow: hidden;
+  }
+  .spread > .folio {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 8px 24px; flex-wrap: wrap;
+    font-family: var(--sans); font-size: 13px;
+    letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.75;
+  }
+  .spread > .main {
+    display: flex; flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center; align-items: flex-start; min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block; font-family: var(--sans);
+    font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase;
+    padding: 6px 12px; border: 1px solid currentColor; border-radius: 999px; opacity: 0.9;
+  }
+  .hed {
+    font-family: var(--serif); font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02; letter-spacing: -0.02em;
+    padding-bottom: 0.12em; word-break: break-word;
+  }
+  .lede {
+    font-family: var(--serif); font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45; max-width: 50ch; margin: 0;
+  }
+  .figure { width: 100%; }
+  .read-on {
+    display: inline-block; font-family: var(--sans);
+    font-weight: 600; font-size: 15px; letter-spacing: 0.08em;
+    text-transform: uppercase; padding: 14px 22px;
+    border: 2px solid currentColor; text-decoration: none; color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — surface only.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── Cover: single-word mood "PRODUCTION", near-black indigo ─── */
+  .cover { background: #07070f; color: #ecebff; }
+  .cover > .main { align-items: center; text-align: center; }
+  .cover .wordmark {
+    font-family: var(--mono); font-size: 13px; letter-spacing: 0.42em;
+    text-transform: uppercase; color: #8d8ad6; margin: 0;
+  }
+  .cover .mood {
+    font-family: var(--sans); font-weight: 900;
+    font-size: clamp(64px, 17vw, 250px); line-height: 0.84;
+    letter-spacing: -0.04em; margin: 0; padding-bottom: 0.08em;
+    background: linear-gradient(95deg, #67e8f9 0%, #a78bfa 52%, #f0abfc 100%);
+    -webkit-background-clip: text; background-clip: text;
+    color: transparent; -webkit-text-fill-color: transparent;
+  }
+  .cover .dek {
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(20px, 2.1vw, 30px); line-height: 1.34;
+    max-width: 30ch; color: #cdccf0; margin: 0;
+  }
+  .cover .toc {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 40px; padding-top: 20px; margin-top: 6px;
+    border-top: 1px solid rgba(167,139,250,0.4); width: 100%; text-align: left;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 4px 12px; text-decoration: none; color: inherit;
+    padding: 7px 0; border-bottom: 1px dotted rgba(167,139,250,0.28);
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.82em; color: #8d8ad6; }
+  .cover .toc .num {
+    font-family: var(--mono); font-weight: 600; color: #67e8f9; margin-right: 12px;
+  }
+  .cover .decor::before {
+    content: ""; position: absolute; left: 50%; top: 50%;
+    width: 80vw; height: 80vw; transform: translate(-50%,-50%);
+    background: radial-gradient(circle, rgba(124,92,250,0.18), transparent 62%);
+  }
+  @media (max-width: 800px) {
+    .cover .toc { grid-template-columns: 1fr; gap: 0; }
+  }
+
+  /* ─── s01 · Midnight — Next.js Instant Navigations ─── */
+  .s01 { background: #0a1330; color: #dfe6ff; }
+  .s01 .tag { color: #7ee7ff; border-color: rgba(126,231,255,0.5); }
+  .s01 .hed {
+    background: linear-gradient(100deg, #7ee7ff, #b69bff 58%, #f0abfc);
+    -webkit-background-clip: text; background-clip: text;
+    color: transparent; -webkit-text-fill-color: transparent;
+  }
+  .s01 .hed em {
+    font-style: italic; background: none;
+    color: #7ee7ff; -webkit-text-fill-color: #7ee7ff;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s01 .lede { color: #c2ccef; }
+  .s01 .figure { display: flex; flex-direction: column; gap: 18px; }
+  .s01 .pf {
+    display: grid; grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 12px; width: 100%;
+  }
+  .s01 .pf .c {
+    border: 1px solid rgba(126,231,255,0.32); border-radius: 12px;
+    padding: 16px 16px 18px; background: rgba(126,231,255,0.05);
+  }
+  .s01 .pf .c b {
+    display: block; font-family: var(--mono); font-size: 13px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: #7ee7ff; margin-bottom: 8px;
+  }
+  .s01 .pf .c span { font-family: var(--sans); font-size: 15px; color: #c2ccef; line-height: 1.4; }
+  .s01 .ba {
+    font-family: var(--mono); font-size: clamp(15px, 1.5vw, 18px);
+    color: #cdd6f7; line-height: 1.7;
+  }
+  .s01 .ba .big {
+    font-family: var(--serif); font-weight: 800; font-style: italic;
+    font-size: 1.7em; color: #f0abfc; -webkit-text-fill-color: #f0abfc;
+  }
+  .s01 .read-on { color: #7ee7ff; border-color: #7ee7ff; --flip: #0a1330; }
+  .s01 .decor::before {
+    content: ""; position: absolute; right: -10vw; top: -10vw;
+    width: 60vw; height: 60vw;
+    background: radial-gradient(circle, rgba(124,92,250,0.22), transparent 66%);
+  }
+
+  /* ─── s02 · Neo-brutalist yellow — Vercel AI SDK 7 ─── */
+  .s02 { background: #ffd400; color: #0a0a0a; }
+  .s02 .tag { color: #0a0a0a; border-color: #0a0a0a; border-width: 2px; font-weight: 700; }
+  .s02 .hed {
+    font-family: var(--sans); font-weight: 900; text-transform: uppercase;
+    font-size: clamp(40px, 7.4vw, 104px); line-height: 0.96; letter-spacing: -0.025em;
+    -webkit-text-fill-color: #0a0a0a; color: #0a0a0a;
+  }
+  .s02 .hed em {
+    font-style: normal; background: #0a0a0a; color: #ffd400; -webkit-text-fill-color: #ffd400;
+    padding: 0 0.1em; margin: 0 0.02em; box-decoration-break: clone; -webkit-box-decoration-break: clone;
+  }
+  .s02 .lede { font-family: var(--sans); font-weight: 500; color: #181400; }
+  .s02 .grid4 {
+    display: grid; grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 0; border: 3px solid #0a0a0a; width: 100%;
+  }
+  .s02 .grid4 div {
+    padding: 16px 18px; border: 1.5px solid #0a0a0a;
+  }
+  .s02 .grid4 b {
+    display: block; font-family: var(--mono); font-size: 13px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px;
+  }
+  .s02 .grid4 span { font-family: var(--sans); font-size: 15px; font-weight: 500; line-height: 1.38; }
+  .s02 .read-on { color: #0a0a0a; border-color: #0a0a0a; border-width: 3px; --flip: #ffd400; font-weight: 800; }
+
+  /* ─── s03 · Terminal — Cloudflare saga rollbacks ─── */
+  .s03 { background: #03150d; color: #46d97a; }
+  .s03 .tag { color: #46d97a; border-color: rgba(70,217,122,0.5); font-family: var(--mono); }
+  .s03 .hed {
+    font-family: var(--mono); font-weight: 600; letter-spacing: -0.01em;
+    font-size: clamp(33px, 5.1vw, 72px); line-height: 1.06;
+    color: #5ef08c; -webkit-text-fill-color: #5ef08c;
+  }
+  .s03 .hed em { font-style: normal; color: #d7ffe6; -webkit-text-fill-color: #d7ffe6; }
+  .s03 .lede { font-family: var(--sans); color: #9fe7ba; }
+  .s03 .term {
+    font-family: var(--mono); font-size: clamp(12.5px, 1.35vw, 15px); line-height: 1.7;
+    background: #021008; border: 1px solid rgba(70,217,122,0.4); border-radius: 8px;
+    padding: 18px 20px; color: #9fe7ba; white-space: pre; overflow-x: auto; width: 100%;
+  }
+  .s03 .term .k { color: #5ef08c; } .s03 .term .s { color: #d7ffe6; } .s03 .term .c { color: #3a7d56; }
+  .s03 .read-on { color: #46d97a; border-color: #46d97a; --flip: #03150d; }
+  .s03 .decor {
+    background: repeating-linear-gradient(0deg, rgba(70,217,122,0.05) 0 2px, transparent 2px 5px);
+  }
+
+  /* ─── s04 · Blueprint — OpenAI × Broadcom Jalapeño ─── */
+  .s04 { background: #eef4fb; color: #103a63; }
+  .s04 .tag { color: #1763b8; border-color: #1763b8; font-family: var(--mono); }
+  .s04 .hed {
+    font-family: var(--sans); font-weight: 600; letter-spacing: -0.015em;
+    font-size: clamp(38px, 5.5vw, 86px); line-height: 1.04;
+    color: #0f3057; -webkit-text-fill-color: #0f3057;
+  }
+  .s04 .hed em { font-style: normal; color: #1763b8; -webkit-text-fill-color: #1763b8; font-weight: 800; }
+  .s04 .lede { font-family: var(--sans); color: #2a567f; }
+  .s04 .specs {
+    display: grid; grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 1px; background: #bcd3ec; border: 1px solid #bcd3ec; width: 100%;
+  }
+  .s04 .specs div { background: #eef4fb; padding: 14px 16px; }
+  .s04 .specs dt {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: #5d83a8; margin: 0 0 4px;
+  }
+  .s04 .specs dd { margin: 0; font-family: var(--sans); font-weight: 700; font-size: clamp(18px,2vw,24px); color: #0f3057; }
+  .s04 .read-on { color: #1763b8; border-color: #1763b8; --flip: #eef4fb; }
+  .s04 .decor {
+    background-image:
+      linear-gradient(rgba(23,99,184,0.12) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(23,99,184,0.12) 1px, transparent 1px);
+    background-size: 30px 30px;
+  }
+  .s04 .decor i {
+    position: absolute; width: 22px; height: 22px;
+    border: 2px solid rgba(23,99,184,0.45);
+  }
+  .s04 .decor i.tr { right: 26px; top: clamp(76px, 9vw, 120px); border-left: 0; border-bottom: 0; }
+  .s04 .decor i.bl { left: 26px; bottom: 26px; border-right: 0; border-top: 0; }
+  .s04 .decor i.br { right: 26px; bottom: 26px; border-left: 0; border-top: 0; }
+
+  /* ─── s05 · Big stats violet — OpenAI agents at work ─── */
+  .s05 { background: #25104f; color: #f2eaff; }
+  .s05 .tag { color: #c6f24e; border-color: rgba(198,242,78,0.55); }
+  .s05 .hed {
+    font-family: var(--sans); font-weight: 800; letter-spacing: -0.02em;
+    font-size: clamp(40px, 6vw, 92px); line-height: 1.0;
+    color: #f6f0ff; -webkit-text-fill-color: #f6f0ff;
+  }
+  .s05 .hed em { font-style: italic; font-family: var(--serif); font-weight: 800; color: #c6f24e; -webkit-text-fill-color: #c6f24e; }
+  .s05 .lede { color: #d6c9f2; }
+  .s05 .stats {
+    display: grid; grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 20px 28px; width: 100%; border-top: 1px solid rgba(198,242,78,0.35); padding-top: 22px;
+  }
+  .s05 .stat .n {
+    font-family: var(--serif); font-weight: 800; letter-spacing: -0.045em;
+    font-size: clamp(54px, 8.5vw, 116px); line-height: 0.86; color: #c6f24e; display: block;
+  }
+  .s05 .stat .n .u {
+    font-family: var(--sans); font-weight: 700; font-size: 0.26em;
+    letter-spacing: normal; margin-left: 0.1em; color: #e7c8ff;
+  }
+  .s05 .stat .l {
+    display: block; margin-top: 10px; font-family: var(--sans); font-size: 14px;
+    line-height: 1.42; color: #d6c9f2;
+  }
+  .s05 .read-on { color: #c6f24e; border-color: #c6f24e; --flip: #25104f; }
+  .s05 .decor::before {
+    content: ""; position: absolute; left: -12vw; bottom: -12vw;
+    width: 58vw; height: 58vw;
+    background: radial-gradient(circle, rgba(198,242,78,0.12), transparent 64%);
+  }
+
+  /* ─── Colophon · ivory newsprint ─── */
+  .colophon { background: #f4f0e6; color: #1b1b1b; }
+  .colophon .hed {
+    font-family: var(--serif); font-weight: 700; color: #1b1b1b;
+    font-size: clamp(44px, 6vw, 92px);
+  }
+  .colophon .hed em { font-style: italic; color: #6b1f14; font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; }
+  .colophon .lede { color: #2a2a2a; max-width: 58ch; }
+  .colophon .meta {
+    font-family: var(--mono); font-size: 13px; letter-spacing: 0.04em;
+    color: #5a5346; line-height: 1.9; border-top: 1px solid #d6cfbd; padding-top: 16px; margin-top: 6px;
+  }
+  .colophon .folio { opacity: 0.6; }
+
+  @media (max-width: 800px) {
+    .s01 .pf  { grid-template-columns: 1fr; }
+    .s02 .grid4 { grid-template-columns: 1fr; }
+    .s04 .specs { grid-template-columns: 1fr; }
+    .s04 .decor i.tr, .s04 .decor i.bl, .s04 .decor i.br { display: none; }
+    .s05 .stats { grid-template-columns: 1fr; gap: 24px; }
+    .cover .mood { font-size: clamp(56px, 19vw, 150px); }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ════════ COVER ════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 067</span>
+    <span>Friday · 26 Jun 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <p class="wordmark">Ephemeris</p>
+    <h1 class="mood">PRODUCTION</h1>
+    <p class="dek">Today's issue is about the week AI tooling grew up: durable agents, instant apps, custom silicon, and five million people using it for real work.</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>The next page is already there</span><span>Next.js</span></a>
+      <a href="#s02"><span><span class="num">02</span>Agents that survive the restart</span><span>Vercel</span></a>
+      <a href="#s03"><span><span class="num">03</span>Roll a workflow back, step by step</span><span>Cloudflare</span></a>
+      <a href="#s04"><span><span class="num">04</span>OpenAI's first silicon, for inference</span><span>OpenAI</span></a>
+      <a href="#s05"><span><span class="num">05</span>Every department hired the agent</span><span>OpenAI</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ════════ s01 · Next.js 16.3 Instant Navigations ════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 067</span>
+    <span>01 / 05 · Next.js</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev Tools · Frontend</span>
+    <h2 class="hed">Click the link. The next page is <em>already there.</em></h2>
+    <p class="lede">Next.js 16.3 (preview) borrows the single-page-app trick to kill the dead beat after a click. Await data on the server and you now choose how a route navigates: Stream a loading shell, Cache it with <code>'use cache'</code>, or Block when you genuinely want the wait. An <code>instant()</code> Playwright helper and a Navigation Inspector keep instant routes from regressing — slow ones become errors in dev.</p>
+    <div class="figure">
+      <div class="pf">
+        <div class="c"><b>Stream</b><span>&lt;Suspense&gt; shows a shell at once, UI streams in after.</span></div>
+        <div class="c"><b>Cache</b><span>'use cache' reuses prior UI between requests, instantly.</span></div>
+        <div class="c"><b>Block</b><span>export const instant = false opts a route out on purpose.</span></div>
+      </div>
+      <p class="ba">Prefetch, rethought: not one request per link — <span class="big">one shell per route</span>, cached and reused across every link that points there.</p>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://nextjs.org/blog/next-16-3-instant-navigations" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ════════ s02 · Vercel AI SDK 7 ════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 067</span>
+    <span>02 / 05 · Vercel</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev Tools · Agents</span>
+    <h2 class="hed">Agents that survive the <em>restart.</em></h2>
+    <p class="lede">AI SDK 7 ships a WorkflowAgent (<code>@ai-sdk/workflow</code>) for durable, resumable execution that lives through process restarts, redeploys, and human approvals that arrive an hour later. A standardized <code>reasoning</code> option maps to each provider's native setting, and the SDK adds the plumbing a long-running agent needs to be safe in production.</p>
+    <div class="figure">
+      <div class="grid4">
+        <div><b>WorkflowAgent</b><span>Durable, resumable runs that survive restarts and deploys.</span></div>
+        <div><b>Upload once</b><span>uploadFile / uploadSkill pass references, not re-uploads.</span></div>
+        <div><b>Granular timeouts</b><span>Limits per total, per step, per chunk, per tool.</span></div>
+        <div><b>Signed approvals</b><span>HMAC-verified tool gates + MCP Apps UI in sandboxed iframes.</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://vercel.com/blog/ai-sdk-7" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ════════ s03 · Cloudflare saga rollbacks ════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 067</span>
+    <span>03 / 05 · Cloudflare</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev Tools · Durable Execution</span>
+    <h2 class="hed">Step four failed. <em>Walk the other three back.</em></h2>
+    <p class="lede">Cloudflare Workflows now take a <code>rollback</code> on <code>step.do()</code> — a compensating action paired with each forward step (debit, then credit). When a run terminates mid-flight, rollbacks fire in reverse start-order, even across parallel steps, and survive an engine restart by replaying durable step history without re-running side effects. The one rule: make handlers idempotent.</p>
+    <div class="figure">
+      <div class="term"><span class="k">await</span> step.do(<span class="s">"debit-bank-a"</span>,
+  () =&gt; bankA.debit(from, amount),
+  {
+    <span class="k">rollback</span>: <span class="k">async</span> ({ output }) =&gt;
+      bankA.credit(from, amount, output.id)
+  }
+);
+<span class="c">// terminate mid-saga → reversals run, newest first</span></div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.cloudflare.com/rollbacks-for-workflows/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ════════ s04 · OpenAI × Broadcom Jalapeño ════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 067</span>
+    <span>04 / 05 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Infrastructure · Silicon</span>
+    <h2 class="hed">OpenAI's first chip does <em>one job</em> — inference.</h2>
+    <p class="lede">Jalapeño is OpenAI's first Intelligence Processor, built with Broadcom from design to tape-out in nine months — what they call the fastest high-performance ASIC cycle yet. It's a purpose-built inference part, not a repurposed trainer: a large compute chiplet plus HBM, tuned for the data-movement and memory bottlenecks of reasoning and agentic workloads. Lab samples already run GPT-5.3-Codex-Spark at target power.</p>
+    <div class="figure">
+      <dl class="specs">
+        <div><dt>Design → tape-out</dt><dd>9 months</dd></div>
+        <div><dt>Built for</dt><dd>LLM inference</dd></div>
+        <div><dt>Perf / watt</dt><dd>Beats SOTA*</dd></div>
+        <div><dt>First deploy</dt><dd>End of 2026</dd></div>
+      </dl>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/openai-broadcom-jalapeno-inference-chip" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"><i class="tr"></i><i class="bl"></i><i class="br"></i></div>
+</section>
+
+<!-- ════════ s05 · OpenAI — How agents are transforming work ════════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 067</span>
+    <span>05 / 05 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Research · Future of Work</span>
+    <h2 class="hed">Every department <em>hired the agent.</em></h2>
+    <p class="lede">OpenAI's usage data marks the crossing from demo to daily work. Research requests are up 56× since November 2025, support 32×, engineering 27×. The work got longer, too: by May, 80.6% of requests mapped to tasks a person would spend over 30 minutes on, 70.2% to over an hour. Knowledge workers — Legal, Recruiting included — are now ~20% of Codex users and growing three times faster than developers.</p>
+    <div class="figure">
+      <dl class="stats">
+        <div class="stat"><span class="n">56<span class="u">×</span></span><span class="l">Research use of agents vs. November 2025</span></div>
+        <div class="stat"><span class="n">5<span class="u">M</span></span><span class="l">Weekly active Codex users, passed in June</span></div>
+        <div class="stat"><span class="n">80.6<span class="u">%</span></span><span class="l">Requests mapping to 30-minutes-plus human tasks</span></div>
+      </dl>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/how-agents-are-transforming-work" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ════════ COLOPHON ════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 067</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">A thin docket with thick signal: the week durable workflows, instant apps, and purpose-built silicon all landed at once, and the usage numbers caught up. Five picks, one rubric — what a senior engineer or founder could put to work this week.</p>
+    <p class="meta">Sources today — Next.js · Vercel · Cloudflare · OpenAI<br>Selected for: tools to adopt now, dev &amp; agent infrastructure, research with a practical kernel. Hype and pure announcements left out.<br>Issue 067 · Friday 26 June 2026 · Zürich</p>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>

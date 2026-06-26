@@ -91,6 +91,7 @@ https://blog.cloudflare.com/private-origins-dns-routing
 https://blog.cloudflare.com/q1-2026-internet-disruption-summary
 https://blog.cloudflare.com/quic-death-spiral-fix
 https://blog.cloudflare.com/realtime-threat-intel-waf-rules
+https://blog.cloudflare.com/rollbacks-for-workflows
 https://blog.cloudflare.com/scaling-security-scans
 https://blog.cloudflare.com/shared-dictionaries
 https://blog.cloudflare.com/temporary-accounts
@@ -234,6 +235,7 @@ https://newsletter.semianalysis.com/p/the-coding-assistant-breakdown-more
 https://nextjs.org/blog/agentic-future
 https://nextjs.org/blog/next-16-2
 https://nextjs.org/blog/next-16-2-ai
+https://nextjs.org/blog/next-16-3-instant-navigations
 https://nextjs.org/blog/nextjs-across-platforms
 https://nextjs.org/blog/turbopack-incremental-computation
 https://nvidianews.nvidia.com/news/nvidia-microsoft-windows-pcs-agents-rtx-spark
@@ -260,6 +262,7 @@ https://openai.com/index/gpt-5-5-instant
 https://openai.com/index/gpt-5-5-system-card
 https://openai.com/index/gpt-5-5-with-trusted-access-for-cyber
 https://openai.com/index/gpt-5-immunology-mystery
+https://openai.com/index/how-agents-are-transforming-work
 https://openai.com/index/how-chatgpt-protects-privacy
 https://openai.com/index/introducing-chatgpt-images-2-0
 https://openai.com/index/introducing-evmbench
@@ -274,6 +277,7 @@ https://openai.com/index/mrc-supercomputer-networking
 https://openai.com/index/nextdoor
 https://openai.com/index/notion
 https://openai.com/index/open-source-codex-orchestration-symphony
+https://openai.com/index/openai-broadcom-jalapeno-inference-chip
 https://openai.com/index/openai-frontier-models-and-codex-are-now-available-on-aws
 https://openai.com/index/openai-to-acquire-ona
 https://openai.com/index/our-response-to-the-tanstack-npm-supply-chain-attack
@@ -389,6 +393,7 @@ https://vercel.com/blog/agent-stack
 https://vercel.com/blog/agentic-infrastructure
 https://vercel.com/blog/ai-gateway-production-index
 https://vercel.com/blog/ai-gateway-production-index-june-2026
+https://vercel.com/blog/ai-sdk-7
 https://vercel.com/blog/build-knowledge-agents-without-embeddings
 https://vercel.com/blog/building-a-real-time-power-outage-map-with-next-js-on-vercel
 https://vercel.com/blog/how-conductor-moved-parallel-coding-agents-from-the-laptop-to-the-cloud-with-vercel-sandbox
