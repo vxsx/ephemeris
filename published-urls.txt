@@ -100,6 +100,7 @@ https://blog.cloudflare.com/voidzero-joins-cloudflare
 https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5
 https://blog.google/innovation-and-ai/products/gemini-app/next-evolution-gemini-app
 https://blog.google/innovation-and-ai/technology/research/gemini-for-science-io-2026
+https://blog.interceptfund.com/p/ending-respiratory-infections
 https://blog.maximeheckel.com/posts/on-rendering-the-sky-sunsets-and-planets
 https://blog.tilderesearch.com/blog/aurora
 https://bloomberg.com/news/articles/2026-05-26/china-expands-travel-curbs-to-top-ai-talent-at-private-firms
@@ -224,17 +225,20 @@ https://jeffbullas.com/stop-using-just-one-ai
 https://jeffbullas.com/truth-business-growth-strategy
 https://krea.ai/
 https://krea.ai/app
+https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models
 https://maxleiter.com/blog/weights
 https://metr.org/blog/2026-05-19-frontier-risk-report
 https://mf0.ai/
 https://microsoft.com/en-us/research/articles/whimsical-strategies-break-ai-agents-generating-out-of-distribution-adversarial-strategies-at-scale
 https://microsoft.com/en-us/security/blog/2026/06/02/microsoft-build-2026-securing-code-agents-and-models-across-the-development-lifecycle
 https://minimax.io/blog/minimax-m3
+https://mistral.ai/news/ocr-4
 https://moab.pro/articles/aeo-geo
 https://newsletter.semianalysis.com/p/the-coding-assistant-breakdown-more
 https://nextjs.org/blog/agentic-future
 https://nextjs.org/blog/next-16-2
 https://nextjs.org/blog/next-16-2-ai
+https://nextjs.org/blog/next-16-3-ai-improvements
 https://nextjs.org/blog/next-16-3-instant-navigations
 https://nextjs.org/blog/nextjs-across-platforms
 https://nextjs.org/blog/turbopack-incremental-computation
@@ -329,6 +333,7 @@ https://proofofconcept.pub/p/design-systems-are-now-inference
 https://qwen.ai/blog
 https://ramp.com/data/ai-index
 https://sciencenews.org/article/ai-tech-save-gray-whales
+https://scrollprize.org/firstscroll
 https://sentinelone.com/labs/fast16-mystery-shadowbrokers-reference-reveals-high-precision-software-sabotage-5-years-before-stuxnet
 https://sentry.engineering/blog/building-type-safe-metrics-api-in-swift-part-ii
 https://sentry.engineering/blog/do-you-really-need-an-mcp-to-build-your-app
@@ -411,6 +416,7 @@ https://vercel.com/blog/making-turborepo-ninety-six-percent-faster-with-agents-s
 https://vercel.com/blog/optimizing-vercel-sandbox-snapshots
 https://vercel.com/blog/protecting-against-inference-theft
 https://vercel.com/blog/protecting-against-token-theft
+https://vercel.com/blog/teaching-agents-product-design-at-vercel
 https://vercel.com/blog/vercel-flags-platform-native-feature-flags
 https://vercel.com/blog/we-ralph-wiggumed-webstreams-to-make-them-10x-faster
 https://vercel.com/blog/zdr-on-ai-gateway
