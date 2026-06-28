@@ -132,6 +132,7 @@ https://deeplearning.ai/the-batch/issue-354
 https://deeplearning.ai/the-batch/issue-355
 https://deeplearning.ai/the-batch/issue-356
 https://deeplearning.ai/the-batch/issue-357
+https://deeplearning.ai/the-batch/issue-359
 https://deepswe.datacurve.ai/blog
 https://developers.googleblog.com/introducing-the-google-colab-cli
 https://developers.openai.com/ads
@@ -192,6 +193,7 @@ https://github.com/oven-sh/bun/pull/30412
 https://github.com/palmier-io/palmier-pro
 https://github.com/rvnikita/claude-code-statusline
 https://github.com/specs-devs/samples/tree/main/Agent%20Center
+https://github.com/Twarner491/AvianVisitors
 https://github.com/yunit00/game-corovans
 https://hackernews.foresyn.ai/
 https://hermes-agent.nousresearch.com/desktop
@@ -227,6 +229,7 @@ https://krea.ai/
 https://krea.ai/app
 https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models
 https://maxleiter.com/blog/weights
+https://memeburn.com/openais-chatgpt-bidi-1-brings-bidirectional-voice-mode
 https://metr.org/blog/2026-05-19-frontier-risk-report
 https://mf0.ai/
 https://microsoft.com/en-us/research/articles/whimsical-strategies-break-ai-agents-generating-out-of-distribution-adversarial-strategies-at-scale
@@ -287,6 +290,7 @@ https://openai.com/index/openai-to-acquire-ona
 https://openai.com/index/our-response-to-the-tanstack-npm-supply-chain-attack
 https://openai.com/index/personal-finance-chatgpt
 https://openai.com/index/prc-linked-influence-operations-ai-debates
+https://openai.com/index/previewing-gpt-5-6-sol
 https://openai.com/index/ramp
 https://openai.com/index/running-codex-safely
 https://openai.com/index/speeding-up-agentic-workflows-with-websockets
@@ -299,6 +303,7 @@ https://openai.com/index/virgin-atlantic
 https://openai.com/index/wasmer
 https://openai.com/index/where-the-goblins-came-from
 https://openai.com/index/work-with-codex-from-anywhere
+https://pasqualepillitteri.it/en/news/6571/google-ai-studio-design-variations-en
 https://pcgamer.com/software/ai/amazon-bins-an-internal-ai-leaderboard-for-its-kiro-employees-because-they-were-burning-through-too-many-costly-tokens
 https://posthog.com/blog/agents-closed-4063-errors
 https://posthog.com/blog/ai-observability-for-mvps
@@ -334,6 +339,7 @@ https://qwen.ai/blog
 https://ramp.com/data/ai-index
 https://sciencenews.org/article/ai-tech-save-gray-whales
 https://scrollprize.org/firstscroll
+https://semafor.com/article/06/27/2026/us-releases-powerful-anthropic-model-mythos-to-some-us-companies
 https://sentinelone.com/labs/fast16-mystery-shadowbrokers-reference-reveals-high-precision-software-sabotage-5-years-before-stuxnet
 https://sentry.engineering/blog/building-type-safe-metrics-api-in-swift-part-ii
 https://sentry.engineering/blog/do-you-really-need-an-mcp-to-build-your-app

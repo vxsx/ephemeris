@@ -1,0 +1,692 @@
+<!doctype html>
+<!--
+  Ephemeris · Issue 069 · 2026-06-28
+  Built from scaffold.html. Structure locked; surface overrides only.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 069 · 28 Jun 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — copied from scaffold.html. Do not edit.
+     ═══════════════════════════════════════════════════════════════════ */
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+  .spread > .decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+  .figure { width: 100%; }
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — surface only.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── Cover: date-hero, bone + ink + solar amber ─── */
+  .cover { background: #f1ece0; color: #16130d; }
+  .cover .folio { opacity: 0.85; }
+  .cover .wordmark {
+    font-family: var(--serif);
+    font-weight: 700; font-style: italic;
+    font-variation-settings: "opsz" 60, "SOFT" 60, "WONK" 0;
+    font-size: clamp(20px, 2.2vw, 30px);
+    letter-spacing: -0.01em;
+    color: #9a3210;
+    margin: 0;
+  }
+  .cover .datehero {
+    font-family: var(--sans);
+    font-weight: 900;
+    font-size: clamp(82px, 19vw, 320px);
+    line-height: 0.82;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+    margin: 0;
+    color: #16130d;
+  }
+  .cover .datehero .mo { color: #9a3210; }
+  .cover .datehero .yr {
+    display: block;
+    font-size: 0.18em;
+    font-weight: 800;
+    letter-spacing: 0.32em;
+    color: #16130d;
+    opacity: 0.65;
+    margin-top: 0.5em;
+  }
+  .cover .dek {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(21px, 2.1vw, 30px);
+    line-height: 1.32;
+    max-width: 30ch;
+    margin: 0;
+  }
+  .cover .toc {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 40px;
+    padding-top: 18px;
+    border-top: 1.5px solid #16130d;
+    width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 4px 12px;
+    text-decoration: none; color: inherit;
+    padding: 7px 0;
+    border-bottom: 1px dotted rgba(22,19,13,0.3);
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.82em; opacity: 0.62; text-transform: uppercase; letter-spacing: 0.1em; }
+  .cover .toc .num {
+    font-family: var(--mono); font-weight: 600;
+    color: #9a3210; margin-right: 10px;
+  }
+  .cover .decor::before {
+    content: "";
+    position: absolute;
+    right: -10vw; top: -12vw;
+    width: 52vw; height: 52vw;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(154,50,16,0.16), transparent 68%);
+  }
+  @media (max-width: 800px) {
+    .cover .toc { grid-template-columns: 1fr; gap: 0; }
+  }
+
+  /* ─── s01: GPT-5.6 Sol — film still, letterboxed black + solar amber ─── */
+  .s01 { background: #08080a; color: #f4efe6; }
+  .s01 .tag { color: #ffb13b; border-color: #ffb13b; }
+  .s01 .hed {
+    font-family: var(--sans);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.015em;
+    line-height: 0.96;
+    font-size: clamp(46px, 7.4vw, 116px);
+  }
+  .s01 .hed em { font-style: normal; color: #ffb13b; }
+  .s01 .lede { color: #d7d0c4; }
+  .s01 .read-on { color: #ffb13b; border-color: #ffb13b; --flip: #08080a; }
+  .s01 .tiers {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 0;
+    border-top: 1px solid rgba(244,239,230,0.25);
+    border-bottom: 1px solid rgba(244,239,230,0.25);
+    width: 100%;
+  }
+  .s01 .tiers div {
+    padding: 18px 20px 18px 0;
+    border-right: 1px solid rgba(244,239,230,0.16);
+  }
+  .s01 .tiers div:last-child { border-right: 0; }
+  .s01 .tiers .name {
+    font-family: var(--sans); font-weight: 900; text-transform: uppercase;
+    letter-spacing: 0.04em; font-size: clamp(22px, 2.6vw, 34px); color: #ffb13b;
+  }
+  .s01 .tiers .desc { font-family: var(--mono); font-size: 13px; color: #cfc7ba; margin-top: 6px; line-height: 1.5; }
+  .s01 .decor::before {
+    content: ""; position: absolute; left: 0; right: 0; top: 0; height: 7vh;
+    background: #000;
+  }
+  .s01 .decor::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 7vh;
+    background: #000;
+  }
+  .s01 .decor .glow {
+    position: absolute; left: -8vw; bottom: 12vh; width: 46vw; height: 46vw;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,177,59,0.20), transparent 66%);
+  }
+  @media (max-width: 800px) {
+    .s01 .tiers { grid-template-columns: 1fr; }
+    .s01 .tiers div { border-right: 0; border-bottom: 1px solid rgba(244,239,230,0.16); padding: 14px 0; }
+    .s01 .tiers div:last-child { border-bottom: 0; }
+  }
+
+  /* ─── s02: Loop engineering — blueprint, pale grid + mono ─── */
+  .s02 { background: #e9eef0; color: #12303a; }
+  .s02 .tag { color: #0d6e78; border-color: #0d6e78; }
+  .s02 .hed {
+    font-family: var(--sans);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.0;
+    font-size: clamp(44px, 6.6vw, 100px);
+  }
+  .s02 .hed em { font-style: normal; color: #0d6e78; }
+  .s02 .lede { font-family: var(--sans); color: #244853; }
+  .s02 .read-on { color: #0d6e78; border-color: #0d6e78; --flip: #e9eef0; }
+  .s02 .loops { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 720px; }
+  .s02 .loops .row {
+    display: grid; grid-template-columns: auto 1fr auto;
+    gap: 14px; align-items: center;
+    border: 1.5px solid #12303a; background: rgba(255,255,255,0.4);
+    padding: 14px 16px;
+  }
+  .s02 .loops .k { font-family: var(--mono); font-weight: 600; font-size: 13px; color: #0d6e78; }
+  .s02 .loops .v { font-family: var(--sans); font-weight: 600; font-size: clamp(16px,1.5vw,19px); }
+  .s02 .loops .t { font-family: var(--mono); font-size: 12px; color: #5a7882; white-space: nowrap; }
+  .s02 .decor {
+    background-image:
+      linear-gradient(rgba(13,110,120,0.10) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(13,110,120,0.10) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .s02 .decor .crop1, .s02 .decor .crop2 {
+    position: absolute; width: 26px; height: 26px;
+    border: 0 solid #0d6e78;
+  }
+  .s02 .decor .crop1 { right: 6vw; bottom: 16vh; border-right-width: 2px; border-bottom-width: 2px; }
+  .s02 .decor .crop2 { right: 6vw; bottom: 16vh; transform: translate(-180px,-120px); border-left-width: 2px; border-top-width: 2px; }
+  @media (max-width: 800px) {
+    .s02 .loops .row { grid-template-columns: 1fr; gap: 6px; }
+    .s02 .loops .t { white-space: normal; }
+    .s02 .decor .crop1, .s02 .decor .crop2 { display: none; }
+  }
+
+  /* ─── s03: Bidi voice — risograph duotone cyan/magenta overprint ─── */
+  .s03 { background: #f4ecdf; color: #161214; }
+  .s03 .tag { color: #d6217a; border-color: #d6217a; }
+  .s03 .hed {
+    font-family: var(--serif);
+    font-weight: 800; font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 40, "WONK" 1;
+    line-height: 0.98;
+    color: #d6217a;
+    text-shadow: 0.045em 0.045em 0 #16b6c8;
+  }
+  .s03 .hed em { font-style: italic; color: #16b6c8; text-shadow: 0.045em 0.045em 0 #d6217a; }
+  .s03 .lede { color: #2c2428; }
+  .s03 .read-on { color: #d6217a; border-color: #d6217a; --flip: #f4ecdf; }
+  .s03 .duo { display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 640px; }
+  .s03 .duo .wave { display: flex; align-items: flex-end; gap: 5px; height: 56px; }
+  .s03 .duo .wave i { display: block; width: 9px; border-radius: 2px; }
+  .s03 .duo .you i  { background: #16b6c8; }
+  .s03 .duo .bot i  { background: #d6217a; mix-blend-mode: multiply; }
+  .s03 .duo .lab { font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+  .s03 .duo .you .lab { color: #0e8d9c; }
+  .s03 .duo .bot .lab { color: #b21a66; }
+  .s03 .duo .note {
+    font-family: var(--mono); font-size: 13px; line-height: 1.5;
+    border-left: 3px solid #16b6c8; padding-left: 14px; color: #2c2428;
+  }
+  .s03 .decor .blob {
+    position: absolute; right: -8vw; top: 8vh; width: 40vw; height: 40vw; border-radius: 50%;
+    background: #16b6c8; opacity: 0.10; mix-blend-mode: multiply;
+  }
+  .s03 .decor .blob2 {
+    position: absolute; right: -4vw; top: 12vh; width: 40vw; height: 40vw; border-radius: 50%;
+    background: #d6217a; opacity: 0.10; mix-blend-mode: multiply;
+  }
+
+  /* ─── s04: AI Studio Design Variations — variants grid, peach + coral ─── */
+  .s04 { background: #fff2ea; color: #2a1c16; }
+  .s04 .tag { color: #e0461f; border-color: #e0461f; }
+  .s04 .hed {
+    font-family: var(--sans);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.0;
+  }
+  .s04 .hed em { font-style: normal; color: #e0461f; }
+  .s04 .lede { font-family: var(--sans); color: #4a352b; }
+  .s04 .read-on { color: #e0461f; border-color: #e0461f; --flip: #fff2ea; }
+  .s04 .variants {
+    display: grid; grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 14px; width: 100%; max-width: 720px;
+  }
+  .s04 .variants .card {
+    border: 1.5px solid #2a1c16; background: #fff; padding: 12px;
+    position: relative; aspect-ratio: 4 / 3; display: flex; flex-direction: column; gap: 7px;
+  }
+  .s04 .variants .card .n {
+    position: absolute; top: 8px; right: 10px;
+    font-family: var(--serif); font-style: italic; font-weight: 700; color: #e0461f; font-size: 15px;
+  }
+  .s04 .variants .bar { background: #ffd9cb; height: 9px; border-radius: 3px; }
+  .s04 .variants .bar.wide { width: 80%; }
+  .s04 .variants .bar.mid  { width: 55%; }
+  .s04 .variants .bar.accent { background: #e0461f; width: 38%; }
+  .s04 .variants .card.alt .bar { background: #e9def8; }
+  .s04 .variants .card.alt .bar.accent { background: #7b6cff; }
+  .s04 .decor::before {
+    content: ""; position: absolute; left: -6vw; bottom: -8vw; width: 36vw; height: 36vw; border-radius: 50%;
+    background: radial-gradient(circle, rgba(123,108,255,0.16), transparent 70%);
+  }
+  @media (max-width: 800px) {
+    .s04 .variants { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; }
+  }
+
+  /* ─── s05: AvianVisitors — postcard, sage + terracotta, stamp motif ─── */
+  .s05 { background: #edefe1; color: #283325; }
+  .s05 .tag { color: #b75636; border-color: #b75636; }
+  .s05 .hed {
+    font-family: var(--serif);
+    font-weight: 400; font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 90, "WONK" 0;
+    line-height: 1.02;
+    color: #2f4029;
+  }
+  .s05 .hed em { font-style: italic; color: #b75636; }
+  .s05 .lede { color: #3c4a37; }
+  .s05 .read-on { color: #b75636; border-color: #b75636; --flip: #edefe1; }
+  .s05 .postcard {
+    display: grid; grid-template-columns: auto 1fr; gap: 22px; align-items: center;
+    border: 2px solid #5d7050; background: rgba(255,255,255,0.42);
+    padding: 18px 20px; width: 100%; max-width: 700px;
+  }
+  .s05 .stamp {
+    width: 96px; height: 110px; flex: 0 0 auto;
+    border: 2px dashed #b75636; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 46px; background: #f6f4e9;
+  }
+  .s05 .postcard dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; }
+  .s05 .postcard dt { font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; color: #6c7a62; }
+  .s05 .postcard dd { margin: 0; font-family: var(--sans); font-weight: 600; font-size: 15px; }
+  .s05 .decor::before {
+    content: ""; position: absolute; inset: 4vh 4vw;
+    border: 1.5px dashed rgba(93,112,80,0.30);
+  }
+  @media (max-width: 800px) {
+    .s05 .postcard { grid-template-columns: 1fr; gap: 16px; }
+    .s05 .stamp { margin: 0 auto; }
+  }
+
+  /* ─── s06: Mythos 5 unblock — dark report / classified, crimson on black ─── */
+  .s06 { background: #0b0a0c; color: #d9d2cc; }
+  .s06 .tag { color: #e3354b; border-color: #e3354b; }
+  .s06 .hed {
+    font-family: var(--sans);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    line-height: 1.0;
+    font-size: clamp(42px, 6.2vw, 96px);
+    color: #efe9e3;
+  }
+  .s06 .hed .redact {
+    background: #e3354b; color: #e3354b;
+    border-radius: 2px; padding: 0 0.08em;
+    box-decoration-break: clone; -webkit-box-decoration-break: clone;
+  }
+  .s06 .lede { font-family: var(--sans); color: #b9b1aa; }
+  .s06 .read-on { color: #e3354b; border-color: #e3354b; --flip: #0b0a0c; }
+  .s06 .dossier {
+    width: 100%; max-width: 660px;
+    border: 1px solid rgba(217,210,204,0.3);
+    font-family: var(--mono); font-size: 13px;
+  }
+  .s06 .dossier .hd {
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(227,53,75,0.14); padding: 10px 14px;
+    border-bottom: 1px solid rgba(217,210,204,0.3);
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .s06 .dossier .hd .stamp { color: #e3354b; font-weight: 600; border: 1.5px solid #e3354b; padding: 2px 8px; border-radius: 3px; }
+  .s06 .dossier .row { display: flex; gap: 12px; padding: 9px 14px; border-bottom: 1px dotted rgba(217,210,204,0.22); }
+  .s06 .dossier .row:last-child { border-bottom: 0; }
+  .s06 .dossier .row .key { color: #8e8881; width: 92px; flex: 0 0 auto; }
+  .s06 .dossier .bar { background: #d9d2cc; opacity: 0.85; height: 0.9em; border-radius: 2px; display: inline-block; vertical-align: middle; }
+  .s06 .decor {
+    background-image: repeating-linear-gradient(0deg, rgba(255,255,255,0.022) 0 2px, transparent 2px 4px);
+  }
+  .s06 .decor::before {
+    content: "CLASSIFIED"; position: absolute; right: -2vw; bottom: 6vh;
+    font-family: var(--sans); font-weight: 900; font-size: 16vw; color: rgba(227,53,75,0.06);
+    letter-spacing: -0.04em; transform: rotate(-8deg);
+  }
+
+  /* ─── Colophon — museum placard, ivory + olive, centered ─── */
+  .colophon { background: #f0ebdd; color: #2c3019; }
+  .colophon .folio { opacity: 0.7; }
+  .colophon .hed {
+    font-family: var(--serif);
+    font-weight: 400; font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 80, "WONK" 0;
+    font-size: clamp(46px, 7vw, 96px);
+  }
+  .colophon .hed em { font-style: italic; color: #5b6422; }
+  .colophon .lede { color: #3a3e26; }
+  .colophon .meta {
+    font-family: var(--mono); font-size: 12.5px; line-height: 1.7;
+    letter-spacing: 0.02em; color: #4a4d30;
+    border-top: 1px solid rgba(44,48,25,0.3);
+    border-bottom: 1px solid rgba(44,48,25,0.3);
+    padding: 16px 0; max-width: 640px;
+  }
+  .colophon .meta b { color: #2c3019; font-weight: 600; }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ══════════ COVER — date-hero ══════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 069</span>
+    <span>Sunday · 28 Jun 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <p class="wordmark">Ephemeris.</p>
+    <h1 class="datehero">28 <span class="mo">Jun</span><span class="yr">Sunday · Zürich · MMXXVI</span></h1>
+    <p class="dek">Today the frontier ships in tiers, the voice talks back mid-sentence, and the loop does the rest of the work.</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>Sol arrives in three tiers</span><span>OpenAI</span></a>
+      <a href="#s02"><span><span class="num">02</span>Engineer the loop, not the prompt</span><span>The Batch</span></a>
+      <a href="#s03"><span><span class="num">03</span>The voice that talks back mid-word</span><span>via @seeallochnaya</span></a>
+      <a href="#s04"><span><span class="num">04</span>One click, new layouts</span><span>via @TochkiNadAI</span></a>
+      <a href="#s05"><span><span class="num">05</span>A live collage of your window's birds</span><span>via @denissexy</span></a>
+      <a href="#s06"><span><span class="num">06</span>The frontier model gets cleared</span><span>via @seeallochnaya</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ══════════ s01 — GPT-5.6 Sol ══════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 069</span>
+    <span>01 / 06 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Model Labs · Frontier</span>
+    <h2 class="hed">Sol arrives in <em>three tiers</em>.</h2>
+    <p class="lede">OpenAI previewed GPT-5.6 Sol as a tiered family: you pick the model by how hard the job is. New reasoning modes, a 1.5M-token context window, and inference clocked at 750 tokens/sec on Cerebras silicon. Rollout is phased — enterprise first, the rest in July.</p>
+    <div class="figure">
+      <div class="tiers">
+        <div><div class="name">Sol</div><div class="desc">Top tier · ultra reasoning + subagents for the hardest work</div></div>
+        <div><div class="name">Terra</div><div class="desc">Balanced · the everyday agent and coding workhorse</div></div>
+        <div><div class="name">Luna</div><div class="desc">Instant · low-latency replies, cheapest to run</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/previewing-gpt-5-6-sol" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"><span class="glow"></span></div>
+</section>
+
+<!-- ══════════ s02 — Loop engineering ══════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 069</span>
+    <span>02 / 06 · The Batch</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev Tools · Agentic Coding</span>
+    <h2 class="hed">Engineer the <em>loop</em>, not the prompt.</h2>
+    <p class="lede">Andrew Ng names the skill that Boris Cherny (Claude Code) and Peter Steinberger (OpenClaw) have been circling: loop engineering. Stop hand-feeding prompts and instead close three feedback loops at different speeds, so the agent writes, tests, and re-tests until the spec is met — while you hold the direction.</p>
+    <div class="figure">
+      <div class="loops">
+        <div class="row"><span class="k">L1</span><span class="v">Agent loop — write, run, fix, repeat</span><span class="t">~ minutes</span></div>
+        <div class="row"><span class="k">L2</span><span class="v">Developer loop — review, steer, re-spec</span><span class="t">~ hours</span></div>
+        <div class="row"><span class="k">L3</span><span class="v">User loop — ship, watch, learn</span><span class="t">~ days</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.deeplearning.ai/the-batch/issue-359/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"><span class="crop2"></span><span class="crop1"></span></div>
+</section>
+
+<!-- ══════════ s03 — Bidi voice ══════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 069</span>
+    <span>03 / 06 · via @seeallochnaya</span>
+  </header>
+  <div class="main">
+    <span class="tag">AI Tools · Voice + Privacy</span>
+    <h2 class="hed">It listens <em>while</em> it talks.</h2>
+    <p class="lede">OpenAI's Bidi 1 voice mode drops the turn-taking entirely: the model hears you while it speaks, so you can cut in mid-sentence and it switches tasks without missing a beat. Three intelligence tiers — High, Medium, Instant — and a privacy split worth noting: audio stays on-device until something is judged an interruption, only then is encrypted audio sent to the cloud.</p>
+    <div class="figure">
+      <div class="duo">
+        <div class="wave you"><i style="height:40%"></i><i style="height:70%"></i><i style="height:55%"></i><i style="height:90%"></i><i style="height:48%"></i><i style="height:76%"></i><i style="height:32%"></i><i style="height:64%"></i></div>
+        <span class="lab" style="color:#0e8d9c">You — speaking</span>
+        <div class="wave bot"><i style="height:62%"></i><i style="height:38%"></i><i style="height:84%"></i><i style="height:50%"></i><i style="height:72%"></i><i style="height:44%"></i><i style="height:88%"></i><i style="height:56%"></i></div>
+        <span class="lab" style="color:#b21a66">Model — answering</span>
+        <p class="note">Mic stays local until you interrupt — then encrypted audio goes up. A split built to keep an always-open microphone honest.</p>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://memeburn.com/openais-chatgpt-bidi-1-brings-bidirectional-voice-mode/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"><span class="blob"></span><span class="blob2"></span></div>
+</section>
+
+<!-- ══════════ s04 — AI Studio Design Variations ══════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 069</span>
+    <span>04 / 06 · via @TochkiNadAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Creative Tools · Vibe Coding</span>
+    <h2 class="hed">One click, <em>new layouts</em>.</h2>
+    <p class="lede">Google AI Studio's Build mode added Design Variations: instead of writing a paragraph about spacing, type, and colour, you press a button and get several full layout alternatives of the same app to compare and apply. It runs on Gemini 3.5 Flash, picked for the low latency that makes a one-click reshuffle feel instant.</p>
+    <div class="figure">
+      <div class="variants">
+        <div class="card"><span class="n">i</span><div class="bar wide"></div><div class="bar mid"></div><div class="bar accent"></div></div>
+        <div class="card alt"><span class="n">ii</span><div class="bar accent"></div><div class="bar wide"></div><div class="bar mid"></div></div>
+        <div class="card"><span class="n">iii</span><div class="bar mid"></div><div class="bar accent"></div><div class="bar wide"></div></div>
+        <div class="card alt"><span class="n">iv</span><div class="bar wide"></div><div class="bar accent"></div><div class="bar mid"></div></div>
+        <div class="card"><span class="n">v</span><div class="bar accent"></div><div class="bar mid"></div><div class="bar wide"></div></div>
+        <div class="card alt"><span class="n">vi</span><div class="bar mid"></div><div class="bar wide"></div><div class="bar accent"></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://pasqualepillitteri.it/en/news/6571/google-ai-studio-design-variations-en" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ══════════ s05 — AvianVisitors ══════════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 069</span>
+    <span>05 / 06 · via @denissexy</span>
+  </header>
+  <div class="main">
+    <span class="tag">Creative · Build It Yourself</span>
+    <h2 class="hed">A live <em>collage</em> of your window's birds.</h2>
+    <p class="lede">AvianVisitors turns a Raspberry Pi and a clip-on mic into a window onto the birds outside — BirdNET listens and identifies each species, and an optional Gemini pass paints a custom illustration of every visitor into a dynamic collage. A fork of BirdNET-Pi, around a hundred dollars all in, with an e-ink frame option for offline viewing.</p>
+    <div class="figure">
+      <div class="postcard">
+        <div class="stamp" aria-hidden="true">🐦</div>
+        <dl>
+          <dt>Brain</dt><dd>BirdNET-Pi species ID from sound</dd>
+          <dt>Art</dt><dd>Gemini-generated bird illustrations</dd>
+          <dt>Rig</dt><dd>Raspberry Pi 4B / 5 / Zero 2W + USB mic</dd>
+          <dt>Cost</dt><dd>≈ $70–105, e-ink frame optional</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://github.com/Twarner491/AvianVisitors" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ══════════ s06 — Mythos 5 unblock ══════════ -->
+<section class="spread s06" id="s06">
+  <header class="folio">
+    <span>Ephemeris · Issue 069</span>
+    <span>06 / 06 · via @seeallochnaya</span>
+  </header>
+  <div class="main">
+    <span class="tag">Frontier · Access + Policy</span>
+    <h2 class="hed">The frontier model gets <span class="redact">cleared</span>.</h2>
+    <p class="lede">Two weeks after Washington ordered Anthropic to suspend Mythos 5 and Fable 5 over security concerns, the government has released Mythos 5 to a first batch of more than 100 American institutions and companies. Fable 5 is still under negotiation. The signal for builders: frontier access is now something governments hand out by name.</p>
+    <div class="figure">
+      <div class="dossier">
+        <div class="hd"><span>Directive · Model Access</span><span class="stamp">Granted</span></div>
+        <div class="row"><span class="key">Model</span><span>Mythos 5 — released to a first wave</span></div>
+        <div class="row"><span class="key">Scope</span><span>100+ U.S. institutions &amp; companies</span></div>
+        <div class="row"><span class="key">Pending</span><span>Fable 5 — <span class="bar" style="width:140px"></span> in talks</span></div>
+        <div class="row"><span class="key">Backdrop</span><span>Suspended 12 Jun over <span class="bar" style="width:96px"></span> concerns</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.semafor.com/article/06/27/2026/us-releases-powerful-anthropic-model-mythos-to-some-us-companies" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ══════════ COLOPHON ══════════ -->
+<section class="spread colophon centered" id="colophon">
+  <header class="folio">
+    <span>End of Issue 069</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Six picks for Sunday, 28 June 2026 — the morning the frontier learned to ship in tiers and the loop learned to run itself.</p>
+    <div class="figure">
+      <p class="meta">
+        <b>Sources today:</b> OpenAI · The Batch (DeepLearning.AI) · Memeburn · Google AI Studio · GitHub · Semafor · Telegram (@seeallochnaya, @TochkiNadAI, @denissexy)<br>
+        <b>Rubric:</b> tools you could adopt this week · creative &amp; generative software · dev tools &amp; agentic coding · privacy &amp; security with high signal · the immediately actionable. Skip hype, skip the already-shipped, nothing older than 30 days.<br>
+        <b>Issue 069 · Europe/Zürich</b>
+      </p>
+    </div>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>
