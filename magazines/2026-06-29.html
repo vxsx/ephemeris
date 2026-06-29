@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 070 · 29 Jun 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — from scaffold.html. Surface overrides below.
+     ═══════════════════════════════════════════════════════════════════ */
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+
+  .spread > .decor {
+    position: absolute; inset: 0; z-index: 0;
+    pointer-events: none; overflow: hidden;
+  }
+
+  .spread > .folio {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 8px 24px; flex-wrap: wrap;
+    font-family: var(--sans); font-size: 13px;
+    letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.75;
+  }
+
+  .spread > .main {
+    display: flex; flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center; align-items: flex-start; min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block; font-family: var(--sans);
+    font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase;
+    padding: 6px 12px; border: 1px solid currentColor; border-radius: 999px; opacity: 0.9;
+  }
+  .hed {
+    font-family: var(--serif); font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px); line-height: 1.02;
+    letter-spacing: -0.02em; padding-bottom: 0.12em; word-break: break-word;
+  }
+  .lede {
+    font-family: var(--serif); font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45; max-width: 50ch; margin: 0;
+  }
+  .figure { width: 100%; }
+  .read-on {
+    display: inline-block; font-family: var(--sans); font-weight: 600;
+    font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 14px 22px; border: 2px solid currentColor; text-decoration: none;
+    color: currentColor; --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px) 22px max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — surface only.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── COVER: single-word mood "LOOP" ─── */
+  .cover { background: #0d0f12; color: #d7dbd6; }
+  .cover .wordmark {
+    font-family: var(--mono); font-weight: 600; font-size: 13px;
+    letter-spacing: 0.34em; text-transform: uppercase; color: #6df2a6; opacity: 0.85;
+  }
+  .cover .masthead {
+    font-family: var(--sans); font-weight: 900;
+    font-size: clamp(110px, 30vw, 460px); line-height: 0.8;
+    letter-spacing: -0.05em; color: #6df2a6; margin: 0;
+    padding-bottom: 0.06em;
+  }
+  .cover .dek {
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(22px, 2.4vw, 34px); line-height: 1.3; max-width: 28ch; color: #d7dbd6;
+  }
+  .cover .toc {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 40px; padding-top: 20px; border-top: 1px solid rgba(215,219,214,0.3); width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;
+    gap: 4px 12px; text-decoration: none; color: inherit; padding: 8px 0;
+    border-bottom: 1px dotted rgba(215,219,214,0.22); text-align: left;
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.82em; opacity: 0.6; font-family: var(--mono); }
+  .cover .toc .num {
+    font-family: var(--mono); font-weight: 700; color: #6df2a6; margin-right: 10px;
+  }
+  .cover .decor::before {
+    content: "LOOP LOOP LOOP LOOP LOOP LOOP LOOP LOOP";
+    position: absolute; top: 50%; left: -4vw; right: -4vw; transform: translateY(-50%);
+    font-family: var(--sans); font-weight: 900; font-size: clamp(110px, 30vw, 460px);
+    line-height: 0.8; letter-spacing: -0.05em; color: #6df2a6; opacity: 0.05;
+    white-space: nowrap; overflow: hidden;
+  }
+  @media (max-width: 800px) {
+    .cover .toc { grid-template-columns: 1fr; gap: 0; }
+    .cover .masthead { font-size: clamp(88px, 34vw, 200px); }
+  }
+
+  /* ─── s01 · The Coming Loop — TERMINAL (loud, dark inversion) ─── */
+  .s01 { background: #06100b; color: #8ef6b0; }
+  .s01 .folio { opacity: 0.6; font-family: var(--mono); color: #8ef6b0; }
+  .s01 .tag { color: #8ef6b0; border-color: rgba(142,246,176,0.5); font-family: var(--mono); }
+  .s01 .hed {
+    font-family: var(--mono); font-weight: 700; letter-spacing: -0.01em;
+    font-size: clamp(40px, 6.2vw, 92px); line-height: 1.04;
+  }
+  .s01 .hed em { font-style: normal; color: #06100b; background: #8ef6b0; padding: 0 0.14em; }
+  .s01 .lede { font-family: var(--mono); font-size: clamp(16px, 1.4vw, 20px); color: #bdf7d0; line-height: 1.6; }
+  .s01 .term {
+    font-family: var(--mono); font-size: clamp(13px, 1.2vw, 16px); line-height: 1.7;
+    border: 1px solid rgba(142,246,176,0.35); border-radius: 8px;
+    padding: 20px 22px; white-space: pre-wrap; color: #8ef6b0;
+    background: rgba(142,246,176,0.04); max-width: 56ch;
+  }
+  .s01 .term .dim { color: #3f7d57; }
+  .s01 .read-on { color: #8ef6b0; border-color: #8ef6b0; --flip: #06100b; font-family: var(--mono); }
+  .s01 .decor::before {
+    content: ""; position: absolute; inset: 0;
+    background: repeating-linear-gradient(to bottom, rgba(142,246,176,0.05) 0, rgba(142,246,176,0.05) 1px, transparent 1px, transparent 4px);
+  }
+  .s01 .decor::after {
+    content: ""; position: absolute; right: -10vw; top: -10vw; width: 50vw; height: 50vw;
+    background: radial-gradient(circle, rgba(142,246,176,0.10), transparent 70%);
+  }
+
+  /* ─── s02 · Krea 2 — RISOGRAPH DUOTONE (loud) ─── */
+  .s02 { background: #f3ede1; color: #161210; }
+  .s02 .tag { color: #d8246b; border-color: #d8246b; }
+  .s02 .hed {
+    font-family: var(--sans); font-weight: 800; letter-spacing: -0.03em;
+    font-size: clamp(46px, 7.2vw, 104px);
+  }
+  .s02 .hed em {
+    font-style: normal; color: #128a9b;
+  }
+  .s02 .lede { font-family: var(--serif); color: #2a2420; }
+  .s02 .stats { display: flex; flex-wrap: wrap; gap: 18px 40px; max-width: 60ch; }
+  .s02 .stats div { min-width: 140px; }
+  .s02 .stats .num {
+    font-family: var(--sans); font-weight: 800; font-size: clamp(34px, 4vw, 56px);
+    line-height: 1; color: #d8246b; letter-spacing: -0.02em;
+  }
+  .s02 .stats .num .unit {
+    font-family: var(--sans); font-style: normal; font-weight: 700;
+    font-size: 0.34em; letter-spacing: normal; margin-left: 0.35em; color: #128a9b;
+  }
+  .s02 .stats .lab {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: #5a504a; margin-top: 6px;
+  }
+  .s02 .read-on { color: #d8246b; border-color: #d8246b; --flip: #f3ede1; }
+  .s02 .decor::before {
+    content: ""; position: absolute; right: -8vw; top: -6vw; width: 46vw; height: 46vw;
+    border-radius: 50%; background: #128a9b; opacity: 0.16; mix-blend-mode: multiply;
+  }
+  .s02 .decor::after {
+    content: ""; position: absolute; right: -4vw; top: -3vw; width: 46vw; height: 46vw;
+    border-radius: 50%; background: #d8246b; opacity: 0.16; mix-blend-mode: multiply;
+  }
+
+  /* ─── s03 · Claude Tag — NEO-BRUTALIST YELLOW (loud) ─── */
+  .s03 { background: #f6d400; color: #0b0b0b; }
+  .s03 .tag { color: #0b0b0b; border: 2px solid #0b0b0b; border-radius: 0; font-weight: 700; }
+  .s03 .hed {
+    font-family: var(--sans); font-weight: 900; text-transform: uppercase;
+    letter-spacing: -0.02em; line-height: 0.98; font-size: clamp(48px, 8vw, 110px);
+  }
+  .s03 .hed em { font-style: normal; background: #0b0b0b; color: #f6d400; padding: 0 0.1em; }
+  .s03 .lede { font-family: var(--sans); font-weight: 500; font-size: clamp(18px, 1.6vw, 23px); color: #1a1500; }
+  .s03 .grid {
+    display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 0; max-width: 62ch;
+    border: 3px solid #0b0b0b;
+  }
+  .s03 .grid div {
+    padding: 16px 18px; border: 1.5px solid #0b0b0b;
+    font-family: var(--sans); font-weight: 700; font-size: 15px; text-transform: uppercase; letter-spacing: 0.03em;
+  }
+  .s03 .grid div b { display: block; font-size: 12px; font-weight: 800; opacity: 0.55; margin-bottom: 4px; letter-spacing: 0.12em; }
+  .s03 .at {
+    display: inline-block; background: #0b0b0b; color: #f6d400; font-family: var(--mono); font-weight: 700;
+    font-size: clamp(20px, 2.2vw, 30px); padding: 8px 16px; letter-spacing: 0.02em;
+  }
+  .s03 .read-on { color: #0b0b0b; border-color: #0b0b0b; border-radius: 0; --flip: #f6d400; }
+  @media (max-width: 800px) { .s03 .grid { grid-template-columns: 1fr; } }
+
+  /* ─── s04 · Patch the Planet — DARK CLASSIFIED (loud, dark inversion) ─── */
+  .s04 { background: #0a0608; color: #ecd9d4; }
+  .s04 .folio { opacity: 0.65; }
+  .s04 .tag { color: #ec4760; border-color: #ec4760; }
+  .s04 .hed { font-family: var(--serif); font-weight: 800; font-size: clamp(44px, 6.6vw, 98px); }
+  .s04 .hed em { font-style: italic; color: #ec4760; font-variation-settings: "opsz" 144, "SOFT" 60, "WONK" 1; }
+  .s04 .lede { color: #d7c3bd; }
+  .s04 .bars { display: flex; flex-direction: column; gap: 14px; max-width: 60ch; font-family: var(--mono); }
+  .s04 .bars .row { display: flex; align-items: center; gap: 14px; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; }
+  .s04 .bars .row .bar { height: 16px; background: #ec4760; }
+  .s04 .bars .row span { white-space: nowrap; color: #ecd9d4; }
+  .s04 .bars .meta { font-family: var(--mono); font-size: 12px; color: #8a6f6a; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 6px; }
+  .s04 .redact { background: #ec4760; color: #ec4760; padding: 0 0.2em; border-radius: 2px; }
+  .s04 .read-on { color: #ec4760; border-color: #ec4760; --flip: #0a0608; }
+  .s04 .decor::before {
+    content: "DAYBREAK // SEC-OSS"; position: absolute; top: clamp(120px, 16vw, 180px); right: -2vw;
+    font-family: var(--mono); font-weight: 700; font-size: clamp(40px, 8vw, 120px);
+    color: rgba(236,71,96,0.06); letter-spacing: 0.04em; white-space: nowrap;
+  }
+
+  /* ─── s05 · Cursor SDK → Notion — BLUEPRINT (quiet, precise) ─── */
+  .s05 { background: #eaeff2; color: #15293b; }
+  .s05 .tag { color: #1f5e8a; border-color: #1f5e8a; }
+  .s05 .hed { font-family: var(--serif); font-weight: 700; font-size: clamp(46px, 6.8vw, 100px); color: #15293b; }
+  .s05 .hed em { font-style: italic; color: #1f5e8a; font-variation-settings: "opsz" 144, "SOFT" 40, "WONK" 0; }
+  .s05 .lede { color: #2c4256; }
+  .s05 .flow {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 10px 8px;
+    font-family: var(--mono); font-size: clamp(12px, 1.1vw, 14px); letter-spacing: 0.04em; text-transform: uppercase;
+  }
+  .s05 .flow b {
+    display: inline-block; padding: 9px 14px; border: 1.5px solid #1f5e8a; color: #15293b; font-weight: 700;
+    background: rgba(31,94,138,0.05);
+  }
+  .s05 .flow .arrow { color: #1f5e8a; font-weight: 700; }
+  .s05 .annot { font-family: var(--mono); font-size: 12px; color: #5a7185; letter-spacing: 0.06em; margin-top: 14px; }
+  .s05 .read-on { color: #1f5e8a; border-color: #1f5e8a; --flip: #eaeff2; }
+  .s05 .decor::before {
+    content: ""; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(31,94,138,0.08) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(31,94,138,0.08) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .s05 .decor::after {
+    content: ""; position: absolute; right: clamp(20px, 4vw, 60px); bottom: clamp(20px, 4vw, 60px);
+    width: 26px; height: 26px; border-right: 2px solid rgba(31,94,138,0.4); border-bottom: 2px solid rgba(31,94,138,0.4);
+  }
+
+  /* ─── COLOPHON — NEWSPRINT (quiet, precise) ─── */
+  .colophon { background: #f1ece1; color: #14110c; }
+  .colophon .folio { opacity: 0.6; }
+  .colophon .hed {
+    font-family: var(--serif); font-weight: 800; font-size: clamp(48px, 7vw, 100px);
+  }
+  .colophon .hed em { font-style: italic; color: #7a1f12; font-variation-settings: "opsz" 144, "SOFT" 80, "WONK" 1; }
+  .colophon .rule { height: 2px; background: #14110c; width: 100%; margin: 4px 0 2px; }
+  .colophon .cols {
+    column-count: 3; column-gap: 36px; max-width: 80ch; margin-top: 6px;
+    font-family: var(--serif); font-size: 16px; line-height: 1.5;
+  }
+  .colophon .cols h4 {
+    font-family: var(--sans); font-weight: 700; font-size: 11px; letter-spacing: 0.18em;
+    text-transform: uppercase; margin: 0 0 6px; color: #7a1f12;
+  }
+  .colophon .cols p { margin: 0 0 14px; break-inside: avoid; }
+  .colophon .read-on { color: #7a1f12; border-color: #7a1f12; --flip: #f1ece1; }
+  @media (max-width: 800px) { .colophon .cols { column-count: 1; } }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════════════ COVER ═══════════════ -->
+<section class="spread cover centered" id="cover">
+  <header class="folio">
+    <span class="wordmark">Ephemeris · Issue 070</span>
+    <span class="wordmark">Monday · 29 Jun 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <h1 class="masthead">LOOP</h1>
+    <p class="dek">The week the tools stopped waiting to be asked — and started running the loop themselves.</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>The harness runs the loop now</span><span>lucumr</span></a>
+      <a href="#s02"><span><span class="num">02</span>A from-scratch image model, now open</span><span>Krea</span></a>
+      <a href="#s03"><span><span class="num">03</span>Tag the teammate, not the tool</span><span>Anthropic</span></a>
+      <a href="#s04"><span><span class="num">04</span>Point the model at the code the world runs on</span><span>OpenAI</span></a>
+      <a href="#s05"><span><span class="num">05</span>Drop a coding agent into the doc</span><span>@TochkiNadAI</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s01 · The Coming Loop ═══════════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 070</span>
+    <span>01 / 5 · lucumr.pocoo.org</span>
+  </header>
+  <div class="main">
+    <span class="tag">Agentic coding · Essay</span>
+    <h2 class="hed">The harness runs the <em>loop</em> now.</h2>
+    <p class="lede">Armin Ronacher's case: orchestration harnesses — prompt the agent, judge the result, prompt again — are becoming the default way software gets built. They're unbeatable at mechanical work: porting, benchmarking, security scanning. Point one at lasting production code and you get defensive, sprawling systems no human fully holds in their head. The role he sees arriving for the senior engineer is messenger to a machine, not author of the program.</p>
+    <div class="figure">
+      <pre class="term">$ while ! task.done; do
+    prompt -> act -> judge
+  done
+
+<span class="dim"># port legacy module ........ ok</span>
+<span class="dim"># run the benchmark suite ... ok</span>
+<span class="dim"># ship the prod feature ..... who still reads this?</span></pre>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://lucumr.pocoo.org/2026/6/23/the-coming-loop/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s02 · Krea 2 open weights ═══════════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 070</span>
+    <span>02 / 5 · krea.ai</span>
+  </header>
+  <div class="main">
+    <span class="tag">Generative media · Open weights</span>
+    <h2 class="hed">A from-scratch image model, <em>now open.</em></h2>
+    <p class="lede">Krea published K2 — Raw and Turbo — as open weights, with a full technical report. It's a text-to-image foundation model trained from scratch for aesthetic control and style transfer, and Turbo renders 2K images in roughly two seconds on consumer hardware. The community license clears commercial use for individuals and small teams, which puts a top-ten text-to-image model on your own GPU.</p>
+    <div class="figure">
+      <div class="stats">
+        <div><div class="num">12.9<span class="unit">B params</span></div><div class="lab">DiT backbone, from scratch</div></div>
+        <div><div class="num">~2<span class="unit">sec / 2K</span></div><div class="lab">Turbo, consumer hardware</div></div>
+        <div><div class="num">2<span class="unit">variants</span></div><div class="lab">Raw + Turbo, open weights</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.krea.ai/blog/krea-2-technical-report" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s03 · Claude Tag ═══════════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 070</span>
+    <span>03 / 5 · anthropic.com</span>
+  </header>
+  <div class="main">
+    <span class="tag">Agents · Collaboration</span>
+    <h2 class="hed">Tag the <em>teammate.</em></h2>
+    <p class="lede">Claude Tag drops one Claude into a Slack channel as a standing member. <span class="at">@Claude</span> a request and it splits the work into stages, runs them against the tools and data an admin has granted, and posts results back in-thread. It carries context across the channel, raises things on its own, and can pursue a multi-day project. Beta for Team and Enterprise.</p>
+    <div class="figure">
+      <div class="grid">
+        <div><b>Scope</b>One Claude per channel</div>
+        <div><b>Memory</b>Builds context over time</div>
+        <div><b>Initiative</b>Flags and follows up</div>
+        <div><b>Cadence</b>Async, multi-day runs</div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.anthropic.com/news/introducing-claude-tag" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s04 · Patch the Planet ═══════════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 070</span>
+    <span>04 / 5 · openai.com</span>
+  </header>
+  <div class="main">
+    <span class="tag">Security · Open source</span>
+    <h2 class="hed">Point the model at the <em>code the world runs on.</em></h2>
+    <p class="lede">Patch the Planet, a Daybreak initiative OpenAI built with Trail of Bits, aims cyber-capable models at critical open source to find, validate, and fix vulnerabilities — then routes everything through human review so maintainers aren't buried under machine-generated <span class="redact">false positives</span>. A five-day sprint across cURL, the Go project, Python, Sigstore and others surfaced hundreds of issues and merged dozens of patches.</p>
+    <div class="figure">
+      <div class="bars">
+        <div class="row"><span class="bar" style="width:62%"></span><span>Hundreds surfaced</span></div>
+        <div class="row"><span class="bar" style="width:24%"></span><span>Dozens merged</span></div>
+        <div class="meta">Reusable workflows shipped: fuzzing · variant analysis · differential testing</div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/patch-the-planet" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s05 · Cursor SDK → Notion ═══════════════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 070</span>
+    <span>05 / 5 · cursor.com · via @TochkiNadAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev tools · Agents</span>
+    <h2 class="hed">Drop a coding agent <em>into the doc.</em></h2>
+    <p class="lede">Notion's External Agents API makes Cursor, Claude Code and Codex first-class collaborators inside a workspace: mention one on a spec, or assign it an issue, and it plans, builds, tests, and opens a PR your team can review. Notion shipped its Cursor integration on the Cursor SDK in a couple of weeks — the SDK handing over sandboxes, model routing and tool use, so the team built the experience rather than the engine.</p>
+    <div class="figure">
+      <div class="flow">
+        <b>Notion doc</b><span class="arrow">→</span><b>@agent</b><span class="arrow">→</span><b>plan</b><span class="arrow">→</span><b>build</b><span class="arrow">→</span><b>test</b><span class="arrow">→</span><b>open PR</b>
+      </div>
+      <div class="annot">// External Agents API · runs on the Cursor SDK runtime</div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://cursor.com/blog/notion" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ COLOPHON ═══════════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 070</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <div class="rule"></div>
+    <div class="cols">
+      <h4>Today's sources</h4>
+      <p>Armin Ronacher (lucumr), Krea, Anthropic, OpenAI's Daybreak, and Cursor — surfaced via @TochkiNadAI. The recurring thread: agents moving from tools you prompt to teammates that run the loop.</p>
+      <h4>The rubric</h4>
+      <p>Tools a senior engineer or founder could adopt this week — agentic coding, generative media, AI security. Each pick published within the last 30 days. No reprints against the ledger.</p>
+      <h4>Masthead</h4>
+      <p>Ephemeris · Issue 070 · Monday, 29 June 2026 · Zürich. Five picks on a thin day; signal over volume.</p>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="#cover"><span>↑ Back to cover</span></a>
+  </div>
+</section>
+
+</main>
+</body>
+</html>

@@ -31,6 +31,7 @@ https://anthropic.com/news/expanding-project-glasswing
 https://anthropic.com/news/fable-mythos-access
 https://anthropic.com/news/finance-agents
 https://anthropic.com/news/higher-limits-spacex
+https://anthropic.com/news/introducing-claude-tag
 https://anthropic.com/news/widening-conversation-ai
 https://anthropic.com/research/2028-ai-leadership
 https://anthropic.com/research/anthropic-institute-agenda
@@ -119,6 +120,7 @@ https://community.fabric.microsoft.com/t5/Fabric-Updates-Blog/Introducing-Rayfin
 https://cursor.com/blog/cloud-agent-lessons
 https://cursor.com/blog/composer-2-5
 https://cursor.com/blog/design-mode
+https://cursor.com/blog/notion
 https://cursor.com/blog/typescript-sdk
 https://cursor.com/changelog/sdk-updates-jun-2026
 https://deeplearning.ai/short-courses/build-interactive-agents-with-generative-ui
@@ -227,6 +229,8 @@ https://jeffbullas.com/stop-using-just-one-ai
 https://jeffbullas.com/truth-business-growth-strategy
 https://krea.ai/
 https://krea.ai/app
+https://krea.ai/blog/krea-2-technical-report
+https://lucumr.pocoo.org/2026/6/23/the-coming-loop
 https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models
 https://maxleiter.com/blog/weights
 https://memeburn.com/openais-chatgpt-bidi-1-brings-bidirectional-voice-mode
@@ -288,6 +292,7 @@ https://openai.com/index/openai-broadcom-jalapeno-inference-chip
 https://openai.com/index/openai-frontier-models-and-codex-are-now-available-on-aws
 https://openai.com/index/openai-to-acquire-ona
 https://openai.com/index/our-response-to-the-tanstack-npm-supply-chain-attack
+https://openai.com/index/patch-the-planet
 https://openai.com/index/personal-finance-chatgpt
 https://openai.com/index/prc-linked-influence-operations-ai-debates
 https://openai.com/index/previewing-gpt-5-6-sol
