@@ -1,5 +1,6 @@
 http://hnup.date/hn-sota
 https://ahrefs.com/blog/schema-ai-citations
+https://ai.meta.com/blog/brain2qwerty-brain-ai-human-communication
 https://aisi.gov.uk/blog/our-evaluation-of-openais-gpt-5-5-cyber-capabilities
 https://aleximas.substack.com/p/how-will-ai-driven-automation-actually
 https://andonlabs.com/blog/openai-gpt-5-5-vending-bench
@@ -218,6 +219,7 @@ https://jack-clark.net/2026/06/01/import-ai-459-ai-oversight-is-difficult-scalin
 https://jack-clark.net/2026/06/08/import-ai-460-reward-hacking-society-rsi-data-from-anthropic-and-rl-based-quadcopter-racing
 https://jack-clark.net/2026/06/15/import-ai-461-alignment-is-not-on-track-frontiercode-and-synthetic-research-interns
 https://jack-clark.net/2026/06/22/import-ai-462-superpersuasion-self-sustaining-ai-paths-to-asi
+https://jack-clark.net/2026/06/29/import-ai-463-self-improving-robots-a-10k-chinese-gpu-cluster-and-an-elegiac-essay-for-the-human-era
 https://jeffbullas.com/ai-reinvention-truth
 https://jeffbullas.com/ai-slop-crisis
 https://jeffbullas.com/distraction-economy
@@ -247,6 +249,7 @@ https://nextjs.org/blog/next-16-2
 https://nextjs.org/blog/next-16-2-ai
 https://nextjs.org/blog/next-16-3-ai-improvements
 https://nextjs.org/blog/next-16-3-instant-navigations
+https://nextjs.org/blog/next-16-3-turbopack
 https://nextjs.org/blog/nextjs-across-platforms
 https://nextjs.org/blog/turbopack-incremental-computation
 https://nvidianews.nvidia.com/news/nvidia-microsoft-windows-pcs-agents-rtx-spark
@@ -335,6 +338,7 @@ https://posthog.com/blog/what-if-your-product-built-itself
 https://posthog.com/blog/what-is-a-scout
 https://posthog.com/blog/what-is-ai-observability
 https://posthog.com/blog/why-attacking-competitors-is-dumb
+https://posthog.com/blog/why-we-rebuilt-our-data-warehouse
 https://posthog.com/blog/your-lifecycle-emails-are-wrong
 https://primeintellect.ai/auto-nanogpt
 https://programbench.com/
@@ -427,6 +431,7 @@ https://vercel.com/blog/making-turborepo-ninety-six-percent-faster-with-agents-s
 https://vercel.com/blog/optimizing-vercel-sandbox-snapshots
 https://vercel.com/blog/protecting-against-inference-theft
 https://vercel.com/blog/protecting-against-token-theft
+https://vercel.com/blog/realtime-voice-agents-on-ai-gateway
 https://vercel.com/blog/teaching-agents-product-design-at-vercel
 https://vercel.com/blog/vercel-flags-platform-native-feature-flags
 https://vercel.com/blog/we-ralph-wiggumed-webstreams-to-make-them-10x-faster

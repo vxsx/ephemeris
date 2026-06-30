@@ -1,0 +1,658 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 071 · 30 June 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — from scaffold.html. Surface overrides below.
+     ═══════════════════════════════════════════════════════════════════ */
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+
+  .spread > .decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+
+  .figure { width: 100%; }
+
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — surface only.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── Cover · single-word mood "REWIRED" on near-black ─── */
+  .cover { background: #08090c; color: #e9e4da; }
+  .cover .word {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    font-size: clamp(84px, 21vw, 360px);
+    line-height: 0.82;
+    letter-spacing: -0.05em;
+    margin: 0;
+    padding-bottom: 0.08em;
+    color: #f4efe6;
+    background: linear-gradient(95deg, #ff4d6d 0%, #ffae3b 48%, #4ad9ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .cover .mast {
+    font-family: var(--mono);
+    font-size: 13px; letter-spacing: 0.42em; text-transform: uppercase;
+    color: #7f8aa0;
+  }
+  .cover .dek {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(20px, 2.1vw, 30px);
+    line-height: 1.35;
+    max-width: 34ch;
+    color: #cdc6ba;
+  }
+  .cover .toc {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px 44px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(233,228,218,0.25);
+    width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 4px 12px;
+    text-decoration: none; color: inherit;
+    padding: 8px 0;
+    border-bottom: 1px dotted rgba(233,228,218,0.2);
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.82em; opacity: 0.62; font-family: var(--mono); letter-spacing: 0.04em; }
+  .cover .toc .num {
+    font-family: var(--mono); font-weight: 600;
+    color: #4ad9ff; margin-right: 12px;
+  }
+  .cover .decor::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(120,140,170,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(120,140,170,0.06) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+  .cover .decor::after {
+    content: "";
+    position: absolute; right: -16vw; top: -10vw;
+    width: 50vw; height: 50vw; border-radius: 50%;
+    background: radial-gradient(circle, rgba(74,217,255,0.10), transparent 68%);
+  }
+  @media (max-width: 800px) {
+    .cover .toc { grid-template-columns: 1fr; gap: 0; }
+  }
+
+  /* ─── s01 · Blueprint (Next.js Turbopack) ─── light cyan paper, navy ink, mono ─── */
+  .s01 { background: #eaf2f7; color: #123047; }
+  .s01 .tag { color: #0e6f8f; border-color: #0e6f8f; font-family: var(--mono); }
+  .s01 .hed {
+    font-family: var(--mono); font-weight: 600;
+    font-size: clamp(38px, 5.3vw, 76px);
+    letter-spacing: -0.01em; line-height: 1.08; text-transform: uppercase;
+  }
+  .s01 .hed em { font-style: normal; color: #0e6f8f; }
+  .s01 .lede { font-family: var(--serif); color: #1c3b54; }
+  .s01 .read-on { color: #0e6f8f; border-color: #0e6f8f; --flip: #eaf2f7; font-family: var(--mono); }
+  .s01 .specsheet {
+    border: 1.5px solid #0e6f8f;
+    background: rgba(255,255,255,0.5);
+    font-family: var(--mono); font-size: 14px;
+    max-width: 560px; width: 100%;
+  }
+  .s01 .specsheet .row {
+    display: flex; justify-content: space-between; gap: 16px;
+    padding: 12px 16px; border-bottom: 1px dashed rgba(14,111,143,0.45);
+  }
+  .s01 .specsheet .row:last-child { border-bottom: 0; }
+  .s01 .specsheet .k { color: #123047; letter-spacing: 0.02em; }
+  .s01 .specsheet .v { color: #0e6f8f; text-align: right; }
+  .s01 .decor::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(14,111,143,0.10) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(14,111,143,0.10) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  /* crop marks */
+  .s01 .decor::after {
+    content: "";
+    position: absolute; right: clamp(20px,5vw,90px); bottom: clamp(20px,5vw,90px);
+    width: 46px; height: 46px;
+    border-right: 2px solid rgba(14,111,143,0.55);
+    border-bottom: 2px solid rgba(14,111,143,0.55);
+  }
+
+  /* ─── s02 · Risograph duotone (PostHog DuckDB) ─── cyan + magenta overprint ─── */
+  .s02 { background: #f6f1e6; color: #1a1320; }
+  .s02 .tag { color: #d6186b; border-color: #d6186b; }
+  .s02 .hed {
+    font-family: var(--serif); font-weight: 900;
+    font-size: clamp(46px, 7vw, 104px);
+    color: #1769b0;
+    position: relative;
+  }
+  .s02 .hed em {
+    font-style: italic;
+    color: #d6186b;
+    font-variation-settings: "opsz" 144, "SOFT" 60, "WONK" 1;
+    text-shadow: 0.04em 0.035em 0 rgba(23,105,176,0.55);
+  }
+  .s02 .lede { font-family: var(--serif); color: #2a2030; }
+  .s02 .read-on { color: #d6186b; border-color: #d6186b; --flip: #f6f1e6; }
+  .s02 .migrate {
+    display: flex; flex-wrap: wrap; align-items: stretch; gap: 14px;
+    width: 100%; max-width: 720px;
+  }
+  .s02 .migrate .card {
+    flex: 1 1 180px; min-width: 0;
+    border: 2px solid #1769b0;
+    padding: 16px 18px;
+    background: rgba(23,105,176,0.06);
+  }
+  .s02 .migrate .card .lbl {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: #d6186b; margin-bottom: 6px;
+  }
+  .s02 .migrate .card .txt {
+    font-family: var(--sans); font-weight: 600; font-size: 16px; line-height: 1.35; color: #1a1320;
+  }
+  .s02 .migrate .arrow {
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-weight: 600; font-size: 30px; color: #1769b0;
+    flex: 0 0 auto; padding: 0 4px;
+    text-shadow: 0.05em 0.04em 0 rgba(214,24,107,0.55);
+  }
+  .s02 .decor::before {
+    content: "";
+    position: absolute; left: -10vw; bottom: -14vw;
+    width: 48vw; height: 48vw; border-radius: 50%;
+    background: radial-gradient(circle, rgba(214,24,107,0.12), transparent 66%);
+  }
+  .s02 .decor::after {
+    content: "";
+    position: absolute; right: -8vw; top: -10vw;
+    width: 42vw; height: 42vw; border-radius: 50%;
+    background: radial-gradient(circle, rgba(23,105,176,0.12), transparent 66%);
+  }
+  @media (max-width: 800px) {
+    .s02 .migrate .arrow { transform: rotate(90deg); width: 100%; flex-basis: 100%; }
+  }
+
+  /* ─── s03 · Neon / cyberpunk (Vercel voice agents) ─── dark, teal/purple glow, mono ─── */
+  .s03 { background: #07060f; color: #d8e9ff; }
+  .s03 .tag { color: #57f5d0; border-color: #57f5d0; font-family: var(--mono); }
+  .s03 .hed {
+    font-family: var(--mono); font-weight: 600;
+    font-size: clamp(36px, 5.4vw, 78px);
+    line-height: 1.08; letter-spacing: -0.005em; text-transform: uppercase;
+    color: #eafcff;
+    text-shadow: 0 0 14px rgba(87,245,208,0.55), 0 0 34px rgba(123,92,255,0.45);
+  }
+  .s03 .hed em {
+    font-style: normal;
+    color: #b69bff;
+    text-shadow: 0 0 16px rgba(123,92,255,0.85);
+  }
+  .s03 .lede { font-family: var(--serif); color: #b9c9e6; }
+  .s03 .read-on { color: #57f5d0; border-color: #57f5d0; --flip: #07060f; font-family: var(--mono); }
+  .s03 .read-on:hover { box-shadow: 0 0 22px rgba(87,245,208,0.6); }
+  .s03 .term {
+    width: 100%; max-width: 620px;
+    border: 1px solid rgba(87,245,208,0.4);
+    border-radius: 8px;
+    background: linear-gradient(180deg, rgba(123,92,255,0.10), rgba(7,6,15,0.6));
+    font-family: var(--mono); font-size: 15px; line-height: 1.7;
+    box-shadow: 0 0 40px rgba(123,92,255,0.20);
+    overflow: hidden;
+  }
+  .s03 .term .bar {
+    display: flex; gap: 7px; padding: 11px 14px;
+    border-bottom: 1px solid rgba(87,245,208,0.25);
+  }
+  .s03 .term .bar i { width: 11px; height: 11px; border-radius: 50%; background: #2a3550; display: inline-block; }
+  .s03 .term .body { padding: 16px 18px; white-space: pre-wrap; word-break: break-word; }
+  .s03 .term .c1 { color: #7f8aa8; }
+  .s03 .term .c2 { color: #57f5d0; }
+  .s03 .term .c3 { color: #b69bff; }
+  .s03 .decor::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(0deg, rgba(123,92,255,0.05) 0 2px, transparent 2px 4px);
+  }
+  .s03 .decor::after {
+    content: "";
+    position: absolute; left: 50%; top: -20vw; transform: translateX(-50%);
+    width: 70vw; height: 50vw; border-radius: 50%;
+    background: radial-gradient(circle, rgba(87,245,208,0.10), transparent 65%);
+  }
+
+  /* ─── s04 · Neo-brutalist (Import AI — self-improving robots) ─── white/black + amber ─── */
+  .s04 { background: #f4f3ee; color: #0b0b0b; }
+  .s04 .tag {
+    color: #0b0b0b; border: 2px solid #0b0b0b; border-radius: 0;
+    background: #ffce2e; font-weight: 700; opacity: 1;
+  }
+  .s04 .hed {
+    font-family: var(--sans); font-weight: 900;
+    font-size: clamp(40px, 6.2vw, 92px);
+    line-height: 0.98; letter-spacing: -0.025em; text-transform: uppercase;
+  }
+  .s04 .hed em {
+    font-style: normal;
+    background: #ffce2e;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    padding: 0 0.08em;
+  }
+  .s04 .lede { font-family: var(--sans); font-weight: 400; color: #1a1a1a; }
+  .s04 .read-on {
+    color: #0b0b0b; border: 3px solid #0b0b0b; --flip: #ffce2e; border-radius: 0;
+    box-shadow: 5px 5px 0 #0b0b0b; font-weight: 800;
+  }
+  .s04 .read-on:hover { background: #ffce2e; box-shadow: 5px 5px 0 #0b0b0b; }
+  .s04 .read-on:hover span { color: #0b0b0b; }
+  .s04 .stats {
+    display: flex; flex-wrap: wrap; gap: 14px; width: 100%; max-width: 700px;
+  }
+  .s04 .stats .box {
+    flex: 1 1 200px; min-width: 0;
+    border: 3px solid #0b0b0b; background: #fff;
+    padding: 16px 18px; box-shadow: 6px 6px 0 #0b0b0b;
+  }
+  .s04 .stats .box.amber { background: #ffce2e; }
+  .s04 .stats .num {
+    font-family: var(--sans); font-weight: 900; font-size: clamp(34px, 4.6vw, 56px);
+    line-height: 1; letter-spacing: -0.03em;
+  }
+  .s04 .stats .num .unit {
+    font-family: var(--sans); font-style: normal; font-weight: 700;
+    font-size: 0.30em; letter-spacing: normal; margin-left: 0.45em;
+    text-transform: uppercase;
+  }
+  .s04 .stats .cap {
+    font-family: var(--sans); font-weight: 600; font-size: 14px;
+    margin-top: 8px; line-height: 1.3;
+  }
+  .s04 .decor::before {
+    content: "";
+    position: absolute; right: -6vw; top: 12vh;
+    width: 30vw; height: 30vw; border: 3px solid rgba(11,11,11,0.10);
+    border-radius: 0;
+  }
+
+  /* ─── s05 · Museum placard (Meta Brain2Qwerty) ─── ivory + olive, centered, classical ─── */
+  .s05 { background: #f3efe3; color: #2c2e22; }
+  .s05 .tag {
+    color: #4a5234; border-color: #4a5234;
+    letter-spacing: 0.3em;
+  }
+  .s05 .hed {
+    font-family: var(--serif); font-weight: 400;
+    font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" 0;
+    font-size: clamp(44px, 6.4vw, 96px);
+    letter-spacing: -0.01em; line-height: 1.04;
+  }
+  .s05 .hed em {
+    font-style: italic; color: #4a5234;
+    font-variation-settings: "opsz" 144, "SOFT" 80, "WONK" 1;
+  }
+  .s05 .lede {
+    font-family: var(--serif); color: #3a3c2e; max-width: 46ch;
+  }
+  .s05 .read-on { color: #4a5234; border-color: #4a5234; --flip: #f3efe3; }
+  .s05 .placard {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 0;
+    border-top: 1px solid rgba(74,82,52,0.4);
+    border-bottom: 1px solid rgba(74,82,52,0.4);
+    max-width: 640px; width: 100%;
+  }
+  .s05 .placard .cell {
+    flex: 1 1 160px; min-width: 0;
+    padding: 22px 18px; text-align: center;
+    border-right: 1px solid rgba(74,82,52,0.25);
+  }
+  .s05 .placard .cell:last-child { border-right: 0; }
+  .s05 .placard .figure-num {
+    font-family: var(--serif); font-weight: 400; font-style: italic;
+    font-variation-settings: "opsz" 144;
+    font-size: clamp(38px, 5vw, 58px); line-height: 1; color: #4a5234;
+  }
+  .s05 .placard .figure-num .unit {
+    font-style: normal; font-size: 0.42em; letter-spacing: normal; margin-left: 0.1em;
+  }
+  .s05 .placard .lab {
+    font-family: var(--sans); font-size: 12px; letter-spacing: 0.16em;
+    text-transform: uppercase; margin-top: 10px; opacity: 0.7;
+  }
+  .s05 .decor::before {
+    content: "";
+    position: absolute; left: 50%; top: 50%;
+    transform: translate(-50%,-50%);
+    width: min(72vw, 760px); height: min(72vw, 760px);
+    border: 1px solid rgba(74,82,52,0.14);
+    border-radius: 50%;
+  }
+
+  /* ─── Colophon · dark ─── */
+  .colophon { background: #0b0c10; color: #d9d4c8; }
+  .colophon .hed {
+    font-family: var(--serif); font-weight: 800;
+    font-size: clamp(46px, 7vw, 104px);
+  }
+  .colophon .hed em { font-style: italic; color: #ffce2e; }
+  .colophon .lede { color: #b3ae9f; max-width: 56ch; }
+  .colophon .sources {
+    font-family: var(--mono); font-size: 13px; line-height: 1.9;
+    letter-spacing: 0.02em; color: #8f99a8; margin-top: 6px;
+  }
+  .colophon .decor::before {
+    content: "";
+    position: absolute; right: -14vw; bottom: -16vw;
+    width: 46vw; height: 46vw; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,206,46,0.07), transparent 68%);
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════════════ COVER ═══════════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 071</span>
+    <span>Tuesday · 30 Jun 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <p class="mast">Ephemeris</p>
+    <h1 class="word">Rewired.</h1>
+    <p class="dek">Five rebuilds, all dated the same day — a build engine, a data warehouse, a voice channel, a robot's own policy, and a sentence pulled from brainwaves.</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>The build engine keeps its memory</span><span>Next.js</span></a>
+      <a href="#s02"><span><span class="num">02</span>They tore out ClickHouse for DuckDB</span><span>PostHog</span></a>
+      <a href="#s03"><span><span class="num">03</span>Voice becomes a primitive</span><span>Vercel</span></a>
+      <a href="#s04"><span><span class="num">04</span>Robots that run their own experiments</span><span>Import AI</span></a>
+      <a href="#s05"><span><span class="num">05</span>A sentence, pulled from brainwaves</span><span>Meta AI</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s01 · Next.js 16.3 Turbopack ═══════════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 071</span>
+    <span>01 / 05 · Next.js</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev Tools · Build Engine</span>
+    <h2 class="hed">The build engine keeps its <em>memory</em> between runs.</h2>
+    <p class="lede">Turbopack in Next.js 16.3 writes a persistent on-disk cache, so a cold build reuses work it already did instead of starting over. It also evicts dev-server memory before it balloons and ships an experimental Rust port of the React Compiler. The slow half of the loop — recompiling what never changed — gets shorter.</p>
+    <div class="figure">
+      <div class="specsheet">
+        <div class="row"><span class="k">PERSISTENT FILE CACHE</span><span class="v">builds reuse prior work</span></div>
+        <div class="row"><span class="k">DEV MEMORY EVICTION</span><span class="v">caps long-session bloat</span></div>
+        <div class="row"><span class="k">RUST REACT COMPILER</span><span class="v">experimental</span></div>
+        <div class="row"><span class="k">import.meta.glob</span><span class="v">now supported</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://nextjs.org/blog/next-16-3-turbopack" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s02 · PostHog DuckDB ═══════════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 071</span>
+    <span>02 / 05 · PostHog</span>
+  </header>
+  <div class="main">
+    <span class="tag">Architecture · Postmortem</span>
+    <h2 class="hed">They tore out <em>ClickHouse</em> and rebuilt on DuckDB.</h2>
+    <p class="lede">PostHog rebuilt its data warehouse on DuckDB, handing each customer a single-tenant instance and first-class support for dbt and the modern data stack. The post is the reasoning worth stealing: why an engine that began life embedded in analytics apps won the warehouse workload over a distributed column store.</p>
+    <div class="figure">
+      <div class="migrate">
+        <div class="card"><div class="lbl">From</div><div class="txt">ClickHouse — shared, distributed, hard to isolate per tenant</div></div>
+        <div class="arrow">→</div>
+        <div class="card"><div class="lbl">To</div><div class="txt">DuckDB — single-tenant instances, dbt-native, simpler ops</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://posthog.com/blog/why-we-rebuilt-our-data-warehouse" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s03 · Vercel realtime voice agents ═══════════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 071</span>
+    <span>03 / 05 · Vercel</span>
+  </header>
+  <div class="main">
+    <span class="tag">AI Tools · Realtime Voice</span>
+    <h2 class="hed">Voice becomes a <em>primitive</em>, not a project.</h2>
+    <p class="lede">Vercel's AI Gateway now speaks. Realtime models from OpenAI and xAI sit behind one API, with generateSpeech() and transcribe() for one-shot work and a useRealtime hook for the browser. You get bidirectional, interruptible audio under the same auth, observability, and spend controls as the rest of the stack.</p>
+    <div class="figure">
+      <div class="term">
+        <div class="bar"><i></i><i></i><i></i></div>
+        <div class="body"><span class="c1">// one API, three calls</span>
+<span class="c2">generateSpeech</span>(<span class="c3">{ model, text }</span>)   <span class="c1">→ audio</span>
+<span class="c2">transcribe</span>(<span class="c3">{ model, audio }</span>)    <span class="c1">→ text</span>
+<span class="c2">useRealtime</span>(<span class="c3">{ model }</span>)          <span class="c1">→ live, interruptible</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://vercel.com/blog/realtime-voice-agents-on-ai-gateway" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s04 · Import AI 463 · self-improving robots ═══════════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 071</span>
+    <span>04 / 05 · via Jack Clark · Import AI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Science · Robotics</span>
+    <h2 class="hed">Robots that run their <em>own experiments</em>.</h2>
+    <p class="lede">NVIDIA's ENPIRE puts physical robots in a self-experimentation loop: try a policy, measure the result, revise, repeat — improvement with no human in the tuning seat. Jack Clark's Import AI 463 pairs it with Tencent's ARGUS, software shepherding a 10,000-GPU training cluster, and an essay on what work is left for people.</p>
+    <div class="figure">
+      <div class="stats">
+        <div class="box amber"><div class="num">ENPIRE</div><div class="cap">Robots improve their own policies by self-experiment</div></div>
+        <div class="box"><div class="num">10,000<span class="unit">GPUs</span></div><div class="cap">Tencent's ARGUS shepherds one training cluster</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://jack-clark.net/2026/06/29/import-ai-463-self-improving-robots-a-10k-chinese-gpu-cluster-and-an-elegiac-essay-for-the-human-era/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s05 · Meta Brain2Qwerty v2 ═══════════════ -->
+<section class="spread s05 centered" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 071</span>
+    <span>05 / 05 · Meta AI · via @rvnikita_blog</span>
+  </header>
+  <div class="main">
+    <span class="tag">Science · Neurotech</span>
+    <h2 class="hed">A sentence, pulled from <em>brainwaves</em>.</h2>
+    <p class="lede">Meta's Brain2Qwerty v2 decodes typed sentences from non-invasive MEG recordings at 61% word accuracy — 78% for the best participant, where most sentences come back with one wrong word or fewer. Scaling deep nets alongside a language model is narrowing the gap with surgical implants, and it needs no surgery to do it.</p>
+    <div class="figure">
+      <div class="placard">
+        <div class="cell"><div class="figure-num">61<span class="unit">%</span></div><div class="lab">Avg word accuracy</div></div>
+        <div class="cell"><div class="figure-num">78<span class="unit">%</span></div><div class="lab">Best participant</div></div>
+        <div class="cell"><div class="figure-num">0</div><div class="lab">Implants</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://ai.meta.com/blog/brain2qwerty-brain-ai-human-communication/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ COLOPHON ═══════════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 071</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Five rebuilds, every one dated 29 June, read the morning after. Each pick had to pass one test: could a senior engineer or founder act on it this week.</p>
+    <p class="sources">Sources today — Next.js · PostHog · Vercel · Jack Clark / Import AI · Meta AI (via @rvnikita_blog)<br>Issue 071 · 30 June 2026 · Zürich</p>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+</main>
+</body>
+</html>
