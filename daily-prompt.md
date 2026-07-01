@@ -105,6 +105,14 @@ issues 020 and 021, where the same Sentry article shipped twice because the
 agent picked the `sentry.io/blog/` host on Friday after the ledger only had
 the `blog.sentry.io/` form from Thursday.
 
+**The canonical form is a dedup key only — never a `read-on` link.**
+`canonical-url.sh` output exists to compare against the ledger, nothing else.
+The `read-on` href must be the exact URL that serves the article — the one you
+fetched and saw load. For Sentry that means the `blog.sentry.io/<slug>` form;
+the canonical `sentry.io/blog/<slug>` key redirects to a login wall and must
+never appear in an href. It shipped as a live link in issue 072 (2026-07-01) —
+that is the whole reason this warning exists.
+
 Before finalizing today's picks:
 
 ```bash
