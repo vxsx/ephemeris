@@ -27,6 +27,8 @@ https://anthropic.com/news/claude-for-creative-work
 https://anthropic.com/news/claude-for-small-business
 https://anthropic.com/news/claude-opus-4-7
 https://anthropic.com/news/claude-opus-4-8
+https://anthropic.com/news/claude-science-ai-workbench
+https://anthropic.com/news/claude-sonnet-5
 https://anthropic.com/news/election-safeguards-update
 https://anthropic.com/news/expanding-project-glasswing
 https://anthropic.com/news/fable-mythos-access
@@ -265,6 +267,7 @@ https://openai.com/index/chatgpt-memory-dreaming
 https://openai.com/index/codex-for-almost-everything
 https://openai.com/index/codex-for-every-role-tool-workflow
 https://openai.com/index/codex-maxxing-long-running-work
+https://openai.com/index/core-dump-epidemiology-data-infrastructure-bug
 https://openai.com/index/cybersecurity-in-the-intelligence-age
 https://openai.com/index/databricks
 https://openai.com/index/daybreak-securing-the-world
@@ -316,6 +319,7 @@ https://pcgamer.com/software/ai/amazon-bins-an-internal-ai-leaderboard-for-its-k
 https://posthog.com/blog/agents-closed-4063-errors
 https://posthog.com/blog/ai-observability-for-mvps
 https://posthog.com/blog/autoresearch-query-bug
+https://posthog.com/blog/best-ai-observability-tools
 https://posthog.com/blog/best-analytics-stack-for-vibe-coded-apps
 https://posthog.com/blog/best-mcp-servers-for-startups
 https://posthog.com/blog/best-real-time-analytics-platforms
@@ -362,6 +366,7 @@ https://sentry.io/blog/cut-build-times-delete-cms
 https://sentry.io/blog/debugging-multi-agent-ai-when-the-failure-is-in-the-space-between-agents
 https://sentry.io/blog/errors-traces-logs-metrics-when-to-reach-for-what
 https://sentry.io/blog/fixing-javascript-observability
+https://sentry.io/blog/nextjs-export-traces-opentelemetry
 https://sentry.io/blog/nextjs-supabase-observability
 https://sentry.io/blog/scaling-observability-for-multi-agent-ai-systems
 https://sentry.io/blog/sentry-opentelemetry-work-together
@@ -416,6 +421,7 @@ https://vercel.com/blog/ai-gateway-production-index-june-2026
 https://vercel.com/blog/ai-sdk-7
 https://vercel.com/blog/build-knowledge-agents-without-embeddings
 https://vercel.com/blog/building-a-real-time-power-outage-map-with-next-js-on-vercel
+https://vercel.com/blog/dockerfile-on-vercel
 https://vercel.com/blog/how-conductor-moved-parallel-coding-agents-from-the-laptop-to-the-cloud-with-vercel-sandbox
 https://vercel.com/blog/how-cursor-built-a-growth-iteration-loop-with-vercel-microfrontends-and-flags
 https://vercel.com/blog/how-general-intelligence-used-agents-to-build-an-agent-platform-on-vercel
