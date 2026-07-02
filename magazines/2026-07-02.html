@@ -1,0 +1,608 @@
+<!doctype html>
+<!-- Ephemeris · Issue 073 · 2026-07-02 · built on scaffold.html -->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 073 · 02 Jul 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — from scaffold.html. Do not touch.
+     ═══════════════════════════════════════════════════════════════════ */
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+  .spread > .decor {
+    position: absolute; inset: 0; z-index: 0;
+    pointer-events: none; overflow: hidden;
+  }
+  .spread > .folio {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 8px 24px; flex-wrap: wrap;
+    font-family: var(--sans); font-size: 13px;
+    letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.75;
+  }
+  .spread > .main {
+    display: flex; flex-direction: column; gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center; align-items: flex-start; min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block; font-family: var(--sans);
+    font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase;
+    padding: 6px 12px; border: 1px solid currentColor; border-radius: 999px; opacity: 0.9;
+  }
+  .hed {
+    font-family: var(--serif); font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px); line-height: 1.02;
+    letter-spacing: -0.02em; padding-bottom: 0.12em; word-break: break-word;
+  }
+  .lede {
+    font-family: var(--serif); font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45; max-width: 50ch; margin: 0;
+  }
+  .figure { width: 100%; }
+  .read-on {
+    display: inline-block; font-family: var(--sans); font-weight: 600;
+    font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 14px 22px; border: 2px solid currentColor;
+    text-decoration: none; color: currentColor; --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px) 22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — surface only.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── Cover · Date-hero ─── */
+  .cover { background: #f2ede2; color: #14181f; }
+  .cover .kicker {
+    font-family: var(--sans); font-weight: 800; letter-spacing: 0.42em;
+    text-transform: uppercase; font-size: 14px; color: #14181f;
+  }
+  .datehero {
+    display: flex; align-items: flex-end; flex-wrap: wrap;
+    gap: 0 0.14em; line-height: 0.8; margin: 0.1em 0 0.05em;
+  }
+  .datehero .dnum {
+    font-family: var(--serif); font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    font-size: clamp(140px, 30vw, 380px); letter-spacing: -0.04em;
+    color: #1c39bb; padding-bottom: 0.06em;
+  }
+  .datehero .stack {
+    display: flex; flex-direction: column; line-height: 0.98;
+    padding-bottom: 0.34em; letter-spacing: normal;
+  }
+  .datehero .stack span {
+    font-family: var(--sans); font-weight: 800; text-transform: uppercase;
+    letter-spacing: 0.06em; font-size: clamp(28px, 6vw, 68px); color: #14181f;
+  }
+  .datehero .stack .yr { color: #1c39bb; }
+  .cover .dek {
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(22px, 2.3vw, 34px); line-height: 1.28; max-width: 30ch; margin: 0;
+  }
+  .cover .dek em { font-style: normal; color: #1c39bb; font-weight: 600; }
+  .cover .toc {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 40px; padding-top: 18px; border-top: 2px solid #14181f; width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 4px 12px; text-decoration: none; color: inherit;
+    padding: 7px 0; border-bottom: 1px dotted rgba(20,24,31,0.3);
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.82em; opacity: 0.65; }
+  .cover .toc .num {
+    font-family: var(--mono); font-weight: 600; color: #1c39bb; margin-right: 10px;
+  }
+  @media (max-width: 800px) {
+    .cover .toc { grid-template-columns: 1fr; gap: 0; }
+  }
+
+  /* ─── s01 · Remote Labor Index · Big-stats / yellow (LOUD) ─── */
+  .s01 { background: #ffd400; color: #0a0a0a; }
+  .s01 .tag { color: #0a0a0a; border-color: #0a0a0a; }
+  .s01 .hed {
+    font-family: var(--sans); font-weight: 900; text-transform: uppercase;
+    font-size: clamp(44px, 7.4vw, 104px); line-height: 0.98; letter-spacing: -0.03em;
+  }
+  .s01 .hed em {
+    font-style: normal; background: #0a0a0a; color: #ffd400;
+    padding: 0 0.12em; box-decoration-break: clone; -webkit-box-decoration-break: clone;
+  }
+  .s01 .lede { font-family: var(--sans); font-weight: 500; }
+  .s01 .read-on { color: #0a0a0a; border-color: #0a0a0a; --flip: #ffd400; }
+  .rli-stats {
+    display: grid; grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 12px; width: 100%; max-width: 720px;
+    border-top: 4px solid #0a0a0a; padding-top: 16px;
+  }
+  .rli-stats .cell .num {
+    font-family: var(--sans); font-weight: 900; font-size: clamp(46px, 8vw, 84px);
+    line-height: 0.9; letter-spacing: -0.04em; display: block;
+  }
+  .rli-stats .cell .num .unit {
+    font-size: 0.34em; letter-spacing: normal; margin-left: 0.06em; font-weight: 800;
+  }
+  .rli-stats .cell .who {
+    font-family: var(--mono); font-size: 13px; text-transform: uppercase;
+    letter-spacing: 0.06em; margin-top: 4px; opacity: 0.85;
+  }
+  .rli-note {
+    font-family: var(--mono); font-size: 15px; margin-top: 14px;
+    border-left: 4px solid #0a0a0a; padding-left: 12px; max-width: 620px;
+  }
+  .s01 .decor .ghost {
+    position: absolute; right: -3vw; top: 4vw;
+    font-family: var(--sans); font-weight: 900; font-size: 46vw;
+    line-height: 1; color: rgba(10,10,10,0.06); letter-spacing: -0.05em;
+  }
+
+  /* ─── s02 · Vercel Services · Blueprint (quiet) ─── */
+  .s02 { background: #e9f0f8; color: #0d2a4a; }
+  .s02 .tag { color: #0d2a4a; border-color: #0d2a4a; }
+  .s02 .hed { font-family: var(--serif); font-weight: 700; font-size: clamp(46px, 6.6vw, 96px); }
+  .s02 .hed em {
+    font-style: italic; color: #0d2a4a;
+    font-variation-settings: "opsz" 120, "SOFT" 60, "WONK" 1;
+    text-decoration: underline; text-decoration-thickness: 2px;
+    text-underline-offset: 6px; text-decoration-color: #1f6feb;
+  }
+  .s02 .read-on { color: #0d2a4a; border-color: #0d2a4a; --flip: #e9f0f8; }
+  .bp-card {
+    font-family: var(--mono); font-size: 15px; line-height: 1.7;
+    border: 1.5px solid #0d2a4a; background: rgba(255,255,255,0.55);
+    padding: 22px 24px; max-width: 560px; position: relative;
+  }
+  .bp-card .cm { position: absolute; width: 12px; height: 12px; border: 1.5px solid #1f6feb; }
+  .bp-card .tl { top: -7px; left: -7px; border-right: 0; border-bottom: 0; }
+  .bp-card .tr { top: -7px; right: -7px; border-left: 0; border-bottom: 0; }
+  .bp-card .bl { bottom: -7px; left: -7px; border-right: 0; border-top: 0; }
+  .bp-card .br { bottom: -7px; right: -7px; border-left: 0; border-top: 0; }
+  .bp-card .dir { color: #1f6feb; }
+  .bp-card .rule { border-top: 1px dashed rgba(13,42,74,0.35); margin: 10px 0; }
+  .bp-card .meta { font-size: 13px; opacity: 0.8; letter-spacing: 0.04em; }
+  .s02 .decor {
+    background-image:
+      linear-gradient(rgba(31,111,235,0.10) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(31,111,235,0.10) 1px, transparent 1px);
+    background-size: 34px 34px;
+  }
+
+  /* ─── s03 · Cloudflare Monetization Gateway · Neon (LOUD, DARK) ─── */
+  .s03 { background: #0a0713; color: #ecd8ff; }
+  .s03 .tag { color: #35f5e0; border-color: #35f5e0; }
+  .s03 .hed {
+    font-family: var(--sans); font-weight: 800; font-size: clamp(46px, 7.2vw, 100px);
+    letter-spacing: -0.02em;
+  }
+  .s03 .hed em {
+    font-style: normal;
+    background: linear-gradient(92deg, #35f5e0 0%, #b26bff 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .s03 .lede { color: #cbb6e8; }
+  .s03 .read-on { color: #35f5e0; border-color: #35f5e0; --flip: #0a0713; }
+  .neon-card {
+    font-family: var(--mono); font-size: 15px; line-height: 1.75;
+    border: 1.5px solid #b26bff; border-radius: 8px;
+    box-shadow: 0 0 0 1px rgba(53,245,224,0.25), 0 0 34px rgba(178,107,255,0.28);
+    padding: 20px 22px; max-width: 540px; background: rgba(53,245,224,0.03);
+  }
+  .neon-card .req { color: #35f5e0; }
+  .neon-card .res { color: #ff7ad9; }
+  .neon-card .ok  { color: #9dffb0; }
+  .neon-card .dim { color: #8a77a8; }
+  .s03 .decor .blob {
+    position: absolute; border-radius: 50%; filter: blur(60px);
+  }
+  .s03 .decor .b1 { width: 44vw; height: 44vw; left: -12vw; bottom: -16vw; background: rgba(178,107,255,0.22); }
+  .s03 .decor .b2 { width: 34vw; height: 34vw; right: -8vw; top: -10vw; background: rgba(53,245,224,0.16); }
+
+  /* ─── s04 · Sentry spot-checking agents · Spreadsheet (quiet, mono) ─── */
+  .s04 { background: #eef0f3; color: #1a1e26; }
+  .s04 .tag { color: #b3541e; border-color: #b3541e; }
+  .s04 .hed {
+    font-family: var(--sans); font-weight: 700; font-size: clamp(42px, 6.2vw, 88px);
+    letter-spacing: -0.025em;
+  }
+  .s04 .hed em { font-style: normal; color: #b3541e; }
+  .s04 .read-on { color: #1a1e26; border-color: #1a1e26; --flip: #eef0f3; }
+  .sheet {
+    width: 100%; max-width: 640px; border-collapse: collapse;
+    font-family: var(--mono); font-size: 14px; font-variant-numeric: tabular-nums;
+    background: #fff; border: 1px solid #c9ccd2;
+  }
+  .sheet th, .sheet td { border: 1px solid #d7dade; padding: 9px 12px; text-align: left; }
+  .sheet thead th {
+    background: #e2e4e8; text-transform: uppercase; letter-spacing: 0.06em;
+    font-size: 11px; color: #5a5f68;
+  }
+  .sheet td .no  { color: #b3541e; font-weight: 600; }
+  .sheet td .yes { color: #2c7a3f; font-weight: 600; }
+  .sheet .rownum { color: #9aa0aa; background: #f4f5f7; }
+
+  /* ─── s05 · GeneBench-Pro · Academic journal (quiet, cream+navy) ─── */
+  .s05 { background: #f5efe1; color: #1a2436; }
+  .s05 .tag { color: #1a2436; border-color: #1a2436; }
+  .s05 .hed {
+    font-family: var(--serif); font-weight: 600; font-size: clamp(44px, 6.4vw, 92px);
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0; line-height: 1.0;
+  }
+  .s05 .hed em {
+    font-style: italic; color: #7a1f14;
+    font-variation-settings: "opsz" 144, "SOFT" 80, "WONK" 1;
+  }
+  .s05 .read-on { color: #1a2436; border-color: #1a2436; --flip: #f5efe1; }
+  .journal {
+    display: grid; grid-template-columns: 200px 1fr; gap: 28px;
+    width: 100%; max-width: 720px; border-top: 2px solid #1a2436; padding-top: 18px;
+  }
+  .journal .side {
+    font-family: var(--sans); font-size: 12px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: #5b3a2e; line-height: 1.7;
+  }
+  .journal .side b { display: block; color: #1a2436; font-weight: 800; }
+  .journal .results { font-family: var(--serif); }
+  .journal .row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    border-bottom: 1px solid rgba(26,36,54,0.25); padding: 7px 0; gap: 16px;
+  }
+  .journal .row .model { font-size: 19px; }
+  .journal .row .pct {
+    font-family: var(--mono); font-weight: 600; font-variant-numeric: tabular-nums;
+    font-size: 20px; color: #7a1f14;
+  }
+  .journal .foot { font-family: var(--sans); font-size: 13px; margin-top: 12px; opacity: 0.75; }
+
+  /* ─── s06 · Anthropic jailbreak severity framework · Dark report (LOUD, DARK) ─── */
+  .s06 { background: #100a0c; color: #f0e2e2; }
+  .s06 .tag { color: #e23b4a; border-color: #e23b4a; }
+  .s06 .hed {
+    font-family: var(--sans); font-weight: 800; text-transform: uppercase;
+    font-size: clamp(40px, 6.4vw, 90px); letter-spacing: 0.005em; line-height: 1.0;
+  }
+  .s06 .hed em {
+    font-style: normal; background: #e23b4a; color: #100a0c;
+    padding: 0 0.14em; box-decoration-break: clone; -webkit-box-decoration-break: clone;
+  }
+  .s06 .lede { color: #d3bcbc; }
+  .s06 .read-on { color: #e23b4a; border-color: #e23b4a; --flip: #100a0c; }
+  .sev {
+    width: 100%; max-width: 600px; font-family: var(--mono); font-size: 14px;
+    border: 1px solid rgba(226,59,74,0.4); padding: 20px 22px;
+    background: rgba(226,59,74,0.05);
+  }
+  .sev .head {
+    display: flex; justify-content: space-between; font-size: 11px;
+    letter-spacing: 0.14em; text-transform: uppercase; color: #e08a92;
+    border-bottom: 1px dashed rgba(226,59,74,0.4); padding-bottom: 10px; margin-bottom: 12px;
+  }
+  .sev .dim { display: flex; align-items: center; gap: 12px; padding: 5px 0; }
+  .sev .dim .lbl { width: 210px; flex: 0 0 auto; }
+  .sev .dim .bar { height: 10px; background: #e23b4a; }
+  .sev .arrow { margin-top: 12px; color: #f0e2e2; font-size: 15px; }
+  .sev .arrow b { color: #e23b4a; }
+  .s06 .decor .stamp {
+    position: absolute; right: -2vw; bottom: 6vw;
+    font-family: var(--sans); font-weight: 900; font-size: 20vw; line-height: 1;
+    color: rgba(226,59,74,0.06); letter-spacing: -0.04em; transform: rotate(-8deg);
+  }
+
+  /* ─── Colophon · dark ─── */
+  .colophon { background: #0e1216; color: #e7ecf1; }
+  .colophon .hed { font-family: var(--serif); font-weight: 800; color: #e7ecf1; }
+  .colophon .hed em { font-style: italic; color: #6fb0ff; }
+  .colophon .lede { color: #aeb8c4; }
+  .colo-grid {
+    display: grid; grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 22px; width: 100%; max-width: 860px; margin-top: 8px;
+    font-family: var(--sans); font-size: 14px; line-height: 1.6;
+  }
+  .colo-grid h4 {
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: #6fb0ff; margin: 0 0 8px; font-weight: 800;
+  }
+  .colo-grid p { margin: 0; color: #aeb8c4; }
+
+  /* ─── Mobile collapses for per-issue figures ─── */
+  @media (max-width: 800px) {
+    .rli-stats { grid-template-columns: 1fr; }
+    .journal   { grid-template-columns: 1fr; gap: 16px; }
+    .bp-card, .neon-card, .sev { font-size: 13px; }
+    .sheet { font-size: 12px; }
+    .sheet th, .sheet td { padding: 7px 8px; }
+    .sev .dim .lbl { width: 130px; }
+    .s01 .decor .ghost { font-size: 62vw; top: 30vw; }
+    .datehero .dnum { font-size: 40vw; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════════════ COVER · Date-hero ═══════════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 073</span>
+    <span>Thursday · 02 Jul 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <span class="kicker">Ephemeris</span>
+    <div class="datehero">
+      <span class="dnum">02</span>
+      <span class="stack">
+        <span>Thu</span>
+        <span>Jul</span>
+        <span class="yr">'26</span>
+      </span>
+    </div>
+    <p class="dek">Today the work agents do gets <em>a number</em>, and the web they browse gets <em>a price</em>.</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>One freelance job in six now finishes itself</span><span>via @seeallochnaya</span></a>
+      <a href="#s02"><span><span class="num">02</span>Frontend and backend, one deployment</span><span>Vercel</span></a>
+      <a href="#s03"><span><span class="num">03</span>The web grows a cash register for agents</span><span>Cloudflare</span></a>
+      <a href="#s04"><span><span class="num">04</span>Read the trace your eval can't</span><span>Sentry</span></a>
+      <a href="#s05"><span><span class="num">05</span>A biology exam top models still fail</span><span>OpenAI</span></a>
+      <a href="#s06"><span><span class="num">06</span>A shared scale for how bad a jailbreak is</span><span>Anthropic</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+</section>
+
+<!-- ═══════════════ s01 · Remote Labor Index ═══════════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 073</span>
+    <span>01 / 6 · via @seeallochnaya → safe.ai</span>
+  </header>
+  <div class="main">
+    <span class="tag">Research · Labor Benchmark</span>
+    <h2 class="hed">Machines now finish <em>one job in six</em>.</h2>
+    <p class="lede">The Remote Labor Index scores how often an agent completes real freelance work — design, CAD, video — judged against a professional's output. Fable 5 clears 16.1%, up from 2.5% eight months ago. The number is small; the slope is not.</p>
+    <div class="figure">
+      <div class="rli-stats">
+        <div class="cell"><span class="num">16.1<span class="unit">%</span></span><span class="who">Fable 5</span></div>
+        <div class="cell"><span class="num">8.3<span class="unit">%</span></span><span class="who">Opus 4.8</span></div>
+        <div class="cell"><span class="num">6.3<span class="unit">%</span></span><span class="who">GPT-5.5</span></div>
+      </div>
+      <p class="rli-note">2.5% → 16.1% in under eight months. Caveat: automated graders overstate the win — only human review holds the line.</p>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://safe.ai/blog/significant-increase-in-digital-labor-automation" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"><span class="ghost">16</span></div>
+</section>
+
+<!-- ═══════════════ s02 · Vercel Services ═══════════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 073</span>
+    <span>02 / 6 · Vercel</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev Tools · Deploy</span>
+    <h2 class="hed">Frontend and backend, <em>one deployment</em>.</h2>
+    <p class="lede">Vercel Services puts a Next.js app and a FastAPI backend in a single project. They deploy and roll back atomically, and talk to each other over internal bindings instead of hopping the public internet — one repo, one release, one graph.</p>
+    <div class="figure">
+      <div class="bp-card">
+        <span class="cm tl"></span><span class="cm tr"></span><span class="cm bl"></span><span class="cm br"></span>
+        my-app/<br>
+        &nbsp;&nbsp;web/&nbsp;&nbsp;&nbsp;&nbsp;<span class="dir">→ Next.js</span><br>
+        &nbsp;&nbsp;api/&nbsp;&nbsp;&nbsp;&nbsp;<span class="dir">→ FastAPI</span><br>
+        &nbsp;&nbsp;worker/&nbsp;<span class="dir">→ queue consumer</span>
+        <div class="rule"></div>
+        <span class="meta">atomic deploy · rollback together · env-var service bindings · no public hop</span>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://vercel.com/blog/vercel-services-run-full-stack-on-vercel" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s03 · Cloudflare Monetization Gateway ═══════════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 073</span>
+    <span>03 / 6 · Cloudflare</span>
+  </header>
+  <div class="main">
+    <span class="tag">Web · Payments</span>
+    <h2 class="hed">The web grows a <em>cash register</em>.</h2>
+    <p class="lede">Cloudflare's Monetization Gateway lets you charge for pages, APIs, datasets and MCP tools using the x402 protocol and stablecoins. Payment is verified at the edge, so micropayments down to fractions of a cent settle in under a second — priced for a reader that is now a bot.</p>
+    <div class="figure">
+      <div class="neon-card">
+        <span class="req">GET /dataset.parquet</span><br>
+        <span class="res">← 402 Payment Required</span><br>
+        <span class="dim">&nbsp;&nbsp;accept:</span> x402 · USDC<br>
+        <span class="dim">&nbsp;&nbsp;price :</span> $0.0004 / call<br>
+        <span class="req">→ pay + retry</span><br>
+        <span class="ok">← 200 OK · settled 380ms</span>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.cloudflare.com/monetization-gateway/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"><span class="blob b1"></span><span class="blob b2"></span></div>
+</section>
+
+<!-- ═══════════════ s04 · Sentry · spot-checking agents ═══════════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 073</span>
+    <span>04 / 6 · Sentry</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev Tools · Agents</span>
+    <h2 class="hed">Read the trace your <em>eval can't</em>.</h2>
+    <p class="lede">Sergiy Dybskiy argues evals catch known failures but miss the call that matters: is a cheap model good enough for free users? Reading individual traces exposes fabrications that sail past tool-call validation — a made-up speaker name that <em>looks</em> grounded. Log with stable IDs; inspect tool output, not just the call.</p>
+    <div class="figure">
+      <table class="sheet">
+        <thead><tr><th>#</th><th>trace</th><th>tool_call</th><th>grounded?</th></tr></thead>
+        <tbody>
+          <tr><td class="rownum">1</td><td>0x9f2a</td><td>search("q3 revenue")</td><td><span class="yes">✓ yes</span></td></tr>
+          <tr><td class="rownum">2</td><td>0xa17c</td><td>transcribe(call)</td><td><span class="no">✗ speaker invented</span></td></tr>
+          <tr><td class="rownum">3</td><td>0xb033</td><td>lookup(user)</td><td><span class="yes">✓ yes</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.sentry.io/spot-checking-ai-agents/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s05 · OpenAI · GeneBench-Pro ═══════════════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 073</span>
+    <span>05 / 6 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Research · Genomics</span>
+    <h2 class="hed">A biology exam <em>top models fail</em>.</h2>
+    <p class="lede">GeneBench-Pro hands a model a dataset, an experimental context and a research question, then asks it to pick a method and reach a defensible conclusion — 129 synthetic problems with verifiable ground truth. The best system clears barely a third; most real biology still goes unanswered.</p>
+    <div class="figure">
+      <div class="journal">
+        <div class="side">
+          <b>Domains</b>
+          Genomics<br>Quantitative biology<br>Translational medicine
+          <b style="margin-top:12px">Method</b>
+          129 synthetic tasks<br>ground-truth verified
+        </div>
+        <div class="results">
+          <div class="row"><span class="model">GPT-5.6 Sol Pro <span style="opacity:.6;font-size:14px">· max reasoning</span></span><span class="pct">31.5%</span></div>
+          <div class="row"><span class="model">GPT-5.6 Sol</span><span class="pct">28.7%</span></div>
+          <div class="row"><span class="model">Claude Opus 4.8</span><span class="pct">16.0%</span></div>
+          <p class="foot">Top non-GPT model trails by 12 points — and everyone misses roughly seven problems in ten.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/introducing-genebench-pro" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s06 · Anthropic · jailbreak severity framework ═══════════════ -->
+<section class="spread s06" id="s06">
+  <header class="folio">
+    <span>Ephemeris · Issue 073</span>
+    <span>06 / 6 · Anthropic</span>
+  </header>
+  <div class="main">
+    <span class="tag">Security · Frameworks</span>
+    <h2 class="hed">One scale for <em>how bad a jailbreak is</em>.</h2>
+    <p class="lede">Anthropic, Amazon, Microsoft and Google agreed a consensus way to score a jailbreak instead of arguing about it. Four axes feed a severity tier — from a break inside safety margins to a universal one that unlocks whole classes of harm — so labs and regulators can react to the same number.</p>
+    <div class="figure">
+      <div class="sev">
+        <div class="head"><span>Jailbreak Severity</span><span>4 axes → tier</span></div>
+        <div class="dim"><span class="lbl">Capability gain</span><span class="bar" style="width:70%"></span></div>
+        <div class="dim"><span class="lbl">Breadth of gain</span><span class="bar" style="width:52%"></span></div>
+        <div class="dim"><span class="lbl">Ease of weaponization</span><span class="bar" style="width:44%"></span></div>
+        <div class="dim"><span class="lbl">Discoverability</span><span class="bar" style="width:60%"></span></div>
+        <p class="arrow">→ tier: <b>minor → universal</b> · one taxonomy across frontier labs</p>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.anthropic.com/news/redeploying-fable-5" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"><span class="stamp">SEV</span></div>
+</section>
+
+<!-- ═══════════════ COLOPHON ═══════════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 073</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Six stories on the day agents got measured and priced — labor benchmarks, edge payments, trace-reading, a biology exam, and a shared jailbreak scale.</p>
+    <div class="colo-grid">
+      <div>
+        <h4>Sources today</h4>
+        <p>Center for AI Safety (via @seeallochnaya), Vercel, Cloudflare, Sentry, OpenAI, Anthropic.</p>
+      </div>
+      <div>
+        <h4>Rubric</h4>
+        <p>Tools you could adopt this week · dev &amp; agentic tooling · research with a practical kernel · privacy &amp; security when the signal is high.</p>
+      </div>
+      <div>
+        <h4>Issue</h4>
+        <p>No. 073 · Thursday 02 July 2026 · Europe/Zürich. Fresh picks only — no reprints against the ledger.</p>
+      </div>
+    </div>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>

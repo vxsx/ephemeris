@@ -35,6 +35,7 @@ https://anthropic.com/news/fable-mythos-access
 https://anthropic.com/news/finance-agents
 https://anthropic.com/news/higher-limits-spacex
 https://anthropic.com/news/introducing-claude-tag
+https://anthropic.com/news/redeploying-fable-5
 https://anthropic.com/news/widening-conversation-ai
 https://anthropic.com/research/2028-ai-leadership
 https://anthropic.com/research/anthropic-institute-agenda
@@ -85,6 +86,7 @@ https://blog.cloudflare.com/hyper-bug
 https://blog.cloudflare.com/internal-ai-engineering-stack
 https://blog.cloudflare.com/iran-internet-partially-restored-may-2026
 https://blog.cloudflare.com/making-rust-workers-reliable
+https://blog.cloudflare.com/monetization-gateway
 https://blog.cloudflare.com/oauth-for-all
 https://blog.cloudflare.com/optimizing-core-unit-boot-time
 https://blog.cloudflare.com/our-unified-data-platform
@@ -283,6 +285,7 @@ https://openai.com/index/how-agents-are-transforming-work
 https://openai.com/index/how-chatgpt-protects-privacy
 https://openai.com/index/introducing-chatgpt-images-2-0
 https://openai.com/index/introducing-evmbench
+https://openai.com/index/introducing-genebench-pro
 https://openai.com/index/introducing-gpt-5-5
 https://openai.com/index/introducing-life-sci-bench
 https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind
@@ -350,6 +353,7 @@ https://programbench.com/blog/gpt-5-5-first-solve
 https://proofofconcept.pub/p/design-systems-are-now-inference
 https://qwen.ai/blog
 https://ramp.com/data/ai-index
+https://safe.ai/blog/significant-increase-in-digital-labor-automation
 https://sciencenews.org/article/ai-tech-save-gray-whales
 https://scrollprize.org/firstscroll
 https://semafor.com/article/06/27/2026/us-releases-powerful-anthropic-model-mythos-to-some-us-companies
@@ -370,6 +374,7 @@ https://sentry.io/blog/nextjs-export-traces-opentelemetry
 https://sentry.io/blog/nextjs-supabase-observability
 https://sentry.io/blog/scaling-observability-for-multi-agent-ai-systems
 https://sentry.io/blog/sentry-opentelemetry-work-together
+https://sentry.io/blog/spot-checking-ai-agents
 https://shir-man.com/free-llm
 https://shir-man.com/pole-chudes-exe
 https://sierra.ai/blog/the-ai-native-interview
@@ -440,6 +445,7 @@ https://vercel.com/blog/protecting-against-token-theft
 https://vercel.com/blog/realtime-voice-agents-on-ai-gateway
 https://vercel.com/blog/teaching-agents-product-design-at-vercel
 https://vercel.com/blog/vercel-flags-platform-native-feature-flags
+https://vercel.com/blog/vercel-services-run-full-stack-on-vercel
 https://vercel.com/blog/we-ralph-wiggumed-webstreams-to-make-them-10x-faster
 https://vercel.com/blog/zdr-on-ai-gateway
 https://wheresyoured.at/where-are-all-the-data-centers
