@@ -1,0 +1,583 @@
+<!doctype html>
+<!--
+  Ephemeris · Issue 074 · 2026-07-03
+  Built on the locked scaffold. Surface-only theme overrides below.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 074 · 3 July 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — don't touch below this line unless fixing a bug.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 {
+    overflow-wrap: break-word;
+    margin: 0;
+  }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+
+  .spread > .decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+
+  .figure { width: 100%; }
+
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — Issue 074. Surface only.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── Cover · single-word mood "MACHINES" on ink ─── */
+  .cover { background: #0d0e13; color: #f3f0ea; }
+  .cover .kicker {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: #6ee7c8;
+    margin: 0;
+  }
+  .cover .masthead {
+    font-family: var(--sans);
+    font-weight: 900;
+    font-size: clamp(72px, 21vw, 320px);
+    line-height: 0.82;
+    letter-spacing: -0.05em;
+    color: #f3f0ea;
+    margin: 0;
+    padding-bottom: 0.04em;
+  }
+  .cover .masthead::after {
+    content: ".";
+    color: #6ee7c8;
+  }
+  .cover .dek {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(21px, 2.1vw, 30px);
+    line-height: 1.32;
+    max-width: 30ch;
+    margin: 0;
+    color: #d6d2c8;
+  }
+  .cover .toc {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 44px;
+    padding-top: 22px;
+    border-top: 1px solid rgba(243,240,234,0.28);
+    width: 100%;
+    max-width: 1100px;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    text-decoration: none; color: inherit;
+    padding: 9px 0;
+    border-bottom: 1px dotted rgba(243,240,234,0.22);
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; font-family: var(--sans); font-weight: 500; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.82em; opacity: 0.62; font-family: var(--mono); letter-spacing: 0.04em; }
+  .cover .toc .num {
+    font-family: var(--mono); font-weight: 600;
+    color: #6ee7c8; margin-right: 12px;
+  }
+  .cover .decor::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 82% 12%, rgba(110,231,200,0.10), transparent 42%),
+      radial-gradient(circle at 12% 90%, rgba(110,231,200,0.06), transparent 46%);
+  }
+
+  /* ─── s01 · Z.ai ZCode · risograph duotone (cyan / magenta) ─── */
+  .s01 { background: #f4f1e8; color: #191512; }
+  .s01 .tag { color: #0a95bd; border-color: #0a95bd; }
+  .s01 .hed {
+    font-family: var(--sans);
+    font-weight: 900;
+    letter-spacing: -0.035em;
+    line-height: 0.94;
+    color: #e5187f;
+    text-shadow: 4px 4px 0 rgba(10,149,189,0.55);
+  }
+  .s01 .hed em { font-style: normal; color: #0a95bd; text-shadow: 4px 4px 0 rgba(229,24,127,0.5); }
+  .s01 .lede { font-family: var(--sans); font-weight: 400; color: #241f1b; }
+  .s01 .stats {
+    display: grid; grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 0; margin: 0; width: 100%; max-width: 720px;
+    border: 3px solid #191512;
+  }
+  .s01 .stats > div { padding: 18px 20px; border-right: 3px solid #191512; }
+  .s01 .stats > div:last-child { border-right: 0; }
+  .s01 .stats dt { font-family: var(--sans); font-weight: 900; font-size: clamp(28px, 3.4vw, 44px); line-height: 1; color: #e5187f; }
+  .s01 .stats dd { margin: 8px 0 0; font-family: var(--mono); font-size: 15px; letter-spacing: 0.02em; color: #0a7d9e; text-transform: uppercase; }
+  .s01 .read-on { color: #e5187f; border-color: #e5187f; --flip: #f4f1e8; }
+  .s01 .decor::before {
+    content: "";
+    position: absolute; right: -8vw; top: 18%;
+    width: 46vw; height: 46vw;
+    background: radial-gradient(circle, rgba(10,149,189,0.16) 0 32%, transparent 33%) 0 0 / 26px 26px;
+    transform: rotate(8deg);
+  }
+
+  /* ─── s02 · Sentry · terminal (phosphor on black) — dark inversion ─── */
+  .s02 { background: #05080a; color: #37f39a; }
+  .s02 .tag { color: #37f39a; border-color: #1f6b48; }
+  .s02 .hed {
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: clamp(38px, 5.4vw, 82px);
+    letter-spacing: -0.01em;
+    line-height: 1.06;
+    color: #d8ffe9;
+  }
+  .s02 .hed em { font-style: normal; background: #37f39a; color: #05080a; padding: 0 0.12em; }
+  .s02 .lede { font-family: var(--mono); font-size: clamp(16px, 1.4vw, 19px); line-height: 1.6; color: #7ee9b8; max-width: 60ch; }
+  .s02 .termcard {
+    font-family: var(--mono); font-size: 15px; line-height: 1.75;
+    background: #0a1013; border: 1px solid #17402c; border-radius: 8px;
+    padding: 20px 22px; width: 100%; max-width: 640px;
+    color: #6fe6ac; white-space: pre-wrap;
+  }
+  .s02 .termcard b { color: #d8ffe9; font-weight: 600; }
+  .s02 .termcard .c { color: #3f7a5e; }
+  .s02 .read-on { color: #37f39a; border-color: #37f39a; --flip: #05080a; }
+  .s02 .decor::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(0deg, rgba(55,243,154,0.05) 0 1px, transparent 1px 4px);
+  }
+  .s02 .decor::after {
+    content: "";
+    position: absolute; right: -6vw; bottom: -10vw;
+    width: 40vw; height: 40vw;
+    background: radial-gradient(circle, rgba(55,243,154,0.10), transparent 70%);
+  }
+
+  /* ─── s03 · Vercel × Shopify Hydrogen · blueprint ─── */
+  .s03 { background: #e7eef3; color: #16324a; }
+  .s03 .tag { color: #16324a; border-color: #16324a; }
+  .s03 .hed {
+    font-family: var(--serif);
+    font-weight: 700;
+    color: #12354f;
+  }
+  .s03 .hed em { font-style: italic; color: #b4471f; font-variation-settings: "opsz" 144, "SOFT" 60, "WONK" 1; }
+  .s03 .lede { color: #26445c; }
+  .s03 .layers { display: flex; flex-direction: column; gap: 14px; width: 100%; max-width: 680px; margin: 0; }
+  .s03 .layers .lyr {
+    border: 1.5px solid #3f6d8c; border-radius: 4px; padding: 16px 18px;
+    background: rgba(255,255,255,0.35);
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px;
+  }
+  .s03 .layers .lbl { font-family: var(--mono); font-size: 14px; letter-spacing: 0.16em; text-transform: uppercase; color: #b4471f; font-weight: 600; }
+  .s03 .layers .txt { font-family: var(--sans); font-size: 17px; color: #26445c; flex: 1 1 240px; }
+  .s03 .layers .ann { font-family: var(--mono); font-size: 13px; color: #5a7d97; }
+  .s03 .read-on { color: #b4471f; border-color: #b4471f; --flip: #e7eef3; }
+  .s03 .decor::before {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(rgba(63,109,140,0.14) 1px, transparent 1px) 0 0 / 100% 30px,
+      linear-gradient(90deg, rgba(63,109,140,0.14) 1px, transparent 1px) 0 0 / 30px 100%;
+  }
+  .s03 .decor .crop { position: absolute; width: 20px; height: 20px; border: 0 solid #3f6d8c; }
+  .s03 .decor .crop.bl { left: clamp(12px,3vw,60px); bottom: clamp(40px,4vw,64px); border-left-width: 1.5px; border-bottom-width: 1.5px; }
+  .s03 .decor .crop.br { right: clamp(12px,3vw,60px); bottom: clamp(40px,4vw,64px); border-right-width: 1.5px; border-bottom-width: 1.5px; }
+
+  /* ─── s04 · Cloudflare · big stats on vermilion (LOUD) ─── */
+  .s04 { background: #e83015; color: #fff4ee; }
+  .s04 .tag { color: #fff4ee; border-color: rgba(255,244,238,0.7); }
+  .s04 .hed { font-family: var(--sans); font-weight: 800; letter-spacing: -0.03em; color: #fff4ee; line-height: 0.98; }
+  .s04 .hed em { font-style: normal; color: #2a0a04; background: #ffd7ab; padding: 0 0.1em; }
+  .s04 .lede { font-family: var(--sans); font-weight: 400; color: #ffe4d8; }
+  .s04 .bigstat { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px 28px; width: 100%; }
+  .s04 .bignum { font-family: var(--sans); font-weight: 900; font-size: clamp(96px, 20vw, 280px); line-height: 0.8; letter-spacing: -0.05em; color: #2a0a04; }
+  .s04 .bignum .unit { font-size: 0.24em; letter-spacing: normal; margin-left: 0.1em; color: #fff4ee; font-weight: 700; }
+  .s04 .caption { font-family: var(--mono); font-size: 15px; letter-spacing: 0.04em; text-transform: uppercase; color: #ffd7ab; max-width: 22ch; }
+  .s04 .stats { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 20px 28px; margin: 6px 0 0; width: 100%; max-width: 780px; }
+  .s04 .stats dt { font-family: var(--sans); font-weight: 800; font-size: clamp(24px, 3vw, 38px); color: #2a0a04; }
+  .s04 .stats dd { margin: 4px 0 0; font-family: var(--mono); font-size: 14px; letter-spacing: 0.03em; text-transform: uppercase; color: #ffe0d0; }
+  .s04 .read-on { color: #fff4ee; border-color: #fff4ee; --flip: #e83015; }
+  .s04 .decor::before {
+    content: "";
+    position: absolute; left: -12vw; top: -12vw;
+    width: 50vw; height: 50vw;
+    background: radial-gradient(circle, rgba(42,10,4,0.16), transparent 68%);
+  }
+
+  /* ─── s05 · Supabase Realtime · concrete (warm grey) ─── */
+  .s05 { background: #d8d5cc; color: #1b1a16; }
+  .s05 .tag { color: #1b1a16; border-color: #1b1a16; }
+  .s05 .hed {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-style: italic;
+    font-size: clamp(46px, 6.2vw, 96px);
+    color: #1b1a16;
+    font-variation-settings: "opsz" 144, "SOFT" 40, "WONK" 0;
+  }
+  .s05 .hed em { font-style: italic; font-weight: 600; color: #1f8a5b; }
+  .s05 .lede { color: #34322b; }
+  .s05 .wire { font-family: var(--mono); font-size: 16px; line-height: 1.8; width: 100%; max-width: 640px; margin: 0; color: #34322b; }
+  .s05 .wire .row { display: flex; flex-wrap: wrap; gap: 4px 14px; padding: 10px 0; border-bottom: 1px solid rgba(27,26,22,0.18); }
+  .s05 .wire .k { color: #1f8a5b; min-width: 15ch; }
+  .s05 .wire .note { font-family: var(--sans); font-size: 16px; color: #4a4840; margin-top: 12px; }
+  .s05 .read-on { color: #1f8a5b; border-color: #1f8a5b; --flip: #d8d5cc; }
+  .s05 .decor::before {
+    content: "{ }";
+    position: absolute; right: -2vw; bottom: -8vw;
+    font-family: var(--mono); font-weight: 400;
+    font-size: 42vw; line-height: 1; color: rgba(31,138,91,0.10);
+  }
+
+  /* ─── Colophon · newsprint ─── */
+  .colophon { background: #f1ebde; color: #16130d; }
+  .colophon .folio { color: #16130d; }
+  .colophon .hed {
+    font-family: var(--serif); font-weight: 900;
+    font-size: clamp(52px, 8vw, 116px);
+    color: #16130d;
+  }
+  .colophon .hed em { font-style: italic; color: #8a2b12; }
+  .colophon .lede { color: #2c271d; max-width: 46ch; }
+  .colophon .cols {
+    column-count: 3; column-gap: 34px; width: 100%; max-width: 940px;
+    margin: 6px 0 0;
+    font-family: var(--sans); font-size: 16px; line-height: 1.5; color: #2c271d;
+  }
+  .colophon .cols h4 {
+    font-family: var(--serif); font-weight: 700; font-size: 15px;
+    letter-spacing: 0.14em; text-transform: uppercase; color: #8a2b12;
+    margin: 0 0 4px; break-after: avoid;
+  }
+  .colophon .cols p { margin: 0 0 14px; break-inside: avoid; }
+
+  /* ─── Mobile figure clamps ─── */
+  @media (max-width: 800px) {
+    .s01 .stats { grid-template-columns: 1fr; }
+    .s01 .stats > div { border-right: 0; border-bottom: 3px solid #191512; }
+    .s01 .stats > div:last-child { border-bottom: 0; }
+    .s01 .hed, .s01 .hed em { text-shadow: 3px 3px 0 rgba(10,149,189,0.5); }
+    .s04 .stats { grid-template-columns: 1fr; }
+    .s04 .bignum { font-size: clamp(88px, 30vw, 150px); }
+    .colophon .cols { column-count: 1; }
+    .s05 .decor::before { font-size: 70vw; }
+    .s02 .termcard { font-size: 13.5px; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ══════════════ COVER ══════════════ -->
+<section class="spread cover centered" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 074</span>
+    <span>Friday · 03 Jul 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <p class="kicker">The daily typographic dispatch</p>
+    <h1 class="masthead">MACHINES</h1>
+    <p class="dek">Half the web's traffic is no longer human — and the tools to build it just got cheaper and more open. Five dispatches from the handover.</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>A coding agent built to undercut</span><span>Z.ai</span></a>
+      <a href="#s02"><span><span class="num">02</span>Catch the broken build before the user</span><span>Sentry</span></a>
+      <a href="#s03"><span><span class="num">03</span>One commerce core, any framework</span><span>Vercel</span></a>
+      <a href="#s04"><span><span class="num">04</span>Half the web isn't human anymore</span><span>Cloudflare</span></a>
+      <a href="#s05"><span><span class="num">05</span>Realtime learns to speak binary</span><span>Supabase</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ══════════════ s01 · Z.ai ZCode ══════════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 074</span>
+    <span>01 / 05 · Z.ai via VentureBeat</span>
+  </header>
+  <div class="main">
+    <span class="tag">AI Tools · Agentic Coding</span>
+    <h2 class="hed">A coding agent built to <em>undercut</em>.</h2>
+    <p class="lede">Z.ai shipped ZCode, a free, agent-first desktop IDE for macOS, Windows and Linux built around GLM-5.2 — its 753-billion-parameter model, released under an MIT license. Paid Coding Plans start at $16.20 a month, roughly a tenth of the premium Claude tiers it is chasing, with bring-your-own-key for other models. The pitch is long-horizon, project-level work rather than single-file autocomplete — a direct swing at Cursor, Claude Code and Copilot.</p>
+    <div class="figure">
+      <dl class="stats">
+        <div><dt>Free</dt><dd>Desktop IDE · 3 OSes</dd></div>
+        <div><dt>753B</dt><dd>MoE · MIT license</dd></div>
+        <div><dt>$16.20</dt><dd>Lite plan / month</dd></div>
+      </dl>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://venturebeat.com/technology/z-ai-launches-zcode-to-challenge-cursor-claude-code-and-github-copilot-in-ai-coding" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ══════════════ s02 · Sentry ══════════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 074</span>
+    <span>02 / 05 · Sentry</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev Tools · Reliability</span>
+    <h2 class="hed">Catch the broken build before the <em>user</em> does.</h2>
+    <p class="lede">The team behind Usage — 1.6 million downloads, a 4.7-star rating — treats every Apple release as a potential outage. The app, its menu-bar helper, a background service and the widgets each report to a separate Sentry project, and every failure is wrapped in a custom ErrorWithData so a crash carries both what broke and the unexpected payload that broke it — the tell for an undocumented API change.</p>
+    <div class="figure">
+      <div class="termcard"><span class="c"># usage — the safety net that ships first</span>
+<b>▸</b> crash monitoring ............ ok
+<b>▸</b> error + ErrorWithData ....... armed
+<b>▸</b> size analysis (regressions) . watching
+<b>▸</b> metrics (perf budget) ....... quiet
+<b>▸</b> user feedback ............... open
+<span class="c"># "nobody wants a system monitor</span>
+<span class="c">#  that shows up in its own charts."</span></div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.sentry.io/apple-update-breaks-app/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ══════════════ s03 · Vercel × Shopify Hydrogen ══════════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 074</span>
+    <span>03 / 05 · Vercel</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev Tools · Frameworks</span>
+    <h2 class="hed">One commerce core, <em>any</em> framework.</h2>
+    <p class="lede">Vercel and Shopify are rebuilding Hydrogen, Shopify's headless-storefront framework, as three portable layers. Centralize the core, the argument goes, and every storefront inherits the fix — "fix each bug once, ship improvements to everyone, and get back to building."</p>
+    <div class="figure">
+      <dl class="layers">
+        <div class="lyr"><span class="lbl">Core</span><span class="txt">Shared JS utilities — money formatting, Storefront API glue</span><span class="ann">fix once</span></div>
+        <div class="lyr"><span class="lbl">Client</span><span class="txt">Framework-agnostic cart &amp; form state</span><span class="ann">React first</span></div>
+        <div class="lyr"><span class="lbl">Server</span><span class="txt">Next.js · Nuxt · Svelte as the runtime</span><span class="ann">native caching</span></div>
+      </dl>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://vercel.com/blog/vercel-and-shopify-are-rebuilding-hydrogen" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true">
+    <span class="crop bl"></span>
+    <span class="crop br"></span>
+  </div>
+</section>
+
+<!-- ══════════════ s04 · Cloudflare ══════════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 074</span>
+    <span>04 / 05 · Cloudflare</span>
+  </header>
+  <div class="main">
+    <span class="tag">Web · Economics</span>
+    <h2 class="hed">Half the web isn't <em>human</em> anymore.</h2>
+    <p class="lede">A year after Content Independence Day, Cloudflare's tally is blunt: more than half of all internet traffic is now non-human, and a market for paid crawling is forming in the gap. For every hour spent searching, only fifteen minutes now lands on the open web.</p>
+    <div class="figure">
+      <div class="bigstat">
+        <span class="bignum">52<span class="unit">%</span></span>
+        <span class="caption">of crawler requests are now AI training — up from 22% a year ago</span>
+      </div>
+      <dl class="stats">
+        <div><dt>50%+</dt><dd>Traffic now non-human</dd></div>
+        <div><dt>−40%</dt><dd>Human visits, worst-hit sectors</dd></div>
+        <div><dt>15 min</dt><dd>Of each search hour on the open web</dd></div>
+      </dl>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.cloudflare.com/agentic-internet-bot-report/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ══════════════ s05 · Supabase Realtime ══════════════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 074</span>
+    <span>05 / 05 · Supabase</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev Tools · Realtime</span>
+    <h2 class="hed">Realtime learns to speak <em>binary</em>.</h2>
+    <p class="lede">Supabase Realtime Broadcast can now carry binary payloads alongside JSON. Protobuf, CBOR, MessagePack or raw media frames travel over a channel as bytes instead of base64 stuffed into a JSON string — dropping the encoding tax and the serialize-on-both-ends dance. For multiplayer cursors, game state or audio, the wire finally matches the data.</p>
+    <div class="figure">
+      <div class="wire">
+        <div class="row"><span class="k">before →</span><span>JSON + base64 · ~1.33× bytes · encode/decode both ends</span></div>
+        <div class="row"><span class="k">now →</span><span>binary payload · 1.0× bytes · straight through</span></div>
+        <p class="note">On Broadcast channels today: Protobuf · CBOR · MessagePack · media frames.</p>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://supabase.com/changelog/46834-realtime-broadcast-now-supports-binary-payloads" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ══════════════ COLOPHON ══════════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 074</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Five picks for 3 July 2026 — an open coding agent priced to undercut, the web tipping past its human majority, and the plumbing beneath both.</p>
+    <div class="cols">
+      <h4>Sources today</h4>
+      <p>Z.ai (via VentureBeat), Sentry, Vercel, Cloudflare, Supabase. Also read but not run: OpenAI, Anthropic, GitHub, PostHog, Fly.io, Next.js, The Batch, Import AI, and five Telegram channels.</p>
+      <h4>Rubric</h4>
+      <p>Tools you could adopt this week; dev tools and agentic coding; the economics of the agentic web; anything immediately useful to a senior engineer or founder. No reprints, nothing older than thirty days, no marketing.</p>
+      <h4>Issue</h4>
+      <p>No. 074 · Friday, 3 July 2026 · Europe/Zürich. Built each morning at 08:00.</p>
+    </div>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>

@@ -59,6 +59,7 @@ https://arxiv.org/abs/2606.03458
 https://arxiv.org/pdf/2604.24827
 https://biohub.org/news/world-model-of-protein-biology
 https://blog.cloudflare.com/agent-readiness
+https://blog.cloudflare.com/agentic-internet-bot-report
 https://blog.cloudflare.com/agents-platform-flue-sdk
 https://blog.cloudflare.com/agents-stripe-projects
 https://blog.cloudflare.com/agents-week-in-review
@@ -366,6 +367,7 @@ https://sentry.engineering/blog/swizzling-swiftui-view-body
 https://sentry.io/blog/agents-need-production-context
 https://sentry.io/blog/ai-agent-observability-developers-guide-to-agent-monitoring
 https://sentry.io/blog/ai-bug-reproduction
+https://sentry.io/blog/apple-update-breaks-app
 https://sentry.io/blog/cut-build-times-delete-cms
 https://sentry.io/blog/debugging-multi-agent-ai-when-the-failure-is-in-the-space-between-agents
 https://sentry.io/blog/errors-traces-logs-metrics-when-to-reach-for-what
@@ -381,6 +383,7 @@ https://sierra.ai/blog/the-ai-native-interview
 https://simonwillison.net/2026/May/14/not-so-locked-in
 https://stepsecurity.io/blog/the-hades-campaign-pypi-packages
 https://success.com/tokenmaxxing-ai-adoption-metrics
+https://supabase.com/changelog/46834-realtime-broadcast-now-supports-binary-payloads
 https://t.me/ProductsAndStartups/1740
 https://t.me/ProductsAndStartups/1745
 https://t.me/ProductsAndStartups/1748
@@ -417,6 +420,7 @@ https://thezvi.substack.com/p/the-most-important-charts-in-the
 https://thezvi.substack.com/p/what-is-anthropic
 https://thinkingmachines.ai/blog/interaction-models
 https://v0.app/
+https://venturebeat.com/technology/z-ai-launches-zcode-to-challenge-cursor-claude-code-and-github-copilot-in-ai-coding
 https://vercel.com/blog/a-new-programming-model-for-durable-execution
 https://vercel.com/blog/agent-responsibly
 https://vercel.com/blog/agent-stack
@@ -444,6 +448,7 @@ https://vercel.com/blog/protecting-against-inference-theft
 https://vercel.com/blog/protecting-against-token-theft
 https://vercel.com/blog/realtime-voice-agents-on-ai-gateway
 https://vercel.com/blog/teaching-agents-product-design-at-vercel
+https://vercel.com/blog/vercel-and-shopify-are-rebuilding-hydrogen
 https://vercel.com/blog/vercel-flags-platform-native-feature-flags
 https://vercel.com/blog/vercel-services-run-full-stack-on-vercel
 https://vercel.com/blog/we-ralph-wiggumed-webstreams-to-make-them-10x-faster
