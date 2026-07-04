@@ -32,6 +32,7 @@ https://anthropic.com/news/claude-sonnet-5
 https://anthropic.com/news/election-safeguards-update
 https://anthropic.com/news/expanding-project-glasswing
 https://anthropic.com/news/fable-mythos-access
+https://anthropic.com/news/fable-safeguards-jailbreak-framework
 https://anthropic.com/news/finance-agents
 https://anthropic.com/news/higher-limits-spacex
 https://anthropic.com/news/introducing-claude-tag
@@ -75,6 +76,7 @@ https://blog.cloudflare.com/claude-managed-agents
 https://blog.cloudflare.com/clickhouse-query-plan-contention
 https://blog.cloudflare.com/cloudflare-one-stack
 https://blog.cloudflare.com/code-orange-fail-small-complete
+https://blog.cloudflare.com/content-independence-day-ai-options
 https://blog.cloudflare.com/copy-fail-linux-vulnerability-mitigation
 https://blog.cloudflare.com/cyber-frontier-models
 https://blog.cloudflare.com/de-tld-outage-dnssec
@@ -128,6 +130,7 @@ https://cursor.com/blog/composer-2-5
 https://cursor.com/blog/design-mode
 https://cursor.com/blog/notion
 https://cursor.com/blog/typescript-sdk
+https://cursor.com/changelog/ios-mobile-app
 https://cursor.com/changelog/sdk-updates-jun-2026
 https://deeplearning.ai/short-courses/build-interactive-agents-with-generative-ui
 https://deeplearning.ai/the-batch/issue-347
@@ -355,6 +358,8 @@ https://proofofconcept.pub/p/design-systems-are-now-inference
 https://qwen.ai/blog
 https://ramp.com/data/ai-index
 https://safe.ai/blog/significant-increase-in-digital-labor-automation
+https://sakana.ai/fugu-release
+https://sakana.ai/marlin-release
 https://sciencenews.org/article/ai-tech-save-gray-whales
 https://scrollprize.org/firstscroll
 https://semafor.com/article/06/27/2026/us-releases-powerful-anthropic-model-mythos-to-some-us-companies
@@ -453,6 +458,7 @@ https://vercel.com/blog/vercel-flags-platform-native-feature-flags
 https://vercel.com/blog/vercel-services-run-full-stack-on-vercel
 https://vercel.com/blog/we-ralph-wiggumed-webstreams-to-make-them-10x-faster
 https://vercel.com/blog/zdr-on-ai-gateway
+https://vercel.com/changelog/enforce-consistent-code-for-agents-and-humans-with-konsistent
 https://wheresyoured.at/where-are-all-the-data-centers
 https://wsj.com/tech/ai/mind-blowing-growth-is-about-to-propel-anthropic-into-its-first-profitable-quarter-7edbf2f4
 https://x.com/airbusheli/status/2063895281205137413
