@@ -57,6 +57,7 @@ https://arxiv.org/abs/2605.13829
 https://arxiv.org/abs/2605.22771
 https://arxiv.org/abs/2605.30341
 https://arxiv.org/abs/2606.03458
+https://arxiv.org/abs/2606.23001
 https://arxiv.org/pdf/2604.24827
 https://biohub.org/news/world-model-of-protein-biology
 https://blog.cloudflare.com/agent-readiness
@@ -179,6 +180,7 @@ https://github.blog/engineering/infrastructure/how-github-uses-ebpf-to-improve-d
 https://github.blog/engineering/infrastructure/when-protections-outlive-their-purpose-a-lesson-on-managing-defense-systems-at-scale
 https://github.blog/engineering/platform-security/post-quantum-security-for-ssh-access-on-github
 https://github.com/Agents365-ai/drawio-skill
+https://github.com/AMAP-ML/DreamX-World
 https://github.com/Augani/openreel-video
 https://github.com/BayramAnnakov/ai-native-product-skills/tree/master/skills/autoresearch
 https://github.com/BayramAnnakov/ai-personal-os-skills/tree/main/skills/slide-inspector
@@ -230,6 +232,7 @@ https://jack-clark.net/2026/06/22/import-ai-462-superpersuasion-self-sustaining-
 https://jack-clark.net/2026/06/29/import-ai-463-self-improving-robots-a-10k-chinese-gpu-cluster-and-an-elegiac-essay-for-the-human-era
 https://jeffbullas.com/ai-reinvention-truth
 https://jeffbullas.com/ai-slop-crisis
+https://jeffbullas.com/chokepoint-economy
 https://jeffbullas.com/distraction-economy
 https://jeffbullas.com/forget-google
 https://jeffbullas.com/how-creators-make-money-ai
@@ -363,6 +366,7 @@ https://sakana.ai/marlin-release
 https://sciencenews.org/article/ai-tech-save-gray-whales
 https://scrollprize.org/firstscroll
 https://semafor.com/article/06/27/2026/us-releases-powerful-anthropic-model-mythos-to-some-us-companies
+https://semgrep.dev/blog/2026/we-have-mythos-at-home-glm-52-beats-claude-in-our-cyber-benchmarks
 https://sentinelone.com/labs/fast16-mystery-shadowbrokers-reference-reveals-high-precision-software-sabotage-5-years-before-stuxnet
 https://sentry.engineering/blog/building-type-safe-metrics-api-in-swift-part-ii
 https://sentry.engineering/blog/do-you-really-need-an-mcp-to-build-your-app
@@ -414,9 +418,11 @@ https://thezvi.substack.com/p/claude-code-codex-and-agentic-coding
 https://thezvi.substack.com/p/claude-code-codex-and-agentic-coding-f54
 https://thezvi.substack.com/p/claude-fable-5-and-mythos-5-the-system
 https://thezvi.substack.com/p/claude-opus-48-is-honestly-better
+https://thezvi.substack.com/p/claude-sonnet-5-is-not-frontier-but
 https://thezvi.substack.com/p/cyber-lack-of-security-and-ai-governance
 https://thezvi.substack.com/p/gemini-35-flash-looks-good-for-how
 https://thezvi.substack.com/p/gpt-55-capabilities-and-reactions
+https://thezvi.substack.com/p/gpt-56-the-system-card
 https://thezvi.substack.com/p/monthly-roundup-42-may-2026
 https://thezvi.substack.com/p/opus-47-part-2-capabilities-and-reactions
 https://thezvi.substack.com/p/opus-47-part-3-model-welfare
