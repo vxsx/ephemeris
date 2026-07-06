@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 077 · 06 Jul 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — cloned from scaffold.html. Do not restructure.
+     ═══════════════════════════════════════════════════════════════════ */
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+
+  .spread > .decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+
+  .figure { width: 100%; }
+
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — surface only.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── COVER · pull-quote on ink ─── */
+  .cover { background: #0d0f12; color: #ece6d8; }
+  .cover .wordmark {
+    font-family: var(--serif); font-weight: 900; font-style: italic;
+    font-variation-settings: "opsz" 60, "SOFT" 0, "WONK" 1;
+    letter-spacing: -0.01em; opacity: 1; color: #79f2c0;
+  }
+  .cover .lead { display: flex; flex-direction: column; gap: 14px; }
+  .cover .kicker {
+    font-family: var(--mono); font-size: 13px; letter-spacing: 0.28em;
+    text-transform: uppercase; color: #79f2c0; opacity: 0.85;
+  }
+  .cover .pullquote {
+    font-family: var(--serif); font-style: italic; font-weight: 500;
+    font-size: clamp(38px, 7.4vw, 104px); line-height: 1.02;
+    letter-spacing: -0.02em; max-width: 15ch;
+    font-variation-settings: "opsz" 144, "SOFT" 60, "WONK" 1;
+    padding-bottom: 0.1em; margin: 0;
+  }
+  .cover .pullquote em { font-style: italic; color: #79f2c0; }
+  .cover .qsrc {
+    font-family: var(--sans); font-size: 14px; letter-spacing: 0.14em;
+    text-transform: uppercase; opacity: 0.62; margin: 0;
+  }
+  .cover .toc {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(236,230,216,0.35);
+    width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 4px 12px;
+    text-decoration: none; color: inherit;
+    padding: 7px 0;
+    border-bottom: 1px dotted rgba(236,230,216,0.22);
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.82em; opacity: 0.6; }
+  .cover .toc .num {
+    font-family: var(--serif); font-weight: 700; font-style: italic;
+    color: #79f2c0; margin-right: 10px;
+  }
+  .cover .decor::before {
+    content: ""; position: absolute;
+    right: -18vw; top: -20vw; width: 60vw; height: 60vw;
+    background: radial-gradient(circle, rgba(121,242,192,0.10), transparent 68%);
+  }
+  @media (max-width: 800px) {
+    .cover .toc { grid-template-columns: 1fr; gap: 0; }
+  }
+
+  /* ─── s01 · NotebookLM · Risograph duotone ─── */
+  .s01 { background: #f2ede1; color: #191712; }
+  .s01 .tag { color: #16130c; border-color: #16130c; }
+  .s01 .hed {
+    font-family: var(--sans); font-weight: 900; letter-spacing: -0.035em;
+    line-height: 0.98; color: #ec2b7a;
+    text-shadow: 0.055em 0.055em 0 #17b6d6;
+  }
+  .s01 .lede { font-family: var(--serif); }
+  .s01 .read-on { color: #16130c; border-color: #16130c; --flip: #f2ede1; }
+  .s01 .reel {
+    display: inline-flex; flex-direction: column; gap: 0;
+    width: clamp(150px, 22vw, 190px); aspect-ratio: 9 / 16;
+    border: 3px solid #16130c; background: #fff;
+    position: relative; overflow: hidden;
+  }
+  .s01 .reel .band { flex: 1 1 auto; }
+  .s01 .reel .c { background: #17b6d6; mix-blend-mode: multiply; }
+  .s01 .reel .m { background: #ec2b7a; mix-blend-mode: multiply; margin-top: -34%; }
+  .s01 .reel .timer {
+    position: absolute; top: 10px; right: 10px;
+    font-family: var(--mono); font-size: 13px; font-weight: 600;
+    color: #16130c; background: #f5d022; padding: 2px 7px; border: 2px solid #16130c;
+  }
+  .s01 .reel .play {
+    position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+    width: 0; height: 0; border-style: solid;
+    border-width: 16px 0 16px 26px; border-color: transparent transparent transparent #16130c;
+    mix-blend-mode: normal;
+  }
+  .s01 .decor::before {
+    content: ""; position: absolute; left: -8vw; bottom: -10vw;
+    width: 40vw; height: 40vw; border-radius: 50%;
+    background: #17b6d6; opacity: 0.16; mix-blend-mode: multiply;
+  }
+  .s01 .decor::after {
+    content: ""; position: absolute; left: -4vw; bottom: -14vw;
+    width: 40vw; height: 40vw; border-radius: 50%;
+    background: #ec2b7a; opacity: 0.14; mix-blend-mode: multiply;
+  }
+
+  /* ─── s02 · Safari MCP · Terminal ─── */
+  .s02 { background: #060a07; color: #7dfc9b; }
+  .s02 .tag { color: #7dfc9b; border-color: rgba(125,252,155,0.5); }
+  .s02 .hed {
+    font-family: var(--mono); font-weight: 600; font-size: clamp(38px, 5.6vw, 84px);
+    letter-spacing: -0.01em; line-height: 1.04; color: #b9ffcb;
+    text-shadow: 0 0 22px rgba(125,252,155,0.35);
+  }
+  .s02 .lede { font-family: var(--mono); font-size: clamp(17px, 1.5vw, 20px); color: #86e6a0; }
+  .s02 .read-on { color: #7dfc9b; border-color: #7dfc9b; --flip: #060a07; font-family: var(--mono); }
+  .s02 .term {
+    font-family: var(--mono); font-size: clamp(12px, 1.35vw, 15px);
+    line-height: 1.7; border: 1px solid rgba(125,252,155,0.35);
+    background: rgba(125,252,155,0.04); padding: 16px 18px; max-width: 62ch;
+  }
+  .s02 .term .p { color: #47c76e; }
+  .s02 .term .cmd { color: #d8ffe2; }
+  .s02 .term .ok { color: #7dfc9b; }
+  .s02 .term .dim { color: #4d8a63; }
+  .s02 .decor {
+    background-image: repeating-linear-gradient(
+      to bottom, rgba(125,252,155,0.05) 0 1px, transparent 1px 4px);
+  }
+
+  /* ─── s03 · Memora · Midnight ─── */
+  .s03 { background: #08102b; color: #dde4ff; }
+  .s03 .tag { color: #9fb4ff; border-color: rgba(159,180,255,0.5); }
+  .s03 .hed {
+    font-family: var(--sans); font-weight: 800; letter-spacing: -0.025em; line-height: 1.0;
+    background: linear-gradient(96deg, #8fd6ff 0%, #a99bff 52%, #f0a6ff 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .s03 .lede { color: #c3ccf0; }
+  .s03 .read-on { color: #b7c6ff; border-color: #b7c6ff; --flip: #08102b; }
+  .s03 .stats { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 20px 44px; }
+  .s03 .big {
+    font-family: var(--serif); font-weight: 800; font-style: italic; line-height: 0.82;
+    font-size: clamp(96px, 20vw, 240px); letter-spacing: -0.04em;
+    background: linear-gradient(180deg, #a7e0ff, #b3a4ff);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .s03 .big .unit {
+    font-family: var(--sans); font-style: normal; font-weight: 700;
+    font-size: 0.24em; letter-spacing: normal; margin-left: 0.12em;
+    -webkit-text-fill-color: #8fb8ff; color: #8fb8ff;
+  }
+  .s03 dl { margin: 0; display: grid; gap: 14px; }
+  .s03 .row { display: flex; align-items: baseline; gap: 14px; }
+  .s03 dt {
+    font-family: var(--mono); font-size: clamp(26px, 3.4vw, 40px); font-weight: 600;
+    color: #eaf0ff; min-width: 3.6ch;
+  }
+  .s03 dd { margin: 0; font-family: var(--sans); font-size: 14px; letter-spacing: 0.04em;
+    text-transform: uppercase; color: #97a6d8; }
+  .s03 .decor::before {
+    content: ""; position: absolute; right: -14vw; top: -12vw; width: 52vw; height: 52vw;
+    background: radial-gradient(circle, rgba(150,120,255,0.22), transparent 66%);
+  }
+  .s03 .decor::after {
+    content: ""; position: absolute; left: -12vw; bottom: -16vw; width: 44vw; height: 44vw;
+    background: radial-gradient(circle, rgba(80,160,255,0.16), transparent 68%);
+  }
+
+  /* ─── s04 · Cloudflare Attribution · Neo-brutalist ─── */
+  .s04 { background: #f5d400; color: #0a0a0a; }
+  .s04 .tag {
+    color: #f5d400; background: #0a0a0a; border: 3px solid #0a0a0a; border-radius: 0;
+    opacity: 1; font-weight: 700;
+  }
+  .s04 .hed {
+    font-family: var(--sans); font-weight: 900; text-transform: uppercase;
+    letter-spacing: -0.02em; line-height: 0.92; font-size: clamp(42px, 6.6vw, 96px);
+  }
+  .s04 .lede { font-family: var(--sans); font-weight: 500; }
+  .s04 .read-on {
+    color: #f5d400; background: #0a0a0a; border: 3px solid #0a0a0a; border-radius: 0;
+    --flip: #f5d400;
+  }
+  .s04 .read-on:hover { background: #fff; }
+  .s04 .read-on:hover span { color: #0a0a0a; }
+  .s04 .ratio {
+    display: inline-flex; flex-direction: column; background: #0a0a0a; color: #f5d400;
+    border: 3px solid #0a0a0a; padding: 18px 26px; margin: 0;
+  }
+  .s04 .ratio b {
+    font-family: var(--sans); font-weight: 900; font-size: clamp(52px, 11vw, 118px);
+    line-height: 0.9; letter-spacing: -0.03em;
+  }
+  .s04 .ratio b .unit { letter-spacing: normal; }
+  .s04 .ratio small {
+    font-family: var(--sans); font-weight: 700; font-size: 13px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: #fff; margin-top: 8px;
+  }
+  .s04 .lanes { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
+  .s04 .lanes span {
+    font-family: var(--sans); font-weight: 800; font-size: 14px; letter-spacing: 0.1em;
+    text-transform: uppercase; background: #fff; border: 3px solid #0a0a0a; padding: 8px 14px;
+  }
+  .s04 .figrow { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 22px 30px; }
+
+  /* ─── s05 · Viral Bench · Teal grid ─── */
+  .s05 { background: #0b3b39; color: #e3f6f0; }
+  .s05 .tag { color: #ff7a63; border-color: rgba(255,122,99,0.6); }
+  .s05 .hed {
+    font-family: var(--serif); font-weight: 800; font-style: italic; line-height: 1.0;
+    letter-spacing: -0.02em; color: #f4efe4;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+  }
+  .s05 .hed em { color: #ff7a63; font-style: italic; }
+  .s05 .lede { color: #bfe4db; }
+  .s05 .read-on { color: #ffb0a2; border-color: #ff7a63; --flip: #0b3b39; }
+  .s05 .grid {
+    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; width: 100%;
+  }
+  .s05 .cell {
+    border: 1px solid rgba(227,246,240,0.28); padding: 16px 16px 20px; position: relative;
+    background: rgba(255,255,255,0.03);
+  }
+  .s05 .cell .n {
+    font-family: var(--serif); font-style: italic; font-weight: 700; font-size: 26px;
+    color: #ff7a63; display: block; margin-bottom: 10px;
+  }
+  .s05 .cell .t { font-family: var(--sans); font-weight: 700; font-size: 15px; letter-spacing: 0.02em; }
+  .s05 .cell .d { font-family: var(--sans); font-size: 13.5px; color: #9fcfc5; margin-top: 5px; line-height: 1.4; }
+  .s05 .decor::before {
+    content: ""; position: absolute; right: -12vw; bottom: -14vw; width: 42vw; height: 42vw;
+    background: radial-gradient(circle, rgba(255,122,99,0.16), transparent 68%);
+  }
+  @media (max-width: 800px) {
+    .s05 .grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* ─── s06 · Tom Riddle diary · Pastel rose ─── */
+  .s06 { background: linear-gradient(155deg, #f7e8ee 0%, #efe6f4 58%, #e9e9f6 100%); color: #3a2a38; }
+  .s06 .tag { color: #8a4f76; border-color: rgba(138,79,118,0.5); }
+  .s06 .hed {
+    font-family: var(--serif); font-weight: 400; font-style: italic; line-height: 1.02;
+    letter-spacing: -0.015em; color: #5a3455;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s06 .lede { color: #4a3547; }
+  .s06 .read-on { color: #8a4f76; border-color: #8a4f76; --flip: #f4ecf1; }
+  .s06 .quill {
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    font-size: clamp(22px, 3vw, 34px); line-height: 1.5; color: #6a4363; max-width: 24ch;
+    font-variation-settings: "opsz" 120, "SOFT" 100, "WONK" 1;
+  }
+  .s06 .quill .fade { color: rgba(106,67,99,0.28); }
+  .s06 .quill .reply { color: #a2617f; }
+  .s06 .decor::before {
+    content: ""; position: absolute; left: -10vw; top: -12vw; width: 44vw; height: 44vw;
+    background: radial-gradient(circle, rgba(214,150,183,0.30), transparent 66%);
+  }
+  .s06 .decor::after {
+    content: ""; position: absolute; right: -12vw; bottom: -14vw; width: 46vw; height: 46vw;
+    background: radial-gradient(circle, rgba(150,150,230,0.24), transparent 68%);
+  }
+
+  /* ─── Colophon · ink bookend ─── */
+  .colophon { background: #0d0f12; color: #ece6d8; }
+  .colophon .hed { font-family: var(--serif); font-weight: 300; font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 60, "WONK" 0; color: #ece6d8; }
+  .colophon .hed em { color: #79f2c0; font-style: italic; }
+  .colophon .lede { color: #b9b2a4; max-width: 60ch; }
+  .colophon .folio { opacity: 0.6; }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════════════ COVER · pull-quote ═══════════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span><span class="wordmark">Ephemeris.</span> · Issue 077</span>
+    <span>Monday · 06 Jul 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <div class="lead">
+      <span class="kicker">Today · agents that see, remember, and get counted</span>
+      <blockquote class="pullquote">Give your agent the ability to <em>find out for itself.</em></blockquote>
+      <p class="qsrc">— WebKit, on handing Safari to an agent · story 02</p>
+    </div>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>Your notes, now a sixty-second reel</span><span>Google</span></a>
+      <a href="#s02"><span><span class="num">02</span>Hand the agent a real browser</span><span>WebKit</span></a>
+      <a href="#s03"><span><span class="num">03</span>Memory that keeps the point, drops the transcript</span><span>MS Research</span></a>
+      <a href="#s04"><span><span class="num">04</span>Fifty thousand crawls, one visitor back</span><span>Cloudflare</span></a>
+      <a href="#s05"><span><span class="num">05</span>An agent that chases the algorithm</span><span>via @denissexy</span></a>
+      <a href="#s06"><span><span class="num">06</span>The diary writes back</span><span>via @seeallochnaya</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s01 · NotebookLM · Risograph ═══════════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 077</span>
+    <span>01 / 6 · Google · The Decoder</span>
+  </header>
+  <div class="main">
+    <span class="tag">Generative Video · NotebookLM</span>
+    <h2 class="hed">Your notes, now a sixty-second reel.</h2>
+    <p class="lede">NotebookLM's new Short Video Overviews turn whatever you upload — a PDF, a pile of notes, a dense paper — into a 60-second vertical clip that walks through one idea, phone-shaped and grounded in your own sources rather than the open web. Gemini Omni Flash drives the motion; Nano Banana 2 Lite paints each frame in about four seconds. Live now for AI Ultra and Pro on web and mobile, English first, with free access said to follow.</p>
+    <div class="figure">
+      <div class="reel" aria-hidden="true">
+        <span class="timer">0:60</span>
+        <div class="band c"></div>
+        <div class="band m"></div>
+        <span class="play"></span>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://the-decoder.com/google-brings-tiktok-style-video-shorts-to-notebooklm/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s02 · Safari MCP · Terminal ═══════════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 077</span>
+    <span>02 / 6 · WebKit</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev Tools · Agents</span>
+    <h2 class="hed">Hand the agent a real browser.</h2>
+    <p class="lede">WebKit shipped an MCP server that plugs an agent straight into a live Safari window: read the DOM, take screenshots, run JavaScript, watch network and console traffic, click and type, and flag missing ARIA labels or weak contrast. One line wires it into Claude Code. Stop writing the perfect bug report for your agent — let it look for itself.</p>
+    <div class="figure">
+      <div class="term" aria-hidden="true">
+        <div><span class="p">$</span> <span class="cmd">claude mcp add safari-mcp-stp \</span></div>
+        <div><span class="dim">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="cmd">-- "/Applications/Safari Technology Preview.app/…/safaridriver" --mcp</span></div>
+        <div><span class="ok">✓</span> <span class="dim">connected · safari technology preview</span></div>
+        <div class="dim">—</div>
+        <div><span class="p">agent&gt;</span> <span class="cmd">read DOM · capture screenshot · eval JS timing</span></div>
+        <div><span class="p">agent&gt;</span> <span class="cmd">tail network + console · click / type / scroll</span></div>
+        <div><span class="p">agent&gt;</span> <span class="cmd">audit a11y → missing labels, contrast</span></div>
+        <div><span class="ok">✓</span> <span class="dim">6 findings · no prompt required</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://webkit.org/blog/18136/introducing-the-safari-mcp-server-for-web-developers/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s03 · Memora · Midnight ═══════════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 077</span>
+    <span>03 / 6 · Microsoft Research</span>
+  </header>
+  <div class="main">
+    <span class="tag">Research · Agent Memory</span>
+    <h2 class="hed">Memory that keeps the point, drops the transcript.</h2>
+    <p class="lede">Microsoft Research's Memora splits what an agent stores from how it recalls it — full content on one side; six-to-eight-word index phrases and flexible "cue anchors" on the other — so a long-running agent stops re-reading its whole history to stay on task. It clears Mem0, RAG, and full-context on the standard long-memory suites while spending a fraction of the tokens. Code is on GitHub; the paper lands at ICML 2026.</p>
+    <div class="figure">
+      <div class="stats">
+        <p class="big">98<span class="unit">% fewer tokens</span></p>
+        <dl>
+          <div class="row"><dt>86.3%</dt><dd>LoCoMo accuracy</dd></div>
+          <div class="row"><dt>87.4%</dt><dd>LongMemEval accuracy</dd></div>
+          <div class="row"><dt>~½</dt><dd>memory entries stored</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.microsoft.com/en-us/research/blog/memora-a-harmonic-memory-representation-balancing-abstraction-and-specificity/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s04 · Cloudflare Attribution · Neo-brutalist ═══════════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 077</span>
+    <span>04 / 6 · Cloudflare</span>
+  </header>
+  <div class="main">
+    <span class="tag">Privacy · Crawler Economics</span>
+    <h2 class="hed">Fifty thousand crawls. One visitor back.</h2>
+    <p class="lede">Cloudflare's Attribution Business Insights dashboard shows publishers the number that matters: how many times each AI company crawled you against how many visitors it sent back. Ratios run from 118:1 to nearly 50,000:1. It sorts bots into Training, Search, and Agent, with volume, country, and bandwidth per operator — so a licensing conversation can start from data instead of vibes.</p>
+    <div class="figure">
+      <div class="figrow">
+        <p class="ratio"><b>50,000<span class="unit">:1</span></b><small>crawls per referral, worst case</small></p>
+        <div class="lanes">
+          <span>Training</span><span>Search</span><span>Agent</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.cloudflare.com/attribution-business-insights/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s05 · Viral Bench · Teal grid ═══════════════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 077</span>
+    <span>05 / 6 · via @denissexy</span>
+  </header>
+  <div class="main">
+    <span class="tag">Creative · Agents</span>
+    <h2 class="hed">An agent that <em>chases the algorithm.</em></h2>
+    <p class="lede">Viral Bench is an open agent that runs the whole social-growth loop on its own, then grades itself on the views it actually earns — turning "can a model go viral" into something you can measure. The repo, from the doublespeed / lightreel crew, is small and readable: a working template for anyone wiring an agent to a publishing API. Whether that thrills or unsettles you, the harness is on the table.</p>
+    <div class="figure">
+      <div class="grid">
+        <div class="cell"><span class="n">01</span><span class="t">Read the trend</span><span class="d">Scans what's climbing on the feed that day.</span></div>
+        <div class="cell"><span class="n">02</span><span class="t">Make the post</span><span class="d">Generates the carousel and copy to match.</span></div>
+        <div class="cell"><span class="n">03</span><span class="t">Ship to TikTok</span><span class="d">Publishes autonomously through the API.</span></div>
+        <div class="cell"><span class="n">04</span><span class="t">Score the views</span><span class="d">Real engagement becomes the benchmark.</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://github.com/JibranK12345/Viral-Bench" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s06 · Tom Riddle diary · Pastel rose ═══════════════ -->
+<section class="spread s06 centered" id="s06">
+  <header class="folio">
+    <span>Ephemeris · Issue 077</span>
+    <span>06 / 6 · via @seeallochnaya</span>
+  </header>
+  <div class="main">
+    <span class="tag">Creative · Ambient AI</span>
+    <h2 class="hed">The diary writes back.</h2>
+    <p class="lede">Maxime Rivest wired a reMarkable e-ink tablet to Claude Fable 5 and rebuilt Tom Riddle's diary: you write by hand, the ink fades from the page, and a reply appears in the same looping script. It is a toy, but a pointed one — the e-ink latency and the handwriting round-trip make the model feel less like a chat box and more like an object that answers. The cheapest way to feel where ambient AI is heading.</p>
+    <div class="figure">
+      <p class="quill">“who are you?”<br><span class="fade">…the ink sinks into the page…</span><br><span class="reply">I am the diary. Write, and I will answer.</span></p>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://x.com/MaximeRivest/status/2073544461473169432" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ COLOPHON ═══════════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 077</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Six picks from a picked-over week: Google's NotebookLM, WebKit, Microsoft Research, and Cloudflare, plus two builds surfaced via @denissexy and @seeallochnaya. Chosen against one test — could a senior engineer or founder act on it this week — from roughly eighteen feeds of model labs, engineering blogs, and Telegram. Issue 077 · Monday 06 July 2026 · Zürich.</p>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>
