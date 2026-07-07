@@ -1,0 +1,575 @@
+<!doctype html>
+<!-- Ephemeris · Issue 078 · 2026-07-07 · built on scaffold.html -->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 078 · 07 Jul 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══ LOCKED BASELINE (from scaffold.html) ═══ */
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+  .spread > .decor {
+    position: absolute; inset: 0; z-index: 0;
+    pointer-events: none; overflow: hidden;
+  }
+  .spread > .folio {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 8px 24px; flex-wrap: wrap;
+    font-family: var(--sans); font-size: 13px;
+    letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.75;
+  }
+  .spread > .main {
+    display: flex; flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center; align-items: flex-start; min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block; font-family: var(--sans); font-size: 12px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    padding: 6px 12px; border: 1px solid currentColor;
+    border-radius: 999px; opacity: 0.9;
+  }
+  .hed {
+    font-family: var(--serif); font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px); line-height: 1.02;
+    letter-spacing: -0.02em; padding-bottom: 0.12em; word-break: break-word;
+  }
+  .lede {
+    font-family: var(--serif); font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45; max-width: 50ch; margin: 0;
+  }
+  .figure { width: 100%; }
+  .read-on {
+    display: inline-block; font-family: var(--sans); font-weight: 600;
+    font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 14px 22px; border: 2px solid currentColor;
+    text-decoration: none; color: currentColor; --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — Issue 078
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── COVER · Dossier grid (treatment C) ─── */
+  .cover { background: #12161c; color: #e9edf2; }
+  .cover .folio { opacity: 0.6; }
+  .cover .wordmark {
+    font-family: var(--mono); font-weight: 600; font-size: 13px;
+    letter-spacing: 0.4em; text-transform: uppercase; color: #7fd4c8;
+    margin: 0 0 4px;
+  }
+  .cover .dossierhead {
+    font-family: var(--serif); font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    font-size: clamp(52px, 9vw, 132px); line-height: 0.9;
+    letter-spacing: -0.03em; color: #e9edf2; margin: 0; padding-bottom: 0.08em;
+  }
+  .cover .dossierhead em { font-style: italic; color: #7fd4c8; }
+  .cover .celllist {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px; width: 100%; padding-top: 6px;
+  }
+  .cover .cell {
+    display: flex; flex-direction: column; gap: 8px;
+    text-decoration: none; color: inherit;
+    border: 1px solid rgba(233,237,242,0.22);
+    border-radius: 4px; padding: 16px 16px 18px;
+    background: rgba(255,255,255,0.02);
+    transition: border-color 0.2s, background 0.2s;
+    min-width: 0;
+  }
+  .cover .cell:hover { border-color: #7fd4c8; background: rgba(127,212,200,0.08); }
+  .cover .cell .n {
+    font-family: var(--mono); font-weight: 600; font-size: 12px;
+    letter-spacing: 0.2em; color: #7fd4c8;
+  }
+  .cover .cell .frag {
+    font-family: var(--serif); font-weight: 600; font-size: clamp(18px, 1.5vw, 22px);
+    line-height: 1.2;
+  }
+  .cover .cell .src {
+    font-family: var(--sans); font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; opacity: 0.55; margin-top: auto;
+  }
+  @media (max-width: 800px) { .cover .celllist { grid-template-columns: 1fr; gap: 10px; } }
+
+  /* ─── s01 · Cloudflare Workers Cache — BLUEPRINT ─── */
+  .s01 { background: #0e3a52; color: #dff0f6;
+    background-image:
+      linear-gradient(rgba(223,240,246,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(223,240,246,0.06) 1px, transparent 1px);
+    background-size: 34px 34px, 34px 34px;
+  }
+  .s01 .tag   { color: #8fd0e8; border-color: #8fd0e8; }
+  .s01 .hed   { font-weight: 700; letter-spacing: -0.015em; }
+  .s01 .hed em { font-style: normal; color: #ffd36b; }
+  .s01 .lede  { font-family: var(--sans); font-size: clamp(19px, 1.7vw, 24px); }
+  .s01 .read-on { color: #ffd36b; border-color: #ffd36b; --flip: #0e3a52; }
+  .s01 .bp {
+    font-family: var(--mono); font-size: 14px; line-height: 1.7;
+    border: 1px solid rgba(143,208,232,0.5); border-radius: 4px;
+    padding: 18px 20px; max-width: 44ch;
+    background: rgba(3,25,38,0.45); color: #cfe8f2;
+  }
+  .s01 .bp .k { color: #ffd36b; }
+  .s01 .bp .c { color: #7fb6cf; }
+  .s01 .decor::before {
+    content: ""; position: absolute; top: 14%; right: 6%;
+    width: 44px; height: 44px;
+    border-top: 2px solid rgba(255,211,107,0.5);
+    border-right: 2px solid rgba(255,211,107,0.5);
+  }
+  .s01 .decor::after {
+    content: ""; position: absolute; bottom: 12%; left: 5%;
+    width: 44px; height: 44px;
+    border-bottom: 2px solid rgba(255,211,107,0.5);
+    border-left: 2px solid rgba(255,211,107,0.5);
+  }
+  @media (max-width: 800px) { .s01 .decor::before, .s01 .decor::after { display: none; } }
+
+  /* ─── s02 · KernelBench / Fable GPU kernels — NEON / CYBERPUNK (loud, dark) ─── */
+  .s02 { background: #0a0714; color: #eae2ff; }
+  .s02 .tag { color: #ff4fd8; border-color: #ff4fd8; }
+  .s02 .hed {
+    font-family: var(--sans); font-weight: 900; text-transform: uppercase;
+    font-size: clamp(44px, 6.6vw, 100px); line-height: 0.98; letter-spacing: -0.01em;
+    color: #7cf6ff; text-shadow: 0 0 22px rgba(124,246,255,0.45);
+  }
+  .s02 .hed em { font-style: normal; color: #ff4fd8; text-shadow: 0 0 22px rgba(255,79,216,0.5); }
+  .s02 .lede { color: #cdbff0; }
+  .s02 .read-on { color: #7cf6ff; border-color: #7cf6ff; --flip: #0a0714; }
+  .s02 .term {
+    font-family: var(--mono); font-size: 14px; line-height: 1.8;
+    border: 1px solid rgba(124,246,255,0.35); border-radius: 6px;
+    padding: 18px 20px; max-width: 46ch;
+    background: rgba(20,10,40,0.6); color: #d7ffff;
+    box-shadow: 0 0 40px rgba(124,246,255,0.08), inset 0 0 30px rgba(255,79,216,0.05);
+  }
+  .s02 .term .big { color: #ff4fd8; font-weight: 600; font-size: 30px; }
+  .s02 .term .lbl { color: #9d8fc7; }
+  .s02 .decor::before {
+    content: ""; position: absolute; top: -20%; left: -10%;
+    width: 60vw; height: 60vw;
+    background: radial-gradient(circle, rgba(255,79,216,0.16), transparent 62%);
+  }
+  .s02 .decor::after {
+    content: ""; position: absolute; bottom: -24%; right: -12%;
+    width: 62vw; height: 62vw;
+    background: radial-gradient(circle, rgba(124,246,255,0.14), transparent 62%);
+  }
+
+  /* ─── s03 · Anthropic Global Workspace — MUSEUM PLACARD (centered, quiet) ─── */
+  .s03 { background: #efe9d8; color: #23301f; }
+  .s03 .tag {
+    color: #4b5b3a; border-color: #4b5b3a;
+    letter-spacing: 0.3em; font-size: 11px;
+  }
+  .s03 .hed {
+    font-family: var(--serif); font-weight: 500; font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 60, "WONK" 0;
+    font-size: clamp(42px, 6vw, 92px); letter-spacing: -0.01em; color: #2a3a22;
+  }
+  .s03 .hed em { font-style: normal; font-weight: 700; color: #6b3f1e; }
+  .s03 .lede { font-size: clamp(19px, 1.7vw, 24px); }
+  .s03 .read-on { color: #4b5b3a; border-color: #4b5b3a; --flip: #efe9d8; }
+  .s03 .placard {
+    border-top: 1px solid rgba(75,91,58,0.5);
+    border-bottom: 1px solid rgba(75,91,58,0.5);
+    padding: 18px 0; max-width: 52ch;
+  }
+  .s03 .placard .props {
+    list-style: none; margin: 0; padding: 0;
+    display: flex; flex-wrap: wrap; gap: 8px 10px; justify-content: center;
+  }
+  .s03 .placard .props li {
+    font-family: var(--sans); font-size: 12px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: #3a4a2c;
+    border: 1px solid rgba(75,91,58,0.4); border-radius: 999px; padding: 5px 12px;
+  }
+  .s03 .placard .cap {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: #6b3f1e; margin: 0 0 12px;
+  }
+
+  /* ─── s04 · JD Oxygen AIIC — DARK REPORT / CLASSIFIED (loud, dark) ─── */
+  .s04 { background: #120607; color: #f0dcdc; }
+  .s04 .tag { color: #ff5a5a; border-color: #ff5a5a; letter-spacing: 0.26em; }
+  .s04 .hed {
+    font-family: var(--sans); font-weight: 800; font-size: clamp(44px, 6.4vw, 98px);
+    line-height: 0.99; letter-spacing: -0.015em; color: #f4e6e6;
+  }
+  .s04 .hed em {
+    font-style: normal; background: #d21f2c; color: #120607;
+    padding: 0 0.12em; border-radius: 2px;
+  }
+  .s04 .lede { color: #d9c2c2; }
+  .s04 .read-on { color: #ff6b6b; border-color: #ff6b6b; --flip: #120607; }
+  .s04 .bars { display: flex; flex-direction: column; gap: 14px; max-width: 50ch; }
+  .s04 .bars .row { display: grid; grid-template-columns: 1fr; gap: 4px; }
+  .s04 .bars .meta {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: #c78d8d;
+  }
+  .s04 .bars .meta b { color: #ff8a8a; font-weight: 600; font-size: 16px; }
+  .s04 .bars .track { height: 10px; background: rgba(255,90,90,0.14); border-radius: 2px; overflow: hidden; }
+  .s04 .bars .fill { height: 100%; background: linear-gradient(90deg, #d21f2c, #ff6b6b); }
+  .s04 .decor::before {
+    content: "CONFIDENTIAL · OXYGEN AIIC · V1";
+    position: absolute; top: 40%; left: -6%;
+    font-family: var(--mono); font-size: clamp(40px, 8vw, 120px); font-weight: 600;
+    letter-spacing: 0.05em; color: rgba(210,31,44,0.07);
+    transform: rotate(-8deg); white-space: nowrap;
+  }
+
+  /* ─── s05 · OpenAI EU jobs map — CONCRETE (warm grey, giant punctuation) ─── */
+  .s05 { background: #d7d3ca; color: #26241f; }
+  .s05 .tag { color: #5a5346; border-color: #5a5346; }
+  .s05 .hed {
+    font-family: var(--serif); font-weight: 800; font-size: clamp(46px, 7vw, 104px);
+    letter-spacing: -0.025em; color: #1d1b16;
+  }
+  .s05 .hed em { font-style: italic; color: #8a5a2b; }
+  .s05 .lede { font-family: var(--sans); font-size: clamp(19px, 1.7vw, 24px); }
+  .s05 .read-on { color: #1d1b16; border-color: #1d1b16; --flip: #d7d3ca; }
+  .s05 .cols {
+    column-count: 3; column-gap: 26px; max-width: 60ch;
+    border-top: 2px solid #26241f; padding-top: 16px;
+  }
+  .s05 .cols .item { break-inside: avoid; margin-bottom: 16px; }
+  .s05 .cols .item .w {
+    display: block; font-family: var(--serif); font-weight: 800;
+    font-size: 22px; color: #8a5a2b; margin-bottom: 2px;
+  }
+  .s05 .cols .item .d { font-size: 15px; line-height: 1.4; color: #3a352c; }
+  .s05 .decor::before {
+    content: "\201C"; position: absolute; top: -6vw; left: -1vw;
+    font-family: var(--serif); font-weight: 900; font-size: 42vw;
+    line-height: 1; color: rgba(38,36,31,0.05);
+  }
+  @media (max-width: 800px) { .s05 .cols { column-count: 1; } }
+
+  /* ─── s06 · jeffbullas X-Factor — HOT PINK (loud, numbered) ─── */
+  .s06 { background: #ff2e88; color: #1a0512; }
+  .s06 .tag { color: #1a0512; border-color: #1a0512; }
+  .s06 .hed {
+    font-family: var(--serif); font-weight: 900; font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 40, "WONK" 1;
+    font-size: clamp(46px, 7vw, 106px); letter-spacing: -0.02em; color: #1a0512;
+  }
+  .s06 .hed em { font-style: normal; -webkit-text-stroke: 2px #1a0512; color: #ff2e88; }
+  .s06 .lede { color: #2a0a1c; }
+  .s06 .read-on { color: #1a0512; border-color: #1a0512; --flip: #ff2e88; }
+  .s06 .plays { list-style: none; margin: 0; padding: 0; max-width: 54ch;
+    display: flex; flex-direction: column; gap: 14px; }
+  .s06 .plays li {
+    display: flex; gap: 14px; align-items: baseline;
+    border-bottom: 2px solid rgba(26,5,18,0.35); padding-bottom: 12px;
+  }
+  .s06 .plays .num {
+    font-family: var(--serif); font-style: italic; font-weight: 800;
+    font-size: 30px; color: #1a0512; flex: 0 0 auto; line-height: 1;
+  }
+  .s06 .plays .txt { font-family: var(--sans); font-size: 17px; line-height: 1.4; }
+  .s06 .plays .txt b { font-weight: 800; }
+  .s06 .decor::before {
+    content: ""; position: absolute; top: -18%; right: -14%;
+    width: 52vw; height: 52vw; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.22), transparent 66%);
+  }
+
+  /* ─── COLOPHON — dark ledger ─── */
+  .colophon { background: #12161c; color: #cfd6df; }
+  .colophon .hed {
+    font-family: var(--serif); font-weight: 800; color: #eef2f6;
+    font-size: clamp(42px, 6vw, 92px);
+  }
+  .colophon .hed em { font-style: italic; color: #7fd4c8; }
+  .colophon .lede { font-family: var(--sans); color: #b7c1cd; }
+  .colophon .meta {
+    font-family: var(--mono); font-size: 13px; line-height: 1.9;
+    color: #9aa6b3; border-top: 1px solid rgba(207,214,223,0.2); padding-top: 16px;
+    max-width: 62ch;
+  }
+  .colophon .meta b { color: #7fd4c8; font-weight: 600; }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══ COVER · Dossier grid ═══ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 078</span>
+    <span>Tuesday · 07 Jul 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <p class="wordmark">Ephemeris — the daily dossier</p>
+    <h1 class="dossierhead">Six things <em>worth</em> the morning.</h1>
+    <nav class="celllist">
+      <a class="cell" href="#s01">
+        <span class="n">01</span>
+        <span class="frag">A Worker that caches itself, one line of config.</span>
+        <span class="src">Cloudflare</span>
+      </a>
+      <a class="cell" href="#s02">
+        <span class="n">02</span>
+        <span class="frag">A model writes GPU kernels, one launch per token.</span>
+        <span class="src">via Import AI</span>
+      </a>
+      <a class="cell" href="#s03">
+        <span class="n">03</span>
+        <span class="frag">Anthropic finds a workspace the model can name.</span>
+        <span class="src">via @denissexy</span>
+      </a>
+      <a class="cell" href="#s04">
+        <span class="n">04</span>
+        <span class="frag">One model reads a catalog of tens of billions.</span>
+        <span class="src">via Import AI</span>
+      </a>
+      <a class="cell" href="#s05">
+        <span class="n">05</span>
+        <span class="frag">OpenAI maps which EU jobs bend, break, or grow.</span>
+        <span class="src">OpenAI</span>
+      </a>
+      <a class="cell" href="#s06">
+        <span class="n">06</span>
+        <span class="frag">Charisma, treated as a skill you can drill.</span>
+        <span class="src">Jeff Bullas</span>
+      </a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+</section>
+
+<!-- ═══ s01 · Cloudflare Workers Cache — Blueprint ═══ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 078</span>
+    <span>01 / 6 · Cloudflare</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev tools · Edge infra</span>
+    <h2 class="hed">Your Worker can <em>cache itself</em> now.</h2>
+    <p class="lede">Cloudflare gave Workers a regionally tiered cache that sits directly in front of the entrypoint — no zone rules, no separate service. You turn it on with one line in Wrangler and steer it with the ordinary <code>Cache-Control</code> headers you already write. A lower tier lives in each data centre; an upper tier aggregates fills across the network, so the first request anywhere in the world warms the cache for everyone after.</p>
+    <div class="figure">
+      <pre class="bp"><span class="c"># wrangler.jsonc</span>
+"<span class="k">cache</span>": { "<span class="k">enabled</span>": true }
+
+<span class="c"># then, in your handler</span>
+res.headers.set(
+  "<span class="k">Cache-Control</span>",
+  "public, max-age=3600"
+)
+<span class="c"># server-rendered → behaves like static</span></pre>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.cloudflare.com/workers-cache/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ s02 · KernelBench / Fable GPU kernels — Neon ═══ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 078</span>
+    <span>02 / 6 · via Import AI 464</span>
+  </header>
+  <div class="main">
+    <span class="tag">AI systems · Agentic coding</span>
+    <h2 class="hed">The model writes its own <em>GPU kernels</em>.</h2>
+    <p class="lede">KernelBench-Mega hands an agent a whole model block and a three-hour clock, then asks it to fuse the block into one megakernel. On a Kimi-Linear decode task, Anthropic's Fable posted an 18.71× speedup over an optimised PyTorch baseline — and did it with a single cooperative kernel launch per token where rival systems still fire four to fourteen. Kernel-writing is close to the metal of AI R&D, so a model that is good at it is a model that can help build the next one.</p>
+    <div class="figure">
+      <div class="term"><span class="big">18.71×</span> <span class="lbl">faster than tuned PyTorch</span><br><br>launches / token &nbsp; <b>1</b> &nbsp; <span class="lbl">(others: 4–14)</span><br>hardware &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RTX PRO 6000 Blackwell<br>agent budget &nbsp;&nbsp; 3 h wall-clock / run</div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://jack-clark.net/2026/07/06/import-ai-464-fables-writes-gpu-kernels-ai-automation-and-analog-computation/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ s03 · Anthropic Global Workspace — Museum placard (centered) ═══ -->
+<section class="spread s03 centered" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 078</span>
+    <span>03 / 6 · via @denissexy</span>
+  </header>
+  <div class="main">
+    <span class="tag">Interpretability · Safety</span>
+    <h2 class="hed">A workspace the model can <em>name</em>.</h2>
+    <p class="lede">Anthropic's new paper argues that a language model keeps a small, privileged set of activations it can report on, steer, and reason with — a "J-space" the authors read out with a Jacobian lens. It behaves like the global workspace theorists describe in human cognition: verbalisable, controllable, engaged only for the hard problems. The practical hook is auditing — you can surface a model's unspoken deliberation, and even shape behaviour by writing a concept into that workspace instead of retraining.</p>
+    <div class="figure">
+      <div class="placard">
+        <p class="cap">Five properties of the workspace</p>
+        <ul class="props">
+          <li>Verbal report</li>
+          <li>Directed control</li>
+          <li>Internal reasoning</li>
+          <li>Flexible transfer</li>
+          <li>Used only when needed</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://transformer-circuits.pub/2026/workspace/index.html" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ s04 · JD Oxygen AIIC — Dark report ═══ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 078</span>
+    <span>04 / 6 · via Import AI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Applied AI · Production scale</span>
+    <h2 class="hed">One model reads a catalogue of <em>tens of billions</em>.</h2>
+    <p class="lede">JD.com published the architecture of Oxygen AIIC, the LLM-and-vision stack that keeps its product catalogue coherent across tens of billions of SKUs. It runs on Huawei Ascend NPUs, serves more than 700 million shoppers, and folds hundreds of millions of item updates into structured knowledge every day. This is the rare paper that shows what industrial LLM deployment actually costs and looks like once it is load-bearing rather than demo-ware.</p>
+    <div class="figure">
+      <div class="bars">
+        <div class="row"><div class="meta"><span>Knowledge-production precision</span><b>94.2%</b></div><div class="track"><div class="fill" style="width:94%"></div></div></div>
+        <div class="row"><div class="meta"><span>Shoppers served</span><b>700M+</b></div><div class="track"><div class="fill" style="width:82%"></div></div></div>
+        <div class="row"><div class="meta"><span>Item updates absorbed daily</span><b>100Ms</b></div><div class="track"><div class="fill" style="width:70%"></div></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://arxiv.org/abs/2606.28070" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ s05 · OpenAI EU jobs map — Concrete ═══ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 078</span>
+    <span>05 / 6 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Strategy · Future of work</span>
+    <h2 class="hed">A map of which jobs <em>bend, break, or grow</em>.</h2>
+    <p class="lede">OpenAI's workforce analysis sorts European occupations by how AI is likely to touch them — the roles facing outright automation, the ones set to grow, and the larger middle whose day-to-day simply gets rewired. It is a planning document more than a forecast: useful for a founder deciding where to add headcount, where to add tooling, and where the two collide over the next two years.</p>
+    <div class="figure">
+      <div class="cols">
+        <div class="item"><span class="w">Automate</span><span class="d">Narrow, repetitive tasks with a clean digital trail — the first to be handed off.</span></div>
+        <div class="item"><span class="w">Transform</span><span class="d">The broad middle: same job title, reshaped workflow, new tools bolted into the loop.</span></div>
+        <div class="item"><span class="w">Grow</span><span class="d">Roles where demand rises as the cost of the surrounding work falls.</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/mapping-ai-jobs-transition-eu" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ s06 · jeffbullas X-Factor — Hot pink ═══ -->
+<section class="spread s06" id="s06">
+  <header class="folio">
+    <span>Ephemeris · Issue 078</span>
+    <span>06 / 6 · Jeff Bullas</span>
+  </header>
+  <div class="main">
+    <span class="tag">Business · Creator economy</span>
+    <h2 class="hed">Charisma is a skill you can <em>drill</em>.</h2>
+    <p class="lede">As trust migrates from institutions to individuals, Jeff Bullas argues the scarce asset is a learnable one: the presence and warmth that make a person hard to scroll past. The essay's real value is that it resists the algorithm's pull toward generic — and turns "be charismatic" into three moves you can actually run.</p>
+    <div class="figure">
+      <ol class="plays">
+        <li><span class="num">1</span><span class="txt"><b>Show up on a rhythm, not in bursts.</b> Pick one channel, post weekly, hold it for two years. Trust is built on being encountered again, not on a viral spike.</span></li>
+        <li><span class="num">2</span><span class="txt"><b>Give the best stuff away first.</b> Publish your frameworks unpaywalled; the more you hand over, the more you are trusted with.</span></li>
+        <li><span class="num">3</span><span class="txt"><b>Own the revenue, don't rent it.</b> Brand deals are ~70% of a typical creator's income — build a product or community that converts the trust you already hold.</span></li>
+      </ol>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.jeffbullas.com/charisma-into-cash/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ COLOPHON ═══ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 078</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Six picks for Tuesday, 07 July 2026 — an edge-cache primitive, a model tuning its own kernels, a workspace inside the network, a catalogue at industrial scale, a workforce map, and a note on charisma as craft.</p>
+    <div class="figure">
+      <p class="meta">Sources today · <b>Cloudflare</b> · <b>Import AI (Jack Clark)</b> · <b>Transformer Circuits / Anthropic</b> · <b>arXiv</b> · <b>OpenAI</b> · <b>Jeff Bullas</b> · via <b>@denissexy</b><br>
+      Rubric · tools you can adopt this week, dev &amp; agentic coding, applied AI at scale, research with a practical kernel, and what's actionable for a senior engineer or founder. Max two picks per source; nothing older than thirty days; no reprints.<br>
+      Ephemeris · Issue 078 · 2026-07-07 · Zürich</p>
+    </div>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>

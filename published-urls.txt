@@ -58,6 +58,7 @@ https://arxiv.org/abs/2605.22771
 https://arxiv.org/abs/2605.30341
 https://arxiv.org/abs/2606.03458
 https://arxiv.org/abs/2606.23001
+https://arxiv.org/abs/2606.28070
 https://arxiv.org/pdf/2604.24827
 https://biohub.org/news/world-model-of-protein-biology
 https://blog.cloudflare.com/agent-readiness
@@ -108,6 +109,7 @@ https://blog.cloudflare.com/shared-dictionaries
 https://blog.cloudflare.com/temporary-accounts
 https://blog.cloudflare.com/unweight-tensor-compression
 https://blog.cloudflare.com/voidzero-joins-cloudflare
+https://blog.cloudflare.com/workers-cache
 https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5
 https://blog.google/innovation-and-ai/products/gemini-app/next-evolution-gemini-app
 https://blog.google/innovation-and-ai/technology/research/gemini-for-science-io-2026
@@ -232,8 +234,10 @@ https://jack-clark.net/2026/06/08/import-ai-460-reward-hacking-society-rsi-data-
 https://jack-clark.net/2026/06/15/import-ai-461-alignment-is-not-on-track-frontiercode-and-synthetic-research-interns
 https://jack-clark.net/2026/06/22/import-ai-462-superpersuasion-self-sustaining-ai-paths-to-asi
 https://jack-clark.net/2026/06/29/import-ai-463-self-improving-robots-a-10k-chinese-gpu-cluster-and-an-elegiac-essay-for-the-human-era
+https://jack-clark.net/2026/07/06/import-ai-464-fables-writes-gpu-kernels-ai-automation-and-analog-computation
 https://jeffbullas.com/ai-reinvention-truth
 https://jeffbullas.com/ai-slop-crisis
+https://jeffbullas.com/charisma-into-cash
 https://jeffbullas.com/chokepoint-economy
 https://jeffbullas.com/distraction-economy
 https://jeffbullas.com/forget-google
@@ -302,6 +306,7 @@ https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind
 https://openai.com/index/introducing-openai-privacy-filter
 https://openai.com/index/introducing-trusted-contact-in-chatgpt
 https://openai.com/index/introducing-workspace-agents-in-chatgpt
+https://openai.com/index/mapping-ai-jobs-transition-eu
 https://openai.com/index/model-disproves-discrete-geometry-conjecture
 https://openai.com/index/mrc-supercomputer-networking
 https://openai.com/index/nextdoor
@@ -434,6 +439,7 @@ https://thezvi.substack.com/p/the-ai-ad-hoc-prior-restraint-era
 https://thezvi.substack.com/p/the-most-important-charts-in-the
 https://thezvi.substack.com/p/what-is-anthropic
 https://thinkingmachines.ai/blog/interaction-models
+https://transformer-circuits.pub/2026/workspace/index.html
 https://v0.app/
 https://venturebeat.com/technology/z-ai-launches-zcode-to-challenge-cursor-claude-code-and-github-copilot-in-ai-coding
 https://vercel.com/blog/a-new-programming-model-for-durable-execution
