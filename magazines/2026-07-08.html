@@ -1,0 +1,422 @@
+<!doctype html>
+<!--
+  Ephemeris · Issue 079 · 2026-07-08
+  Built on scaffold.html — structure locked, surface (palette/type/motifs) per issue.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 079 · 8 July 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══ LOCKED BASELINE (from scaffold.html) ═══ */
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+  .spread > .decor {
+    position: absolute; inset: 0; z-index: 0;
+    pointer-events: none; overflow: hidden;
+  }
+  .spread > .folio {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 8px 24px; flex-wrap: wrap;
+    font-family: var(--sans); font-size: 13px;
+    letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.75;
+  }
+  .spread > .main {
+    display: flex; flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center; align-items: flex-start; min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block; font-family: var(--sans);
+    font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase;
+    padding: 6px 12px; border: 1px solid currentColor; border-radius: 999px; opacity: 0.9;
+  }
+  .hed {
+    font-family: var(--serif); font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02; letter-spacing: -0.02em;
+    padding-bottom: 0.12em; word-break: break-word;
+  }
+  .lede {
+    font-family: var(--serif); font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45; max-width: 50ch; margin: 0;
+  }
+  .figure { width: 100%; }
+  .read-on {
+    display: inline-block; font-family: var(--sans); font-weight: 600;
+    font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 14px 22px; border: 2px solid currentColor;
+    text-decoration: none; color: currentColor; --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px) 22px max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══ THEME OVERRIDES ═══ */
+
+  /* ─── Cover: DATE-HERO ─── */
+  .cover { background: #f4ecdd; color: #191410; }
+  .cover .kicker {
+    font-family: var(--mono); font-size: 13px; letter-spacing: 0.3em;
+    text-transform: uppercase; color: #a15a2c;
+  }
+  .cover .datehero {
+    font-family: var(--sans); font-weight: 900; text-transform: uppercase;
+    font-size: clamp(64px, 15vw, 224px); line-height: 0.82;
+    letter-spacing: -0.045em; color: #191410; margin: 0;
+  }
+  .cover .datehero em { font-style: normal; color: #e5551b; }
+  .cover .dek {
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(21px, 2.2vw, 32px); line-height: 1.32;
+    max-width: 30ch; color: #4a3d31;
+  }
+  .cover .toc {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 44px; padding-top: 20px; border-top: 1px solid #191410; width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 4px 12px; text-decoration: none; color: inherit;
+    padding: 8px 0; border-bottom: 1px dotted rgba(25,20,16,0.3);
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.82em; opacity: 0.62; font-family: var(--mono); }
+  .cover .toc .num { font-family: var(--mono); font-weight: 600; color: #e5551b; margin-right: 10px; }
+  @media (max-width: 800px) { .cover .toc { grid-template-columns: 1fr; gap: 0; } }
+
+  /* ─── s01 · Alberta cybersecurity — BIG STATS / warm orange (loud) ─── */
+  .s01 { background: #e5551b; color: #1c0f07; }
+  .s01 .tag { color: #1c0f07; border-color: #1c0f07; background: rgba(255,255,255,0.16); }
+  .s01 .hed { color: #1c0f07; }
+  .s01 .hed em { font-style: italic; color: #fff4e8; font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; }
+  .s01 .lede { color: #3a1e0d; max-width: 52ch; }
+  .s01 .read-on { color: #1c0f07; border-color: #1c0f07; --flip: #e5551b; }
+  .s01 .bignum {
+    font-family: var(--sans); font-weight: 900; font-size: clamp(84px, 19vw, 288px);
+    line-height: 0.8; letter-spacing: -0.05em; color: #1c0f07;
+  }
+  .s01 .bignum .unit {
+    font-family: var(--sans); font-style: normal; font-weight: 700;
+    font-size: 0.2em; letter-spacing: normal; margin-left: 0.14em; color: #fff4e8;
+    vertical-align: 0.35em;
+  }
+  .s01 .stats { display: flex; flex-wrap: wrap; gap: clamp(20px, 3vw, 52px); margin: 6px 0 0; }
+  .s01 .stats div { min-width: 0; }
+  .s01 .stats dt { font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.72; }
+  .s01 .stats dd { margin: 4px 0 0; font-family: var(--serif); font-weight: 700; font-size: clamp(24px, 3vw, 40px); line-height: 1; }
+  .s01 .decor::before {
+    content: ""; position: absolute; right: -8vw; bottom: -16vw;
+    width: 60vw; height: 60vw; background: radial-gradient(circle, rgba(255,244,232,0.2), transparent 70%);
+  }
+
+  /* ─── s02 · Vercel Sandbox FUSE — BLUEPRINT / pale grid (quiet) ─── */
+  .s02 { background: #e7edf1; color: #12324a; }
+  .s02 .decor {
+    background-image:
+      linear-gradient(rgba(18,50,74,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(18,50,74,0.07) 1px, transparent 1px);
+    background-size: 30px 30px;
+  }
+  .s02 .tag { color: #0a6ca3; border-color: #0a6ca3; }
+  .s02 .hed { font-weight: 700; color: #0e2a40; }
+  .s02 .hed em { font-style: italic; color: #0a6ca3; font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; }
+  .s02 .lede { color: #2b4a60; max-width: 54ch; }
+  .s02 .read-on { color: #0e2a40; border-color: #0e2a40; --flip: #e7edf1; }
+  .s02 .spec {
+    font-family: var(--mono); font-size: clamp(14px, 1.25vw, 16px); line-height: 1.75;
+    border: 1px solid rgba(18,50,74,0.4); background: rgba(255,255,255,0.55);
+    padding: clamp(16px, 2vw, 24px); max-width: 56ch; margin: 0;
+    white-space: pre-wrap; word-break: break-word; color: #16384f;
+  }
+  .s02 .spec b { color: #0a6ca3; font-weight: 600; }
+
+  /* ─── s03 · OpenCode — TERMINAL / dark (loud · tonal inverter) ─── */
+  .s03 { background: #05100a; color: #7dffa8; }
+  .s03 .decor { background: repeating-linear-gradient(0deg, rgba(125,255,168,0.045) 0 2px, transparent 2px 4px); }
+  .s03 .tag { color: #7dffa8; border-color: #2f6b46; font-family: var(--mono); }
+  .s03 .hed {
+    font-family: var(--mono); font-weight: 600; font-size: clamp(38px, 5vw, 82px);
+    line-height: 1.06; letter-spacing: -0.01em; color: #d2ffdf;
+  }
+  .s03 .hed em { font-style: normal; color: #4ade80; }
+  .s03 .lede { font-family: var(--mono); font-size: clamp(18px, 1.5vw, 20px); color: #93e3a9; max-width: 58ch; line-height: 1.55; }
+  .s03 .read-on { color: #7dffa8; border-color: #7dffa8; --flip: #05100a; font-family: var(--mono); }
+  .s03 .term {
+    font-family: var(--mono); font-size: clamp(14px, 1.3vw, 16px); line-height: 1.75;
+    background: #0a1a11; border: 1px solid #1f4d32; border-radius: 8px;
+    padding: clamp(16px, 2vw, 22px); color: #9defb4; max-width: 62ch; margin: 0;
+    white-space: pre-wrap; word-break: break-word;
+  }
+  .s03 .term .p { color: #4ade80; }
+  .s03 .term .c { color: #5f8f70; }
+
+  /* ─── s04 · PostHog provisioning API — NEWSPRINT / cream (quiet) ─── */
+  .s04 { background: #f2ede2; color: #1a1a1a; }
+  .s04 .tag { color: #7a2018; border-color: #7a2018; }
+  .s04 .hed { font-family: var(--serif); font-weight: 700; font-size: clamp(40px, 5.6vw, 88px); color: #141414; line-height: 1.04; }
+  .s04 .hed em { font-style: italic; color: #7a2018; }
+  .s04 .lede { color: #333; max-width: 52ch; }
+  .s04 .read-on { color: #7a2018; border-color: #7a2018; --flip: #f2ede2; }
+  .s04 .steps {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(18px, 2.4vw, 34px);
+    border-top: 2px solid #141414; padding-top: 20px; width: 100%;
+  }
+  .s04 .steps .n { font-family: var(--serif); font-weight: 800; font-style: italic; font-size: clamp(30px, 3.4vw, 48px); color: #7a2018; line-height: 1; }
+  .s04 .steps h4 { font-family: var(--sans); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 0.12em; margin: 10px 0 6px; }
+  .s04 .steps p { font-family: var(--serif); font-size: clamp(16px, 1.2vw, 18px); line-height: 1.42; margin: 0; color: #3a3a3a; }
+  @media (max-width: 800px) { .s04 .steps { grid-template-columns: 1fr; gap: 22px; } }
+
+  /* ─── s05 · JetBrains Caveman — NEO-BRUTALIST / yellow (loud) ─── */
+  .s05 { background: #ffe500; color: #0a0a0a; }
+  .s05 .decor::after { content: ""; position: absolute; inset: clamp(10px, 1.4vw, 20px); border: 3px solid #0a0a0a; }
+  .s05 .tag { color: #0a0a0a; border: 2px solid #0a0a0a; border-radius: 0; background: #fff; opacity: 1; }
+  .s05 .hed {
+    font-family: var(--sans); font-weight: 900; text-transform: uppercase;
+    font-size: clamp(40px, 6.2vw, 94px); line-height: 0.98; letter-spacing: -0.02em; color: #0a0a0a;
+  }
+  .s05 .hed em { font-style: normal; background: #0a0a0a; color: #ffe500; padding: 0 0.12em; }
+  .s05 .lede { font-family: var(--sans); font-weight: 500; color: #171717; max-width: 52ch; }
+  .s05 .read-on { color: #0a0a0a; border: 2px solid #0a0a0a; border-radius: 0; --flip: #ffe500; background: #fff; }
+  .s05 .verdict { display: flex; align-items: baseline; gap: clamp(16px, 3vw, 44px); flex-wrap: wrap; }
+  .s05 .verdict .claim {
+    font-family: var(--sans); font-weight: 900; font-size: clamp(48px, 9vw, 116px); line-height: 0.9;
+    text-decoration: line-through; text-decoration-thickness: 6px; color: #0a0a0a; opacity: 0.5;
+  }
+  .s05 .verdict .real {
+    font-family: var(--sans); font-weight: 900; font-size: clamp(64px, 12.5vw, 176px); line-height: 0.85;
+    color: #ffe500; background: #0a0a0a; padding: 0 0.1em; letter-spacing: -0.03em;
+  }
+  .s05 .cap { font-family: var(--mono); font-size: 14px; letter-spacing: 0.03em; margin: 14px 0 0; color: #0a0a0a; }
+
+  /* ─── Colophon — warm espresso ─── */
+  .colophon { background: #16110c; color: #efe6d6; }
+  .colophon .hed { font-family: var(--serif); font-weight: 800; color: #f4ecdd; }
+  .colophon .hed em { font-style: italic; color: #e5551b; }
+  .colophon .lede { color: #cabda6; max-width: 60ch; }
+  .colophon .meta { font-family: var(--mono); font-size: 14px; letter-spacing: 0.03em; line-height: 1.9; color: #a99a82; margin: 4px 0 0; }
+  .colophon .meta b { color: #efe6d6; font-weight: 600; }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══ COVER — DATE-HERO ═══ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 079</span>
+    <span>Wednesday · 08 Jul 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <span class="kicker">Ephemeris — a daily typographic dispatch</span>
+    <h1 class="datehero">Wed 08 <em>Jul</em> 26</h1>
+    <p class="dek">The coding agent clocks in — auditing a province's entire codebase, mounting its own filesystem, and getting fact-checked on its own hype.</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>A province's code, read in a day</span><span>Anthropic</span></a>
+      <a href="#s02"><span><span class="num">02</span>A filesystem that isn't there</span><span>Vercel</span></a>
+      <a href="#s03"><span><span class="num">03</span>The coding agent that ships its source</span><span>OpenCode</span></a>
+      <a href="#s04"><span><span class="num">04</span>Analytics without the signup screen</span><span>PostHog</span></a>
+      <a href="#s05"><span><span class="num">05</span>Caveman talk, measured</span><span>JetBrains</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+</section>
+
+<!-- ═══ s01 · Anthropic — Alberta cybersecurity ═══ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 079</span>
+    <span>01 / 5 · Anthropic</span>
+  </header>
+  <div class="main">
+    <span class="tag">Security · Agentic coding</span>
+    <h2 class="hed">Twenty hours to read <em>every line</em> the province runs.</h2>
+    <p class="lede">Alberta's technology ministry pointed Claude Code at its whole estate — 1,280 applications, 3,400 repositories, 466 million lines — and had it scanned in 20 hours, work it pegged at six and a half years by hand. The agents went past flagging holes: they wrote and tested patches, filled in missing tests, and rebuilt a 25-year-old Java subsidy portal in days.</p>
+    <div class="figure">
+      <div class="bignum">466<span class="unit">M lines</span></div>
+      <dl class="stats">
+        <div><dt>Scan time</dt><dd>20 hours</dd></div>
+        <div><dt>By hand</dt><dd>6.5 years</dd></div>
+        <div><dt>Estate</dt><dd>1,280 apps · 3,400 repos</dd></div>
+        <div><dt>Controls / pass</dt><dd>95</dd></div>
+      </dl>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.anthropic.com/news/alberta-government-claude-cybersecurity" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ s02 · Vercel — Sandbox FUSE ═══ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 079</span>
+    <span>02 / 5 · Vercel</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev infra · Agents</span>
+    <h2 class="hed">Give the sandbox a filesystem <em>that isn't there</em>.</h2>
+    <p class="lede">Vercel Sandbox now mounts FUSE-based filesystems, so the ephemeral box you drop an agent into can read from a virtual or remote source instead of a disk baked in at build time. For anyone running untrusted agent code, the working directory can be assembled on demand and thrown away with the box.</p>
+    <div class="figure">
+      <pre class="spec"><b>FILESYSTEM</b>   fuse (user-space mount)
+<b>MOUNT</b>        on-demand, per invocation
+<b>BACKS ONTO</b>   virtual / remote source
+<b>LIFETIME</b>     dies with the sandbox
+<b>SHIPPED</b>      2026-07-03 · Vercel changelog</pre>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://vercel.com/changelog/vercel-sandbox-now-supports-fuse-based-filesystems" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ s03 · OpenCode — terminal (dark inverter) ═══ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 079</span>
+    <span>03 / 5 · OpenCode</span>
+  </header>
+  <div class="main">
+    <span class="tag">Open source · Coding agent</span>
+    <h2 class="hed">The coding agent that ships its <em>source</em>.</h2>
+    <p class="lede">OpenCode — 183k stars, MIT-licensed, TypeScript — is the terminal-native coding agent that runs against 75+ model providers and edits, runs, and tests its own work. Version 1.17.15 landed on 7 July, one of hundreds of releases at a cadence measured in days.</p>
+    <div class="figure">
+      <pre class="term"><span class="p">$</span> opencode
+<span class="c"># 183k★ · MIT · TypeScript · 75+ model providers</span>
+<span class="p">›</span> read · edit · run · test — without leaving the shell
+<span class="c"># v1.17.15 — shipped 2026-07-07 by the anomalyco team</span></pre>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://github.com/anomalyco/opencode/releases/tag/v1.17.15" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ s04 · PostHog — provisioning API ═══ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 079</span>
+    <span>04 / 5 · PostHog</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev tools · APIs</span>
+    <h2 class="hed">Resell analytics without the <em>signup screen</em>.</h2>
+    <p class="lede">PostHog's new provisioning-API walkthrough builds "HogFarm," a service that stands up a full PostHog account per customer behind OAuth — projects created, demo data seeded, dashboards and session replays piped back into your own interface. It's the recipe for embedding product analytics you actually control.</p>
+    <div class="figure">
+      <div class="steps">
+        <div><div class="n">1</div><h4>Register</h4><p>An OAuth app with the provisioning scope, so users never touch an API key.</p></div>
+        <div><div class="n">2</div><h4>Provision</h4><p>Create an account and project on the fly, then seed it with demo data.</p></div>
+        <div><div class="n">3</div><h4>Embed</h4><p>Pipe dashboards and session replays straight into your own UI.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://posthog.com/blog/embedded-analytics-provisioning-api" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ s05 · JetBrains — Caveman benchmark (neo-brutalist) ═══ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 079</span>
+    <span>05 / 5 · JetBrains</span>
+  </header>
+  <div class="main">
+    <span class="tag">Prompting · Benchmarks</span>
+    <h2 class="hed">We tested caveman talk. It saves <em>8.5%</em>.</h2>
+    <p class="lede">The viral "talk to your agent like a caveman" skill promised 65% fewer tokens. JetBrains ran it across 82 paired SkillsBench tasks and measured 8.5% on real agentic coding, with no detectable hit to quality. What dominates an agent session is code and tool calls — and the skill leaves those untouched.</p>
+    <div class="figure">
+      <div class="verdict">
+        <span class="claim">65%</span>
+        <span class="real">8.5%</span>
+      </div>
+      <p class="cap">65% advertised · 8.5% measured · 82 paired tasks · quality unchanged (p = 0.82)</p>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.jetbrains.com/ai/2026/07/speak-to-ai-agents-like-cavemen-tosave-tokens/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ COLOPHON ═══ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 079</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">A thin morning, so five picks over ten — each a tool a builder could put to work this week, checked against the archive so nothing repeats.</p>
+    <div class="figure">
+      <p class="meta"><b>Sources today</b> — Anthropic · Vercel · OpenCode · PostHog · JetBrains<br>
+      <b>Rubric</b> — tools to adopt now · agentic coding · dev infrastructure · security signal · immediately actionable<br>
+      <b>Issue</b> — 079 · Wednesday 08 July 2026 · Europe/Zürich</p>
+    </div>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>

@@ -17,6 +17,7 @@ https://anthropic.com/engineering/managed-agents
 https://anthropic.com/features/project-deal
 https://anthropic.com/institute/recursive-self-improvement
 https://anthropic.com/news/AI-enabled-cyber-threats-mitre-attack
+https://anthropic.com/news/alberta-government-claude-cybersecurity
 https://anthropic.com/news/anthropic-acquires-stainless
 https://anthropic.com/news/anthropic-amazon-compute
 https://anthropic.com/news/anthropic-public-record
@@ -114,6 +115,7 @@ https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3
 https://blog.google/innovation-and-ai/products/gemini-app/next-evolution-gemini-app
 https://blog.google/innovation-and-ai/technology/research/gemini-for-science-io-2026
 https://blog.interceptfund.com/p/ending-respiratory-infections
+https://blog.jetbrains.com/ai/2026/07/speak-to-ai-agents-like-cavemen-tosave-tokens
 https://blog.maximeheckel.com/posts/on-rendering-the-sky-sunsets-and-planets
 https://blog.tilderesearch.com/blog/aurora
 https://bloomberg.com/news/articles/2026-05-26/china-expands-travel-curbs-to-top-ai-talent-at-private-firms
@@ -184,6 +186,7 @@ https://github.blog/engineering/infrastructure/when-protections-outlive-their-pu
 https://github.blog/engineering/platform-security/post-quantum-security-for-ssh-access-on-github
 https://github.com/Agents365-ai/drawio-skill
 https://github.com/AMAP-ML/DreamX-World
+https://github.com/anomalyco/opencode/releases/tag/v1.17.15
 https://github.com/Augani/openreel-video
 https://github.com/BayramAnnakov/ai-native-product-skills/tree/master/skills/autoresearch
 https://github.com/BayramAnnakov/ai-personal-os-skills/tree/main/skills/slide-inspector
@@ -346,6 +349,7 @@ https://posthog.com/blog/customer-facing-analytics-examples
 https://posthog.com/blog/duckdb-vs-clickhouse
 https://posthog.com/blog/duckdb-vs-postgres
 https://posthog.com/blog/duckdb-vs-sqlite
+https://posthog.com/blog/embedded-analytics-provisioning-api
 https://posthog.com/blog/everything-is-build-mode
 https://posthog.com/blog/joe-os-analytics
 https://posthog.com/blog/local-flag-evals-rust
@@ -475,6 +479,7 @@ https://vercel.com/blog/vercel-services-run-full-stack-on-vercel
 https://vercel.com/blog/we-ralph-wiggumed-webstreams-to-make-them-10x-faster
 https://vercel.com/blog/zdr-on-ai-gateway
 https://vercel.com/changelog/enforce-consistent-code-for-agents-and-humans-with-konsistent
+https://vercel.com/changelog/vercel-sandbox-now-supports-fuse-based-filesystems
 https://webkit.org/blog/18136/introducing-the-safari-mcp-server-for-web-developers
 https://wheresyoured.at/where-are-all-the-data-centers
 https://wsj.com/tech/ai/mind-blowing-growth-is-about-to-propel-anthropic-into-its-first-profitable-quarter-7edbf2f4
