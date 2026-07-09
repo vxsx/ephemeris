@@ -93,6 +93,7 @@ https://blog.cloudflare.com/hyper-bug
 https://blog.cloudflare.com/internal-ai-engineering-stack
 https://blog.cloudflare.com/iran-internet-partially-restored-may-2026
 https://blog.cloudflare.com/making-rust-workers-reliable
+https://blog.cloudflare.com/meerkat-introduction
 https://blog.cloudflare.com/monetization-gateway
 https://blog.cloudflare.com/oauth-for-all
 https://blog.cloudflare.com/optimizing-core-unit-boot-time
@@ -119,6 +120,7 @@ https://blog.jetbrains.com/ai/2026/07/speak-to-ai-agents-like-cavemen-tosave-tok
 https://blog.maximeheckel.com/posts/on-rendering-the-sky-sunsets-and-planets
 https://blog.tilderesearch.com/blog/aurora
 https://bloomberg.com/news/articles/2026-05-26/china-expands-travel-curbs-to-top-ai-talent-at-private-firms
+https://bun.com/blog/bun-in-rust
 https://bun.com/blog/bun-v1.3.14
 https://chinatalk.media/p/how-to-buy-cheap-claude-tokens-in
 https://chromewebstore.google.com/detail/pjoleapiipgcignjlbhhiighckpbhcpp
@@ -174,6 +176,7 @@ https://fly.io/blog/litestream-vfs
 https://fly.io/blog/litestream-writable-vfs
 https://fly.io/blog/unfortunately-mcp
 https://github.blog/ai-and-ml/github-copilot/agent-driven-development-in-copilot-applied-science
+https://github.blog/ai-and-ml/github-copilot/automating-cross-repo-documentation-with-github-agentic-workflows
 https://github.blog/ai-and-ml/github-copilot/continuous-ai-for-accessibility-how-github-transforms-feedback-into-inclusion
 https://github.blog/changelog/2026-06-01-updates-to-github-copilot-billing-and-plans
 https://github.blog/changelog/2026-06-11-github-agentic-workflows-is-now-in-public-preview
@@ -208,6 +211,7 @@ https://github.com/DenisSergeevitch/UFO-USA
 https://github.com/Fission-AI/OpenSpec/blob/main/docs/concepts.md
 https://github.com/JibranK12345/Viral-Bench
 https://github.com/nexu-io/open-design
+https://github.com/onsails/right-agent
 https://github.com/OpenCoworkAI/open-cowork
 https://github.com/oven-sh/bun/pull/30412
 https://github.com/palmier-io/palmier-pro
@@ -325,6 +329,7 @@ https://openai.com/index/prc-linked-influence-operations-ai-debates
 https://openai.com/index/previewing-gpt-5-6-sol
 https://openai.com/index/ramp
 https://openai.com/index/running-codex-safely
+https://openai.com/index/separating-signal-from-noise-coding-evaluations
 https://openai.com/index/speeding-up-agentic-workflows-with-websockets
 https://openai.com/index/strengthening-societal-resilience-with-rosalind-biodefense
 https://openai.com/index/testing-ads-in-chatgpt
@@ -473,6 +478,7 @@ https://vercel.com/blog/protecting-against-inference-theft
 https://vercel.com/blog/protecting-against-token-theft
 https://vercel.com/blog/realtime-voice-agents-on-ai-gateway
 https://vercel.com/blog/teaching-agents-product-design-at-vercel
+https://vercel.com/blog/vercel-agent
 https://vercel.com/blog/vercel-and-shopify-are-rebuilding-hydrogen
 https://vercel.com/blog/vercel-flags-platform-native-feature-flags
 https://vercel.com/blog/vercel-services-run-full-stack-on-vercel
