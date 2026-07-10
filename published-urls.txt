@@ -1,4 +1,5 @@
 http://hnup.date/hn-sota
+https://1x.tech/discover/neos-hands
 https://ahrefs.com/blog/schema-ai-citations
 https://ai.meta.com/blog/brain2qwerty-brain-ai-human-communication
 https://aisi.gov.uk/blog/our-evaluation-of-openais-gpt-5-5-cyber-capabilities
@@ -58,6 +59,8 @@ https://arxiv.org/abs/2605.13829
 https://arxiv.org/abs/2605.22771
 https://arxiv.org/abs/2605.30341
 https://arxiv.org/abs/2606.03458
+https://arxiv.org/abs/2606.16475
+https://arxiv.org/abs/2606.19980
 https://arxiv.org/abs/2606.23001
 https://arxiv.org/abs/2606.28070
 https://arxiv.org/pdf/2604.24827
@@ -94,6 +97,7 @@ https://blog.cloudflare.com/internal-ai-engineering-stack
 https://blog.cloudflare.com/iran-internet-partially-restored-may-2026
 https://blog.cloudflare.com/making-rust-workers-reliable
 https://blog.cloudflare.com/meerkat-introduction
+https://blog.cloudflare.com/ml-dsa-will-have-to-do
 https://blog.cloudflare.com/monetization-gateway
 https://blog.cloudflare.com/oauth-for-all
 https://blog.cloudflare.com/optimizing-core-unit-boot-time
@@ -308,6 +312,7 @@ https://openai.com/index/introducing-chatgpt-images-2-0
 https://openai.com/index/introducing-evmbench
 https://openai.com/index/introducing-genebench-pro
 https://openai.com/index/introducing-gpt-5-5
+https://openai.com/index/introducing-gpt-live
 https://openai.com/index/introducing-life-sci-bench
 https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind
 https://openai.com/index/introducing-openai-privacy-filter
@@ -398,6 +403,7 @@ https://sentry.io/blog/cut-build-times-delete-cms
 https://sentry.io/blog/debugging-multi-agent-ai-when-the-failure-is-in-the-space-between-agents
 https://sentry.io/blog/errors-traces-logs-metrics-when-to-reach-for-what
 https://sentry.io/blog/fixing-javascript-observability
+https://sentry.io/blog/logging-best-practices
 https://sentry.io/blog/nextjs-export-traces-opentelemetry
 https://sentry.io/blog/nextjs-supabase-observability
 https://sentry.io/blog/scaling-observability-for-multi-agent-ai-systems
