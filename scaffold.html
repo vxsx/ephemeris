@@ -103,6 +103,11 @@
     text-transform: uppercase;
     opacity: 0.75;
   }
+  /* The folio wordmark links back to the archive index. It must read as
+     plain folio text — inherit colour, no underline until hover — never a
+     default blue link. Present on every folio (cover + stories). */
+  .folio a.home { color: inherit; text-decoration: none; }
+  .folio a.home:hover { text-decoration: underline; }
 
   .spread > .main {
     display: flex;
@@ -288,7 +293,7 @@
      ═══════════════════════════════════════════════════════════════════ -->
 <section class="spread cover" id="cover">
   <header class="folio">
-    <span>Ephemeris · Issue NNN</span>
+    <span><a class="home" href="../index.html">Ephemeris · Issue NNN</a></span>
     <span>Weekday · DD MMM YYYY · Zürich</span>
   </header>
   <div class="main">
@@ -308,7 +313,7 @@
      ═══════════════════════════════════════════════════════════════════ -->
 <section class="spread s01" id="s01">
   <header class="folio">
-    <span>Ephemeris · Issue NNN</span>
+    <span><a class="home" href="../index.html">Ephemeris · Issue NNN</a></span>
     <span>01 / N · Source</span>
   </header>
   <div class="main">

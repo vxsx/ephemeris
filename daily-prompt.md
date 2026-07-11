@@ -64,11 +64,13 @@ update, a technical deep-dive, a benchmark, a case study, a behavior
 change. **Skip pure product-marketing** ("announcing our partnership
 with X", leadership shuffles, funding rounds).
 
-## Step 3 — Pick 5 to 10 articles
+## Step 3 — Pick 3 to 5 articles
 
-Aim for ten; ship fewer if the day is thin. **Minimum 5, maximum 10.**
-Do not pad with weak picks — a 6-story issue with real signal beats a
-10-story issue with four fillers.
+Aim for five; ship fewer if the day is thin. **Minimum 3, maximum 5.**
+The cap is deliberate — the reader has limited time and would rather read
+five strong picks than skim ten. Do not pad: a 4-story issue with real
+signal beats a 5-story issue with one filler. Curate hard, cut the marginal
+pick rather than including it.
 
 **Rubric (in priority order):**
 
@@ -83,8 +85,8 @@ Hard rules:
 
 - Skip pure hype/marketing.
 - Skip opinion-only pieces unless they sharply change how you'd act tomorrow.
-- **Max 2 picks from any single source.** At least 4 distinct sources
-  represented on a 5–7 issue; at least 6 on an 8–10 issue.
+- **Max 2 picks from any single source.** At least 3 distinct sources
+  represented (so on a 5-story issue, no source contributes more than 2).
 - Engineering-blog posts (GitHub/Sentry/Vercel/PostHog) count only if they
   teach something (postmortem, architecture deep-dive, new primitive, tool
   release) — skip launch fluff / positioning posts.
@@ -444,9 +446,18 @@ H. **Source map** — horizontal row of the 18 source names with dots marking
    which contributed today, then TOC
 
 Each spread must have: folio (NN / total + source, where total is today's
-story count — so "04 / 07" on a 7-story issue), tag, headline, lede,
+story count — so "04 / 05" on a 5-story issue), tag, headline, lede,
 secondary visual element (pull quote, stats, terminal, graph, grid, etc.),
 and a `.read-on` button pointing at the article URL.
+
+**The folio wordmark links back to the index.** The folio's left label —
+`Ephemeris · Issue NNN` — is wrapped in `<a class="home" href="../index.html">`
+so every spread (cover included) can return to the archive. The scaffold
+wires this up, including the `.folio a.home` style that keeps it looking
+like plain folio text (inherit colour, no underline until hover). Keep the
+link on every folio; don't strip it and don't restyle it into an obvious
+blue link. The colophon folio has no wordmark, so it keeps its existing
+"Back to top ↑" instead.
 
 **Story numbering starts at 01, not 02.** The cover is `id="cover"` and is
 not a numbered story. The first story is `s01` / folio `01 / N` / TOC entry
@@ -466,8 +477,8 @@ Read the two most recent issues in `magazines/` (excluding today's). List
 the themes each used in order. Today's issue must:
 
 - Share at most **40%** of themes with yesterday's issue (round down —
-  e.g. 3/8 or 4/10).
-- Share at most **60%** with the day before.
+  e.g. 2 of 5).
+- Share at most **60%** with the day before (e.g. 3 of 5).
 - Use a cover treatment that's different from both.
 - Put repeated themes in a genuinely different slot order (don't just
   shuffle neighbours).
@@ -520,5 +531,5 @@ your final message if it fails — don't retry blindly.
 
 ## Step 8 — Final summary
 
-Report back in ≤80 words: issue number, date, the story titles (5–10), and the
+Report back in ≤80 words: issue number, date, the story titles (3–5), and the
 public URL.
