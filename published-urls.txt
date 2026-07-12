@@ -160,6 +160,8 @@ https://deeplearning.ai/the-batch/issue-357
 https://deeplearning.ai/the-batch/issue-359
 https://deepswe.datacurve.ai/blog
 https://developers.googleblog.com/introducing-the-google-colab-cli
+https://developers.googleblog.com/litertjs-googles-high-performance-web-ai-inference
+https://developers.googleblog.com/we-terminated-a-tpu-mid-training-and-it-recovered-in-seconds-introduction-to-elastic-training-with-maxtext
 https://developers.openai.com/ads
 https://developers.openai.com/codex/record-and-replay
 https://developers.openai.com/codex/use-cases
@@ -232,6 +234,7 @@ https://hermesagents.net/
 https://higgsfield.ai/apps/virality-predictor
 https://higgsfield.ai/mcp
 https://huggingface.co/blog/mishig/local-moores-law
+https://huggingface.co/blog/native-speed-vllm-transformers-backend
 https://huggingface.co/collections/talkie-lm/talkie-13b
 https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro
 https://huggingface.co/google/diffusiongemma-26B-A4B-it
@@ -274,6 +277,7 @@ https://microsoft.com/en-us/research/articles/whimsical-strategies-break-ai-agen
 https://microsoft.com/en-us/research/blog/memora-a-harmonic-memory-representation-balancing-abstraction-and-specificity
 https://microsoft.com/en-us/security/blog/2026/06/02/microsoft-build-2026-securing-code-agents-and-models-across-the-development-lifecycle
 https://minimax.io/blog/minimax-m3
+https://mistral.ai/news/leanstral-1-5
 https://mistral.ai/news/ocr-4
 https://moab.pro/articles/aeo-geo
 https://newsletter.semianalysis.com/p/the-coding-assistant-breakdown-more

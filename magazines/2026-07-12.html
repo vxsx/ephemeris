@@ -1,0 +1,609 @@
+<!doctype html>
+<!--
+  Ephemeris · Issue 083 · 2026-07-12
+  Built on scaffold.html (locked structural baseline).
+  Surface overrides only: palette, type, decorative motifs.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 083 · 12 Jul 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — copied verbatim from scaffold.html.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 {
+    overflow-wrap: break-word;
+    margin: 0;
+  }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+
+  .spread > .decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .folio a.home { color: inherit; text-decoration: none; }
+  .folio a.home:hover { text-decoration: underline; }
+
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+
+  .figure { width: 100%; }
+
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — Issue 083
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── COVER · dossier grid (charcoal + electric cyan) ─── */
+  .cover { background: #14161c; color: #e9e6dc; }
+  .cover .cover-mark {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    font-size: clamp(40px, 6vw, 76px);
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    color: #e9e6dc;
+    margin: 0;
+    padding-bottom: 0.08em;
+  }
+  .cover .cover-mark em { font-style: normal; color: #35e0ff; }
+  .cover .dek {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(20px, 2vw, 28px);
+    line-height: 1.32;
+    max-width: 34ch;
+    margin: 0;
+    color: #c8c4b8;
+  }
+  .cover .dossier {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px;
+    width: 100%;
+    background: rgba(233,230,220,0.14);
+    border: 1px solid rgba(233,230,220,0.14);
+    margin-top: clamp(8px, 1.5vw, 20px);
+  }
+  .cover .dossier a {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-decoration: none;
+    color: inherit;
+    background: #14161c;
+    padding: clamp(20px, 2.4vw, 34px);
+    min-height: 190px;
+  }
+  .cover .dossier a:hover { background: #1b1e26; }
+  .cover .dossier .cell-num {
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: clamp(30px, 4vw, 46px);
+    color: #35e0ff;
+    letter-spacing: 0;
+  }
+  .cover .dossier .cell-hed {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(21px, 2vw, 28px);
+    line-height: 1.12;
+    margin-top: auto;
+  }
+  .cover .dossier .cell-src {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #8f8b80;
+  }
+  @media (max-width: 800px) {
+    .cover .dossier { grid-template-columns: 1fr; }
+    .cover .dossier a { min-height: 0; }
+  }
+
+  /* ─── s01 · Risograph duotone (cyan / magenta overprint) ─── */
+  .s01 { background: #f6f1e6; color: #17161a; }
+  .s01 .tag { color: #d6006e; border-color: #d6006e; }
+  .s01 .hed {
+    font-family: var(--sans);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    color: #d6006e;
+    text-shadow: 4px 4px 0 #00a7c4;
+    text-transform: uppercase;
+    line-height: 0.98;
+  }
+  .s01 .hed em { font-style: normal; color: #00a7c4; text-shadow: 4px 4px 0 #d6006e; }
+  .s01 .lede { color: #201f24; }
+  .s01 .read-on { color: #17161a; border-color: #17161a; --flip: #f6f1e6; }
+  /* overprint callout */
+  .s01 .riso {
+    display: flex; flex-wrap: wrap; gap: 14px 18px; align-items: stretch;
+  }
+  .s01 .riso .chip {
+    font-family: var(--mono); font-weight: 600; font-size: 17px;
+    padding: 12px 16px; color: #f6f1e6; background: #17161a;
+    box-shadow: 5px 5px 0 #00a7c4;
+  }
+  .s01 .riso .card {
+    flex: 1 1 200px; min-width: 0;
+    border: 3px solid #d6006e; padding: 16px 18px;
+    box-shadow: 6px 6px 0 rgba(0,167,196,0.5);
+    background: #fbf8f1;
+  }
+  .s01 .riso .card b { font-family: var(--sans); font-weight: 900; font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase; color: #d6006e; display:block; margin-bottom: 6px; }
+  .s01 .riso .card span { font-family: var(--serif); font-size: 19px; line-height: 1.3; }
+  .s01 .decor::before {
+    content: ""; position: absolute; left: -8vw; top: -10vw;
+    width: 46vw; height: 46vw; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,167,196,0.16), transparent 68%);
+  }
+  .s01 .decor::after {
+    content: ""; position: absolute; right: -6vw; bottom: -8vw;
+    width: 40vw; height: 40vw; border-radius: 50%;
+    background: radial-gradient(circle, rgba(214,0,110,0.14), transparent 68%);
+  }
+  @media (max-width: 800px) {
+    .s01 .hed, .s01 .hed em { text-shadow: 2px 2px 0 currentColor; }
+    .s01 .hed { text-shadow: 2px 2px 0 #00a7c4; }
+    .s01 .hed em { text-shadow: 2px 2px 0 #d6006e; }
+  }
+
+  /* ─── s02 · Electric big-numeral (near-black + cyan) ─── */
+  .s02 { background: #080b11; color: #dfe9ef; }
+  .s02 .tag { color: #35e0ff; border-color: #35e0ff; }
+  .s02 .hed { font-family: var(--serif); font-weight: 800; color: #f2f8fb; }
+  .s02 .hed em {
+    font-style: italic; color: #35e0ff;
+    font-variation-settings: "opsz" 144, "SOFT" 60, "WONK" 1;
+  }
+  .s02 .lede { color: #b9c6cf; }
+  .s02 .read-on { color: #35e0ff; border-color: #35e0ff; --flip: #080b11; }
+  .s02 .statwrap { display: flex; flex-wrap: wrap; align-items: center; gap: clamp(24px, 4vw, 60px); }
+  .s02 .num {
+    font-family: var(--sans); font-weight: 900;
+    font-size: clamp(96px, 17vw, 210px); line-height: 0.82;
+    color: #35e0ff; letter-spacing: -0.05em;
+    text-shadow: 0 0 42px rgba(53,224,255,0.45);
+  }
+  .s02 .num .unit {
+    font-family: var(--sans); font-style: normal; font-weight: 700;
+    font-size: 0.3em;
+    letter-spacing: normal;
+    margin-left: 0.12em;
+    color: #dfe9ef;
+  }
+  .s02 .num small {
+    display: block; font-family: var(--mono); font-weight: 400;
+    font-size: 0.09em; letter-spacing: 0.18em; text-transform: uppercase;
+    color: #7f929d; margin-top: 0.6em;
+  }
+  .s02 .specs { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+  .s02 .specs li { display: flex; gap: 14px; align-items: baseline; font-family: var(--mono); font-size: 16px; color: #cdd8df; }
+  .s02 .specs li b { color: #35e0ff; font-weight: 700; min-width: 68px; }
+  .s02 .decor::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      linear-gradient(90deg, rgba(53,224,255,0.05) 1px, transparent 1px) 0 0 / 46px 46px,
+      linear-gradient(rgba(53,224,255,0.05) 1px, transparent 1px) 0 0 / 46px 46px;
+  }
+
+  /* ─── s03 · Museum placard (ivory + olive, centered) ─── */
+  .s03 { background: #efe9da; color: #2a2d20; }
+  .s03 .tag {
+    color: #5e6034; border-color: #5e6034;
+    border-radius: 0; letter-spacing: 0.3em;
+  }
+  .s03 .hed {
+    font-family: var(--serif); font-weight: 500;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+    letter-spacing: -0.005em; color: #26281c;
+    font-size: clamp(48px, 6.4vw, 96px);
+  }
+  .s03 .hed em { font-style: italic; color: #6a6b2e; }
+  .s03 .eyebrow {
+    font-family: var(--sans); font-size: 13px; font-weight: 600;
+    letter-spacing: 0.42em; text-transform: uppercase; color: #8a7f52;
+  }
+  .s03 .lede { color: #3a3d2c; }
+  .s03 .read-on {
+    color: #5e6034; border-color: #5e6034; border-radius: 0; --flip: #efe9da;
+  }
+  .s03 .placard {
+    max-width: 620px; width: 100%;
+    border-top: 1px solid #b7ad8e; border-bottom: 1px solid #b7ad8e;
+    padding: 22px 0;
+  }
+  .s03 .placard dl {
+    margin: 0; display: grid; grid-template-columns: 1fr auto; gap: 0;
+  }
+  .s03 .placard dt, .s03 .placard dd {
+    padding: 11px 4px; border-bottom: 1px solid rgba(94,96,52,0.2);
+  }
+  .s03 .placard dt {
+    font-family: var(--sans); font-size: 13px; font-weight: 600;
+    letter-spacing: 0.16em; text-transform: uppercase; color: #6a6b45;
+    text-align: left;
+  }
+  .s03 .placard dd {
+    margin: 0; text-align: right;
+    font-family: var(--serif); font-weight: 600; font-size: 21px;
+    color: #26281c; font-variant-numeric: tabular-nums;
+  }
+  .s03 .placard dt:nth-last-of-type(1),
+  .s03 .placard dd:nth-last-of-type(1) { border-bottom: 0; }
+  .s03 .decor::before {
+    content: ""; position: absolute; left: 50%; top: clamp(96px, 12vw, 150px);
+    transform: translateX(-50%);
+    width: min(70vw, 760px); height: 1px; background: rgba(94,96,52,0.28);
+  }
+
+  /* ─── s04 · Amber terminal (near-black + phosphor amber) ─── */
+  .s04 { background: #0a0805; color: #ffb000; }
+  .s04 .tag { color: #ffb000; border-color: rgba(255,176,0,0.6); font-family: var(--mono); }
+  .s04 .hed {
+    font-family: var(--mono); font-weight: 700;
+    letter-spacing: -0.01em; line-height: 1.05; color: #ffc23a;
+    font-size: clamp(40px, 5.6vw, 84px);
+    text-shadow: 0 0 20px rgba(255,176,0,0.35);
+  }
+  .s04 .hed em { font-style: normal; color: #ff7a2a; }
+  .s04 .lede { font-family: var(--mono); font-size: clamp(18px, 1.5vw, 21px); color: #e0a54f; line-height: 1.5; }
+  .s04 .read-on { color: #ffb000; border-color: #ffb000; --flip: #0a0805; font-family: var(--mono); }
+  .s04 .term {
+    font-family: var(--mono); font-size: 15px; line-height: 1.7;
+    border: 1px solid rgba(255,176,0,0.4); background: rgba(255,176,0,0.05);
+    padding: 18px 20px; max-width: 720px; width: 100%;
+    color: #ffcf6b; overflow-x: auto;
+  }
+  .s04 .term .dim { color: #9a7327; }
+  .s04 .term .err { color: #ff5a3c; }
+  .s04 .term .ok  { color: #7cff8a; }
+  .s04 .term .amp { color: #ffb000; }
+  .s04 .decor::before {
+    content: ""; position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      to bottom, rgba(255,176,0,0.05) 0 1px, transparent 1px 4px);
+  }
+  .s04 .decor::after {
+    content: ""; position: absolute; right: -10vw; top: -10vw;
+    width: 50vw; height: 50vw; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,122,42,0.12), transparent 70%);
+  }
+
+  /* ─── Colophon · dark slate ─── */
+  .colophon { background: #101319; color: #d7d9df; }
+  .colophon .hed {
+    font-family: var(--serif); font-weight: 800; color: #f4f5f8;
+    font-size: clamp(48px, 7vw, 96px);
+  }
+  .colophon .hed em { font-style: italic; color: #35e0ff; }
+  .colophon .lede { color: #aeb2bd; max-width: 60ch; }
+  .colophon .cols {
+    display: grid; grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 26px 40px; width: 100%; margin-top: 8px;
+    border-top: 1px solid rgba(215,217,223,0.18); padding-top: 26px;
+  }
+  .colophon .cols h4 {
+    font-family: var(--sans); font-size: 12px; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase; color: #6f8bd0; margin: 0 0 12px;
+  }
+  .colophon .cols ul { list-style: none; margin: 0; padding: 0; }
+  .colophon .cols li { font-family: var(--mono); font-size: 15px; color: #c3c6cf; padding: 3px 0; }
+  @media (max-width: 800px) {
+    .colophon .cols { grid-template-columns: 1fr; gap: 22px; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════════ COVER · dossier grid ═══════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 083</a></span>
+    <span>Sunday · 12 Jul 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <h1 class="cover-mark">Ephemeris<em>.</em></h1>
+    <p class="dek">Four ways the machinery got sturdier — models that serve themselves, run in your browser, prove their own work, and shrug off dead hardware.</p>
+    <nav class="dossier">
+      <a href="#s01">
+        <span class="cell-num">01</span>
+        <span class="cell-hed">Write the model once, serve it at full speed.</span>
+        <span class="cell-src">Hugging Face</span>
+      </a>
+      <a href="#s02">
+        <span class="cell-num">02</span>
+        <span class="cell-hed">Ship the model to the browser, not the server.</span>
+        <span class="cell-src">Google Developers</span>
+      </a>
+      <a href="#s03">
+        <span class="cell-num">03</span>
+        <span class="cell-hed">A model that proves its own work.</span>
+        <span class="cell-src">Mistral AI</span>
+      </a>
+      <a href="#s04">
+        <span class="cell-num">04</span>
+        <span class="cell-hed">Kill a TPU mid-run. It comes back.</span>
+        <span class="cell-src">Google Developers</span>
+      </a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+</section>
+
+<!-- ═══════════ s01 · Risograph duotone · HF vLLM backend ═══════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 083</a></span>
+    <span>01 / 04 · Hugging Face</span>
+  </header>
+  <div class="main">
+    <span class="tag">Inference · Serving</span>
+    <h2 class="hed">Write the model once, <em>serve it fast</em>.</h2>
+    <p class="lede">For years, making a model quick in vLLM meant keeping a second, hand-tuned copy of it alongside the Transformers one. The new modeling backend closes that gap: pass <code>--model-impl transformers</code> and dynamic layer fusion gives any compatible model native vLLM throughput. Across Qwen3 at 4B, 32B and a 235B MoE, the single implementation meets or beats the hand-written version. One file to keep in sync instead of two.</p>
+    <div class="figure riso">
+      <div class="chip">--model-impl transformers</div>
+      <div class="card"><b>Parity</b><span>Meets or beats native throughput on every Qwen3 size tested.</span></div>
+      <div class="card"><b>No rewrite</b><span>The Transformers model you already train now serves at speed — zero optimization code.</span></div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://huggingface.co/blog/native-speed-vllm-transformers-backend" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s02 · Electric big-numeral · LiteRT.js ═══════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 083</a></span>
+    <span>02 / 04 · Google Developers</span>
+  </header>
+  <div class="main">
+    <span class="tag">On-device · Web AI</span>
+    <h2 class="hed">Ship the model to the <em>browser</em>, not the server.</h2>
+    <p class="lede">LiteRT.js drops Google's native inference runtime into the browser through WebAssembly and WebGPU, so a model runs entirely on the user's machine — no server round-trip, no upload of their data. The demo runs real-time object detection with Ultralytics YOLO. If you've been paying to host inference that could live on the client, this is the week to move it.</p>
+    <div class="figure statwrap">
+      <div class="num">5&ndash;60<span class="unit">×</span><small>GPU vs CPU speedup</small></div>
+      <ul class="specs">
+        <li><b>3×</b> faster than other web runtimes, CPU and GPU</li>
+        <li><b>WebGPU</b> acceleration, WebNN for NPU hardware</li>
+        <li><b>Local</b> inference — private by default, no server bill</li>
+      </ul>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://developers.googleblog.com/litertjs-googles-high-performance-web-ai-inference/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s03 · Museum placard · Leanstral 1.5 ═══════════ -->
+<section class="spread s03 centered" id="s03">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 083</a></span>
+    <span>03 / 04 · Mistral AI</span>
+  </header>
+  <div class="main">
+    <span class="eyebrow">Leanstral 1.5 · Apache-2.0</span>
+    <span class="tag">Formal methods · Open models</span>
+    <h2 class="hed">A machine that shows its <em>proof</em>.</h2>
+    <p class="lede">Leanstral 1.5 is an open model built for one job: writing machine-checked proofs in Lean 4. At 119B total but only 6B active parameters, it saturates miniF2F and clears most of PutnamBench. The practical payoff is verification that catches real defects — the team used it to surface five previously unknown bugs across 57 open-source repositories, with weights and a free API within reach of an ordinary project.</p>
+    <div class="figure">
+      <div class="placard">
+        <dl>
+          <dt>miniF2F</dt><dd>saturated</dd>
+          <dt>PutnamBench</dt><dd>587 / 672</dd>
+          <dt>FATE-H</dt><dd>87%</dd>
+          <dt>Bugs found</dt><dd>5 across 57 repos</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://mistral.ai/news/leanstral-1-5" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s04 · Amber terminal · MaxText elastic training ═══════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 083</a></span>
+    <span>04 / 04 · Google Developers</span>
+  </header>
+  <div class="main">
+    <span class="tag">Infrastructure · Training</span>
+    <h2 class="hed">We killed a TPU mid-run. It <em>recovered</em> in two minutes.</h2>
+    <p class="lede">Train on enough chips for long enough and hardware will die on you; the usual answer is to tear the whole job down and reschedule. MaxText's elastic training turns a dead TPU into a caught Python exception — PathwayS flags it, an elastic_retry decorator reloads the latest Orbax checkpoint onto surviving chips, and the run continues on the slice that lived.</p>
+    <div class="figure">
+      <pre class="term"><span class="dim"># 48 chips · 3 slices · Qwen3-0.6B · ~$30 / 30 min</span>
+step 512  loss 2.41  <span class="dim">throughput ok</span>
+<span class="err">✗ slice-2 lost — hardware fault raised as exception</span>
+<span class="amp">elastic_retry:</span> reload Orbax checkpoint → surviving chips
+<span class="amp">elastic_retry:</span> rescheduling only the dead slice
+<span class="ok">✓ resumed in 1m52s · ~88 steps replayed</span>
+step 600  loss 2.39  <span class="dim">run intact</span></pre>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://developers.googleblog.com/we-terminated-a-tpu-mid-training-and-it-recovered-in-seconds-introduction-to-elastic-training-with-maxtext/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ COLOPHON · dark slate ═══════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 083</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>Sunday.</em></h3>
+    <p class="lede">A quieter day on the feeds, so four picks over five — models pulling closer to the metal: native serving, browser inference, machine-checked proofs, and training that survives dead silicon.</p>
+    <div class="cols">
+      <div>
+        <h4>Sources today</h4>
+        <ul>
+          <li>Hugging Face</li>
+          <li>Google Developers Blog</li>
+          <li>Mistral AI</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Rubric</h4>
+        <ul>
+          <li>Adopt this week</li>
+          <li>Dev tools &amp; agentic coding</li>
+          <li>Research w/ a practical kernel</li>
+          <li>No reprints · 30-day cap</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Issue</h4>
+        <ul>
+          <li>No. 083</li>
+          <li>12 July 2026</li>
+          <li>Zürich · 08:00</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>
