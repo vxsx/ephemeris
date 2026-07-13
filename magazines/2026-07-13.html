@@ -1,0 +1,588 @@
+<!doctype html>
+<!--
+  Ephemeris · Issue 084 · 2026-07-13
+  Built on scaffold.html (locked structural baseline). Surface overrides only.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 084 · 13 Jul 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — copied verbatim from scaffold.html.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 {
+    overflow-wrap: break-word;
+    margin: 0;
+  }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+
+  .spread > .decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .folio a.home { color: inherit; text-decoration: none; }
+  .folio a.home:hover { text-decoration: underline; }
+
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+
+  .figure { width: 100%; }
+
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — surface only.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── Cover — pull-quote, deep aubergine ─── */
+  .cover { background: #17102a; color: #f3ecdf; }
+  .cover .wordmark {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: clamp(20px, 2.2vw, 30px);
+    letter-spacing: -0.01em;
+    color: #c9f24d;
+    opacity: 0.85;
+    margin: 0;
+  }
+  .cover .pullquote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-variation-settings: "opsz" 144, "SOFT" 60, "WONK" 1;
+    font-size: clamp(44px, 7.4vw, 116px);
+    line-height: 1.0;
+    letter-spacing: -0.025em;
+    padding-bottom: 0.1em;
+    margin: 0;
+    max-width: 20ch;
+  }
+  .cover .pullquote em { font-style: italic; color: #c9f24d; }
+  .cover .attr {
+    font-family: var(--mono);
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    opacity: 0.7;
+    margin: 0;
+  }
+  .cover .dek {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(19px, 2vw, 26px);
+    line-height: 1.35;
+    max-width: 34ch;
+    margin: 0;
+    opacity: 0.92;
+  }
+  .cover .toc {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 40px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(243,236,223,0.28);
+    width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 4px 12px;
+    text-decoration: none; color: inherit;
+    padding: 7px 0;
+    border-bottom: 1px dotted rgba(243,236,223,0.22);
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.82em; opacity: 0.62; }
+  .cover .toc .num {
+    font-family: var(--serif); font-weight: 700; font-style: italic;
+    color: #c9f24d; margin-right: 10px;
+  }
+  .cover .decor::before {
+    content: "";
+    position: absolute;
+    right: -18vw; top: -20vw;
+    width: 62vw; height: 62vw;
+    background: radial-gradient(circle, rgba(201,242,77,0.10), transparent 68%);
+  }
+  .cover .decor::after {
+    content: "";
+    position: absolute;
+    left: -14vw; bottom: -22vw;
+    width: 54vw; height: 54vw;
+    background: radial-gradient(circle, rgba(160,107,255,0.16), transparent 70%);
+  }
+  @media (max-width: 800px) {
+    .cover .toc { grid-template-columns: 1fr; gap: 0; }
+  }
+
+  /* ─── s01 · Reve 2.1 — neon / cyberpunk ─── */
+  .s01 { background: #0a0a15; color: #e9e9f6; }
+  .s01 .tag { color: #35e0d0; border-color: rgba(53,224,208,0.55); }
+  .s01 .hed {
+    font-weight: 800;
+    background: linear-gradient(96deg, #a06bff 0%, #35e0d0 92%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+  }
+  .s01 .hed em { font-style: italic; -webkit-text-fill-color: #35e0d0; color: #35e0d0; }
+  .s01 .lede { color: #c7c7e0; }
+  .s01 .read-on { color: #35e0d0; border-color: #35e0d0; --flip: #0a0a15; }
+
+  .s01 .spec {
+    font-family: var(--mono);
+    border: 1px solid rgba(160,107,255,0.4);
+    border-radius: 10px;
+    background: rgba(160,107,255,0.06);
+    box-shadow: 0 0 0 1px rgba(53,224,208,0.10), 0 0 42px rgba(160,107,255,0.14);
+    max-width: 560px;
+    overflow: hidden;
+  }
+  .s01 .spec-row {
+    display: flex; justify-content: space-between; gap: 18px;
+    padding: 12px 18px;
+    border-bottom: 1px solid rgba(160,107,255,0.16);
+    font-size: 15px;
+  }
+  .s01 .spec-row:last-child { border-bottom: 0; }
+  .s01 .spec-row .k { color: #8f8fb8; text-transform: uppercase; letter-spacing: 0.12em; font-size: 12px; align-self: center; }
+  .s01 .spec-row .v { color: #35e0d0; text-align: right; }
+  .s01 .decor::before {
+    content: "";
+    position: absolute;
+    left: -12vw; bottom: -18vw;
+    width: 52vw; height: 52vw;
+    background: radial-gradient(circle, rgba(53,224,208,0.16), transparent 70%);
+  }
+  .s01 .decor::after {
+    content: "";
+    position: absolute;
+    right: -10vw; top: -16vw;
+    width: 46vw; height: 46vw;
+    background: radial-gradient(circle, rgba(160,107,255,0.20), transparent 72%);
+  }
+
+  /* ─── s02 · AtCoder sweep — scoreboard cobalt ─── */
+  .s02 { background: #123ceb; color: #f4f6ff; }
+  .s02 .tag { color: #eaf0ff; border-color: rgba(234,240,255,0.6); }
+  .s02 .hed {
+    font-family: var(--sans);
+    font-weight: 900;
+    letter-spacing: -0.035em;
+    text-transform: uppercase;
+    font-size: clamp(44px, 6.6vw, 100px);
+    line-height: 0.98;
+  }
+  .s02 .hed em { font-style: normal; color: #ffe600; }
+  .s02 .lede { font-family: var(--serif); color: #e3e9ff; }
+  .s02 .read-on { color: #ffe600; border-color: #ffe600; --flip: #123ceb; }
+
+  .s02 .score {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 28px 44px;
+  }
+  .s02 .big { display: flex; flex-direction: column; gap: 4px; }
+  .s02 .big .num {
+    font-family: var(--sans); font-weight: 900;
+    font-size: clamp(88px, 15vw, 168px);
+    line-height: 0.82; letter-spacing: -0.05em; color: #ffe600;
+  }
+  .s02 .big .num .unit {
+    font-family: var(--sans); font-weight: 800;
+    font-size: 0.34em;
+    letter-spacing: normal;
+    color: #f4f6ff;
+  }
+  .s02 .big .lbl {
+    font-family: var(--mono); font-size: 13px; letter-spacing: 0.14em;
+    text-transform: uppercase; opacity: 0.8;
+  }
+  .s02 .bars { flex: 1 1 300px; min-width: 260px; display: flex; flex-direction: column; gap: 12px; }
+  .s02 .row { display: flex; align-items: center; gap: 14px; }
+  .s02 .row .who {
+    font-family: var(--mono); font-size: 13px; letter-spacing: 0.08em;
+    width: 92px; flex: 0 0 auto; text-transform: uppercase; opacity: 0.85;
+  }
+  .s02 .row .bar {
+    position: relative; height: 34px; width: var(--w);
+    display: flex; align-items: center; justify-content: flex-end;
+    padding-right: 12px;
+    font-family: var(--mono); font-weight: 600; font-size: 15px;
+    border-radius: 3px; min-width: 62px;
+  }
+  .s02 .row .bar.ai { background: #ffe600; color: #123ceb; }
+  .s02 .row .bar.hu { background: rgba(244,246,255,0.28); color: #f4f6ff; }
+  .s02 .decor::before {
+    content: "×";
+    position: absolute;
+    right: 2vw; bottom: -6vw;
+    font-family: var(--sans); font-weight: 900;
+    font-size: 46vw; line-height: 1; color: rgba(255,255,255,0.05);
+  }
+  @media (max-width: 800px) {
+    .s02 .score { gap: 20px; }
+    .s02 .row .who { width: 78px; }
+  }
+
+  /* ─── s03 · clarity-session-review — blueprint ─── */
+  .s03 { background: #eef2f5; color: #14273e; }
+  .s03 .tag { color: #1c4f8a; border-color: #1c4f8a; }
+  .s03 .hed { font-weight: 800; color: #14273e; }
+  .s03 .hed em { font-style: italic; color: #1c4f8a; font-variation-settings: "opsz" 144, "SOFT" 40, "WONK" 1; }
+  .s03 .lede { color: #2a3f57; }
+  .s03 .read-on { color: #1c4f8a; border-color: #1c4f8a; --flip: #eef2f5; }
+
+  .s03 .method {
+    list-style: none; margin: 0; padding: 0;
+    font-family: var(--mono);
+    max-width: 620px;
+    border-left: 2px solid rgba(28,79,138,0.35);
+  }
+  .s03 .method li {
+    display: flex; gap: 14px; align-items: baseline;
+    padding: 11px 0 11px 16px;
+    font-size: 15px; line-height: 1.4;
+    border-bottom: 1px dashed rgba(28,79,138,0.22);
+  }
+  .s03 .method li:last-child { border-bottom: 0; }
+  .s03 .method .n { color: #1c4f8a; font-weight: 600; flex: 0 0 auto; }
+  .s03 .decor {
+    background-image:
+      linear-gradient(rgba(28,79,138,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(28,79,138,0.06) 1px, transparent 1px);
+    background-size: 34px 34px;
+  }
+  /* crop marks — kept clear of the folio (below the top clamp) */
+  .s03 .decor::before,
+  .s03 .decor::after {
+    content: "";
+    position: absolute;
+    width: 22px; height: 22px;
+    border: 2px solid rgba(28,79,138,0.4);
+  }
+  .s03 .decor::before { right: 30px; top: clamp(96px, 12vw, 150px); border-left: 0; border-bottom: 0; }
+  .s03 .decor::after  { right: 30px; bottom: 30px; border-left: 0; border-top: 0; }
+  @media (max-width: 800px) {
+    .s03 .decor::before, .s03 .decor::after { display: none; }
+  }
+
+  /* ─── s04 · Claude Reflect — pastel rose ─── */
+  .s04 {
+    background: linear-gradient(158deg, #f8ebf0 0%, #f2dfe8 62%, #efd8e4 100%);
+    color: #3a2733;
+  }
+  .s04 .tag { color: #a03d63; border-color: #a03d63; }
+  .s04 .hed {
+    font-weight: 340;
+    font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" 0;
+    color: #3a2733;
+  }
+  .s04 .hed em { font-style: italic; color: #a03d63; font-weight: 500; }
+  .s04 .lede { color: #4c3542; }
+  .s04 .read-on { color: #a03d63; border-color: #a03d63; --flip: #f5e4ec; }
+
+  .s04 .reflect-q {
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(22px, 2.6vw, 34px);
+    line-height: 1.32; color: #7a2f4d;
+    margin: 0; max-width: 24ch;
+    border-left: 3px solid rgba(160,61,99,0.4);
+    padding-left: 22px;
+  }
+  .s04 .reflect-cap {
+    font-family: var(--mono); font-size: 13px; letter-spacing: 0.06em;
+    color: #8a6376; margin: 14px 0 0;
+  }
+  .s04 .decor::before {
+    content: "";
+    position: absolute;
+    right: -16vw; bottom: -20vw;
+    width: 58vw; height: 58vw;
+    background: radial-gradient(circle, rgba(160,61,99,0.10), transparent 70%);
+  }
+
+  /* ─── Colophon — dark bookend ─── */
+  .colophon { background: #0c0c12; color: #e7e7ef; }
+  .colophon .hed { font-weight: 800; }
+  .colophon .hed em { font-style: italic; color: #c9f24d; font-variation-settings: "opsz" 144, "SOFT" 60, "WONK" 1; }
+  .colophon .lede { color: #b6b6c6; max-width: 58ch; }
+  .colophon .folio { opacity: 0.6; }
+  .colophon .meta {
+    font-family: var(--mono); font-size: 14px; line-height: 1.7;
+    color: #9a9ab0; max-width: 62ch;
+  }
+  .colophon .meta b { color: #e7e7ef; font-weight: 600; }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════════ COVER — pull-quote ═══════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 084</a></span>
+    <span>Monday · 13 Jul 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <p class="wordmark">Ephemeris.</p>
+    <blockquote class="pullquote">The Humanity Prevails Award went <em>unclaimed</em>.</blockquote>
+    <p class="attr">— AtCoder World Tour Finals, Tokyo · 09 Jul 2026</p>
+    <p class="dek">Today the machines kept score — an image model that drafts before it paints, a solver that swept the finals, and two tools for reading the record straight.</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>It plans the layout before it paints</span><span>Reve</span></a>
+      <a href="#s02"><span><span class="num">02</span>It solved all five. The humans didn't</span><span>The Decoder</span></a>
+      <a href="#s03"><span><span class="num">03</span>The timeline lied. The replay didn't</span><span>GitHub</span></a>
+      <a href="#s04"><span><span class="num">04</span>See the hours you hand to the model</span><span>Anthropic</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ 01 · Reve 2.1 ═══════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 084</a></span>
+    <span>01 / 04 · Reve</span>
+  </header>
+  <div class="main">
+    <span class="tag">Creative software · Generative media</span>
+    <h2 class="hed">It plans the layout before it <em>paints</em>.</h2>
+    <p class="lede">Reve 2.1 keeps the lab's layout-first move: it reasons about structure, hierarchy and spatial relationships first, then renders the scene at native 4K — 16 megapixels, with elements you can address and re-edit one at a time. Foreign-script text now holds together. It sits second overall on Arena, trained at under a tenth of the compute of the models ranked above and below it.</p>
+    <div class="figure">
+      <div class="spec">
+        <div class="spec-row"><span class="k">Resolution</span><span class="v">native 4K · 16 MP</span></div>
+        <div class="spec-row"><span class="k">Editing</span><span class="v">addressable elements</span></div>
+        <div class="spec-row"><span class="k">Text</span><span class="v">multilingual, foreign scripts</span></div>
+        <div class="spec-row"><span class="k">Arena rank</span><span class="v">#2 overall</span></div>
+        <div class="spec-row"><span class="k">Training compute</span><span class="v">&lt; 1/10 of peers</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.reve.com/posts/launching-reve-2.1/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ 02 · AtCoder sweep ═══════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 084</a></span>
+    <span>02 / 04 · The Decoder</span>
+  </header>
+  <div class="main">
+    <span class="tag">Research · Competitive programming</span>
+    <h2 class="hed">It solved all five. The <em>humans</em> didn't.</h2>
+    <p class="lede">At the AtCoder World Tour Finals in Tokyo, an OpenAI ensemble — a model comparable to the GPT-5.6 that shipped that Thursday, wrapped in a small harness that scales compute at test time — swept every problem in the Algorithm Division with no internet access. Nobody else cracked problems C or E. Organisers had posted a 600,000-yen prize for any human who beat it outright; the pot went home with the house.</p>
+    <div class="figure">
+      <div class="score">
+        <div class="big">
+          <span class="num">5<span class="unit">/5</span></span>
+          <span class="lbl">problems solved</span>
+        </div>
+        <div class="bars">
+          <div class="row"><span class="who">OpenAI</span><span class="bar ai" style="--w:100%"><b>8,300</b></span></div>
+          <div class="row"><span class="who">Top human</span><span class="bar hu" style="--w:52%"><b>4,300</b></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://the-decoder.com/openais-ai-beats-every-human-at-atcoder-a-top-competitive-programming-contest/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ 03 · clarity-session-review ═══════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 084</a></span>
+    <span>03 / 04 · via @ProductsAndStartups</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev tools · Session analytics</span>
+    <h2 class="hed">The timeline lied. The <em>replay</em> didn't.</h2>
+    <p class="lede">A new open-source Claude Code skill, clarity-session-review, formalises a hard lesson: Microsoft Clarity's event timelines are floors, not facts — watching the actual recordings overturned four headline findings in a single investigation. The skill enforces seven forensic principles for both one-off "why did user X churn?" digs and recurring session censuses, so the report you ship is the behaviour you saw, not the events you guessed.</p>
+    <div class="figure">
+      <ol class="method">
+        <li><span class="n">01</span> Question the claim before you watch.</li>
+        <li><span class="n">02</span> Attribute sessions to real people via database joins.</li>
+        <li><span class="n">03</span> Triangulate replay against source and data.</li>
+        <li><span class="n">04</span> Treat the timeline as a floor, never a fact.</li>
+        <li><span class="n">05</span> Log every claim with on-screen coordinates.</li>
+      </ol>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://github.com/BayramAnnakov/clarity-session-review" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ 04 · Claude Reflect ═══════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 084</a></span>
+    <span>04 / 04 · Anthropic</span>
+  </header>
+  <div class="main">
+    <span class="tag">AI tools · Adopt this week</span>
+    <h2 class="hed">See the hours you <em>hand</em> to the model.</h2>
+    <p class="lede">Anthropic's new Reflect feature — in beta for Free, Pro and Max users with Memory on — turns your own chat history into a usage report. Pick a 1, 3, 6 or 12-month window and it charts what you ask Claude, which task types you delegate, and how sensitive the topics run, without exposing the conversations themselves. Built with wellness researchers, it can nudge quiet hours and asks the pointed question below.</p>
+    <div class="figure">
+      <blockquote class="reflect-q">"What's one thing you want to keep doing yourself, even if Claude could do it faster?"</blockquote>
+      <p class="reflect-cap">Reflect · Settings → 1 / 3 / 6 / 12-month report</p>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.anthropic.com/news/reflect-with-claude" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ COLOPHON ═══════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 084</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">A thin day at the usual desks, so four picks over five: a 4K image model, a contest sweep, a forensic skill, and a mirror for your own usage.</p>
+    <p class="meta">
+      Today's picks fed from <b>Reve</b>, <b>The Decoder</b> (via @seeallochnaya), <b>GitHub</b> (via @ProductsAndStartups) and <b>Anthropic</b>.<br>
+      Also read: The Batch, Import AI, OpenAI, Cloudflare, GitHub, Sentry, Vercel, PostHog, Next.js, Fly.io, and the Telegram channels.<br>
+      Rubric: tools you can adopt this week, creative and generative media, dev &amp; agentic tooling, security when the signal is high, research with a practical kernel.<br>
+      <b>Issue 084 · 13 July 2026 · Zürich.</b>
+    </p>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>

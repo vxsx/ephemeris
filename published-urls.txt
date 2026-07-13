@@ -39,6 +39,7 @@ https://anthropic.com/news/finance-agents
 https://anthropic.com/news/higher-limits-spacex
 https://anthropic.com/news/introducing-claude-tag
 https://anthropic.com/news/redeploying-fable-5
+https://anthropic.com/news/reflect-with-claude
 https://anthropic.com/news/widening-conversation-ai
 https://anthropic.com/research/2028-ai-leadership
 https://anthropic.com/research/anthropic-institute-agenda
@@ -123,6 +124,7 @@ https://blog.google/innovation-and-ai/technology/research/gemini-for-science-io-
 https://blog.interceptfund.com/p/ending-respiratory-infections
 https://blog.jetbrains.com/ai/2026/07/speak-to-ai-agents-like-cavemen-tosave-tokens
 https://blog.maximeheckel.com/posts/on-rendering-the-sky-sunsets-and-planets
+https://blog.reve.com/posts/launching-reve-2.1
 https://blog.tilderesearch.com/blog/aurora
 https://bloomberg.com/news/articles/2026-05-26/china-expands-travel-curbs-to-top-ai-talent-at-private-firms
 https://bun.com/blog/bun-in-rust
@@ -202,6 +204,7 @@ https://github.com/anomalyco/opencode/releases/tag/v1.17.15
 https://github.com/Augani/openreel-video
 https://github.com/BayramAnnakov/ai-native-product-skills/tree/master/skills/autoresearch
 https://github.com/BayramAnnakov/ai-personal-os-skills/tree/main/skills/slide-inspector
+https://github.com/BayramAnnakov/clarity-session-review
 https://github.com/BayramAnnakov/excel-hygiene
 https://github.com/BayramAnnakov/factory-agent
 https://github.com/BayramAnnakov/fishbanks-sandbox
@@ -439,6 +442,7 @@ https://techcrunch.com/2026/05/19/googles-gemini-omni-turns-images-audio-and-tex
 https://techspot.com/news/112386-amazon-employees-using-internal-ai-tools-inflate-usage.html
 https://telegram.org/blog/ai-bot-revolution-11-new-features
 https://the-decoder.com/google-brings-tiktok-style-video-shorts-to-notebooklm
+https://the-decoder.com/openais-ai-beats-every-human-at-atcoder-a-top-competitive-programming-contest
 https://thenextweb.com/news/bytedance-seedance-2-5-ai-video-4k-30-seconds
 https://therundown.ai/p/openai-superapp-hiding-inside-codex
 https://theverge.com/ai-artificial-intelligence/952011/midjourney-medical-ai-ultrasound-scan
