@@ -1,0 +1,653 @@
+<!doctype html>
+<!--
+  Ephemeris · Issue 085 · 2026-07-14
+  Built from scaffold.html (locked structural baseline).
+  Cover: single-word mood ("METERED"). Themes: neo-brutalist / film-still /
+  spreadsheet / dark-report / blueprint.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 085 · 14 Jul 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — from scaffold.html. Do not edit.
+     ═══════════════════════════════════════════════════════════════════ */
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 {
+    overflow-wrap: break-word;
+    margin: 0;
+  }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+
+  .spread > .decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .folio a.home { color: inherit; text-decoration: none; }
+  .folio a.home:hover { text-decoration: underline; }
+
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+
+  .figure { width: 100%; }
+
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — surface only.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── COVER · single-word mood "METERED" ─── */
+  .cover { background: #0a0b0d; color: #f2f3f5; }
+  .cover .folio { opacity: 0.6; }
+  .cover .wordmark {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-style: italic;
+    font-size: clamp(20px, 2.2vw, 30px);
+    letter-spacing: 0.02em;
+    margin: 0;
+    color: #ffe600;
+    font-variation-settings: "opsz" 40, "SOFT" 60, "WONK" 1;
+  }
+  .cover .moodword {
+    font-family: var(--sans);
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: clamp(56px, 17vw, 208px);
+    line-height: 0.82;
+    letter-spacing: -0.045em;
+    margin: 0;
+    color: #ffe600;
+    padding-bottom: 0.06em;
+  }
+  .cover .dek {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(20px, 2.1vw, 30px);
+    line-height: 1.32;
+    max-width: 30ch;
+    margin: 0;
+    color: #cfd2d7;
+  }
+  .cover .toc {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(242,243,245,0.28);
+    width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 4px 12px;
+    text-decoration: none; color: inherit;
+    padding: 9px 0;
+    border-bottom: 1px dotted rgba(242,243,245,0.22);
+    font-family: var(--mono);
+    font-size: 13.5px;
+    text-align: left;
+  }
+  .cover .toc a:hover { color: #ffe600; }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.82em; opacity: 0.6; }
+  .cover .toc .num { color: #ffe600; margin-right: 12px; font-weight: 600; }
+  .cover .decor::before {
+    content: "";
+    position: absolute;
+    left: -10vw; top: -10vw; right: -10vw; height: 60vh;
+    background: radial-gradient(60% 100% at 50% 0%, rgba(255,230,0,0.10), transparent 70%);
+  }
+  @media (max-width: 800px) {
+    .cover .toc { grid-template-columns: 1fr; gap: 0; }
+  }
+
+  /* ─── s01 · GPT-5.6 · NEO-BRUTALIST yellow/black ─── */
+  .s01 { background: #ffe600; color: #0a0a0a; }
+  .s01 .tag { color: #0a0a0a; border: 2px solid #0a0a0a; border-radius: 0; font-weight: 800; opacity: 1; }
+  .s01 .hed {
+    font-family: var(--sans);
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: clamp(44px, 6.6vw, 96px);
+    line-height: 0.96;
+    letter-spacing: -0.02em;
+  }
+  .s01 .lede { font-family: var(--sans); font-weight: 500; font-size: clamp(19px, 1.7vw, 24px); line-height: 1.5; max-width: 46ch; }
+  .s01 .read-on { color: #0a0a0a; border: 3px solid #0a0a0a; border-radius: 0; --flip: #ffe600; font-weight: 800; }
+  .s01 .read-on:hover { background: #0a0a0a; }
+  .s01 .tiers {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    width: 100%;
+  }
+  .s01 .tier {
+    border: 3px solid #0a0a0a;
+    background: #fffef2;
+    padding: 18px 16px 16px;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .s01 .t-name { font-family: var(--sans); font-weight: 900; font-size: 22px; letter-spacing: 0.04em; }
+  .s01 .t-price {
+    font-family: var(--sans); font-weight: 900;
+    font-size: clamp(38px, 4.4vw, 60px); line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .s01 .t-price .unit {
+    font-family: var(--mono); font-weight: 400; font-style: normal;
+    font-size: 0.28em; letter-spacing: normal; margin-left: 0.4em;
+    text-transform: uppercase;
+  }
+  .s01 .t-sub { font-family: var(--mono); font-size: 12.5px; }
+  .s01 .t-role { font-family: var(--sans); font-weight: 700; font-size: 13.5px; margin-top: 4px; border-top: 2px solid #0a0a0a; padding-top: 8px; }
+  .s01 .t-note { font-family: var(--mono); font-size: 13px; margin: 14px 0 0; line-height: 1.5; }
+  @media (max-width: 800px) { .s01 .tiers { grid-template-columns: 1fr; } }
+
+  /* ─── s02 · Gemini media · FILM STILL letterbox ─── */
+  .s02 { background: #0b0d10; color: #eef0f2; }
+  .s02 .tag { color: #e7b96b; border-color: rgba(231,185,107,0.6); }
+  .s02 .hed {
+    font-family: var(--sans);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: clamp(42px, 6.2vw, 92px);
+    line-height: 1.0;
+    letter-spacing: 0.01em;
+  }
+  .s02 .lede { color: #cfd3d8; max-width: 52ch; }
+  .s02 .read-on { color: #e7b96b; border-color: #e7b96b; --flip: #0b0d10; }
+  .s02 .strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    width: 100%;
+    border: 1px solid rgba(238,240,242,0.25);
+  }
+  .s02 .cell { padding: 18px 18px; border-right: 1px solid rgba(238,240,242,0.25); }
+  .s02 .cell:last-child { border-right: 0; }
+  .s02 .c-kind { font-family: var(--mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: #e7b96b; }
+  .s02 .c-name { font-family: var(--sans); font-weight: 800; font-size: clamp(20px, 2.2vw, 28px); margin: 8px 0 12px; }
+  .s02 .c-spec { font-family: var(--mono); font-size: 13px; line-height: 1.8; color: #d7dbe0; }
+  .s02 .c-spec b { color: #fff; font-weight: 600; }
+  .s02 .decor::before, .s02 .decor::after {
+    content: ""; position: absolute; left: 0; right: 0; height: clamp(28px, 5vh, 54px);
+    background: #000;
+  }
+  .s02 .decor::before { top: 0; }
+  .s02 .decor::after { bottom: 0; }
+  @media (max-width: 800px) {
+    .s02 .strip { grid-template-columns: 1fr; }
+    .s02 .cell { border-right: 0; border-bottom: 1px solid rgba(238,240,242,0.25); }
+    .s02 .cell:last-child { border-bottom: 0; }
+  }
+
+  /* ─── s03 · Vercel index · SPREADSHEET / ledger ─── */
+  .s03 { background: #eceef0; color: #14181d; }
+  .s03 .tag { color: #1f5f4b; border-color: #1f5f4b; }
+  .s03 .hed { font-family: var(--serif); font-weight: 700; font-size: clamp(42px, 5.6vw, 84px); letter-spacing: -0.02em; }
+  .s03 .hed em { font-style: italic; color: #1f5f4b; font-variation-settings: "opsz" 120, "SOFT" 40; }
+  .s03 .lede { max-width: 54ch; }
+  .s03 .read-on { color: #1f5f4b; border-color: #1f5f4b; --flip: #eceef0; }
+  .s03 .ledger {
+    width: 100%;
+    background: #f7f8f9;
+    border: 1px solid #cfd4d8;
+    font-family: var(--mono);
+  }
+  .s03 .row {
+    display: grid;
+    grid-template-columns: 8.5em 1fr 3.4em;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 16px;
+    border-bottom: 1px solid #dde1e5;
+  }
+  .s03 .row:last-child { border-bottom: 0; }
+  .s03 .row.head { background: #14181d; color: #f7f8f9; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; grid-template-columns: 1fr auto; }
+  .s03 .lab { font-size: 14px; font-weight: 600; }
+  .s03 .bar { height: 15px; background: #dfe3e6; position: relative; }
+  .s03 .bar > i { display: block; height: 100%; background: #1f5f4b; width: calc(var(--w) * 1%); }
+  .s03 .pct { font-size: 14px; text-align: right; font-weight: 600; }
+  .s03 .callout {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    margin-top: 14px; width: 100%;
+  }
+  .s03 .kpi { border: 1px solid #cfd4d8; background: #fff; padding: 12px 14px; }
+  .s03 .kpi .n { font-family: var(--sans); font-weight: 800; font-size: clamp(26px, 3vw, 40px); letter-spacing: -0.02em; color: #1f5f4b; }
+  .s03 .kpi .l { font-family: var(--mono); font-size: 12px; line-height: 1.5; margin-top: 4px; }
+  @media (max-width: 800px) {
+    .s03 .row { grid-template-columns: 6.5em 1fr 3em; gap: 10px; }
+    .s03 .callout { grid-template-columns: 1fr; }
+  }
+
+  /* ─── s04 · Cloudflare Precursor · DARK REPORT / classified ─── */
+  .s04 { background: #0a0a0c; color: #e7e2e2; }
+  .s04 .tag { color: #ff3b3b; border-color: #ff3b3b; }
+  .s04 .hed {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: clamp(44px, 6.4vw, 94px);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+    color: #f4eeee;
+  }
+  .s04 .hed em { font-style: normal; color: #ff3b3b; }
+  .s04 .lede { color: #c8c2c2; max-width: 54ch; }
+  .s04 .read-on { color: #ff3b3b; border-color: #ff3b3b; --flip: #0a0a0c; }
+  .s04 .dossier {
+    width: 100%;
+    border: 1px solid #ff3b3b;
+    background: rgba(255,59,59,0.04);
+    font-family: var(--mono);
+  }
+  .s04 .d-head {
+    background: #ff3b3b; color: #0a0a0c;
+    font-weight: 600; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase;
+    padding: 8px 16px;
+  }
+  .s04 .signals { list-style: none; margin: 0; padding: 6px 0; }
+  .s04 .signals li {
+    display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    padding: 9px 16px; border-bottom: 1px dashed rgba(255,59,59,0.25);
+    font-size: 13.5px;
+  }
+  .s04 .signals li:last-child { border-bottom: 0; }
+  .s04 .signals .v { color: #ff8f8f; }
+  .s04 .redact { background: #ff3b3b; color: #ff3b3b; padding: 0 8px; border-radius: 2px; }
+  .s04 .d-foot {
+    padding: 10px 16px; border-top: 1px solid #ff3b3b;
+    font-size: 12.5px; letter-spacing: 0.04em; color: #c8c2c2;
+  }
+  .s04 .decor::before {
+    content: ""; position: absolute; inset: 0;
+    background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(255,59,59,0.04) 3px 4px);
+  }
+
+  /* ─── s05 · Zvi J-Space · BLUEPRINT (pale) ─── */
+  .s05 { background: #e7edf2; color: #0d2b45; }
+  .s05 .decor::before {
+    content: ""; position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(13,43,69,0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(13,43,69,0.08) 1px, transparent 1px);
+    background-size: 34px 34px;
+  }
+  .s05 .tag { color: #0d2b45; border-color: #0d2b45; }
+  .s05 .hed { font-family: var(--serif); font-weight: 600; font-size: clamp(42px, 5.8vw, 86px); letter-spacing: -0.015em; }
+  .s05 .hed em { font-style: italic; color: #0f5a8a; }
+  .s05 .lede { max-width: 56ch; color: #163a5a; }
+  .s05 .read-on { color: #0d2b45; border-color: #0d2b45; --flip: #e7edf2; }
+  .s05 .jspace {
+    width: 100%;
+    border: 1px solid #0d2b45;
+    background: rgba(255,255,255,0.55);
+    padding: 18px;
+  }
+  .s05 .grid25 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; max-width: 320px; }
+  .s05 .slot { aspect-ratio: 1 / 1; border: 1px solid #6f8aa2; }
+  .s05 .slot.on { background: #0f5a8a; border-color: #0f5a8a; }
+  .s05 .anno { font-family: var(--mono); font-size: 12.5px; line-height: 1.7; margin-top: 16px; letter-spacing: 0.02em; }
+  .s05 .cascade {
+    font-family: var(--mono); font-size: 13px; margin-top: 10px;
+    padding-top: 10px; border-top: 1px dashed #6f8aa2; color: #0f5a8a;
+  }
+  .s05 .decor .crop { position: absolute; width: 16px; height: 16px; border: 1px solid #0d2b45; }
+  .s05 .decor .crop.tr { top: clamp(76px, 9vw, 120px); right: 26px; border-left: 0; border-bottom: 0; }
+  .s05 .decor .crop.br { bottom: 26px; right: 26px; border-left: 0; border-top: 0; }
+  .s05 .decor .crop.bl { bottom: 26px; left: 26px; border-right: 0; border-top: 0; }
+  @media (max-width: 800px) { .s05 .decor .crop { display: none; } }
+
+  /* ─── COLOPHON ─── */
+  .colophon { background: #0a0b0d; color: #e8e9ec; }
+  .colophon .hed { color: #f2f3f5; }
+  .colophon .hed em { font-style: italic; color: #ffe600; }
+  .colophon .lede { color: #b9bcc2; max-width: 62ch; }
+  .colophon .sources {
+    font-family: var(--mono); font-size: 13px; line-height: 1.9;
+    margin-top: 6px; color: #cfd2d7; letter-spacing: 0.02em;
+  }
+  .colophon .sources b { color: #ffe600; font-weight: 600; }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════ COVER · single-word mood ═══════ -->
+<section class="spread cover centered" id="cover">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 085</a></span>
+    <span>Tuesday · 14 Jul 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <p class="wordmark">Ephemeris.</p>
+    <h1 class="moodword">Metered</h1>
+    <p class="dek">Today intelligence gets a price tag, a usage index, a behavioral score, and a map of what it can say out loud.</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>The workhorse, sized three ways</span><span>OpenAI</span></a>
+      <a href="#s02"><span><span class="num">02</span>Video, billed by the second</span><span>Google</span></a>
+      <a href="#s03"><span><span class="num">03</span>Open weights took a third of the tokens</span><span>Vercel</span></a>
+      <a href="#s04"><span><span class="num">04</span>The tell is in your tremor</span><span>Cloudflare</span></a>
+      <a href="#s05"><span><span class="num">05</span>Twenty-five ideas, six that count</span><span>The Zvi</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════ s01 · OpenAI GPT-5.6 · neo-brutalist ═══════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 085</a></span>
+    <span>01 / 05 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">AI tools · Adopt this week</span>
+    <h2 class="hed">The workhorse, sized three ways.</h2>
+    <p class="lede">GPT-5.6 shipped July 9 as a family, not a model: Sol for hard coding and agents, Terra for the middle, Luna tuned for latency. Sol tops the independent Coding Agent Index at 80 and hits 88.8% on Terminal-Bench 2.1 — above GPT-5.5's 83.4% — and it's already the default across Codex, the API, and Copilot.</p>
+    <div class="figure">
+      <div class="tiers">
+        <div class="tier">
+          <div class="t-name">SOL</div>
+          <div class="t-price">$5<span class="unit">/1M in</span></div>
+          <div class="t-sub">$30 / 1M out</div>
+          <div class="t-role">Coding · agents · research</div>
+        </div>
+        <div class="tier">
+          <div class="t-name">TERRA</div>
+          <div class="t-price">$2.50<span class="unit">/1M in</span></div>
+          <div class="t-sub">$15 / 1M out</div>
+          <div class="t-role">Balanced default</div>
+        </div>
+        <div class="tier">
+          <div class="t-name">LUNA</div>
+          <div class="t-price">$1<span class="unit">/1M in</span></div>
+          <div class="t-sub">$6 / 1M out</div>
+          <div class="t-role">Cheapest · latency-tuned</div>
+        </div>
+      </div>
+      <p class="t-note">Sol Pro and Sol Ultra add heavier compute at the same model and price. 5.6 is the last of the 5.x line before GPT-6.</p>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/gpt-5-6/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════ s02 · Google Gemini media · film still ═══════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 085</a></span>
+    <span>02 / 05 · Google — via The Batch</span>
+  </header>
+  <div class="main">
+    <span class="tag">Creative software · Generative media</span>
+    <h2 class="hed">Video, billed by the second.</h2>
+    <p class="lede">Google put two media models in the Gemini API. Omni Flash makes 10-second clips at $0.10 a second, taking text, images, and up to three seconds of reference video; Nano Banana 2 Lite returns a 1K image in about four seconds for $0.034 per thousand. Both are reachable from AI Studio, Flow, or a single call.</p>
+    <div class="figure">
+      <div class="strip">
+        <div class="cell">
+          <div class="c-kind">Video</div>
+          <div class="c-name">Omni Flash</div>
+          <div class="c-spec">
+            length · <b>10 s / clip</b><br>
+            price · <b>$0.10 / second</b><br>
+            input · text, image, ≤3 s video<br>
+            id · <b>gemini-omni-flash-preview</b>
+          </div>
+        </div>
+        <div class="cell">
+          <div class="c-kind">Image</div>
+          <div class="c-name">Nano Banana 2 Lite</div>
+          <div class="c-spec">
+            speed · <b>~4 s to image</b><br>
+            price · <b>$0.034 / 1K @ 1K</b><br>
+            for · high-volume ideation<br>
+            id · <b>gemini-3.1-flash-lite-image</b>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-omni-flash-nano-banana-2-lite/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════ s03 · Vercel AI Gateway index · spreadsheet ═══════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 085</a></span>
+    <span>03 / 05 · Vercel</span>
+  </header>
+  <div class="main">
+    <span class="tag">Market data · Model economy</span>
+    <h2 class="hed">Open weights took a <em>third</em> of the tokens.</h2>
+    <p class="lede">Vercel's AI Gateway sees real production traffic, and July's index reads as a map of demand. Open-weight models jumped to 29% of tokens from 11% in April — while taking under 4% of the money. Anthropic runs 32% of tokens but 61% of spend, and 72% or more in every high-stakes use case.</p>
+    <div class="figure">
+      <div class="ledger">
+        <div class="row head"><span>Share of tokens · Jul 2026</span><span>%</span></div>
+        <div class="row"><span class="lab">Anthropic</span><span class="bar"><i style="--w:32"></i></span><span class="pct">32.0</span></div>
+        <div class="row"><span class="lab">Google</span><span class="bar"><i style="--w:24"></i></span><span class="pct">24.0</span></div>
+        <div class="row"><span class="lab">DeepSeek</span><span class="bar"><i style="--w:22.6"></i></span><span class="pct">22.6</span></div>
+        <div class="row"><span class="lab">OpenAI</span><span class="bar"><i style="--w:10.3"></i></span><span class="pct">10.3</span></div>
+      </div>
+      <div class="callout">
+        <div class="kpi"><div class="n">11 → 29%</div><div class="l">Open-weight share of tokens, April → July</div></div>
+        <div class="kpi"><div class="n">61%</div><div class="l">Anthropic's cut of total spend</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://vercel.com/blog/ai-gateway-production-index-july-2026" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════ s04 · Cloudflare Precursor · dark report ═══════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 085</a></span>
+    <span>04 / 05 · Cloudflare</span>
+  </header>
+  <div class="main">
+    <span class="tag">Privacy · Web integrity</span>
+    <h2 class="hed">The tell is in your <em>tremor</em>.</h2>
+    <p class="lede">Precursor injects an obfuscated script that watches a whole session — pointer paths, keystroke rhythm, focus, visibility — instead of a single checkpoint. It scores the human tells bots can't fake at scale: wrist-pivot geometry, cognitive-load delays, the micro-tremor of a real hand. A page refresh no longer resets the signature. Keystrokes are read as timing, never the keys themselves.</p>
+    <div class="figure">
+      <div class="dossier">
+        <div class="d-head">Session signal · live</div>
+        <ul class="signals">
+          <li><span>Pointer path</span><span class="v">irregular · overshoots</span></li>
+          <li><span>Key rhythm</span><span class="v">timing only</span></li>
+          <li><span>Micro-tremor</span><span class="v">detected</span></li>
+          <li><span>Refresh reset</span><span class="v"><span class="redact">████████</span> denied</span></li>
+        </ul>
+        <div class="d-foot">HUMAN overshoots and corrects · BOT interpolates a straight line</div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.cloudflare.com/introducing-precursor/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════ s05 · Zvi J-Space · blueprint ═══════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 085</a></span>
+    <span>05 / 05 · Don't Worry About the Vase</span>
+  </header>
+  <div class="main">
+    <span class="tag">Research · Interpretability</span>
+    <h2 class="hed">Twenty-five ideas, <em>six</em> that count.</h2>
+    <p class="lede">A new Anthropic paper maps "J-space" — the concepts a model can actually verbalize — with a Jacobian Lens that measures which internal features steer the output. Zvi's read: about 25 concepts sit there at once, but only ~6 are truly distinct. Swap one ("France" → "China") and its capital, language, and currency shift with it. Automatic, System-1 answers skip the space entirely.</p>
+    <div class="figure">
+      <div class="jspace">
+        <div class="grid25">
+          <span class="slot on"></span><span class="slot"></span><span class="slot on"></span><span class="slot"></span><span class="slot"></span>
+          <span class="slot"></span><span class="slot on"></span><span class="slot"></span><span class="slot"></span><span class="slot on"></span>
+          <span class="slot"></span><span class="slot"></span><span class="slot"></span><span class="slot on"></span><span class="slot"></span>
+          <span class="slot"></span><span class="slot"></span><span class="slot on"></span><span class="slot"></span><span class="slot"></span>
+          <span class="slot"></span><span class="slot"></span><span class="slot"></span><span class="slot"></span><span class="slot"></span>
+        </div>
+        <div class="anno">J-SPACE · ~25 slots populated · ~6 distinct · ablate it and abstract reasoning drops, most skills stay</div>
+        <div class="cascade">FRANCE → capital · language · currency &nbsp;(one swap cascades)</div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://thezvi.substack.com/p/no-space-like-j-space" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true">
+    <span class="crop tr"></span><span class="crop br"></span><span class="crop bl"></span>
+  </div>
+</section>
+
+<!-- ═══════ COLOPHON ═══════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 085</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Five picks from the morning feeds, read so you don't have to — a new model family, cheap generative media, the market's real usage, a behavioral bot check, and a look inside the model's own reasoning.</p>
+    <p class="sources"><b>Sources ·</b> OpenAI · Google (via The Batch) · Vercel · Cloudflare · Don't Worry About the Vase<br>
+    <b>Rubric ·</b> tools to adopt · generative media · dev &amp; market signal · privacy &amp; security · research with a working edge<br>
+    <b>Issue ·</b> 085 · 14 July 2026 · Zürich</p>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>

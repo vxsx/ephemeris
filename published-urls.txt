@@ -95,6 +95,7 @@ https://blog.cloudflare.com/frontier-model-defense
 https://blog.cloudflare.com/high-performance-llms
 https://blog.cloudflare.com/hyper-bug
 https://blog.cloudflare.com/internal-ai-engineering-stack
+https://blog.cloudflare.com/introducing-precursor
 https://blog.cloudflare.com/iran-internet-partially-restored-may-2026
 https://blog.cloudflare.com/making-rust-workers-reliable
 https://blog.cloudflare.com/meerkat-introduction
@@ -119,6 +120,7 @@ https://blog.cloudflare.com/unweight-tensor-compression
 https://blog.cloudflare.com/voidzero-joins-cloudflare
 https://blog.cloudflare.com/workers-cache
 https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5
+https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-omni-flash-nano-banana-2-lite
 https://blog.google/innovation-and-ai/products/gemini-app/next-evolution-gemini-app
 https://blog.google/innovation-and-ai/technology/research/gemini-for-science-io-2026
 https://blog.interceptfund.com/p/ending-respiratory-infections
@@ -316,6 +318,7 @@ https://openai.com/index/endava
 https://openai.com/index/gpt-5-5-instant
 https://openai.com/index/gpt-5-5-system-card
 https://openai.com/index/gpt-5-5-with-trusted-access-for-cyber
+https://openai.com/index/gpt-5-6
 https://openai.com/index/gpt-5-immunology-mystery
 https://openai.com/index/how-agents-are-transforming-work
 https://openai.com/index/how-chatgpt-protects-privacy
@@ -462,6 +465,7 @@ https://thezvi.substack.com/p/gemini-35-flash-looks-good-for-how
 https://thezvi.substack.com/p/gpt-55-capabilities-and-reactions
 https://thezvi.substack.com/p/gpt-56-the-system-card
 https://thezvi.substack.com/p/monthly-roundup-42-may-2026
+https://thezvi.substack.com/p/no-space-like-j-space
 https://thezvi.substack.com/p/opus-47-part-2-capabilities-and-reactions
 https://thezvi.substack.com/p/opus-47-part-3-model-welfare
 https://thezvi.substack.com/p/the-ai-ad-hoc-prior-restraint-era
@@ -476,6 +480,7 @@ https://vercel.com/blog/agent-responsibly
 https://vercel.com/blog/agent-stack
 https://vercel.com/blog/agentic-infrastructure
 https://vercel.com/blog/ai-gateway-production-index
+https://vercel.com/blog/ai-gateway-production-index-july-2026
 https://vercel.com/blog/ai-gateway-production-index-june-2026
 https://vercel.com/blog/ai-sdk-7
 https://vercel.com/blog/build-knowledge-agents-without-embeddings
