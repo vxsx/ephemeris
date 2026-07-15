@@ -2,6 +2,7 @@ http://hnup.date/hn-sota
 https://1x.tech/discover/neos-hands
 https://ahrefs.com/blog/schema-ai-citations
 https://ai.meta.com/blog/brain2qwerty-brain-ai-human-communication
+https://ai.meta.com/blog/introducing-muse-image-muse-video-msl
 https://aisi.gov.uk/blog/our-evaluation-of-openais-gpt-5-5-cyber-capabilities
 https://aleximas.substack.com/p/how-will-ai-driven-automation-actually
 https://andonlabs.com/blog/openai-gpt-5-5-vending-bench
@@ -89,6 +90,7 @@ https://blog.cloudflare.com/copy-fail-linux-vulnerability-mitigation
 https://blog.cloudflare.com/cyber-frontier-models
 https://blog.cloudflare.com/de-tld-outage-dnssec
 https://blog.cloudflare.com/dmarc-management-ga
+https://blog.cloudflare.com/dnssec-nta-ede-33
 https://blog.cloudflare.com/dynamic-workflows
 https://blog.cloudflare.com/enforce-first-as-bgp
 https://blog.cloudflare.com/frontier-model-defense
@@ -139,6 +141,7 @@ https://claude.com/blog/connectors-for-everyday-life
 https://claude.com/blog/how-claude-code-works-in-large-codebases-best-practices-and-where-to-start
 https://claude.com/blog/introducing-dynamic-workflows-in-claude-code
 https://cloud.google.com/blog/topics/threat-intelligence/ai-vulnerability-exploitation-initial-access
+https://code.claude.com/docs/en/whats-new/2026-w28
 https://cognition.ai/blog/ai-guarantee
 https://cognition.ai/blog/frontier-code
 https://community.fabric.microsoft.com/t5/Fabric-Updates-Blog/Introducing-Rayfin-A-new-AI-first-way-to-build-deploy-and-govern/ba-p/5191676

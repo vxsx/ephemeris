@@ -1,0 +1,558 @@
+<!doctype html>
+<!--
+  Ephemeris · Issue 086 · 2026-07-15
+  Built on the locked scaffold. Structure untouched; surface-only overrides.
+  Cover: manifesto. Themes: risograph duotone · terminal · blueprint.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 086 · 15 Jul 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — from scaffold.html. Don't touch.
+     ═══════════════════════════════════════════════════════════════════ */
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+
+  .spread > .decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .folio a.home { color: inherit; text-decoration: none; }
+  .folio a.home:hover { text-decoration: underline; }
+
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+
+  .figure { width: 100%; }
+
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — surface only.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── Cover · manifesto ─── */
+  .cover {
+    background: #f4efe3;
+    color: #17130d;
+  }
+  .cover .brandline {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: #b1361f;
+  }
+  .cover .manifesto {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(30px, 4.4vw, 62px);
+    line-height: 1.14;
+    letter-spacing: -0.015em;
+    max-width: 20ch;
+    margin: 0;
+  }
+  .cover .manifesto em {
+    font-style: italic;
+    color: #b1361f;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .cover .toc {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2px 40px;
+    padding-top: 18px;
+    border-top: 2px solid #17130d;
+    width: 100%;
+  }
+  .cover .toc a {
+    display: flex; flex-direction: column;
+    gap: 4px;
+    text-decoration: none; color: inherit;
+    padding: 10px 0;
+  }
+  .cover .toc .num {
+    font-family: var(--mono); font-weight: 700; font-size: 13px;
+    color: #b1361f; letter-spacing: 0.1em;
+  }
+  .cover .toc .t { font-family: var(--serif); font-weight: 600; font-size: 17px; line-height: 1.2; }
+  .cover .toc .s { font-family: var(--sans); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.6; }
+  .cover .decor::before {
+    content: "";
+    position: absolute;
+    right: -8vw; top: -10vw;
+    width: 46vw; height: 46vw;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(177,54,31,0.10), transparent 70%);
+  }
+  @media (max-width: 800px) {
+    .cover .toc { grid-template-columns: 1fr; gap: 0; }
+    .cover .toc a { border-bottom: 1px dotted rgba(23,19,13,0.28); }
+    .cover .manifesto { max-width: none; }
+  }
+
+  /* ─── s01 · Muse Image · Risograph duotone (cyan × magenta) ─── */
+  .s01 {
+    background: #f3efe6;
+    color: #14212b;
+    --cyan: #0092b0;
+    --mag:  #e5006d;
+  }
+  .s01 .tag { color: var(--mag); border-color: var(--mag); }
+  .s01 .hed {
+    font-family: var(--sans);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    color: var(--cyan);
+    /* magenta overprint with a deliberate registration offset */
+    text-shadow: 0.055em 0.045em 0 rgba(229,0,109,0.62);
+  }
+  .s01 .hed em { font-style: normal; color: var(--mag); text-shadow: -0.05em -0.04em 0 rgba(0,146,176,0.55); }
+  .s01 .lede { color: #1a2731; }
+  .s01 .read-on { color: var(--mag); border-color: var(--mag); --flip: #f3efe6; }
+
+  .s01 .riso {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    border: 2px solid var(--cyan);
+    margin-top: 4px;
+  }
+  .s01 .riso > div {
+    padding: 18px 18px 22px;
+    border-right: 2px solid var(--cyan);
+  }
+  .s01 .riso > div:last-child { border-right: 0; }
+  .s01 .riso .k {
+    font-family: var(--mono); font-weight: 700; font-size: 12px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--mag); margin-bottom: 8px;
+  }
+  .s01 .riso .v { font-family: var(--serif); font-size: 17px; line-height: 1.3; color: #14212b; }
+  .s01 .risofoot {
+    font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.04em;
+    color: var(--cyan); margin-top: 12px; text-transform: uppercase;
+  }
+  /* riso texture behind content */
+  .s01 .decor::before {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 22% 30%, rgba(0,146,176,0.10), transparent 42%),
+      radial-gradient(circle at 80% 74%, rgba(229,0,109,0.10), transparent 46%);
+  }
+  .s01 .decor::after {
+    content: "";
+    position: absolute;
+    right: -6vw; bottom: -8vw;
+    width: 40vw; height: 40vw; border-radius: 50%;
+    border: 3px solid rgba(229,0,109,0.14);
+    box-shadow: -0.7vw -0.6vw 0 rgba(0,146,176,0.12);
+  }
+  @media (max-width: 800px) {
+    .s01 .riso { grid-template-columns: 1fr; }
+    .s01 .riso > div { border-right: 0; border-bottom: 2px solid var(--cyan); }
+    .s01 .riso > div:last-child { border-bottom: 0; }
+    .s01 .hed { text-shadow: 0.045em 0.04em 0 rgba(229,0,109,0.6); }
+  }
+
+  /* ─── s02 · Claude Code /checkup · Terminal ─── */
+  .s02 {
+    background: #05080a;
+    color: #57e39a;
+    --dim: #2f8f66;
+    --amber: #ffcf5a;
+  }
+  .s02 .tag { color: var(--dim); border-color: var(--dim); font-family: var(--mono); }
+  .s02 .hed {
+    font-family: var(--mono);
+    font-weight: 800;
+    font-size: clamp(38px, 5.6vw, 84px);
+    letter-spacing: -0.01em;
+    color: #7dffb4;
+    text-shadow: 0 0 14px rgba(87,227,154,0.35);
+  }
+  .s02 .hed em { font-style: normal; color: var(--amber); text-shadow: 0 0 14px rgba(255,207,90,0.32); }
+  .s02 .lede { font-family: var(--mono); font-size: clamp(16px, 1.5vw, 20px); line-height: 1.55; color: #9fe9c1; max-width: 58ch; }
+  .s02 .read-on { color: #7dffb4; border-color: #2f8f66; --flip: #05080a; font-family: var(--mono); }
+
+  .s02 .term {
+    font-family: var(--mono);
+    font-size: 13.5px;
+    line-height: 1.7;
+    border: 1px solid #17402f;
+    border-radius: 8px;
+    background: rgba(10,20,15,0.75);
+    padding: 16px 18px;
+    max-width: 60ch;
+    overflow-x: auto;
+  }
+  .s02 .term .p { color: var(--dim); }
+  .s02 .term .ok { color: #7dffb4; }
+  .s02 .term .q { color: var(--amber); }
+  .s02 .term .c { color: #4c7c66; }
+  .s02 .decor::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      to bottom, rgba(87,227,154,0.05) 0 1px, transparent 1px 4px);
+  }
+  .s02 .decor::after {
+    content: "> _";
+    position: absolute;
+    right: 5vw; bottom: 6vw;
+    font-family: var(--mono); font-weight: 700;
+    font-size: clamp(60px, 12vw, 150px);
+    color: rgba(87,227,154,0.07);
+  }
+  @media (max-width: 800px) {
+    .s02 .term { font-size: 12px; }
+    .s02 .decor::after { display: none; }
+  }
+
+  /* ─── s03 · Cloudflare EDE 33 · Blueprint ─── */
+  .s03 {
+    background: #0c274b;
+    color: #e8f1ff;
+    --line: rgba(150,196,255,0.34);
+    --ink: #bcd8ff;
+  }
+  .s03 .tag { color: var(--ink); border-color: var(--ink); font-family: var(--mono); }
+  .s03 .hed {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(44px, 6vw, 96px);
+    letter-spacing: -0.02em;
+    color: #ffffff;
+  }
+  .s03 .hed em {
+    font-style: italic;
+    color: #7fd0ff;
+    font-variation-settings: "opsz" 144, "SOFT" 60, "WONK" 1;
+  }
+  .s03 .lede { color: #d5e5fb; }
+  .s03 .read-on { color: #7fd0ff; border-color: #7fd0ff; --flip: #0c274b; font-family: var(--mono); }
+
+  .s03 .schema {
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.75;
+    color: var(--ink);
+    border: 1px solid var(--line);
+    padding: 18px 20px;
+    max-width: 62ch;
+    background: rgba(8,28,58,0.5);
+    position: relative;
+    overflow-x: auto;
+  }
+  .s03 .schema b { color: #ffffff; font-weight: 700; }
+  .s03 .schema .fail { color: #ff8f8f; font-weight: 700; }
+  .s03 .schema .ede { color: #ffd66b; font-weight: 700; }
+  .s03 .schema .note { color: #8fb6e6; }
+  /* crop marks on the schema corners */
+  .s03 .schema::before,
+  .s03 .schema::after {
+    content: ""; position: absolute; width: 12px; height: 12px;
+    border-color: #7fd0ff; border-style: solid;
+  }
+  .s03 .schema::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+  .s03 .schema::after  { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+
+  /* blueprint grid behind content */
+  .s03 .decor::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 34px 34px;
+    opacity: 0.5;
+  }
+  .s03 .decor::after {
+    content: "EDE 33";
+    position: absolute;
+    right: 4vw; top: clamp(84px, 12vw, 150px);
+    font-family: var(--mono); font-weight: 800;
+    font-size: clamp(40px, 8vw, 104px);
+    color: rgba(127,208,255,0.09);
+    letter-spacing: 0.05em;
+  }
+  @media (max-width: 800px) {
+    .s03 .schema { font-size: 11.5px; }
+    .s03 .decor::after { display: none; }
+  }
+
+  /* ─── Colophon · blueprint-dark, plain ─── */
+  .colophon {
+    background: #101319;
+    color: #d7dde6;
+  }
+  .colophon .hed {
+    font-family: var(--serif); font-weight: 800;
+    font-size: clamp(40px, 6vw, 88px); color: #f2f4f8;
+  }
+  .colophon .hed em { font-style: italic; color: #f0a04b; }
+  .colophon .lede { color: #aab3c0; max-width: 62ch; }
+  .colophon .meta {
+    font-family: var(--mono); font-size: 13px; line-height: 1.9;
+    color: #8b95a3; letter-spacing: 0.03em; margin-top: 6px;
+  }
+  .colophon .meta b { color: #d7dde6; font-weight: 700; }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════════════ COVER · manifesto ═══════════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 086</a></span>
+    <span>Wednesday · 15 Jul 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <div class="brandline">Ephemeris</div>
+    <p class="manifesto">Today's issue is about tools that <em>check their own work</em> — an image model that reasons before it renders, a coding agent that audits its own setup, and a resolver that finally admits when it stopped verifying.</p>
+    <nav class="toc">
+      <a href="#s01"><span class="num">01</span><span class="t">An image model that reasons before it renders</span><span class="s">Meta · Superintelligence Labs</span></a>
+      <a href="#s02"><span class="num">02</span><span class="t">One command to de-bloat your setup</span><span class="s">Claude Code</span></a>
+      <a href="#s03"><span class="num">03</span><span class="t">Your resolver admits when it stopped checking</span><span class="s">Cloudflare</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s01 · Muse Image · Risograph ═══════════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 086</a></span>
+    <span>01 / 3 · Meta AI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Creative software · Generative media</span>
+    <h2 class="hed">An image model that <em>reasons</em> before it renders.</h2>
+    <p class="lede">Meta's Superintelligence Labs shipped Muse Image, its first image model — and it doesn't map a prompt straight to pixels. It runs as an agent: searching the web, calling coding tools, and self-refining draft after draft until the composition holds. That's how it lands legible QR codes, real mathematical diagrams, and clean multi-photo blends.</p>
+    <div class="figure">
+      <div class="riso">
+        <div><div class="k">Agentic</div><div class="v">Invokes search and code tools mid-generation to get facts and layout right.</div></div>
+        <div><div class="k">Self-refining</div><div class="v">Critiques its own drafts and redraws, keeping coherence across edits.</div></div>
+        <div><div class="k">Test-time compute</div><div class="v">Spends more thinking on harder prompts instead of one-shotting.</div></div>
+      </div>
+      <div class="risofoot">Free today in Meta AI · Instagram Stories (US) · WhatsApp — Muse Video previewed alongside</div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://ai.meta.com/blog/introducing-muse-image-muse-video-msl/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s02 · Claude Code /checkup · Terminal ═══════════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 086</a></span>
+    <span>02 / 3 · Claude Code</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev tools · Agentic coding</span>
+    <h2 class="hed">One command to <em>de-bloat</em> your setup.</h2>
+    <p class="lede">Claude Code rebuilt /doctor into a full setup checkup — /checkup is the alias — that reads your install back to you and offers to fix it. It prunes unused skills, MCPs, and plugins that eat context, dedupes local CLAUDE.md against the committed copy, splits an overgrown root file into nested ones, and disables slow hooks. Every change is a plan you approve first; edits land in your working tree for a normal git diff.</p>
+    <div class="figure">
+      <div class="term">
+<span class="p">$</span> claude /checkup
+<span class="c">▸ scanning setup…</span>
+<span class="ok">✓</span> 7 unused skills eating context   <span class="q">→ prune? [y/N]</span>
+<span class="ok">✓</span> CLAUDE.md drift vs HEAD          <span class="q">→ dedupe? [y/N]</span>
+<span class="ok">✓</span> root CLAUDE.md is 1,240 lines    <span class="q">→ split into nested? [y/N]</span>
+<span class="ok">✓</span> 2 hooks over 800ms              <span class="q">→ disable? [y/N]</span>
+<span class="c">plan ready · nothing changes without your yes</span>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://code.claude.com/docs/en/whats-new/2026-w28" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s03 · Cloudflare EDE 33 · Blueprint ═══════════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 086</a></span>
+    <span>03 / 3 · Cloudflare</span>
+  </header>
+  <div class="main">
+    <span class="tag">Infrastructure · DNS integrity</span>
+    <h2 class="hed">Your resolver now <em>admits</em> when it stopped checking.</h2>
+    <p class="lede">On 3 July, Albania's .AL registry rolled a new DNSSEC key but never updated the matching DS record at the root — so every .AL domain failed validation and went dark for validating resolvers. Cloudflare restored access with a Negative Trust Anchor that suspends validation, but that hid a problem: you couldn't tell a verified answer from a bypassed one. Now 1.1.1.1 returns Extended DNS Error 33 whenever an NTA is in play.</p>
+    <div class="figure">
+      <div class="schema">
+root zone ── DS record? ──<span class="fail">✗ missing</span>
+     │
+  .AL TLD ── new DNSKEY published (3 Jul)
+     │
+  validation <span class="fail">FAILS</span> → every .AL domain dark
+     │
+  Cloudflare applies <b>NTA</b> → validation suspended, sites resolve
+     │
+  1.1.1.1 attaches <span class="ede">EDE 33</span> <span class="note">"NTA applied (RFC 7646)"</span>
+     │
+  → clients &amp; monitors <b>see the bypass</b> instead of guessing
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.cloudflare.com/dnssec-nta-ede-33/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ COLOPHON ═══════════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 086</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">A thin, deliberate three — the strong signals that cleared the ledger without repeating a story already shipped this fortnight.</p>
+    <p class="meta">
+      <b>Fed today:</b> Meta AI (Superintelligence Labs) · Claude Code docs · Cloudflare blog<br>
+      <b>Also scanned:</b> The Batch · Import AI · Zvi · OpenAI · Anthropic · GitHub · Sentry · Vercel · PostHog · Fly · Next.js · five Telegram channels<br>
+      <b>Rubric:</b> tools you could adopt this week · creative &amp; generative media · dev &amp; agentic tooling · privacy &amp; integrity · practical research<br>
+      <b>Issue 086 · 15 Jul 2026 · Europe/Zürich</b>
+    </p>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>
