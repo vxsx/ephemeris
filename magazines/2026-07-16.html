@@ -1,0 +1,570 @@
+<!doctype html>
+<!-- Ephemeris · Issue 087 · 2026-07-16 · built from scaffold.html -->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 087 · 16 July 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — copied verbatim from scaffold.html.
+     ═══════════════════════════════════════════════════════════════════ */
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+
+  .spread > .decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .folio a.home { color: inherit; text-decoration: none; }
+  .folio a.home:hover { text-decoration: underline; }
+
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+
+  .figure { width: 100%; }
+
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — Issue 087. Surface only.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── Cover · DOSSIER GRID (dark) ─── */
+  .cover { background: #0d0f14; color: #eef0f4; }
+  .cover .brandrow {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 10px 24px; width: 100%;
+    border-bottom: 1px solid rgba(238,240,244,0.18); padding-bottom: 16px;
+  }
+  .cover .wordmark {
+    font-family: var(--serif); font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    font-size: clamp(34px, 5.2vw, 62px); line-height: 0.9;
+    letter-spacing: -0.03em; color: #eef0f4; margin: 0;
+  }
+  .cover .wordmark em { font-style: italic; color: #64f0c0; }
+  .cover .brandrow .meta {
+    font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: #9aa3b2; text-align: right;
+  }
+  .cover .dek {
+    font-family: var(--serif); font-size: clamp(20px, 2vw, 28px);
+    line-height: 1.42; max-width: 40ch; color: #cfd5df; margin: 0;
+  }
+  .cover .dossier {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px; width: 100%;
+  }
+  .cover .cell {
+    display: flex; flex-direction: column; gap: 10px;
+    text-decoration: none; color: inherit;
+    border: 1px solid rgba(238,240,244,0.16);
+    background: rgba(255,255,255,0.02);
+    padding: 20px 20px 22px; border-radius: 4px;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .cover .cell:hover { border-color: #64f0c0; background: rgba(100,240,192,0.06); }
+  .cover .cell .n {
+    font-family: var(--mono); font-size: 13px; letter-spacing: 0.2em;
+    color: #64f0c0;
+  }
+  .cover .cell .frag {
+    font-family: var(--serif); font-weight: 700; font-size: clamp(20px, 2.1vw, 27px);
+    line-height: 1.12; letter-spacing: -0.01em;
+  }
+  .cover .cell .src {
+    font-family: var(--sans); font-size: 12px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: #9aa3b2; margin-top: auto;
+  }
+  @media (max-width: 800px) { .cover .dossier { grid-template-columns: 1fr; } }
+
+  /* ─── s01 · Grok 4.5 · BIG STATS (electric cobalt on cool white) ─── */
+  .s01 { background: #eef1fb; color: #0a1030; }
+  .s01 .tag { color: #1b3cff; border-color: #1b3cff; }
+  .s01 .hed {
+    font-family: var(--sans); font-weight: 900; font-size: clamp(46px, 6.6vw, 100px);
+    letter-spacing: -0.035em; line-height: 0.98; text-transform: none;
+  }
+  .s01 .hed em { font-style: normal; color: #1b3cff; }
+  .s01 .lede { font-family: var(--serif); color: #1c2340; }
+  .s01 .read-on { color: #1b3cff; border-color: #1b3cff; --flip: #eef1fb; }
+  .s01 .statwrap {
+    display: flex; align-items: flex-end; gap: clamp(20px, 4vw, 56px);
+    flex-wrap: wrap; width: 100%; margin-top: 4px;
+  }
+  .s01 .num {
+    font-family: var(--sans); font-weight: 900; font-size: clamp(120px, 22vw, 300px);
+    line-height: 0.8; letter-spacing: -0.05em; color: #1b3cff;
+  }
+  .s01 .num .unit {
+    font-family: var(--sans); font-style: normal; font-weight: 700;
+    font-size: 0.16em; letter-spacing: normal; margin-left: 0.15em;
+    color: #0a1030; vertical-align: super;
+  }
+  .s01 .stats {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0; border-top: 3px solid #0a1030; flex: 1 1 340px; min-width: 260px;
+  }
+  .s01 .stats div { padding: 12px 14px 4px; border-right: 1px solid rgba(10,16,48,0.18); }
+  .s01 .stats div:last-child { border-right: none; }
+  .s01 .stats dt {
+    font-family: var(--sans); font-weight: 800; font-size: clamp(22px, 2.6vw, 34px);
+    letter-spacing: -0.02em; color: #1b3cff;
+  }
+  .s01 .stats dd {
+    font-family: var(--mono); font-size: 12.5px; line-height: 1.45; margin: 4px 0 0;
+    color: #384063; letter-spacing: 0.01em;
+  }
+  .s01 .decor::before {
+    content: "4.5"; position: absolute; right: -3vw; top: -6vw;
+    font-family: var(--sans); font-weight: 900; font-size: 44vw; line-height: 1;
+    color: rgba(27,60,255,0.05); letter-spacing: -0.06em;
+  }
+
+  /* ─── s02 · Genkit Agents API · WARM ORANGE two-column + pull-quote ─── */
+  .s02 { background: #f7893b; color: #201005; }
+  .s02 .tag { color: #201005; border-color: #201005; }
+  .s02 .hed {
+    font-family: var(--serif); font-weight: 800; font-size: clamp(46px, 6.4vw, 96px);
+    line-height: 1.0;
+  }
+  .s02 .hed em {
+    font-style: italic; font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    color: #ffffff;
+  }
+  .s02 .lede { color: #2c1808; max-width: 48ch; }
+  .s02 .read-on { color: #201005; border-color: #201005; --flip: #f7893b; }
+  .s02 .grid2 {
+    display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(20px, 3vw, 44px);
+    align-items: start; width: 100%;
+  }
+  .s02 .pull {
+    font-family: var(--serif); font-style: italic; font-weight: 500;
+    font-size: clamp(22px, 2.4vw, 32px); line-height: 1.28; color: #201005;
+    border-left: 4px solid #201005; padding-left: 18px; margin: 0;
+  }
+  .s02 .feats { list-style: none; margin: 0; padding: 0; }
+  .s02 .feats li {
+    font-family: var(--sans); font-size: 15px; line-height: 1.4;
+    padding: 11px 0; border-top: 1px solid rgba(32,16,5,0.28); display: flex; gap: 12px;
+  }
+  .s02 .feats li:last-child { border-bottom: 1px solid rgba(32,16,5,0.28); }
+  .s02 .feats b {
+    font-family: var(--mono); font-weight: 600; color: #6b2f00;
+    flex: 0 0 auto; font-size: 13.5px;
+  }
+  .s02 .decor::before {
+    content: ""; position: absolute; left: -12vw; bottom: -18vw;
+    width: 50vw; height: 50vw; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.18), transparent 68%);
+  }
+
+  /* ─── s03 · GPT-Red · NEON / CYBERPUNK terminal (dark, tone invert) ─── */
+  .s03 { background: #070310; color: #e8e2ff; }
+  .s03 .tag { color: #ff3ea5; border-color: #ff3ea5; font-family: var(--mono); }
+  .s03 .hed {
+    font-family: var(--sans); font-weight: 800; font-size: clamp(44px, 6.2vw, 92px);
+    letter-spacing: -0.02em; line-height: 1.0; text-transform: uppercase;
+    color: #6cf7e8; text-shadow: 0 0 22px rgba(108,247,232,0.45);
+  }
+  .s03 .hed em {
+    font-style: normal; color: #ff3ea5; text-shadow: 0 0 22px rgba(255,62,165,0.5);
+  }
+  .s03 .lede { font-family: var(--sans); color: #c7bff0; max-width: 54ch; }
+  .s03 .read-on { color: #6cf7e8; border-color: #6cf7e8; --flip: #070310; }
+  .s03 .term {
+    width: 100%; max-width: 640px;
+    border: 1px solid #33245c; border-radius: 8px; overflow: hidden;
+    background: linear-gradient(180deg, rgba(20,10,40,0.85), rgba(8,4,20,0.92));
+    box-shadow: 0 0 40px rgba(108,247,232,0.10);
+  }
+  .s03 .term .bar {
+    font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.14em;
+    color: #9a8fce; padding: 10px 16px; border-bottom: 1px solid #33245c;
+    text-transform: uppercase;
+  }
+  .s03 .term pre {
+    margin: 0; padding: 16px 18px; font-family: var(--mono); font-size: 14.5px;
+    line-height: 1.7; color: #d8d0ff; white-space: pre-wrap; word-break: break-word;
+  }
+  .s03 .term .atk { color: #ff3ea5; }
+  .s03 .term .def { color: #6cf7e8; }
+  .s03 .term .cm  { color: #6c5f9e; }
+  .s03 .decor::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(0deg, rgba(108,247,232,0.05) 0 1px, transparent 1px 4px),
+      radial-gradient(60% 60% at 78% 12%, rgba(255,62,165,0.16), transparent 70%);
+  }
+
+  /* ─── s04 · Speechify on Vercel · NEWSPRINT three-column ─── */
+  .s04 { background: #f4f1e8; color: #1a1a17; }
+  .s04 .tag {
+    color: #1a1a17; border-color: #1a1a17; border-radius: 0;
+    font-variant: small-caps; letter-spacing: 0.14em; text-transform: none;
+  }
+  .s04 .hed {
+    font-family: var(--serif); font-weight: 700; font-size: clamp(44px, 6vw, 90px);
+    line-height: 1.0; letter-spacing: -0.015em;
+  }
+  .s04 .hed em {
+    font-style: italic; font-variation-settings: "opsz" 144, "SOFT" 60, "WONK" 0;
+  }
+  .s04 .lede { color: #2b2b26; max-width: 54ch; }
+  .s04 .read-on {
+    color: #1a1a17; border-color: #1a1a17; --flip: #f4f1e8; border-width: 1px;
+    border-radius: 0;
+  }
+  .s04 .cols {
+    column-count: 3; column-gap: 30px; column-rule: 1px solid rgba(26,26,23,0.22);
+    width: 100%; font-family: var(--serif); font-size: 16.5px; line-height: 1.5;
+    color: #24241f; hyphens: none;
+  }
+  .s04 .cols p { margin: 0 0 12px; }
+  .s04 .cols .kick {
+    display: block; font-family: var(--sans); font-weight: 700; font-size: 12px;
+    letter-spacing: 0.16em; text-transform: uppercase; color: #7a2015; margin-bottom: 6px;
+  }
+  .s04 .stats {
+    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0;
+    width: 100%; border-top: 2px solid #1a1a17; border-bottom: 2px solid #1a1a17;
+    margin-top: 4px;
+  }
+  .s04 .stats div { padding: 12px 12px; border-right: 1px solid rgba(26,26,23,0.2); }
+  .s04 .stats div:last-child { border-right: none; }
+  .s04 .stats dt {
+    font-family: var(--serif); font-weight: 700; font-size: clamp(26px, 3.2vw, 40px);
+    letter-spacing: -0.02em; line-height: 1;
+  }
+  .s04 .stats dd {
+    font-family: var(--sans); font-size: 11.5px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: #5a5a50; margin: 6px 0 0;
+  }
+
+  /* ─── Colophon (dark) ─── */
+  .colophon { background: #0d0f14; color: #d7dbe4; }
+  .colophon .hed {
+    font-family: var(--serif); font-weight: 800; color: #eef0f4;
+    font-size: clamp(44px, 6vw, 88px);
+  }
+  .colophon .hed em { font-style: italic; color: #64f0c0; }
+  .colophon .lede { color: #aab2c0; max-width: 60ch; }
+  .colophon .srcline {
+    font-family: var(--mono); font-size: 13px; line-height: 1.7; color: #8b93a4;
+    letter-spacing: 0.02em; margin-top: 4px;
+  }
+  .colophon .folio { color: #8b93a4; }
+
+  /* ─── Mobile additions ─── */
+  @media (max-width: 800px) {
+    .s01 .num { font-size: clamp(96px, 34vw, 180px); }
+    .s01 .stats { grid-template-columns: 1fr; border-top: 3px solid #0a1030; }
+    .s01 .stats div { border-right: none; border-bottom: 1px solid rgba(10,16,48,0.18); }
+    .s01 .decor::before { font-size: 70vw; }
+    .s02 .grid2 { grid-template-columns: 1fr; }
+    .s04 .cols { column-count: 1; }
+    .s04 .stats { grid-template-columns: repeat(2, 1fr); }
+    .s04 .stats div:nth-child(2) { border-right: none; }
+    .s04 .stats div:nth-child(1), .s04 .stats div:nth-child(2) { border-bottom: 1px solid rgba(26,26,23,0.2); }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════════════ COVER · dossier grid ═══════════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 087</a></span>
+    <span>Thursday · 16 Jul 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <div class="brandrow">
+      <h1 class="wordmark">Ephemeris<em>.</em></h1>
+      <span class="meta">Dossier № 087<br>Four filings</span>
+    </div>
+    <p class="dek">Today: a coding model raised inside the editor, an agent framework that hides the plumbing, a model that attacks itself to get harder, and half a million pages served straight from cache.</p>
+    <nav class="dossier">
+      <a class="cell" href="#s01">
+        <span class="n">01</span>
+        <span class="frag">Grok 4.5 trained where you already work.</span>
+        <span class="src">x.ai</span>
+      </a>
+      <a class="cell" href="#s02">
+        <span class="n">02</span>
+        <span class="frag">The whole agent loop, behind one call.</span>
+        <span class="src">Google Developers</span>
+      </a>
+      <a class="cell" href="#s03">
+        <span class="n">03</span>
+        <span class="frag">The model that red-teams itself.</span>
+        <span class="src">OpenAI</span>
+      </a>
+      <a class="cell" href="#s04">
+        <span class="n">04</span>
+        <span class="frag">500,000 pages, none of them hit a database.</span>
+        <span class="src">Vercel</span>
+      </a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+</section>
+
+<!-- ═══════════════ s01 · Grok 4.5 · big stats ═══════════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 087</a></span>
+    <span>01 / 04 · x.ai</span>
+  </header>
+  <div class="main">
+    <span class="tag">AI Models · Agentic Coding</span>
+    <h2 class="hed">It learned to code on <em>real</em> work.</h2>
+    <p class="lede">xAI's Grok 4.5 was co-trained with Cursor, and its reinforcement-learning pipeline ran across hundreds of thousands of multi-step software tasks, graded by both scripts and models. It's live today in Grok Build, in Cursor on every plan, and from the console.</p>
+    <div class="figure">
+      <div class="statwrap">
+        <div class="num">$2<span class="unit">/ $6 per Mtok</span></div>
+        <dl class="stats">
+          <div><dt>Cursor</dt><dd>co-trained, and shipped on all plans</dd></div>
+          <div><dt>100k+</dt><dd>multi-step SWE tasks in the RL loop</dd></div>
+          <div><dt>3 doors</dt><dd>Grok Build · Cursor · console</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://x.ai/news/grok-4-5" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s02 · Genkit Agents API · warm orange ═══════════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 087</a></span>
+    <span>02 / 04 · Google Developers</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev Tools · Agents</span>
+    <h2 class="hed">Stop wiring the agent loop <em>by hand</em>.</h2>
+    <p class="lede">Genkit's new Agents API, in preview for TypeScript and Go, folds message history, the tool loop, streaming, state persistence, and a frontend protocol behind a single <code>chat()</code> that runs the same in-process or over HTTP.</p>
+    <div class="figure">
+      <div class="grid2">
+        <blockquote class="pull">Define the agent once — system prompt, tools, typed state — and the same call backs your tests, your endpoint, and your frontend.</blockquote>
+        <ul class="feats">
+          <li><b>detach</b><span>Long turns keep running after the client disconnects; reconnect by snapshot ID.</span></li>
+          <li><b>interrupt</b><span>Tools pause for human approval before a payment or a deploy.</span></li>
+          <li><b>artifacts</b><span>Reports, patches, itineraries — versioned outputs the user can inspect.</span></li>
+          <li><b>preview</b><span>TS and Go today; Python and Dart on the way. Expect breaking changes.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://developers.googleblog.com/build-agentic-full-stack-apps-with-genkit/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s03 · GPT-Red · neon terminal (dark) ═══════════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 087</a></span>
+    <span>03 / 04 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Security · Robustness</span>
+    <h2 class="hed">It plays <em>both sides</em> to get harder.</h2>
+    <p class="lede">GPT-Red is OpenAI's automated red-teaming system: self-play pits an attacker that manufactures jailbreaks and prompt injections against a defender that learns to withstand them — turning a manual audit into a continuous pressure test for safety, alignment, and injection robustness.</p>
+    <div class="figure">
+      <div class="term">
+        <div class="bar">gpt-red · self-play loop</div>
+<pre><span class="cm"># round n — no human writes the exploit</span>
+<span class="atk">attacker →</span> smuggle instructions inside a pasted doc
+<span class="def">defender →</span> refuses; flags the injected span
+<span class="atk">attacker →</span> re-encodes the payload, tries again
+<span class="def">defender →</span> holds. gradient flows to the defense
+<span class="cm"># the wall that just moved becomes next round's floor</span></pre>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/unlocking-self-improvement-gpt-red" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ s04 · Speechify on Vercel · newsprint ═══════════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 087</a></span>
+    <span>04 / 04 · Vercel</span>
+  </header>
+  <div class="main">
+    <span class="tag">Architecture · At Scale</span>
+    <h2 class="hed">Half a million pages, served <em>from the cache</em>.</h2>
+    <p class="lede">Speechify renders 500,000 dynamic pages across 45 languages to some 60 million users — and the traffic never reaches a database.</p>
+    <div class="figure">
+      <div class="cols">
+        <p><span class="kick">The move</span>Cache Components, the Data Cache, and ISR render each page dynamically on first hit, then serve it from the nearest edge until the content actually changes.</p>
+        <p>That collapses the database-scaling problem: repeat visitors read cached HTML at the edge, so origin load stays flat as audience grows.</p>
+        <p><span class="kick">The team</span>A small growth team ships every two to three days. Instant Rollbacks make a bad release a one-click revert; Fluid Compute autoscales without a dedicated platform crew — the case for reading the writeup before your next rebuild.</p>
+      </div>
+      <dl class="stats">
+        <div><dt>500K</dt><dd>dynamic pages</dd></div>
+        <div><dt>60M</dt><dd>users served</dd></div>
+        <div><dt>45</dt><dd>languages</dd></div>
+        <div><dt>2–3d</dt><dd>release cadence</dd></div>
+      </dl>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://vercel.com/blog/how-speechify-serves-50000-dynamic-pages-to-60-million-users-on-vercel" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ COLOPHON ═══════════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of Issue 087</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Four picks off a wide sweep — the model labs, engineering blogs, curation newsletters, and Telegram channels — kept to what a builder could act on this week.</p>
+    <p class="srcline">Filed from: x.ai · Google Developers · OpenAI · Vercel<br>
+    Also read today: Anthropic, Cloudflare, PostHog, Sentry, GitHub, Fly.io, Next.js, The Batch, Import AI, and the usual channels.<br>
+    Rubric: tools to adopt now · dev &amp; agentic tooling · security with real signal · architecture that teaches.<br>
+    Issue 087 · 16 July 2026 · Zürich.</p>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>

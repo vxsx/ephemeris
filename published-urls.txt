@@ -166,6 +166,7 @@ https://deeplearning.ai/the-batch/issue-356
 https://deeplearning.ai/the-batch/issue-357
 https://deeplearning.ai/the-batch/issue-359
 https://deepswe.datacurve.ai/blog
+https://developers.googleblog.com/build-agentic-full-stack-apps-with-genkit
 https://developers.googleblog.com/introducing-the-google-colab-cli
 https://developers.googleblog.com/litertjs-googles-high-performance-web-ai-inference
 https://developers.googleblog.com/we-terminated-a-tpu-mid-training-and-it-recovered-in-seconds-introduction-to-elastic-training-with-maxtext
@@ -357,6 +358,7 @@ https://openai.com/index/strengthening-societal-resilience-with-rosalind-biodefe
 https://openai.com/index/testing-ads-in-chatgpt
 https://openai.com/index/the-next-evolution-of-the-agents-sdk
 https://openai.com/index/trustworthy-third-party-evaluations-foundations
+https://openai.com/index/unlocking-self-improvement-gpt-red
 https://openai.com/index/using-codex-to-simulate-black-holes
 https://openai.com/index/virgin-atlantic
 https://openai.com/index/wasmer
@@ -495,6 +497,7 @@ https://vercel.com/blog/how-general-intelligence-used-agents-to-build-an-agent-p
 https://vercel.com/blog/how-gitbook-serves-30000-sites-with-sub-second-content-updates
 https://vercel.com/blog/how-kiko-milano-scales-for-black-friday
 https://vercel.com/blog/how-okara-runs-cmo-agents-for-120000-companies-on-vercel
+https://vercel.com/blog/how-speechify-serves-50000-dynamic-pages-to-60-million-users-on-vercel
 https://vercel.com/blog/how-superset-built-the-ide-for-ai-agents-on-vercel
 https://vercel.com/blog/how-zo-computer-improved-ai-reliability-20x-on-vercel
 https://vercel.com/blog/introducing-deepsec-find-and-fix-vulnerabilities-in-your-code-base
@@ -517,6 +520,7 @@ https://vercel.com/changelog/vercel-sandbox-now-supports-fuse-based-filesystems
 https://webkit.org/blog/18136/introducing-the-safari-mcp-server-for-web-developers
 https://wheresyoured.at/where-are-all-the-data-centers
 https://wsj.com/tech/ai/mind-blowing-growth-is-about-to-propel-anthropic-into-its-first-profitable-quarter-7edbf2f4
+https://x.ai/news/grok-4-5
 https://x.com/airbusheli/status/2063895281205137413
 https://x.com/andonlabs/status/2042765807781056646
 https://x.com/joinShiftX/status/2060044783519735987
