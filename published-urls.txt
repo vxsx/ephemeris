@@ -133,6 +133,7 @@ https://blog.tilderesearch.com/blog/aurora
 https://bloomberg.com/news/articles/2026-05-26/china-expands-travel-curbs-to-top-ai-talent-at-private-firms
 https://bun.com/blog/bun-in-rust
 https://bun.com/blog/bun-v1.3.14
+https://c82.net/blog/making-of-naturalists-library
 https://chinatalk.media/p/how-to-buy-cheap-claude-tokens-in
 https://chromewebstore.google.com/detail/pjoleapiipgcignjlbhhiighckpbhcpp
 https://civitai.com/models/2670340/slop-in-the-face
@@ -272,6 +273,7 @@ https://jeffbullas.com/human-signal-manifesto
 https://jeffbullas.com/ideas-die-unseen
 https://jeffbullas.com/stop-using-just-one-ai
 https://jeffbullas.com/truth-business-growth-strategy
+https://kimi.com/blog/kimi-k3
 https://krea.ai/
 https://krea.ai/app
 https://krea.ai/blog/krea-2-technical-report
@@ -428,6 +430,7 @@ https://sentry.io/blog/logging-best-practices
 https://sentry.io/blog/nextjs-export-traces-opentelemetry
 https://sentry.io/blog/nextjs-supabase-observability
 https://sentry.io/blog/scaling-observability-for-multi-agent-ai-systems
+https://sentry.io/blog/seer-agent-page-context
 https://sentry.io/blog/sentry-opentelemetry-work-together
 https://sentry.io/blog/spot-checking-ai-agents
 https://shir-man.com/free-llm
