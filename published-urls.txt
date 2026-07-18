@@ -65,6 +65,7 @@ https://arxiv.org/abs/2606.16475
 https://arxiv.org/abs/2606.19980
 https://arxiv.org/abs/2606.23001
 https://arxiv.org/abs/2606.28070
+https://arxiv.org/abs/2606.29537
 https://arxiv.org/pdf/2604.24827
 https://biohub.org/news/world-model-of-protein-biology
 https://blog.cloudflare.com/agent-readiness
@@ -210,6 +211,7 @@ https://github.com/AMAP-ML/DreamX-World
 https://github.com/anomalyco/opencode/releases/tag/v1.17.15
 https://github.com/Augani/openreel-video
 https://github.com/BayramAnnakov/ai-native-product-skills/tree/master/skills/autoresearch
+https://github.com/BayramAnnakov/ai-native-product-skills/tree/master/skills/council
 https://github.com/BayramAnnakov/ai-personal-os-skills/tree/main/skills/slide-inspector
 https://github.com/BayramAnnakov/clarity-session-review
 https://github.com/BayramAnnakov/excel-hygiene
@@ -237,6 +239,7 @@ https://github.com/palmier-io/palmier-pro
 https://github.com/rvnikita/claude-code-statusline
 https://github.com/specs-devs/samples/tree/main/Agent%20Center
 https://github.com/Twarner491/AvianVisitors
+https://github.com/xai-org/grok-build
 https://github.com/yunit00/game-corovans
 https://hackernews.foresyn.ai/
 https://hermes-agent.nousresearch.com/desktop
@@ -390,6 +393,7 @@ https://posthog.com/blog/self-driving-product
 https://posthog.com/blog/session-replays-opening-pull-requests
 https://posthog.com/blog/slack-app-beta
 https://posthog.com/blog/testing-ai-agents
+https://posthog.com/blog/traces-beta
 https://posthog.com/blog/training-ai-models
 https://posthog.com/blog/untangling-rayon-and-tokio
 https://posthog.com/blog/what-if-your-product-built-itself

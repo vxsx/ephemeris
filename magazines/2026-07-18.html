@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 089 · Agents, examined</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — from scaffold.html. Do not touch.
+     ═══════════════════════════════════════════════════════════════════ */
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+  .spread > .decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .folio a.home { color: inherit; text-decoration: none; }
+  .folio a.home:hover { text-decoration: underline; }
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+  .figure { width: 100%; }
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — surface only.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── Cover: single-word mood ─── */
+  .cover { background: #0a0b0d; color: #f4f0e6; }
+  .cover .folio { opacity: 0.6; }
+  .cover .masthead {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    font-size: clamp(92px, 22vw, 340px);
+    line-height: 0.82;
+    letter-spacing: -0.05em;
+    color: #ffc94b;
+    padding-bottom: 0.08em;
+    margin: 0;
+  }
+  .cover .masthead em {
+    font-style: normal;
+    color: #f4f0e6;
+  }
+  .cover .dek {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(22px, 2.4vw, 34px);
+    line-height: 1.3;
+    max-width: 24ch;
+    color: #d8d2c4;
+  }
+  .cover .toc {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(244,240,230,0.25);
+    width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    text-decoration: none; color: inherit;
+    padding: 8px 0;
+    border-bottom: 1px dotted rgba(244,240,230,0.22);
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.85em; opacity: 0.6; }
+  .cover .toc .num {
+    font-family: var(--mono); font-weight: 600;
+    color: #ffc94b; margin-right: 12px;
+  }
+  .cover .decor::before {
+    content: "";
+    position: absolute;
+    right: -18vw; top: -18vw;
+    width: 62vw; height: 62vw;
+    background: radial-gradient(circle, rgba(255,201,75,0.10), transparent 68%);
+  }
+  @media (max-width: 800px) {
+    .cover .toc { grid-template-columns: 1fr; gap: 0; }
+  }
+
+  /* ─── s01 · OSWorld 2.0 — big stats / yellow (LOUD) ─── */
+  .s01 { background: #ffd21f; color: #14130c; }
+  .s01 .tag { color: #14130c; border-color: #14130c; }
+  .s01 .hed {
+    font-family: var(--sans);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    line-height: 0.98;
+    font-size: clamp(44px, 6.6vw, 96px);
+  }
+  .s01 .read-on { color: #14130c; border-color: #14130c; --flip: #ffd21f; }
+  .s01 .statwrap {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: clamp(20px, 3vw, 48px);
+    align-items: end;
+    border-top: 3px solid #14130c;
+    padding-top: 18px;
+  }
+  .s01 .num {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-variation-settings: "opsz" 144;
+    font-size: clamp(84px, 15vw, 180px);
+    line-height: 0.82;
+    letter-spacing: -0.04em;
+  }
+  .s01 .num .unit {
+    font-family: var(--sans); font-style: normal; font-weight: 700;
+    font-size: 0.26em;
+    letter-spacing: normal;
+    display: block;
+    margin-top: 0.4em;
+    text-transform: uppercase;
+  }
+  .s01 .dl {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 4px 20px;
+    margin: 0;
+  }
+  .s01 .dl .k {
+    font-family: var(--serif); font-weight: 800;
+    font-size: clamp(28px, 4vw, 46px); line-height: 1;
+  }
+  .s01 .dl .v {
+    font-family: var(--sans); font-weight: 600;
+    font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
+    opacity: 0.8; margin-top: 6px;
+  }
+  .s01 .decor::after {
+    content: "108";
+    position: absolute;
+    right: -3vw; bottom: -6vw;
+    font-family: var(--serif); font-weight: 900;
+    font-size: 46vw; line-height: 0.7;
+    color: rgba(20,19,12,0.05);
+  }
+  @media (max-width: 800px) {
+    .s01 .statwrap { grid-template-columns: 1fr; align-items: start; }
+    .s01 .dl { grid-template-columns: 1fr; gap: 12px; }
+  }
+
+  /* ─── s02 · Grok Build — terminal (LOUD, dark inversion) ─── */
+  .s02 { background: #05080a; color: #33e08a; }
+  .s02 .tag { color: #33e08a; border-color: rgba(51,224,138,0.5); }
+  .s02 .hed {
+    font-family: var(--mono);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+    font-size: clamp(34px, 5vw, 74px);
+    text-shadow: 0 0 22px rgba(51,224,138,0.35);
+  }
+  .s02 .lede { font-family: var(--mono); font-size: clamp(18px, 1.5vw, 21px); color: #b7f5d4; }
+  .s02 .read-on { color: #33e08a; border-color: #33e08a; --flip: #05080a; }
+  .s02 .term {
+    border: 1px solid rgba(51,224,138,0.35);
+    border-radius: 8px;
+    background: #030506;
+    font-family: var(--mono);
+    font-size: clamp(13px, 1.15vw, 15px);
+    line-height: 1.85;
+    overflow-x: auto;
+  }
+  .s02 .term .bar {
+    display: flex; gap: 8px; align-items: center;
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(51,224,138,0.22);
+    color: rgba(183,245,212,0.6);
+    letter-spacing: 0.04em; font-size: 12px;
+  }
+  .s02 .term .bar b { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
+  .s02 .term .body { padding: 16px 18px 20px; white-space: pre; }
+  .s02 .term .p { color: #57c8ff; }
+  .s02 .term .c { color: rgba(183,245,212,0.5); }
+  .s02 .term .g { color: #33e08a; }
+  .s02 .decor::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      to bottom, rgba(51,224,138,0.05) 0 1px, transparent 1px 4px);
+  }
+  @media (max-width: 800px) {
+    .s02 .term .body { font-size: 12px; }
+  }
+
+  /* ─── s03 · Council — concrete / warm grey (quiet, precise) ─── */
+  .s03 { background: #d7d2c7; color: #1b1712; }
+  .s03 .tag { color: #6b3320; border-color: #6b3320; }
+  .s03 .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(46px, 7.4vw, 112px);
+    line-height: 0.98;
+  }
+  .s03 .hed em { font-style: italic; color: #6b3320; }
+  .s03 .read-on { color: #1b1712; border-color: #1b1712; --flip: #d7d2c7; }
+  .s03 .pq {
+    border-left: 4px solid #6b3320;
+    padding: 6px 0 6px 26px;
+    max-width: 30ch;
+  }
+  .s03 .pq q {
+    font-family: var(--serif); font-style: italic; font-weight: 600;
+    font-size: clamp(26px, 3.4vw, 44px); line-height: 1.18;
+    quotes: none;
+  }
+  .s03 .pq .attr {
+    display: block; margin-top: 16px;
+    font-family: var(--mono); font-size: 13px; letter-spacing: 0.04em;
+    text-transform: uppercase; opacity: 0.7;
+  }
+  .s03 .decor::before {
+    content: "\201C";
+    position: absolute;
+    left: 2vw; bottom: -14vw;
+    font-family: var(--serif); font-weight: 900; font-style: italic;
+    font-size: 52vw; line-height: 0.6;
+    color: rgba(107,51,32,0.07);
+  }
+  @media (max-width: 800px) {
+    .s03 .decor::before { font-size: 60vw; bottom: -10vw; }
+  }
+
+  /* ─── s04 · PostHog tracing — spreadsheet (quiet, data) ─── */
+  .s04 { background: #e9ebee; color: #1a2026; }
+  .s04 .tag { color: #0f6d63; border-color: #0f6d63; }
+  .s04 .hed {
+    font-family: var(--sans);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    font-size: clamp(40px, 6vw, 88px);
+    line-height: 1.0;
+  }
+  .s04 .hed em { font-style: normal; color: #0f6d63; }
+  .s04 .read-on { color: #1a2026; border-color: #1a2026; --flip: #e9ebee; }
+  .s04 .trace {
+    font-family: var(--mono);
+    font-size: clamp(12px, 1.1vw, 14.5px);
+    border: 1px solid #c3c8cf;
+    background: #f6f7f9;
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .s04 .trace th {
+    text-align: left; font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; font-size: 11px; color: #5b636b;
+    padding: 10px 14px; border-bottom: 1px solid #c3c8cf; background: #eceef1;
+  }
+  .s04 .trace td { padding: 11px 14px; border-bottom: 1px solid #d8dce1; vertical-align: middle; }
+  .s04 .trace tr:last-child td { border-bottom: none; }
+  .s04 .trace .sp { color: #1a2026; }
+  .s04 .trace .sp.child::before { content: "└ "; color: #9aa2ab; }
+  .s04 .trace .barcell { width: 46%; }
+  .s04 .trace .bar {
+    display: block; height: 12px; border-radius: 2px; background: #0f6d63;
+  }
+  .s04 .trace .bar.slow { background: #c2410c; }
+  .s04 .trace .ms { text-align: right; font-variation-settings: "tnum"; color: #3a424a; white-space: nowrap; }
+  .s04 .decor::before {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(to right, rgba(26,32,38,0.04) 0 1px, transparent 1px 64px),
+      repeating-linear-gradient(to bottom, rgba(26,32,38,0.04) 0 1px, transparent 1px 64px);
+  }
+  @media (max-width: 800px) {
+    .s04 .trace { font-size: 11px; }
+    .s04 .trace .barcell { width: 34%; }
+    .s04 .trace th:nth-child(2), .s04 .trace td:nth-child(2) { display: none; }
+  }
+
+  /* ─── Colophon — dark ─── */
+  .colophon { background: #0a0b0d; color: #e7e3d8; }
+  .colophon .folio { opacity: 0.55; }
+  .colophon .hed { font-family: var(--serif); font-weight: 800; font-size: clamp(44px, 6vw, 92px); }
+  .colophon .hed em { font-style: italic; color: #ffc94b; }
+  .colophon .lede { color: #c9c4b6; }
+  .colophon .meta {
+    display: grid; grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 22px 32px; width: 100%;
+    border-top: 1px solid rgba(231,227,216,0.2); padding-top: 22px;
+    font-family: var(--sans);
+  }
+  .colophon .meta h4 {
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: #ffc94b; margin: 0 0 8px;
+  }
+  .colophon .meta p { margin: 0; font-size: 14px; line-height: 1.5; color: #c9c4b6; }
+  @media (max-width: 800px) {
+    .colophon .meta { grid-template-columns: 1fr; gap: 18px; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════════════ COVER — single-word mood ═══════════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 089</a></span>
+    <span>Saturday · 18 Jul 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <h1 class="masthead">Agents<em>.</em></h1>
+    <p class="dek">Four ways to look one in the eye — a benchmark, a harness, a panel, and a trace.</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>The long jobs are where they fold</span><span>OSWorld 2.0</span></a>
+      <a href="#s02"><span><span class="num">02</span>Read the whole agent, line by line</span><span>xAI</span></a>
+      <a href="#s03"><span><span class="num">03</span>The panel that only agrees with itself</span><span>via @ProductsAndStartups</span></a>
+      <a href="#s04"><span><span class="num">04</span>Follow the slow request, span by span</span><span>PostHog</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ 01 · OSWorld 2.0 ═══════════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 089</a></span>
+    <span>01 / 04 · arXiv · via @importai</span>
+  </header>
+  <div class="main">
+    <span class="tag">Research · Computer-use agents</span>
+    <h2 class="hed">The long jobs are where they fold.</h2>
+    <p class="lede">OSWorld 2.0 stops testing agents on toy clicks and hands them 108 real workflows — the kind a person finishes in about an hour and a half. The best model, Claude Opus 4.8 at full thinking, finishes one in five. Short benchmarks flattered everyone; stretch the horizon to ~318 tool calls and the scores collapse.</p>
+    <div class="figure">
+      <div class="statwrap">
+        <div class="num">20.6<span class="unit">% best agent<br>fully solved</span></div>
+        <dl class="dl">
+          <div><div class="k">108</div><div class="v">long-horizon tasks</div></div>
+          <div><div class="k">~318</div><div class="v">tool calls / task</div></div>
+          <div><div class="k">1.6h</div><div class="v">median human time</div></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://arxiv.org/abs/2606.29537" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ 02 · Grok Build ═══════════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 089</a></span>
+    <span>02 / 04 · xAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev tools · Agentic coding</span>
+    <h2 class="hed">Read the whole agent, line by line.</h2>
+    <p class="lede">xAI open-sourced Grok Build — its terminal coding agent, the full Rust harness, under Apache 2.0. That's the agent loop, the tools that read and edit your code, the TUI, and the whole extension surface — MCP, skills, plugins, hooks, headless, ACP. You can compile it, point it at your own inference, and audit exactly what it does before it touches a repo.</p>
+    <div class="figure">
+      <div class="term">
+        <div class="bar"><b style="background:#ff5f56"></b><b style="background:#ffbd2e"></b><b style="background:#27c93f"></b><span style="margin-left:8px">grok-build — zsh</span></div>
+        <div class="body"><span class="p">$</span> git clone https://github.com/xai-org/grok-build
+<span class="p">$</span> cargo build --release
+<span class="c"># bring your own model — no cloud round-trip required</span>
+<span class="p">$</span> grok-build --config ./config.toml
+<span class="g">▸ harness up · tools: read, edit, shell, web, tasks</span>
+<span class="g">▸ extensions: mcp · skills · plugins · hooks · acp</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://github.com/xai-org/grok-build" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ 03 · Council skill ═══════════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 089</a></span>
+    <span>03 / 04 · GitHub · via @ProductsAndStartups</span>
+  </header>
+  <div class="main">
+    <span class="tag">Agents · Multi-agent design</span>
+    <h2 class="hed">The panel that only <em>agrees with itself.</em></h2>
+    <p class="lede">Spin up five sub-agents on the same model and the same context and you get one opinion wearing five name tags. The Council skill names the trap: correlated votes reduce error by roughly nothing, yet the apparent unanimity inflates your confidence. The fix is mandates, not costumes: give each seat a different job and different evidence, then treat disagreement as the only reading worth trusting.</p>
+    <div class="figure">
+      <blockquote class="pq">
+        <q>N seats ≈ ONE sample, quoted N times.</q>
+        <span class="attr">Persona is decoration. The mandate is the whole thing.</span>
+      </blockquote>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://github.com/BayramAnnakov/ai-native-product-skills/tree/master/skills/council" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ 04 · PostHog tracing ═══════════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 089</a></span>
+    <span>04 / 04 · PostHog</span>
+  </header>
+  <div class="main">
+    <span class="tag">Observability · Tracing</span>
+    <h2 class="hed">Follow the slow request, <em>span by span.</em></h2>
+    <p class="lede">PostHog's distributed tracing is in beta, and it takes your existing OpenTelemetry exporters — no new SDK to wire in. Errors tell you something broke; logs show scattered events; a trace draws the causality chain, with timing. Because the spans sit next to product events in the warehouse, you can pivot from a 3.2s checkout to the exact N+1 query, then jump straight to that user's session replay.</p>
+    <div class="figure">
+      <table class="trace">
+        <thead><tr><th>Span</th><th>Service</th><th class="barcell">Duration</th><th class="ms">Time</th></tr></thead>
+        <tbody>
+          <tr><td class="sp">checkout</td><td>web</td><td class="barcell"><span class="bar" style="width:100%"></span></td><td class="ms">3.2s</td></tr>
+          <tr><td class="sp child">inventory · N+1</td><td>inventory</td><td class="barcell"><span class="bar slow" style="width:87%"></span></td><td class="ms">2.8s</td></tr>
+          <tr><td class="sp child">charge</td><td>payment</td><td class="barcell"><span class="bar" style="width:10%"></span></td><td class="ms">0.3s</td></tr>
+          <tr><td class="sp child">confirm</td><td>email</td><td class="barcell"><span class="bar" style="width:3%"></span></td><td class="ms">0.1s</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://posthog.com/blog/traces-beta" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════ COLOPHON ═══════════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 089</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">One thread ran through the picks: what an AI agent is actually doing when you look closely — how far it gets, what's inside its harness, when a panel of them is fooling you, and how to trace it in production.</p>
+    <div class="meta">
+      <div>
+        <h4>Sources today</h4>
+        <p>arXiv / xlang-ai · xAI · a skill by BayramAnnakov, via @ProductsAndStartups · PostHog. OSWorld 2.0 surfaced via Import AI.</p>
+      </div>
+      <div>
+        <h4>Rubric</h4>
+        <p>Adoptable AI tools, generative media, dev &amp; agentic tooling, privacy &amp; security when the signal is high, research with a practical kernel. No reprints; nothing older than 30 days.</p>
+      </div>
+      <div>
+        <h4>Issue</h4>
+        <p>089 · Saturday 18 July 2026 · Europe/Zürich. A daily typographic reading of the public feeds.</p>
+      </div>
+    </div>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>
