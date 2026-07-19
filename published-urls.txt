@@ -121,6 +121,7 @@ https://blog.cloudflare.com/smart-tiered-cache-for-public-clouds
 https://blog.cloudflare.com/temporary-accounts
 https://blog.cloudflare.com/unweight-tensor-compression
 https://blog.cloudflare.com/voidzero-joins-cloudflare
+https://blog.cloudflare.com/wordpress-vulnerabilities
 https://blog.cloudflare.com/workers-cache
 https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5
 https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-omni-flash-nano-banana-2-lite
@@ -135,6 +136,7 @@ https://bloomberg.com/news/articles/2026-05-26/china-expands-travel-curbs-to-top
 https://bun.com/blog/bun-in-rust
 https://bun.com/blog/bun-v1.3.14
 https://c82.net/blog/making-of-naturalists-library
+https://carteakey.dev/blog/local-inference/local-llm-optimization
 https://chinatalk.media/p/how-to-buy-cheap-claude-tokens-in
 https://chromewebstore.google.com/detail/pjoleapiipgcignjlbhhiighckpbhcpp
 https://civitai.com/models/2670340/slop-in-the-face
@@ -206,6 +208,7 @@ https://github.blog/engineering/from-pixels-to-characters-the-engineering-behind
 https://github.blog/engineering/infrastructure/how-github-uses-ebpf-to-improve-deployment-safety
 https://github.blog/engineering/infrastructure/when-protections-outlive-their-purpose-a-lesson-on-managing-defense-systems-at-scale
 https://github.blog/engineering/platform-security/post-quantum-security-for-ssh-access-on-github
+https://github.blog/engineering/the-cost-of-saying-yes-has-changed
 https://github.com/Agents365-ai/drawio-skill
 https://github.com/AMAP-ML/DreamX-World
 https://github.com/anomalyco/opencode/releases/tag/v1.17.15
@@ -484,6 +487,7 @@ https://thezvi.substack.com/p/the-ai-ad-hoc-prior-restraint-era
 https://thezvi.substack.com/p/the-most-important-charts-in-the
 https://thezvi.substack.com/p/what-is-anthropic
 https://thinkingmachines.ai/blog/interaction-models
+https://thinkingmachines.ai/news/introducing-inkling
 https://transformer-circuits.pub/2026/workspace/index.html
 https://v0.app/
 https://venturebeat.com/technology/z-ai-launches-zcode-to-challenge-cursor-claude-code-and-github-copilot-in-ai-coding
