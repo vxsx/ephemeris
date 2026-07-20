@@ -1,0 +1,493 @@
+<!doctype html>
+<!--
+  Ephemeris · Issue 091 · 2026-07-20
+  Built on the locked scaffold. Surface-only overrides below.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 091 · 20 Jul 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — don't touch. Surface overrides under "Theme overrides".
+     ═══════════════════════════════════════════════════════════════════ */
+
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 {
+    overflow-wrap: break-word;
+    margin: 0;
+  }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+
+  .spread > .decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .folio a.home { color: inherit; text-decoration: none; }
+  .folio a.home:hover { text-decoration: underline; }
+
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+
+  .figure { width: 100%; }
+
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — surface only.
+     Cover: editor's note · s01: terminal · s02: electric big-stats ·
+     s03: museum placard (invert) · colophon: dark ink.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── Cover · editor's note ─── */
+  .cover { background: #0e1311; color: #ece7db; }
+  .cover .brand {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    font-size: clamp(30px, 4vw, 48px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: #e6b24c;
+    margin: 0;
+  }
+  .cover .kicker {
+    font-family: var(--sans);
+    font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase;
+    color: #8a9690; margin: 0 0 6px;
+  }
+  .cover .note {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(26px, 3.4vw, 46px);
+    line-height: 1.28;
+    letter-spacing: -0.01em;
+    max-width: 20ch;
+    margin: 0;
+  }
+  .cover .note b { font-style: normal; font-weight: 600; color: #e6b24c; }
+  .cover .toc {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding-top: 14px;
+    border-top: 1px solid rgba(236,231,219,0.22);
+    width: 100%;
+    max-width: 640px;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 4px 16px;
+    text-decoration: none; color: inherit;
+    padding: 11px 0;
+    border-bottom: 1px solid rgba(236,231,219,0.14);
+    font-family: var(--sans);
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; font-size: 17px; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: #8a9690; }
+  .cover .toc .num {
+    font-family: var(--mono); color: #e6b24c; margin-right: 12px; font-size: 0.86em;
+  }
+  .cover .decor::before {
+    content: ""; position: absolute;
+    right: -18vw; top: -18vw; width: 60vw; height: 60vw;
+    background: radial-gradient(circle, rgba(230,178,76,0.10), transparent 68%);
+  }
+
+  /* ─── s01 · Terminal (loud) ─── */
+  .s01 { background: #04100a; color: #43efa0; }
+  .s01 .tag { color: #43efa0; border-color: rgba(67,239,160,0.5); }
+  .s01 .hed {
+    font-family: var(--mono);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    font-size: clamp(40px, 5.6vw, 88px);
+    text-shadow: 0 0 26px rgba(67,239,160,0.28);
+  }
+  .s01 .hed em { font-style: normal; color: #ffcc4d; }
+  .s01 .lede { font-family: var(--sans); color: #bfeeda; font-size: clamp(19px, 1.7vw, 24px); }
+  .s01 .read-on { color: #43efa0; border-color: #43efa0; --flip: #04100a; }
+  .s01 .term {
+    font-family: var(--mono);
+    font-size: clamp(13.5px, 1.55vw, 16px);
+    line-height: 1.85;
+    background: rgba(0,0,0,0.45);
+    border: 1px solid rgba(67,239,160,0.28);
+    border-radius: 8px;
+    padding: 18px 20px;
+    max-width: 720px;
+    white-space: pre;
+    overflow-x: auto;
+    color: #6ff0b4;
+  }
+  .s01 .term .p { color: #2f9d69; }
+  .s01 .term .flag { color: #ffcc4d; }
+  .s01 .term .crit { color: #ff5c57; font-weight: 600; }
+  .s01 .decor::before {
+    content: ""; position: absolute; inset: 0;
+    background: repeating-linear-gradient(180deg, rgba(67,239,160,0.05) 0 1px, transparent 1px 4px);
+  }
+  .s01 .decor::after {
+    content: ""; position: absolute;
+    left: -12vw; bottom: -20vw; width: 52vw; height: 52vw;
+    background: radial-gradient(circle, rgba(67,239,160,0.10), transparent 70%);
+  }
+
+  /* ─── s02 · Electric big-stats (loud) ─── */
+  .s02 { background: #1a30f0; color: #ffffff; }
+  .s02 .tag { color: #eaff00; border-color: rgba(234,255,0,0.6); }
+  .s02 .hed {
+    font-family: var(--sans);
+    font-weight: 900;
+    letter-spacing: -0.035em;
+    line-height: 0.98;
+    font-size: clamp(46px, 7.4vw, 112px);
+  }
+  .s02 .hed em { font-style: normal; color: #eaff00; }
+  .s02 .lede { font-family: var(--serif); color: #e7ebff; }
+  .s02 .read-on { color: #ffffff; border-color: #ffffff; --flip: #1a30f0; }
+  .s02 .figure { display: flex; flex-direction: column; gap: 22px; }
+  .s02 .bignum {
+    font-family: var(--sans); font-weight: 900;
+    font-size: clamp(84px, 15vw, 190px);
+    line-height: 0.82;
+    letter-spacing: -0.05em;
+    color: #eaff00;
+    display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 0.3em;
+  }
+  .s02 .bignum .unit {
+    font-family: var(--mono);
+    font-weight: 400;
+    font-size: 0.14em;
+    letter-spacing: normal;
+    color: #ffffff;
+    text-transform: uppercase;
+  }
+  .s02 .stats {
+    display: grid; grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 4px 28px; margin: 0;
+    border-top: 2px solid rgba(255,255,255,0.35);
+    padding-top: 16px; max-width: 760px;
+  }
+  .s02 .stats div { min-width: 0; }
+  .s02 .stats dt {
+    font-family: var(--sans); font-weight: 800;
+    font-size: clamp(30px, 4.4vw, 52px); letter-spacing: -0.02em; color: #ffffff;
+  }
+  .s02 .stats dd {
+    margin: 4px 0 0; font-family: var(--sans); font-weight: 600;
+    font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; color: #b9c2ff;
+  }
+  .s02 .decor::before {
+    content: "1.7"; position: absolute;
+    right: -2vw; bottom: -6vw;
+    font-family: var(--sans); font-weight: 900; font-size: 44vw; line-height: 1;
+    color: rgba(255,255,255,0.05); letter-spacing: -0.06em;
+  }
+
+  /* ─── s03 · Museum placard (tonal invert) ─── */
+  .s03 { background: #f4efe1; color: #2a2a22; }
+  .s03 .tag { color: #46592f; border-color: #46592f; }
+  .s03 .hed {
+    font-family: var(--serif); font-weight: 600;
+    font-variation-settings: "opsz" 120, "SOFT" 40, "WONK" 0;
+    letter-spacing: -0.015em;
+    font-size: clamp(46px, 6.4vw, 96px);
+  }
+  .s03 .hed em { font-style: italic; color: #46592f; }
+  .s03 .lede { color: #3c3c31; }
+  .s03 .read-on { color: #46592f; border-color: #46592f; --flip: #f4efe1; }
+  .s03 .placard {
+    background: #faf6ec;
+    border: 1px solid rgba(70,89,47,0.4);
+    border-radius: 3px;
+    padding: 26px 30px;
+    max-width: 620px;
+    text-align: left;
+    box-shadow: 0 1px 0 rgba(70,89,47,0.15);
+  }
+  .s03 .placard .cap {
+    font-family: var(--sans); font-size: 12px; letter-spacing: 0.32em;
+    text-transform: uppercase; color: #46592f; margin: 0 0 16px;
+    text-align: center;
+  }
+  .s03 .placard dl { margin: 0; display: grid; gap: 0; }
+  .s03 .placard .row {
+    display: grid; grid-template-columns: 1fr; gap: 2px;
+    padding: 12px 0; border-top: 1px solid rgba(70,89,47,0.22);
+  }
+  .s03 .placard .row:first-of-type { border-top: 0; }
+  .s03 .placard dt {
+    font-family: var(--serif); font-weight: 600; font-size: 20px; color: #2a2a22;
+  }
+  .s03 .placard dd {
+    margin: 0; font-family: var(--sans); font-size: 15px; color: #5a5a4c; letter-spacing: 0.01em;
+  }
+  .s03 .decor::before {
+    content: ""; position: absolute;
+    left: 50%; top: -20vw; transform: translateX(-50%);
+    width: 60vw; height: 60vw;
+    background: radial-gradient(circle, rgba(70,89,47,0.06), transparent 68%);
+  }
+
+  /* ─── Colophon · dark ink ─── */
+  .colophon { background: #0e1311; color: #ece7db; }
+  .colophon .hed { font-family: var(--serif); font-weight: 800; }
+  .colophon .hed em { font-style: italic; color: #e6b24c; }
+  .colophon .lede { font-family: var(--sans); color: #bcc4be; font-size: clamp(18px, 1.5vw, 21px); max-width: 60ch; }
+  .colophon .folio { color: #8a9690; }
+
+  @media (max-width: 800px) {
+    .s01 .term { font-size: 13px; line-height: 1.8; padding: 14px 15px; }
+    .s02 .stats { grid-template-columns: 1fr; gap: 14px; }
+    .s02 .stats dd { font-size: 13px; }
+    .s02 .bignum { font-size: clamp(70px, 24vw, 120px); }
+    .cover .note { font-size: clamp(24px, 6.5vw, 34px); max-width: none; }
+    .s03 .placard { padding: 20px 18px; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══ COVER · editor's note ═══ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 091</a></span>
+    <span>Monday · 20 Jul 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <div>
+      <p class="kicker">Editor's note</p>
+      <h1 class="brand">Ephemeris.</h1>
+    </div>
+    <p class="note">Three sightings of the same animal today. An autonomous agent breaks into Hugging Face — and what notices is <b>another model</b>, not a night-shift human. A second agent writes near-frontier code for pennies, and hints that reinforcement learning has <b>no ceiling</b>. OpenAI's finance chief, meanwhile, offers a plainer yardstick: <b>finished work</b>. Catch them, cheapen them, price them.</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>The breach a model caught</span><span>Hugging Face</span></a>
+      <a href="#s02"><span><span class="num">02</span>No ceiling to post-training</span><span>Cognition</span></a>
+      <a href="#s03"><span><span class="num">03</span>Measure the work, not the model</span><span>OpenAI</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ s01 · Hugging Face incident · terminal ═══ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 091</a></span>
+    <span>01 / 03 · Hugging Face</span>
+  </header>
+  <div class="main">
+    <span class="tag">Security · AI-driven attack</span>
+    <h2 class="hed">An agent broke in. Their model <em>caught it.</em></h2>
+    <p class="lede">A poisoned dataset carried a remote-code loader and a template injection into Hugging Face's pipeline; from there an autonomous agent escalated privileges and moved across internal clusters at machine speed. What surfaced it was Hugging Face's own LLM triage, correlating signals no night-shift human was reading in real time. The takeaway costs nothing to adopt: keep a capable model you can run on your own hardware, vetted before the incident — the commercial APIs refused the forensic work on safety grounds.</p>
+    <div class="figure">
+      <div class="term"><span class="p">$</span> tail -f /var/log/hf/triage.jsonl
+14:07:02  dataset.load    loader=remote            <span class="flag">⚠ code-exec</span>
+14:07:04  iam.escalate    svc-worker → cluster-admin
+14:07:09  net.lateral     clusters=7   egress=<span class="flag">∆high</span>
+14:07:09  llm-triage      correlate()  →  <span class="crit">INCIDENT  p=0.97</span>
+14:07:10  response        isolate · rotate-creds · freeze</div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://huggingface.co/blog/security-incident-july-2026" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ s02 · Cognition SWE-1.7 · electric big-stats ═══ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 091</a></span>
+    <span>02 / 03 · Cognition</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev tools · Agentic coding</span>
+    <h2 class="hed">There's no <em>ceiling</em> to post-training.</h2>
+    <p class="lede">Cognition built SWE-1.7 on top of Kimi K2.7 — a base already put through heavy reinforcement learning — and still pulled large gains, denting the idea that RL post-training saturates. It reaches frontier-class agentic coding at a fraction of the cost, and runs inside Devin at 1,000 tokens a second on Cerebras. Its move for long jobs: as it nears the context limit, it summarizes its own working state and resumes from that summary, stretching the effective horizon past the raw window.</p>
+    <div class="figure">
+      <div class="bignum">1000<span class="unit">tok / s · Cerebras</span></div>
+      <dl class="stats">
+        <div><dt>42.3%</dt><dd>FrontierCode 1.1</dd></div>
+        <div><dt>81.5%</dt><dd>Terminal-Bench 2.1</dd></div>
+        <div><dt>77.8%</dt><dd>SWE-Bench Multiling.</dd></div>
+      </dl>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://cognition.com/blog/swe-1-7" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ s03 · OpenAI scorecard · museum placard (invert) ═══ -->
+<section class="spread s03 centered" id="s03">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 091</a></span>
+    <span>03 / 03 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">AI economics · Measurement</span>
+    <h2 class="hed">Measure the work, not the <em>model.</em></h2>
+    <p class="lede">OpenAI's finance chief makes the case for judging AI by useful work — cost per successful task, dependability, and return on compute — rather than parameter counts or leaderboard scores. For a team weighing where its AI spend earns its keep, those are four numbers you can start tracking this quarter. The catch is that each one forces you to define "successful" before you can put a price on it.</p>
+    <div class="figure">
+      <div class="placard">
+        <p class="cap">The scorecard</p>
+        <dl>
+          <div class="row"><dt>Useful work</dt><dd>Did it move a real task forward, or just produce tokens?</dd></div>
+          <div class="row"><dt>Cost per successful task</dt><dd>Dollars per outcome — not dollars per token.</dd></div>
+          <div class="row"><dt>Dependability</dt><dd>Does it hold up unattended, run after run?</dd></div>
+          <div class="row"><dt>Return on compute</dt><dd>Value out, weighed against the FLOPs in.</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/a-scorecard-for-the-ai-age/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══ COLOPHON ═══ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 091</span>
+    <span><a class="home" href="../index.html">Back to top ↑</a></span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Issue 091. Today's picks came from Hugging Face, Cognition, and OpenAI, filtered for one thing: an AI tool, technique, or lesson a senior engineer or founder could act on this week. Three sources, three sightings of the agent era — as intruder, as builder, as line item. Back tomorrow at eight.</p>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>

@@ -148,6 +148,7 @@ https://cloud.google.com/blog/topics/threat-intelligence/ai-vulnerability-exploi
 https://code.claude.com/docs/en/whats-new/2026-w28
 https://cognition.ai/blog/ai-guarantee
 https://cognition.ai/blog/frontier-code
+https://cognition.com/blog/swe-1-7
 https://community.fabric.microsoft.com/t5/Fabric-Updates-Blog/Introducing-Rayfin-A-new-AI-first-way-to-build-deploy-and-govern/ba-p/5191676
 https://cursor.com/blog/cloud-agent-lessons
 https://cursor.com/blog/composer-2-5
@@ -251,6 +252,7 @@ https://higgsfield.ai/apps/virality-predictor
 https://higgsfield.ai/mcp
 https://huggingface.co/blog/mishig/local-moores-law
 https://huggingface.co/blog/native-speed-vllm-transformers-backend
+https://huggingface.co/blog/security-incident-july-2026
 https://huggingface.co/collections/talkie-lm/talkie-13b
 https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro
 https://huggingface.co/google/diffusiongemma-26B-A4B-it
@@ -308,6 +310,7 @@ https://nextjs.org/blog/nextjs-across-platforms
 https://nextjs.org/blog/turbopack-incremental-computation
 https://nvidianews.nvidia.com/news/nvidia-microsoft-windows-pcs-agents-rtx-spark
 https://openai.com/academy/codex-for-work/how-data-science-teams-use-codex
+https://openai.com/index/a-scorecard-for-the-ai-age
 https://openai.com/index/advancing-content-provenance
 https://openai.com/index/advancing-voice-intelligence-with-new-models-in-the-api
 https://openai.com/index/ai-chemist-improves-reaction
