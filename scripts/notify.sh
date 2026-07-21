@@ -25,10 +25,26 @@ URL="https://vadim.sikora.name/ephemeris/magazines/${ISSUE_DATE}.html"
 PRETTY="$(date -j -f '%Y-%m-%d' "$ISSUE_DATE" '+%A, %-d %B %Y' 2>/dev/null \
         || date -d "$ISSUE_DATE" '+%A, %-d %B %Y')"
 
+# Count the picks: one <section id="sNN"> per story (cover and colophon
+# have their own ids, so they never match).
+MAG_FILE="$REPO_DIR/magazines/${ISSUE_DATE}.html"
+COUNT="$(grep -oE 'id="s[0-9]+"' "$MAG_FILE" 2>/dev/null | sort -u | wc -l | tr -d ' ')" || COUNT=0
+
+WORDS=(zero one two three four five six seven eight nine ten eleven twelve)
+if [[ "$COUNT" -eq 1 ]]; then
+  PICKS_LINE="Today's pick is up:"
+elif [[ "$COUNT" -ge 2 && "$COUNT" -le 12 ]]; then
+  PICKS_LINE="Today's ${WORDS[COUNT]} picks are up:"
+elif [[ "$COUNT" -gt 12 ]]; then
+  PICKS_LINE="Today's ${COUNT} picks are up:"
+else
+  PICKS_LINE="Today's picks are up:"
+fi
+
 TEXT=$(cat <<EOF
 ☕️ *Ephemeris — ${PRETTY}*
 
-Today's ten picks are up:
+${PICKS_LINE}
 ${URL}
 EOF
 )

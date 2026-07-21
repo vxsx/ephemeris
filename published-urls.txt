@@ -3,6 +3,7 @@ https://1x.tech/discover/neos-hands
 https://ahrefs.com/blog/schema-ai-citations
 https://ai.meta.com/blog/brain2qwerty-brain-ai-human-communication
 https://ai.meta.com/blog/introducing-muse-image-muse-video-msl
+https://aisi.gov.uk/blog/how-far-behind-the-frontier-are-leading-open-weight-models-on-cyber
 https://aisi.gov.uk/blog/our-evaluation-of-openais-gpt-5-5-cyber-capabilities
 https://aleximas.substack.com/p/how-will-ai-driven-automation-actually
 https://andonlabs.com/blog/openai-gpt-5-5-vending-bench
@@ -235,6 +236,7 @@ https://github.com/DenisSergeevitch/pole-chudes-2
 https://github.com/DenisSergeevitch/UFO-USA
 https://github.com/Fission-AI/OpenSpec/blob/main/docs/concepts.md
 https://github.com/JibranK12345/Viral-Bench
+https://github.com/mvanhorn/last30days-skill
 https://github.com/nexu-io/open-design
 https://github.com/onsails/right-agent
 https://github.com/OpenCoworkAI/open-cowork
@@ -306,6 +308,7 @@ https://nextjs.org/blog/next-16-2-ai
 https://nextjs.org/blog/next-16-3-ai-improvements
 https://nextjs.org/blog/next-16-3-instant-navigations
 https://nextjs.org/blog/next-16-3-turbopack
+https://nextjs.org/blog/next-security-release-program
 https://nextjs.org/blog/nextjs-across-platforms
 https://nextjs.org/blog/turbopack-incremental-computation
 https://nvidianews.nvidia.com/news/nvidia-microsoft-windows-pcs-agents-rtx-spark
@@ -437,6 +440,7 @@ https://sentry.io/blog/debugging-multi-agent-ai-when-the-failure-is-in-the-space
 https://sentry.io/blog/errors-traces-logs-metrics-when-to-reach-for-what
 https://sentry.io/blog/fixing-javascript-observability
 https://sentry.io/blog/logging-best-practices
+https://sentry.io/blog/mongodb-query-tracing-dotnet-sentry
 https://sentry.io/blog/nextjs-export-traces-opentelemetry
 https://sentry.io/blog/nextjs-supabase-observability
 https://sentry.io/blog/scaling-observability-for-multi-agent-ai-systems
