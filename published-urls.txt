@@ -99,6 +99,7 @@ https://blog.cloudflare.com/frontier-model-defense
 https://blog.cloudflare.com/high-performance-llms
 https://blog.cloudflare.com/hyper-bug
 https://blog.cloudflare.com/internal-ai-engineering-stack
+https://blog.cloudflare.com/internal-dns
 https://blog.cloudflare.com/introducing-precursor
 https://blog.cloudflare.com/iran-internet-partially-restored-may-2026
 https://blog.cloudflare.com/making-rust-workers-reliable
@@ -215,6 +216,7 @@ https://github.com/Agents365-ai/drawio-skill
 https://github.com/AMAP-ML/DreamX-World
 https://github.com/anomalyco/opencode/releases/tag/v1.17.15
 https://github.com/Augani/openreel-video
+https://github.com/BayramAnnakov/ai-native-product-skills
 https://github.com/BayramAnnakov/ai-native-product-skills/tree/master/skills/autoresearch
 https://github.com/BayramAnnakov/ai-native-product-skills/tree/master/skills/council
 https://github.com/BayramAnnakov/ai-personal-os-skills/tree/main/skills/slide-inspector
@@ -222,6 +224,7 @@ https://github.com/BayramAnnakov/clarity-session-review
 https://github.com/BayramAnnakov/excel-hygiene
 https://github.com/BayramAnnakov/factory-agent
 https://github.com/BayramAnnakov/fishbanks-sandbox
+https://github.com/BayramAnnakov/oss-migration-eval
 https://github.com/BayramAnnakov/systems-thinking-skills/tree/main/skills/why-tree
 https://github.com/BayramAnnakov/team-os-toolkit
 https://github.com/BayramAnnakov/token-audit-skill
@@ -447,6 +450,7 @@ https://sentry.io/blog/scaling-observability-for-multi-agent-ai-systems
 https://sentry.io/blog/seer-agent-page-context
 https://sentry.io/blog/sentry-opentelemetry-work-together
 https://sentry.io/blog/spot-checking-ai-agents
+https://sentry.io/blog/structure-a-log
 https://shir-man.com/free-llm
 https://shir-man.com/pole-chudes-exe
 https://sierra.ai/blog/the-ai-native-interview
