@@ -1,0 +1,641 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 094 · 24 July 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — from scaffold.html. Surface overrides only below.
+     ═══════════════════════════════════════════════════════════════════ */
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+  .spread > .decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .folio a.home { color: inherit; text-decoration: none; }
+  .folio a.home:hover { text-decoration: underline; }
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+  .figure { width: 100%; }
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — surface only.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── Cover · dossier grid ───────────────────────────────────────── */
+  .cover { background: #e7e1d3; color: #1a1813; }
+  .cover .main { gap: clamp(20px, 2.4vw, 34px); }
+  .cover .kicker {
+    font-family: var(--mono);
+    font-size: 14px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    opacity: 0.72;
+  }
+  .cover .wordmark {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    font-size: clamp(52px, 11vw, 140px);
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    color: #b23a1f;
+    padding-bottom: 0.08em;
+  }
+  .cover .wordmark em { font-style: normal; color: #1a1813; }
+  .cover .dossier {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    border-top: 2px solid #1a1813;
+    border-left: 2px solid #1a1813;
+  }
+  .cover .cell {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    padding: clamp(16px, 1.8vw, 26px) clamp(16px, 1.8vw, 26px) clamp(18px, 2vw, 28px);
+    border-right: 2px solid #1a1813;
+    border-bottom: 2px solid #1a1813;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: clamp(150px, 20vw, 220px);
+  }
+  .cover .cell .row {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px;
+  }
+  .cover .cell .n {
+    font-family: var(--serif); font-weight: 800; font-style: italic;
+    font-size: clamp(30px, 3.4vw, 46px); color: #b23a1f; line-height: 1;
+  }
+  .cover .cell .swatch { width: 26px; height: 26px; border: 1.5px solid #1a1813; }
+  .cover .cell .frag {
+    font-family: var(--serif); font-weight: 600;
+    font-size: clamp(20px, 2vw, 28px); line-height: 1.15;
+    margin-top: auto;
+  }
+  .cover .cell .src {
+    font-family: var(--sans); font-size: 12px; font-weight: 600;
+    letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.6;
+  }
+  .cover .cell:hover { background: #dcd4c1; }
+  @media (max-width: 800px) {
+    .cover .dossier { grid-template-columns: 1fr; }
+  }
+
+  /* ─── s01 · Film still — Sentry / Seer autonomous bug-fixing ─────── */
+  .s01 { background: #0d0d11; color: #f2ede2; }
+  .s01 .tag { color: #e8402f; border-color: #e8402f; opacity: 1; }
+  .s01 .hed {
+    font-family: var(--sans);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.015em;
+    line-height: 0.98;
+    font-size: clamp(44px, 6.6vw, 96px);
+  }
+  .s01 .hed em { font-style: normal; color: #e8402f; }
+  .s01 .lede { color: #cfc9bd; }
+  .s01 .read-on { color: #f2ede2; border-color: #e8402f; --flip: #0d0d11; }
+  .s01 .read-on:hover { background: #e8402f; border-color: #e8402f; }
+  /* figure: the 57 → 1 collapse + method note */
+  .s01 .bugstat {
+    display: flex; align-items: baseline; gap: clamp(10px, 1.5vw, 22px);
+    font-family: var(--sans); font-weight: 900; line-height: 1;
+    font-size: clamp(60px, 12vw, 150px); color: #f2ede2;
+    letter-spacing: -0.03em;
+  }
+  .s01 .bugstat .arrow { letter-spacing: normal; color: #e8402f; font-weight: 700; }
+  .s01 .bugstat .one { color: #e8402f; }
+  .s01 .caption {
+    font-family: var(--mono); font-size: 13px; letter-spacing: 0.04em;
+    color: #8f8a80; text-transform: uppercase; margin-top: 6px;
+  }
+  .s01 .method {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px 26px; margin-top: clamp(16px, 2vw, 26px);
+    max-width: 60ch;
+  }
+  .s01 .method div { border-left: 2px solid #e8402f; padding-left: 14px; }
+  .s01 .method b {
+    display: block; font-family: var(--mono); font-weight: 600; font-size: 13px;
+    letter-spacing: 0.1em; text-transform: uppercase; color: #e8402f; margin-bottom: 4px;
+  }
+  .s01 .method span { font-family: var(--sans); font-size: 15px; color: #cfc9bd; }
+  /* decor: letterbox bars + sprockets */
+  .s01 .decor .bar {
+    position: absolute; left: 0; right: 0;
+    height: clamp(24px, 5.5vh, 56px); background: #000;
+  }
+  .s01 .decor .bar.top { top: 0; border-bottom: 1px solid rgba(232,64,47,0.45); }
+  .s01 .decor .bar.bottom { bottom: 0; border-top: 1px solid rgba(232,64,47,0.45); }
+  .s01 .decor .bar::after {
+    content: ""; position: absolute; left: 0; right: 0; top: 50%;
+    transform: translateY(-50%); height: 10px;
+    background-image: repeating-linear-gradient(90deg,
+      rgba(242,237,226,0.14) 0 14px, transparent 14px 40px);
+  }
+  @media (max-width: 800px) {
+    .s01 .method { grid-template-columns: 1fr; }
+    .s01 .bugstat { font-size: clamp(52px, 20vw, 90px); }
+  }
+
+  /* ─── s02 · Blueprint — Cloudflare Cache Response Rules ──────────── */
+  .s02 { background: #e3ebf1; color: #143a5c; }
+  .s02 .tag { color: #0e6ac0; border-color: #0e6ac0; }
+  .s02 .hed {
+    font-family: var(--mono);
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: -0.01em;
+    line-height: 1.04;
+    font-size: clamp(32px, 4.9vw, 62px);
+    color: #143a5c;
+  }
+  .s02 .hed em { font-style: normal; color: #0e6ac0; }
+  .s02 .read-on { color: #143a5c; border-color: #0e6ac0; --flip: #e3ebf1; }
+  .s02 .read-on:hover { background: #0e6ac0; border-color: #0e6ac0; }
+  /* figure: request pipeline, the new phase highlighted */
+  .s02 .pipeline {
+    display: flex; flex-wrap: wrap; align-items: stretch; gap: 0;
+    font-family: var(--mono); margin-top: 4px;
+  }
+  .s02 .pipeline .stage {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 12px 16px; border: 1.5px solid rgba(20,58,92,0.4);
+    background: rgba(255,255,255,0.35); min-width: 92px;
+  }
+  .s02 .pipeline .stage b {
+    font-size: 14px; font-weight: 600; letter-spacing: 0.02em; color: #143a5c;
+  }
+  .s02 .pipeline .stage small {
+    font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: rgba(20,58,92,0.55); margin-top: 3px;
+  }
+  .s02 .pipeline .stage.hot {
+    background: #0e6ac0; border-color: #0e6ac0;
+  }
+  .s02 .pipeline .stage.hot b { color: #fff; }
+  .s02 .pipeline .stage.hot small { color: rgba(255,255,255,0.8); }
+  .s02 .pipeline .arrow {
+    display: flex; align-items: center; padding: 0 10px;
+    color: #0e6ac0; font-weight: 600; font-size: 20px;
+  }
+  .s02 .note {
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(17px, 1.6vw, 21px); color: #2b5578;
+    margin-top: clamp(16px, 2vw, 24px); max-width: 54ch;
+    border-left: 2px solid #0e6ac0; padding-left: 16px;
+  }
+  /* decor: blueprint grid + crop marks (kept clear of the folio) */
+  .s02 .decor .grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(20,58,92,0.10) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(20,58,92,0.10) 1px, transparent 1px);
+    background-size: 34px 34px;
+  }
+  .s02 .decor .crop {
+    position: absolute; width: 20px; height: 20px;
+    border-color: rgba(20,58,92,0.5); border-style: solid; border-width: 0;
+  }
+  .s02 .decor .crop.br { right: 26px; bottom: 26px; border-right-width: 2px; border-bottom-width: 2px; }
+  .s02 .decor .crop.bl { left: 26px; bottom: 26px; border-left-width: 2px; border-bottom-width: 2px; }
+  .s02 .decor .crop.tr { right: 26px; top: 26px; border-right-width: 2px; border-top-width: 2px; }
+  @media (max-width: 800px) {
+    .s02 .pipeline { flex-direction: column; align-items: stretch; }
+    .s02 .pipeline .arrow { padding: 6px 0; transform: rotate(90deg); align-self: flex-start; }
+    .s02 .decor .crop { display: none; }
+  }
+
+  /* ─── s03 · Risograph — GigaChat Audio 10B (open weights) ────────── */
+  .s03 { background: #f3ede1; color: #14100c; }
+  .s03 .tag { color: #d62878; border-color: #d62878; }
+  .s03 .hed {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 700;
+    font-variation-settings: "opsz" 144, "SOFT" 40, "WONK" 1;
+    font-size: clamp(50px, 7.4vw, 104px);
+    line-height: 1.0;
+    color: #0aa5bd;
+    text-shadow: 3px 3px 0 rgba(214,40,120,0.85);
+  }
+  .s03 .hed em { font-style: italic; color: #d62878; text-shadow: 3px 3px 0 rgba(10,165,189,0.7); }
+  .s03 .lede { color: #2a241d; }
+  .s03 .read-on { color: #14100c; border-color: #d62878; --flip: #f3ede1; }
+  .s03 .read-on:hover { background: #d62878; border-color: #d62878; }
+  /* figure: duotone waveform + spec list */
+  .s03 .wave {
+    display: flex; align-items: flex-end; gap: 4px; height: clamp(70px, 12vw, 120px);
+    margin-bottom: clamp(18px, 2vw, 26px);
+  }
+  .s03 .wave i {
+    flex: 1 1 auto; display: block; border-radius: 2px 2px 0 0;
+    background: #0aa5bd; mix-blend-mode: multiply;
+  }
+  .s03 .wave i:nth-child(even) { background: #d62878; }
+  .s03 .specs {
+    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px 20px; border-top: 2px solid #14100c; padding-top: 16px;
+  }
+  .s03 .specs div .v {
+    font-family: var(--serif); font-weight: 800; font-size: clamp(26px, 3vw, 40px);
+    line-height: 1; color: #d62878; letter-spacing: -0.02em;
+  }
+  .s03 .specs div .v .unit {
+    font-family: var(--sans); font-style: normal; font-weight: 700;
+    font-size: 0.4em; letter-spacing: normal; margin-left: 0.25em; color: #14100c;
+  }
+  .s03 .specs div .k {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: #6a6255; margin-top: 6px;
+  }
+  @media (max-width: 800px) {
+    .s03 .hed { text-shadow: 2px 2px 0 rgba(214,40,120,0.85); }
+    .s03 .specs { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ─── s04 · Teal grid — Claude SEO plugin ────────────────────────── */
+  .s04 { background: #eaf4f0; color: #0c4a45; }
+  .s04 .tag { color: #0f857b; border-color: #0f857b; }
+  .s04 .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-style: normal;
+    font-variation-settings: "opsz" 120, "SOFT" 0, "WONK" 0;
+    font-size: clamp(46px, 6.4vw, 90px);
+    line-height: 1.0;
+    color: #0c4a45;
+  }
+  .s04 .hed em { font-style: italic; color: #10a99c; }
+  .s04 .read-on { color: #0c4a45; border-color: #0f857b; --flip: #eaf4f0; }
+  .s04 .read-on:hover { background: #0f857b; border-color: #0f857b; }
+  /* figure: agent grid + install chip + stats */
+  .s04 .agentgrid {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px; margin-bottom: clamp(16px, 2vw, 24px);
+  }
+  .s04 .agentgrid .card {
+    position: relative; border: 1.5px solid rgba(12,74,69,0.35);
+    background: rgba(255,255,255,0.4); padding: 14px 14px 16px;
+    min-height: 84px;
+  }
+  .s04 .agentgrid .card .c {
+    font-family: var(--serif); font-style: italic; font-weight: 700;
+    font-size: 15px; color: #10a99c; position: absolute; top: 8px; right: 12px;
+  }
+  .s04 .agentgrid .card .l {
+    font-family: var(--sans); font-weight: 700; font-size: 15px;
+    color: #0c4a45; display: block; margin-top: 10px;
+  }
+  .s04 .agentgrid .card .d {
+    font-family: var(--sans); font-size: 13px; color: #4a6d68; margin-top: 3px;
+    display: block;
+  }
+  .s04 .install {
+    font-family: var(--mono); font-size: 14px; color: #06332f;
+    background: #d4e9e2; border: 1.5px solid rgba(12,74,69,0.4);
+    padding: 12px 15px; overflow-x: auto; white-space: nowrap;
+  }
+  .s04 .install .p { color: #0f857b; }
+  .s04 .metrics {
+    display: flex; flex-wrap: wrap; gap: 10px 26px; margin-top: 14px;
+    font-family: var(--mono); font-size: 13px; letter-spacing: 0.04em;
+    text-transform: uppercase; color: #3c625d;
+  }
+  .s04 .metrics b { color: #0c4a45; }
+  .s04 .decor::before {
+    content: ""; position: absolute; right: -8vw; top: -8vw;
+    width: 44vw; height: 44vw; border-radius: 50%;
+    background: radial-gradient(circle, rgba(16,169,156,0.12), transparent 70%);
+  }
+  @media (max-width: 800px) {
+    .s04 .agentgrid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ─── Colophon · warm concrete ───────────────────────────────────── */
+  .colophon { background: #e8e4da; color: #201d16; }
+  .colophon .hed {
+    font-family: var(--serif); font-weight: 800; color: #201d16;
+    font-size: clamp(44px, 6vw, 84px);
+  }
+  .colophon .hed em { font-style: italic; color: #7a3b1e; }
+  .colophon .lede { color: #3d382e; max-width: 58ch; }
+  .colophon .creds {
+    font-family: var(--mono); font-size: 13px; letter-spacing: 0.05em;
+    color: #6a6151; margin-top: 20px; line-height: 1.9; text-transform: uppercase;
+  }
+  .colophon .creds b { color: #7a3b1e; }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════════════════ COVER · dossier grid ═══════════════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 094</a></span>
+    <span>Friday · 24 Jul 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <span class="kicker">Dossier · four dispatches</span>
+    <h1 class="wordmark">Ephemeris<em>.</em></h1>
+    <nav class="dossier">
+      <a class="cell" href="#s01">
+        <div class="row"><span class="n">01</span><span class="swatch" style="background:#0d0d11"></span></div>
+        <span class="frag">The bug backlog crashed like Lehman '08 — and that's the good news.</span>
+        <span class="src">Sentry</span>
+      </a>
+      <a class="cell" href="#s02">
+        <div class="row"><span class="n">02</span><span class="swatch" style="background:#0e6ac0"></span></div>
+        <span class="frag">The stray header that keeps your cache cold.</span>
+        <span class="src">Cloudflare</span>
+      </a>
+      <a class="cell" href="#s03">
+        <div class="row"><span class="n">03</span><span class="swatch" style="background:#d62878"></span></div>
+        <span class="frag">An open 10B model that reads two hours of audio by the clock.</span>
+        <span class="src">Hugging Face · via @TochkiNadAI</span>
+      </a>
+      <a class="cell" href="#s04">
+        <div class="row"><span class="n">04</span><span class="swatch" style="background:#10a99c"></span></div>
+        <span class="frag">Eighteen agents comb your SEO before lunch.</span>
+        <span class="src">GitHub · via @TochkiNadAI</span>
+      </a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+</section>
+
+<!-- ═══════════════════ s01 · Sentry / Seer ═══════════════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 094</a></span>
+    <span>01 / 04 · Sentry</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev tools · Agents</span>
+    <h2 class="hed">The bug backlog just crashed. That's the <em>good news.</em></h2>
+    <p class="lede">A Sentry engineer wired Seer to an autonomous fix loop and watched a 57-bug pile shrink to one. The playbook is repeatable: connect error monitoring, let Seer draft the pull request, and hand the hard cases to a cloud coding agent.</p>
+    <div class="figure">
+      <div class="bugstat">57<span class="arrow">→</span><span class="one">1</span></div>
+      <div class="caption">open bugs, one working session</div>
+      <div class="method">
+        <div>
+          <b>Friendly bugs</b>
+          <span>Isolated and reproducible — Seer scores fixability, then opens the PR on its own.</span>
+        </div>
+        <div>
+          <b>Grumpy bugs</b>
+          <span>Seer does root-cause, then delegates the patch to Cursor or Claude Code with full dev-env access to verify.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.sentry.io/57-bugs-to-1/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true">
+    <span class="bar top"></span>
+    <span class="bar bottom"></span>
+  </div>
+</section>
+
+<!-- ═══════════════════ s02 · Cloudflare Cache Response Rules ═══════════════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 094</a></span>
+    <span>02 / 04 · Cloudflare</span>
+  </header>
+  <div class="main">
+    <span class="tag">Web infra · Caching</span>
+    <h2 class="hed">Strip the stray header before it drags your cache <em>cold.</em></h2>
+    <p class="lede">A single <code>Set-Cookie</code> or wrong <code>Cache-Control</code> from your origin is enough to make a perfectly cacheable asset uncacheable. Cache Response Rules add a new stage — after the origin answers, before Cloudflare stores — where you rewrite those headers without touching origin code.</p>
+    <div class="figure">
+      <div class="pipeline">
+        <div class="stage"><b>visitor</b><small>request</small></div>
+        <div class="arrow">→</div>
+        <div class="stage"><b>origin</b><small>responds</small></div>
+        <div class="arrow">→</div>
+        <div class="stage hot"><b>cache response rules</b><small>new phase</small></div>
+        <div class="arrow">→</div>
+        <div class="stage"><b>cache</b><small>stores</small></div>
+      </div>
+      <p class="note">No more watching something that should sail out of cache get dragged back to origin by a stray Set-Cookie.</p>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.cloudflare.com/introducing-cache-response-rules/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true">
+    <span class="grid"></span>
+    <span class="crop tr"></span>
+    <span class="crop bl"></span>
+    <span class="crop br"></span>
+  </div>
+</section>
+
+<!-- ═══════════════════ s03 · GigaChat Audio 10B ═══════════════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 094</a></span>
+    <span>03 / 04 · Hugging Face · via @TochkiNadAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Open weights · Audio</span>
+    <h2 class="hed">Two hours of audio, read by the <em>clock.</em></h2>
+    <p class="lede">Sber's ai-sage team put GigaChat Audio 10B and the 70-plus-language GigaAM on Hugging Face under MIT. It is audio-native — a Conformer encoder feeding a mixture-of-experts decoder — and its edge is temporal grounding: it timestamps events and summarizes across recordings up to 120 minutes long.</p>
+    <div class="figure">
+      <div class="wave" aria-hidden="true">
+        <i style="height:38%"></i><i style="height:64%"></i><i style="height:22%"></i><i style="height:80%"></i><i style="height:48%"></i><i style="height:92%"></i><i style="height:34%"></i><i style="height:70%"></i><i style="height:26%"></i><i style="height:58%"></i><i style="height:88%"></i><i style="height:42%"></i><i style="height:74%"></i><i style="height:30%"></i><i style="height:62%"></i><i style="height:50%"></i><i style="height:84%"></i><i style="height:36%"></i>
+      </div>
+      <div class="specs">
+        <div><div class="v">10<span class="unit">B</span></div><div class="k">params, MoE</div></div>
+        <div><div class="v">120<span class="unit">min</span></div><div class="k">audio context</div></div>
+        <div><div class="v">MIT</div><div class="k">licence</div></div>
+        <div><div class="v">'26</div><div class="k">Interspeech</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://huggingface.co/ai-sage/GigaChat3.1-Audio-10B-A1.8B" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ s04 · Claude SEO ═══════════════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 094</a></span>
+    <span>04 / 04 · GitHub · via @TochkiNadAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev tools · Claude Code</span>
+    <h2 class="hed">Eighteen agents comb your site <em>before lunch.</em></h2>
+    <p class="lede">Claude SEO is a Claude Code plugin that fans 18 specialist agents and 25 sub-skills across one audit — technical, content, schema, and AI-search readiness in a single pass. Every recommendation ships with a falsifiability check, so you know how you'd tell if it failed. No third-party API keys, ten to fifteen minutes end to end.</p>
+    <div class="figure">
+      <div class="agentgrid">
+        <div class="card"><span class="c">01</span><span class="l">Technical</span><span class="d">crawl, speed, indexing</span></div>
+        <div class="card"><span class="c">02</span><span class="l">Content</span><span class="d">E-E-A-T signals</span></div>
+        <div class="card"><span class="c">03</span><span class="l">Schema</span><span class="d">markup validation</span></div>
+        <div class="card"><span class="c">04</span><span class="l">GEO</span><span class="d">AI-search scoring</span></div>
+        <div class="card"><span class="c">05</span><span class="l">Local</span><span class="d">maps &amp; citations</span></div>
+        <div class="card"><span class="c">06</span><span class="l">Intl</span><span class="d">hreflang &amp; locale</span></div>
+      </div>
+      <div class="install"><span class="p">/plugin</span> marketplace add AgriciDaniel/claude-seo&nbsp;&nbsp;·&nbsp;&nbsp;<span class="p">/seo</span> audit &lt;url&gt;</div>
+      <div class="metrics"><span><b>18</b> agents</span><span><b>25</b> sub-skills</span><span><b>10–15</b> min</span><span><b>MIT</b> · 12.2k★</span></div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://github.com/AgriciDaniel/claude-seo" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ COLOPHON ═══════════════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 094</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Four dispatches for the senior engineer with ten minutes: an autonomous bug loop, a cache-header fix, an open audio model, and an SEO agent swarm you can install today.</p>
+    <div class="creds">
+      <b>Sources today —</b> Sentry · Cloudflare · Hugging Face / Sber · GitHub<br>
+      <b>Surfaced via —</b> @TochkiNadAI · The Batch · Import AI<br>
+      <b>Rubric —</b> tools to adopt this week · dev &amp; agentic · web infra · open weights<br>
+      <b>Issue 094 —</b> 24 July 2026 · Zürich
+    </div>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>

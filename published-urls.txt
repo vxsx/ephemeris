@@ -100,6 +100,7 @@ https://blog.cloudflare.com/high-performance-llms
 https://blog.cloudflare.com/hyper-bug
 https://blog.cloudflare.com/internal-ai-engineering-stack
 https://blog.cloudflare.com/internal-dns
+https://blog.cloudflare.com/introducing-cache-response-rules
 https://blog.cloudflare.com/introducing-precursor
 https://blog.cloudflare.com/iran-internet-partially-restored-may-2026
 https://blog.cloudflare.com/making-rust-workers-reliable
@@ -213,6 +214,7 @@ https://github.blog/engineering/infrastructure/when-protections-outlive-their-pu
 https://github.blog/engineering/platform-security/post-quantum-security-for-ssh-access-on-github
 https://github.blog/engineering/the-cost-of-saying-yes-has-changed
 https://github.com/Agents365-ai/drawio-skill
+https://github.com/AgriciDaniel/claude-seo
 https://github.com/AMAP-ML/DreamX-World
 https://github.com/anomalyco/opencode/releases/tag/v1.17.15
 https://github.com/Augani/openreel-video
@@ -255,6 +257,7 @@ https://hermes-agent.nousresearch.com/desktop
 https://hermesagents.net/
 https://higgsfield.ai/apps/virality-predictor
 https://higgsfield.ai/mcp
+https://huggingface.co/ai-sage/GigaChat3.1-Audio-10B-A1.8B
 https://huggingface.co/blog/mishig/local-moores-law
 https://huggingface.co/blog/native-speed-vllm-transformers-backend
 https://huggingface.co/blog/security-incident-july-2026
@@ -434,6 +437,7 @@ https://sentry.engineering/blog/do-you-really-need-an-mcp-to-build-your-app
 https://sentry.engineering/blog/from-monkey-patching-to-tracing-channels
 https://sentry.engineering/blog/next-halloween-im-dressing-as-on2
 https://sentry.engineering/blog/swizzling-swiftui-view-body
+https://sentry.io/blog/57-bugs-to-1
 https://sentry.io/blog/agents-need-production-context
 https://sentry.io/blog/ai-agent-observability-developers-guide-to-agent-monitoring
 https://sentry.io/blog/ai-bug-reproduction
