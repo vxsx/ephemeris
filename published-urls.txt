@@ -31,6 +31,7 @@ https://anthropic.com/news/claude-for-creative-work
 https://anthropic.com/news/claude-for-small-business
 https://anthropic.com/news/claude-opus-4-7
 https://anthropic.com/news/claude-opus-4-8
+https://anthropic.com/news/claude-opus-5
 https://anthropic.com/news/claude-science-ai-workbench
 https://anthropic.com/news/claude-sonnet-5
 https://anthropic.com/news/election-safeguards-update
@@ -78,6 +79,7 @@ https://blog.cloudflare.com/ai-code-review
 https://blog.cloudflare.com/ai-gateway-spend-limits
 https://blog.cloudflare.com/artifacts-git-for-agents-beta
 https://blog.cloudflare.com/attribution-business-insights
+https://blog.cloudflare.com/bgp-origin-attribute
 https://blog.cloudflare.com/browser-run-containers
 https://blog.cloudflare.com/build-your-own-vulnerability-harness
 https://blog.cloudflare.com/building-for-the-future
@@ -412,6 +414,7 @@ https://posthog.com/blog/traces-beta
 https://posthog.com/blog/training-ai-models
 https://posthog.com/blog/untangling-rayon-and-tokio
 https://posthog.com/blog/what-if-your-product-built-itself
+https://posthog.com/blog/what-is-a-context-warehouse
 https://posthog.com/blog/what-is-a-scout
 https://posthog.com/blog/what-is-ai-observability
 https://posthog.com/blog/why-attacking-competitors-is-dumb
@@ -462,6 +465,7 @@ https://simonwillison.net/2026/May/14/not-so-locked-in
 https://stepsecurity.io/blog/the-hades-campaign-pypi-packages
 https://success.com/tokenmaxxing-ai-adoption-metrics
 https://supabase.com/changelog/46834-realtime-broadcast-now-supports-binary-payloads
+https://support.claude.com/en/articles/12512198-how-to-create-custom-skills
 https://t.me/ProductsAndStartups/1740
 https://t.me/ProductsAndStartups/1745
 https://t.me/ProductsAndStartups/1748
@@ -504,6 +508,7 @@ https://thezvi.substack.com/p/what-is-anthropic
 https://thinkingmachines.ai/blog/interaction-models
 https://thinkingmachines.ai/news/introducing-inkling
 https://transformer-circuits.pub/2026/workspace/index.html
+https://unite.ai/alibaba-launches-qwen-image-3-0-without-benchmarks-or-weights
 https://v0.app/
 https://venturebeat.com/technology/z-ai-launches-zcode-to-challenge-cursor-claude-code-and-github-copilot-in-ai-coding
 https://vercel.com/blog/a-new-programming-model-for-durable-execution
