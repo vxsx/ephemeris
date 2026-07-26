@@ -3,6 +3,7 @@ https://1x.tech/discover/neos-hands
 https://ahrefs.com/blog/schema-ai-citations
 https://ai.meta.com/blog/brain2qwerty-brain-ai-human-communication
 https://ai.meta.com/blog/introducing-muse-image-muse-video-msl
+https://ai.meta.com/blog/introducing-muse-spark-meta-model-api
 https://aisi.gov.uk/blog/how-far-behind-the-frontier-are-leading-open-weight-models-on-cyber
 https://aisi.gov.uk/blog/our-evaluation-of-openais-gpt-5-5-cyber-capabilities
 https://aleximas.substack.com/p/how-will-ai-driven-automation-actually
@@ -68,6 +69,7 @@ https://arxiv.org/abs/2606.19980
 https://arxiv.org/abs/2606.23001
 https://arxiv.org/abs/2606.28070
 https://arxiv.org/abs/2606.29537
+https://arxiv.org/abs/2607.02514
 https://arxiv.org/pdf/2604.24827
 https://biohub.org/news/world-model-of-protein-biology
 https://blog.cloudflare.com/agent-readiness
@@ -207,6 +209,7 @@ https://github.blog/ai-and-ml/github-copilot/better-tools-made-copilot-code-revi
 https://github.blog/ai-and-ml/github-copilot/continuous-ai-for-accessibility-how-github-transforms-feedback-into-inclusion
 https://github.blog/changelog/2026-06-01-updates-to-github-copilot-billing-and-plans
 https://github.blog/changelog/2026-06-11-github-agentic-workflows-is-now-in-public-preview
+https://github.blog/changelog/2026-07-23-github-mcp-server-supports-the-next-mcp-specification
 https://github.blog/engineering/architecture-optimization/from-latency-to-instant-modernizing-github-issues-navigation-performance
 https://github.blog/engineering/architecture-optimization/how-we-rebuilt-the-search-architecture-for-high-availability-in-github-enterprise-server
 https://github.blog/engineering/architecture-optimization/the-uphill-climb-of-making-diff-lines-performant
@@ -311,6 +314,7 @@ https://mistral.ai/news/ocr-4
 https://moab.pro/articles/aeo-geo
 https://newsletter.semianalysis.com/p/the-coding-assistant-breakdown-more
 https://nextjs.org/blog/agentic-future
+https://nextjs.org/blog/july-2026-security-release
 https://nextjs.org/blog/next-16-2
 https://nextjs.org/blog/next-16-2-ai
 https://nextjs.org/blog/next-16-3-ai-improvements
@@ -546,6 +550,7 @@ https://vercel.com/blog/vercel-flags-platform-native-feature-flags
 https://vercel.com/blog/vercel-services-run-full-stack-on-vercel
 https://vercel.com/blog/we-ralph-wiggumed-webstreams-to-make-them-10x-faster
 https://vercel.com/blog/zdr-on-ai-gateway
+https://vercel.com/changelog/connect-to-and-manage-sandboxes-from-the-dashboard
 https://vercel.com/changelog/enforce-consistent-code-for-agents-and-humans-with-konsistent
 https://vercel.com/changelog/vercel-sandbox-now-supports-fuse-based-filesystems
 https://webkit.org/blog/18136/introducing-the-safari-mcp-server-for-web-developers

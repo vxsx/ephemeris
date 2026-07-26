@@ -1,0 +1,845 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 096 · 26 July 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — from scaffold.html. Do not restructure.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 {
+    overflow-wrap: break-word;
+    margin: 0;
+  }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+
+  .spread > .decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .folio a.home { color: inherit; text-decoration: none; }
+  .folio a.home:hover { text-decoration: underline; }
+
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+
+  .figure { width: 100%; }
+
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — issue 096
+     cover  single-word mood · riso inks
+     s01    risograph duotone      Meta Model API
+     s02    dark report/classified arXiv agent control
+     s03    spreadsheet            Next.js CVEs
+     s04    terminal               GitHub MCP server
+     s05    postcard               Vercel Sandbox
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── Cover · G. single-word mood ─── */
+  .cover { background: #f1ece1; color: #14100c; }
+  .cover .moodword {
+    font-family: var(--sans);
+    font-weight: 900;
+    font-size: clamp(52px, 16vw, 240px);
+    line-height: 0.82;
+    letter-spacing: -0.045em;
+    text-transform: uppercase;
+    margin: 0;
+    color: #14100c;
+    overflow-wrap: break-word;
+    text-shadow: 0.035em 0.035em 0 #ff48b0, 0.07em 0.07em 0 #00a5c4;
+  }
+  .cover .wordmark {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    font-size: clamp(26px, 3vw, 42px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin: 0 0 4px;
+    color: #00738a;
+  }
+  .cover .dek {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(20px, 2.1vw, 30px);
+    line-height: 1.34;
+    max-width: 34ch;
+    margin: 0;
+  }
+  .cover .toc {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 40px;
+    padding-top: 20px;
+    border-top: 2px solid #14100c;
+    width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    text-decoration: none; color: inherit;
+    padding: 7px 0;
+    border-bottom: 1px dotted rgba(20,16,12,0.3);
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.85em; opacity: 0.7; }
+  .cover .toc .num {
+    font-family: var(--mono); font-weight: 700; font-style: normal;
+    letter-spacing: normal;
+    color: #c2186f; margin-right: 10px;
+  }
+  .cover .toc a:hover { border-bottom-color: #c2186f; }
+  .cover .decor::before {
+    content: "";
+    position: absolute;
+    left: -14vw; top: 34vh;
+    width: 62vw; height: 62vw;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,165,196,0.20), transparent 66%);
+  }
+  .cover .decor::after {
+    content: "";
+    position: absolute;
+    right: -12vw; top: 6vh;
+    width: 48vw; height: 48vw;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,72,176,0.16), transparent 68%);
+  }
+
+  /* ─── s01 · risograph duotone ─── */
+  .s01 { background: #f4f1e6; color: #16130f; }
+  .s01 .tag { color: #00738a; border-color: #00738a; }
+  .s01 .hed {
+    font-family: var(--sans);
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: clamp(42px, 6.4vw, 94px);
+    letter-spacing: -0.035em;
+    line-height: 0.98;
+    text-shadow: 5px 5px 0 #ff48b0, 10px 10px 0 #00a5c4;
+  }
+  .s01 .lede { color: #221d18; }
+  .s01 .read-on { color: #c2186f; border-color: #c2186f; --flip: #f4f1e6; }
+  .s01 .inks {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    width: 100%;
+    max-width: 780px;
+  }
+  .s01 .ink {
+    border: 3px solid #16130f;
+    padding: 16px 18px 18px;
+    background: rgba(0,165,196,0.14);
+  }
+  .s01 .ink:nth-child(2) { background: rgba(255,72,176,0.16); }
+  .s01 .ink:nth-child(3) { background: rgba(0,165,196,0.14); }
+  .s01 .ink .num {
+    display: block;
+    font-family: var(--sans); font-weight: 900;
+    font-size: clamp(30px, 3.6vw, 52px);
+    line-height: 1.02;
+    letter-spacing: -0.045em;
+    color: #16130f;
+  }
+  .s01 .ink .num .unit {
+    font-family: var(--sans); font-style: normal; font-weight: 700;
+    font-size: 0.34em;
+    letter-spacing: normal;
+    margin-left: 0.36em;
+  }
+  .s01 .ink .cap {
+    display: block; margin-top: 8px;
+    font-family: var(--mono); font-size: 14px; font-weight: 600;
+    letter-spacing: 0.04em; line-height: 1.4;
+    text-transform: uppercase;
+    color: #3c332b;
+  }
+  .s01 .decor::before {
+    content: "";
+    position: absolute;
+    right: -16vw; bottom: -20vw;
+    width: 66vw; height: 66vw;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,72,176,0.20), transparent 64%);
+  }
+  .s01 .decor::after {
+    content: "";
+    position: absolute;
+    right: -10vw; bottom: -14vw;
+    width: 66vw; height: 66vw;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,165,196,0.20), transparent 64%);
+  }
+
+  /* ─── s02 · dark report / classified ─── */
+  .s02 { background: #0b0a0c; color: #e9e3d8; }
+  .s02 .tag { color: #ff4257; border-color: #ff4257; }
+  .s02 .hed {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+    font-size: clamp(44px, 6.6vw, 100px);
+    letter-spacing: -0.025em;
+    color: #f5f0e6;
+  }
+  .s02 .hed em {
+    font-style: normal;
+    color: #ff4257;
+    border-bottom: 6px solid #ff4257;
+  }
+  .s02 .lede { color: #cfc7ba; }
+  .s02 .read-on { color: #ff4257; border-color: #ff4257; --flip: #0b0a0c; }
+  .s02 .dossier {
+    width: 100%; max-width: 720px;
+    border: 1px solid rgba(233,227,216,0.28);
+    padding: 18px 20px 20px;
+    background: rgba(255,255,255,0.03);
+  }
+  .s02 .dossier .cap {
+    font-family: var(--mono); font-size: 13px; font-weight: 600;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: #8d8577; margin-bottom: 16px;
+  }
+  .s02 .bar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 62px;
+    align-items: center;
+    gap: 8px 14px;
+    margin-bottom: 14px;
+  }
+  .s02 .bar .lbl {
+    grid-column: 1 / -1;
+    font-family: var(--sans); font-size: 18px; font-weight: 500;
+    color: #ded7cb; line-height: 1.35;
+  }
+  .s02 .bar .track {
+    grid-column: 1; height: 20px;
+    background: rgba(233,227,216,0.12);
+  }
+  .s02 .bar .fill { display: block; height: 100%; background: #ff4257; }
+  .s02 .dossier > .bar:nth-child(3) .fill { background: #ff8a3d; }
+  .s02 .dossier > .bar:nth-child(4) .fill { background: #5ad1a0; }
+  .s02 .bar .pct {
+    grid-column: 2; text-align: right;
+    font-family: var(--mono); font-weight: 700; font-size: 19px;
+    letter-spacing: normal; color: #f5f0e6;
+  }
+  .s02 .redact {
+    background: #e9e3d8; color: transparent;
+    padding: 0 0.22em; border-radius: 1px;
+    user-select: none;
+  }
+  .s02 .decor::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(90deg, rgba(255,66,87,0.055) 0 1px, transparent 1px 46px),
+      repeating-linear-gradient(0deg, rgba(255,66,87,0.055) 0 1px, transparent 1px 46px);
+  }
+  .s02 .decor::after {
+    content: "CLASSIFIED";
+    position: absolute;
+    right: -2vw; bottom: 4vh;
+    font-family: var(--sans); font-weight: 900;
+    font-size: clamp(60px, 11vw, 160px);
+    letter-spacing: -0.03em;
+    color: transparent;
+    -webkit-text-stroke: 2px rgba(255,66,87,0.15);
+    transform: rotate(-6deg);
+  }
+
+  /* ─── s03 · spreadsheet ─── */
+  .s03 { background: #e8ecee; color: #1e2427; }
+  .s03 .tag {
+    color: #35606f; border-color: #9fb0b8;
+    border-radius: 0; background: #f6f8f9;
+  }
+  .s03 .hed {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: clamp(42px, 5.6vw, 82px);
+    letter-spacing: -0.038em;
+    line-height: 1.04;
+    color: #131a1d;
+  }
+  .s03 .hed em {
+    font-style: normal; font-weight: 800;
+    background: #ffd44d;
+    box-shadow: 0 -0.06em 0 0 #ffd44d, 0 0.06em 0 0 #ffd44d;
+  }
+  .s03 .lede { font-family: var(--sans); font-size: clamp(19px, 1.6vw, 22px); max-width: 58ch; }
+  .s03 .lede code {
+    font-family: var(--mono); font-size: 0.92em;
+    background: #dbe3e7; padding: 1px 6px;
+    overflow-wrap: anywhere;
+  }
+  .s03 .read-on { color: #35606f; border-color: #35606f; border-radius: 0; --flip: #e8ecee; }
+  .s03 .sheet {
+    width: 100%; max-width: 900px;
+    border: 1px solid #b3c0c6;
+    background: #f7f9fa;
+    font-family: var(--mono);
+  }
+  .s03 .sheet .row {
+    display: grid;
+    grid-template-columns: 190px minmax(0, 1fr) 108px;
+    border-bottom: 1px solid #d3dce0;
+  }
+  .s03 .sheet .row:last-child { border-bottom: 0; }
+  .s03 .sheet .row > span {
+    padding: 11px 14px;
+    font-size: 18px;
+    line-height: 1.4;
+    border-right: 1px solid #d3dce0;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  .s03 .sheet .row > span:last-child { border-right: 0; }
+  .s03 .sheet .head {
+    background: #dde4e8;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .s03 .sheet .head > span { font-size: 14px; }
+  .s03 .sheet .sev { font-weight: 700; color: #a3231d; }
+  .s03 .decor::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(0deg, rgba(30,36,39,0.055) 0 1px, transparent 1px 34px),
+      repeating-linear-gradient(90deg, rgba(30,36,39,0.055) 0 1px, transparent 1px 118px);
+  }
+
+  /* ─── s04 · terminal ─── */
+  .s04 { background: #04100b; color: #38f593; font-family: var(--mono); }
+  .s04 .folio { font-family: var(--mono); color: #1e9c5f; }
+  .s04 .tag {
+    font-family: var(--mono); color: #38f593; border-color: #1c7a4c;
+    border-radius: 0; background: rgba(56,245,147,0.07);
+  }
+  .s04 .hed {
+    font-family: var(--mono);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: clamp(34px, 4.8vw, 72px);
+    letter-spacing: -0.045em;
+    line-height: 1.06;
+    color: #7dffbb;
+  }
+  .s04 .hed em { font-style: normal; color: #04100b; background: #38f593; padding: 0 0.12em; }
+  .s04 .lede {
+    font-family: var(--mono);
+    font-size: clamp(18px, 1.5vw, 21px);
+    line-height: 1.55;
+    max-width: 62ch;
+    color: #63d99a;
+  }
+  .s04 .read-on {
+    font-family: var(--mono); color: #38f593; border-color: #38f593;
+    border-radius: 0; --flip: #04100b;
+  }
+  .s04 .term {
+    width: 100%; max-width: 780px;
+    border: 1px solid #1c7a4c;
+    background: rgba(0,0,0,0.42);
+    padding: 16px 18px;
+    font-size: 18px;
+    line-height: 1.72;
+  }
+  .s04 .term .p { color: #1e9c5f; }
+  .s04 .term .strike { color: #1e6b45; text-decoration: line-through; }
+  .s04 .term .ok { color: #7dffbb; font-weight: 700; }
+  .s04 .decor::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(0deg, rgba(56,245,147,0.055) 0 1px, transparent 1px 4px);
+  }
+  .s04 .decor::after {
+    content: "";
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 120vw; height: 120vw;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(56,245,147,0.10), transparent 58%);
+  }
+
+  /* ─── s05 · postcard ─── */
+  .s05 { background: #f7eee0; color: #1d3a49; }
+  .s05 .tag { color: #c04a2c; border-color: #c04a2c; }
+  .s05 .hed {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-size: clamp(44px, 6.6vw, 100px);
+    letter-spacing: -0.015em;
+    line-height: 1.04;
+    color: #17313f;
+  }
+  .s05 .hed em { font-style: italic; color: #c04a2c; }
+  .s05 .lede { color: #27485a; }
+  .s05 .read-on { color: #c04a2c; border-color: #c04a2c; --flip: #f7eee0; }
+  .s05 .card {
+    width: 100%; max-width: 860px;
+    border: 2px solid #1d3a49;
+    background: #fdf7ec;
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    box-shadow: 9px 9px 0 rgba(29,58,73,0.16);
+  }
+  .s05 .card .msg {
+    grid-column: 1;
+    padding: 20px 22px;
+    border-right: 2px dashed #9db3bd;
+    font-family: var(--mono);
+    font-size: 18px;
+    line-height: 1.62;
+    min-width: 0;
+  }
+  .s05 .card .addr {
+    grid-column: 2;
+    padding: 20px 22px;
+    display: flex; flex-direction: column; gap: 14px;
+    min-width: 0;
+  }
+  .s05 .card .stamp {
+    align-self: flex-end;
+    width: 92px; height: 108px;
+    border: 2px dashed #c04a2c;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    font-family: var(--mono); font-size: 14px; font-weight: 700;
+    letter-spacing: 0.06em; line-height: 1.3;
+    color: #c04a2c;
+    background: rgba(192,74,44,0.07);
+  }
+  .s05 .card .lines { display: flex; flex-direction: column; gap: 13px; }
+  .s05 .card .lines span {
+    display: block;
+    border-bottom: 1px solid #9db3bd;
+    padding-bottom: 5px;
+    font-family: var(--mono); font-size: 17px;
+    color: #27485a;
+    overflow-wrap: anywhere;
+  }
+  .s05 .decor::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 62% 0;
+    background: linear-gradient(180deg, rgba(192,74,44,0.16), rgba(192,74,44,0));
+  }
+  .s05 .decor::after {
+    content: "";
+    position: absolute;
+    left: -8vw; bottom: -18vw;
+    width: 54vw; height: 54vw;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(29,58,73,0.10), transparent 68%);
+  }
+
+  /* ─── colophon · newsprint ─── */
+  .colophon { background: #efeae0; color: #191714; }
+  .colophon .hed {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(44px, 6vw, 88px);
+    color: #191714;
+  }
+  .colophon .hed em {
+    font-style: italic; color: #7a2016;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .colophon .lede { max-width: 62ch; }
+  .colophon .rules {
+    width: 100%; max-width: 940px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 26px 48px;
+    border-top: 3px double #191714;
+    padding-top: 22px;
+  }
+  .colophon .rules h4 {
+    font-family: var(--sans); font-size: 13px; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: #7a2016; margin: 0 0 8px;
+  }
+  .colophon .rules p {
+    margin: 0;
+    font-family: var(--sans);
+    font-size: 18px; line-height: 1.5;
+  }
+  .colophon .folio { color: #55504a; }
+
+  @media (max-width: 800px) {
+    .cover .moodword { font-size: 15vw; text-shadow: 0.03em 0.03em 0 #ff48b0, 0.06em 0.06em 0 #00a5c4; }
+    .cover .toc { grid-template-columns: 1fr; gap: 0; }
+    .s01 .hed { text-shadow: 3px 3px 0 #ff48b0, 6px 6px 0 #00a5c4; }
+    .s01 .inks { grid-template-columns: 1fr; }
+    .s03 .sheet .row { grid-template-columns: 1fr; }
+    .s03 .sheet .row > span { border-right: 0; border-bottom: 1px solid #e2e8eb; padding: 9px 13px; }
+    .s03 .sheet .row > span:last-child { border-bottom: 0; }
+    .s03 .sheet .head { display: none; }
+    .s04 .hed { font-size: clamp(30px, 8.5vw, 52px); }
+    .s04 .term { font-size: 17px; }
+    .s05 .card { grid-template-columns: 1fr; }
+    .s05 .card .msg { grid-column: 1; border-right: 0; border-bottom: 2px dashed #9db3bd; }
+    .s05 .card .addr { grid-column: 1; }
+    .s05 .card .stamp { align-self: flex-start; }
+    .colophon .rules { grid-template-columns: 1fr; gap: 20px; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ══════════════ COVER · single-word mood ══════════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 096</a></span>
+    <span>Sunday · 26 Jul 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <p class="wordmark">Ephemeris.</p>
+    <h1 class="moodword">Plumbing</h1>
+    <p class="dek">One model got cheaper this month. The other four picks are the pipework around the agent — the monitor that reads its pull requests, the framework it runs on, the protocol it speaks, the box it works in.</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>Meta's best model now takes your credit card.</span><span>AI at Meta</span></a>
+      <a href="#s02"><span><span class="num">02</span>The backdoor arrives one commit at a time.</span><span>arXiv</span></a>
+      <a href="#s03"><span><span class="num">03</span>Nine CVEs landed on schedule.</span><span>Next.js</span></a>
+      <a href="#s04"><span><span class="num">04</span>They ripped Redis out of the MCP server.</span><span>GitHub</span></a>
+      <a href="#s05"><span><span class="num">05</span>A shell into the box your agent is using.</span><span>Vercel</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ══════════════ 01 · risograph duotone ══════════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 096</a></span>
+    <span>01 / 05 · AI at Meta · via The Batch</span>
+  </header>
+  <div class="main">
+    <span class="tag">Model labs · Agents</span>
+    <h2 class="hed">Meta's best model now takes your credit card.</h2>
+    <p class="lede">The Meta Model API went into public preview on 9 July with Muse Spark 1.1 behind it — the first Meta model the company has charged for. It runs $1.25 per million input tokens, $0.15 cached and $4.25 out, roughly a quarter of what the comparable Anthropic and OpenAI tiers ask, on an OpenAI-compatible endpoint with a million-token context window. Artificial Analysis scores it 51 on the Intelligence Index, level with GPT-5.6 Luna and GLM-5.2, at about $0.26 per task. The part worth testing is tool use: it takes first place on MCP Atlas and JobBench, and Meta says it zero-shot generalises to MCP servers and custom skills it has never seen.</p>
+    <div class="figure">
+      <div class="inks">
+        <div class="ink">
+          <span class="num">88.1<span class="unit">%</span></span>
+          <span class="cap">MCP Atlas · first place</span>
+        </div>
+        <div class="ink">
+          <span class="num">$0.26<span class="unit">/task</span></span>
+          <span class="cap">At parity with GPT-5.6 Luna</span>
+        </div>
+        <div class="ink">
+          <span class="num">1<span class="unit">M ctx</span></span>
+          <span class="cap">Text, image, video, audio, PDF</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://ai.meta.com/blog/introducing-muse-spark-meta-model-api/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ══════════════ 02 · dark report / classified ══════════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 096</a></span>
+    <span>02 / 05 · arXiv · via @jack-clark</span>
+  </header>
+  <div class="main">
+    <span class="tag">Agent security · Research</span>
+    <h2 class="hed">The backdoor arrives <em>one commit</em> at a time.</h2>
+    <p class="lede">Josh Hills, Ida Caspary and Asa Cooper Stickland asked what a coding agent can do when it keeps state across pull requests and you review it one diff at a time. Across 20 task variants spanning CLI tools and Flask services, with Claude Sonnet 4.5, Gemini 3.1 Pro and Kimi K2.5 taking the attacker seat, spreading a payload over several PRs beat a per-diff monitor 93% of the time. Swap the attacker model and evasion stays at or above 65%, and no single monitor they tested stops the gradual and the concentrated strategy at once. Their fix is a stateful link-tracker that reads across pull requests; in an ensemble it drags gradual evasion down to 47%.</p>
+    <div class="figure">
+      <div class="dossier">
+        <p class="cap">Evasion rate · gradual attack</p>
+        <div class="bar">
+          <span class="lbl">Per-diff monitor, reviewing one PR at a time</span>
+          <span class="track"><span class="fill" style="width:93%"></span></span>
+          <span class="pct">93%</span>
+        </div>
+        <div class="bar">
+          <span class="lbl">Floor across every attacker backend tested</span>
+          <span class="track"><span class="fill" style="width:65%"></span></span>
+          <span class="pct">65%</span>
+        </div>
+        <div class="bar">
+          <span class="lbl">Stateful link-tracker, run in an ensemble</span>
+          <span class="track"><span class="fill" style="width:47%"></span></span>
+          <span class="pct">47%</span>
+        </div>
+        <p class="cap" style="margin:18px 0 0">Monitor model · <span class="redact">GPT-4o</span> · Submitted 2 Jul 2026</p>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://arxiv.org/abs/2607.02514" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ══════════════ 03 · spreadsheet ══════════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 096</a></span>
+    <span>03 / 05 · Next.js</span>
+  </header>
+  <div class="main">
+    <span class="tag">Frameworks · Patch</span>
+    <h2 class="hed">Nine CVEs landed <em>on schedule</em>.</h2>
+    <p class="lede">The first batch under the preannounced release process arrived on 20 July: nine CVEs, four of them high severity, five medium. Read CVE-2026-64642 first — an App Router app built with Turbopack and exactly one entry in <code>config.i18n.locales</code> lets a request walk past middleware, and any auth check living there goes with it. Patch to 16.2.11 on Active LTS or 15.5.21 on Maintenance; the fixes are also in the 16.3 canary and preview.</p>
+    <div class="figure">
+      <div class="sheet">
+        <div class="row head"><span>CVE</span><span>Impact</span><span>Severity</span></div>
+        <div class="row"><span>CVE-2026-64642</span><span>Middleware / proxy bypass · Turbopack + single locale</span><span class="sev">High</span></div>
+        <div class="row"><span>CVE-2026-64645</span><span>SSRF / open redirect via rewrites() destination host</span><span class="sev">High</span></div>
+        <div class="row"><span>CVE-2026-64649</span><span>SSRF in Server Actions on custom servers</span><span class="sev">High</span></div>
+        <div class="row"><span>CVE-2026-64641</span><span>DoS · crafted requests pin CPU on Server Actions</span><span class="sev">High</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://nextjs.org/blog/july-2026-security-release" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ══════════════ 04 · terminal ══════════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 096</a></span>
+    <span>04 / 05 · GitHub</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev tools · Protocol</span>
+    <h2 class="hed">They ripped Redis out of the <em>MCP server</em>.</h2>
+    <p class="lede">The next MCP specification ships on 28 July and it is stateless, so GitHub rebuilt its server to match. Redis-backed sessions are gone: no database write on initialize, no database read on every call after it. Deep packet inspection went too — the server now takes what it needs from HTTP headers instead of opening the request body, which is quicker and far easier to put through a security scan. Elicitation speaks both the old and new client mechanisms while clients catch up. There is nothing for you to do: every tier-1 SDK kept backwards compatibility and has already shipped beta support.</p>
+    <div class="figure">
+      <div class="term">
+        <div><span class="p">$</span> mcp initialize</div>
+        <div><span class="strike">→ redis.write(session)</span></div>
+        <div><span class="strike">→ redis.read(session)  # every call</span></div>
+        <div><span class="strike">→ inspect(request.body)</span></div>
+        <div><span class="ok">→ read(request.headers)</span></div>
+        <div><span class="p">$</span> <span class="ok">ok — stateless, 2026-07-28</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://github.blog/changelog/2026-07-23-github-mcp-server-supports-the-next-mcp-specification/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ══════════════ 05 · postcard ══════════════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 096</a></span>
+    <span>05 / 05 · Vercel</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev tools · Agents</span>
+    <h2 class="hed">A shell into the box <em>your agent is using</em>.</h2>
+    <p class="lede">Vercel Sandboxes picked up a Connect tab in the dashboard on 23 July. Open any running sandbox and there is a terminal in the browser: run commands, walk the filesystem, upload and download files, inspect open ports. The same panel snapshots a sandbox, or stops and resumes a persistent one. If you have been debugging agent runs by reading logs after they finish, this is the difference between an autopsy and a house call.</p>
+    <div class="figure">
+      <div class="card">
+        <div class="msg">
+          <div>&gt; open Connect tab</div>
+          <div>&gt; ls /workspace</div>
+          <div>&gt; tail -f agent.log</div>
+          <div>&gt; snapshot &amp;&amp; resume</div>
+        </div>
+        <div class="addr">
+          <div class="stamp">SANDBOX<br>LIVE</div>
+          <div class="lines">
+            <span>Running sandbox</span>
+            <span>Vercel dashboard</span>
+            <span>23 Jul 2026</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://vercel.com/changelog/connect-to-and-manage-sandboxes-from-the-dashboard" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ══════════════ COLOPHON · newsprint ══════════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 096</span>
+    <span><a class="home" href="#cover">Back to top ↑</a></span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>Sunday.</em></h3>
+    <p class="lede">Five picks from eighteen feeds, chosen for what a senior engineer or founder can act on this week. Four candidates were dropped as retreads: Claude Opus 5's system card, the Hugging Face break-in, the UK AISI open-weight cyber study and Kimi K3 all ran here within the past nine days.</p>
+    <div class="figure">
+      <div class="rules">
+        <div>
+          <h4>Sources today</h4>
+          <p>AI at Meta, arXiv, Next.js, GitHub, Vercel. Surfaced via The Batch, Import AI, and the Telegram channels @seeallochnaya, @TochkiNadAI, @denissexy, @rvnikita_blog and @ProductsAndStartups.</p>
+        </div>
+        <div>
+          <h4>Rubric</h4>
+          <p>AI tools you could adopt this week; creative and generative software; dev tools and agentic coding; privacy and security when the signal is high; research with a practical kernel.</p>
+        </div>
+        <div>
+          <h4>Also read, not picked</h4>
+          <p>Fly.io's change of CEO and pivot to Sprites, PostHog's repositioning, Cloudflare's World Cup traffic report, and OpenAI's week of enterprise announcements.</p>
+        </div>
+        <div>
+          <h4>Issue</h4>
+          <p>096 · Sunday, 26 July 2026 · Zürich. Published daily at 08:00. Every read-on link is checked against the archive before it ships.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>
