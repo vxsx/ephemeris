@@ -71,7 +71,9 @@ https://arxiv.org/abs/2606.28070
 https://arxiv.org/abs/2606.29537
 https://arxiv.org/abs/2607.02514
 https://arxiv.org/pdf/2604.24827
+https://astral.sh/blog/ruff-v0.16.0
 https://biohub.org/news/world-model-of-protein-biology
+https://blaizzy.github.io/nativ
 https://blog.cloudflare.com/agent-readiness
 https://blog.cloudflare.com/agentic-internet-bot-report
 https://blog.cloudflare.com/agents-platform-flue-sdk
@@ -151,6 +153,7 @@ https://claude.com/blog/agent-view-in-claude-code
 https://claude.com/blog/connectors-for-everyday-life
 https://claude.com/blog/how-claude-code-works-in-large-codebases-best-practices-and-where-to-start
 https://claude.com/blog/introducing-dynamic-workflows-in-claude-code
+https://claude.com/blog/the-new-rules-of-context-engineering-for-claude-5-generation-models
 https://cloud.google.com/blog/topics/threat-intelligence/ai-vulnerability-exploitation-initial-access
 https://code.claude.com/docs/en/whats-new/2026-w28
 https://cognition.ai/blog/ai-guarantee
@@ -209,6 +212,7 @@ https://github.blog/ai-and-ml/github-copilot/better-tools-made-copilot-code-revi
 https://github.blog/ai-and-ml/github-copilot/continuous-ai-for-accessibility-how-github-transforms-feedback-into-inclusion
 https://github.blog/changelog/2026-06-01-updates-to-github-copilot-billing-and-plans
 https://github.blog/changelog/2026-06-11-github-agentic-workflows-is-now-in-public-preview
+https://github.blog/changelog/2026-07-23-copilot-cloud-agent-for-linear-is-now-generally-available
 https://github.blog/changelog/2026-07-23-github-mcp-server-supports-the-next-mcp-specification
 https://github.blog/engineering/architecture-optimization/from-latency-to-instant-modernizing-github-issues-navigation-performance
 https://github.blog/engineering/architecture-optimization/how-we-rebuilt-the-search-architecture-for-high-availability-in-github-enterprise-server
@@ -514,6 +518,7 @@ https://thinkingmachines.ai/news/introducing-inkling
 https://transformer-circuits.pub/2026/workspace/index.html
 https://unite.ai/alibaba-launches-qwen-image-3-0-without-benchmarks-or-weights
 https://v0.app/
+https://vectoral.com/blog/token-relay-market
 https://venturebeat.com/technology/z-ai-launches-zcode-to-challenge-cursor-claude-code-and-github-copilot-in-ai-coding
 https://vercel.com/blog/a-new-programming-model-for-durable-execution
 https://vercel.com/blog/agent-responsibly

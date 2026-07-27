@@ -1,0 +1,908 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 097 · 27 July 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — structure only. Surface overrides start further down.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 {
+    overflow-wrap: break-word;
+    margin: 0;
+  }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+
+  .spread > .decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .folio a.home { color: inherit; text-decoration: none; }
+  .folio a.home:hover { text-decoration: underline; }
+
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+
+  .figure { width: 100%; }
+
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — issue 097
+     cover  pull-quote      · ivory + ink
+     s01    dark report     · crimson on near-black, redact bars
+     s02    risograph       · cyan/magenta overprint, registration offset
+     s03    memo / airgram  · typewriter, margin rules, RE: header
+     s04    film still      · letterboxed, cinematic all-caps
+     s05    postcard        · horizontal split, stamp motif
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── Cover · pull-quote ─────────────────────────────────────────── */
+  .cover { background: #f4f0e6; color: #14120e; }
+  .cover .wordmark {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    margin: 0;
+    opacity: 0.6;
+  }
+  .cover .quote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-variation-settings: "opsz" 144, "SOFT" 60, "WONK" 1;
+    font-size: clamp(46px, 8.2vw, 128px);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    margin: 0;
+    padding-bottom: 0.14em;
+    max-width: 16ch;
+  }
+  .cover .quote .mark { color: #a3341c; font-style: normal; }
+  .cover .attrib {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #a3341c;
+    margin: 0;
+  }
+  .cover .dek {
+    font-family: var(--serif);
+    font-size: clamp(19px, 1.7vw, 23px);
+    line-height: 1.45;
+    max-width: 54ch;
+    margin: 0;
+    opacity: 0.85;
+  }
+  .cover .toc {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px 44px;
+    padding-top: 18px;
+    border-top: 2px solid #14120e;
+    width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    text-decoration: none; color: inherit;
+    padding: 7px 0;
+    border-bottom: 1px dotted rgba(20,18,14,0.3);
+    font-size: 17px;
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.8em; opacity: 0.65; letter-spacing: 0.06em; text-transform: uppercase; }
+  .cover .toc .num {
+    font-family: var(--mono); font-weight: 600; font-size: 0.8em;
+    color: #a3341c; margin-right: 10px;
+  }
+  .cover .decor::before {
+    content: "";
+    position: absolute;
+    left: -8vw; top: 30vh;
+    width: 46vw; height: 46vw;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(163,52,28,0.09), transparent 68%);
+  }
+  @media (max-width: 800px) {
+    .cover .toc { grid-template-columns: 1fr; gap: 0; }
+    .cover .quote { font-size: clamp(38px, 11vw, 60px); max-width: none; }
+  }
+
+  /* ─── s01 · dark report / classified ─────────────────────────────── */
+  .s01 { background: #0a0709; color: #ded5cf; }
+  .s01 .tag { color: #ff4d3d; border-color: #ff4d3d; }
+  .s01 .hed {
+    font-family: var(--sans);
+    font-weight: 900;
+    font-size: clamp(40px, 6.4vw, 92px);
+    letter-spacing: -0.035em;
+    line-height: 0.98;
+    color: #f6efe9;
+  }
+  .s01 .hed em { font-style: normal; color: #ff4d3d; }
+  .s01 .lede { color: #c3b8b2; }
+  .s01 .read-on { color: #ff4d3d; border-color: #ff4d3d; --flip: #0a0709; }
+
+  .s01 .ledger {
+    width: 100%;
+    max-width: 720px;
+    border-top: 1px solid rgba(255,77,61,0.45);
+    font-family: var(--mono);
+    font-size: 15px;
+  }
+  .s01 .ledger .row {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr) minmax(0, 1fr);
+    gap: 10px 18px;
+    padding: 13px 0;
+    border-bottom: 1px solid rgba(222,213,207,0.16);
+    align-items: baseline;
+  }
+  .s01 .ledger .row.head {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #ff4d3d;
+    padding-bottom: 8px;
+  }
+  .s01 .ledger .k { color: #ded5cf; }
+  .s01 .ledger .v { color: #f6efe9; font-weight: 600; }
+  .s01 .ledger .v.cut { color: #ff4d3d; }
+  .s01 .redact {
+    display: inline-block;
+    background: #ff4d3d;
+    color: transparent;
+    padding: 0 6px;
+    border-radius: 1px;
+    user-select: none;
+  }
+  .s01 .decor .grain {
+    position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(0deg, rgba(255,77,61,0.05) 0 1px, transparent 1px 4px);
+  }
+  .s01 .decor .stamp {
+    position: absolute;
+    right: -3vw; top: clamp(120px, 16vw, 220px);
+    font-family: var(--sans);
+    font-weight: 900;
+    font-size: clamp(80px, 15vw, 220px);
+    letter-spacing: -0.05em;
+    color: rgba(255,77,61,0.09);
+    transform: rotate(-12deg);
+    white-space: nowrap;
+  }
+  @media (max-width: 800px) {
+    .s01 .ledger .row { grid-template-columns: 1fr; gap: 4px; }
+    .s01 .ledger .row.head { display: none; }
+    .s01 .decor .stamp { display: none; }
+  }
+
+  /* ─── s02 · risograph duotone ────────────────────────────────────── */
+  .s02 { background: #f7f2e4; color: #141210; }
+  .s02 .tag {
+    color: #f7f2e4;
+    background: #0d8fa8;
+    border-color: #0d8fa8;
+    box-shadow: 4px 4px 0 #e5217a;
+  }
+  .s02 .hed {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    font-size: clamp(44px, 6.8vw, 96px);
+    letter-spacing: -0.032em;
+    color: #e5217a;
+    text-shadow: 5px 5px 0 rgba(13,143,168,0.85);
+  }
+  .s02 .hed em { font-style: italic; color: #0d8fa8; text-shadow: 5px 5px 0 rgba(229,33,122,0.8); }
+  .s02 .lede { color: #211d19; }
+  .s02 .read-on { color: #e5217a; border-color: #e5217a; --flip: #f7f2e4; }
+
+  .s02 .jump {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0 clamp(12px, 2vw, 28px);
+    font-family: var(--serif);
+    font-weight: 900;
+    font-variation-settings: "opsz" 144;
+    line-height: 0.9;
+    margin-bottom: 22px;
+  }
+  .s02 .jump .from {
+    font-size: clamp(56px, 11vw, 132px);
+    color: #0d8fa8;
+    letter-spacing: -0.05em;
+    opacity: 0.55;
+    text-decoration: line-through;
+    text-decoration-thickness: 6px;
+  }
+  .s02 .jump .arrow {
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: clamp(22px, 3vw, 40px);
+    letter-spacing: normal;
+    color: #141210;
+  }
+  .s02 .jump .to {
+    font-size: clamp(72px, 15vw, 186px);
+    color: #e5217a;
+    letter-spacing: -0.055em;
+    text-shadow: 7px 7px 0 rgba(13,143,168,0.75);
+  }
+  .s02 .jump .unit {
+    font-family: var(--sans);
+    font-style: normal;
+    font-weight: 700;
+    font-size: clamp(14px, 1.5vw, 20px);
+    letter-spacing: normal;
+    text-transform: uppercase;
+    color: #141210;
+    text-shadow: none;
+    margin-left: 0.4em;
+  }
+  .s02 .code {
+    font-family: var(--mono);
+    font-size: 15px;
+    line-height: 1.7;
+    background: #141210;
+    color: #f7f2e4;
+    padding: 18px 20px;
+    max-width: 560px;
+    overflow-x: auto;
+    box-shadow: 8px 8px 0 rgba(229,33,122,0.9);
+  }
+  .s02 .code b { color: #52d6ee; font-weight: 400; }
+  .s02 .decor .ink-c,
+  .s02 .decor .ink-m {
+    position: absolute;
+    width: 40vw; height: 40vw;
+    border-radius: 50%;
+    mix-blend-mode: multiply;
+  }
+  .s02 .decor .ink-c { background: rgba(13,143,168,0.16); right: -10vw; bottom: -12vw; }
+  .s02 .decor .ink-m { background: rgba(229,33,122,0.14); right: -4vw; bottom: -18vw; }
+  @media (max-width: 800px) {
+    .s02 .jump { gap: 0 10px; }
+    .s02 .code { font-size: 13px; padding: 14px; box-shadow: 5px 5px 0 rgba(229,33,122,0.9); }
+  }
+
+  /* ─── s03 · memo / airgram ───────────────────────────────────────── */
+  .s03 { background: #ece7db; color: #1c1a15; }
+  .s03 .folio { font-family: var(--mono); letter-spacing: 0.12em; }
+  .s03 .tag {
+    font-family: var(--mono);
+    border-radius: 0;
+    border-width: 1px;
+    color: #1c1a15;
+    letter-spacing: 0.16em;
+  }
+  .s03 .hed {
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: clamp(28px, 4.4vw, 58px);
+    line-height: 1.14;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+  }
+  .s03 .hed em { font-style: normal; border-bottom: 5px solid #1c1a15; }
+  .s03 .lede { font-family: var(--sans); font-size: clamp(18px, 1.6vw, 21px); line-height: 1.6; max-width: 56ch; }
+  .s03 .read-on { font-family: var(--mono); border-radius: 0; border-width: 1px; --flip: #ece7db; }
+
+  .s03 .memo {
+    width: 100%;
+    max-width: 660px;
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.75;
+    border-top: 3px double #1c1a15;
+    border-bottom: 3px double #1c1a15;
+    padding: 16px 0;
+  }
+  .s03 .memo dl {
+    display: grid;
+    grid-template-columns: 92px minmax(0, 1fr);
+    gap: 2px 14px;
+    margin: 0;
+  }
+  .s03 .memo dt { text-transform: uppercase; letter-spacing: 0.14em; opacity: 0.55; }
+  .s03 .memo dd { margin: 0; }
+  .s03 .memo .body {
+    margin: 14px 0 0;
+    padding-top: 12px;
+    border-top: 1px solid rgba(28,26,21,0.25);
+    max-width: none;
+  }
+  .s03 .memo .body span { display: block; }
+  .s03 .decor .rule-l {
+    position: absolute;
+    left: clamp(14px, 3.4vw, 68px); top: 0; bottom: 0;
+    width: 1px;
+    background: rgba(196,60,44,0.4);
+  }
+  .s03 .decor .rule-l2 {
+    position: absolute;
+    left: calc(clamp(14px, 3.4vw, 68px) + 5px); top: 0; bottom: 0;
+    width: 1px;
+    background: rgba(196,60,44,0.4);
+  }
+  .s03 .decor .punch {
+    position: absolute;
+    left: clamp(6px, 1.2vw, 22px);
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: rgba(28,26,21,0.14);
+  }
+  .s03 .decor .p1 { top: 26vh; }
+  .s03 .decor .p2 { top: 50vh; }
+  .s03 .decor .p3 { top: 74vh; }
+  @media (max-width: 800px) {
+    .s03 .memo dl { grid-template-columns: 76px minmax(0, 1fr); }
+    .s03 .memo { font-size: 13px; }
+    .s03 .decor .rule-l, .s03 .decor .rule-l2, .s03 .decor .punch { display: none; }
+  }
+
+  /* ─── s04 · film still ───────────────────────────────────────────── */
+  .s04 { background: #08090c; color: #d9dde3; }
+  .s04 .tag {
+    color: #d9dde3; border-color: rgba(217,221,227,0.5);
+    border-radius: 0; letter-spacing: 0.3em;
+  }
+  .s04 .hed {
+    font-family: var(--sans);
+    font-weight: 900;
+    font-size: clamp(38px, 6.2vw, 88px);
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+    line-height: 0.96;
+    color: #f2f4f7;
+  }
+  .s04 .hed em { font-style: normal; color: #f0c04a; }
+  .s04 .lede { color: #a8afb9; }
+  .s04 .read-on { color: #f0c04a; border-color: #f0c04a; --flip: #08090c; border-radius: 0; }
+
+  .s04 .frame {
+    width: 100%;
+    max-width: 780px;
+    border: 1px solid rgba(217,221,227,0.22);
+    background: linear-gradient(180deg, rgba(240,192,74,0.05), rgba(8,9,12,0));
+    padding: clamp(18px, 2.6vw, 30px);
+  }
+  .s04 .frame .slate {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: #f0c04a;
+    margin-bottom: 16px;
+  }
+  .s04 .frame .subs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .s04 .frame .subs li {
+    font-family: var(--sans);
+    font-size: clamp(16px, 1.5vw, 19px);
+    line-height: 1.45;
+    padding-left: 26px;
+    position: relative;
+    color: #e7eaef;
+  }
+  .s04 .frame .subs li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: #f0c04a;
+  }
+  .s04 .frame .subs li b { color: #f0c04a; font-weight: 700; }
+  .s04 .decor .bar-t,
+  .s04 .decor .bar-b {
+    position: absolute; left: 0; right: 0; height: 16px;
+    background: #000;
+  }
+  .s04 .decor .bar-t { top: 0; }
+  .s04 .decor .bar-b { bottom: 0; }
+  .s04 .decor .glow {
+    position: absolute;
+    left: 50%; top: 55%;
+    transform: translate(-50%, -50%);
+    width: 90vw; height: 60vh;
+    background: radial-gradient(ellipse, rgba(240,192,74,0.07), transparent 70%);
+  }
+
+  /* ─── s05 · postcard ─────────────────────────────────────────────── */
+  .s05 { background: #0f5f63; color: #f4ead6; }
+  .s05 .tag { color: #f2c14e; border-color: #f2c14e; }
+  .s05 .hed {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 700;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-size: clamp(42px, 6.6vw, 94px);
+    letter-spacing: -0.025em;
+    color: #f9f2e2;
+  }
+  .s05 .hed em { font-style: normal; font-weight: 900; color: #f2c14e; }
+  .s05 .lede { color: #dfd3bd; }
+  .s05 .read-on { color: #f2c14e; border-color: #f2c14e; --flip: #0f5f63; }
+
+  .s05 .card {
+    width: 100%;
+    max-width: 760px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: 0;
+    border: 3px solid #f2c14e;
+    background: #0b4b4f;
+  }
+  .s05 .card .left {
+    padding: 20px 22px;
+    border-right: 2px dashed rgba(242,193,78,0.55);
+  }
+  .s05 .card .right { padding: 20px 22px; }
+  .s05 .card h4 {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #f2c14e;
+    margin: 0 0 12px;
+  }
+  .s05 .card .models {
+    display: flex; flex-direction: column; gap: 11px;
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.4;
+  }
+  .s05 .card .models .m { display: flex; flex-direction: column; gap: 1px; }
+  .s05 .card .models .m b { font-weight: 600; color: #f9f2e2; font-size: 14px; }
+  .s05 .card .models .m span { color: rgba(244,234,214,0.72); }
+  .s05 .card .stamp {
+    width: 92px; height: 108px;
+    border: 2px dashed #f2c14e;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 2px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #f2c14e;
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  .s05 .card .stamp b { font-size: 26px; letter-spacing: normal; color: #f9f2e2; }
+  .s05 .card .addr {
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.9;
+    color: rgba(244,234,214,0.8);
+    border-top: 1px solid rgba(242,193,78,0.4);
+    padding-top: 10px;
+  }
+  .s05 .decor .sun {
+    position: absolute;
+    right: -6vw; top: clamp(110px, 14vw, 200px);
+    width: 34vw; height: 34vw;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(242,193,78,0.16), transparent 66%);
+  }
+  .s05 .decor .wave {
+    position: absolute;
+    left: 0; right: 0; bottom: 0; height: 34vh;
+    background: repeating-linear-gradient(
+      -45deg, rgba(242,193,78,0.055) 0 2px, transparent 2px 16px);
+  }
+  @media (max-width: 800px) {
+    .s05 .card { grid-template-columns: 1fr; }
+    .s05 .card .left { border-right: 0; border-bottom: 2px dashed rgba(242,193,78,0.55); }
+  }
+
+  /* ─── Colophon ───────────────────────────────────────────────────── */
+  .colophon { background: #f4f0e6; color: #23261d; }
+  .colophon .hed {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(40px, 5.4vw, 76px);
+    color: #3d4a2c;
+  }
+  .colophon .hed em { font-style: italic; color: #a3341c; }
+  .colophon .lede { max-width: 58ch; }
+  .colophon .plate {
+    width: 100%;
+    max-width: 760px;
+    border-top: 2px solid #3d4a2c;
+    border-bottom: 2px solid #3d4a2c;
+    padding: 20px 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px 40px;
+  }
+  .colophon .plate h5 {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    margin: 0 0 8px;
+    color: #a3341c;
+  }
+  .colophon .plate p {
+    margin: 0;
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.75;
+    color: #2f3327;
+  }
+  @media (max-width: 800px) {
+    .colophon .plate { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ════════ COVER · pull-quote ════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 097</a></span>
+    <span>Monday · 27 Jul 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <p class="wordmark">Ephemeris</p>
+    <blockquote class="quote"><span class="mark">“</span>Spend most of the tokens on gotchas.<span class="mark">”</span></blockquote>
+    <p class="attrib">Thariq Shihipar · Anthropic · 24 July</p>
+    <p class="dek">Today's issue is about defaults moving. Which lint rules fire without being asked, how much system prompt a model still needs, who picks up the ticket, where the weights live, and who ends up paying for the tokens.</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>$3,333 of credit, sold for 425 renminbi.</span><span>Vectoral</span></a>
+      <a href="#s02"><span><span class="num">02</span>Fifty-nine rules became four hundred thirteen.</span><span>Astral</span></a>
+      <a href="#s03"><span><span class="num">03</span>Assign the ticket to no one in particular.</span><span>GitHub</span></a>
+      <a href="#s04"><span><span class="num">04</span>Four fifths of the prompt is gone.</span><span>Anthropic</span></a>
+      <a href="#s05"><span><span class="num">05</span>Greetings from your own memory bus.</span><span>Nativ</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ════════ 01 · dark report ════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 097</a></span>
+    <span>01 / 05 · Vectoral</span>
+  </header>
+  <div class="main">
+    <span class="tag">Security · API keys</span>
+    <h2 class="hed">$3,333 of credit, sold for <em>425 renminbi</em>.</h2>
+    <p class="lede">Matt Lenhard mapped the relay market: a four-layer supply chain that pools API keys from free-trial farms, prepaid cards and chargebacks, then resells frontier tokens through Chinese-language storefronts at up to 97.8% off list. The ten biggest relays draw 3.6 million visits a month between them, with price-comparison sites and key lotteries on top. The demand side is the part that should reach your backlog — it pays strangers to go looking for unmetered endpoints, and the invoice lands on whoever owns the key.</p>
+    <div class="figure">
+      <div class="ledger">
+        <div class="row head"><span>Layer</span><span>Runs on</span><span>Exposure</span></div>
+        <div class="row"><span class="k">Account pools</span><span class="v">one-api / new-api</span><span class="v cut">stolen + leaked keys</span></div>
+        <div class="row"><span class="k">Storefronts</span><span class="v">3.6M visits / mo</span><span class="v cut">97.8% off list</span></div>
+        <div class="row"><span class="k">Buyer intent</span><span class="v"><span class="redact">redacted</span> distillation</span><span class="v cut">your quota</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://vectoral.com/blog/token-relay-market" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true">
+    <span class="grain"></span>
+    <span class="stamp">RELAY</span>
+  </div>
+</section>
+
+<!-- ════════ 02 · risograph ════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 097</a></span>
+    <span>02 / 05 · Astral</span>
+  </header>
+  <div class="main">
+    <span class="tag">Python · Linting</span>
+    <h2 class="hed">Fifty-nine rules became <em>four hundred thirteen</em>.</h2>
+    <p class="lede">Ruff's default set had not moved since v0.1.0. Version 0.16.0, out on 23 July, turns on 413 of its 968 rules by default — including checks for syntax errors and immediate runtime errors that were sitting behind opt-in flags the whole time. Astral pointed it at sqlite-utils and got more than 1,600 violations back. Expect a loud first run on any codebase that has been coasting on the old defaults.</p>
+    <div class="figure">
+      <div class="jump">
+        <span class="from">59</span>
+        <span class="arrow">→</span>
+        <span class="to">413<span class="unit">on by default</span></span>
+      </div>
+      <pre class="code"># pyproject.toml — keep the pre-0.16 behaviour
+[lint]
+select = <b>["E4", "E7", "E9", "F"]</b></pre>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://astral.sh/blog/ruff-v0.16.0" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true">
+    <span class="ink-c"></span>
+    <span class="ink-m"></span>
+  </div>
+</section>
+
+<!-- ════════ 03 · memo / airgram ════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 097</a></span>
+    <span>03 / 05 · GitHub</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev tools · Agents</span>
+    <h2 class="hed">Assign the ticket to <em>no one in particular</em>.</h2>
+    <p class="lede">Copilot's cloud agent for Linear left preview on 23 July. You hand it an issue the way you would hand it to a teammate; it works in an ephemeral Actions runner, streams progress into the Linear timeline, and opens a draft pull request with a review request attached. General availability adds the controls that make it usable on a real board — pick the model, pick target and working branches, point it at a repo-specific custom agent, and comment mid-run when it drifts.</p>
+    <div class="figure">
+      <div class="memo">
+        <dl>
+          <dt>To</dt><dd>@copilot (cloud agent, ephemeral runner)</dd>
+          <dt>From</dt><dd>Your Linear board</dd>
+          <dt>Re</dt><dd>Assigned issue → draft PR</dd>
+          <dt>CC</dt><dd>Pro · Pro+ · Business · Enterprise</dd>
+        </dl>
+        <div class="body">
+          <span>01 · Install GitHub Copilot for Linear from the Marketplace. Needs org-owner and workspace-admin rights.</span>
+          <span>02 · Assign the issue. Progress lands back in the Linear activity timeline.</span>
+          <span>03 · Mention Copilot in a comment to give it new instructions while it works.</span>
+          <span>04 · Review the draft PR. The branch was yours to choose.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://github.blog/changelog/2026-07-23-copilot-cloud-agent-for-linear-is-now-generally-available" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true">
+    <span class="rule-l"></span>
+    <span class="rule-l2"></span>
+    <span class="punch p1"></span>
+    <span class="punch p2"></span>
+    <span class="punch p3"></span>
+  </div>
+</section>
+
+<!-- ════════ 04 · film still ════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 097</a></span>
+    <span>04 / 05 · Anthropic</span>
+  </header>
+  <div class="main">
+    <span class="tag">Agents · Prompting</span>
+    <h2 class="hed">Four fifths of the prompt <em>is gone</em>.</h2>
+    <p class="lede">Thariq Shihipar on what happened when Claude Code's system prompt lost more than 80% of its bulk with no measurable movement on the coding evals. The old craft was writing rules to head off the worst case; against the Claude 5 models those rules mostly collide with each other and spend reasoning on reconciling the contradictions. The replacement guidance is specific, and most of it transfers to whatever agent you are building this week.</p>
+    <div class="figure">
+      <div class="frame">
+        <div class="slate">Four rules · 24 Jul 2026 · scene 05</div>
+        <ul class="subs">
+          <li><b>System prompt:</b> carry product context, not an exhaustive rulebook. Let the model use judgement.</li>
+          <li><b>CLAUDE.md:</b> keep it light on what the repo is; spend the tokens on the gotchas inside it.</li>
+          <li><b>Skills:</b> write guides, not constraints — split long ones across files so they load only when needed.</li>
+          <li><b>References:</b> a spec can be a test suite or a working function. Show the artefact, skip the description.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://claude.com/blog/the-new-rules-of-context-engineering-for-claude-5-generation-models" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true">
+    <span class="glow"></span>
+    <span class="bar-t"></span>
+    <span class="bar-b"></span>
+  </div>
+</section>
+
+<!-- ════════ 05 · postcard ════════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 097</a></span>
+    <span>05 / 05 · Nativ · via Simon Willison</span>
+  </header>
+  <div class="main">
+    <span class="tag">Local models · Mac</span>
+    <h2 class="hed">Greetings from your own <em>memory bus</em>.</h2>
+    <p class="lede">Prince Canuma, who wrote the mlx-vlm library, wrapped it in a Mac application. Nativ picks up the models already sitting in your Hugging Face cache, gives you a chat window and a localhost API server against them, and reports tokens per second, memory and thermal state while they run. Vision, audio, code and text, MIT-licensed, Apple Silicon only, no account to create.</p>
+    <div class="figure">
+      <div class="card">
+        <div class="left">
+          <h4>Ships with</h4>
+          <div class="models">
+            <div class="m"><b>Gemma 4 E2B · Google</b><span>10.28 GB · 128K ctx · vision + audio</span></div>
+            <div class="m"><b>North Mini Code · Cohere</b><span>19.38 GB · 500K ctx · code + tools</span></div>
+            <div class="m"><b>LFM2.5-VL 1.6B · Liquid AI</b><span>3.20 GB · 128K ctx · vision + language</span></div>
+          </div>
+        </div>
+        <div class="right">
+          <div class="stamp"><b>MIT</b>free<br>forever</div>
+          <div class="addr">
+            M1 and later<br>
+            MLX-VLM inside<br>
+            localhost API + chat
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blaizzy.github.io/nativ/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true">
+    <span class="sun"></span>
+    <span class="wave"></span>
+  </div>
+</section>
+
+<!-- ════════ COLOPHON ════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 097</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>Monday.</em></h3>
+    <p class="lede">Five picks from 27 July 2026: a gray market in stolen model credits, a linter that changed its mind about defaults, an agent that takes Linear tickets, a system prompt cut by four fifths, and a Mac app for the weights you already downloaded.</p>
+    <div class="figure">
+      <div class="plate">
+        <div>
+          <h5>Today's sources</h5>
+          <p>Vectoral · Astral · GitHub Changelog · Anthropic · Nativ, via Simon Willison</p>
+        </div>
+        <div>
+          <h5>Also read</h5>
+          <p>The Batch · Import AI · Don't Worry About the Vase · OpenAI · Cloudflare · Sentry · Vercel · PostHog · Fly.io · Next.js · @seeallochnaya · @TochkiNadAI · @denissexy · @rvnikita_blog · @ProductsAndStartups</p>
+        </div>
+        <div>
+          <h5>Rubric</h5>
+          <p>Tools you could adopt this week · creative software · dev tools and agentic coding · privacy and security when the signal is high · research with a practical kernel</p>
+        </div>
+        <div>
+          <h5>Issue</h5>
+          <p>097 · Monday 27 July 2026 · Zürich · every item dated inside the last thirty days, every link fresh to this archive</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>
