@@ -114,6 +114,7 @@ https://blog.cloudflare.com/meerkat-introduction
 https://blog.cloudflare.com/ml-dsa-will-have-to-do
 https://blog.cloudflare.com/monetization-gateway
 https://blog.cloudflare.com/oauth-for-all
+https://blog.cloudflare.com/open-sourcing-our-privacy-proxy-cli
 https://blog.cloudflare.com/optimizing-core-unit-boot-time
 https://blog.cloudflare.com/our-unified-data-platform
 https://blog.cloudflare.com/past-bots-and-humans
@@ -212,6 +213,7 @@ https://github.blog/ai-and-ml/github-copilot/better-tools-made-copilot-code-revi
 https://github.blog/ai-and-ml/github-copilot/continuous-ai-for-accessibility-how-github-transforms-feedback-into-inclusion
 https://github.blog/changelog/2026-06-01-updates-to-github-copilot-billing-and-plans
 https://github.blog/changelog/2026-06-11-github-agentic-workflows-is-now-in-public-preview
+https://github.blog/changelog/2026-07-23-agent-automation-controls-in-github-issues-in-public-preview
 https://github.blog/changelog/2026-07-23-copilot-cloud-agent-for-linear-is-now-generally-available
 https://github.blog/changelog/2026-07-23-github-mcp-server-supports-the-next-mcp-specification
 https://github.blog/engineering/architecture-optimization/from-latency-to-instant-modernizing-github-issues-navigation-performance
@@ -241,6 +243,7 @@ https://github.com/BayramAnnakov/team-os-toolkit
 https://github.com/BayramAnnakov/token-audit-skill
 https://github.com/BayramAnnakov/whimsical-strategies-skill
 https://github.com/BayramAnnakov/youtube-playlist-to-markdown
+https://github.com/bradautomates/claude-video
 https://github.com/coreyhaines31/marketingskills
 https://github.com/deepseek-ai/Thinking-with-Visual-Primitives
 https://github.com/DenisSergeevitch/agents-best-practices
@@ -287,6 +290,7 @@ https://jack-clark.net/2026/06/15/import-ai-461-alignment-is-not-on-track-fronti
 https://jack-clark.net/2026/06/22/import-ai-462-superpersuasion-self-sustaining-ai-paths-to-asi
 https://jack-clark.net/2026/06/29/import-ai-463-self-improving-robots-a-10k-chinese-gpu-cluster-and-an-elegiac-essay-for-the-human-era
 https://jack-clark.net/2026/07/06/import-ai-464-fables-writes-gpu-kernels-ai-automation-and-analog-computation
+https://jack-clark.net/2026/07/27/import-ai-466-the-bitter-lesson-for-robotics-ais-complete-week-long-programming-tasks-and-openais-accidental-ai-hacker
 https://jeffbullas.com/ai-reinvention-truth
 https://jeffbullas.com/ai-slop-crisis
 https://jeffbullas.com/charisma-into-cash
@@ -530,6 +534,7 @@ https://vercel.com/blog/ai-gateway-production-index-june-2026
 https://vercel.com/blog/ai-sdk-7
 https://vercel.com/blog/build-knowledge-agents-without-embeddings
 https://vercel.com/blog/building-a-real-time-power-outage-map-with-next-js-on-vercel
+https://vercel.com/blog/deepsecbench-evaluating-model-performance-in-finding-cybersecurity-vulnerabilities
 https://vercel.com/blog/dockerfile-on-vercel
 https://vercel.com/blog/how-conductor-moved-parallel-coding-agents-from-the-laptop-to-the-cloud-with-vercel-sandbox
 https://vercel.com/blog/how-cursor-built-a-growth-iteration-loop-with-vercel-microfrontends-and-flags
