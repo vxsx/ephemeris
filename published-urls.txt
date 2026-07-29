@@ -122,6 +122,7 @@ https://blog.cloudflare.com/post-quantum-eo-2026
 https://blog.cloudflare.com/post-quantum-ipsec
 https://blog.cloudflare.com/private-origins-dns-routing
 https://blog.cloudflare.com/q1-2026-internet-disruption-summary
+https://blog.cloudflare.com/q2-2026-internet-disruption-summary
 https://blog.cloudflare.com/quic-death-spiral-fix
 https://blog.cloudflare.com/realtime-threat-intel-waf-rules
 https://blog.cloudflare.com/rollbacks-for-workflows
@@ -138,6 +139,7 @@ https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-o
 https://blog.google/innovation-and-ai/products/gemini-app/next-evolution-gemini-app
 https://blog.google/innovation-and-ai/technology/research/gemini-for-science-io-2026
 https://blog.interceptfund.com/p/ending-respiratory-infections
+https://blog.jetbrains.com/ai/2026/07/ponytail-skill-claude-tested
 https://blog.jetbrains.com/ai/2026/07/speak-to-ai-agents-like-cavemen-tosave-tokens
 https://blog.maximeheckel.com/posts/on-rendering-the-sky-sunsets-and-planets
 https://blog.reve.com/posts/launching-reve-2.1
@@ -216,6 +218,7 @@ https://github.blog/changelog/2026-06-11-github-agentic-workflows-is-now-in-publ
 https://github.blog/changelog/2026-07-23-agent-automation-controls-in-github-issues-in-public-preview
 https://github.blog/changelog/2026-07-23-copilot-cloud-agent-for-linear-is-now-generally-available
 https://github.blog/changelog/2026-07-23-github-mcp-server-supports-the-next-mcp-specification
+https://github.blog/changelog/2026-07-28-npm-publish-time-malware-scanning-and-dual-use-metadata
 https://github.blog/engineering/architecture-optimization/from-latency-to-instant-modernizing-github-issues-navigation-performance
 https://github.blog/engineering/architecture-optimization/how-we-rebuilt-the-search-architecture-for-high-availability-in-github-enterprise-server
 https://github.blog/engineering/architecture-optimization/the-uphill-climb-of-making-diff-lines-performant
@@ -386,6 +389,7 @@ https://openai.com/index/prc-linked-influence-operations-ai-debates
 https://openai.com/index/previewing-gpt-5-6-sol
 https://openai.com/index/ramp
 https://openai.com/index/running-codex-safely
+https://openai.com/index/scientific-computing-agentic-ai
 https://openai.com/index/separating-signal-from-noise-coding-evaluations
 https://openai.com/index/speeding-up-agentic-workflows-with-websockets
 https://openai.com/index/strengthening-societal-resilience-with-rosalind-biodefense
@@ -400,6 +404,7 @@ https://openai.com/index/where-the-goblins-came-from
 https://openai.com/index/work-with-codex-from-anywhere
 https://pasqualepillitteri.it/en/news/6571/google-ai-studio-design-variations-en
 https://pcgamer.com/software/ai/amazon-bins-an-internal-ai-leaderboard-for-its-kiro-employees-because-they-were-burning-through-too-many-costly-tokens
+https://posthog.com/blog/10k-prs-a-month
 https://posthog.com/blog/agents-closed-4063-errors
 https://posthog.com/blog/ai-observability-for-mvps
 https://posthog.com/blog/autoresearch-query-bug
