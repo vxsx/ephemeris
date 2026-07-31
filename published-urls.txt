@@ -42,6 +42,7 @@ https://anthropic.com/news/fable-safeguards-jailbreak-framework
 https://anthropic.com/news/finance-agents
 https://anthropic.com/news/higher-limits-spacex
 https://anthropic.com/news/introducing-claude-tag
+https://anthropic.com/news/investigating-incidents-cybersecurity-evals
 https://anthropic.com/news/redeploying-fable-5
 https://anthropic.com/news/reflect-with-claude
 https://anthropic.com/news/widening-conversation-ai
@@ -89,6 +90,7 @@ https://blog.cloudflare.com/browser-run-containers
 https://blog.cloudflare.com/build-your-own-vulnerability-harness
 https://blog.cloudflare.com/building-for-the-future
 https://blog.cloudflare.com/casb-anthropic-integration
+https://blog.cloudflare.com/cdnjs-dev-platform-migration
 https://blog.cloudflare.com/celebrating-12-years-of-project-galileo
 https://blog.cloudflare.com/claude-managed-agents
 https://blog.cloudflare.com/clickhouse-query-plan-contention
@@ -221,6 +223,7 @@ https://github.blog/changelog/2026-07-23-agent-automation-controls-in-github-iss
 https://github.blog/changelog/2026-07-23-copilot-cloud-agent-for-linear-is-now-generally-available
 https://github.blog/changelog/2026-07-23-github-mcp-server-supports-the-next-mcp-specification
 https://github.blog/changelog/2026-07-28-npm-publish-time-malware-scanning-and-dual-use-metadata
+https://github.blog/changelog/2026-07-30-stacked-pull-requests-are-now-in-public-preview
 https://github.blog/engineering/architecture-optimization/from-latency-to-instant-modernizing-github-issues-navigation-performance
 https://github.blog/engineering/architecture-optimization/how-we-rebuilt-the-search-architecture-for-high-availability-in-github-enterprise-server
 https://github.blog/engineering/architecture-optimization/the-uphill-climb-of-making-diff-lines-performant
@@ -341,6 +344,7 @@ https://nvidianews.nvidia.com/news/nvidia-microsoft-windows-pcs-agents-rtx-spark
 https://openai.com/academy/codex-for-work/how-data-science-teams-use-codex
 https://openai.com/index/a-scorecard-for-the-ai-age
 https://openai.com/index/advancing-content-provenance
+https://openai.com/index/advancing-the-price-performance-frontier-with-gpt-5-6
 https://openai.com/index/advancing-voice-intelligence-with-new-models-in-the-api
 https://openai.com/index/ai-chemist-improves-reaction
 https://openai.com/index/boston-childrens-hospital
@@ -497,6 +501,7 @@ https://t.me/ProductsAndStartups/1758
 https://t.me/rvnikita_blog/1735
 https://t.me/s/denissexy
 https://t.me/TochkiNadAI/2324
+https://t.me/TochkiNadAI/2520
 https://techcrunch.com/2026/05/19/googles-gemini-omni-turns-images-audio-and-text-into-video-and-thats-just-the-start
 https://techspot.com/news/112386-amazon-employees-using-internal-ai-tools-inflate-usage.html
 https://telegram.org/blog/ai-bot-revolution-11-new-features
