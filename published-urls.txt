@@ -49,6 +49,7 @@ https://anthropic.com/news/widening-conversation-ai
 https://anthropic.com/research/2028-ai-leadership
 https://anthropic.com/research/anthropic-institute-agenda
 https://anthropic.com/research/claude-personal-guidance
+https://anthropic.com/research/discovering-cryptographic-weaknesses
 https://anthropic.com/research/donating-open-source-petri
 https://anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench
 https://anthropic.com/research/glasswing-initial-update
@@ -116,6 +117,7 @@ https://blog.cloudflare.com/making-rust-workers-reliable
 https://blog.cloudflare.com/meerkat-introduction
 https://blog.cloudflare.com/ml-dsa-will-have-to-do
 https://blog.cloudflare.com/monetization-gateway
+https://blog.cloudflare.com/moq-relays
 https://blog.cloudflare.com/oauth-for-all
 https://blog.cloudflare.com/open-sourcing-our-privacy-proxy-cli
 https://blog.cloudflare.com/optimizing-core-unit-boot-time
@@ -224,6 +226,7 @@ https://github.blog/changelog/2026-07-23-copilot-cloud-agent-for-linear-is-now-g
 https://github.blog/changelog/2026-07-23-github-mcp-server-supports-the-next-mcp-specification
 https://github.blog/changelog/2026-07-28-npm-publish-time-malware-scanning-and-dual-use-metadata
 https://github.blog/changelog/2026-07-30-stacked-pull-requests-are-now-in-public-preview
+https://github.blog/engineering/architecture-optimization/dont-stop-early-case-folding-source-code-at-memory-speed
 https://github.blog/engineering/architecture-optimization/from-latency-to-instant-modernizing-github-issues-navigation-performance
 https://github.blog/engineering/architecture-optimization/how-we-rebuilt-the-search-architecture-for-high-availability-in-github-enterprise-server
 https://github.blog/engineering/architecture-optimization/the-uphill-climb-of-making-diff-lines-performant
@@ -410,6 +413,7 @@ https://openai.com/index/virgin-atlantic
 https://openai.com/index/wasmer
 https://openai.com/index/where-the-goblins-came-from
 https://openai.com/index/work-with-codex-from-anywhere
+https://pangram.com/blog/introducing-pangram-image-detection
 https://pasqualepillitteri.it/en/news/6571/google-ai-studio-design-variations-en
 https://pcgamer.com/software/ai/amazon-bins-an-internal-ai-leaderboard-for-its-kiro-employees-because-they-were-burning-through-too-many-costly-tokens
 https://posthog.com/blog/10k-prs-a-month
@@ -575,6 +579,7 @@ https://vercel.com/blog/vercel-flags-platform-native-feature-flags
 https://vercel.com/blog/vercel-services-run-full-stack-on-vercel
 https://vercel.com/blog/we-ralph-wiggumed-webstreams-to-make-them-10x-faster
 https://vercel.com/blog/zdr-on-ai-gateway
+https://vercel.com/changelog/ai-gateway-spend-budgets-and-alerts
 https://vercel.com/changelog/connect-to-and-manage-sandboxes-from-the-dashboard
 https://vercel.com/changelog/enforce-consistent-code-for-agents-and-humans-with-konsistent
 https://vercel.com/changelog/vercel-sandbox-now-supports-fuse-based-filesystems

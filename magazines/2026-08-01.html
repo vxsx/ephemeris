@@ -1,0 +1,872 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 102 · 1 August 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — from scaffold.html. Surface overrides below.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 {
+    overflow-wrap: break-word;
+    margin: 0;
+  }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+
+  .spread > .decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .folio a.home { color: inherit; text-decoration: none; }
+  .folio a.home:hover { text-decoration: underline; }
+
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+
+  .figure { width: 100%; }
+
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — issue 102
+     cover  date-hero, pale paper
+     s01    terminal            · acid green on black
+     s02    neo-brutalist       · yellow / black, Inter 900 caps
+     s03    blueprint           · negative navy, white grid, mono notes
+     s04    postcard            · peach paper, navy + red, stamp motif
+     s05    spreadsheet         · ledger grey, tabular mono
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── COVER · date-hero ─── */
+  .cover { background: #e9e7dd; color: #16160f; }
+  .cover .datehero {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0 clamp(12px, 2vw, 30px);
+    width: 100%;
+  }
+  .cover .dh-dow {
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: clamp(26px, 4.4vw, 68px);
+    letter-spacing: 0.04em;
+    color: #c8341f;
+  }
+  .cover .dh-num {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    font-size: clamp(110px, 22vw, 320px);
+    line-height: 0.82;
+    letter-spacing: -0.05em;
+    padding-bottom: 0.1em;
+  }
+  .cover .dh-mon {
+    font-family: var(--sans);
+    font-weight: 900;
+    font-size: clamp(38px, 7vw, 108px);
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+  }
+  .cover .dh-yr {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: clamp(30px, 5vw, 84px);
+    letter-spacing: 0.02em;
+    color: #c8341f;
+  }
+  .cover .rule {
+    width: 100%; height: 6px;
+    background: #16160f;
+    margin: 4px 0 0;
+  }
+  .cover .dek {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(21px, 2.1vw, 30px);
+    line-height: 1.32;
+    max-width: 34ch;
+    margin: 0;
+  }
+  .cover .toc {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 40px;
+    padding-top: 18px;
+    border-top: 1px solid currentColor;
+    width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    text-decoration: none; color: inherit;
+    padding: 7px 0;
+    border-bottom: 1px dotted rgba(0,0,0,0.28);
+  }
+  .cover .toc a:hover { background: rgba(200,52,31,0.12); }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.82em; opacity: 0.65; }
+  .cover .toc .num {
+    font-family: var(--mono); font-weight: 600;
+    color: #c8341f; margin-right: 10px;
+  }
+  .cover .decor::before {
+    content: "";
+    position: absolute;
+    right: -12vw; top: -18vw;
+    width: 60vw; height: 60vw;
+    border: 2px solid rgba(200,52,31,0.22);
+    border-radius: 50%;
+  }
+  .cover .decor::after {
+    content: "";
+    position: absolute;
+    left: -20vw; bottom: -26vw;
+    width: 52vw; height: 52vw;
+    background: radial-gradient(circle, rgba(22,22,15,0.07), transparent 70%);
+  }
+
+  /* ─── s01 · TERMINAL ─── */
+  .s01 { background: #050705; color: #7dff8e; }
+  .s01 .tag {
+    font-family: var(--mono);
+    color: #050705; background: #7dff8e; border-color: #7dff8e;
+    border-radius: 0;
+  }
+  .s01 .hed {
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: clamp(38px, 5.3vw, 82px);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    text-shadow: 0 0 24px rgba(125,255,142,0.35);
+  }
+  .s01 .hed em { font-style: normal; color: #050705; background: #7dff8e; padding: 0 0.12em; }
+  .s01 .lede { font-family: var(--mono); font-size: clamp(17px, 1.4vw, 20px); line-height: 1.6; max-width: 62ch; color: #a9ffb6; }
+  .s01 .bench {
+    font-family: var(--mono);
+    font-size: clamp(13px, 1.15vw, 16px);
+    border: 1px solid rgba(125,255,142,0.4);
+    padding: clamp(14px, 1.6vw, 22px);
+    background: rgba(125,255,142,0.05);
+    width: 100%;
+    max-width: 640px;
+  }
+  .s01 .bench .brow {
+    display: flex; justify-content: space-between; gap: 12px;
+    padding: 5px 0;
+    border-bottom: 1px dotted rgba(125,255,142,0.22);
+  }
+  .s01 .bench .brow:last-child { border-bottom: 0; }
+  .s01 .bench .brow span:first-child { min-width: 0; overflow-wrap: anywhere; }
+  .s01 .bench .brow span:last-child { color: #d8ffdd; font-weight: 600; white-space: nowrap; }
+  .s01 .bench .hit span:last-child { color: #050705; background: #7dff8e; padding: 0 6px; }
+  .s01 .read-on { font-family: var(--mono); border-color: #7dff8e; color: #7dff8e; --flip: #050705; border-radius: 0; }
+  .s01 .decor::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(125,255,142,0.055) 0px,
+      rgba(125,255,142,0.055) 1px,
+      transparent 1px,
+      transparent 4px);
+  }
+  .s01 .decor::after {
+    content: "";
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 120vw; height: 90vh;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(ellipse, rgba(125,255,142,0.13), transparent 62%);
+  }
+
+  /* ─── s02 · NEO-BRUTALIST ─── */
+  .s02 { background: #ffe500; color: #0a0a0a; }
+  .s02 .tag {
+    font-weight: 800;
+    border: 3px solid #0a0a0a;
+    border-radius: 0;
+    background: #0a0a0a; color: #ffe500;
+    opacity: 1;
+  }
+  .s02 .hed {
+    font-family: var(--sans);
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: clamp(42px, 6.6vw, 104px);
+    line-height: 0.94;
+    letter-spacing: -0.035em;
+    padding-bottom: 0.04em;
+  }
+  .s02 .hed em {
+    font-style: normal;
+    background: #0a0a0a;
+    color: #ffe500;
+    padding: 0 0.1em;
+    display: inline-block;
+  }
+  .s02 .lede { font-family: var(--sans); font-weight: 500; max-width: 46ch; }
+  .s02 .steps {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    width: 100%;
+  }
+  .s02 .steps > div {
+    border: 4px solid #0a0a0a;
+    background: #fff;
+    padding: 16px 18px 18px;
+    min-width: 0;
+  }
+  .s02 .steps .k {
+    font-family: var(--sans); font-weight: 900;
+    font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase;
+    display: block; margin-bottom: 8px;
+  }
+  .s02 .steps .v {
+    font-family: var(--mono);
+    font-size: clamp(13px, 1.05vw, 15px);
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+  }
+  .s02 .read-on {
+    border: 4px solid #0a0a0a;
+    border-radius: 0;
+    background: #0a0a0a; color: #ffe500;
+    --flip: #ffe500;
+  }
+  .s02 .read-on:hover { background: #fff; color: #0a0a0a; }
+  .s02 .read-on:hover span { color: #0a0a0a; }
+  .s02 .decor::before {
+    content: "";
+    position: absolute;
+    right: -8vw; bottom: -8vw;
+    width: 46vw; height: 46vw;
+    border: 18px solid #0a0a0a;
+  }
+  .s02 .decor::after {
+    content: "";
+    position: absolute;
+    left: -6vw; top: clamp(120px, 16vw, 220px);
+    width: 26vw; height: 26vw;
+    background: #0a0a0a;
+    transform: rotate(45deg);
+    opacity: 0.08;
+  }
+
+  /* ─── s03 · BLUEPRINT (negative) ─── */
+  .s03 { background: #0c2f52; color: #e8f2fb; }
+  .s03 .tag {
+    font-family: var(--mono);
+    border-radius: 0;
+    border-color: rgba(232,242,251,0.6);
+  }
+  .s03 .hed {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+    font-size: clamp(42px, 6.1vw, 96px);
+    line-height: 1.04;
+    letter-spacing: -0.024em;
+  }
+  .s03 .hed em {
+    font-style: normal;
+    font-weight: 700;
+    border-bottom: 3px solid #7fd4ff;
+    color: #b8e6ff;
+  }
+  .s03 .lede { max-width: 52ch; color: #d3e6f6; }
+  .s03 .specs {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    width: 100%;
+    max-width: 700px;
+    border: 1px solid rgba(232,242,251,0.35);
+    font-family: var(--mono);
+    font-size: clamp(13px, 1.05vw, 15px);
+  }
+  .s03 .specs .srow {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) minmax(0, 0.9fr);
+    gap: 10px;
+    padding: 11px 14px;
+    border-bottom: 1px solid rgba(232,242,251,0.18);
+    min-width: 0;
+  }
+  .s03 .specs .srow:last-child { border-bottom: 0; }
+  .s03 .specs .srow > span { min-width: 0; overflow-wrap: anywhere; }
+  .s03 .specs .head {
+    background: rgba(232,242,251,0.09);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-size: 11px;
+  }
+  .s03 .specs .hi { color: #7fd4ff; font-weight: 600; }
+  .s03 .note {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    color: #8fb6d6;
+    margin: 0;
+  }
+  .s03 .read-on { border-radius: 0; border-color: #7fd4ff; color: #7fd4ff; --flip: #0c2f52; }
+  .s03 .decor::before {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(to right, rgba(232,242,251,0.11) 0 1px, transparent 1px 56px),
+      repeating-linear-gradient(to bottom, rgba(232,242,251,0.11) 0 1px, transparent 1px 56px);
+  }
+  .s03 .crop {
+    position: absolute;
+    width: 46px; height: 46px;
+    border: 2px solid rgba(127,212,255,0.6);
+  }
+  .s03 .crop.tr { top: clamp(84px, 10vw, 130px); right: 26px; border-left: 0; border-bottom: 0; }
+  .s03 .crop.bl { bottom: 26px; left: 26px; border-right: 0; border-top: 0; }
+
+  /* ─── s04 · POSTCARD ─── */
+  .s04 { background: #f6d7b8; color: #18305c; }
+  .s04 .tag { border-color: #c9342c; color: #c9342c; }
+  .s04 .hed {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 60, "WONK" 1;
+    font-size: clamp(46px, 6.8vw, 100px);
+    line-height: 1.0;
+  }
+  .s04 .hed em { font-style: normal; color: #c9342c; font-weight: 900; }
+  .s04 .lede { max-width: 48ch; }
+  .s04 .card {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: clamp(16px, 2vw, 30px);
+    width: 100%;
+    background: #fdf3e6;
+    border: 2px solid #18305c;
+    padding: clamp(16px, 2vw, 26px);
+    box-shadow: 9px 9px 0 rgba(24,48,92,0.2);
+  }
+  .s04 .card .col { min-width: 0; }
+  .s04 .card h4 {
+    font-family: var(--sans);
+    font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
+    font-weight: 800; color: #c9342c;
+    margin: 0 0 10px;
+  }
+  .s04 .card ul { margin: 0; padding-left: 1.05em; }
+  .s04 .card li { font-family: var(--sans); font-size: clamp(14px, 1.15vw, 16px); line-height: 1.5; margin-bottom: 7px; }
+  .s04 .stamp {
+    border: 3px dashed #c9342c;
+    padding: 14px 12px;
+    text-align: center;
+    font-family: var(--mono);
+  }
+  .s04 .stamp .big {
+    display: block;
+    font-family: var(--serif);
+    font-weight: 900; font-style: italic;
+    font-variation-settings: "opsz" 144;
+    font-size: clamp(40px, 5vw, 66px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: #c9342c;
+  }
+  .s04 .stamp .cap {
+    display: block;
+    margin-top: 8px;
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    line-height: 1.45;
+    color: #18305c;
+  }
+  .s04 .read-on { border-color: #c9342c; color: #c9342c; --flip: #f6d7b8; }
+  .s04 .decor::before {
+    content: "";
+    position: absolute;
+    inset: 14px;
+    border: 3px double rgba(24,48,92,0.3);
+  }
+  .s04 .decor::after {
+    content: "";
+    position: absolute;
+    left: -14vw; bottom: -18vw;
+    width: 48vw; height: 48vw;
+    background: radial-gradient(circle, rgba(201,52,44,0.14), transparent 68%);
+  }
+
+  /* ─── s05 · SPREADSHEET ─── */
+  .s05 { background: #e6e7e2; color: #1b1c19; }
+  .s05 .tag {
+    font-family: var(--mono);
+    border-radius: 0;
+    border-color: #1b1c19;
+    background: #fff;
+  }
+  .s05 .hed {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: clamp(40px, 5.6vw, 86px);
+    line-height: 1.06;
+    letter-spacing: -0.028em;
+  }
+  .s05 .hed em {
+    font-style: normal;
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: 0.86em;
+    color: #0f6b45;
+  }
+  .s05 .lede { font-family: var(--sans); max-width: 50ch; font-size: clamp(19px, 1.5vw, 22px); }
+  .s05 .sheet {
+    width: 100%;
+    max-width: 760px;
+    border: 1px solid #9a9b93;
+    background: #fbfbf8;
+    font-family: var(--mono);
+    font-size: clamp(12px, 1.05vw, 15px);
+    font-variant-numeric: tabular-nums;
+  }
+  .s05 .sheet .r {
+    display: grid;
+    grid-template-columns: 34px minmax(0, 1.1fr) minmax(0, 0.8fr) minmax(0, 1.1fr);
+    border-bottom: 1px solid #d3d4cd;
+    min-width: 0;
+  }
+  .s05 .sheet .r:last-child { border-bottom: 0; }
+  .s05 .sheet .r > span {
+    padding: 10px 11px;
+    border-right: 1px solid #d3d4cd;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  .s05 .sheet .r > span:last-child { border-right: 0; }
+  .s05 .sheet .hd {
+    background: #dcdcd4;
+    font-size: 11px; letter-spacing: 0.13em; text-transform: uppercase;
+    color: #4a4b45;
+  }
+  .s05 .sheet .idx { background: #dcdcd4; color: #7c7d76; text-align: center; }
+  .s05 .sheet .g { color: #0f6b45; font-weight: 600; }
+  .s05 .foot {
+    font-family: var(--mono); font-size: 13px; color: #5c5d56; margin: 0;
+  }
+  .s05 .read-on { border-radius: 0; border-color: #1b1c19; --flip: #e6e7e2; }
+  .s05 .decor::before {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(to right, rgba(27,28,25,0.055) 0 1px, transparent 1px 92px),
+      repeating-linear-gradient(to bottom, rgba(27,28,25,0.055) 0 1px, transparent 1px 34px);
+  }
+
+  /* ─── COLOPHON ─── */
+  .colophon { background: #0f3a2e; color: #e2efe6; }
+  .colophon .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(44px, 6vw, 92px);
+  }
+  .colophon .hed em {
+    font-style: italic;
+    color: #8fe3b4;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .colophon .lede { max-width: 56ch; color: #cbe4d5; }
+  .colophon .srcs {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    width: 100%;
+  }
+  .colophon .srcs span {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    padding: 5px 11px;
+    border: 1px solid rgba(226,239,230,0.3);
+    border-radius: 999px;
+    opacity: 0.6;
+  }
+  .colophon .srcs span.on {
+    background: #8fe3b4; color: #0f3a2e; border-color: #8fe3b4; opacity: 1; font-weight: 600;
+  }
+  .colophon .rubric {
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.7;
+    color: #a8cbb8;
+    margin: 0;
+  }
+  .colophon .decor::before {
+    content: "";
+    position: absolute;
+    right: -14vw; top: -14vw;
+    width: 56vw; height: 56vw;
+    background: radial-gradient(circle, rgba(143,227,180,0.12), transparent 68%);
+  }
+
+  /* ─── Mobile additions (baseline block above stays intact) ─── */
+  @media (max-width: 800px) {
+    .cover .toc { grid-template-columns: 1fr; gap: 0; }
+    .cover .datehero { gap: 0 10px; }
+    .s02 .steps { grid-template-columns: 1fr; }
+    .s03 .specs .srow { grid-template-columns: 1fr; gap: 2px; }
+    .s03 .specs .head { display: none; }
+    .s03 .crop { display: none; }
+    .s04 .card { grid-template-columns: 1fr; }
+    .s05 .sheet .r { grid-template-columns: 26px minmax(0, 1fr); }
+    .s05 .sheet .hd { display: none; }
+    .s05 .sheet .r > span { border-right: 0; padding: 7px 10px; }
+    .s05 .sheet .r > span:nth-child(2) { font-weight: 600; padding-bottom: 2px; }
+    .s05 .sheet .r > span:nth-child(3),
+    .s05 .sheet .r > span:nth-child(4) { grid-column: 2; padding-top: 0; padding-bottom: 4px; }
+    .s05 .sheet .idx { grid-row: span 3; display: flex; align-items: center; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ══════════════════ COVER · date-hero ══════════════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 102</a></span>
+    <span>Saturday · 01 Aug 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <div class="datehero">
+      <span class="dh-dow">SAT</span>
+      <span class="dh-num">01</span>
+      <span class="dh-mon">AUG</span>
+      <span class="dh-yr">26</span>
+    </div>
+    <div class="rule"></div>
+    <p class="dek">Today's issue is about limits — the ones you remove to go faster, and the ones you add so nothing runs away from you.</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>The early exit was costing 15×</span><span>GitHub</span></a>
+      <a href="#s02"><span><span class="num">02</span>One POST buys a global relay</span><span>Cloudflare</span></a>
+      <a href="#s03"><span><span class="num">03</span>Sixty hours halved a post-quantum key</span><span>Anthropic</span></a>
+      <a href="#s04"><span><span class="num">04</span>One real photo in 625 comes back fake</span><span>Pangram</span></a>
+      <a href="#s05"><span><span class="num">05</span>A cap your agent can't talk past</span><span>Vercel</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ══════════════════ 01 · TERMINAL ══════════════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 102</a></span>
+    <span>01 / 05 · GitHub Engineering</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev tools · Performance</span>
+    <h2 class="hed">The early exit was costing <em>15×</em>.</h2>
+    <p class="lede">GitHub's code search lowercases every byte it indexes. The obvious loop breaks out at the first non-ASCII byte — and that break is exactly what stops the compiler from emitting vector instructions. Alexander Neubeck and Greg Orzell deleted it. Sweeping the whole buffer unconditionally runs at memory bandwidth; stopping early runs at a fifteenth of it.</p>
+    <div class="figure">
+      <div class="bench">
+        <div class="brow hit"><span>ascii · branch-free sweep</span><span>45.0 GiB/s</span></div>
+        <div class="brow"><span>ascii · with early exit</span><span>3.0 GiB/s</span></div>
+        <div class="brow"><span>pure CJK</span><span>2.95 GiB/s</span></div>
+        <div class="brow"><span>unicode · worst case</span><span>869 MiB/s</span></div>
+        <div class="brow"><span>full simple-fold table</span><span>1,776 bytes</span></div>
+      </div>
+    </div>
+    <p class="lede">The rest is byte-space arithmetic — folding inside UTF-8 without decoding and re-encoding — plus a paged bitmap that fits every Unicode simple fold in under 2 KB. Keeping the break and making the body perfectly branch-free still gets you zero vector instructions. The branch has to go.</p>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://github.blog/engineering/architecture-optimization/dont-stop-early-case-folding-source-code-at-memory-speed/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ══════════════════ 02 · NEO-BRUTALIST ══════════════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 102</a></span>
+    <span>02 / 05 · Cloudflare</span>
+  </header>
+  <div class="main">
+    <span class="tag">Infrastructure · Real-time media</span>
+    <h2 class="hed">One POST request buys you a <em>global relay</em>.</h2>
+    <p class="lede">Media over QUIC relays are now provisionable. Call the API, get an anycast relay live across 330+ cities in seconds, and hand out separate JWT credentials for publishers and subscribers — each scoped, each with its own expiry, each revocable on its own.</p>
+    <div class="figure">
+      <div class="steps">
+        <div><span class="k">01 · Provision</span><span class="v">POST /accounts/{ACCOUNT_ID}/moq/relays<br>Bearer token. No region choice, no capacity planning.</span></div>
+        <div><span class="k">02 · Scope</span><span class="v">Issue tokens for publish, subscribe, or both. Expiry and revocation are per token.</span></div>
+        <div><span class="k">03 · Ship</span><span class="v">Free for the whole beta, no stated usage limit. Live streams, auctions, conferencing.</span></div>
+      </div>
+    </div>
+    <p class="lede">Cloudflare's line: the relays you create are available across the network within seconds, with no servers to deploy, size, or load balance.</p>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.cloudflare.com/moq-relays/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ══════════════════ 03 · BLUEPRINT ══════════════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 102</a></span>
+    <span>03 / 05 · Anthropic Research</span>
+  </header>
+  <div class="main">
+    <span class="tag">Research · Cryptography</span>
+    <h2 class="hed">Sixty hours of model time <em>halved a post-quantum key</em>.</h2>
+    <p class="lede">Claude Mythos Preview found a nontrivial automorphism in HAWK's lattice that nobody had published, then built it into an improved key-recovery attack. The scheme's authors would need to double key sizes to hold the security level they advertised. A second effort produced a 200–800× faster meet-in-the-middle attack on 7-round AES-128 using a fingerprinting trick the team named the Möbius Bridge.</p>
+    <div class="figure">
+      <div class="specs">
+        <div class="srow head"><span>Target</span><span>Result</span><span>Cost</span></div>
+        <div class="srow"><span>HAWK · PQ signatures</span><span class="hi">effective keysize ÷ 2</span><span>60 hours</span></div>
+        <div class="srow"><span>AES-128 · 7 of 10 rounds</span><span class="hi">200–800× speedup</span><span>Möbius Bridge</span></div>
+        <div class="srow"><span>CryptanalysisBench</span><span>ETH Zürich · Tel Aviv · TU Berlin</span><span>public</span></div>
+      </div>
+    </div>
+    <p class="note">// Neither attack reaches production. HAWK is not deployed; full AES runs 10 rounds. Papers, demo code for HAWK, and the model's chain of thought for the AES result are published.</p>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true">
+    <div class="crop tr"></div>
+    <div class="crop bl"></div>
+  </div>
+</section>
+
+<!-- ══════════════════ 04 · POSTCARD ══════════════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 102</a></span>
+    <span>04 / 05 · Pangram · via Don't Worry About the Vase</span>
+  </header>
+  <div class="main">
+    <span class="tag">AI tools · Provenance</span>
+    <h2 class="hed">One real photo in <em>625</em> comes back marked fake.</h2>
+    <p class="lede">Pangram Image reads output from DALL·E, Gemini, Midjourney, FLUX and Grok Imagine, and it catches frames lifted out of Kling and Veo. That false-positive figure — 0.16% on ReLAION — is the number to argue with before you wire it into anything that accuses a person of something.</p>
+    <div class="figure">
+      <div class="card">
+        <div class="col">
+          <h4>Known limits</h4>
+          <ul>
+            <li>Anything under 512×512 px is refused outright.</li>
+            <li>Deepfakes and face swaps are not detected with confidence.</li>
+            <li>An AI-edited photograph can read as fully synthetic.</li>
+            <li>NSFW content is not processed.</li>
+            <li>Web dashboard is open to free and paid accounts; API access is invitation-only during the research preview.</li>
+          </ul>
+        </div>
+        <div class="col stamp">
+          <span class="big">99.5%</span>
+          <span class="cap">Internal accuracy · next best 98% · 2,000 human WikiArt images called correctly</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.pangram.com/blog/introducing-pangram-image-detection" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ══════════════════ 05 · SPREADSHEET ══════════════════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 102</a></span>
+    <span>05 / 05 · Vercel</span>
+  </header>
+  <div class="main">
+    <span class="tag">Cost control · Agents</span>
+    <h2 class="hed">A dollar cap your agent <em>cannot</em> talk its way past.</h2>
+    <p class="lede">AI Gateway budgets now sit at three levels, and a request has to clear all of them. Cross any single limit and the request is rejected while the others still have room — which is what makes a per-key budget a real blast radius on a runaway loop rather than a dashboard number.</p>
+    <div class="figure">
+      <div class="sheet">
+        <div class="r hd"><span class="idx"></span><span>Scope</span><span>Period</span><span>On breach</span></div>
+        <div class="r"><span class="idx">1</span><span>Team</span><span>daily / weekly / monthly / cumulative</span><span class="g">request rejected</span></div>
+        <div class="r"><span class="idx">2</span><span>Project</span><span>inherits team default, overridable</span><span class="g">request rejected</span></div>
+        <div class="r"><span class="idx">3</span><span>API key</span><span>own limit, own refresh</span><span class="g">request rejected</span></div>
+        <div class="r"><span class="idx">4</span><span>Email alerts</span><span>50% · 75% · 100%</span><span>informational only</span></div>
+        <div class="r"><span class="idx">5</span><span>BYOK spend</span><span>every period</span><span>not counted by default</span></div>
+      </div>
+    </div>
+    <p class="foot">Row 5 is the one that bites: bring your own key and the meter stops watching unless you change the setting. Dashboard or CLI.</p>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://vercel.com/changelog/ai-gateway-spend-budgets-and-alerts" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ══════════════════ COLOPHON ══════════════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 102</span>
+    <span><a class="home" href="#cover">Back to top ↑</a></span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Issue 102, Saturday 1 August 2026. Five picks from five sources — a branch deleted for a fifteenfold speedup, a relay you can provision in one call, a lattice weakness found in sixty hours, an image detector with its false-positive rate printed on the tin, and a spend limit that rejects the request.</p>
+    <div class="figure">
+      <div class="srcs">
+        <span class="on">GitHub Engineering</span>
+        <span class="on">Cloudflare</span>
+        <span class="on">Anthropic Research</span>
+        <span class="on">Pangram</span>
+        <span class="on">Vercel</span>
+        <span>The Batch</span>
+        <span>Don't Worry About the Vase</span>
+        <span>Import AI</span>
+        <span>Jeff Bullas</span>
+        <span>OpenAI</span>
+        <span>Anthropic News</span>
+        <span>Sentry</span>
+        <span>PostHog</span>
+        <span>Fly.io</span>
+        <span>Next.js</span>
+        <span>@seeallochnaya</span>
+        <span>@TochkiNadAI</span>
+        <span>@denissexy</span>
+        <span>@rvnikita_blog</span>
+        <span>@ProductsAndStartups</span>
+      </div>
+    </div>
+    <p class="rubric">Rubric, in order: AI tools worth adopting this week · creative and generative software · dev tools and agentic coding · privacy and security when the signal is high · research with a practical kernel · anything a senior engineer or founder can act on. Maximum five stories, maximum two from any one source, nothing older than thirty days, nothing published here before.</p>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+</main>
+</body>
+</html>
