@@ -1,0 +1,863 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 103 · 02 Aug 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — from scaffold.html. Do not modify.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 {
+    overflow-wrap: break-word;
+    margin: 0;
+  }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+
+  .spread > .decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .folio a.home { color: inherit; text-decoration: none; }
+  .folio a.home:hover { text-decoration: underline; }
+
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+
+  .figure { width: 100%; }
+
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — issue 103. Surface only.
+     cover  manifesto, vermilion
+     s01    blueprint      — pale grid, mono display, crop marks
+     s02    teal grid      — deep teal, numbered cards
+     s03    museum placard — ivory + olive, centered, classical
+     s04    dark report    — crimson on near-black, redact bars
+     s05    risograph      — cyan/magenta overprint, registration offset
+     colo   newsprint      — cream + black, small caps
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── COVER — manifesto ─── */
+  .cover { background: #c8452d; color: #fdf3e7; }
+  .cover .folio { opacity: 0.85; }
+  .cover .kicker {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    opacity: 0.85;
+  }
+  .cover .manifesto {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-variation-settings: "opsz" 144, "SOFT" 40, "WONK" 0;
+    font-size: clamp(30px, 4.4vw, 66px);
+    line-height: 1.14;
+    letter-spacing: -0.02em;
+    max-width: 19ch;
+    padding-bottom: 0.1em;
+    margin: 0;
+  }
+  .cover .manifesto em {
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    color: #ffe9c9;
+  }
+  .cover .wordmark {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    font-size: clamp(26px, 3vw, 44px);
+    letter-spacing: -0.03em;
+    color: #ffe9c9;
+    margin: 0;
+  }
+  .cover .toc {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px 44px;
+    padding-top: 18px;
+    border-top: 2px solid rgba(253,243,231,0.55);
+    width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    text-decoration: none; color: inherit;
+    padding: 9px 0;
+    border-bottom: 1px dotted rgba(253,243,231,0.4);
+  }
+  .cover .toc a:hover { opacity: 0.72; }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; font-size: 17px; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 13px; opacity: 0.75; font-family: var(--mono); }
+  .cover .toc .num {
+    font-family: var(--mono); font-weight: 600;
+    color: #ffe9c9; margin-right: 12px;
+  }
+  .cover .decor::before {
+    content: "";
+    position: absolute;
+    right: -18vw; top: -10vw;
+    width: 62vw; height: 62vw;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,233,201,0.16), transparent 66%);
+  }
+
+  /* ─── s01 — BLUEPRINT ─── */
+  .s01 { background: #d9e3ec; color: #16283d; }
+  .s01 .tag { color: #1f5fa8; border-color: #1f5fa8; font-family: var(--mono); }
+  .s01 .hed {
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: clamp(34px, 4.9vw, 74px);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+  }
+  .s01 .hed em {
+    font-style: normal;
+    color: #1f5fa8;
+    border-bottom: 3px solid #1f5fa8;
+  }
+  .s01 .lede { color: #24384f; }
+  .s01 .specs {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1px;
+    background: rgba(31,95,168,0.35);
+    border: 1px solid rgba(31,95,168,0.35);
+    width: 100%;
+    max-width: 760px;
+  }
+  .s01 .specs > div {
+    grid-column: span 1;
+    background: #d9e3ec;
+    padding: 16px 18px;
+  }
+  .s01 .specs dt {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #4d6b8e;
+    margin-bottom: 6px;
+  }
+  .s01 .specs dd {
+    font-family: var(--mono);
+    font-size: 19px;
+    font-weight: 600;
+    color: #16283d;
+    margin: 0;
+    line-height: 1.25;
+  }
+  .s01 .read-on { color: #1f5fa8; border-color: #1f5fa8; --flip: #d9e3ec; font-family: var(--mono); }
+  .s01 .decor::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(31,95,168,0.11) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(31,95,168,0.11) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  /* crop marks — kept clear of the folio (below 120px) */
+  .s01 .crop {
+    position: absolute;
+    width: 26px; height: 26px;
+    border-color: rgba(31,95,168,0.5);
+  }
+  .s01 .crop.tr { top: clamp(78px, 9.5vw, 128px); right: 26px; border-top: 2px solid; border-right: 2px solid; }
+  .s01 .crop.bl { bottom: 26px; left: 26px; border-bottom: 2px solid; border-left: 2px solid; }
+  .s01 .crop.br { bottom: 26px; right: 26px; border-bottom: 2px solid; border-right: 2px solid; }
+
+  /* ─── s02 — TEAL GRID ─── */
+  .s02 { background: #0b5b52; color: #e4f6f1; }
+  .s02 .tag { color: #7ff0d4; border-color: #7ff0d4; }
+  .s02 .hed {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: clamp(42px, 6.2vw, 94px);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+  }
+  .s02 .hed em {
+    font-style: normal;
+    color: #05302b;
+    background: #7ff0d4;
+    padding: 0 0.1em;
+  }
+  .s02 .lede { color: #cbeae2; }
+  .s02 .cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    width: 100%;
+    max-width: 840px;
+  }
+  .s02 .card {
+    grid-column: span 1;
+    border: 1px solid rgba(127,240,212,0.42);
+    padding: 18px 20px 20px;
+    position: relative;
+  }
+  .s02 .card .n {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 26px;
+    color: #7ff0d4;
+    letter-spacing: normal;
+    display: block;
+    margin-bottom: 8px;
+  }
+  .s02 .card h4 {
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #e4f6f1;
+    margin-bottom: 6px;
+  }
+  .s02 .card p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.45;
+    color: #b6ded5;
+  }
+  .s02 .read-on { color: #7ff0d4; border-color: #7ff0d4; --flip: #0b5b52; }
+  .s02 .decor::before {
+    content: "";
+    position: absolute;
+    left: -14vw; bottom: -22vw;
+    width: 58vw; height: 58vw;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(127,240,212,0.13), transparent 68%);
+  }
+
+  /* ─── s03 — MUSEUM PLACARD ─── */
+  .s03 { background: #f4f1e4; color: #2f3a24; }
+  .s03 .tag { color: #55663d; border-color: #55663d; letter-spacing: 0.3em; }
+  .s03 .hed {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-variation-settings: "opsz" 144, "SOFT" 20, "WONK" 0;
+    font-size: clamp(40px, 5.8vw, 90px);
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+  }
+  .s03 .hed em {
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    color: #55663d;
+  }
+  .s03 .lede { color: #3d472f; }
+  .s03 .placard {
+    border-top: 1px solid #55663d;
+    border-bottom: 1px solid #55663d;
+    padding: 22px 30px;
+    max-width: 660px;
+    width: 100%;
+  }
+  .s03 .placard dl { margin: 0; }
+  .s03 .placard .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10px 28px;
+    flex-wrap: wrap;
+    padding: 7px 0;
+  }
+  .s03 .placard dt {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: #6b7a52;
+    flex: 0 0 auto;
+  }
+  .s03 .placard dd {
+    font-family: var(--mono);
+    font-size: 15px;
+    color: #2f3a24;
+    margin: 0;
+    text-align: right;
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow-wrap: break-word;
+  }
+  .s03 .read-on { color: #55663d; border-color: #55663d; --flip: #f4f1e4; }
+  .s03 .decor::before {
+    content: "";
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    width: min(70vw, 620px); height: min(70vw, 620px);
+    border: 1px solid rgba(85,102,61,0.18);
+    border-radius: 50%;
+  }
+
+  /* ─── s04 — DARK REPORT / CLASSIFIED ─── */
+  .s04 { background: #0a0709; color: #e8dcdc; }
+  .s04 .tag { color: #ff4b3e; border-color: #ff4b3e; }
+  .s04 .hed {
+    font-family: var(--sans);
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: clamp(36px, 5.6vw, 84px);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+  }
+  .s04 .hed em {
+    font-style: normal;
+    background: #ff4b3e;
+    color: #0a0709;
+    padding: 0 0.1em;
+  }
+  .s04 .redact {
+    background: #e8dcdc;
+    color: transparent;
+    padding: 0 0.08em;
+    border-radius: 1px;
+  }
+  .s04 .lede { color: #cbbcbc; }
+  .s04 .ledger {
+    width: 100%;
+    max-width: 780px;
+    border: 1px solid rgba(255,75,62,0.45);
+  }
+  .s04 .ledger .hrow,
+  .s04 .ledger .lrow {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 128px;
+    gap: 16px;
+    padding: 12px 18px;
+    align-items: baseline;
+  }
+  .s04 .ledger .hrow {
+    background: rgba(255,75,62,0.14);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #ff8d84;
+  }
+  .s04 .ledger .lrow {
+    border-top: 1px solid rgba(255,75,62,0.22);
+    font-family: var(--mono);
+    font-size: 15px;
+    color: #e8dcdc;
+  }
+  .s04 .ledger .when { color: #ff4b3e; font-weight: 600; text-align: right; }
+  .s04 .read-on { color: #ff4b3e; border-color: #ff4b3e; --flip: #0a0709; }
+  .s04 .decor::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      0deg, rgba(255,75,62,0.055) 0 2px, transparent 2px 7px);
+  }
+  .s04 .stamp {
+    position: absolute;
+    right: -3vw; bottom: 8vh;
+    font-family: var(--sans);
+    font-weight: 900;
+    font-size: clamp(70px, 14vw, 210px);
+    letter-spacing: -0.05em;
+    color: rgba(255,75,62,0.09);
+    transform: rotate(-8deg);
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  /* ─── s05 — RISOGRAPH DUOTONE ─── */
+  .s05 { background: #f6f2ea; color: #17181c; }
+  .s05 .tag { color: #d81a72; border-color: #d81a72; }
+  .s05 .hed {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-size: clamp(44px, 6.6vw, 98px);
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+  }
+  .s05 .hed em {
+    font-style: italic;
+    color: #d81a72;
+    text-shadow: 3px 3px 0 rgba(0,167,199,0.55);
+  }
+  .s05 .lede { color: #2b2d33; }
+  .s05 .inks {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+    width: 100%;
+    max-width: 780px;
+  }
+  .s05 .inks > div { grid-column: span 1; padding: 20px 22px; }
+  .s05 .ink-c { background: rgba(0,167,199,0.16); border: 2px solid #00a7c7; }
+  .s05 .ink-m { background: rgba(216,26,114,0.13); border: 2px solid #d81a72; margin-left: -6px; margin-top: 10px; }
+  .s05 .inks h4 {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .s05 .ink-c h4 { color: #007e97; }
+  .s05 .ink-m h4 { color: #d81a72; }
+  .s05 .inks ul { margin: 0; padding-left: 18px; }
+  .s05 .inks li {
+    font-family: var(--mono);
+    font-size: 15px;
+    line-height: 1.65;
+    color: #23252b;
+  }
+  .s05 .read-on { color: #d81a72; border-color: #d81a72; --flip: #f6f2ea; }
+  .s05 .decor::before,
+  .s05 .decor::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    mix-blend-mode: multiply;
+    width: 46vw; height: 46vw;
+  }
+  .s05 .decor::before { right: -8vw; top: 12vh; background: rgba(0,167,199,0.16); }
+  .s05 .decor::after  { right: -3vw; top: 17vh; background: rgba(216,26,114,0.14); }
+
+  /* ─── COLOPHON — NEWSPRINT ─── */
+  .colophon { background: #efece2; color: #191813; }
+  .colophon .hed {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(40px, 5.4vw, 82px);
+    line-height: 1.04;
+  }
+  .colophon .hed em {
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    color: #8c2f1d;
+  }
+  .colophon .lede { color: #33322a; }
+  .colophon .rules {
+    column-count: 3;
+    column-gap: 40px;
+    column-rule: 1px solid rgba(25,24,19,0.22);
+    width: 100%;
+    max-width: 960px;
+    padding-top: 18px;
+    border-top: 2px solid #191813;
+  }
+  .colophon .rules section { break-inside: avoid; margin-bottom: 18px; }
+  .colophon .rules h4 {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: #8c2f1d;
+    margin-bottom: 6px;
+  }
+  .colophon .rules p {
+    margin: 0;
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.5;
+    color: #33322a;
+  }
+  .colophon .folio { opacity: 0.7; }
+
+  /* ─── Mobile additions ─── */
+  @media (max-width: 800px) {
+    .cover .toc { grid-template-columns: 1fr; gap: 0; }
+    .cover .manifesto { font-size: clamp(26px, 7.4vw, 40px); max-width: none; }
+    .cover .toc a > span:first-child { font-size: 16px; }
+
+    .s01 .hed { font-size: clamp(28px, 7.6vw, 46px); }
+    .s01 .specs { grid-template-columns: 1fr; }
+    .s01 .crop { display: none; }
+
+    .s02 .cards { grid-template-columns: 1fr; }
+    .s03 .placard { padding: 18px 16px; }
+    .s03 .placard .row { flex-direction: column; align-items: flex-start; gap: 2px; }
+    .s03 .placard dd { text-align: left; }
+
+    .s04 .ledger .hrow,
+    .s04 .ledger .lrow { grid-template-columns: 1fr; gap: 4px; }
+    .s04 .ledger .when { text-align: left; }
+    .s04 .stamp { display: none; }
+
+    .s05 .inks { grid-template-columns: 1fr; }
+    .s05 .ink-m { margin-left: 0; margin-top: -2px; }
+
+    .colophon .rules { column-count: 1; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═════════════ COVER — manifesto ═════════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 103</a></span>
+    <span>Sunday · 02 Aug 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <p class="kicker">Manifesto</p>
+    <p class="manifesto">Today's issue is about the <em>receipt.</em> A proof that arrives with a file you can run. An agent that has to pass your own test before it says it finished. A reviewer handed your team's rules instead of generic advice. And a token, being taken away, because it let a publish skip its second factor.</p>
+    <h1 class="wordmark">Ephemeris.</h1>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>Ten stuck problems, one Lean file each</span><span>OpenAI</span></a>
+      <a href="#s02"><span><span class="num">02</span>Make the agent run your check first</span><span>Claude Code</span></a>
+      <a href="#s03"><span><span class="num">03</span>A reviewer that reads your standards</span><span>GitHub</span></a>
+      <a href="#s04"><span><span class="num">04</span>The npm token that skipped 2FA</span><span>GitHub</span></a>
+      <a href="#s05"><span><span class="num">05</span>One CLI, no platform API bills</span><span>via @TochkiNadAI</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═════════════ 01 — BLUEPRINT ═════════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 103</a></span>
+    <span>01 / 05 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Research · Formal methods</span>
+    <h2 class="hed">Ten stuck problems, and a <em>certificate</em> for each one.</h2>
+    <p class="lede">An internal version of OpenAI's Astra model produced proofs for ten problems in mathematics and theoretical computer science that had seen no progress on the main result for at least a decade — among them the existence of non-sofic groups, a disproof of Connes's rigidity conjecture, and sphere-packing bounds pushed down to the Cohn–Elkies threshold. Each result ships with a Lean 4 formalisation in a public repo, so the argument can be machine-checked rather than taken on trust. What is missing from the write-up is the denominator: how many problems were attempted, and what the prompts were.</p>
+    <div class="figure">
+      <dl class="specs">
+        <div><dt>Results</dt><dd>10</dd></div>
+        <div><dt>Fields</dt><dd>8</dd></div>
+        <div><dt>Checked in</dt><dd>Lean 4</dd></div>
+        <div><dt>Token cost</dt><dd>&lt; $2,000 ea.</dd></div>
+        <div><dt>Human role</dt><dd>Formatting</dd></div>
+        <div><dt>Failures shown</dt><dd>None</dd></div>
+      </dl>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/ten-advances-in-mathematics/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true">
+    <span class="crop tr"></span>
+    <span class="crop bl"></span>
+    <span class="crop br"></span>
+  </div>
+</section>
+
+<!-- ═════════════ 02 — TEAL GRID ═════════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 103</a></span>
+    <span>02 / 05 · Claude Code</span>
+  </header>
+  <div class="main">
+    <span class="tag">Agentic coding · Workflow</span>
+    <h2 class="hed">Make it run <em>your</em> check before it says done.</h2>
+    <p class="lede">A verification loop is the cycle where an agent runs tests, linters or custom checks against its own output and fixes what fails before moving on. Claude Code ships a /verify skill and hooks into your toolchain, but the part worth your afternoon is converting the checks you still run by hand into skills — a markdown file under .claude/skills/ with frontmatter and instructions written the way you'd hand them to a new teammate. The examples are the project-specific rules a generic linter will never know: every error log carries a request ID, and no log ever contains a request body.</p>
+    <div class="figure">
+      <div class="cards">
+        <div class="card">
+          <span class="n">01</span>
+          <h4>Standalone</h4>
+          <p>Invoked deliberately, for cross-cutting passes — a security sweep, an accessibility audit.</p>
+        </div>
+        <div class="card">
+          <span class="n">02</span>
+          <h4>Embedded</h4>
+          <p>Appended to a producing skill's instructions, so it fires as part of the work itself.</p>
+        </div>
+        <div class="card">
+          <span class="n">03</span>
+          <h4>Chained</h4>
+          <p>One skill calls the next on completion. End-to-end, and it runs without you.</p>
+        </div>
+        <div class="card">
+          <span class="n">04</span>
+          <h4>PR-wide</h4>
+          <p>The same verification runs against every pull request, not only the ones you remember.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://claude.com/blog/building-verification-loops-in-claude-code-with-skills" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═════════════ 03 — MUSEUM PLACARD ═════════════ -->
+<section class="spread s03 centered" id="s03">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 103</a></span>
+    <span>03 / 05 · GitHub</span>
+  </header>
+  <div class="main">
+    <span class="tag">Code review · MCP</span>
+    <h2 class="hed">Your reviewer can finally read <em>your standards.</em></h2>
+    <p class="lede">Copilot code review now supports agent skills and MCP servers on every plan — Pro, Pro+, Business and Enterprise. Put a SKILL.md in a subdirectory of .github/skills and the reviewer argues from your team's conventions instead of general advice; point it at an MCP server and it pulls context from the issue tracker, docs site or service catalogue you already run. Every MCP call made during a review is read-only, and the GitHub and Playwright servers are on by default. Anyone who wired this up during the public preview changes nothing.</p>
+    <div class="figure">
+      <div class="placard">
+        <dl>
+          <div class="row"><dt>Skill file</dt><dd>.github/skills/&lt;name&gt;/SKILL.md</dd></div>
+          <div class="row"><dt>MCP setup</dt><dd>Repo settings → Copilot → MCP servers</dd></div>
+          <div class="row"><dt>Credentials</dt><dd>Settings → Secrets and variables → Agents</dd></div>
+          <div class="row"><dt>Tool scope</dt><dd>Read-only</dd></div>
+          <div class="row"><dt>On by default</dt><dd>GitHub, Playwright</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://github.blog/changelog/2026-07-29-copilot-code-review-agent-skills-and-mcp-now-generally-available" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═════════════ 04 — DARK REPORT ═════════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 103</a></span>
+    <span>04 / 05 · GitHub</span>
+  </header>
+  <div class="main">
+    <span class="tag">Supply chain · npm</span>
+    <h2 class="hed">The token that skipped 2FA just <em>lost its rights.</em></h2>
+    <p class="lede">npm granular access tokens set to bypass two-factor authentication can no longer create or delete tokens, change package access, maintainers or trusted-publishing config, or manage organisation and team membership. Those operations now demand an interactive 2FA challenge. Publishing still works from such a token — until January 2027, when direct publish goes too. If your CI publishes with a bypass token, the migration is to trusted publishing over OIDC, or to staged publishing, and you have five months. GitHub PATs, GitHub App tokens and GITHUB_TOKEN in Actions are untouched.</p>
+    <div class="figure">
+      <div class="ledger">
+        <div class="hrow"><span>Operation</span><span class="when">Bypass token</span></div>
+        <div class="lrow"><span>Create or delete tokens</span><span class="when">Blocked</span></div>
+        <div class="lrow"><span>Change package access / maintainers</span><span class="when">Blocked</span></div>
+        <div class="lrow"><span>Edit trusted publishing config</span><span class="when">Blocked</span></div>
+        <div class="lrow"><span>Org and team membership</span><span class="when">Blocked</span></div>
+        <div class="lrow"><span>Direct publish</span><span class="when">Jan 2027</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://github.blog/changelog/2026-07-31-restricting-npm-bypass-2fa-granular-access-tokens" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true">
+    <span class="stamp">Revoked</span>
+  </div>
+</section>
+
+<!-- ═════════════ 05 — RISOGRAPH ═════════════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 103</a></span>
+    <span>05 / 05 · via @TochkiNadAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Agent tooling · Open source</span>
+    <h2 class="hed">One CLI, and the agent stops <em>paying</em> to read the web.</h2>
+    <p class="lede">Agent-Reach gives an agent a single command line for reading and searching Twitter/X, Reddit, YouTube, GitHub, Bilibili and XiaoHongShu, without a platform API bill behind any of them. Each site gets a first-choice backend and a fallback — twitter-cli, then OpenCLI, then bird — layered over yt-dlp, Jina Reader and Exa, with an agent-reach doctor command that reports which paths actually work on your machine right now. It sits at 64,100 stars and was last updated on 25 July.</p>
+    <div class="figure">
+      <div class="inks">
+        <div class="ink-c">
+          <h4>No login needed</h4>
+          <ul>
+            <li>Web pages</li>
+            <li>YouTube</li>
+            <li>RSS</li>
+            <li>GitHub</li>
+            <li>Bilibili</li>
+          </ul>
+        </div>
+        <div class="ink-m">
+          <h4>Login required</h4>
+          <ul>
+            <li>Twitter / X</li>
+            <li>Reddit</li>
+            <li>LinkedIn</li>
+            <li>Instagram</li>
+            <li>XiaoHongShu</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://github.com/Panniantong/Agent-Reach" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═════════════ COLOPHON — NEWSPRINT ═════════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 103</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>Sunday.</em></h3>
+    <p class="lede">Five picks for 2 August 2026, drawn from eighteen sources read this morning.</p>
+    <div class="figure">
+      <div class="rules">
+        <section>
+          <h4>Fed today's issue</h4>
+          <p>OpenAI, Claude Code, GitHub Changelog, and @TochkiNadAI on Telegram.</p>
+        </section>
+        <section>
+          <h4>Read, nothing taken</h4>
+          <p>The Batch, The Zvi, Import AI, Jeff Bullas, Anthropic, Cloudflare, Sentry, Vercel, PostHog, fly.io, Next.js, and four more Telegram channels.</p>
+        </section>
+        <section>
+          <h4>Dropped as repeats</h4>
+          <p>Hugging Face's forensic timeline of the agent intrusion — that story ran here on 20 July. A talk claiming 80% of Claude Code's prompt was deleted, which ran on 27 July from Anthropic's own write-up. Vercel's adoption of the 2026-07-28 MCP specification, after GitHub's ran on 23 July.</p>
+        </section>
+        <section>
+          <h4>Dropped as too old</h4>
+          <p>Anthropic on containing agents (25 May), fly.io on agent sandboxes (8 June), and the Olmo 3 energy accounting paper (1 May) — all past the thirty-day cap, the last one surfaced by a newsletter that made it look current.</p>
+        </section>
+        <section>
+          <h4>Note</h4>
+          <p>sentry.engineering now redirects to blog.sentry.io/engineering. Nothing there was newer than 23 July.</p>
+        </section>
+        <section>
+          <h4>The rubric</h4>
+          <p>Tools worth adopting this week, creative software, dev tools and agentic coding, privacy and security when the signal is high, research with a practical kernel. Maximum five, and no reprints.</p>
+        </section>
+      </div>
+    </div>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>
