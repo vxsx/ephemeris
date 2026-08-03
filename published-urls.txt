@@ -24,6 +24,7 @@ https://anthropic.com/news/AI-enabled-cyber-threats-mitre-attack
 https://anthropic.com/news/alberta-government-claude-cybersecurity
 https://anthropic.com/news/anthropic-acquires-stainless
 https://anthropic.com/news/anthropic-amazon-compute
+https://anthropic.com/news/anthropic-economic-index-connector
 https://anthropic.com/news/anthropic-public-record
 https://anthropic.com/news/chris-olah-pope-leo-encyclical
 https://anthropic.com/news/claude-design-anthropic-labs
@@ -272,6 +273,7 @@ https://github.com/mvanhorn/last30days-skill
 https://github.com/nexu-io/open-design
 https://github.com/onsails/right-agent
 https://github.com/OpenCoworkAI/open-cowork
+https://github.com/oso95/scroll-world
 https://github.com/oven-sh/bun/pull/30412
 https://github.com/palmier-io/palmier-pro
 https://github.com/Panniantong/Agent-Reach
@@ -354,6 +356,7 @@ https://openai.com/index/advancing-content-provenance
 https://openai.com/index/advancing-the-price-performance-frontier-with-gpt-5-6
 https://openai.com/index/advancing-voice-intelligence-with-new-models-in-the-api
 https://openai.com/index/ai-chemist-improves-reaction
+https://openai.com/index/avatarin
 https://openai.com/index/boston-childrens-hospital
 https://openai.com/index/braintrust
 https://openai.com/index/building-codex-windows-sandbox
@@ -499,6 +502,7 @@ https://sierra.ai/blog/the-ai-native-interview
 https://simonwillison.net/2026/May/14/not-so-locked-in
 https://stepsecurity.io/blog/the-hades-campaign-pypi-packages
 https://success.com/tokenmaxxing-ai-adoption-metrics
+https://sunday.ai/blog/act-2-preview
 https://supabase.com/changelog/46834-realtime-broadcast-now-supports-binary-payloads
 https://support.claude.com/en/articles/12512198-how-to-create-custom-skills
 https://t.me/ProductsAndStartups/1740
