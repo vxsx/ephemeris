@@ -96,6 +96,7 @@ https://blog.cloudflare.com/cdnjs-dev-platform-migration
 https://blog.cloudflare.com/celebrating-12-years-of-project-galileo
 https://blog.cloudflare.com/claude-managed-agents
 https://blog.cloudflare.com/clickhouse-query-plan-contention
+https://blog.cloudflare.com/cloudflare-computer
 https://blog.cloudflare.com/cloudflare-one-stack
 https://blog.cloudflare.com/code-orange-fail-small-complete
 https://blog.cloudflare.com/content-independence-day-ai-options
@@ -135,6 +136,7 @@ https://blog.cloudflare.com/realtime-threat-intel-waf-rules
 https://blog.cloudflare.com/rollbacks-for-workflows
 https://blog.cloudflare.com/scaling-security-scans
 https://blog.cloudflare.com/shared-dictionaries
+https://blog.cloudflare.com/smaller-faster-safer-models
 https://blog.cloudflare.com/smart-tiered-cache-for-public-clouds
 https://blog.cloudflare.com/temporary-accounts
 https://blog.cloudflare.com/unweight-tensor-compression
@@ -287,6 +289,7 @@ https://hermes-agent.nousresearch.com/desktop
 https://hermesagents.net/
 https://higgsfield.ai/apps/virality-predictor
 https://higgsfield.ai/mcp
+https://hub.harborframework.com/datasets/frontier-bench/frontier-bench/latest
 https://huggingface.co/ai-sage/GigaChat3.1-Audio-10B-A1.8B
 https://huggingface.co/blog/mishig/local-moores-law
 https://huggingface.co/blog/native-speed-vllm-transformers-backend
@@ -343,6 +346,7 @@ https://nextjs.org/blog/agentic-future
 https://nextjs.org/blog/july-2026-security-release
 https://nextjs.org/blog/next-16-2
 https://nextjs.org/blog/next-16-2-ai
+https://nextjs.org/blog/next-16-3
 https://nextjs.org/blog/next-16-3-ai-improvements
 https://nextjs.org/blog/next-16-3-instant-navigations
 https://nextjs.org/blog/next-16-3-turbopack
@@ -365,6 +369,7 @@ https://openai.com/index/chatgpt-memory-dreaming
 https://openai.com/index/codex-for-almost-everything
 https://openai.com/index/codex-for-every-role-tool-workflow
 https://openai.com/index/codex-maxxing-long-running-work
+https://openai.com/index/continuous-voice-interaction-with-gpt-live
 https://openai.com/index/core-dump-epidemiology-data-infrastructure-bug
 https://openai.com/index/cybersecurity-in-the-intelligence-age
 https://openai.com/index/databricks
