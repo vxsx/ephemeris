@@ -107,6 +107,7 @@ https://blog.cloudflare.com/dmarc-management-ga
 https://blog.cloudflare.com/dnssec-nta-ede-33
 https://blog.cloudflare.com/dynamic-workflows
 https://blog.cloudflare.com/enforce-first-as-bgp
+https://blog.cloudflare.com/engineering-standards-enforcement
 https://blog.cloudflare.com/frontier-model-defense
 https://blog.cloudflare.com/high-performance-llms
 https://blog.cloudflare.com/hyper-bug
@@ -115,6 +116,7 @@ https://blog.cloudflare.com/internal-dns
 https://blog.cloudflare.com/introducing-cache-response-rules
 https://blog.cloudflare.com/introducing-precursor
 https://blog.cloudflare.com/iran-internet-partially-restored-may-2026
+https://blog.cloudflare.com/local-tracing
 https://blog.cloudflare.com/making-rust-workers-reliable
 https://blog.cloudflare.com/meerkat-introduction
 https://blog.cloudflare.com/ml-dsa-will-have-to-do
@@ -232,6 +234,8 @@ https://github.blog/changelog/2026-07-28-npm-publish-time-malware-scanning-and-d
 https://github.blog/changelog/2026-07-29-copilot-code-review-agent-skills-and-mcp-now-generally-available
 https://github.blog/changelog/2026-07-30-stacked-pull-requests-are-now-in-public-preview
 https://github.blog/changelog/2026-07-31-restricting-npm-bypass-2fa-granular-access-tokens
+https://github.blog/changelog/2026-08-03-trigger-copilot-automations-with-comments
+https://github.blog/changelog/2026-08-04-customize-code-scanning-default-setup-at-scale
 https://github.blog/engineering/architecture-optimization/dont-stop-early-case-folding-source-code-at-memory-speed
 https://github.blog/engineering/architecture-optimization/from-latency-to-instant-modernizing-github-issues-navigation-performance
 https://github.blog/engineering/architecture-optimization/how-we-rebuilt-the-search-architecture-for-high-availability-in-github-enterprise-server
@@ -597,6 +601,7 @@ https://vercel.com/changelog/ai-gateway-spend-budgets-and-alerts
 https://vercel.com/changelog/connect-to-and-manage-sandboxes-from-the-dashboard
 https://vercel.com/changelog/enforce-consistent-code-for-agents-and-humans-with-konsistent
 https://vercel.com/changelog/vercel-sandbox-now-supports-fuse-based-filesystems
+https://vercel.com/customers/how-factory-scaled-its-cloud-backend-to-one-billion-monthly-requests-on-vercel
 https://webkit.org/blog/18136/introducing-the-safari-mcp-server-for-web-developers
 https://wheresyoured.at/where-are-all-the-data-centers
 https://wsj.com/tech/ai/mind-blowing-growth-is-about-to-propel-anthropic-into-its-first-profitable-quarter-7edbf2f4
