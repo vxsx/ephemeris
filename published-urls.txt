@@ -116,6 +116,7 @@ https://blog.cloudflare.com/internal-dns
 https://blog.cloudflare.com/introducing-cache-response-rules
 https://blog.cloudflare.com/introducing-precursor
 https://blog.cloudflare.com/iran-internet-partially-restored-may-2026
+https://blog.cloudflare.com/kitesurf
 https://blog.cloudflare.com/local-tracing
 https://blog.cloudflare.com/making-rust-workers-reliable
 https://blog.cloudflare.com/meerkat-introduction
@@ -143,6 +144,7 @@ https://blog.cloudflare.com/smart-tiered-cache-for-public-clouds
 https://blog.cloudflare.com/temporary-accounts
 https://blog.cloudflare.com/unweight-tensor-compression
 https://blog.cloudflare.com/voidzero-joins-cloudflare
+https://blog.cloudflare.com/webmcp
 https://blog.cloudflare.com/wordpress-vulnerabilities
 https://blog.cloudflare.com/workers-cache
 https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5
@@ -283,6 +285,7 @@ https://github.com/oso95/scroll-world
 https://github.com/oven-sh/bun/pull/30412
 https://github.com/palmier-io/palmier-pro
 https://github.com/Panniantong/Agent-Reach
+https://github.com/petergyang/human-review
 https://github.com/rvnikita/claude-code-statusline
 https://github.com/specs-devs/samples/tree/main/Agent%20Center
 https://github.com/Twarner491/AvianVisitors
@@ -491,6 +494,7 @@ https://sentry.io/blog/agents-need-production-context
 https://sentry.io/blog/ai-agent-observability-developers-guide-to-agent-monitoring
 https://sentry.io/blog/ai-bug-reproduction
 https://sentry.io/blog/apple-update-breaks-app
+https://sentry.io/blog/automated-debugging-workflow-sentry
 https://sentry.io/blog/cut-build-times-delete-cms
 https://sentry.io/blog/debugging-multi-agent-ai-when-the-failure-is-in-the-space-between-agents
 https://sentry.io/blog/errors-traces-logs-metrics-when-to-reach-for-what
@@ -582,6 +586,7 @@ https://vercel.com/blog/how-okara-runs-cmo-agents-for-120000-companies-on-vercel
 https://vercel.com/blog/how-speechify-serves-50000-dynamic-pages-to-60-million-users-on-vercel
 https://vercel.com/blog/how-superset-built-the-ide-for-ai-agents-on-vercel
 https://vercel.com/blog/how-zo-computer-improved-ai-reliability-20x-on-vercel
+https://vercel.com/blog/introducing-agent-plugins
 https://vercel.com/blog/introducing-deepsec-find-and-fix-vulnerabilities-in-your-code-base
 https://vercel.com/blog/introducing-eve
 https://vercel.com/blog/introducing-vercel-connect
