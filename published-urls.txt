@@ -210,6 +210,7 @@ https://dsv4.interactive.ikot.blog/
 https://econlab.substack.com/p/how-much-does-it-cost-to-be-ai-pilled
 https://elevenlabs.io/blog/aiuc-announcement
 https://epoch.ai/benchmarks/frontiermath-tier-4-v2
+https://epoch.ai/data-insights/cve-severity-spike-july-2026
 https://every.to/on-every/re-re-introducing-sparkle-marie-kondo-your-mac
 https://every.to/source-code/how-we-run-a-25-person-company-on-four-ai-agents
 https://every.to/source-code/the-folder-is-the-agent
@@ -302,6 +303,7 @@ https://huggingface.co/blog/mishig/local-moores-law
 https://huggingface.co/blog/native-speed-vllm-transformers-backend
 https://huggingface.co/blog/security-incident-july-2026
 https://huggingface.co/collections/talkie-lm/talkie-13b
+https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731
 https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro
 https://huggingface.co/google/diffusiongemma-26B-A4B-it
 https://jack-clark.net/2026/03/23/import-ai-450-chinas-electronic-warfare-model-traumatized-llms-and-a-scaling-law-for-cyberattacks
@@ -455,6 +457,7 @@ https://posthog.com/blog/joe-os-analytics
 https://posthog.com/blog/local-flag-evals-rust
 https://posthog.com/blog/making-claude-cowork-actually-useful
 https://posthog.com/blog/minimum-viable-product-marketing
+https://posthog.com/blog/replay-vision
 https://posthog.com/blog/self-driving-product
 https://posthog.com/blog/session-replays-opening-pull-requests
 https://posthog.com/blog/slack-app-beta
@@ -503,6 +506,7 @@ https://sentry.io/blog/logging-best-practices
 https://sentry.io/blog/mongodb-query-tracing-dotnet-sentry
 https://sentry.io/blog/nextjs-export-traces-opentelemetry
 https://sentry.io/blog/nextjs-supabase-observability
+https://sentry.io/blog/otel-spans-errors-sentry-trace
 https://sentry.io/blog/scaling-observability-for-multi-agent-ai-systems
 https://sentry.io/blog/seer-agent-page-context
 https://sentry.io/blog/sentry-opentelemetry-work-together
@@ -589,6 +593,7 @@ https://vercel.com/blog/how-zo-computer-improved-ai-reliability-20x-on-vercel
 https://vercel.com/blog/introducing-agent-plugins
 https://vercel.com/blog/introducing-deepsec-find-and-fix-vulnerabilities-in-your-code-base
 https://vercel.com/blog/introducing-eve
+https://vercel.com/blog/introducing-the-new-v0-api
 https://vercel.com/blog/introducing-vercel-connect
 https://vercel.com/blog/making-turborepo-ninety-six-percent-faster-with-agents-sandboxes-and-humans
 https://vercel.com/blog/optimizing-vercel-sandbox-snapshots

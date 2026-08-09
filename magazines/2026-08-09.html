@@ -1,0 +1,802 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 108 · 09 Aug 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — from scaffold.html. Do not restructure.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 {
+    overflow-wrap: break-word;
+    margin: 0;
+  }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+
+  .spread > .decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .folio a.home { color: inherit; text-decoration: none; }
+  .folio a.home:hover { text-decoration: underline; }
+
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+
+  .figure { width: 100%; }
+
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — issue 108
+     cover  date-hero (ink + electric yellow)
+     s01    big stats / yellow
+     s02    film still
+     s03    risograph duotone
+     s04    dark report / classified
+     s05    spreadsheet
+     colo   memo / airgram
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─────────────── COVER · date-hero ─────────────── */
+  .cover { background: #111014; color: #f1efe8; }
+  .cover .wordline {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: 15px;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: #ffe500;
+  }
+  .cover .datehero {
+    font-family: var(--sans);
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: clamp(66px, 15.5vw, 224px);
+    line-height: 0.8;
+    letter-spacing: -0.05em;
+    margin: 0;
+    padding-bottom: 0.06em;
+  }
+  .cover .datehero .d1,
+  .cover .datehero .d2,
+  .cover .datehero .d3 { display: block; letter-spacing: -0.05em; }
+  .cover .datehero .d2 { color: #ffe500; }
+  .cover .datehero .d3 { color: #6f6b7e; }
+  .cover .dek {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(21px, 2.1vw, 30px);
+    line-height: 1.32;
+    max-width: 30ch;
+    margin: 0;
+  }
+  .cover .toc {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 40px;
+    padding-top: 20px;
+    border-top: 2px solid #ffe500;
+    width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    text-decoration: none; color: inherit;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(241,239,232,0.16);
+  }
+  .cover .toc a:hover { color: #ffe500; }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; font-size: 17px; }
+  .cover .toc a > span:last-child  {
+    flex: 0 0 auto; font-family: var(--mono); font-size: 13px;
+    letter-spacing: 0.06em; opacity: 0.62;
+  }
+  .cover .toc .num {
+    font-family: var(--mono); font-weight: 600;
+    color: #ffe500; margin-right: 12px; letter-spacing: normal;
+  }
+  .cover .decor .rule {
+    position: absolute; left: 0; right: 0; top: 0; height: 100%;
+    background: repeating-linear-gradient(
+      to bottom, transparent 0 76px, rgba(255,229,0,0.05) 76px 77px);
+  }
+  @media (max-width: 800px) {
+    .cover .toc { grid-template-columns: 1fr; gap: 0; }
+    .cover .wordline { letter-spacing: 0.28em; font-size: 13px; }
+  }
+
+  /* ─────────────── s01 · big stats / yellow ─────────────── */
+  .s01 { background: #ffe500; color: #100f08; }
+  .s01 .tag {
+    background: #100f08; color: #ffe500; border-color: #100f08;
+    border-radius: 0; font-weight: 700; opacity: 1;
+  }
+  .s01 .hed {
+    font-family: var(--sans);
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: clamp(46px, 8vw, 118px);
+    line-height: 0.92;
+    letter-spacing: -0.038em;
+  }
+  .s01 .hed em {
+    font-style: normal;
+    background: #100f08;
+    color: #ffe500;
+    padding: 0 0.1em 0.06em;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+  .s01 .lede { font-family: var(--sans); font-weight: 400; max-width: 46ch; }
+  .s01 .figure {
+    display: flex; flex-wrap: wrap; align-items: flex-end; gap: 22px 40px;
+    border-top: 6px solid #100f08; padding-top: 22px;
+  }
+  .s01 .num {
+    font-family: var(--sans); font-weight: 900;
+    font-size: clamp(84px, 15vw, 190px);
+    line-height: 0.78;
+    letter-spacing: -0.06em;
+  }
+  .s01 .num .unit {
+    font-family: var(--sans); font-style: normal; font-weight: 700;
+    font-size: 0.23em;
+    letter-spacing: normal;
+    margin-left: 0.5em;
+    text-transform: uppercase;
+  }
+  .s01 .dl { display: flex; flex-wrap: wrap; gap: 18px 34px; }
+  .s01 .dl div { min-width: 130px; }
+  .s01 .dl dt {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em;
+    text-transform: uppercase; opacity: 0.62; margin: 0 0 4px;
+  }
+  .s01 .dl dd {
+    margin: 0; font-family: var(--sans); font-weight: 800;
+    font-size: 26px; line-height: 1.1; letter-spacing: -0.01em;
+  }
+  .s01 .read-on { border-color: #100f08; color: #100f08; --flip: #ffe500; border-width: 3px; }
+  .s01 .decor::before {
+    content: "";
+    position: absolute; right: -8vw; bottom: -10vw;
+    width: 70vw; height: 70vw;
+    background: repeating-linear-gradient(
+      -45deg, rgba(16,15,8,0.10) 0 16px, transparent 16px 40px);
+  }
+
+  /* ─────────────── s02 · film still ─────────────── */
+  .s02 { background: #08080a; color: #ddd7cc; }
+  .s02 .tag {
+    border-color: #e6c86a; color: #e6c86a; border-radius: 0;
+    letter-spacing: 0.3em; opacity: 1;
+  }
+  .s02 .hed {
+    font-family: var(--sans);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: clamp(34px, 5.4vw, 78px);
+    line-height: 1.1;
+    letter-spacing: 0.035em;
+    color: #f4efe4;
+  }
+  .s02 .hed em { font-style: normal; color: #e6c86a; }
+  .s02 .lede { font-family: var(--sans); font-weight: 300; max-width: 52ch; color: #bdb6ab; }
+  .s02 .strip {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+    width: 100%;
+    border-top: 1px solid rgba(230,200,106,0.4);
+    border-bottom: 1px solid rgba(230,200,106,0.4);
+    padding: 18px 0;
+  }
+  .s02 .frame {
+    border: 1px solid rgba(221,215,204,0.22);
+    padding: 16px 14px 18px;
+    background: rgba(255,255,255,0.03);
+    min-width: 0;
+  }
+  .s02 .frame b {
+    display: block;
+    font-family: var(--sans); font-weight: 700; font-size: 19px;
+    text-transform: uppercase; letter-spacing: 0.06em; color: #e6c86a;
+    margin-bottom: 8px;
+  }
+  .s02 .frame span {
+    font-family: var(--mono); font-size: 15px; line-height: 1.55;
+    color: #b3aca1; display: block;
+  }
+  .s02 .timecode {
+    font-family: var(--mono); font-size: 13px; letter-spacing: 0.14em;
+    color: #7d7669; margin-top: 12px; display: block;
+  }
+  .s02 .read-on { border-color: #e6c86a; color: #e6c86a; --flip: #08080a; }
+  .s02 .decor .lb-top,
+  .s02 .decor .lb-bot {
+    position: absolute; left: 0; right: 0; height: 8vh;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.85), transparent);
+  }
+  .s02 .decor .lb-bot { bottom: 0; transform: scaleY(-1); }
+  .s02 .decor .lb-top { top: 0; }
+  .s02 .decor .glow {
+    position: absolute; left: 50%; top: 46%;
+    width: 92vw; height: 60vh; transform: translate(-50%, -50%);
+    background: radial-gradient(ellipse, rgba(230,200,106,0.10), transparent 68%);
+  }
+  @media (max-width: 800px) {
+    .s02 .strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
+  /* ─────────────── s03 · risograph duotone ─────────────── */
+  .s03 {
+    background: #f5f1e6;
+    color: #14131a;
+    --cy: #00a3c4;
+    --mg: #ff2d78;
+  }
+  .s03 .tag {
+    border-color: var(--cy); color: var(--cy); border-radius: 0;
+    border-width: 2px; opacity: 1; font-weight: 600;
+  }
+  .s03 .hed {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: clamp(46px, 7.4vw, 106px);
+    line-height: 0.98;
+    letter-spacing: -0.028em;
+    color: var(--mg);
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    text-shadow: 7px 7px 0 var(--cy);
+  }
+  .s03 .hed em {
+    font-style: italic;
+    color: var(--cy);
+    text-shadow: 7px 7px 0 var(--mg);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s03 .lede { max-width: 50ch; }
+  .s03 .card {
+    border: 3px solid var(--cy);
+    background: #fffdf6;
+    box-shadow: 12px 12px 0 var(--mg);
+    padding: 22px 24px 24px;
+    max-width: 700px;
+  }
+  .s03 .card h4 {
+    font-family: var(--mono); font-size: 13px; font-weight: 600;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--mg); margin-bottom: 14px;
+  }
+  .s03 .card code {
+    display: block;
+    font-family: var(--mono); font-size: 16px; line-height: 1.9;
+    color: #14131a;
+    word-break: break-word;
+  }
+  .s03 .card code b { color: var(--cy); font-weight: 600; }
+  .s03 .parts {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px;
+  }
+  .s03 .parts span {
+    font-family: var(--mono); font-size: 14px;
+    border: 2px solid var(--mg); color: var(--mg);
+    padding: 4px 10px;
+  }
+  .s03 .read-on { border-color: var(--mg); color: var(--mg); --flip: #f5f1e6; border-width: 3px; }
+  .s03 .decor .ink-a,
+  .s03 .decor .ink-b {
+    position: absolute;
+    border-radius: 50%;
+    mix-blend-mode: multiply;
+    opacity: 0.18;
+  }
+  .s03 .decor .ink-a {
+    right: -12vw; top: 22vh; width: 52vw; height: 52vw;
+    background: var(--cy);
+  }
+  .s03 .decor .ink-b {
+    right: -4vw; top: 30vh; width: 52vw; height: 52vw;
+    background: var(--mg);
+  }
+  @media (max-width: 800px) {
+    .s03 .hed { text-shadow: 4px 4px 0 var(--cy); }
+    .s03 .hed em { text-shadow: 4px 4px 0 var(--mg); }
+    .s03 .card { box-shadow: 7px 7px 0 var(--mg); }
+  }
+
+  /* ─────────────── s04 · dark report / classified ─────────────── */
+  .s04 { background: #0a0709; color: #e4dad3; }
+  .s04 .tag {
+    border-color: #e0233c; color: #e0233c; border-radius: 0;
+    border-width: 2px; opacity: 1; font-weight: 700;
+  }
+  .s04 .hed {
+    font-family: var(--sans);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: clamp(40px, 6.6vw, 96px);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+    color: #f6ece5;
+  }
+  .s04 .hed .redact {
+    background: #e0233c;
+    color: #0a0709;
+    padding: 0 0.14em 0.05em;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+  .s04 .lede { font-family: var(--sans); font-weight: 400; max-width: 52ch; color: #c3b8b1; }
+  .s04 .chart { width: 100%; max-width: 720px; border-top: 1px solid rgba(228,218,211,0.25); padding-top: 20px; }
+  .s04 .row {
+    display: grid;
+    grid-template-columns: minmax(0, 220px) minmax(0, 1fr);
+    gap: 10px 18px;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .s04 .row .k {
+    font-family: var(--mono); font-size: 13px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: #9a8f89; min-width: 0;
+  }
+  .s04 .row .bar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center; gap: 12px; min-width: 0;
+  }
+  .s04 .row .bar i { display: block; height: 20px; background: #4a2b31; }
+  .s04 .row.hot .bar i { background: #e0233c; }
+  .s04 .row .bar b {
+    font-family: var(--sans); font-weight: 800; font-size: 20px;
+    letter-spacing: -0.01em; color: #f6ece5; white-space: nowrap;
+  }
+  .s04 .note {
+    font-family: var(--mono); font-size: 13px; color: #9a8f89;
+    letter-spacing: 0.04em; margin: 4px 0 0;
+  }
+  .s04 .read-on { border-color: #e0233c; color: #e0233c; --flip: #0a0709; }
+  .s04 .decor .grid {
+    position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(to right, transparent 0 58px, rgba(224,35,60,0.07) 58px 59px),
+      repeating-linear-gradient(to bottom, transparent 0 58px, rgba(224,35,60,0.05) 58px 59px);
+  }
+  .s04 .decor .stamp {
+    position: absolute;
+    right: 4vw; top: clamp(120px, 18vw, 220px);
+    transform: rotate(-13deg);
+    border: 4px solid rgba(224,35,60,0.22);
+    color: rgba(224,35,60,0.22);
+    font-family: var(--sans); font-weight: 900;
+    font-size: clamp(20px, 3vw, 40px);
+    letter-spacing: 0.14em;
+    padding: 10px 20px;
+    text-transform: uppercase;
+  }
+  @media (max-width: 800px) {
+    .s04 .decor .stamp { display: none; }
+    .s04 .row { grid-template-columns: 1fr; gap: 6px; margin-bottom: 20px; }
+  }
+
+  /* ─────────────── s05 · spreadsheet ─────────────── */
+  .s05 { background: #e9ecef; color: #1b2027; }
+  .s05 .tag {
+    border-color: #1b2027; color: #1b2027; border-radius: 0;
+    background: #ffffff; opacity: 1;
+  }
+  .s05 .hed {
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: clamp(34px, 5vw, 72px);
+    line-height: 1.14;
+    letter-spacing: -0.03em;
+  }
+  .s05 .hed em { font-style: normal; background: #cfe4d2; padding: 0 0.1em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+  .s05 .lede { font-family: var(--sans); font-weight: 400; max-width: 54ch; color: #38414c; }
+  .s05 .sheet {
+    width: 100%;
+    max-width: 760px;
+    background: #ffffff;
+    border: 1px solid #b9c1ca;
+    font-family: var(--mono);
+    font-size: 15px;
+  }
+  .s05 .sheet .hdr,
+  .s05 .sheet .r {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1.15fr) minmax(0, 1fr);
+    border-bottom: 1px solid #dde2e7;
+  }
+  .s05 .sheet .hdr {
+    background: #dfe4e9;
+    font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: #5b6672;
+    border-bottom: 1px solid #b9c1ca;
+  }
+  .s05 .sheet .r:last-child { border-bottom: 0; }
+  .s05 .sheet span {
+    padding: 11px 12px;
+    border-right: 1px solid #dde2e7;
+    min-width: 0;
+    overflow-wrap: break-word;
+  }
+  .s05 .sheet span:last-child { border-right: 0; }
+  .s05 .sheet .rn { background: #f1f4f7; color: #8b95a0; font-size: 13px; }
+  .s05 .sheet .ok { color: #1c6b3a; }
+  .s05 .sheet .no { color: #a3341f; }
+  .s05 .read-on { border-color: #1b2027; color: #1b2027; --flip: #e9ecef; }
+  .s05 .decor .cols {
+    position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(to right, transparent 0 110px, rgba(27,32,39,0.055) 110px 111px),
+      repeating-linear-gradient(to bottom, transparent 0 44px, rgba(27,32,39,0.04) 44px 45px);
+  }
+  @media (max-width: 800px) {
+    .s05 .sheet { font-size: 13px; }
+    .s05 .sheet .hdr, .s05 .sheet .r { grid-template-columns: 34px minmax(0, 1fr) minmax(0, 1fr); }
+    .s05 .sheet span { padding: 9px 8px; }
+  }
+
+  /* ─────────────── colophon · memo / airgram ─────────────── */
+  .colophon { background: #efe9db; color: #262119; }
+  .colophon .hed {
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: clamp(34px, 5vw, 68px);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  .colophon .hed em { font-style: normal; text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 6px; }
+  .colophon .memo {
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.75;
+    letter-spacing: 0.02em;
+    border-left: 3px solid #b1442f;
+    padding-left: 20px;
+    max-width: 74ch;
+  }
+  .colophon .memo .k { color: #b1442f; text-transform: uppercase; letter-spacing: 0.12em; }
+  .colophon .lede { font-family: var(--sans); font-weight: 400; max-width: 60ch; }
+  .colophon .decor .lines {
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      to bottom, transparent 0 43px, rgba(38,33,25,0.055) 43px 44px);
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════════════════ COVER · date-hero ═══════════════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 108</a></span>
+    <span>Sunday · 09 Aug 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <div class="wordline">Ephemeris</div>
+    <h1 class="datehero">
+      <span class="d1">Sun</span>
+      <span class="d2">09</span>
+      <span class="d3">Aug 26</span>
+    </h1>
+    <p class="dek">Five picks, and four of them hand you something that runs: a smaller model that outscores its own flagship, an API that returns a live preview URL, and a disclosure curve nobody's patch cadence was sized for.</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>Same architecture, and the small one wins</span><span>Hugging Face</span></a>
+      <a href="#s02"><span><span class="num">02</span>Two bugs from footage nobody watched</span><span>PostHog</span></a>
+      <a href="#s03"><span><span class="num">03</span>Send a prompt, get a running dev server</span><span>Vercel</span></a>
+      <a href="#s04"><span><span class="num">04</span>2,500 critical CVEs in one month</span><span>Epoch AI</span></a>
+      <a href="#s05"><span><span class="num">05</span>Keep your OTel spans, point them here</span><span>Sentry</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"><div class="rule"></div></div>
+</section>
+
+<!-- ═══════════════════ 01 · big stats / yellow ═══════════════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 108</a></span>
+    <span>01 / 05 · Hugging Face · via The Batch</span>
+  </header>
+  <div class="main">
+    <span class="tag">Open weights · Model release</span>
+    <h2 class="hed">Same architecture. The <em>small</em> one wins.</h2>
+    <p class="lede">DeepSeek changed the post-training and left the architecture alone, and the result is a Flash model that outscores the Pro tier sitting above it. V4-Flash-0731 is a 304-billion-parameter mixture of experts with a million-token context, a speculative-decoding module called DSpark, and three reasoning effort levels you pick per request. Weights are on Hugging Face under MIT, in BF16 with FP8 quantisation supported.</p>
+    <div class="figure">
+      <div class="num">82.7<span class="unit">Terminal Bench 2.1</span></div>
+      <dl class="dl">
+        <div><dt>Parameters</dt><dd>304B MoE</dd></div>
+        <div><dt>Context</dt><dd>1M tokens</dd></div>
+        <div><dt>Cybergym</dt><dd>76.7</dd></div>
+        <div><dt>DSBench full-stack</dt><dd>68.7</dd></div>
+        <div><dt>Licence</dt><dd>MIT</dd></div>
+      </dl>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ 02 · film still ═══════════════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 108</a></span>
+    <span>02 / 05 · PostHog</span>
+  </header>
+  <div class="main">
+    <span class="tag">Product analytics · Session replay</span>
+    <h2 class="hed">Two bugs in a week, from footage <em>nobody</em> was going to watch.</h2>
+    <p class="lede">Replay Vision puts scanners on top of PostHog session recordings. Each scanner does one job: monitor answers a yes-or-no question about behaviour, score ranks sessions by frustration, classify tags what the user did, summarise writes it up in your product's own vocabulary. PostHog pointed it at their own app and it found a button that looked clickable and wasn't, plus a search returning false "no results" from a caching bug. Both came back as pull requests the team reviewed and merged. Reachable from Slack, the desktop app, the web app, or the PostHog MCP server.</p>
+    <div class="figure">
+      <div class="strip">
+        <div class="frame"><b>Monitor</b><span>Ask a yes/no question about what users do.</span></div>
+        <div class="frame"><b>Score</b><span>Rank every session by how frustrated it looks.</span></div>
+        <div class="frame"><b>Classify</b><span>Tag the actions inside a recording.</span></div>
+        <div class="frame"><b>Summarise</b><span>Describe the session in your product's terms.</span></div>
+      </div>
+      <span class="timecode">31 JUL 2026 · SARA MITEVA · 2 FINDINGS, 2 MERGED PRs</span>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://posthog.com/blog/replay-vision" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true">
+    <div class="glow"></div>
+    <div class="lb-top"></div>
+    <div class="lb-bot"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════ 03 · risograph duotone ═══════════════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 108</a></span>
+    <span>03 / 05 · Vercel</span>
+  </header>
+  <div class="main">
+    <span class="tag">Agent APIs · App generation</span>
+    <h2 class="hed">Send a prompt. Get back a <em>running</em> dev server.</h2>
+    <p class="lede">The rebuilt v0 API takes a prompt, generates an app, boots a dev server inside a Vercel Sandbox and hands you a preview URL you can drop into an iframe. Chats hold the app's state, so a follow-up message continues from where the app is now rather than from the original prompt. The agent's work streams back as parts you can render: text, thinking, file edits, commands. Call it synchronously, queue it and poll, or stream. There's a TypeScript SDK, an MCP server, AI SDK tools, and a single call that deploys the result to Vercel.</p>
+    <div class="figure">
+      <div class="card">
+        <h4>Get started</h4>
+        <code>pnpm add <b>v0@latest</b></code>
+        <code>const chat = await v0.chats.<b>create</b>({ message })</code>
+        <code>chat.<b>demo</b> // → live preview URL</code>
+        <div class="parts">
+          <span>text</span><span>thinking</span><span>file edits</span><span>commands</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://vercel.com/blog/introducing-the-new-v0-api" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true">
+    <div class="ink-a"></div>
+    <div class="ink-b"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════ 04 · dark report / classified ═══════════════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 108</a></span>
+    <span>04 / 05 · Epoch AI · via @seeallochnaya</span>
+  </header>
+  <div class="main">
+    <span class="tag">Security · Disclosure data</span>
+    <h2 class="hed">2,500 critical CVEs, in <span class="redact">July</span> alone.</h2>
+    <p class="lede">Epoch AI tracks the high- and critical-severity CVEs that 21 major vendors — Microsoft, Google, Apple, Adobe and the rest — disclose each month. July 2026 landed near 2,500. That is roughly five times the monthly record set before Anthropic announced that Claude Mythos Preview could find and exploit vulnerabilities on its own, and 60% above June. The old baseline was about 490 a month. It is not going back to 490, and most patch calendars were sized for that number.</p>
+    <div class="figure">
+      <div class="chart">
+        <div class="row">
+          <span class="k">Pre-Mythos monthly baseline</span>
+          <span class="bar"><i style="width: 19%"></i><b>~490</b></span>
+        </div>
+        <div class="row hot">
+          <span class="k">July 2026</span>
+          <span class="bar"><i style="width: 84%"></i><b>~2,500</b></span>
+        </div>
+        <p class="note">Source: Epoch AI, 31 Jul 2026 · 21 tracked disclosing organisations</p>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://epoch.ai/data-insights/cve-severity-spike-july-2026" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true">
+    <div class="grid"></div>
+    <div class="stamp">Severity: high</div>
+  </div>
+</section>
+
+<!-- ═══════════════════ 05 · spreadsheet ═══════════════════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 108</a></span>
+    <span>05 / 05 · Sentry Engineering</span>
+  </header>
+  <div class="main">
+    <span class="tag">Observability · OpenTelemetry</span>
+    <h2 class="hed">Keep your OTel spans. Point them at the <em>error tracker</em>.</h2>
+    <p class="lede">Sentry's new OtlpIntegration does three things: it configures an OTLP exporter aimed at Sentry's ingest endpoint, it reads the active OpenTelemetry trace context, and it stamps trace and span IDs onto every Sentry event — so an exception lands inside the trace that produced it instead of beside it. Setup is one integration line and two environment variables. The limits are stated plainly: errors still need a Sentry SDK, because OTLP carries traces and logs only, and you can't interleave Sentry and OTel spans in the same process.</p>
+    <div class="figure">
+      <div class="sheet">
+        <div class="hdr"><span>&nbsp;</span><span>Item</span><span>Value</span></div>
+        <div class="r"><span class="rn">1</span><span>Integration</span><span>OtlpIntegration()</span></div>
+        <div class="r"><span class="rn">2</span><span>Env var</span><span>OTEL_EXPORTER_OTLP_TRACES_ENDPOINT</span></div>
+        <div class="r"><span class="rn">3</span><span>Env var</span><span>OTEL_EXPORTER_OTLP_TRACES_HEADERS</span></div>
+        <div class="r"><span class="rn">4</span><span>SDKs</span><span class="ok">Python, Ruby, Node, Go, PHP, .NET, Java</span></div>
+        <div class="r"><span class="rn">5</span><span>Errors over OTLP</span><span class="no">no — Sentry SDK required</span></div>
+        <div class="r"><span class="rn">6</span><span>Interleaved spans</span><span class="no">no — one span source per process</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.sentry.io/otel-spans-errors-sentry-trace/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"><div class="cols"></div></div>
+</section>
+
+<!-- ═══════════════════ COLOPHON · memo / airgram ═══════════════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 108</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="memo">
+      <span class="k">Date</span> &nbsp;09 August 2026 · Zürich<br>
+      <span class="k">Issue</span>&nbsp;108 · five stories<br>
+      <span class="k">Re</span> &nbsp;&nbsp;&nbsp;Sources that fed today's picks<br>
+      <br>
+      Hugging Face · The Batch · PostHog · Vercel · Epoch AI · Sentry Engineering ·
+      @seeallochnaya<br>
+      <br>
+      Also read and passed over: Cloudflare, GitHub, OpenAI, Anthropic, Next.js,
+      Fly.io, Import AI, Don't Worry About the Vase, Jeff Bullas, @TochkiNadAI,
+      @denissexy, @rvnikita_blog, @ProductsAndStartups. Every source responded.
+    </p>
+    <p class="lede">The rubric, in order: tools you could adopt this week, creative software, dev tools and agentic coding, privacy and security when the signal is high, research with a practical kernel, and anything a senior engineer or founder can act on tomorrow. Nothing published more than thirty days ago. No story that has run here before.</p>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"><div class="lines"></div></div>
+</section>
+
+</main>
+</body>
+</html>
