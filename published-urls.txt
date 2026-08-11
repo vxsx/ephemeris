@@ -149,6 +149,7 @@ https://blog.cloudflare.com/unweight-tensor-compression
 https://blog.cloudflare.com/voidzero-joins-cloudflare
 https://blog.cloudflare.com/webmcp
 https://blog.cloudflare.com/wordpress-vulnerabilities
+https://blog.cloudflare.com/workers-ai-gateway-unification
 https://blog.cloudflare.com/workers-cache
 https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5
 https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-omni-flash-nano-banana-2-lite
@@ -252,6 +253,7 @@ https://github.blog/engineering/infrastructure/when-protections-outlive-their-pu
 https://github.blog/engineering/platform-security/post-quantum-security-for-ssh-access-on-github
 https://github.blog/engineering/the-cost-of-saying-yes-has-changed
 https://github.blog/engineering/turn-one-giant-ai-generated-pull-request-to-a-reviewable-stack
+https://github.blog/engineering/using-the-github-copilot-sdk-for-java
 https://github.blog/security/supply-chain-security/tame-dependabot-group-your-updates-slow-the-cadence-keep-security-fast
 https://github.com/Agents365-ai/drawio-skill
 https://github.com/AgriciDaniel/claude-seo
@@ -392,6 +394,7 @@ https://openai.com/index/delivering-low-latency-voice-ai-at-scale
 https://openai.com/index/deployment-simulation
 https://openai.com/index/diagnose-rare-childhood-diseases
 https://openai.com/index/endava
+https://openai.com/index/expanding-daybreak-as-the-cyber-defense-window-narrows
 https://openai.com/index/gpt-5-5-instant
 https://openai.com/index/gpt-5-5-system-card
 https://openai.com/index/gpt-5-5-with-trusted-access-for-cyber
@@ -569,12 +572,14 @@ https://thezvi.substack.com/p/the-most-important-charts-in-the
 https://thezvi.substack.com/p/what-is-anthropic
 https://thinkingmachines.ai/blog/interaction-models
 https://thinkingmachines.ai/news/introducing-inkling
+https://tochkicamp.ru/guides/second-brain
 https://transformer-circuits.pub/2026/workspace/index.html
 https://unite.ai/alibaba-launches-qwen-image-3-0-without-benchmarks-or-weights
 https://v0.app/
 https://vectoral.com/blog/token-relay-market
 https://venturebeat.com/technology/z-ai-launches-zcode-to-challenge-cursor-claude-code-and-github-copilot-in-ai-coding
 https://vercel.com/blog/a-new-programming-model-for-durable-execution
+https://vercel.com/blog/a-sandbox-without-a-network-boundary-is-only-half-a-sandbox
 https://vercel.com/blog/agent-responsibly
 https://vercel.com/blog/agent-stack
 https://vercel.com/blog/agentic-infrastructure
