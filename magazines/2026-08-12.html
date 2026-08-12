@@ -131,8 +131,10 @@
     color: currentColor;
     --flip: #0b0b0b;
   }
-  .read-on:hover { background: currentColor; }
-  .read-on:hover span { color: var(--flip); }
+  @media (hover: hover) {
+    .spread .read-on:hover { background: currentColor; }
+    .spread .read-on:hover span { color: var(--flip); }
+  }
 
   @media (max-width: 800px) {
     .spread {

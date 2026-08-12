@@ -168,8 +168,24 @@
     color: currentColor;
     --flip: #0b0b0b;           /* default flip — override per spread */
   }
-  .read-on:hover { background: currentColor; }
-  .read-on:hover span { color: var(--flip); }
+  /* Hover flip. Two guards, both load-bearing:
+
+     `@media (hover: hover)` — touch devices have no pointer to leave, so
+     a tapped link keeps :hover latched after you come back to the page.
+     Issue 111 s03 shipped a button frozen mid-flip on mobile.
+
+     `.spread` prefix — a theme's `.sNN .read-on { background: … }` scores
+     (0,2,0), exactly the same as a bare `.read-on:hover`, and it sits
+     later in the file, so it used to win and the background never
+     flipped — while the label still flipped to --flip, painting the text
+     in the button's own colour. That is how issue 111 s03 shipped an
+     empty yellow box. The prefix scores these (0,3,0) instead, so themes
+     lose. A spread that wants a bespoke hover still overrides with
+     `.sNN .read-on:hover` — same (0,3,0), later in the file. */
+  @media (hover: hover) {
+    .spread .read-on:hover { background: currentColor; }
+    .spread .read-on:hover span { color: var(--flip); }
+  }
 
   /* ───── Mobile — content-safe defaults ─────
      Reflow the grid, clamp headlines, keep read-on reachable. */
@@ -205,7 +221,10 @@
   /* ═══════════════════════════════════════════════════════════════════
      THEME OVERRIDES — surface only: palette, type, decorative motifs.
      Never override .spread / .folio / .main / .cta structure or position.
-     Each .sNN gets its own block. Add --flip to every .sNN .read-on.
+     Each .sNN gets its own block. Add --flip to every .sNN .read-on: on
+     hover the button paints itself in its own `color` and the label in
+     --flip, so those two must contrast. A .sNN .read-on may also set a
+     solid resting `background` — the hover flip outranks it.
      ═══════════════════════════════════════════════════════════════════ */
 
   /* ─── Example: cream editorial hero ─── */
