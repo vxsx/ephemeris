@@ -87,6 +87,7 @@ https://blog.cloudflare.com/agents-stripe-projects
 https://blog.cloudflare.com/agents-week-in-review
 https://blog.cloudflare.com/ai-code-review
 https://blog.cloudflare.com/ai-gateway-spend-limits
+https://blog.cloudflare.com/ai-search-easier
 https://blog.cloudflare.com/artifacts-git-for-agents-beta
 https://blog.cloudflare.com/attribution-business-insights
 https://blog.cloudflare.com/bgp-origin-attribute
@@ -104,6 +105,7 @@ https://blog.cloudflare.com/code-orange-fail-small-complete
 https://blog.cloudflare.com/content-independence-day-ai-options
 https://blog.cloudflare.com/copy-fail-linux-vulnerability-mitigation
 https://blog.cloudflare.com/cyber-frontier-models
+https://blog.cloudflare.com/ddos-threat-report-2026-h1
 https://blog.cloudflare.com/de-tld-outage-dnssec
 https://blog.cloudflare.com/dmarc-management-ga
 https://blog.cloudflare.com/dnssec-nta-ede-33
@@ -243,6 +245,7 @@ https://github.blog/changelog/2026-07-30-stacked-pull-requests-are-now-in-public
 https://github.blog/changelog/2026-07-31-restricting-npm-bypass-2fa-granular-access-tokens
 https://github.blog/changelog/2026-08-03-trigger-copilot-automations-with-comments
 https://github.blog/changelog/2026-08-04-customize-code-scanning-default-setup-at-scale
+https://github.blog/changelog/2026-08-11-copilot-memory-and-ollama-in-github-copilot-for-jetbrains
 https://github.blog/engineering/architecture-optimization/dont-stop-early-case-folding-source-code-at-memory-speed
 https://github.blog/engineering/architecture-optimization/from-latency-to-instant-modernizing-github-issues-navigation-performance
 https://github.blog/engineering/architecture-optimization/how-we-rebuilt-the-search-architecture-for-high-availability-in-github-enterprise-server
@@ -309,6 +312,7 @@ https://huggingface.co/blog/mishig/local-moores-law
 https://huggingface.co/blog/native-speed-vllm-transformers-backend
 https://huggingface.co/blog/security-incident-july-2026
 https://huggingface.co/collections/talkie-lm/talkie-13b
+https://huggingface.co/datasets/HuggingFaceCode/stack-v3-train
 https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731
 https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro
 https://huggingface.co/google/diffusiongemma-26B-A4B-it
@@ -590,6 +594,7 @@ https://vercel.com/blog/ai-sdk-7
 https://vercel.com/blog/build-knowledge-agents-without-embeddings
 https://vercel.com/blog/building-a-real-time-power-outage-map-with-next-js-on-vercel
 https://vercel.com/blog/deepsecbench-evaluating-model-performance-in-finding-cybersecurity-vulnerabilities
+https://vercel.com/blog/deepseek-overtakes-google-on-volume-cost-per-token-falls
 https://vercel.com/blog/dockerfile-on-vercel
 https://vercel.com/blog/how-conductor-moved-parallel-coding-agents-from-the-laptop-to-the-cloud-with-vercel-sandbox
 https://vercel.com/blog/how-cursor-built-a-growth-iteration-loop-with-vercel-microfrontends-and-flags
