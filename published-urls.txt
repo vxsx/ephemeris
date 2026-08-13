@@ -113,6 +113,7 @@ https://blog.cloudflare.com/dynamic-workflows
 https://blog.cloudflare.com/enforce-first-as-bgp
 https://blog.cloudflare.com/engineering-standards-enforcement
 https://blog.cloudflare.com/frontier-model-defense
+https://blog.cloudflare.com/good-and-bad-agentic-behaviors
 https://blog.cloudflare.com/high-performance-llms
 https://blog.cloudflare.com/hyper-bug
 https://blog.cloudflare.com/internal-ai-engineering-stack
@@ -246,6 +247,7 @@ https://github.blog/changelog/2026-07-31-restricting-npm-bypass-2fa-granular-acc
 https://github.blog/changelog/2026-08-03-trigger-copilot-automations-with-comments
 https://github.blog/changelog/2026-08-04-customize-code-scanning-default-setup-at-scale
 https://github.blog/changelog/2026-08-11-copilot-memory-and-ollama-in-github-copilot-for-jetbrains
+https://github.blog/changelog/2026-08-11-per-model-token-breakdown-in-the-usage-report
 https://github.blog/engineering/architecture-optimization/dont-stop-early-case-folding-source-code-at-memory-speed
 https://github.blog/engineering/architecture-optimization/from-latency-to-instant-modernizing-github-issues-navigation-performance
 https://github.blog/engineering/architecture-optimization/how-we-rebuilt-the-search-architecture-for-high-availability-in-github-enterprise-server
@@ -580,6 +582,7 @@ https://tochkicamp.ru/guides/second-brain
 https://transformer-circuits.pub/2026/workspace/index.html
 https://unite.ai/alibaba-launches-qwen-image-3-0-without-benchmarks-or-weights
 https://v0.app/
+https://vc.ru/ai/3073540-kak-sozdat-skill-dlya-ai-chtoby-pisat-vashim-golosom
 https://vectoral.com/blog/token-relay-market
 https://venturebeat.com/technology/z-ai-launches-zcode-to-challenge-cursor-claude-code-and-github-copilot-in-ai-coding
 https://vercel.com/blog/a-new-programming-model-for-durable-execution
@@ -593,6 +596,7 @@ https://vercel.com/blog/ai-gateway-production-index-june-2026
 https://vercel.com/blog/ai-sdk-7
 https://vercel.com/blog/build-knowledge-agents-without-embeddings
 https://vercel.com/blog/building-a-real-time-power-outage-map-with-next-js-on-vercel
+https://vercel.com/blog/building-a-software-factory-for-ai-sdk
 https://vercel.com/blog/deepsecbench-evaluating-model-performance-in-finding-cybersecurity-vulnerabilities
 https://vercel.com/blog/deepseek-overtakes-google-on-volume-cost-per-token-falls
 https://vercel.com/blog/dockerfile-on-vercel
@@ -604,6 +608,7 @@ https://vercel.com/blog/how-kiko-milano-scales-for-black-friday
 https://vercel.com/blog/how-okara-runs-cmo-agents-for-120000-companies-on-vercel
 https://vercel.com/blog/how-speechify-serves-50000-dynamic-pages-to-60-million-users-on-vercel
 https://vercel.com/blog/how-superset-built-the-ide-for-ai-agents-on-vercel
+https://vercel.com/blog/how-we-migrated-the-database-behind-every-vercel-build
 https://vercel.com/blog/how-zo-computer-improved-ai-reliability-20x-on-vercel
 https://vercel.com/blog/introducing-agent-plugins
 https://vercel.com/blog/introducing-deepsec-find-and-fix-vulnerabilities-in-your-code-base
