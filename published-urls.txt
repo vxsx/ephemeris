@@ -1,5 +1,6 @@
 http://hnup.date/hn-sota
 https://1x.tech/discover/neos-hands
+https://404media.co/person-hides-prompt-injection-in-legal-filing-telling-ai-to-side-with-them
 https://ahrefs.com/blog/schema-ai-citations
 https://ai.meta.com/blog/brain2qwerty-brain-ai-human-communication
 https://ai.meta.com/blog/introducing-muse-image-muse-video-msl
@@ -97,6 +98,7 @@ https://blog.cloudflare.com/building-for-the-future
 https://blog.cloudflare.com/casb-anthropic-integration
 https://blog.cloudflare.com/cdnjs-dev-platform-migration
 https://blog.cloudflare.com/celebrating-12-years-of-project-galileo
+https://blog.cloudflare.com/certificate-transparency-monitoring-ga
 https://blog.cloudflare.com/claude-managed-agents
 https://blog.cloudflare.com/clickhouse-query-plan-contention
 https://blog.cloudflare.com/cloudflare-computer
@@ -307,6 +309,7 @@ https://hackernews.foresyn.ai/
 https://hermes-agent.nousresearch.com/desktop
 https://hermesagents.net/
 https://higgsfield.ai/apps/virality-predictor
+https://higgsfield.ai/blog/higgsfield-global-film-festival
 https://higgsfield.ai/mcp
 https://hub.harborframework.com/datasets/frontier-bench/frontier-bench/latest
 https://huggingface.co/ai-sage/GigaChat3.1-Audio-10B-A1.8B
@@ -433,6 +436,7 @@ https://openai.com/index/patch-the-planet
 https://openai.com/index/personal-finance-chatgpt
 https://openai.com/index/prc-linked-influence-operations-ai-debates
 https://openai.com/index/previewing-gpt-5-6-sol
+https://openai.com/index/previewing-ultrafast
 https://openai.com/index/ramp
 https://openai.com/index/running-codex-safely
 https://openai.com/index/scientific-computing-agentic-ai
@@ -512,6 +516,7 @@ https://sentry.io/blog/ai-agent-observability-developers-guide-to-agent-monitori
 https://sentry.io/blog/ai-bug-reproduction
 https://sentry.io/blog/apple-update-breaks-app
 https://sentry.io/blog/automated-debugging-workflow-sentry
+https://sentry.io/blog/claude-routines-agent-triage
 https://sentry.io/blog/cut-build-times-delete-cms
 https://sentry.io/blog/debugging-multi-agent-ai-when-the-failure-is-in-the-space-between-agents
 https://sentry.io/blog/errors-traces-logs-metrics-when-to-reach-for-what
