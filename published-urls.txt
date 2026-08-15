@@ -38,6 +38,7 @@ https://anthropic.com/news/claude-opus-4-8
 https://anthropic.com/news/claude-opus-5
 https://anthropic.com/news/claude-science-ai-workbench
 https://anthropic.com/news/claude-sonnet-5
+https://anthropic.com/news/claude-text-watermark
 https://anthropic.com/news/election-safeguards-update
 https://anthropic.com/news/expanding-project-glasswing
 https://anthropic.com/news/fable-mythos-access
@@ -126,6 +127,7 @@ https://blog.cloudflare.com/iran-internet-partially-restored-may-2026
 https://blog.cloudflare.com/kitesurf
 https://blog.cloudflare.com/local-tracing
 https://blog.cloudflare.com/making-rust-workers-reliable
+https://blog.cloudflare.com/mcp-security-updates
 https://blog.cloudflare.com/mcp-v2
 https://blog.cloudflare.com/meerkat-introduction
 https://blog.cloudflare.com/ml-dsa-will-have-to-do
@@ -156,6 +158,7 @@ https://blog.cloudflare.com/webmcp
 https://blog.cloudflare.com/wordpress-vulnerabilities
 https://blog.cloudflare.com/workers-ai-gateway-unification
 https://blog.cloudflare.com/workers-cache
+https://blog.cloudflare.com/workers-protected-by-access
 https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5
 https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-omni-flash-nano-banana-2-lite
 https://blog.google/innovation-and-ai/products/gemini-app/next-evolution-gemini-app
@@ -206,6 +209,7 @@ https://deeplearning.ai/the-batch/issue-355
 https://deeplearning.ai/the-batch/issue-356
 https://deeplearning.ai/the-batch/issue-357
 https://deeplearning.ai/the-batch/issue-359
+https://deeplearning.ai/the-batch/issue-366
 https://deepswe.datacurve.ai/blog
 https://developers.googleblog.com/build-agentic-full-stack-apps-with-genkit
 https://developers.googleblog.com/introducing-the-google-colab-cli
@@ -388,6 +392,7 @@ https://openai.com/index/ai-chemist-improves-reaction
 https://openai.com/index/avatarin
 https://openai.com/index/boston-childrens-hospital
 https://openai.com/index/braintrust
+https://openai.com/index/builders-guide-to-gpt-5-6
 https://openai.com/index/building-codex-windows-sandbox
 https://openai.com/index/building-self-improving-tax-agents-with-codex
 https://openai.com/index/chatgpt-memory-dreaming

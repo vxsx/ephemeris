@@ -1,0 +1,815 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 114 · 15 August 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — from scaffold.html. Do not restructure.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 {
+    overflow-wrap: break-word;
+    margin: 0;
+  }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+
+  .spread > .decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .folio a.home { color: inherit; text-decoration: none; }
+  .folio a.home:hover { text-decoration: underline; }
+
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+
+  .figure { width: 100%; }
+
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  @media (hover: hover) {
+    .spread .read-on:hover { background: currentColor; }
+    .spread .read-on:hover span { color: var(--flip); }
+  }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — surface only.
+     Issue 114 · source-map cover → riso duotone → dark report →
+     blueprint → neo-brutalist → museum placard
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── COVER — treatment H: source map ─── */
+  .cover { background: #101318; color: #e9e6df; }
+  .cover .wordmark {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    font-size: clamp(46px, 6.4vw, 92px);
+    line-height: 0.94;
+    letter-spacing: -0.035em;
+    color: #f5f2ea;
+    margin: 0;
+    padding-bottom: 0.1em;
+  }
+  .cover .wordmark em {
+    font-style: italic;
+    color: #4fd6c4;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .cover .dek {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(20px, 2vw, 28px);
+    line-height: 1.35;
+    max-width: 34ch;
+    margin: 0;
+    color: #cdc8bd;
+  }
+
+  /* the map itself: every source we read, dotted where it landed today */
+  .cover .map {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 10px;
+    width: 100%;
+    padding: 20px 0 22px;
+    border-top: 1px solid rgba(233,230,223,0.28);
+    border-bottom: 1px solid rgba(233,230,223,0.28);
+    list-style: none;
+    margin: 0;
+  }
+  .cover .map li {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border: 1px solid rgba(233,230,223,0.22);
+    color: rgba(233,230,223,0.42);
+    white-space: nowrap;
+  }
+  .cover .map li.on {
+    color: #101318;
+    background: #4fd6c4;
+    border-color: #4fd6c4;
+    font-weight: 600;
+  }
+  .cover .map li.on::before { content: "● "; }
+  .cover .map li::before { content: "○ "; }
+
+  .cover .toc {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 40px;
+    width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    text-decoration: none; color: inherit;
+    padding: 9px 0;
+    border-bottom: 1px dotted rgba(233,230,223,0.25);
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.8em; opacity: 0.6; font-family: var(--mono); }
+  .cover .toc .num {
+    font-family: var(--mono); font-weight: 600;
+    color: #4fd6c4; margin-right: 12px;
+  }
+  .cover .decor::before {
+    content: "";
+    position: absolute;
+    right: -18vw; top: -18vw;
+    width: 62vw; height: 62vw;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(79,214,196,0.10), transparent 68%);
+  }
+
+  /* ─── s01 · RISOGRAPH DUOTONE — cyan + magenta, overprinted, off-register ─── */
+  .s01 { background: #f4f1e6; color: #16141a; }
+  .s01 .tag { color: #d81b60; border-color: #d81b60; }
+  .s01 .hed {
+    font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    font-size: clamp(48px, 7.4vw, 112px);
+    letter-spacing: -0.035em;
+    color: #d81b60;
+    text-shadow: 5px -5px 0 rgba(0,168,193,0.92);
+  }
+  .s01 .hed em {
+    font-style: italic;
+    color: #00a8c1;
+    text-shadow: 5px -5px 0 rgba(216,27,96,0.92);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s01 .lede { color: #221f26; }
+  /* overprint spec block — two inks, equal weight */
+  .s01 .plates {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+    border: 3px solid #16141a;
+    width: 100%;
+    max-width: 720px;
+  }
+  .s01 .plate { padding: 18px 20px; }
+  .s01 .plate:first-child { background: #00a8c1; color: #04262c; border-right: 3px solid #16141a; }
+  .s01 .plate:last-child  { background: #d81b60; color: #2c0616; }
+  .s01 .plate dt {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.16em;
+    text-transform: uppercase; opacity: 0.75; margin-bottom: 6px;
+  }
+  .s01 .plate dd {
+    margin: 0 0 14px;
+    font-family: var(--sans); font-weight: 700; font-size: 19px; line-height: 1.3;
+  }
+  .s01 .plate dd:last-child { margin-bottom: 0; }
+  .s01 .read-on { color: #16141a; border-color: #16141a; --flip: #f4f1e6; }
+  .s01 .decor::before,
+  .s01 .decor::after {
+    content: "";
+    position: absolute;
+    width: 46vw; height: 46vw;
+    border-radius: 50%;
+    mix-blend-mode: multiply;
+  }
+  .s01 .decor::before { right: -8vw; bottom: -16vw; background: rgba(0,168,193,0.22); }
+  .s01 .decor::after  { right: -2vw; bottom: -11vw; background: rgba(216,27,96,0.20); }
+
+  /* ─── s02 · DARK REPORT / CLASSIFIED — crimson on near-black, redact bars ─── */
+  .s02 { background: #0a0709; color: #ded4d0; }
+  .s02 .folio { opacity: 0.6; }
+  .s02 .tag { color: #ff2f4e; border-color: #ff2f4e; border-radius: 0; }
+  .s02 .hed {
+    font-family: var(--sans);
+    font-weight: 900;
+    font-size: clamp(40px, 5.6vw, 82px);
+    line-height: 1.04;
+    letter-spacing: -0.038em;
+    text-transform: uppercase;
+    color: #f4ece9;
+  }
+  .s02 .hed .redact {
+    background: #ff2f4e;
+    color: #0a0709;
+    padding: 0 0.16em 0.06em;
+    letter-spacing: normal;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+  .s02 .lede { color: #b8aca8; }
+  .s02 .lede code {
+    font-family: var(--mono); font-size: 0.86em;
+    color: #f4ece9; word-break: break-word;
+  }
+  .s02 .policy {
+    width: 100%; max-width: 720px;
+    border: 1px solid #3a2a2e;
+    background: #120c10;
+    font-family: var(--mono);
+    font-size: 15px;
+    line-height: 1.85;
+  }
+  .s02 .policy .bar {
+    display: flex; justify-content: space-between; gap: 16px;
+    padding: 9px 16px;
+    background: #ff2f4e; color: #0a0709;
+    font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 600;
+  }
+  .s02 .policy pre {
+    margin: 0; padding: 16px;
+    white-space: pre-wrap; word-break: break-word;
+    color: #ded4d0;
+  }
+  .s02 .policy .k { color: #ff2f4e; }
+  .s02 .policy .c { color: #6f6169; }
+  .s02 .read-on { color: #ff2f4e; border-color: #ff2f4e; border-radius: 0; --flip: #0a0709; }
+  .s02 .decor::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      -50deg, transparent 0 34px, rgba(255,47,78,0.05) 34px 35px);
+  }
+
+  /* ─── s03 · BLUEPRINT — pale grid, mono annotation, crop marks ─── */
+  .s03 { background: #dde5e3; color: #10303c; }
+  .s03 .tag { color: #10303c; border-color: #10303c; border-radius: 0; }
+  .s03 .hed {
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: clamp(30px, 3.9vw, 60px);
+    line-height: 1.14;
+    letter-spacing: -0.025em;
+    text-transform: none;
+  }
+  .s03 .hed em { font-style: normal; color: #b8442a; }
+  .s03 .lede { color: #1d3f4a; }
+  .s03 .route {
+    width: 100%; max-width: 760px;
+    border: 1px solid #10303c;
+    background: rgba(255,255,255,0.5);
+  }
+  .s03 .route .row {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    border-bottom: 1px solid rgba(16,48,60,0.28);
+  }
+  .s03 .route .row:last-child { border-bottom: 0; }
+  .s03 .route .row > * {
+    padding: 13px 16px;
+    font-family: var(--mono);
+    font-size: 15px;
+    line-height: 1.45;
+    min-width: 0;
+  }
+  .s03 .route .row > :first-child {
+    border-right: 1px solid rgba(16,48,60,0.28);
+    grid-column: 1;
+  }
+  .s03 .route .row > :last-child { grid-column: 2; }
+  .s03 .route .head > * {
+    font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+    background: #10303c; color: #dde5e3;
+  }
+  .s03 .route .row .to { color: #b8442a; font-weight: 600; }
+  .s03 .read-on { color: #b8442a; border-color: #b8442a; border-radius: 0; --flip: #dde5e3; }
+  .s03 .decor::before {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(0deg, rgba(16,48,60,0.10) 0 1px, transparent 1px 44px),
+      repeating-linear-gradient(90deg, rgba(16,48,60,0.10) 0 1px, transparent 1px 44px);
+  }
+  /* crop mark, kept clear of the folio row */
+  .s03 .decor .crop {
+    position: absolute;
+    right: clamp(18px, 4vw, 60px);
+    bottom: clamp(18px, 4vw, 60px);
+    width: 46px; height: 46px;
+    border-right: 2px solid rgba(16,48,60,0.5);
+    border-bottom: 2px solid rgba(16,48,60,0.5);
+  }
+
+  /* ─── s04 · NEO-BRUTALIST — white ground, hard black rules, electric blue ─── */
+  .s04 { background: #fdfdfb; color: #000; }
+  .s04 .tag {
+    border-radius: 0; border-width: 3px;
+    background: #1b3cff; color: #fdfdfb; border-color: #000;
+    font-weight: 700;
+  }
+  .s04 .hed {
+    font-family: var(--sans);
+    font-weight: 900;
+    font-size: clamp(42px, 6.6vw, 96px);
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+    text-transform: uppercase;
+  }
+  .s04 .hed .cut {
+    background: #1b3cff;
+    color: #fdfdfb;
+    letter-spacing: normal;
+    padding: 0 0.12em 0.05em;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+  .s04 .lede { font-family: var(--sans); font-weight: 500; }
+  .s04 .card {
+    width: 100%; max-width: 700px;
+    border: 4px solid #000;
+    box-shadow: 12px 12px 0 #1b3cff;
+    background: #fdfdfb;
+  }
+  .s04 .card .lbl {
+    display: block;
+    padding: 10px 16px;
+    border-bottom: 4px solid #000;
+    font-family: var(--mono); font-weight: 600;
+    font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase;
+  }
+  .s04 .card pre {
+    margin: 0; padding: 18px 16px;
+    font-family: var(--mono); font-size: 15px; line-height: 1.75;
+    white-space: pre-wrap; word-break: break-word;
+  }
+  .s04 .card .k { color: #1b3cff; font-weight: 600; }
+  .s04 .read-on {
+    border-radius: 0; border-width: 4px; border-color: #000;
+    color: #000; background: #ffe500; --flip: #ffe500;
+  }
+  .s04 .decor .slab {
+    position: absolute;
+    left: -6vw; bottom: -8vw;
+    width: 44vw; height: 44vw;
+    border: 4px solid #000;
+    background: repeating-linear-gradient(45deg, transparent 0 12px, rgba(27,60,255,0.10) 12px 24px);
+  }
+
+  /* ─── s05 · MUSEUM PLACARD — ivory + dark olive, centered, hairline rules ─── */
+  .s05 { background: #f1eddf; color: #333c28; }
+  .s05 .tag {
+    border-color: #7d8768; color: #5c6549;
+    letter-spacing: 0.3em; border-radius: 0;
+  }
+  .s05 .hed {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-variation-settings: "opsz" 144, "SOFT" 20, "WONK" 0;
+    font-size: clamp(40px, 5.4vw, 80px);
+    line-height: 1.08;
+    letter-spacing: 0.005em;
+  }
+  .s05 .hed em {
+    font-style: italic;
+    font-weight: 600;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s05 .lede { color: #3f4832; }
+  .s05 .placard {
+    width: 100%; max-width: 700px;
+    border-top: 1px solid #8b937a;
+    border-bottom: 1px solid #8b937a;
+    padding: 26px 0;
+  }
+  .s05 .placard ol {
+    margin: 0; padding: 0; list-style: none;
+    display: grid; gap: 16px;
+  }
+  .s05 .placard li {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 14px;
+    text-align: left;
+  }
+  .s05 .placard .n {
+    grid-column: 1;
+    font-family: var(--serif); font-style: italic; font-weight: 600;
+    font-size: 26px; color: #7d8768; line-height: 1.2;
+    letter-spacing: normal;
+  }
+  .s05 .placard .t {
+    grid-column: 2;
+    font-family: var(--sans); font-size: 18px; line-height: 1.45;
+  }
+  .s05 .placard .t b {
+    display: block; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase; font-size: 14px;
+    color: #5c6549; margin-bottom: 2px;
+  }
+  .s05 .read-on { color: #5c6549; border-color: #5c6549; border-radius: 0; --flip: #f1eddf; }
+  .s05 .decor::before {
+    content: "";
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    width: min(78vw, 900px); height: min(78vw, 900px);
+    border: 1px solid rgba(125,135,104,0.28);
+    border-radius: 50%;
+  }
+
+  /* ─── COLOPHON — newsprint ─── */
+  .colophon { background: #e7e3d8; color: #1b1a17; }
+  .colophon .hed {
+    font-family: var(--serif); font-weight: 700;
+    font-size: clamp(38px, 5vw, 76px);
+  }
+  .colophon .hed em {
+    font-style: italic; color: #6b1f14;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .colophon .sources {
+    width: 100%;
+    columns: 2;
+    column-gap: 40px;
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.9;
+    padding-top: 18px;
+    border-top: 1px solid rgba(27,26,23,0.3);
+  }
+  .colophon .sources span { display: block; break-inside: avoid; }
+  .colophon .rubric {
+    font-family: var(--sans); font-size: 17px; line-height: 1.6;
+    max-width: 62ch; color: #3b3833;
+  }
+
+  /* ─── Mobile additions ─── */
+  @media (max-width: 800px) {
+    .s01 .hed { text-shadow: 3px -3px 0 rgba(0,168,193,0.92); }
+    .s01 .hed em { text-shadow: 3px -3px 0 rgba(216,27,96,0.92); }
+    .s01 .plates { grid-template-columns: 1fr; }
+    .s01 .plate:first-child { border-right: 0; border-bottom: 3px solid #16141a; }
+    .s02 .hed { font-size: clamp(30px, 8vw, 46px); }
+    .s02 .policy { font-size: 13px; }
+    .s03 .hed { font-size: clamp(24px, 6.6vw, 36px); }
+    .s03 .route .row { grid-template-columns: 1fr; }
+    .s03 .route .row > :first-child { border-right: 0; border-bottom: 1px solid rgba(16,48,60,0.28); grid-column: 1; }
+    .s03 .route .row > :last-child { grid-column: 1; }
+    .s03 .decor .crop { display: none; }
+    .s04 .card { box-shadow: 6px 6px 0 #1b3cff; }
+    .s04 .card pre { font-size: 13px; }
+    .s05 .placard li { grid-template-columns: 34px minmax(0, 1fr); gap: 10px; }
+    .s05 .placard .n { font-size: 21px; }
+    .colophon .sources { columns: 1; }
+    .cover .toc { grid-template-columns: 1fr; gap: 0; }
+    .cover .map li { font-size: 11px; padding: 4px 8px; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════════ COVER — treatment H: source map ═══════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 114</a></span>
+    <span>Saturday · 15 Aug 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <h1 class="wordmark">Ephemeris. <em>Nineteen feeds read,</em> four printed.</h1>
+    <p class="dek">Filled circles are the sources that made today's issue. Hollow ones we read and set down.</p>
+    <ul class="map">
+      <li class="on">The Batch</li>
+      <li>The Zvi</li>
+      <li>Import AI</li>
+      <li>Jeff Bullas</li>
+      <li class="on">OpenAI</li>
+      <li>Anthropic Eng</li>
+      <li class="on">Anthropic News</li>
+      <li>GitHub</li>
+      <li>Sentry</li>
+      <li>Vercel</li>
+      <li>PostHog</li>
+      <li class="on">Cloudflare</li>
+      <li>Fly.io</li>
+      <li>Next.js</li>
+      <li>seeallochnaya</li>
+      <li>TochkiNadAI</li>
+      <li>denissexy</li>
+      <li>rvnikita_blog</li>
+      <li>ProductsAndStartups</li>
+    </ul>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>Claude signs every sentence now</span><span>Anthropic</span></a>
+      <a href="#s02"><span><span class="num">02</span>One header gives away every MCP call</span><span>Cloudflare</span></a>
+      <a href="#s03"><span><span class="num">03</span>Send extraction to the cheap model</span><span>OpenAI</span></a>
+      <a href="#s04"><span><span class="num">04</span>Your internal app is public by default</span><span>Cloudflare</span></a>
+      <a href="#s05"><span><span class="num">05</span>Four skills, from ten thousand postings</span><span>The Batch</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ 01 · RISOGRAPH DUOTONE ═══════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 114</a></span>
+    <span>01 / 05 · Anthropic</span>
+  </header>
+  <div class="main">
+    <span class="tag">Provenance · Model behaviour</span>
+    <h2 class="hed">Claude signs every sentence, and the <em>translation</em> carries it.</h2>
+    <p class="lede">Anthropic turned on SynthID-Text across Claude's output and published how it works. The words are not altered. What changes is the source of randomness that picks among them: a cryptographic key plus the preceding context decides the low-stakes choices, leaving a statistical fingerprint in the sequence. Ask Claude to translate a watermarked passage and the mark survives, because Claude chose every word in the new language too.</p>
+    <div class="figure">
+      <dl class="plates">
+        <div class="plate">
+          <dt>Holds up against</dt>
+          <dd>Light editing</dd>
+          <dt>Also survives</dt>
+          <dd>Translation by Claude</dd>
+          <dt>Method</dt>
+          <dd>SynthID-Text, DeepMind, Nature 2024</dd>
+        </div>
+        <div class="plate">
+          <dt>Erased by</dt>
+          <dd>A rewrite that replaces every word</dd>
+          <dt>Weakest on</dt>
+          <dd>Code, short samples, constrained facts</dd>
+          <dt>Detection API</dt>
+          <dd>Announced, not yet shipped</dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.anthropic.com/news/claude-text-watermark" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ 02 · DARK REPORT / CLASSIFIED ═══════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 114</a></span>
+    <span>02 / 05 · Cloudflare</span>
+  </header>
+  <div class="main">
+    <span class="tag">Security · MCP</span>
+    <h2 class="hed">One <span class="redact">header</span> gives away every MCP call crossing your network.</h2>
+    <p class="lede">Cloudflare Gateway now classifies MCP traffic by reading the <code>MCP-Protocol-Version</code> header on every TLS-inspected request. A new selector puts that in a policy, and a separate traffic-source selector tells an approved organisational portal apart from the server an engineer wired up on their own laptop. Cloudflare is honest about the limit: the header proves MCP, its absence proves nothing. Per-tool control is still on the roadmap.</p>
+    <div class="figure">
+      <div class="policy">
+        <div class="bar"><span>Gateway policy</span><span>HTTP · TLS inspection on</span></div>
+<pre><span class="c"># everything speaking MCP on the network</span>
+<span class="k">experimental.is_mcp</span> == true
+
+<span class="c"># ...that did not come through an approved portal</span>
+and <span class="k">mcp_portal</span> not in {approved}
+
+<span class="c">→ action:</span> block <span class="c">/</span> log <span class="c">/</span> isolate</pre>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.cloudflare.com/mcp-security-updates/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ 03 · BLUEPRINT ═══════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 114</a></span>
+    <span>03 / 05 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Cost · Agent architecture</span>
+    <h2 class="hed">Send the extraction to the cheap model. Keep the frontier for the <em>ambiguous part</em>.</h2>
+    <p class="lede">OpenAI's builder guide for GPT-5.6 is a routing argument aimed at startups watching their inference bill. Split an agent by task difficulty rather than running one frontier model end to end: classification and extraction go to a smaller tier, planning and genuinely ambiguous requests get the expensive one. The Responses API side adds subagent primitives, so a primary agent can fan parallelisable work into separate workstreams and synthesise what returns.</p>
+    <div class="figure">
+      <div class="route">
+        <div class="row head"><span>Step in the agent loop</span><span>Where it should run</span></div>
+        <div class="row"><span>Classify the incoming request</span><span class="to">Smaller tier</span></div>
+        <div class="row"><span>Extract fields from a document</span><span class="to">Smaller tier</span></div>
+        <div class="row"><span>Plan a multi-step task</span><span class="to">Frontier</span></div>
+        <div class="row"><span>Resolve an ambiguous instruction</span><span class="to">Frontier</span></div>
+        <div class="row"><span>Parallelisable sub-tasks</span><span class="to">Subagents, then synthesise</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/builders-guide-to-gpt-5-6" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"><span class="crop"></span></div>
+</section>
+
+<!-- ═══════════ 04 · NEO-BRUTALIST ═══════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 114</a></span>
+    <span>04 / 05 · Cloudflare</span>
+  </header>
+  <div class="main">
+    <span class="tag">Access control · Workers</span>
+    <h2 class="hed">Your internal app stays <span class="cut">public</span> until somebody remembers to lock it.</h2>
+    <p class="lede">Cloudflare will now attach an Access policy to the Worker itself instead of to each hostname you remember to configure. One policy covers custom domains, routes, workers.dev subdomains and preview URLs together. Set it at the account level and every Worker in the account is private by default, which is the setting that matters when the person shipping an internal dashboard in an afternoon has never opened the Zero Trust console. Local dev reads the same policy from wrangler.jsonc.</p>
+    <div class="figure">
+      <div class="card">
+        <span class="lbl">wrangler.jsonc</span>
+<pre>{
+  <span class="k">"access"</span>: {
+    <span class="k">"dev"</span>: {
+      <span class="k">"aud"</span>: "my-app",
+      <span class="k">"identity"</span>: { <span class="k">"email"</span>: "admin@company.com" }
+    }
+  }
+}</pre>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.cloudflare.com/workers-protected-by-access/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"><span class="slab"></span></div>
+</section>
+
+<!-- ═══════════ 05 · MUSEUM PLACARD ═══════════ -->
+<section class="spread s05 centered" id="s05">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 114</a></span>
+    <span>05 / 05 · The Batch</span>
+  </header>
+  <div class="main">
+    <span class="tag">Craft · Career</span>
+    <h2 class="hed">Four skills, read out of <em>ten thousand</em> job postings.</h2>
+    <p class="lede">Andrew Ng published an AI Engineering Skills Map assembled from more than 10,000 job postings and interviews with practitioners. His argument is that these four belong to every developer rather than to a job title — the same way working with the cloud stopped being a specialism and became table stakes.</p>
+    <div class="figure">
+      <div class="placard">
+        <ol>
+          <li><span class="n">I</span><span class="t"><b>Build and deploy</b>LLM behaviour, context engineering, RAG, agentic workflows, and the statistics to measure and govern what you shipped.</span></li>
+          <li><span class="n">II</span><span class="t"><b>Software fundamentals</b>Reading the tradeoff between cost, scale, reliability and security well enough to choose an architecture.</span></li>
+          <li><span class="n">III</span><span class="t"><b>Working with coding agents</b>Managing their context, planning the execution, steering them toward software that survives review.</span></li>
+          <li><span class="n">IV</span><span class="t"><b>Shaping the build</b>Moving out of pure implementation into product judgement, business sense, and pushing the thing forward.</span></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.deeplearning.ai/the-batch/issue-366/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ COLOPHON ═══════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 114</span>
+    <span><a class="home" href="#cover">Back to top ↑</a></span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Issue 114, Saturday 15 August 2026. Five picks: a watermark, a header, a routing table, an access policy, and a skills map.</p>
+    <p class="rubric">Chosen against the standing rubric — AI tools worth adopting this week, creative and generative software, dev tools and agentic coding, privacy and security where the signal is high, research with a practical kernel, and anything a senior engineer or founder could act on by Monday. Today's picks came from Anthropic, Cloudflare, OpenAI and The Batch.</p>
+    <div class="sources">
+      <span>The Batch · deeplearning.ai</span>
+      <span>Don't Worry About the Vase</span>
+      <span>Import AI · Jack Clark</span>
+      <span>Jeff Bullas · Jabs</span>
+      <span>OpenAI News</span>
+      <span>Anthropic Engineering</span>
+      <span>Anthropic News</span>
+      <span>The GitHub Blog · Engineering</span>
+      <span>Sentry Engineering</span>
+      <span>Vercel Blog</span>
+      <span>PostHog Blog</span>
+      <span>The Cloudflare Blog</span>
+      <span>Fly.io Blog</span>
+      <span>Next.js Blog</span>
+      <span>@seeallochnaya</span>
+      <span>@TochkiNadAI</span>
+      <span>@denissexy</span>
+      <span>@rvnikita_blog</span>
+      <span>@ProductsAndStartups</span>
+    </div>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>
