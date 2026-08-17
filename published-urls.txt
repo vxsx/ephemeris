@@ -211,6 +211,7 @@ https://deeplearning.ai/the-batch/issue-356
 https://deeplearning.ai/the-batch/issue-357
 https://deeplearning.ai/the-batch/issue-359
 https://deeplearning.ai/the-batch/issue-366
+https://deepmind.google/blog/gemini-robotics-2-brings-whole-body-intelligence-to-robots
 https://deepswe.datacurve.ai/blog
 https://developers.googleblog.com/build-agentic-full-stack-apps-with-genkit
 https://developers.googleblog.com/introducing-the-google-colab-cli
@@ -368,6 +369,7 @@ https://mf0.ai/
 https://microsoft.com/en-us/research/articles/whimsical-strategies-break-ai-agents-generating-out-of-distribution-adversarial-strategies-at-scale
 https://microsoft.com/en-us/research/blog/memora-a-harmonic-memory-representation-balancing-abstraction-and-specificity
 https://microsoft.com/en-us/security/blog/2026/06/02/microsoft-build-2026-securing-code-agents-and-models-across-the-development-lifecycle
+https://minimax.io/blog/minimax-h3
 https://minimax.io/blog/minimax-m3
 https://mistral.ai/news/leanstral-1-5
 https://mistral.ai/news/ocr-4
@@ -473,6 +475,7 @@ https://posthog.com/blog/best-ai-observability-tools
 https://posthog.com/blog/best-analytics-stack-for-vibe-coded-apps
 https://posthog.com/blog/best-mcp-servers-for-startups
 https://posthog.com/blog/best-real-time-analytics-platforms
+https://posthog.com/blog/bribing-customers-to-talk-to-me
 https://posthog.com/blog/cheapest-ai-observability-tools
 https://posthog.com/blog/customer-facing-analytics-examples
 https://posthog.com/blog/duckdb-vs-clickhouse
@@ -505,6 +508,7 @@ https://programbench.com/blog/gpt-5-5-first-solve
 https://proofofconcept.pub/p/design-systems-are-now-inference
 https://qwen.ai/blog
 https://ramp.com/data/ai-index
+https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2
 https://safe.ai/blog/significant-increase-in-digital-labor-automation
 https://sakana.ai/fugu-release
 https://sakana.ai/marlin-release
@@ -614,6 +618,7 @@ https://vercel.com/blog/building-a-software-factory-for-ai-sdk
 https://vercel.com/blog/deepsecbench-evaluating-model-performance-in-finding-cybersecurity-vulnerabilities
 https://vercel.com/blog/deepseek-overtakes-google-on-volume-cost-per-token-falls
 https://vercel.com/blog/dockerfile-on-vercel
+https://vercel.com/blog/everything-hackable-will-get-hacked
 https://vercel.com/blog/how-conductor-moved-parallel-coding-agents-from-the-laptop-to-the-cloud-with-vercel-sandbox
 https://vercel.com/blog/how-cursor-built-a-growth-iteration-loop-with-vercel-microfrontends-and-flags
 https://vercel.com/blog/how-general-intelligence-used-agents-to-build-an-agent-platform-on-vercel
