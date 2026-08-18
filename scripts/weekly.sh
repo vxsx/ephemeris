@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# Build and publish today's Ephemeris issue.
+# Build and publish this week's Ephemeris issue.
 #
-# Invoked by launchd (see deploy/name.vadim.ephemeris.plist) at 08:00
-# Europe/Zurich every day. Runs Claude Code in headless mode following
-# daily-prompt.md. Commits + pushes + posts to Telegram are driven by
-# the agent itself (see steps 6 & 7 of daily-prompt.md).
+# Invoked by launchd (see deploy/name.vadim.ephemeris.plist) on Saturdays at
+# 08:00 Europe/Zurich. Runs Claude Code in headless mode following
+# weekly-prompt.md. Commits + pushes + posts to Telegram are driven by
+# the agent itself (see steps 6 & 7 of weekly-prompt.md).
 
 set -euo pipefail
 
@@ -18,7 +18,7 @@ mkdir -p "$LOG_DIR"
 
 {
   echo "═══════════════════════════════════════════════════════════════"
-  echo "Ephemeris daily run · started $DATE_UTC"
+  echo "Ephemeris weekly run · started $DATE_UTC"
   echo "local: $(date) · host: $(hostname) · user: $(whoami)"
   echo "═══════════════════════════════════════════════════════════════"
 } >> "$LOG_FILE"
@@ -40,8 +40,10 @@ fi
 
 # Ping Telegram when the build fails, so a broken run (e.g. a lapsed /login,
 # the way 2026-06-19/20 silently failed) surfaces the same morning instead of
-# going unnoticed for days. Success notification is done by the agent itself
-# (daily-prompt.md step 7). Plain text, no parse_mode — arbitrary error output
+# going unnoticed. This matters more on a weekly cadence than it did daily: a
+# silent failure now costs a whole week, not a day. Success notification is
+# done by the agent itself (weekly-prompt.md step 7). Plain text, no
+# parse_mode — arbitrary error output
 # must not break the notifier's own send. Best-effort: never aborts the script.
 notify_failure() {
   local exit_code="$1"
@@ -71,9 +73,9 @@ Full log: .logs/${DATE_LOCAL}.log"
 #   --print            : headless, non-interactive
 #   --permission-mode  : auto-approve file/bash ops (cron has no human)
 #   --model / --effort : opus + xhigh for best magazine-quality output
-PROMPT="$(cat daily-prompt.md)
+PROMPT="$(cat weekly-prompt.md)
 
-You are running non-interactively via launchd. Today's date is $DATE_LOCAL (Europe/Zurich). Do the full build now: fetch, select, render, commit, push, notify. Report back in ≤80 words."
+You are running non-interactively via launchd. Today's date is $DATE_LOCAL (Europe/Zurich), a Saturday. Do the full build now: fetch, select, render, commit, push, notify. Report back in ≤120 words."
 
 # `|| EXIT=$?` keeps `set -e` from aborting here, so the lines below always run
 # (a bare invocation would exit the script on failure before we could notify).
@@ -92,7 +94,8 @@ if [[ "$EXIT" -ne 0 ]]; then
   notify_failure "$EXIT"
 fi
 
-# Keep last 30 logs.
-find "$LOG_DIR" -name "*.log" -type f -mtime +30 -delete 2>/dev/null || true
+# Keep ~6 months of logs (~26 weekly runs). At the old 30-day cutoff a weekly
+# cadence would retain only four issues' worth.
+find "$LOG_DIR" -name "*.log" -type f -mtime +180 -delete 2>/dev/null || true
 
 exit "$EXIT"

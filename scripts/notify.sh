@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Post today's Ephemeris URL to the configured Telegram chat.
+# Post this week's Ephemeris URL to the configured Telegram chat.
 #
 # Usage: ./scripts/notify.sh YYYY-MM-DD
 #
@@ -32,13 +32,13 @@ COUNT="$(grep -oE 'id="s[0-9]+"' "$MAG_FILE" 2>/dev/null | sort -u | wc -l | tr 
 
 WORDS=(zero one two three four five six seven eight nine ten eleven twelve)
 if [[ "$COUNT" -eq 1 ]]; then
-  PICKS_LINE="Today's pick is up:"
+  PICKS_LINE="This week's pick is up:"
 elif [[ "$COUNT" -ge 2 && "$COUNT" -le 12 ]]; then
-  PICKS_LINE="Today's ${WORDS[COUNT]} picks are up:"
+  PICKS_LINE="This week's ${WORDS[COUNT]} picks are up:"
 elif [[ "$COUNT" -gt 12 ]]; then
-  PICKS_LINE="Today's ${COUNT} picks are up:"
+  PICKS_LINE="This week's ${COUNT} picks are up:"
 else
-  PICKS_LINE="Today's picks are up:"
+  PICKS_LINE="This week's picks are up:"
 fi
 
 TEXT=$(cat <<EOF

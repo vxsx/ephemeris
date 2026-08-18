@@ -14,5 +14,5 @@ node_modules/
 dist/
 .cache/
 
-# daily run logs (local only)
+# run logs (local only)
 .logs/

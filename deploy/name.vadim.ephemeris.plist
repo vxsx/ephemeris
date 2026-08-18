@@ -9,17 +9,20 @@
     <array>
         <string>/bin/bash</string>
         <string>-lc</string>
-        <string>/Users/vadim/work/ephemeris/scripts/daily.sh</string>
+        <string>/Users/vadim/work/ephemeris/scripts/weekly.sh</string>
     </array>
 
-    <!-- 08:00 Europe/Zurich (system-local time, which is what launchd uses) -->
+    <!-- Saturdays 08:00 Europe/Zurich (system-local time, which is what
+         launchd uses). Weekday 6 = Saturday; launchd counts 0/7 as Sunday. -->
     <key>StartCalendarInterval</key>
     <dict>
+        <key>Weekday</key><integer>6</integer>
         <key>Hour</key><integer>8</integer>
         <key>Minute</key><integer>0</integer>
     </dict>
 
-    <!-- If the Mac is asleep at 08:00, launchd fires the job when it wakes. -->
+    <!-- If the Mac is asleep on Saturday at 08:00, launchd fires the job on
+         wake. If the Mac is off all weekend, the week is skipped. -->
     <key>RunAtLoad</key><false/>
 
     <key>EnvironmentVariables</key>

@@ -1,20 +1,32 @@
-# Ephemeris · daily build prompt
+# Ephemeris · weekly build prompt
 
-You are producing today's issue of **Ephemeris**, a daily typographic
-magazine shipped every morning at 08:00 Zürich. You are running inside
+You are producing this week's issue of **Ephemeris**, a weekly typographic
+magazine shipped every Saturday at 08:00 Zürich. You are running inside
 `/Users/vadim/work/ephemeris` (local) or a fresh clone of `vxsx/ephemeris` (remote).
 
-## Step 1 — Establish today's date
+**The cadence changed on 2026-08-18.** Ephemeris was daily with 3–5 picks
+through issue 116; from issue 117 it is weekly with 10. Every archived issue
+you can read was built under the old rules — do not infer the current rubric,
+pick count, or issue length from them.
 
-Use the system date. Convert to `YYYY-MM-DD` in Europe/Zurich. Store it as
-`$ISSUE_DATE`. The issue number is the count of files in `magazines/` + 1
-(i.e., if `magazines/` has 12 files before you write, today is issue 013).
+## Step 1 — Establish this issue's date
+
+Use the system date. Convert to `YYYY-MM-DD` in Europe/Zurich — it will be a
+Saturday. Store it as `$ISSUE_DATE`. The issue number is the count of files in
+`magazines/` + 1 (i.e., if `magazines/` has 12 files before you write, this is
+issue 013).
 
 ## Step 2 — Fetch all sources
 
 Fetch these homepages in parallel with `WebFetch`. Extract the latest
-~5–8 items per source: title, author (if visible), 1–2 sentence dek,
+~12–15 items per source: title, author (if visible), 1–2 sentence dek,
 URL, topic tags.
+
+Go deeper where a source paginates. The old daily window needed ~5–8 items
+per source; a week needs a pool big enough that "best of the best" means
+something. If you finish this step with barely more candidates than you have
+slots, you are not selecting — you are transcribing, and the selection step
+below is theatre.
 
 **Newsletters / curation:**
 
@@ -47,7 +59,8 @@ URL, topic tags.
 - https://t.me/s/rvnikita_blog
 - https://t.me/s/ProductsAndStartups
 
-Extract the last ~5–8 posts per channel. Short posts are expected — pick
+Extract the last ~15–20 posts per channel — roughly a week of traffic on the
+busier ones. Short posts are expected — pick
 the ones that link out to a primary source or contain a concrete, actionable
 insight (tool release, benchmark, case study, playbook). Skip pure meme /
 reaction posts. **Attribute in the magazine as "via @channelname"**, and
@@ -64,13 +77,19 @@ update, a technical deep-dive, a benchmark, a case study, a behavior
 change. **Skip pure product-marketing** ("announcing our partnership
 with X", leadership shuffles, funding rounds).
 
-## Step 3 — Pick 3 to 5 articles
+## Step 3 — Pick 10 articles
 
-Aim for five; ship fewer if the day is thin. **Minimum 3, maximum 5.**
-The cap is deliberate — the reader has limited time and would rather read
-five strong picks than skim ten. Do not pad: a 4-story issue with real
-signal beats a 5-story issue with one filler. Curate hard, cut the marginal
-pick rather than including it.
+Aim for ten; ship fewer if the week is genuinely thin. **Minimum 6,
+maximum 10.** Do not pad: a 7-story issue where every spread earns its place
+beats a 10-story issue carrying three you had to talk yourself into. Curate
+hard, cut the marginal pick rather than including it.
+
+**"Best of the best" is the point of the weekly cadence.** The reader gets one
+issue every seven days, so each spread costs more of their attention than a
+daily spread did. The test for every pick: opened next Saturday, would this
+still be worth ten minutes? If it is merely interesting-today, cut it. Ten is
+a ceiling you reach by finding ten things that clear the bar — never a quota
+you fill by lowering it.
 
 **Rubric (in priority order):**
 
@@ -85,8 +104,11 @@ Hard rules:
 
 - Skip pure hype/marketing.
 - Skip opinion-only pieces unless they sharply change how you'd act tomorrow.
-- **Max 2 picks from any single source.** At least 3 distinct sources
-  represented (so on a 5-story issue, no source contributes more than 2).
+- **Max 2 picks from any single source.** At least 6 distinct sources
+  represented on a 10-story issue; scale down proportionally on a shorter
+  one, but never fewer than 4. A full week's pool is deep enough that leaning
+  on two or three sources means you under-fetched in Step 2 — not that the
+  rest of the list was quiet.
 - Engineering-blog posts (GitHub/Sentry/Vercel/PostHog) count only if they
   teach something (postmortem, architecture deep-dive, new primitive, tool
   release) — skip launch fluff / positioning posts.
@@ -115,7 +137,7 @@ the canonical `sentry.io/blog/<slug>` key redirects to a login wall and must
 never appear in an href. It shipped as a live link in issue 072 (2026-07-01) —
 that is the whole reason this warning exists.
 
-Before finalizing today's picks:
+Before finalizing this issue's picks:
 
 ```bash
 # Canonicalize candidates, then reject any already in the ledger.
@@ -156,12 +178,15 @@ be the same person. So when a candidate is a GitHub repo or a personal blog
 post, the dedup key is the **project/author**, not the URL — check the byline
 and the project name against recent issues, not just the link.
 
-To catch these, before finalizing read the TOC of the **last 10 issues** (a
-3-issue window misses repeats more than a few days apart — the *Поле Чудес*
-reprint was 6 issues back):
+To catch these, before finalizing read the TOC of the **last 5 issues**. Under
+the daily cadence this window was 10 issues ≈ 10 days, sized so the *Поле
+Чудес* reprint (6 issues back) would have been caught. Weekly, 5 issues is
+≈ 5 weeks — already past the 30-day age cap above, so anything it misses could
+not have been a legal candidate anyway. Each issue now carries ten headlines,
+so expect ~50 titles:
 
 ```bash
-ls -t magazines/*.html | head -10 \
+ls -t magazines/*.html | head -5 \
   | xargs -I{} grep -hoE 'class="hed"[^>]*>[^<]+' {} \
   | sed -E 's/.*">//'
 ```
@@ -171,15 +196,19 @@ with a different URL, source, author surface, or framing ("RE: …", "more
 on …") — drop it.
 
 **Age cap — 30 days.** Each candidate's publication date must be within the
-last 30 days from `$ISSUE_DATE`. If the source page does not show a
-publication date, treat the item as too old and drop it. RSS items expose
+last 30 days from `$ISSUE_DATE`. **Prefer items published since the previous
+issue** — the seven days you are actually reporting on. The 30-day ceiling
+stays because slow-publishing sources (Anthropic engineering, The Zvi) would
+otherwise be unreachable on a weekly cadence; treat it as headroom for
+genuinely exceptional older work, not as the default window. If the source
+page does not show a publication date, treat the item as too old and drop it. RSS items expose
 `<pubDate>`; HTML pages usually surface a date near the byline. The Copilot
 CLI banner article (October 2025, surfaced 2026-05-04) is the canonical
 failure — engineering-blog homepages still link old posts above the fold,
 and the agent grabbed it without checking.
 
 **After the issue is rendered (Step 4)** but before commit (Step 6), append
-today's read-on URLs to `published-urls.txt` (canonicalized) and re-sort:
+this issue's read-on URLs to `published-urls.txt` (canonicalized) and re-sort:
 
 ```bash
 grep -hoE 'class="read-on"[^>]*href="[^"]+"' "magazines/$ISSUE_DATE.html" \
@@ -247,19 +276,25 @@ defanging it with delicate serif heads, generous padding, and pastel
 accents. Commit fully: bold themes get bold type, hard contrast, and
 one strong layout move per spread.
 
-**Per-issue minimums:**
+**Per-issue minimums** (these scaled with the issue — they were two and one
+when an issue was five spreads; ten spreads at one energy level is a worse
+read than five, not a longer one):
 
-- At least **two** spreads must be *visually loud* — saturated palette
+- At least **four** spreads must be *visually loud* — saturated palette
   + display-weight headline + one strong typographic move (oversized
   numeral, stencil-cut highlight, asymmetric reverse-color block,
   half-bar marker over a word, photo-mechanical pattern). Cover doesn't
   count toward this.
-- At least **one** spread must invert the issue's overall tone (a dark
-  spread between cream spreads, or vice versa). Tonal monotony reads
-  as a single long article, not a magazine.
+- At least **two** spreads must invert the issue's overall tone (a dark
+  spread between cream spreads, or vice versa), and they must not be
+  adjacent — spread them across the run so the issue keeps changing
+  temperature. Tonal monotony reads as a single long article, not a
+  magazine.
 - Headlines vary in *weight, scale, and family* across the issue, not
-  only colour. Five spreads of Fraunces 800 italic at the same size
+  only colour. Ten spreads of Fraunces 800 italic at the same size
   reads as one note no matter what colour the backgrounds are.
+- Pace the issue: the reader is scrolling ten spreads, so alternate loud
+  and quiet rather than front-loading every ambitious treatment.
 
 **Loud-theme cheat sheet:**
 
@@ -430,23 +465,23 @@ postmortem → terminal; launch → neon).
 does **not** have to be the hero every day.
 
 A. **Masthead lockup** — big serif wordmark + dotted TOC (issue 001 default)
-B. **Pull-quote cover** — one giant italic quote from today's best story,
+B. **Pull-quote cover** — one giant italic quote from this week's best story,
    masthead demoted to a corner line
 C. **Dossier grid** — N numbered cells (one per story), each a headline
    fragment + source, no single hero element
-D. **Manifesto** — one paragraph in 48px+ serif that names today's theme
-   ("Today's issue is about agents learning to read")
-E. **Date-hero** — giant typographic date ("MON 20 · APR 26") as the visual;
+D. **Manifesto** — one paragraph in 48px+ serif that names this week's theme
+   ("This week is about agents learning to read")
+E. **Date-hero** — giant typographic date ("SAT 22 · AUG 26") as the visual;
    TOC beneath
 F. **Editor's note** — 3-sentence italic intro in the editor's voice,
    smaller TOC
 G. **Single-word mood** — one display word ("LEAKS", "QUIET", "AGENTS")
-   lifted from today's stories, TOC below
-H. **Source map** — horizontal row of the 18 source names with dots marking
-   which contributed today, then TOC
+   lifted from this week's stories, TOC below
+H. **Source map** — horizontal row of the source names with dots marking
+   which contributed this week, then TOC
 
-Each spread must have: folio (NN / total + source, where total is today's
-story count — so "04 / 05" on a 5-story issue), tag, headline, lede,
+Each spread must have: folio (NN / total + source, where total is this
+issue's story count — so "04 / 10" on a 10-story issue), tag, headline, lede,
 secondary visual element (pull quote, stats, terminal, graph, grid, etc.),
 and a `.read-on` button pointing at the article URL.
 
@@ -469,22 +504,26 @@ folio numerators must all begin at 01 and run contiguously to N.
 should vary visually (dark on one issue, newsprint on another).
 **Do not name the fonts, say "hand-laid", or narrate how the issue was
 made.** That copy reads as self-congratulatory. Keep it to the facts:
-which sources fed today's picks, the rubric, and the issue date.
+which sources fed this week's picks, the rubric, and the issue date.
 
 ## Step 4b — Divergence check (before you write)
 
-Read the two most recent issues in `magazines/` (excluding today's). List
-the themes each used in order. Today's issue must:
+Read the two most recent issues in `magazines/` (excluding this one). List
+the themes each used in order. This issue must:
 
-- Share at most **40%** of themes with yesterday's issue (round down —
-  e.g. 2 of 5).
-- Share at most **60%** with the day before (e.g. 3 of 5).
+- Share at most **40%** of themes with last week's issue (round down —
+  e.g. 4 of 10).
+- Share at most **60%** with the issue before that (e.g. 6 of 10).
 - Use a cover treatment that's different from both.
 - Put repeated themes in a genuinely different slot order (don't just
   shuffle neighbours).
 
+The theme catalogue above has 21 entries and you need 10, so two consecutive
+issues can be very nearly disjoint. 40% is a generous ceiling, not a target to
+drift up toward.
+
 If your first draft fails any of these, swap themes until it passes.
-This is a hard gate — if yesterday's issue looks like today's, you failed
+This is a hard gate — if last week's issue looks like this one, you failed
 the task regardless of how pretty either issue is.
 
 ## Step 5 — Rebuild the index
@@ -492,8 +531,13 @@ the task regardless of how pretty either issue is.
 Regenerate `index.html` so it shows a list of all issues newest-first,
 linking to `magazines/*.html`. **Do not add a `<meta http-equiv="refresh">`
 auto-redirect** — readers should land on the archive and pick. Read
-`magazines/` to build the list. Today's issue appears at the top, labelled
+`magazines/` to build the list. This issue appears at the top, labelled
 with its pretty date.
+
+**Keep the existing masthead chrome as-is** — the standfirst reads "Weekly ·
+Saturdays, 08:00 Zürich" and the dek calls Ephemeris a weekly digest. You are
+rebuilding the issue *list*, not rewriting the header; do not regress those
+strings to the old "Daily" wording.
 
 ## Step 6 — Commit and push
 
@@ -503,7 +547,7 @@ If `published-urls.txt` is unchanged, you forgot to append — go back and
 do it before committing.
 
 A pre-commit hook (`scripts/hooks/pre-commit` → `scripts/check-magazine.sh`)
-runs automatically and rejects the commit if today's magazine contains:
+runs automatically and rejects the commit if the new magazine contains:
 
 - a `read-on` URL whose canonical form is already in the committed
   `published-urls.txt` (reprint), or
@@ -520,7 +564,7 @@ git commit -m "issue $ISSUE_NUMBER — $ISSUE_DATE"
 git push origin main
 ```
 
-GitHub Pages publishes on push (30–90s). The URL for today is
+GitHub Pages publishes on push (30–90s). The URL for this issue is
 `https://vadim.sikora.name/ephemeris/magazines/$ISSUE_DATE.html`.
 
 ## Step 7 — Notify Telegram
@@ -531,5 +575,5 @@ your final message if it fails — don't retry blindly.
 
 ## Step 8 — Final summary
 
-Report back in ≤80 words: issue number, date, the story titles (3–5), and the
-public URL.
+Report back in ≤120 words: issue number, date, the story titles (6–10), and
+the public URL.

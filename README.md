@@ -1,12 +1,15 @@
 # Ephemeris
 
-A daily editorial digest of the best writing on AI tools, creative software,
-dev tools, privacy and science — delivered every morning at **08:00 Zürich**
+A weekly editorial digest of the best writing on AI tools, creative software,
+dev tools, privacy and science — delivered every **Saturday at 08:00 Zürich**
 as a typographically over-the-top HTML magazine.
+
+Daily with 3–5 picks through issue 116 (2026-08-17); weekly with 10 from
+issue 117 on.
 
 Live: https://vadim.sikora.name/ephemeris/
 
-## Sources scanned every morning
+## Sources scanned every Saturday
 
 **Newsletters / curation**
 
@@ -41,22 +44,23 @@ Live: https://vadim.sikora.name/ephemeris/
 
 ## Rubric
 
-Ten picks. Priority: AI tools, creative software, dev tools, privacy, science,
-and anything you could apply tomorrow.
+Ten picks, six minimum — a ceiling reached by finding ten things worth the
+space, not a quota. Priority: AI tools, creative software, dev tools, privacy,
+science, and anything you could apply this week.
 
 ## Layout
 
 Each issue is a single self-contained HTML file at
-`magazines/YYYY-MM-DD.html`. Ten spreads, one per story, each with its own
-colour and treatment — hero, midnight, pink, terminal, academic, big-stats,
-grid, neon, dark report, editorial. Set in Fraunces + Inter via Google Fonts.
+`magazines/YYYY-MM-DD.html`. One spread per story, each with its own colour
+and treatment — hero, midnight, pink, terminal, academic, big-stats, grid,
+neon, dark report, editorial. Set in Fraunces + Inter via Google Fonts.
 
 ## Automation
 
-A **local** launchd job (macOS) runs every morning at 08:00 Europe/Zurich and
-invokes Claude Code in headless mode, following [`daily-prompt.md`](./daily-prompt.md):
+A **local** launchd job (macOS) runs every Saturday at 08:00 Europe/Zurich and
+invokes Claude Code in headless mode, following [`weekly-prompt.md`](./weekly-prompt.md):
 
-1. Fetch all six sources
+1. Fetch all nineteen sources
 2. Pick ten stories
 3. Render `magazines/YYYY-MM-DD.html`
 4. Rebuild `index.html` and commit to `main`
@@ -81,7 +85,7 @@ launchctl bootstrap "gui/$UID" \
 ```bash
 launchctl list | grep ephemeris
 launchctl print "gui/$UID/name.vadim.ephemeris"
-tail -f .logs/$(date +%Y-%m-%d).log
+tail -f "$(ls -t .logs/*.log | head -1)"   # newest run; issues are weekly now
 ```
 
 ### Run now (dry-ish: actually publishes)
@@ -98,6 +102,7 @@ launchctl bootout "gui/$UID/name.vadim.ephemeris"
 
 ### Caveat
 
-If the Mac is asleep at 08:00, launchd catches the missed fire on wake. If
-the Mac is off, the day is skipped. Use `pmset repeat wakeorpoweron MTWRFSU
+If the Mac is asleep on Saturday at 08:00, launchd catches the missed fire on
+wake. If the Mac is off all weekend, the week is skipped — which now costs a
+whole issue rather than one of seven. Use `pmset repeat wakeorpoweron S
 07:55:00` (needs admin) for truly reliable delivery.
