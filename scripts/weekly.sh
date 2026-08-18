@@ -25,49 +25,105 @@ mkdir -p "$LOG_DIR"
 
 cd "$REPO_DIR"
 
-# Pull latest so we don't fight an out-of-date worktree.
-git fetch --quiet origin main
-git reset --hard origin/main --quiet
-echo "✓ synced to origin/main ($(git rev-parse --short HEAD))" >> "$LOG_FILE"
-
-# Activate the in-repo pre-commit hook (rejects duplicate / homepage URLs).
-git config core.hooksPath scripts/hooks
-
-# Restore .env — it's gitignored, not touched by the reset, but just in case.
-if [[ ! -f .env ]]; then
-  echo "✗ .env missing — notifier will fail" >> "$LOG_FILE"
-fi
-
-# Ping Telegram when the build fails, so a broken run (e.g. a lapsed /login,
-# the way 2026-06-19/20 silently failed) surfaces the same morning instead of
-# going unnoticed. This matters more on a weekly cadence than it did daily: a
-# silent failure now costs a whole week, not a day. Success notification is
-# done by the agent itself (weekly-prompt.md step 7). Plain text, no
-# parse_mode — arbitrary error output
-# must not break the notifier's own send. Best-effort: never aborts the script.
-notify_failure() {
-  local exit_code="$1"
+# ── Telegram helper ───────────────────────────────────────────────────────
+# Plain text, no parse_mode — arbitrary error output must not break the
+# notifier's own send. Best-effort: never aborts the script.
+telegram_send() {
+  local text="$1"
   [[ -f "$REPO_DIR/.env" ]] && { set -a; source "$REPO_DIR/.env"; set +a; }
   [[ -n "${TELEGRAM_BOT_TOKEN:-}" && -n "${TELEGRAM_CHAT_ID:-}" ]] || {
-    echo "✗ failure notify skipped — Telegram tokens missing" >> "$LOG_FILE"
+    echo "✗ Telegram notify skipped — tokens missing" >> "$LOG_FILE"
     return 0
   }
-  local tail_lines
-  tail_lines="$(grep -v '^[[:space:]]*$' "$LOG_FILE" | tail -n 4 || true)"
-  local text="⚠️ Ephemeris build failed — ${DATE_LOCAL} (exit ${exit_code}) on $(hostname)
-
-${tail_lines}
-
-Full log: .logs/${DATE_LOCAL}.log"
   curl -sS \
     "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
     --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}" \
     --data-urlencode "text=${text}" \
     --data-urlencode "disable_web_page_preview=true" \
     >> "$LOG_FILE" 2>&1 \
-    && echo "✓ Telegram notified of failure" >> "$LOG_FILE" \
-    || echo "✗ failed to send failure notification" >> "$LOG_FILE"
+    && echo "✓ Telegram notified" >> "$LOG_FILE" \
+    || echo "✗ failed to send Telegram notification" >> "$LOG_FILE"
 }
+
+# Ping Telegram when the build fails, so a broken run (e.g. a lapsed /login,
+# the way 2026-06-19/20 silently failed) surfaces the same morning instead of
+# going unnoticed. This matters more on a weekly cadence than it did daily: a
+# silent failure now costs a whole week, not a day. Success notification is
+# done by the agent itself (weekly-prompt.md step 7).
+notify_failure() {
+  local exit_code="$1"
+  local tail_lines
+  tail_lines="$(grep -v '^[[:space:]]*$' "$LOG_FILE" | tail -n 4 || true)"
+  telegram_send "⚠️ Ephemeris build failed — ${DATE_LOCAL} (exit ${exit_code}) on $(hostname)
+
+${tail_lines}
+
+Full log: .logs/${DATE_LOCAL}.log"
+}
+
+# ── Refuse to run on a dirty tree ─────────────────────────────────────────
+# This used to be a bare `git reset --hard origin/main`, on the theory that the
+# run needs a clean checkout. In practice it never had anything to clean: this
+# job's failure mode is dying *before* it writes anything, because the agent
+# does all its work and commits at the end, while the things that break it
+# (session limit 2026-07-22, lapsed /login 2026-06-19/20) break it at
+# invocation. On 2026-07-22 the next day's sync logged the same commit hash,
+# so nothing had been left behind.
+#
+# So a dirty tree here almost certainly means Vadim's own uncommitted work, not
+# agent leftovers — and reset --hard destroys it with no recovery path (local
+# commits at least survive in the reflog; untracked files do not). Bail out and
+# say so instead. Skipping an issue costs a week; losing unpushed work costs
+# however long it took to write. Gitignored paths (.env, .logs/) don't count as
+# dirty — `git status --porcelain` already ignores them.
+git fetch --quiet origin main
+
+DIRTY="$(git status --porcelain)"
+AHEAD="$(git rev-list --count origin/main..HEAD)"
+
+if [[ -n "$DIRTY" || "$AHEAD" -gt 0 ]]; then
+  {
+    echo "✗ aborting — worktree is not clean, refusing to reset --hard over it"
+    if [[ "$AHEAD" -gt 0 ]]; then
+      echo "  $AHEAD local commit(s) not pushed to origin/main"
+    fi
+    if [[ -n "$DIRTY" ]]; then
+      echo "  uncommitted / untracked:"
+      printf '%s\n' "$DIRTY" | sed 's/^/    /'
+    fi
+  } >> "$LOG_FILE"
+
+  SUMMARY=""
+  if [[ "$AHEAD" -gt 0 ]]; then
+    SUMMARY="${AHEAD} unpushed commit(s)"
+  fi
+  if [[ -n "$DIRTY" ]]; then
+    DIRTY_COUNT="$(printf '%s\n' "$DIRTY" | wc -l | tr -d ' ')"
+    SUMMARY="${SUMMARY:+$SUMMARY, }${DIRTY_COUNT} changed/untracked file(s)"
+  fi
+
+  telegram_send "🟡 Ephemeris skipped ${DATE_LOCAL} — the repo has local work.
+
+${SUMMARY}
+
+Nothing was touched. Commit and push (or stash), then rerun with:
+  launchctl kickstart -k gui/\$UID/name.vadim.ephemeris"
+
+  echo "═══ aborted (dirty tree) at $(date -u +%Y-%m-%dT%H:%M:%SZ) ═══" >> "$LOG_FILE"
+  exit 1
+fi
+
+git reset --hard origin/main --quiet
+echo "✓ synced to origin/main ($(git rev-parse --short HEAD))" >> "$LOG_FILE"
+
+# Activate the in-repo pre-commit hook (rejects duplicate / homepage URLs).
+git config core.hooksPath scripts/hooks
+
+# .env is gitignored, so the sync above never touches it — but the notifier is
+# useless without it, so say so loudly if it has gone missing.
+if [[ ! -f .env ]]; then
+  echo "✗ .env missing — notifier will fail" >> "$LOG_FILE"
+fi
 
 # Run the agent. It will fetch sources, render the issue, commit, push, notify.
 #   --print            : headless, non-interactive
