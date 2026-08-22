@@ -147,11 +147,13 @@ https://blog.cloudflare.com/q1-2026-internet-disruption-summary
 https://blog.cloudflare.com/q2-2026-internet-disruption-summary
 https://blog.cloudflare.com/quic-death-spiral-fix
 https://blog.cloudflare.com/realtime-threat-intel-waf-rules
+https://blog.cloudflare.com/revisiting-spectre-attacks-on-workers
 https://blog.cloudflare.com/rollbacks-for-workflows
 https://blog.cloudflare.com/scaling-security-scans
 https://blog.cloudflare.com/shared-dictionaries
 https://blog.cloudflare.com/smaller-faster-safer-models
 https://blog.cloudflare.com/smart-tiered-cache-for-public-clouds
+https://blog.cloudflare.com/task-based-oauth-consent
 https://blog.cloudflare.com/temporary-accounts
 https://blog.cloudflare.com/unweight-tensor-compression
 https://blog.cloudflare.com/voidzero-joins-cloudflare
@@ -292,10 +294,12 @@ https://github.com/coreyhaines31/marketingskills
 https://github.com/deepseek-ai/Thinking-with-Visual-Primitives
 https://github.com/DenisSergeevitch/agents-best-practices
 https://github.com/DenisSergeevitch/chatgpt-portal
+https://github.com/DenisSergeevitch/desktop-fly
 https://github.com/DenisSergeevitch/genternet-chrome
 https://github.com/DenisSergeevitch/pole-chudes-2
 https://github.com/DenisSergeevitch/UFO-USA
 https://github.com/Fission-AI/OpenSpec/blob/main/docs/concepts.md
+https://github.com/JetBrains/benjamin-plus-skill
 https://github.com/JibranK12345/Viral-Bench
 https://github.com/mvanhorn/last30days-skill
 https://github.com/nexu-io/open-design
@@ -317,6 +321,7 @@ https://hermesagents.net/
 https://higgsfield.ai/apps/virality-predictor
 https://higgsfield.ai/blog/higgsfield-global-film-festival
 https://higgsfield.ai/mcp
+https://higgsfield.ai/original-series/oneiric/full-film
 https://hub.harborframework.com/datasets/frontier-bench/frontier-bench/latest
 https://huggingface.co/ai-sage/GigaChat3.1-Audio-10B-A1.8B
 https://huggingface.co/blog/mishig/local-moores-law
@@ -376,6 +381,7 @@ https://mistral.ai/news/ocr-4
 https://moab.pro/articles/aeo-geo
 https://newsletter.semianalysis.com/p/the-coding-assistant-breakdown-more
 https://nextjs.org/blog/agentic-future
+https://nextjs.org/blog/building-app-like-experiences-with-nextjs-16-3
 https://nextjs.org/blog/july-2026-security-release
 https://nextjs.org/blog/making-v0-navigations-instant
 https://nextjs.org/blog/next-16-2
@@ -394,6 +400,7 @@ https://openai.com/index/advancing-content-provenance
 https://openai.com/index/advancing-the-price-performance-frontier-with-gpt-5-6
 https://openai.com/index/advancing-voice-intelligence-with-new-models-in-the-api
 https://openai.com/index/ai-chemist-improves-reaction
+https://openai.com/index/asana
 https://openai.com/index/avatarin
 https://openai.com/index/boston-childrens-hospital
 https://openai.com/index/braintrust
@@ -442,6 +449,7 @@ https://openai.com/index/openai-broadcom-jalapeno-inference-chip
 https://openai.com/index/openai-frontier-models-and-codex-are-now-available-on-aws
 https://openai.com/index/openai-to-acquire-ona
 https://openai.com/index/our-response-to-the-tanstack-npm-supply-chain-attack
+https://openai.com/index/pacing-model-development-cyber-capabilities
 https://openai.com/index/patch-the-planet
 https://openai.com/index/personal-finance-chatgpt
 https://openai.com/index/prc-linked-influence-operations-ai-debates
@@ -489,6 +497,7 @@ https://posthog.com/blog/making-claude-cowork-actually-useful
 https://posthog.com/blog/minimum-viable-product-marketing
 https://posthog.com/blog/replay-vision
 https://posthog.com/blog/self-driving-product
+https://posthog.com/blog/semantic-layer
 https://posthog.com/blog/session-replays-opening-pull-requests
 https://posthog.com/blog/slack-app-beta
 https://posthog.com/blog/testing-ai-agents
@@ -627,6 +636,7 @@ https://vercel.com/blog/how-kiko-milano-scales-for-black-friday
 https://vercel.com/blog/how-okara-runs-cmo-agents-for-120000-companies-on-vercel
 https://vercel.com/blog/how-speechify-serves-50000-dynamic-pages-to-60-million-users-on-vercel
 https://vercel.com/blog/how-superset-built-the-ide-for-ai-agents-on-vercel
+https://vercel.com/blog/how-v0-authenticates-to-snowflake-without-exposing-the-users-oauth-token
 https://vercel.com/blog/how-we-migrated-the-database-behind-every-vercel-build
 https://vercel.com/blog/how-zo-computer-improved-ai-reliability-20x-on-vercel
 https://vercel.com/blog/introducing-agent-plugins
