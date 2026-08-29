@@ -48,6 +48,7 @@ https://anthropic.com/news/finance-agents
 https://anthropic.com/news/higher-limits-spacex
 https://anthropic.com/news/introducing-claude-tag
 https://anthropic.com/news/investigating-incidents-cybersecurity-evals
+https://anthropic.com/news/model-hardware-standard-research-preview
 https://anthropic.com/news/redeploying-fable-5
 https://anthropic.com/news/reflect-with-claude
 https://anthropic.com/news/widening-conversation-ai
@@ -112,6 +113,7 @@ https://blog.cloudflare.com/cyber-frontier-models
 https://blog.cloudflare.com/ddos-threat-report-2026-h1
 https://blog.cloudflare.com/de-tld-outage-dnssec
 https://blog.cloudflare.com/dmarc-management-ga
+https://blog.cloudflare.com/dns-cache-memory-optimization-1111
 https://blog.cloudflare.com/dnssec-nta-ede-33
 https://blog.cloudflare.com/dynamic-workflows
 https://blog.cloudflare.com/enforce-first-as-bgp
@@ -213,6 +215,7 @@ https://deeplearning.ai/the-batch/issue-356
 https://deeplearning.ai/the-batch/issue-357
 https://deeplearning.ai/the-batch/issue-359
 https://deeplearning.ai/the-batch/issue-366
+https://deeplearning.ai/the-batch/issue-368
 https://deepmind.google/blog/gemini-robotics-2-brings-whole-body-intelligence-to-robots
 https://deepswe.datacurve.ai/blog
 https://developers.googleblog.com/build-agentic-full-stack-apps-with-genkit
@@ -268,12 +271,14 @@ https://github.blog/engineering/infrastructure/when-protections-outlive-their-pu
 https://github.blog/engineering/platform-security/post-quantum-security-for-ssh-access-on-github
 https://github.blog/engineering/the-cost-of-saying-yes-has-changed
 https://github.blog/engineering/turn-one-giant-ai-generated-pull-request-to-a-reviewable-stack
+https://github.blog/engineering/user-experience/your-alt-text-passes-automated-checks-that-doesnt-mean-its-any-good
 https://github.blog/engineering/using-the-github-copilot-sdk-for-java
 https://github.blog/security/supply-chain-security/tame-dependabot-group-your-updates-slow-the-cadence-keep-security-fast
 https://github.com/Agents365-ai/drawio-skill
 https://github.com/AgriciDaniel/claude-seo
 https://github.com/AMAP-ML/DreamX-World
 https://github.com/anomalyco/opencode/releases/tag/v1.17.15
+https://github.com/anthropics/claude-plugins-community
 https://github.com/Augani/openreel-video
 https://github.com/BayramAnnakov/ai-native-product-skills
 https://github.com/BayramAnnakov/ai-native-product-skills/tree/master/skills/autoresearch
@@ -349,6 +354,7 @@ https://jack-clark.net/2026/06/29/import-ai-463-self-improving-robots-a-10k-chin
 https://jack-clark.net/2026/07/06/import-ai-464-fables-writes-gpu-kernels-ai-automation-and-analog-computation
 https://jack-clark.net/2026/07/27/import-ai-466-the-bitter-lesson-for-robotics-ais-complete-week-long-programming-tasks-and-openais-accidental-ai-hacker
 https://jack-clark.net/2026/08/10/import-ai-468-23-rsi-ideas-posttrainbench-and-how-trust-and-transparency-interplay-with-ai-racing
+https://jack-clark.net/2026/08/24/import-ai-470-no-rights-for-machines-automating-environment-generation-with-spade-and-building-better-gpu-kernels-with-hawkeye
 https://jeffbullas.com/ai-reinvention-truth
 https://jeffbullas.com/ai-slop-crisis
 https://jeffbullas.com/charisma-into-cash
@@ -370,6 +376,7 @@ https://marktechpost.com/2026/06/27/deepseek-releases-dspark-a-speculative-decod
 https://maxleiter.com/blog/weights
 https://memeburn.com/openais-chatgpt-bidi-1-brings-bidirectional-voice-mode
 https://metr.org/blog/2026-05-19-frontier-risk-report
+https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation
 https://mf0.ai/
 https://microsoft.com/en-us/research/articles/whimsical-strategies-break-ai-agents-generating-out-of-distribution-adversarial-strategies-at-scale
 https://microsoft.com/en-us/research/blog/memora-a-harmonic-memory-representation-balancing-abstraction-and-specificity
@@ -573,6 +580,7 @@ https://t.me/rvnikita_blog/1735
 https://t.me/s/denissexy
 https://t.me/TochkiNadAI/2324
 https://t.me/TochkiNadAI/2520
+https://tailwinds.substack.com/p/what-i-learned-teaching-the-economics
 https://techcrunch.com/2026/05/19/googles-gemini-omni-turns-images-audio-and-text-into-video-and-thats-just-the-start
 https://techspot.com/news/112386-amazon-employees-using-internal-ai-tools-inflate-usage.html
 https://telegram.org/blog/ai-bot-revolution-11-new-features
@@ -642,6 +650,7 @@ https://vercel.com/blog/how-zo-computer-improved-ai-reliability-20x-on-vercel
 https://vercel.com/blog/introducing-agent-plugins
 https://vercel.com/blog/introducing-deepsec-find-and-fix-vulnerabilities-in-your-code-base
 https://vercel.com/blog/introducing-eve
+https://vercel.com/blog/introducing-run
 https://vercel.com/blog/introducing-the-new-v0-api
 https://vercel.com/blog/introducing-vercel-connect
 https://vercel.com/blog/making-turborepo-ninety-six-percent-faster-with-agents-sandboxes-and-humans
@@ -650,6 +659,7 @@ https://vercel.com/blog/protecting-against-inference-theft
 https://vercel.com/blog/protecting-against-token-theft
 https://vercel.com/blog/realtime-voice-agents-on-ai-gateway
 https://vercel.com/blog/teaching-agents-product-design-at-vercel
+https://vercel.com/blog/the-best-workflow-engine-is-a-programming-language
 https://vercel.com/blog/vercel-agent
 https://vercel.com/blog/vercel-and-shopify-are-rebuilding-hydrogen
 https://vercel.com/blog/vercel-flags-platform-native-feature-flags
