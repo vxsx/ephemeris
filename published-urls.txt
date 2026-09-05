@@ -11,6 +11,7 @@ https://aisi.gov.uk/blog/incident-report-unsanctioned-agent-behaviour-during-cyb
 https://aisi.gov.uk/blog/our-evaluation-of-openais-gpt-5-5-cyber-capabilities
 https://aleximas.substack.com/p/how-will-ai-driven-automation-actually
 https://andonlabs.com/blog/openai-gpt-5-5-vending-bench
+https://anthropic.com/claude-fable-and-mythos-5-1
 https://anthropic.com/engineering/advanced-tool-use
 https://anthropic.com/engineering/AI-resistant-technical-evaluations
 https://anthropic.com/engineering/april-23-postmortem
@@ -98,6 +99,7 @@ https://blog.cloudflare.com/bgp-origin-attribute
 https://blog.cloudflare.com/browser-run-containers
 https://blog.cloudflare.com/build-your-own-vulnerability-harness
 https://blog.cloudflare.com/building-for-the-future
+https://blog.cloudflare.com/cache-transcoding
 https://blog.cloudflare.com/casb-anthropic-integration
 https://blog.cloudflare.com/cdnjs-dev-platform-migration
 https://blog.cloudflare.com/celebrating-12-years-of-project-galileo
@@ -216,6 +218,7 @@ https://deeplearning.ai/the-batch/issue-357
 https://deeplearning.ai/the-batch/issue-359
 https://deeplearning.ai/the-batch/issue-366
 https://deeplearning.ai/the-batch/issue-368
+https://deeplearning.ai/the-batch/issue-369
 https://deepmind.google/blog/gemini-robotics-2-brings-whole-body-intelligence-to-robots
 https://deepswe.datacurve.ai/blog
 https://developers.googleblog.com/build-agentic-full-stack-apps-with-genkit
@@ -243,11 +246,13 @@ https://fly.io/blog/design-and-implementation
 https://fly.io/blog/everyone-write-an-agent
 https://fly.io/blog/litestream-vfs
 https://fly.io/blog/litestream-writable-vfs
+https://fly.io/blog/sprites-mcp
 https://fly.io/blog/unfortunately-mcp
 https://github.blog/ai-and-ml/github-copilot/agent-driven-development-in-copilot-applied-science
 https://github.blog/ai-and-ml/github-copilot/automating-cross-repo-documentation-with-github-agentic-workflows
 https://github.blog/ai-and-ml/github-copilot/better-tools-made-copilot-code-review-worse-heres-how-we-actually-improved-it
 https://github.blog/ai-and-ml/github-copilot/continuous-ai-for-accessibility-how-github-transforms-feedback-into-inclusion
+https://github.blog/ai-and-ml/github-copilot/how-we-make-ai-coding-more-cost-efficient-without-sacrificing-task-quality
 https://github.blog/changelog/2026-06-01-updates-to-github-copilot-billing-and-plans
 https://github.blog/changelog/2026-06-11-github-agentic-workflows-is-now-in-public-preview
 https://github.blog/changelog/2026-07-23-agent-automation-controls-in-github-issues-in-public-preview
@@ -389,6 +394,7 @@ https://moab.pro/articles/aeo-geo
 https://newsletter.semianalysis.com/p/the-coding-assistant-breakdown-more
 https://nextjs.org/blog/agentic-future
 https://nextjs.org/blog/building-app-like-experiences-with-nextjs-16-3
+https://nextjs.org/blog/how-we-closed-1500-github-issues
 https://nextjs.org/blog/july-2026-security-release
 https://nextjs.org/blog/making-v0-navigations-instant
 https://nextjs.org/blog/next-16-2
@@ -433,6 +439,7 @@ https://openai.com/index/gpt-5-5-system-card
 https://openai.com/index/gpt-5-5-with-trusted-access-for-cyber
 https://openai.com/index/gpt-5-6
 https://openai.com/index/gpt-5-immunology-mystery
+https://openai.com/index/gpt-6-astra
 https://openai.com/index/how-agents-are-transforming-work
 https://openai.com/index/how-chatgpt-protects-privacy
 https://openai.com/index/how-two-settings-tripled-our-arc-agi-3-scores
@@ -551,6 +558,7 @@ https://sentry.io/blog/debugging-multi-agent-ai-when-the-failure-is-in-the-space
 https://sentry.io/blog/errors-traces-logs-metrics-when-to-reach-for-what
 https://sentry.io/blog/fixing-javascript-observability
 https://sentry.io/blog/logging-best-practices
+https://sentry.io/blog/metrics-caught-ai-size-estimate
 https://sentry.io/blog/mongodb-query-tracing-dotnet-sentry
 https://sentry.io/blog/nextjs-export-traces-opentelemetry
 https://sentry.io/blog/nextjs-supabase-observability
@@ -642,6 +650,7 @@ https://vercel.com/blog/how-general-intelligence-used-agents-to-build-an-agent-p
 https://vercel.com/blog/how-gitbook-serves-30000-sites-with-sub-second-content-updates
 https://vercel.com/blog/how-kiko-milano-scales-for-black-friday
 https://vercel.com/blog/how-okara-runs-cmo-agents-for-120000-companies-on-vercel
+https://vercel.com/blog/how-our-agents-build-on-brand-pages-with-design-md
 https://vercel.com/blog/how-speechify-serves-50000-dynamic-pages-to-60-million-users-on-vercel
 https://vercel.com/blog/how-superset-built-the-ide-for-ai-agents-on-vercel
 https://vercel.com/blog/how-v0-authenticates-to-snowflake-without-exposing-the-users-oauth-token
@@ -674,6 +683,7 @@ https://vercel.com/changelog/vercel-sandbox-now-supports-fuse-based-filesystems
 https://vercel.com/customers/how-factory-scaled-its-cloud-backend-to-one-billion-monthly-requests-on-vercel
 https://webkit.org/blog/18136/introducing-the-safari-mcp-server-for-web-developers
 https://wheresyoured.at/where-are-all-the-data-centers
+https://worldlabs.ai/blog/atlas
 https://wsj.com/tech/ai/mind-blowing-growth-is-about-to-propel-anthropic-into-its-first-profitable-quarter-7edbf2f4
 https://x.ai/news/grok-4-5
 https://x.com/airbusheli/status/2063895281205137413
