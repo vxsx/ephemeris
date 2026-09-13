@@ -18,7 +18,6 @@
     --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   }
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
   html, body {
     margin: 0; padding: 0;
     font-family: var(--sans);
@@ -28,7 +27,7 @@
     color: #111;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
   h1, h2, h3, h4 {
     overflow-wrap: break-word;
@@ -38,7 +37,7 @@
 
   .spread {
     min-height: 100vh;
-    min-height: 100dvh;
+    min-height: 100svh;
     position: relative;
     overflow: hidden;
     padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
@@ -563,9 +562,10 @@
     width: 100%;
   }
   .s07 .stats > div {
-    padding: 16px 18px 16px 0;
+    padding: 18px 24px 16px 0;
     border-right: 2px solid #0b0b0b;
   }
+  .s07 .stats > div + div { padding-left: 24px; }
   .s07 .stats > div:last-child { border-right: 0; }
   .s07 .stats dt {
     font-family: var(--sans); font-weight: 700; font-size: 14px;
@@ -721,9 +721,10 @@
   }
   .s10 .roles > div {
     grid-column: auto;
-    padding: 18px 16px 16px 0;
+    padding: 18px 22px 16px 0;
     border-right: 1px solid rgba(107,31,20,0.3);
   }
+  .s10 .roles > div + div { padding-left: 22px; }
   .s10 .roles > div:last-child { border-right: 0; }
   .s10 .roles .pct {
     font-family: var(--serif); font-weight: 800; font-style: italic;
@@ -805,7 +806,8 @@
     .s06 .decor::before { display: none; }
 
     .s07 .stats { grid-template-columns: 1fr; border-top-width: 3px; }
-    .s07 .stats > div {
+    .s07 .stats > div,
+    .s07 .stats > div + div {
       border-right: 0; border-bottom: 2px solid #0b0b0b; padding: 14px 0;
     }
     .s07 .stats > div:last-child { border-bottom: 0; }
@@ -819,7 +821,9 @@
     .s09 .callout .num { font-size: clamp(64px, 22vw, 120px); }
 
     .s10 .roles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .s10 .roles > div { padding: 14px 12px 14px 0; }
+    .s10 .roles > div,
+    .s10 .roles > div + div { padding: 16px 14px 16px 0; }
+    .s10 .roles > div:nth-child(even) { padding-left: 14px; }
     .s10 .roles > div:nth-child(2) { border-right: 0; }
     .s10 .roles > div:nth-child(1),
     .s10 .roles > div:nth-child(2) { border-bottom: 1px solid rgba(107,31,20,0.3); }

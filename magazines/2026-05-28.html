@@ -15,7 +15,6 @@
     --type:  "Special Elite", "Courier New", ui-monospace, monospace;
   }
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
   html, body {
     margin: 0; padding: 0;
     font-family: var(--sans);
@@ -25,14 +24,14 @@
     color: #111;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
   h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
   img { max-width: 100%; display: block; }
 
   .spread {
     min-height: 100vh;
-    min-height: 100dvh;
+    min-height: 100svh;
     position: relative;
     overflow: hidden;
     padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);

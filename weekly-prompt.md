@@ -429,6 +429,25 @@ write — the scaffold can't enforce them for you:
    headline above a left-stuck placard until patched. The scaffold's
    `.centered` modifier handles main, figure, figure children, cta,
    and folio in one shot.
+10. **Text never touches a rule.** Any divider between side-by-side
+    cells (`border-right` / `border-left` on grid or flex children,
+    `column-rule`) needs padding on *both* sides of the line — at least
+    20px on desktop, 14px on mobile. The recurring bug is one-sided cell
+    padding like `padding: 16px 18px 16px 0`: the gutter only exists
+    before each rule, so the next cell's text sits flush against it. Pad
+    the far side too (`.sNN .stats > div + div { padding-left: 24px; }`),
+    and when the grid re-flows on mobile, redo it for whichever cells now
+    sit right of a rule (and zero it for cells that start a row). Same for
+    horizontal rules: the text below a `border-top` / `border-bottom`
+    needs real padding, never 0. Issue 120 shipped s07's stat labels and
+    s10's role cells glued to their rules.
+11. **Normal document scroll, nothing else.** Don't add
+    `scroll-behavior`, `scroll-snap`, `position: sticky` / `fixed`, `dvh`
+    units, scroll-linked animation, or any `<script>`. The scaffold's
+    `min-height: 100svh` is the only viewport-height sizing a spread gets.
+    Issue 120 jumped constantly on iPad: every spread was `100dvh`, which
+    Safari recomputes as its toolbar collapses mid-scroll, so all twelve
+    spreads resized under the reader's thumb.
 
 **Spread themes — surface treatments, not structural redesigns.** Pick
 one per story. Each item below is a package of *palette + type choices

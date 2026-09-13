@@ -20,6 +20,10 @@
     ✗ re-enable `hyphens: auto` on h1–h4 (it splits real words like
       "being" into "be-/ing" mid-headline; long unbreakable tokens are
       already handled by `.hed { word-break: break-word }`)
+    ✗ touch scrolling: no `scroll-behavior`, `scroll-snap`, sticky/fixed
+      elements, `dvh` units, scroll-linked effects, or <script>
+    ✗ let text touch a rule — a divider between side-by-side cells needs
+      padding on both sides of the line
 
   Why this exists: issues 001–005 used free-form per-spread layouts and
   every issue shipped with at least one overlap/clipping bug. The grid
@@ -46,7 +50,10 @@
     --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   }
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  /* Plain document scroll, nothing else: no scroll-behavior, scroll-snap,
+     sticky/fixed chrome, dvh, or script. Issue 120 jumped around on iPad.
+     `overflow-x: clip` (not `hidden`) so html/body never become a scroll
+     container of their own. */
   html, body {
     margin: 0; padding: 0;
     font-family: var(--sans);
@@ -56,7 +63,7 @@
     color: #111;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
   h1, h2, h3, h4 {
     overflow-wrap: break-word;
@@ -70,7 +77,10 @@
      behind content via isolation + z-index. */
   .spread {
     min-height: 100vh;
-    min-height: 100dvh;         /* iOS Safari: avoid URL-bar jump swallowing the hed */
+    min-height: 100svh;         /* static small viewport: fits with the URL bar shown.
+                                   Never dvh — Safari recomputes it as the toolbar
+                                   collapses mid-scroll, every spread resizes at once
+                                   and the page jumps (issue 120 on iPad). */
     position: relative;
     overflow: hidden;
     padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
