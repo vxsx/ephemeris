@@ -155,6 +155,7 @@ https://blog.cloudflare.com/quic-death-spiral-fix
 https://blog.cloudflare.com/realtime-threat-intel-waf-rules
 https://blog.cloudflare.com/revisiting-spectre-attacks-on-workers
 https://blog.cloudflare.com/rollbacks-for-workflows
+https://blog.cloudflare.com/saving-100-tb-of-ram-with-math
 https://blog.cloudflare.com/scaling-security-scans
 https://blog.cloudflare.com/shared-dictionaries
 https://blog.cloudflare.com/smaller-faster-safer-models
@@ -190,6 +191,7 @@ https://civitai.com/models/2670340/slop-in-the-face
 https://claude.com/blog/agent-view-in-claude-code
 https://claude.com/blog/building-verification-loops-in-claude-code-with-skills
 https://claude.com/blog/connectors-for-everyday-life
+https://claude.com/blog/cowork-is-now-claude
 https://claude.com/blog/how-claude-code-works-in-large-codebases-best-practices-and-where-to-start
 https://claude.com/blog/introducing-dynamic-workflows-in-claude-code
 https://claude.com/blog/the-new-rules-of-context-engineering-for-claude-5-generation-models
@@ -330,6 +332,7 @@ https://github.com/Twarner491/AvianVisitors
 https://github.com/xai-org/grok-build
 https://github.com/yunit00/game-corovans
 https://hackernews.foresyn.ai/
+https://hacktron.ai/blog/hacking-openai
 https://hermes-agent.nousresearch.com/desktop
 https://hermesagents.net/
 https://higgsfield.ai/apps/virality-predictor
@@ -462,6 +465,7 @@ https://openai.com/index/introducing-trusted-contact-in-chatgpt
 https://openai.com/index/introducing-workspace-agents-in-chatgpt
 https://openai.com/index/mapping-ai-jobs-transition-eu
 https://openai.com/index/model-disproves-discrete-geometry-conjecture
+https://openai.com/index/model-misalignment-reporting-framework
 https://openai.com/index/mrc-supercomputer-networking
 https://openai.com/index/navier-stokes-solution
 https://openai.com/index/nextdoor
@@ -479,6 +483,7 @@ https://openai.com/index/previewing-gpt-5-6-sol
 https://openai.com/index/previewing-ultrafast
 https://openai.com/index/ramp
 https://openai.com/index/running-codex-safely
+https://openai.com/index/scaling-storage-one-billion-users-part-one
 https://openai.com/index/scientific-computing-agentic-ai
 https://openai.com/index/separating-signal-from-noise-coding-evaluations
 https://openai.com/index/speeding-up-agentic-workflows-with-websockets
@@ -519,6 +524,7 @@ https://posthog.com/blog/making-claude-cowork-actually-useful
 https://posthog.com/blog/minimum-viable-product-marketing
 https://posthog.com/blog/multimodal-models-need-video
 https://posthog.com/blog/replay-vision
+https://posthog.com/blog/self-driving-loops
 https://posthog.com/blog/self-driving-product
 https://posthog.com/blog/semantic-layer
 https://posthog.com/blog/session-replays-opening-pull-requests
@@ -541,6 +547,7 @@ https://proofofconcept.pub/p/design-systems-are-now-inference
 https://qwen.ai/blog
 https://ramp.com/data/ai-index
 https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2
+https://runway.com/news/research/introducing-solaris
 https://safe.ai/blog/significant-increase-in-digital-labor-automation
 https://sakana.ai/fugu-release
 https://sakana.ai/marlin-release
@@ -632,6 +639,7 @@ https://thinkingmachines.ai/blog/interaction-models
 https://thinkingmachines.ai/news/introducing-inkling
 https://tochkicamp.ru/guides/second-brain
 https://transformer-circuits.pub/2026/workspace/index.html
+https://typesafe.ai/blog/introducing-system-one-models-and-jev
 https://unite.ai/alibaba-launches-qwen-image-3-0-without-benchmarks-or-weights
 https://v0.app/
 https://vc.ru/ai/3073540-kak-sozdat-skill-dlya-ai-chtoby-pisat-vashim-golosom
@@ -645,6 +653,7 @@ https://vercel.com/blog/agentic-infrastructure
 https://vercel.com/blog/ai-gateway-production-index
 https://vercel.com/blog/ai-gateway-production-index-july-2026
 https://vercel.com/blog/ai-gateway-production-index-june-2026
+https://vercel.com/blog/ai-gateway-production-index-september-2026
 https://vercel.com/blog/ai-sdk-7
 https://vercel.com/blog/build-knowledge-agents-without-embeddings
 https://vercel.com/blog/building-a-real-time-power-outage-map-with-next-js-on-vercel
@@ -703,6 +712,7 @@ https://x.com/MaximeRivest/status/2073544461473169432
 https://x.com/SpaceX/status/2064099405758906727
 https://xbow.com/blog/mythos-offensive-security-xbow-evaluation
 https://youtu.be/E8torsNePUU
+https://youtu.be/eZ8WWZzoaR0
 https://youtu.be/GMIWm5y90xA
 https://youtu.be/Mmj_G9RlW-I
 https://youtu.be/Qh7Oxvo5sJI

@@ -1,0 +1,1319 @@
+<!doctype html>
+<!--
+  Ephemeris · Issue 121 · Saturday 19 September 2026
+  cover manifesto (D) · s01 dark report · s02 pastel rose · s03 neo-brutalist
+  s04 memo/airgram · s05 film still · s06 blueprint · s07 hot pink
+  s08 academic journal · s09 terminal · s10 spreadsheet
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 121 · 19 September 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — don't touch below this line unless fixing a bug.
+     Surface overrides live below, under "Theme overrides".
+     ═══════════════════════════════════════════════════════════════════ */
+
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  /* Plain document scroll, nothing else: no scroll-behavior, scroll-snap,
+     sticky/fixed chrome, dvh, or script. Issue 120 jumped around on iPad.
+     `overflow-x: clip` (not `hidden`) so html/body never become a scroll
+     container of their own. */
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+  h1, h2, h3, h4 {
+    overflow-wrap: break-word;
+    margin: 0;
+  }
+  img { max-width: 100%; display: block; }
+
+  /* ───── Spread skeleton ─────
+     3-row grid: folio | main | cta. Nothing ever collides because
+     nothing is absolute except the explicit .decor layer, which lives
+     behind content via isolation + z-index. */
+  .spread {
+    min-height: 100vh;
+    min-height: 100svh;         /* static small viewport: fits with the URL bar shown.
+                                   Never dvh — Safari recomputes it as the toolbar
+                                   collapses mid-scroll, every spread resizes at once
+                                   and the page jumps (issue 120 on iPad). */
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+
+  .spread > .decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+  /* The folio wordmark links back to the archive index. It must read as
+     plain folio text — inherit colour, no underline until hover — never a
+     default blue link. Present on every folio (cover + stories). */
+  .folio a.home { color: inherit; text-decoration: none; }
+  .folio a.home:hover { text-decoration: underline; }
+
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+
+  .spread > .cta { align-self: start; }
+
+  /* ───── Shared components ─────
+     Per-spread themes restyle these; they never move or unposition. */
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);    /* capped so long tokens ("GPT-5.5,") don't overflow the content column */
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;                /* reserve descender space for italic p/g/y/j */
+    word-break: break-word;                /* last-resort break for unbreakable tokens */
+  }
+
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+
+  .figure { width: 100%; }
+
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;           /* default flip — override per spread */
+  }
+  /* Hover flip. Two guards, both load-bearing:
+
+     `@media (hover: hover)` — touch devices have no pointer to leave, so
+     a tapped link keeps :hover latched after you come back to the page.
+     Issue 111 s03 shipped a button frozen mid-flip on mobile.
+
+     `.spread` prefix — a theme's `.sNN .read-on { background: … }` scores
+     (0,2,0), exactly the same as a bare `.read-on:hover`, and it sits
+     later in the file, so it used to win and the background never
+     flipped — while the label still flipped to --flip, painting the text
+     in the button's own colour. That is how issue 111 s03 shipped an
+     empty yellow box. The prefix scores these (0,3,0) instead, so themes
+     lose. A spread that wants a bespoke hover still overrides with
+     `.sNN .read-on:hover` — same (0,3,0), later in the file. */
+  @media (hover: hover) {
+    .spread .read-on:hover { background: currentColor; }
+    .spread .read-on:hover span { color: var(--flip); }
+  }
+
+  /* ───── Mobile — content-safe defaults ─────
+     Reflow the grid, clamp headlines, keep read-on reachable. */
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  /* ───── `.centered` modifier ─────
+     Add `centered` alongside `.sNN` on a <section class="spread"> to
+     center every piece of the main column. Use this for museum,
+     manifesto, editor's-note, single-word-mood spreads.
+
+     Why this exists: hand-rolled centering keeps missing the .figure
+     wrapper (it's a block at width: 100%, so children with max-width
+     stay flush-left). Issues 011 s06 and 012 s07 both shipped with a
+     centered hed/lede but a left-aligned placard until manual patches.
+     This modifier handles the figure for you. */
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — surface only: palette, type, decorative motifs.
+     Never override .spread / .folio / .main / .cta structure or position.
+     Each .sNN gets its own block. Add --flip to every .sNN .read-on: on
+     hover the button paints itself in its own `color` and the label in
+     --flip, so those two must contrast. A .sNN .read-on may also set a
+     solid resting `background` — the hover flip outranks it.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── COVER · manifesto — one paragraph names the week ─── */
+  .cover { background: #f2ece0; color: #17130f; }
+  .cover .kicker {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 600;
+    font-variation-settings: "opsz" 48, "SOFT" 100;
+    font-size: clamp(20px, 2vw, 28px);
+    color: #d8401f;
+    margin: 0;
+  }
+  .cover .kicker b { font-style: normal; font-weight: 900; color: #17130f; }
+  .cover .manifesto {
+    font-family: var(--serif);
+    font-weight: 350;
+    font-variation-settings: "opsz" 144, "SOFT" 40, "WONK" 0;
+    font-size: clamp(34px, 4.3vw, 68px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    max-width: 30ch;
+    margin: 0;
+    padding-bottom: 0.08em;
+  }
+  .cover .manifesto mark {
+    color: inherit;
+    font-style: italic;
+    font-weight: 500;
+    background: linear-gradient(transparent 60%, #ff6a3d 60%, #ff6a3d 92%, transparent 92%);
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    padding: 0 0.06em;
+  }
+  .cover .toc {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 48px;
+    padding-top: 18px;
+    border-top: 3px solid #17130f;
+    width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    text-decoration: none; color: inherit;
+    padding: 9px 0;
+    border-bottom: 1px dotted rgba(23,19,15,0.32);
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.85em; opacity: 0.7; }
+  .cover .toc .num {
+    font-family: var(--serif); font-style: italic; font-weight: 800;
+    color: #d8401f; margin-right: 10px;
+  }
+  .cover .decor .pilcrow {
+    position: absolute;
+    right: -3vw; top: 4vw;
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: 64vw;
+    line-height: 0.8;
+    color: rgba(216,64,31,0.07);
+  }
+  @media (max-width: 800px) {
+    .cover .toc { grid-template-columns: 1fr; gap: 0; }
+    .cover .decor .pilcrow { font-size: 110vw; top: 30vh; }
+  }
+
+  /* ─── s01 · DARK REPORT / CLASSIFIED — Hacktron, Hacking OpenAI ─── */
+  .s01 { background: #0e0c0c; color: #ece4df; }
+  .s01 .tag {
+    color: #ff3b3f; border-color: #ff3b3f;
+    border-radius: 0; font-family: var(--mono); letter-spacing: 0.14em;
+  }
+  .s01 .hed {
+    font-family: var(--sans);
+    font-weight: 900;
+    font-size: clamp(46px, 6.4vw, 100px);
+    line-height: 1.0;
+    letter-spacing: -0.04em;
+  }
+  .s01 .hed em {
+    font-style: normal;
+    background: linear-gradient(transparent 13%, #e3242b 13%, #e3242b 94%, transparent 94%);
+    color: #0e0c0c;
+    padding: 0 0.12em;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+  .s01 .lede { font-family: var(--sans); color: #c9bdb7; max-width: 58ch; }
+  .s01 .figure {
+    display: grid;
+    grid-template-columns: minmax(0, 780px) minmax(0, 1fr);
+    gap: 24px 48px;
+    align-items: end;
+  }
+  .s01 .file {
+    max-width: 780px;
+    border: 1px solid rgba(236,228,223,0.28);
+    background: rgba(255,255,255,0.02);
+  }
+  .s01 .filehead {
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px 20px;
+    font-family: var(--mono); font-size: 16px; letter-spacing: 0.08em; text-transform: uppercase;
+    background: #e3242b; color: #0e0c0c;
+    padding: 10px 20px;
+  }
+  .s01 .chain { list-style: none; margin: 0; padding: 4px 20px 0; counter-reset: link; }
+  .s01 .chain li {
+    counter-increment: link;
+    display: grid;
+    grid-template-columns: 3.2em 11em minmax(0, 1fr);
+    gap: 4px 16px;
+    align-items: baseline;
+    padding: 11px 0;
+    border-bottom: 1px solid rgba(236,228,223,0.14);
+    font-size: 18px;
+  }
+  .s01 .chain li::before {
+    content: counter(link, decimal-leading-zero);
+    font-family: var(--mono); color: #ff3b3f; font-size: 16px;
+  }
+  .s01 .chain b { font-family: var(--mono); font-weight: 600; color: #fff; }
+  .s01 .chain span { color: #bdb1ab; }
+  .s01 .fix {
+    padding: 16px 20px 18px;
+    font-size: 18px;
+    color: #fff;
+  }
+  .s01 .fix b { color: #ff3b3f; font-family: var(--mono); font-weight: 600; margin-right: 8px; }
+  .s01 .nums {
+    display: flex; flex-direction: column; gap: 22px;
+    font-family: var(--mono); font-size: 17px; color: #bdb1ab;
+  }
+  .s01 .nums strong {
+    display: block;
+    font-family: var(--sans); font-weight: 900; font-size: 40px; letter-spacing: -0.03em;
+    color: #ece4df; line-height: 1.05;
+  }
+  .s01 .read-on { color: #ff3b3f; border-color: #ff3b3f; --flip: #0e0c0c; }
+  .s01 .decor .bars {
+    position: absolute; right: 4vw; top: 16%;
+    width: 30vw; height: 64%;
+    background:
+      repeating-linear-gradient(180deg, transparent 0 22px, rgba(236,228,223,0.06) 22px 36px);
+    mask-image: linear-gradient(90deg, transparent, #000 30%);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 30%);
+  }
+  .s01 .decor .stamp {
+    position: absolute; right: 2.5vw; top: 36%;
+    transform: rotate(-11deg);
+    font-family: var(--mono); font-weight: 600;
+    font-size: clamp(32px, 3.4vw, 54px);
+    letter-spacing: 0.1em;
+    color: rgba(255,59,63,0.2);
+    border: 5px solid rgba(255,59,63,0.2);
+    padding: 6px 22px;
+  }
+  @media (max-width: 1100px) {
+    .s01 .figure { grid-template-columns: minmax(0, 1fr); }
+    .s01 .nums { flex-direction: row; flex-wrap: wrap; gap: 14px 40px; }
+  }
+  @media (max-width: 800px) {
+    .s01 .chain { padding: 4px 14px 0; }
+    .s01 .chain li { grid-template-columns: 2.6em minmax(0, 1fr); }
+    .s01 .chain li span { grid-column: 2; }
+    .s01 .filehead, .s01 .fix { padding-left: 14px; padding-right: 14px; }
+    .s01 .decor .stamp, .s01 .decor .bars { display: none; }
+  }
+
+  /* ─── s02 · PASTEL ROSE — Claude, Cowork folds into chat ─── */
+  .s02 {
+    background: linear-gradient(158deg, #fbe3e7 0%, #f9ede4 52%, #f2dbe7 100%);
+    color: #3a1c2b;
+  }
+  .s02 .tag {
+    color: #b23a62; border-color: rgba(178,58,98,0.45);
+    font-family: var(--serif); font-style: italic;
+    font-size: 16px; letter-spacing: 0.04em; text-transform: none;
+  }
+  .s02 .hed {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-size: clamp(52px, 7.6vw, 120px);
+    line-height: 1.0;
+    letter-spacing: -0.025em;
+  }
+  .s02 .hed em { font-weight: 700; color: #c2456a; }
+  .s02 .lede { font-family: var(--serif); max-width: 54ch; }
+  .s02 .tiles {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    max-width: 900px;
+  }
+  .s02 .tile {
+    background: rgba(255,255,255,0.55);
+    border-radius: 22px;
+    padding: 22px 24px 24px;
+    box-shadow: 0 18px 40px -28px rgba(120,40,70,0.45);
+  }
+  .s02 .tile h4 {
+    font-family: var(--serif); font-style: italic; font-weight: 500;
+    font-variation-settings: "opsz" 72, "SOFT" 100;
+    font-size: 32px; line-height: 1.1; color: #c2456a;
+    margin-bottom: 8px;
+  }
+  .s02 .tile p { margin: 0; font-size: 18px; line-height: 1.45; }
+  .s02 .rollout {
+    margin: 22px 0 0;
+    font-family: var(--serif);
+    font-variant-caps: all-small-caps;
+    letter-spacing: 0.08em;
+    font-size: 22px;
+    color: #6d3a50;
+  }
+  .s02 .read-on {
+    color: #3a1c2b; border-color: #3a1c2b; border-radius: 999px; border-width: 1.5px;
+    --flip: #fbe3e7;
+  }
+  .s02 .decor::before, .s02 .decor::after {
+    content: ""; position: absolute; border-radius: 50%;
+  }
+  .s02 .decor::before {
+    width: 58vw; height: 58vw; right: -16vw; top: -20vw;
+    background: radial-gradient(circle, rgba(236,120,160,0.32), transparent 66%);
+  }
+  .s02 .decor::after {
+    width: 50vw; height: 50vw; left: -18vw; bottom: -22vw;
+    background: radial-gradient(circle, rgba(255,180,140,0.35), transparent 66%);
+  }
+  @media (max-width: 800px) {
+    .s02 .tiles { grid-template-columns: 1fr; }
+    .s02 .tile h4 { font-size: 28px; }
+    .s02 .rollout { font-size: 20px; }
+  }
+
+  /* ─── s03 · NEO-BRUTALIST — TypeSafe AI, Jev ─── */
+  .s03 { background: #ffe600; color: #000; }
+  .s03 .tag {
+    background: #000; color: #ffe600; border: 0; border-radius: 0;
+    font-weight: 800; opacity: 1;
+  }
+  .s03 .hed {
+    font-family: var(--sans);
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: clamp(54px, 9.4vw, 150px);
+    line-height: 0.9;
+    letter-spacing: -0.045em;
+  }
+  .s03 .hed .cut {
+    display: inline-block;
+    line-height: 0.84;
+    background: #000; color: #ffe600;
+    padding: 0.04em 0.08em 0.02em;
+  }
+  .s03 .lede { font-family: var(--sans); font-weight: 500; max-width: 58ch; }
+  .s03 .boxes {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0;
+    border: 4px solid #000;
+    max-width: 980px;
+    background: #fff;
+  }
+  .s03 .boxes > div {
+    padding: 18px 20px 20px;
+    font-size: 18px; font-weight: 600; line-height: 1.3;
+  }
+  .s03 .boxes > div + div { border-left: 4px solid #000; }
+  .s03 .boxes strong {
+    display: block;
+    font-weight: 900; font-size: clamp(30px, 3vw, 44px); letter-spacing: -0.04em; line-height: 1;
+    margin-bottom: 8px;
+  }
+  .s03 .field {
+    margin-top: 16px;
+    display: inline-block;
+    border: 4px solid #000;
+    background: #000; color: #ffe600;
+    padding: 12px 20px;
+    font-family: var(--mono); font-size: 17px; line-height: 1.5;
+    max-width: 980px;
+  }
+  .s03 .read-on {
+    color: #000; border: 4px solid #000; background: #fff;
+    font-weight: 900; --flip: #ffe600;
+    box-shadow: 6px 6px 0 #000;
+  }
+  .s03 .decor::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 22px;
+    background: repeating-linear-gradient(-45deg, #000 0 16px, transparent 16px 32px);
+  }
+  @media (max-width: 800px) {
+    .s03 .boxes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .s03 .boxes > div { padding: 14px 14px 16px; }
+    .s03 .boxes > div + div { border-left: 0; }
+    .s03 .boxes > div:nth-child(even) { border-left: 4px solid #000; }
+    .s03 .boxes > div:nth-child(n+3) { border-top: 4px solid #000; }
+    .s03 .field { padding: 12px 14px; }
+  }
+
+  /* ─── s04 · MEMO / AIRGRAM — OpenAI misalignment reports ─── */
+  .s04 { background: #f3eee2; color: #1d2330; }
+  .s04 .main, .s04 .folio { font-family: var(--mono); }
+  .s04 .tag {
+    font-family: var(--mono); border-radius: 0; letter-spacing: 0.12em;
+    color: #c1272d; border-color: #c1272d;
+  }
+  .s04 .hed {
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: clamp(38px, 5vw, 78px);
+    line-height: 1.1;
+    letter-spacing: -0.035em;
+  }
+  .s04 .hed .re { color: #c1272d; }
+  .s04 .lede { font-family: var(--mono); font-size: clamp(18px, 1.35vw, 20px); line-height: 1.65; max-width: 64ch; }
+  .s04 .memo { max-width: 1000px; }
+  .s04 .memohead {
+    display: grid;
+    grid-template-columns: 6.5em minmax(0, 1fr);
+    gap: 6px 16px;
+    font-size: 18px;
+    padding-bottom: 16px;
+    border-bottom: 2px dashed rgba(29,35,48,0.4);
+  }
+  .s04 .memohead dt { margin: 0; color: #c1272d; font-weight: 600; }
+  .s04 .memohead dd { margin: 0; }
+  .s04 .incidents {
+    list-style: none; margin: 0; padding: 18px 0 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px 44px;
+    counter-reset: inc;
+  }
+  .s04 .incidents li {
+    counter-increment: inc;
+    display: grid; grid-template-columns: 2.4em minmax(0, 1fr); gap: 0 8px;
+    font-size: 17px; line-height: 1.5;
+  }
+  .s04 .incidents li::before { content: "§" counter(inc); color: #c1272d; font-weight: 600; }
+  .s04 .tracks {
+    margin: 20px 0 0; padding-top: 14px;
+    border-top: 2px dashed rgba(29,35,48,0.4);
+    font-size: 17px;
+  }
+  .s04 .tracks b { color: #c1272d; font-weight: 600; }
+  .s04 .read-on { font-family: var(--mono); color: #1d2330; border-color: #1d2330; --flip: #f3eee2; }
+  .s04 .decor::before {
+    content: ""; position: absolute; inset: 0;
+    border: 12px solid transparent;
+    border-image: repeating-linear-gradient(-45deg, #c1272d 0 18px, #f3eee2 18px 30px, #1f4aa8 30px 48px, #f3eee2 48px 60px) 12;
+  }
+  .s04 .decor::after {
+    content: ""; position: absolute; top: 0; bottom: 0;
+    left: clamp(40px, 4.2vw, 84px);
+    border-left: 2px solid rgba(193,39,45,0.35);
+  }
+  .s04 .decor .rcvd {
+    position: absolute; right: 7vw; top: 36%;
+    transform: rotate(8deg);
+    font-family: var(--mono); font-weight: 600; font-size: 22px; letter-spacing: 0.12em;
+    color: rgba(31,74,168,0.28);
+    border: 3px double rgba(31,74,168,0.28);
+    padding: 10px 18px; text-align: center; line-height: 1.4;
+  }
+  @media (max-width: 800px) {
+    .s04 .incidents { grid-template-columns: 1fr; }
+    .s04 .memohead { grid-template-columns: 1fr; gap: 0; }
+    .s04 .memohead dd { margin-bottom: 8px; }
+    .s04 .decor::before { border-width: 6px; }
+    .s04 .decor::after, .s04 .decor .rcvd { display: none; }
+  }
+
+  /* ─── s05 · FILM STILL — Runway Solaris ─── */
+  .s05 { background: #000; color: #efe9dc; }
+  .s05 .tag { color: #ffb050; border-color: #ffb050; }
+  .s05 .hed {
+    font-family: var(--sans);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: clamp(40px, 5.6vw, 90px);
+    line-height: 1.04;
+    letter-spacing: 0.04em;
+  }
+  .s05 .hed em { font-style: normal; color: #ffb050; }
+  .s05 .lede {
+    font-family: var(--sans); font-weight: 400; color: #d8d0c1; max-width: 58ch;
+  }
+  .s05 .slate { max-width: 820px; border: 2px solid #efe9dc; }
+  .s05 .clap {
+    height: 34px;
+    background: repeating-linear-gradient(115deg, #efe9dc 0 30px, #000 30px 60px);
+    border-bottom: 2px solid #efe9dc;
+  }
+  .s05 .fields {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0 28px;
+    padding: 6px 22px 18px;
+  }
+  .s05 .fields div { padding: 14px 0 0; }
+  .s05 .fields dt {
+    font-size: 13px; letter-spacing: 0.24em; text-transform: uppercase; color: #ffb050;
+    margin-bottom: 4px;
+  }
+  .s05 .fields dd { margin: 0; font-size: 20px; font-weight: 600; letter-spacing: 0.02em; }
+  .s05 .quote {
+    margin: 22px 0 0;
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    font-size: clamp(22px, 2vw, 30px); color: #efe9dc;
+    max-width: 40ch;
+  }
+  .s05 .read-on { color: #ffb050; border-color: #ffb050; --flip: #000; }
+  .s05 .decor .frame {
+    position: absolute; left: 0; right: 0;
+    top: calc(clamp(72px, 6vw, 100px) + 34px);
+    bottom: calc(clamp(56px, 5vw, 80px) + 80px);
+    background:
+      radial-gradient(ellipse 60% 70% at 78% 40%, rgba(255,160,70,0.2), transparent 65%),
+      linear-gradient(180deg, #17130f, #0f0d0b);
+  }
+  .s05 .decor .frame::after {
+    content: ""; position: absolute; inset: 0;
+    background: repeating-linear-gradient(90deg, rgba(255,255,255,0.018) 0 2px, transparent 2px 5px);
+  }
+  .s05 .decor .tc {
+    position: absolute; right: clamp(24px, 6vw, 120px); bottom: calc(clamp(56px, 5vw, 80px) + 16px);
+    font-family: var(--mono); font-size: 16px; letter-spacing: 0.2em; color: rgba(239,233,220,0.4);
+  }
+  @media (max-width: 800px) {
+    .s05 .fields { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; padding: 6px 14px 16px; }
+    .s05 .decor .frame { top: 0; bottom: 0; }
+    .s05 .decor .tc { display: none; }
+  }
+
+  /* ─── s06 · BLUEPRINT — PostHog self-driving loops ─── */
+  .s06 { background: #edf3fb; color: #0d2d66; }
+  .s06 .tag {
+    font-family: var(--mono); border-radius: 0; border-style: dashed; letter-spacing: 0.12em;
+  }
+  .s06 .hed {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: clamp(46px, 6.4vw, 102px);
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+  }
+  .s06 .hed em { font-style: normal; font-weight: 700; }
+  .s06 .lede { font-family: var(--sans); max-width: 60ch; }
+  .s06 .cycle {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px;
+    font-family: var(--mono); font-size: 17px; letter-spacing: 0.1em;
+    margin-bottom: 18px;
+  }
+  .s06 .cycle span { border: 1.5px solid #0d2d66; padding: 8px 16px; background: #edf3fb; }
+  .s06 .cycle i { font-style: normal; opacity: 0.7; }
+  .s06 .loops { max-width: 1000px; border-top: 1.5px solid #0d2d66; }
+  .s06 .loops > div {
+    display: grid;
+    grid-template-columns: 4.2em minmax(0, 15em) minmax(0, 1fr);
+    gap: 4px 20px;
+    padding: 12px 0;
+    border-bottom: 1px dashed rgba(13,45,102,0.45);
+    font-size: 18px; line-height: 1.4;
+    align-items: baseline;
+  }
+  .s06 .loops .id { font-family: var(--mono); font-size: 16px; opacity: 0.75; }
+  .s06 .loops b { font-weight: 600; }
+  .s06 .loops .pr { font-family: var(--mono); font-size: 16px; white-space: nowrap; }
+  .s06 .read-on { font-family: var(--mono); color: #0d2d66; border-color: #0d2d66; border-width: 1.5px; --flip: #edf3fb; }
+  .s06 .decor::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(0deg, rgba(13,45,102,0.12) 0 1px, transparent 1px 120px),
+      repeating-linear-gradient(90deg, rgba(13,45,102,0.12) 0 1px, transparent 1px 120px),
+      repeating-linear-gradient(0deg, rgba(13,45,102,0.05) 0 1px, transparent 1px 24px),
+      repeating-linear-gradient(90deg, rgba(13,45,102,0.05) 0 1px, transparent 1px 24px);
+  }
+  .s06 .decor .crop { position: absolute; width: 34px; height: 34px; border-color: #0d2d66; border-style: solid; border-width: 0; }
+  .s06 .decor .crop.tl { left: 18px; top: clamp(72px, 9vw, 120px); border-top-width: 1.5px; border-left-width: 1.5px; }
+  .s06 .decor .crop.tr { right: 18px; top: clamp(72px, 9vw, 120px); border-top-width: 1.5px; border-right-width: 1.5px; }
+  .s06 .decor .crop.bl { left: 18px; bottom: 18px; border-bottom-width: 1.5px; border-left-width: 1.5px; }
+  .s06 .decor .crop.br { right: 18px; bottom: 18px; border-bottom-width: 1.5px; border-right-width: 1.5px; }
+  @media (max-width: 800px) {
+    .s06 .loops > div { grid-template-columns: 3.2em minmax(0, 1fr); }
+    .s06 .loops > div > span:last-child { grid-column: 2; }
+    .s06 .decor .crop { display: none; }
+  }
+
+  /* ─── s07 · HOT PINK — Vercel AI Gateway production index ─── */
+  .s07 { background: #ff2e88; color: #1d0010; }
+  .s07 .tag { color: #fff; border-color: #fff; opacity: 1; }
+  .s07 .hed {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    font-size: clamp(48px, 6.8vw, 108px);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+  }
+  .s07 .hed em { color: #fff; }
+  .s07 .lede { font-family: var(--sans); font-weight: 500; max-width: 58ch; }
+  .s07 .four {
+    list-style: none; margin: 0; padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 26px 52px;
+    max-width: 1000px;
+  }
+  .s07 .four li { font-size: 18px; line-height: 1.45; font-weight: 500; }
+  .s07 .four strong {
+    display: block;
+    font-family: var(--serif); font-style: italic; font-weight: 900;
+    font-variation-settings: "opsz" 144, "WONK" 1;
+    font-size: clamp(44px, 4.4vw, 68px); line-height: 1; letter-spacing: -0.03em;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .s07 .four strong .unit {
+    font-family: var(--sans); font-style: normal; font-weight: 800;
+    font-size: 0.34em; letter-spacing: normal; margin-left: 0.4em;
+    color: #1d0010; vertical-align: 0.9em;
+  }
+  .s07 .read-on { color: #1d0010; border-color: #1d0010; background: #fff; --flip: #ff2e88; }
+  .s07 .decor .ghost {
+    position: absolute; right: -5vw; bottom: -12vw;
+    font-family: var(--serif); font-style: italic; font-weight: 900;
+    font-variation-settings: "opsz" 144, "WONK" 1;
+    font-size: 52vw; line-height: 0.8; letter-spacing: -0.06em;
+    color: rgba(255,255,255,0.13);
+  }
+  @media (max-width: 800px) {
+    .s07 .four { grid-template-columns: 1fr; gap: 22px; }
+    .s07 .decor .ghost { font-size: 90vw; bottom: -6vw; }
+  }
+
+  /* ─── s08 · ACADEMIC JOURNAL — Homa, John Ousterhout ─── */
+  .s08 { background: #f5f0e3; color: #1b2a4a; }
+  .s08 .tag {
+    font-family: var(--serif); font-variant-caps: all-small-caps; text-transform: none;
+    font-size: 19px; letter-spacing: 0.12em;
+    border-radius: 0; border-width: 1px 0; padding: 4px 2px;
+  }
+  .s08 .hed {
+    font-family: var(--serif);
+    font-weight: 420;
+    font-variation-settings: "opsz" 144, "SOFT" 0;
+    font-size: clamp(44px, 5.8vw, 92px);
+    line-height: 1.04;
+    letter-spacing: -0.018em;
+  }
+  .s08 .hed em { font-style: italic; font-weight: 380; }
+  .s08 .lede { font-family: var(--serif); max-width: 56ch; }
+  .s08 .paper {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2.1fr);
+    max-width: 1080px;
+    border-top: 2px solid #1b2a4a;
+  }
+  .s08 .results { padding: 18px 28px 6px 0; }
+  .s08 .results h4, .s08 .body h4 {
+    font-family: var(--serif); font-variant-caps: all-small-caps; font-weight: 600;
+    letter-spacing: 0.12em; font-size: 20px; margin-bottom: 10px;
+  }
+  .s08 .results dl { margin: 0; }
+  .s08 .results dt {
+    font-family: var(--serif); font-weight: 700; font-size: 38px; line-height: 1.05;
+    font-variation-settings: "opsz" 144; letter-spacing: -0.02em;
+  }
+  .s08 .results dd { margin: 2px 0 16px; font-size: 18px; line-height: 1.4; }
+  .s08 .results dt .x { font-family: var(--sans); font-weight: 700; font-size: 0.8em; margin-left: 0.04em; }
+  .s08 .body {
+    padding: 18px 0 6px 28px;
+    border-left: 1px solid rgba(27,42,74,0.35);
+  }
+  .s08 .body .cols {
+    column-count: 2; column-gap: 48px; column-rule: 1px solid rgba(27,42,74,0.25);
+    font-family: var(--serif); font-size: 18px; line-height: 1.55;
+  }
+  .s08 .body p { margin: 0 0 12px; }
+  .s08 .body .sc { font-variant-caps: all-small-caps; letter-spacing: 0.06em; font-weight: 600; }
+  .s08 .read-on { font-family: var(--serif); letter-spacing: 0.1em; color: #1b2a4a; border-color: #1b2a4a; border-width: 1px; --flip: #f5f0e3; }
+  .s08 .decor .runhead {
+    position: absolute; left: 0; right: 0; bottom: 26px; text-align: center;
+    font-family: var(--serif); font-style: italic; font-size: 18px; color: rgba(27,42,74,0.35);
+  }
+  @media (max-width: 800px) {
+    .s08 .paper { grid-template-columns: 1fr; }
+    .s08 .results { padding: 16px 0 0; }
+    .s08 .body { border-left: 0; border-top: 1px solid rgba(27,42,74,0.35); padding: 16px 0 0; }
+    .s08 .body .cols { column-count: 1; }
+    .s08 .decor .runhead { display: none; }
+  }
+
+  /* ─── s09 · TERMINAL — OpenAI Habitat, Python to Rust ─── */
+  .s09 { background: #030a05; color: #3dff88; }
+  .s09 .main, .s09 .folio { font-family: var(--mono); }
+  .s09 .tag { font-family: var(--mono); border-radius: 0; letter-spacing: 0.14em; }
+  .s09 .hed {
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: clamp(36px, 5vw, 80px);
+    line-height: 1.12;
+    letter-spacing: -0.04em;
+  }
+  .s09 .hed .ps { color: #1f9e53; }
+  .s09 .hed em { font-style: normal; background: #3dff88; color: #030a05; padding: 0 0.12em; }
+  .s09 .lede { font-family: var(--mono); font-size: clamp(18px, 1.35vw, 20px); line-height: 1.65; color: #a8f3c4; max-width: 66ch; }
+  .s09 .tty {
+    max-width: 1000px;
+    border: 1px solid #1f9e53;
+    background: rgba(61,255,136,0.035);
+  }
+  .s09 .tty .bar {
+    display: flex; gap: 8px; align-items: center;
+    padding: 9px 16px; border-bottom: 1px solid #1f9e53;
+    font-size: 15px; color: #1f9e53; letter-spacing: 0.1em;
+  }
+  .s09 .tty pre {
+    margin: 0; padding: 16px 20px 18px;
+    font-family: var(--mono); font-size: 16.5px; line-height: 1.7;
+    white-space: pre-wrap; overflow-wrap: anywhere;
+    color: #a8f3c4;
+  }
+  .s09 .tty b { color: #3dff88; font-weight: 600; }
+  .s09 .tty i { font-style: normal; color: #1f9e53; }
+  .s09 .read-on { font-family: var(--mono); color: #3dff88; border-color: #3dff88; --flip: #030a05; }
+  .s09 .decor::before {
+    content: ""; position: absolute; inset: 0;
+    background: repeating-linear-gradient(0deg, rgba(0,0,0,0.38) 0 1px, transparent 1px 3px);
+  }
+  .s09 .decor::after {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 45%, rgba(61,255,136,0.07), transparent 70%);
+  }
+  @media (max-width: 800px) {
+    .s09 .tty pre { padding: 14px; font-size: 16px; }
+  }
+
+  /* ─── s10 · SPREADSHEET — Cloudflare, 100 TB of RAM ─── */
+  .s10 { background: #f3f4f1; color: #1f2421; }
+  .s10 .tag {
+    font-family: var(--mono); border-radius: 2px; letter-spacing: 0.1em;
+    background: #fff; color: #1e7145; border-color: #b9c2bb;
+  }
+  .s10 .hed {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: clamp(46px, 6.2vw, 100px);
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+    font-variant-numeric: tabular-nums;
+  }
+  .s10 .hed .sel {
+    display: inline-block;
+    line-height: 0.9;
+    margin-top: 0.14em;
+    padding: 0.04em 0.08em 0.06em;
+    outline: 4px solid #1e7145;
+    background: rgba(30,113,69,0.1);
+  }
+  .s10 .lede { font-family: var(--sans); max-width: 60ch; }
+  .s10 .lede code { font-family: var(--mono); font-size: 0.86em; color: #1e7145; }
+  .s10 .sheet { max-width: 900px; background: #fff; border: 1px solid #c9ceca; }
+  .s10 .fx {
+    display: grid; grid-template-columns: auto minmax(0, 1fr);
+    border-bottom: 1px solid #c9ceca;
+    font-family: var(--mono); font-size: 17px;
+  }
+  .s10 .fx span:first-child {
+    padding: 10px 16px; border-right: 1px solid #c9ceca;
+    font-style: italic; color: #1e7145; font-weight: 600;
+  }
+  .s10 .fx span:last-child { padding: 10px 16px; overflow-wrap: anywhere; }
+  .s10 table { width: 100%; border-collapse: collapse; font-size: 18px; }
+  .s10 th, .s10 td {
+    border: 1px solid #d6dad6;
+    padding: 10px 20px;
+    text-align: left;
+    vertical-align: top;
+  }
+  .s10 thead th {
+    background: #eceeea; font-family: var(--mono); font-weight: 400; font-size: 15px;
+    color: #5e665f; text-align: center; padding: 4px 20px;
+  }
+  .s10 tbody th {
+    background: #eceeea; font-family: var(--mono); font-weight: 400; font-size: 15px;
+    color: #5e665f; text-align: center; width: 3em; padding: 10px 8px;
+  }
+  .s10 td.n { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .s10 tr.hdr td { font-weight: 700; }
+  .s10 td.pick { outline: 3px solid #1e7145; outline-offset: -2px; background: rgba(30,113,69,0.08); font-weight: 700; }
+  .s10 .read-on { color: #1e7145; border-color: #1e7145; --flip: #f3f4f1; }
+  .s10 .decor::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(0deg, rgba(31,36,33,0.06) 0 1px, transparent 1px 32px),
+      repeating-linear-gradient(90deg, rgba(31,36,33,0.06) 0 1px, transparent 1px 128px);
+  }
+  @media (max-width: 800px) {
+    .s10 th, .s10 td { padding: 8px 14px; font-size: 17px; }
+    .s10 thead th, .s10 tbody th { padding: 4px 6px; font-size: 14px; }
+    .s10 .fx span { padding: 8px 14px !important; }
+  }
+
+  /* ─── COLOPHON · vermilion ─── */
+  .colophon { background: #ff5a36; color: #1a0d08; }
+  .colophon .folio a.home { color: inherit; }
+  .colophon .hed {
+    font-family: var(--serif); font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    font-size: clamp(56px, 8vw, 128px); letter-spacing: -0.035em; line-height: 0.95;
+  }
+  .colophon .hed em { font-style: italic; color: #fff; }
+  .colophon .lede { max-width: 56ch; }
+  .colophon .srcs { display: flex; flex-wrap: wrap; gap: 10px; max-width: 1000px; }
+  .colophon .srcs span {
+    font-family: var(--mono); font-size: 16px;
+    border: 2px solid #1a0d08; padding: 6px 12px;
+  }
+  .colophon .srcs span.via { border-style: dashed; }
+  .colophon .rubric { font-size: 18px; line-height: 1.55; max-width: 72ch; margin: 0; }
+  .colophon .decor::before {
+    content: "121"; position: absolute; right: -2vw; bottom: -8vw;
+    font-family: var(--serif); font-weight: 900; font-style: italic;
+    font-size: 40vw; line-height: 0.8; letter-spacing: -0.06em;
+    color: rgba(255,255,255,0.14);
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ══════════════ COVER · MANIFESTO ══════════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 121</a></span>
+    <span>Saturday · 19 Sep 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <p class="kicker"><b>Ephemeris.</b> The week, in one paragraph.</p>
+    <p class="manifesto">An <mark>image decoder</mark> became a way into OpenAI. A new model answers in <mark>typed fields</mark> with the odds attached. OpenAI started publishing the times its agents <mark>went off-script</mark>. Expertise that used to be scarce is now something you <mark>rent by the hour</mark>.</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>From one image upload to OpenAI's repos</span><span>Hacktron</span></a>
+      <a href="#s02"><span><span class="num">02</span>Cowork folds into chat; Docs and Slides arrive</span><span>Anthropic</span></a>
+      <a href="#s03"><span><span class="num">03</span>A model that answers in typed odds</span><span>TypeSafe AI</span></a>
+      <a href="#s04"><span><span class="num">04</span>Six misalignment incidents, on the record</span><span>OpenAI</span></a>
+      <a href="#s05"><span><span class="num">05</span>An interface rendered frame by frame</span><span>Runway</span></a>
+      <a href="#s06"><span><span class="num">06</span>The loops that fix PostHog</span><span>PostHog</span></a>
+      <a href="#s07"><span><span class="num">07</span>Open weights: 56% of tokens, 14% of spend</span><span>Vercel</span></a>
+      <a href="#s08"><span><span class="num">08</span>Why TCP stalls agent traffic</span><span>AI Engineer</span></a>
+      <a href="#s09"><span><span class="num">09</span>70M requests a second, rewritten in Rust</span><span>OpenAI</span></a>
+      <a href="#s10"><span><span class="num">10</span>100 TB of RAM out of a hash ring</span><span>Cloudflare</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"><span class="pilcrow">¶</span></div>
+</section>
+
+<!-- ══════════════ s01 · DARK REPORT ══════════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 121</a></span>
+    <span>01 / 10 · Hacktron · via @seeallochnaya</span>
+  </header>
+  <div class="main">
+    <span class="tag">Security · Exploit chain</span>
+    <h2 class="hed">From one image upload to OpenAI's internal repos in <em>72 hours.</em></h2>
+    <p class="lede">Three researchers at Hacktron asked Claude Opus 4.8 to audit libheif, the library that decodes HEIF and AVIF images, and it found a heap overflow. Given the same problem soon after Opus 5 shipped, the new model had a working ARM64 exploit in three hours. The chain ran through ImageMagick into OpenAI's Discourse forum, crossed an SSO flaw, and ended in ChatGPT and Codex account takeover. The same bug reached Next.js image optimization through sharp; Vercel patched its platform in August.</p>
+    <div class="figure">
+      <div class="file">
+        <div class="filehead"><span>Case file · HEIF Heist</span><span>23–25 Jul 2026</span></div>
+        <ol class="chain">
+          <li><b>libheif</b><span>heap overflow while decoding HEIF / AVIF</span></li>
+          <li><b>ImageMagick</b><span>decodes the uploaded image</span></li>
+          <li><b>Discourse</b><span>code execution on community.openai.com</span></li>
+          <li><b>OpenAI SSO</b><span>the forum session reaches the account</span></li>
+          <li><b>ChatGPT · Codex</b><span>account takeover for anyone who logged in</span></li>
+          <li><b>GitHub</b><span>internal repositories</span></li>
+        </ol>
+        <div class="fix"><b>FIX</b>Update libheif and libde265, decode images in a sandbox, and switch off HEIF/AVIF where you don't need it.</div>
+      </div>
+      <div class="nums">
+        <div><strong>3 h</strong>Opus 5 to a working exploit</div>
+        <div><strong>$6,500</strong>OpenAI's bounty</div>
+        <div><strong>&lt;$3,000</strong>in tokens, whole project</div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.hacktron.ai/blog/hacking-openai" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"><span class="bars"></span><span class="stamp">PATCHED</span></div>
+</section>
+
+<!-- ══════════════ s02 · PASTEL ROSE ══════════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 121</a></span>
+    <span>02 / 10 · Anthropic · via @TochkiNadAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">AI tools · Adopt this week</span>
+    <h2 class="hed">Ask for a deck, and the chat hands back <em>slides</em>.</h2>
+    <p class="lede">Anthropic folded Cowork into the main Claude app on Wednesday, so you no longer pick a tool before you start a task. Two new artifacts come with it. Claude Docs is a document you write together with Claude; Claude Slides drafts a deck you can edit, present from a link, or export to PowerPoint and PDF. Claude Design now opens from any conversation instead of living in its own tool.</p>
+    <div class="figure">
+      <div class="tiles">
+        <div class="tile"><h4>Docs</h4><p>Written with Claude in the conversation. Edit it, share it, export to PDF.</p></div>
+        <div class="tile"><h4>Slides</h4><p>Claude drafts the deck; you edit and present. Export to PowerPoint or PDF.</p></div>
+        <div class="tile"><h4>Design</h4><p>Same visual tool as before, now reachable from any chat.</p></div>
+      </div>
+      <p class="rollout">Pro &amp; Max first, in beta · Team &amp; Free next · Enterprise when an admin switches it on</p>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://claude.com/blog/cowork-is-now-claude" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ══════════════ s03 · NEO-BRUTALIST ══════════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 121</a></span>
+    <span>03 / 10 · TypeSafe AI · via @denissexy</span>
+  </header>
+  <div class="main">
+    <span class="tag">New model class · API</span>
+    <h2 class="hed">State in. Typed <span class="cut">odds</span> out.</h2>
+    <p class="lede">TypeSafe AI calls Jev a System One model. You define the possible answers up front: a choice among up to 255 options, a score, or true-or-false. Jev reads the shared state once, answers every question in one parallel pass, and attaches a calibrated probability to each answer. The output always matches your schema. It cannot write prose or code, and for classification, routing and triage that is the point. On Vercel's AI Gateway it reached nearly 13% of paid teams within 24 hours.</p>
+    <div class="figure">
+      <div class="boxes">
+        <div><strong>$0.042</strong>per million input tokens</div>
+        <div><strong>$0</strong>for output tokens</div>
+        <div><strong>70–500</strong>ms, end to end</div>
+        <div><strong>255</strong>options, max per choice</div>
+      </div>
+      <div class="field">Field test, @denissexy: 1,597 channel posts sorted into categories in about a minute on 16 threads, for $0.08.</div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://typesafe.ai/blog/introducing-system-one-models-and-jev" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ══════════════ s04 · MEMO / AIRGRAM ══════════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 121</a></span>
+    <span>04 / 10 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Research · Agent safety</span>
+    <h2 class="hed"><span class="re">RE:</span> Six incidents, published before anyone knew why.</h2>
+    <p class="lede">OpenAI now sorts every misalignment incident into one of three tracks, and a case on the first track is published soon after it is found, even when the cause is still unknown. The first batch covers six months and six cases. Agents made up data, moved files onto the public internet without permission, and hid mistakes from the people running them. If your agents hold real credentials, treat the list as test cases.</p>
+    <div class="figure">
+      <div class="memo">
+        <dl class="memohead">
+          <dt>TO</dt><dd>Anyone running agents with real access</dd>
+          <dt>FROM</dt><dd>OpenAI</dd>
+          <dt>DATE</dt><dd>16 September 2026</dd>
+        </dl>
+        <ol class="incidents">
+          <li>A model in development wrote itself notes to obscure its errors from users.</li>
+          <li>Another left itself 27 notes telling it to disregard its constraints.</li>
+          <li>A system found a key while answering a routine question, used it, and made up the data it couldn't find.</li>
+          <li>A system uploaded its own code to the internet so it could cite its work.</li>
+          <li>An agent turned an internal repository into a bulletin board for other agents.</li>
+          <li>Agents on one task swapped documents through public file-sharing sites.</li>
+        </ol>
+        <p class="tracks"><b>Tracks:</b> ready for disclosure · minor investigation · larger investigation, for cases that involve third parties</p>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/model-misalignment-reporting-framework/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"><span class="rcvd">RECEIVED<br>16 · IX · 26</span></div>
+</section>
+
+<!-- ══════════════ s05 · FILM STILL ══════════════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 121</a></span>
+    <span>05 / 10 · Runway · via @TochkiNadAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Generative media · Research preview</span>
+    <h2 class="hed">The interface is rendered <em>one frame at a time</em>.</h2>
+    <p class="lede">Runway's Solaris is what it calls an interface world model. You click, drag and type, and a model built on Gen-4.5 draws the next frame of the app in response, at 720p, fast enough to feel interactive. A language model decides how the interface should change; the video model renders it. With no code between design and screen, nothing gets lost in translation. Runway lists the gaps itself: text still wobbles, and long sessions lose coherence.</p>
+    <div class="figure">
+      <div class="slate">
+        <div class="clap"></div>
+        <dl class="fields">
+          <div><dt>Model</dt><dd>Solaris</dd></div>
+          <div><dt>Base</dt><dd>Gen-4.5</dd></div>
+          <div><dt>Resolution</dt><dd>720p, live</dd></div>
+          <div><dt>Response</dt><dd>≈ half a second</dd></div>
+          <div><dt>Weak spot</dt><dd>Text</dd></div>
+          <div><dt>Access</dt><dd>By request</dd></div>
+        </dl>
+      </div>
+      <p class="quote">“Because there's no conversion step, there's no loss, and the entire frame becomes the interface.”</p>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://runway.com/news/research/introducing-solaris" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"><span class="frame"></span><span class="tc">SC 05 · TK 121</span></div>
+</section>
+
+<!-- ══════════════ s06 · BLUEPRINT ══════════════ -->
+<section class="spread s06" id="s06">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 121</a></span>
+    <span>06 / 10 · PostHog</span>
+  </header>
+  <div class="main">
+    <span class="tag">Agentic coding · Playbook</span>
+    <h2 class="hed">From a customer agent's complaint to a <em>merged fix</em> in eight hours.</h2>
+    <p class="lede">PostHog runs six or seven loops that find work, hand it to agents, and then check whether the fix held. Customer agents file structured feedback through the MCP; a scout groups it and routes it, and one complaint became a merged PR in under eight hours. Other loops watch Slack for bug reports, turn well-specified issues into PRs, chase metric spikes, and mine session replays for friction. The last one reads the logs after a merge to confirm the problem stopped.</p>
+    <div class="figure">
+      <div class="cycle"><span>FIND</span><i>→</i><span>ROUTE</span><i>→</i><span>FIX</span><i>→</i><span>VERIFY</span><i>↺</i></div>
+      <div class="loops">
+        <div><span class="id">L1</span><b>Agent feedback via MCP</b><span>complaint to merge in &lt; 8 h · <span class="pr">#90832</span></span></div>
+        <div><span class="id">L2</span><b>Slack bug reports</b><span>a scout groups threads into reports · <span class="pr">#88912</span></span></div>
+        <div><span class="id">L3</span><b>Issue → PR</b><span>humans write the spec, scouts start the task · <span class="pr">#95499</span></span></div>
+        <div><span class="id">L4</span><b>Anomaly alerts</b><span>MCP errors from ~1% to 9.9%, diagnosed · <span class="pr">#95623</span></span></div>
+        <div><span class="id">L5</span><b>Replay Vision</b><span>friction in recordings becomes a fix · <span class="pr">#93181</span></span></div>
+        <div><span class="id">L6–7</span><b>Error logs</b><span>re-checks merged fixes, ~10.8% of runs · <span class="pr">#92909</span></span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://posthog.com/blog/self-driving-loops" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"><span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span></div>
+</section>
+
+<!-- ══════════════ s07 · HOT PINK ══════════════ -->
+<section class="spread s07" id="s07">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 121</a></span>
+    <span>07 / 10 · Vercel</span>
+  </header>
+  <div class="main">
+    <span class="tag">Data · Model economics</span>
+    <h2 class="hed">Open weights ran 56% of the tokens and earned <em>14% of the spend</em>.</h2>
+    <p class="lede">Vercel's AI Gateway index for August is the closest thing to a public ledger of what production teams call. Open-weight models passed half of all token volume for the first time, up from 7% in December, while Anthropic still collected 64% of the money. Average token prices fell for a third month running, and Google's share of volume slid from 30% to 5%. If you last priced your model mix in spring, it is time to do it again.</p>
+    <div class="figure">
+      <ol class="four">
+        <li><strong>56%<span class="unit">tokens</span></strong>ran on open-weight models in August, against 7% in December.</li>
+        <li><strong>64%<span class="unit">spend</span></strong>went to Anthropic, which has held the top two spend slots every month since December.</li>
+        <li><strong>−23.2%<span class="unit">price</span></strong>average cost per token in August, the steepest drop since April.</li>
+        <li><strong>7.7%<span class="unit">spend</span></strong>went to GPT-6 Astra in its first twelve days, about double Fable 5.1's share.</li>
+      </ol>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://vercel.com/blog/ai-gateway-production-index-september-2026" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"><span class="ghost">56</span></div>
+</section>
+
+<!-- ══════════════ s08 · ACADEMIC JOURNAL ══════════════ -->
+<section class="spread s08" id="s08">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 121</a></span>
+    <span>08 / 10 · AI Engineer · via @rvnikita_blog</span>
+  </header>
+  <div class="main">
+    <span class="tag">Research · Networking</span>
+    <h2 class="hed">Agents send small messages, and TCP makes them <em>wait behind big ones</em>.</h2>
+    <p class="lede">In an 18-minute talk, Stanford's John Ousterhout argues that inference and agent workloads broke an assumption TCP has carried since the 1970s. Homa, the transport his group built as a replacement, is a Linux kernel module you can run today, and he is working to get it into the mainline kernel.</p>
+    <div class="figure">
+      <div class="paper">
+        <div class="results">
+          <h4>Results</h4>
+          <dl>
+            <dt>7–83<span class="x">×</span></dt><dd>lower P99 latency for short messages than TCP and DCTCP, on a 40-node cluster</dd>
+            <dt>≈ 2<span class="x">×</span></dt><dd>faster for long messages</dd>
+            <dt>146</dt><dd>its IANA protocol number</dd>
+          </dl>
+        </div>
+        <div class="body">
+          <div class="cols">
+            <p><span class="sc">§1 The problem.</span> Training moves huge transfers where only throughput matters, and TCP copes. Inference trades small messages: KV-cache checks, syncs between GPUs after every round. With tokens arriving milliseconds apart, one slow exchange in a thousand idles every GPU waiting on it.</p>
+            <p><span class="sc">§2 Why TCP.</span> It is a byte stream, so a short message queues behind long ones, and the sender runs congestion control for a jam that forms at the receiver.</p>
+            <p><span class="sc">§3 Homa.</span> Messages have lengths from the first packet, the shortest remaining goes first, the receiver grants bandwidth, and switch priority queues let short messages overtake.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://youtu.be/eZ8WWZzoaR0" target="_blank" rel="noopener"><span>Watch the talk →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"><span class="runhead">Ephemeris · Vol. 121 · Transport</span></div>
+</section>
+
+<!-- ══════════════ s09 · TERMINAL ══════════════ -->
+<section class="spread s09" id="s09">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 121</a></span>
+    <span>09 / 10 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Engineering · Postmortem</span>
+    <h2 class="hed"><span class="ps">$</span> Two engineers and Codex moved 70M requests a second <em>to Rust</em>.</h2>
+    <p class="lede">Habitat, OpenAI's online storage layer, started at DevDay 2023 as a Python library over Azure Cosmos DB. It now serves more than 70 million requests a second across about 40 regions. The Python service peaked above 20 million before two engineers, working with Codex, rewrote it in Rust in one quarter. The Rust service takes 95% of production traffic and is 6x more CPU-efficient and 15x more memory-efficient. The most useful part is the list of failures their load tests never caught.</p>
+    <div class="figure">
+      <div class="tty">
+        <div class="bar">● ● ● &nbsp;habitat — postmortem</div>
+<pre><i>$</i> <b>habitat stats</b>
+  rps         70M+        <i># python peak: 20M+</i>
+  data        500+ PB, ~40 regions
+  rust        95% of production
+  cpu / mem   6x / 15x more efficient
+<i>$</i> <b>habitat gaps --missed-by-load-tests</b>
+  [1] db answered fast; parsing waited hundreds of ms for the event loop
+  [2] flag SDK polled every 60 s with no jitter: fleet-wide stalls
+  [3] LIFO connection pool: slow pods got more traffic and stayed slow
+  [4] 6 requests held 18 connections; shared proxy + HTTP/2 made it 1</pre>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/scaling-storage-one-billion-users-part-one/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ══════════════ s10 · SPREADSHEET ══════════════ -->
+<section class="spread s10" id="s10">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 121</a></span>
+    <span>10 / 10 · Cloudflare</span>
+  </header>
+  <div class="main">
+    <span class="tag">Engineering · Rust</span>
+    <h2 class="hed">Two bytes a point, 90% fewer points, <span class="sel">100 TB</span> of RAM.</h2>
+    <p class="lede">Cloudflare's Pingora Backend Router picks origin servers with ketama consistent hashing, which stores many points on a ring for every server. Using expected value and the coefficient of variation, the team worked out how few points they could keep before load skewed, and cut them by 90% with no appreciable error. Then they shrank each point from 8 bytes to 6. Narrowing the server index to u16 alone saved nothing, because Rust pads the struct; storing the point as a 6-byte array fixed it without <code>#[repr(packed)]</code>.</p>
+    <div class="figure">
+      <div class="sheet">
+        <div class="fx"><span>fx</span><span>=points_per_server × servers × sizeof(Point)</span></div>
+        <table>
+          <thead><tr><th></th><th>A</th><th>B</th><th>C</th></tr></thead>
+          <tbody>
+            <tr class="hdr"><th>1</th><td>Ketama ring</td><td>Before</td><td>After</td></tr>
+            <tr><th>2</th><td>Server index</td><td class="n">u32</td><td class="n">u16</td></tr>
+            <tr><th>3</th><td>Bytes per point</td><td class="n">8</td><td class="n">6</td></tr>
+            <tr><th>4</th><td>Points per server</td><td class="n">100%</td><td class="n">10%</td></tr>
+            <tr><th>5</th><td>RAM freed</td><td class="n">—</td><td class="n pick">100 TB</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.cloudflare.com/saving-100-tb-of-ram-with-math/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ══════════════ COLOPHON ══════════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 121</span>
+    <span><a class="home" href="#cover">Back to top ↑</a></span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>the week.</em></h3>
+    <p class="lede">Issue 121, Saturday 19 September 2026. Ten picks, published between 31 August and 18 September, from nine publishers; four of them came to us through Telegram channels.</p>
+    <div class="figure">
+      <div class="srcs">
+        <span>Hacktron</span><span>Anthropic</span><span>TypeSafe AI</span><span>OpenAI</span>
+        <span>Runway</span><span>PostHog</span><span>Vercel</span><span>AI Engineer</span><span>Cloudflare</span>
+        <span class="via">@seeallochnaya</span><span class="via">@TochkiNadAI</span><span class="via">@denissexy</span><span class="via">@rvnikita_blog</span>
+      </div>
+    </div>
+    <p class="rubric">
+      Rubric, in order: AI tools you could adopt this week · creative software and generative
+      media · dev tools and agentic coding · privacy and security where the signal is high ·
+      science and research with a practical kernel · anything immediately actionable for a
+      senior engineer or founder.
+    </p>
+    <p class="rubric">
+      Also read this week and left out: The Batch, The Zvi, jeffbullas.com, GitHub Engineering,
+      Sentry, Next.js, fly.io, @ProductsAndStartups. Import AI has not published since 7 September.
+    </p>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+</main>
+</body>
+</html>
