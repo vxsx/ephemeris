@@ -12,6 +12,7 @@ https://aisi.gov.uk/blog/our-evaluation-of-openais-gpt-5-5-cyber-capabilities
 https://aleximas.substack.com/p/how-will-ai-driven-automation-actually
 https://andonlabs.com/blog/openai-gpt-5-5-vending-bench
 https://anthropic.com/claude-fable-and-mythos-5-1
+https://anthropic.com/claude-opus-5-5
 https://anthropic.com/engineering/advanced-tool-use
 https://anthropic.com/engineering/AI-resistant-technical-evaluations
 https://anthropic.com/engineering/april-23-postmortem
@@ -32,6 +33,7 @@ https://anthropic.com/news/anthropic-economic-index-connector
 https://anthropic.com/news/anthropic-public-record
 https://anthropic.com/news/chris-olah-pope-leo-encyclical
 https://anthropic.com/news/claude-design-anthropic-labs
+https://anthropic.com/news/claude-discovers-novel-enzyme-system
 https://anthropic.com/news/claude-fable-5-mythos-5
 https://anthropic.com/news/claude-for-creative-work
 https://anthropic.com/news/claude-for-small-business
@@ -110,6 +112,7 @@ https://blog.cloudflare.com/clickhouse-query-plan-contention
 https://blog.cloudflare.com/cloudflare-computer
 https://blog.cloudflare.com/cloudflare-one-stack
 https://blog.cloudflare.com/code-orange-fail-small-complete
+https://blog.cloudflare.com/containers-cross-tenant-vulnerability
 https://blog.cloudflare.com/content-independence-day-ai-options
 https://blog.cloudflare.com/copy-fail-linux-vulnerability-mitigation
 https://blog.cloudflare.com/cyber-frontier-models
@@ -171,6 +174,7 @@ https://blog.cloudflare.com/workers-cache
 https://blog.cloudflare.com/workers-module-registry-nodejs
 https://blog.cloudflare.com/workers-protected-by-access
 https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5
+https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-text-to-speech
 https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-omni-flash-nano-banana-2-lite
 https://blog.google/innovation-and-ai/products/gemini-app/next-evolution-gemini-app
 https://blog.google/innovation-and-ai/technology/research/gemini-for-science-io-2026
@@ -274,6 +278,7 @@ https://github.blog/changelog/2026-08-11-per-model-token-breakdown-in-the-usage-
 https://github.blog/engineering/architecture-optimization/dont-stop-early-case-folding-source-code-at-memory-speed
 https://github.blog/engineering/architecture-optimization/from-latency-to-instant-modernizing-github-issues-navigation-performance
 https://github.blog/engineering/architecture-optimization/how-we-rebuilt-the-search-architecture-for-high-availability-in-github-enterprise-server
+https://github.blog/engineering/architecture-optimization/improving-site-performance-by-shipping-more-css
 https://github.blog/engineering/architecture-optimization/the-uphill-climb-of-making-diff-lines-performant
 https://github.blog/engineering/from-pixels-to-characters-the-engineering-behind-github-copilot-clis-animated-ascii-banner
 https://github.blog/engineering/infrastructure/how-github-uses-ebpf-to-improve-deployment-safety
@@ -281,6 +286,7 @@ https://github.blog/engineering/infrastructure/when-protections-outlive-their-pu
 https://github.blog/engineering/platform-security/post-quantum-security-for-ssh-access-on-github
 https://github.blog/engineering/the-cost-of-saying-yes-has-changed
 https://github.blog/engineering/turn-one-giant-ai-generated-pull-request-to-a-reviewable-stack
+https://github.blog/engineering/user-experience/rendering-huge-pull-requests-in-the-github-copilot-app
 https://github.blog/engineering/user-experience/your-alt-text-passes-automated-checks-that-doesnt-mean-its-any-good
 https://github.blog/engineering/using-the-github-copilot-sdk-for-java
 https://github.blog/security/supply-chain-security/tame-dependabot-group-your-updates-slow-the-cadence-keep-security-fast
@@ -424,6 +430,7 @@ https://openai.com/index/advancing-voice-intelligence-with-new-models-in-the-api
 https://openai.com/index/ai-chemist-improves-reaction
 https://openai.com/index/asana
 https://openai.com/index/avatarin
+https://openai.com/index/better-prompt-caching-for-gpt-6
 https://openai.com/index/boston-childrens-hospital
 https://openai.com/index/braintrust
 https://openai.com/index/builders-guide-to-gpt-5-6
@@ -568,6 +575,7 @@ https://sentry.io/blog/ai-agent-observability-developers-guide-to-agent-monitori
 https://sentry.io/blog/ai-bug-reproduction
 https://sentry.io/blog/apple-update-breaks-app
 https://sentry.io/blog/automated-debugging-workflow-sentry
+https://sentry.io/blog/bfcache-metrics
 https://sentry.io/blog/claude-routines-agent-triage
 https://sentry.io/blog/cut-build-times-delete-cms
 https://sentry.io/blog/debugging-multi-agent-ai-when-the-failure-is-in-the-space-between-agents
@@ -589,6 +597,7 @@ https://shir-man.com/free-llm
 https://shir-man.com/pole-chudes-exe
 https://sierra.ai/blog/the-ai-native-interview
 https://simonwillison.net/2026/May/14/not-so-locked-in
+https://smh.com.au/politics/federal/openai-breaches-medicare-albanese-reveals-20260924-p6100u.html
 https://stepsecurity.io/blog/the-hades-campaign-pypi-packages
 https://success.com/tokenmaxxing-ai-adoption-metrics
 https://sunday.ai/blog/act-2-preview
@@ -686,6 +695,7 @@ https://vercel.com/blog/optimizing-vercel-sandbox-snapshots
 https://vercel.com/blog/protecting-against-inference-theft
 https://vercel.com/blog/protecting-against-token-theft
 https://vercel.com/blog/realtime-voice-agents-on-ai-gateway
+https://vercel.com/blog/state-of-agent-skills
 https://vercel.com/blog/teaching-agents-product-design-at-vercel
 https://vercel.com/blog/the-best-workflow-engine-is-a-programming-language
 https://vercel.com/blog/vercel-agent
