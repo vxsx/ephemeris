@@ -12,6 +12,7 @@ https://aisi.gov.uk/blog/our-evaluation-of-openais-gpt-5-5-cyber-capabilities
 https://aleximas.substack.com/p/how-will-ai-driven-automation-actually
 https://andonlabs.com/blog/openai-gpt-5-5-vending-bench
 https://anthropic.com/claude-fable-and-mythos-5-1
+https://anthropic.com/claude-haiku-5-5
 https://anthropic.com/claude-opus-5-5
 https://anthropic.com/claude-sonnet-5-5
 https://anthropic.com/engineering/advanced-tool-use
@@ -91,6 +92,7 @@ https://blaizzy.github.io/nativ
 https://blog.cloudflare.com/aeo
 https://blog.cloudflare.com/agent-readiness
 https://blog.cloudflare.com/agentic-internet-bot-report
+https://blog.cloudflare.com/agentic-security-operations
 https://blog.cloudflare.com/agents-platform-flue-sdk
 https://blog.cloudflare.com/agents-stripe-projects
 https://blog.cloudflare.com/agents-week-in-review
@@ -160,6 +162,7 @@ https://blog.cloudflare.com/quic-death-spiral-fix
 https://blog.cloudflare.com/realtime-threat-intel-waf-rules
 https://blog.cloudflare.com/revisiting-spectre-attacks-on-workers
 https://blog.cloudflare.com/rollbacks-for-workflows
+https://blog.cloudflare.com/root-ksk-2024-rollover
 https://blog.cloudflare.com/saving-100-tb-of-ram-with-math
 https://blog.cloudflare.com/scaling-security-scans
 https://blog.cloudflare.com/shared-dictionaries
@@ -201,6 +204,7 @@ https://claude.com/blog/cowork-is-now-claude
 https://claude.com/blog/how-claude-code-works-in-large-codebases-best-practices-and-where-to-start
 https://claude.com/blog/introducing-dynamic-workflows-in-claude-code
 https://claude.com/blog/the-new-rules-of-context-engineering-for-claude-5-generation-models
+https://claude.com/resources/articles/dashboards-and-motion
 https://claude.dev/blog/automating-eval-design-and-hillclimbing
 https://cloud.google.com/blog/topics/threat-intelligence/ai-vulnerability-exploitation-initial-access
 https://code.claude.com/docs/en/whats-new/2026-w28
@@ -280,6 +284,7 @@ https://github.blog/changelog/2026-08-03-trigger-copilot-automations-with-commen
 https://github.blog/changelog/2026-08-04-customize-code-scanning-default-setup-at-scale
 https://github.blog/changelog/2026-08-11-copilot-memory-and-ollama-in-github-copilot-for-jetbrains
 https://github.blog/changelog/2026-08-11-per-model-token-breakdown-in-the-usage-report
+https://github.blog/engineering/architecture-optimization/building-git-infrastructure-for-agent-scale-development
 https://github.blog/engineering/architecture-optimization/dont-stop-early-case-folding-source-code-at-memory-speed
 https://github.blog/engineering/architecture-optimization/from-latency-to-instant-modernizing-github-issues-navigation-performance
 https://github.blog/engineering/architecture-optimization/how-we-rebuilt-the-search-architecture-for-high-availability-in-github-enterprise-server
@@ -338,6 +343,7 @@ https://github.com/oven-sh/bun/pull/30412
 https://github.com/palmier-io/palmier-pro
 https://github.com/Panniantong/Agent-Reach
 https://github.com/petergyang/human-review
+https://github.com/rehan-remade/universal-modder
 https://github.com/rvnikita/claude-code-statusline
 https://github.com/specs-devs/samples/tree/main/Agent%20Center
 https://github.com/Twarner491/AvianVisitors
@@ -423,6 +429,7 @@ https://nextjs.org/blog/next-16-3
 https://nextjs.org/blog/next-16-3-ai-improvements
 https://nextjs.org/blog/next-16-3-instant-navigations
 https://nextjs.org/blog/next-16-3-turbopack
+https://nextjs.org/blog/next-16-4
 https://nextjs.org/blog/next-security-release-program
 https://nextjs.org/blog/nextjs-across-platforms
 https://nextjs.org/blog/september-2026-security-release
@@ -527,6 +534,7 @@ https://posthog.com/blog/best-mcp-servers-for-startups
 https://posthog.com/blog/best-real-time-analytics-platforms
 https://posthog.com/blog/bribing-customers-to-talk-to-me
 https://posthog.com/blog/cheapest-ai-observability-tools
+https://posthog.com/blog/cloud-agents-runtime
 https://posthog.com/blog/customer-facing-analytics-examples
 https://posthog.com/blog/duckdb-vs-clickhouse
 https://posthog.com/blog/duckdb-vs-postgres
@@ -603,6 +611,7 @@ https://sentry.io/blog/sentry-opentelemetry-work-together
 https://sentry.io/blog/session-replay-unreal-engine
 https://sentry.io/blog/spot-checking-ai-agents
 https://sentry.io/blog/structure-a-log
+https://sentry.io/blog/tracing-for-all-js-platforms
 https://shir-man.com/free-llm
 https://shir-man.com/pole-chudes-exe
 https://sierra.ai/blog/the-ai-native-interview
@@ -648,6 +657,7 @@ https://thezvi.substack.com/p/gemini-35-flash-looks-good-for-how
 https://thezvi.substack.com/p/gpt-55-capabilities-and-reactions
 https://thezvi.substack.com/p/gpt-56-the-system-card
 https://thezvi.substack.com/p/monthly-roundup-42-may-2026
+https://thezvi.substack.com/p/new-math-from-openai
 https://thezvi.substack.com/p/no-space-like-j-space
 https://thezvi.substack.com/p/opus-47-part-2-capabilities-and-reactions
 https://thezvi.substack.com/p/opus-47-part-3-model-welfare
