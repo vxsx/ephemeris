@@ -25,6 +25,7 @@ https://anthropic.com/engineering/harness-design-long-running-apps
 https://anthropic.com/engineering/how-we-contain-claude
 https://anthropic.com/engineering/infrastructure-noise
 https://anthropic.com/engineering/managed-agents
+https://anthropic.com/engineering/redesigning-source-control
 https://anthropic.com/features/project-deal
 https://anthropic.com/institute/recursive-self-improvement
 https://anthropic.com/news/AI-enabled-cyber-threats-mitre-attack
@@ -122,6 +123,7 @@ https://blog.cloudflare.com/copy-fail-linux-vulnerability-mitigation
 https://blog.cloudflare.com/cyber-frontier-models
 https://blog.cloudflare.com/ddos-threat-report-2026-h1
 https://blog.cloudflare.com/de-tld-outage-dnssec
+https://blog.cloudflare.com/deploy-with-void
 https://blog.cloudflare.com/dmarc-management-ga
 https://blog.cloudflare.com/dns-cache-memory-optimization-1111
 https://blog.cloudflare.com/dnssec-nta-ede-33
@@ -132,6 +134,7 @@ https://blog.cloudflare.com/frontier-model-defense
 https://blog.cloudflare.com/good-and-bad-agentic-behaviors
 https://blog.cloudflare.com/high-performance-llms
 https://blog.cloudflare.com/hyper-bug
+https://blog.cloudflare.com/hyperdrive-mysql
 https://blog.cloudflare.com/internal-ai-engineering-stack
 https://blog.cloudflare.com/internal-dns
 https://blog.cloudflare.com/introducing-cache-response-rules
@@ -286,6 +289,7 @@ https://github.blog/changelog/2026-08-11-copilot-memory-and-ollama-in-github-cop
 https://github.blog/changelog/2026-08-11-per-model-token-breakdown-in-the-usage-report
 https://github.blog/engineering/architecture-optimization/building-git-infrastructure-for-agent-scale-development
 https://github.blog/engineering/architecture-optimization/dont-stop-early-case-folding-source-code-at-memory-speed
+https://github.blog/engineering/architecture-optimization/from-2500-requests-to-24-rebuilding-star-history-without-the-stargazers
 https://github.blog/engineering/architecture-optimization/from-latency-to-instant-modernizing-github-issues-navigation-performance
 https://github.blog/engineering/architecture-optimization/how-we-rebuilt-the-search-architecture-for-high-availability-in-github-enterprise-server
 https://github.blog/engineering/architecture-optimization/improving-site-performance-by-shipping-more-css
@@ -332,6 +336,7 @@ https://github.com/DenisSergeevitch/pole-chudes-2
 https://github.com/DenisSergeevitch/UFO-USA
 https://github.com/Fission-AI/OpenSpec/blob/main/docs/concepts.md
 https://github.com/heygen-com/hyperframes
+https://github.com/ibragim-bad/evals-from-sessions
 https://github.com/JetBrains/benjamin-plus-skill
 https://github.com/JibranK12345/Viral-Bench
 https://github.com/mvanhorn/last30days-skill
@@ -347,6 +352,7 @@ https://github.com/rehan-remade/universal-modder
 https://github.com/rvnikita/claude-code-statusline
 https://github.com/specs-devs/samples/tree/main/Agent%20Center
 https://github.com/Twarner491/AvianVisitors
+https://github.com/wheresryan22/anatomy
 https://github.com/xai-org/grok-build
 https://github.com/yunit00/game-corovans
 https://hackernews.foresyn.ai/
@@ -415,6 +421,7 @@ https://microsoft.com/en-us/security/blog/2026/06/02/microsoft-build-2026-securi
 https://minimax.io/blog/minimax-h3
 https://minimax.io/blog/minimax-m3
 https://mistral.ai/news/leanstral-1-5
+https://mistral.ai/news/mistral-large-4
 https://mistral.ai/news/ocr-4
 https://moab.pro/articles/aeo-geo
 https://newsletter.semianalysis.com/p/the-coding-assistant-breakdown-more
@@ -432,10 +439,12 @@ https://nextjs.org/blog/next-16-3-turbopack
 https://nextjs.org/blog/next-16-4
 https://nextjs.org/blog/next-security-release-program
 https://nextjs.org/blog/nextjs-across-platforms
+https://nextjs.org/blog/nextjs-security-update-october-14-2026
 https://nextjs.org/blog/september-2026-security-release
 https://nextjs.org/blog/turbopack-chunking
 https://nextjs.org/blog/turbopack-incremental-computation
 https://nvidianews.nvidia.com/news/nvidia-microsoft-windows-pcs-agents-rtx-spark
+https://odyssey.systems/meet-odyssey-3
 https://openai.com/academy/codex-for-work/how-data-science-teams-use-codex
 https://openai.com/index/a-scorecard-for-the-ai-age
 https://openai.com/index/advancing-content-provenance
@@ -691,6 +700,7 @@ https://vercel.com/blog/deepsecbench-evaluating-model-performance-in-finding-cyb
 https://vercel.com/blog/deepseek-overtakes-google-on-volume-cost-per-token-falls
 https://vercel.com/blog/dockerfile-on-vercel
 https://vercel.com/blog/everything-hackable-will-get-hacked
+https://vercel.com/blog/findings-from-the-1-million-dollar-vercel-sandbox-challenge
 https://vercel.com/blog/how-conductor-moved-parallel-coding-agents-from-the-laptop-to-the-cloud-with-vercel-sandbox
 https://vercel.com/blog/how-cursor-built-a-growth-iteration-loop-with-vercel-microfrontends-and-flags
 https://vercel.com/blog/how-general-intelligence-used-agents-to-build-an-agent-platform-on-vercel

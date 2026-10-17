@@ -1,0 +1,1093 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 125 · 17 October 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     LOCKED BASELINE — copied from scaffold.html.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+  h1, h2, h3, h4 {
+    overflow-wrap: break-word;
+    margin: 0;
+  }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100svh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+
+  .spread > .decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .folio a.home { color: inherit; text-decoration: none; }
+  .folio a.home:hover { text-decoration: underline; }
+
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+
+  .figure { width: 100%; }
+
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  @media (hover: hover) {
+    .spread .read-on:hover { background: currentColor; }
+    .spread .read-on:hover span { color: var(--flip); }
+  }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — issue 125
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── COVER · pull-quote — paper white, one red word ─── */
+  .cover { background: #f2eee5; color: #15130f; }
+  .cover .corner {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 18px;
+    padding-bottom: 14px; border-bottom: 2px solid #15130f; width: 100%;
+  }
+  .cover .corner b {
+    font-family: var(--serif); font-weight: 900; font-size: 34px; letter-spacing: -0.02em;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+  }
+  .cover .corner span { font-family: var(--sans); font-size: 17px; font-weight: 500; color: #5a544a; }
+  .cover .pq {
+    margin: 0;
+    font-family: var(--serif); font-weight: 300; font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 0;
+    font-size: clamp(44px, 6.2vw, 100px);
+    line-height: 1.04; letter-spacing: -0.025em;
+    max-width: 17ch;
+    padding-bottom: 0.1em;
+  }
+  .cover .pq .q { color: #e0321c; font-weight: 700; }
+  .cover .pq mark {
+    font-style: normal; font-weight: 900; color: #15130f;
+    background: linear-gradient(transparent 52%, #e0321c 52%, #e0321c 88%, transparent 88%);
+    padding: 0 0.06em;
+  }
+  .cover .attr {
+    margin: 0; font-family: var(--sans); font-size: 19px; line-height: 1.5; max-width: 54ch; color: #3a352d;
+  }
+  .cover .attr b { color: #15130f; }
+  .cover .toc {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 40px;
+    padding-top: 20px;
+    border-top: 1px solid currentColor;
+    width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    text-decoration: none; color: inherit;
+    padding: 6px 0;
+    border-bottom: 1px dotted rgba(0,0,0,0.25);
+  }
+  .cover .toc a:hover > span:first-child { text-decoration: underline; text-decoration-color: #e0321c; }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.85em; opacity: 0.7; }
+  .cover .toc .num {
+    font-family: var(--serif); font-weight: 700; font-style: italic;
+    color: #e0321c; margin-right: 8px;
+  }
+  .cover .decor .bigq {
+    position: absolute; right: -3vw; top: clamp(72px, 9vw, 120px);
+    font-family: var(--serif); font-weight: 900; font-size: 52vw; line-height: 0.7;
+    color: rgba(224,50,28,0.09);
+  }
+  @media (max-width: 800px) {
+    .cover .toc { grid-template-columns: 1fr; gap: 0; }
+    .cover .pq { font-size: clamp(34px, 9.4vw, 52px); }
+    .cover .corner b { font-size: 28px; }
+    .cover .attr { font-size: 17px; }
+    .cover .decor .bigq { top: 140px; font-size: 90vw; }
+  }
+
+  /* ─── s01 · BIG STATS / YELLOW — Anthropic Scion ─── */
+  .s01 { background: #ffd400; color: #0d0d0d; }
+  .s01 .tag { background: #0d0d0d; color: #ffd400; border: 2px solid #0d0d0d; border-radius: 0; font-weight: 800; opacity: 1; }
+  .s01 .hed {
+    font-family: var(--sans); font-weight: 900; text-transform: uppercase;
+    letter-spacing: -0.035em; line-height: 1.06;
+  }
+  .s01 .hed .cut {
+    background: #0d0d0d; color: #ffd400; padding: 0 0.12em;
+    -webkit-box-decoration-break: clone; box-decoration-break: clone;
+  }
+  .s01 .lede { font-family: var(--sans); font-weight: 500; font-size: clamp(19px, 1.6vw, 23px); max-width: 60ch; }
+  .s01 .big {
+    margin: 0; font-family: var(--sans); font-weight: 900;
+    font-size: clamp(96px, 16vw, 250px); line-height: 0.86; letter-spacing: -0.055em;
+    padding-bottom: 0.14em;
+  }
+  .s01 .big .unit {
+    display: inline-block; vertical-align: top;
+    font-family: var(--sans); font-style: normal; font-weight: 800;
+    font-size: max(18px, 0.11em); line-height: 1.2; letter-spacing: normal; text-transform: uppercase;
+    margin: 0.5em 0 0 0.6em; max-width: 12em;
+  }
+  .s01 .big .unit s { display: block; margin-top: 4px; font-weight: 600; text-decoration-thickness: 3px; opacity: 0.7; }
+  .s01 .stats {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: 20px 0 0; border-top: 5px solid #0d0d0d;
+  }
+  .s01 .stats > div { padding: 18px 24px 4px 0; }
+  .s01 .stats > div + div { border-left: 5px solid #0d0d0d; padding-left: 24px; }
+  .s01 .stats dt { font-family: var(--sans); font-weight: 900; font-size: clamp(40px, 4.4vw, 64px); line-height: 1; letter-spacing: -0.04em; }
+  .s01 .stats dd { margin: 8px 0 0; font-family: var(--sans); font-weight: 600; font-size: 18px; line-height: 1.4; }
+  .s01 .read-on { background: #0d0d0d; color: #ffd400; border-color: #0d0d0d; --flip: #0d0d0d; }
+  .s01 .decor .tape {
+    position: absolute; left: 0; right: 0; bottom: 0; height: 16px;
+    background: repeating-linear-gradient(-45deg, #0d0d0d 0 18px, transparent 18px 36px);
+  }
+  .s01 .decor .ghost {
+    position: absolute; right: -2vw; top: clamp(72px, 9vw, 120px);
+    font-family: var(--sans); font-weight: 900; font-size: 30vw; line-height: 0.8; letter-spacing: -0.06em;
+    color: rgba(13,13,13,0.07);
+  }
+  @media (max-width: 800px) {
+    .s01 .big { font-size: clamp(64px, 19vw, 110px); }
+    .s01 .big .unit { display: block; margin: 10px 0 0; font-size: 17px; }
+    .s01 .stats { grid-template-columns: 1fr; }
+    .s01 .stats > div { padding: 14px 0 6px; }
+    .s01 .stats > div + div { border-left: none; border-top: 3px solid #0d0d0d; padding-left: 0; }
+    .s01 .decor .ghost { display: none; }
+  }
+
+  /* ─── s02 · POSTCARD — Mistral Large 4 ─── */
+  .s02 { background: #dfe7ef; color: #1b2a3d; }
+  .s02 .tag { color: #b8232a; border-color: #b8232a; }
+  .s02 .hed {
+    text-wrap: balance;
+    font-weight: 600; font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" 0;
+    letter-spacing: -0.025em;
+  }
+  .s02 .hed em { font-style: italic; font-weight: 400; color: #b8232a; font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; }
+  .s02 .lede { max-width: 56ch; }
+  .s02 .card {
+    display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    background: #fbf8f1; color: #1b2a3d;
+    max-width: 920px; padding: 28px 0;
+    box-shadow: 0 2px 0 rgba(27,42,61,0.08), 10px 14px 0 rgba(27,42,61,0.12);
+    transform: rotate(-0.8deg);
+  }
+  .s02 .card .msg { padding: 0 32px; }
+  .s02 .card .addr { padding: 0 32px; border-left: 1.5px solid #9aa7b6; }
+  .s02 .msg .note {
+    margin: 0 0 16px; font-family: var(--serif); font-style: italic; font-weight: 400;
+    font-variation-settings: "opsz" 72, "SOFT" 100, "WONK" 1;
+    font-size: clamp(26px, 2.5vw, 36px); line-height: 1.2; color: #0f3d78;
+  }
+  .s02 .msg .sig { margin: 0; font-family: var(--sans); font-size: 17px; color: #4c5a6b; }
+  .s02 .stamprow { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
+  .s02 .stamp {
+    width: 116px; padding: 10px; text-align: center;
+    background: #f7d9a8;
+    outline: 2px dashed #b8232a; outline-offset: -6px;
+    font-family: var(--sans); color: #7d1a1f;
+  }
+  .s02 .stamp b { display: block; font-family: var(--serif); font-weight: 900; font-size: 40px; line-height: 1; letter-spacing: -0.02em; }
+  .s02 .stamp span { display: block; font-size: 15px; font-weight: 600; line-height: 1.25; margin-top: 4px; }
+  .s02 .postmark {
+    width: 104px; height: 104px; border-radius: 50%; flex: 0 0 auto;
+    border: 2px solid rgba(27,42,61,0.55); color: rgba(27,42,61,0.75);
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    font-family: var(--mono); font-size: 15px; line-height: 1.3; transform: rotate(-12deg);
+  }
+  .s02 .lines { margin: 0; padding: 0; list-style: none; }
+  .s02 .lines li {
+    display: flex; justify-content: space-between; gap: 6px 14px; flex-wrap: wrap;
+    padding: 10px 0; border-bottom: 1px solid #b9c3cf;
+    font-family: var(--sans); font-size: 18px;
+  }
+  .s02 .lines li b { font-family: var(--mono); font-weight: 600; }
+  .s02 .read-on { color: #1b2a3d; --flip: #dfe7ef; }
+  .s02 .decor .airmail {
+    position: absolute; inset: 10px;
+    border: 10px solid transparent;
+    border-image: repeating-linear-gradient(45deg, #b8232a 0 14px, #dfe7ef 14px 22px, #1f4e8c 22px 36px, #dfe7ef 36px 44px) 10;
+    opacity: 0.85;
+  }
+  @media (max-width: 800px) {
+    .s02 .card { grid-template-columns: 1fr; padding: 22px 0; transform: none; }
+    .s02 .card .msg, .s02 .card .addr { padding: 0 18px; }
+    .s02 .card .addr { border-left: none; border-top: 1.5px solid #9aa7b6; margin-top: 18px; padding-top: 18px; }
+    .s02 .msg .note { font-size: 24px; }
+    .s02 .lines li { font-size: 17px; }
+    .s02 .decor .airmail { inset: 6px; border-width: 6px; }
+  }
+
+  /* ─── s03 · RISOGRAPH DUOTONE — Anatomy ─── */
+  .s03 { background: #f4efe4; color: #0b3a78; }
+  .s03 .tag { background: #ff48b0; color: #f4efe4; border-color: #ff48b0; opacity: 1; font-weight: 700; }
+  .s03 .hed {
+    text-wrap: balance;
+    font-weight: 900; font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    color: #0078bf; letter-spacing: -0.03em;
+    text-shadow: 0.045em 0.035em 0 rgba(255,72,176,0.9);
+  }
+  .s03 .hed em { font-style: italic; color: #ff48b0; text-shadow: -0.04em 0.03em 0 rgba(0,120,191,0.85); }
+  .s03 .lede { color: #0b3a78; max-width: 54ch; }
+  .s03 .press { display: flex; flex-wrap: wrap; gap: 22px; align-items: flex-start; }
+  .s03 .cmd {
+    flex: 1 1 460px; min-width: 0; margin: 0;
+    background: #0078bf; color: #f4efe4;
+    padding: 20px 24px; box-shadow: 8px 8px 0 #ff48b0;
+    font-family: var(--mono); font-size: 17px; line-height: 1.7;
+    white-space: pre-wrap; overflow-wrap: anywhere;
+  }
+  .s03 .cmd .p { color: #ffb3dc; }
+  .s03 .outs { flex: 1 1 240px; display: flex; flex-direction: column; gap: 10px; margin: 0; padding: 0; list-style: none; }
+  .s03 .outs li {
+    padding: 10px 16px; border: 3px solid #ff48b0; color: #0b3a78;
+    font-family: var(--sans); font-weight: 700; font-size: 18px; line-height: 1.35;
+    background: #fbe3ee;
+  }
+  .s03 .outs li span { display: block; font-weight: 500; font-size: 16px; }
+  .s03 .read-on { color: #0078bf; --flip: #f4efe4; box-shadow: 5px 5px 0 #ff48b0; }
+  .s03 .decor .dots {
+    position: absolute; inset: 0;
+    background-image: radial-gradient(rgba(255,72,176,0.22) 1.6px, transparent 1.8px);
+    background-size: 14px 14px;
+    -webkit-mask-image: linear-gradient(120deg, transparent 35%, #000 80%);
+            mask-image: linear-gradient(120deg, transparent 35%, #000 80%);
+  }
+  .s03 .decor svg { position: absolute; right: -9vw; top: clamp(72px, 9vw, 120px); width: 38vw; height: auto; mix-blend-mode: multiply; opacity: 0.9; }
+  .s03 .decor svg.b { transform: translate(-10px, 7px); }
+  @media (max-width: 800px) {
+    .s03 .cmd { font-size: 15px; padding: 16px 18px; flex-basis: 100%; }
+    .s03 .outs { flex-basis: 100%; }
+    .s03 .outs li { font-size: 17px; }
+    .s03 .decor svg { width: 90vw; opacity: 0.3; top: auto; bottom: -10vw; right: -20vw; }
+  }
+
+  /* ─── s04 · FILM STILL — Cloudflare Hyperdrive ─── */
+  .s04 { background: #15171a; color: #ece6da; }
+  .s04 .tag { color: #f2c14e; border-color: #f2c14e; font-family: var(--mono); letter-spacing: 0.16em; }
+  .s04 .hed {
+    font-family: var(--sans); font-weight: 800; text-transform: uppercase;
+    font-size: clamp(48px, 6vw, 94px); letter-spacing: 0.02em; line-height: 1.02;
+  }
+  .s04 .hed em { font-style: normal; color: #f2c14e; }
+  .s04 .lede { font-family: var(--sans); font-weight: 400; font-size: clamp(19px, 1.55vw, 22px); color: #cfc7b8; max-width: 62ch; }
+  .s04 .lede code { font-family: var(--mono); font-size: 0.9em; color: #ece6da; }
+  .s04 .board { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+  .s04 .frame { border: 1px solid #3c4046; padding: 16px 18px 18px; background: rgba(0,0,0,0.25); }
+  .s04 .frame h4 { font-family: var(--mono); font-weight: 600; font-size: 15px; letter-spacing: 0.14em; color: #f2c14e; margin-bottom: 8px; }
+  .s04 .frame p { margin: 0; font-family: var(--sans); font-size: 18px; line-height: 1.45; }
+  .s04 .frame.end { border-color: #f2c14e; }
+  .s04 .sub {
+    margin: 22px 0 0; text-align: center;
+    font-family: var(--sans); font-weight: 500; font-style: italic; font-size: clamp(20px, 1.8vw, 26px);
+    color: #f6e7b4; text-shadow: 0 2px 0 #000;
+  }
+  .s04 .read-on { color: #f2c14e; --flip: #15171a; font-family: var(--mono); letter-spacing: 0.14em; }
+  .s04 .decor .bar { position: absolute; left: 0; right: 0; height: clamp(26px, 3.6vw, 52px); background: #000; }
+  .s04 .decor .bar.t { top: 0; }
+  .s04 .decor .bar.b { bottom: 0; }
+  .s04 .decor .tc {
+    position: absolute; right: clamp(24px, 6vw, 120px); bottom: clamp(4px, 1vw, 14px);
+    font-family: var(--mono); font-size: 15px; letter-spacing: 0.12em; color: #6c6f75;
+  }
+  .s04 .decor .vig { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 40%, transparent 40%, rgba(0,0,0,0.55) 100%); }
+  @media (max-width: 1100px) { .s04 .board { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 800px) {
+    .s04 .board { grid-template-columns: 1fr; }
+    .s04 .frame p { font-size: 17px; }
+    .s04 .decor .bar { height: 20px; }
+    .s04 .decor .tc { display: none; }
+  }
+
+  /* ─── s05 · HOT PINK — evals from sessions ─── */
+  .s05 { background: #ff2d87; color: #1a0610; }
+  .s05 .tag { background: #1a0610; color: #ff2d87; border-color: #1a0610; opacity: 1; font-weight: 700; }
+  .s05 .hed {
+    text-wrap: balance;
+    font-weight: 900; font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 50, "WONK" 1;
+    letter-spacing: -0.03em;
+  }
+  .s05 .hed em { color: #fff6fa; }
+  .s05 .lede { max-width: 56ch; }
+  .s05 .steps {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px 40px;
+    margin: 0; padding: 0; list-style: none; max-width: 1100px;
+  }
+  .s05 .steps li {
+    display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0 18px; align-items: start;
+    border-top: 3px solid #1a0610; padding-top: 14px;
+  }
+  .s05 .steps .n {
+    font-family: var(--serif); font-style: italic; font-weight: 900; font-size: 68px; line-height: 0.9;
+    color: #fff6fa; font-variation-settings: "opsz" 144, "WONK" 1;
+  }
+  .s05 .steps b { display: block; font-family: var(--sans); font-weight: 900; font-size: 18px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 4px; }
+  .s05 .steps p { margin: 0; font-family: var(--sans); font-size: 18px; line-height: 1.45; }
+  .s05 .steps code { font-family: var(--mono); font-size: 0.88em; }
+  .s05 .cost { margin-top: 26px; max-width: 760px; }
+  .s05 .cost h4 { font-family: var(--sans); font-weight: 800; font-size: 16px; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 10px; }
+  .s05 .cost .row { display: grid; grid-template-columns: 7.5em minmax(0, 1fr); gap: 14px; align-items: center; margin-bottom: 8px; font-family: var(--sans); font-weight: 700; font-size: 18px; }
+  .s05 .cost i { display: block; height: 34px; }
+  .s05 .cost i b {
+    display: flex; align-items: center; justify-content: flex-end; height: 100%; padding-right: 10px;
+    background: #1a0610; color: #fff6fa; font-family: var(--mono); font-weight: 600; font-style: normal; font-size: 17px;
+  }
+  .s05 .read-on { color: #1a0610; --flip: #ff2d87; }
+  .s05 .decor .ghost {
+    position: absolute; right: -3vw; bottom: -5vw;
+    font-family: var(--serif); font-style: italic; font-weight: 900; font-size: 30vw; line-height: 1; letter-spacing: -0.04em;
+    color: rgba(255,255,255,0.16);
+  }
+  @media (max-width: 800px) {
+    .s05 .steps { grid-template-columns: 1fr; gap: 20px; }
+    .s05 .steps .n { font-size: 52px; }
+    .s05 .steps p { font-size: 17px; }
+    .s05 .cost .row { grid-template-columns: 6em minmax(0, 1fr); font-size: 17px; }
+  }
+
+  /* ─── s06 · MUSEUM PLACARD — GitHub star history ─── */
+  .s06 { background: #efebe0; color: #33361f; }
+  .s06 .tag {
+    font-family: var(--serif); font-size: 17px; font-variant: small-caps; text-transform: lowercase;
+    letter-spacing: 0.2em; border: none; border-radius: 0;
+    border-top: 1px solid #33361f; border-bottom: 1px solid #33361f; padding: 8px 18px;
+  }
+  .s06 .hed {
+    font-weight: 400; font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+    font-size: clamp(52px, 6.4vw, 100px); letter-spacing: -0.015em; line-height: 1.04;
+  }
+  .s06 .hed em { font-style: italic; font-weight: 300; color: #6b5a2a; }
+  .s06 .lede { max-width: 56ch; font-size: clamp(19px, 1.6vw, 23px); }
+  .s06 .placard {
+    width: 100%; max-width: 680px; background: #f8f5ed; border: 1px solid #33361f;
+    padding: 30px 40px 26px; text-align: left;
+  }
+  .s06 .placard .ttl {
+    margin: 0 0 4px; font-family: var(--serif); font-variant: small-caps; text-transform: lowercase;
+    letter-spacing: 0.14em; font-size: 20px; font-weight: 600;
+  }
+  .s06 .placard .sub { margin: 0; font-family: var(--serif); font-style: italic; font-size: 18px; color: #5d5f45; }
+  .s06 .ba { display: grid; grid-template-columns: 1fr 1fr; margin: 18px 0 0; border-top: 1px solid #33361f; }
+  .s06 .ba > div { padding: 16px 28px 16px 0; }
+  .s06 .ba > div + div { border-left: 1px solid #33361f; padding-left: 28px; padding-right: 0; }
+  .s06 .ba dt { font-family: var(--serif); font-variant: small-caps; text-transform: lowercase; letter-spacing: 0.14em; font-size: 17px; }
+  .s06 .ba dd { margin: 4px 0 0; font-family: var(--serif); font-weight: 300; font-size: 46px; line-height: 1.05; font-variation-settings: "opsz" 144; }
+  .s06 .ba dd small { display: block; font-size: 17px; font-weight: 400; font-style: italic; color: #5d5f45; }
+  .s06 .notes { margin: 0; padding: 14px 0 0; border-top: 1px solid #33361f; list-style: none; }
+  .s06 .notes li { font-family: var(--serif); font-size: 18px; line-height: 1.5; padding: 4px 0; }
+  .s06 .placard blockquote {
+    margin: 16px 0 0; padding-top: 16px; border-top: 1px solid #33361f;
+    font-family: var(--serif); font-style: italic; font-size: 22px; line-height: 1.35;
+  }
+  .s06 .read-on { color: #33361f; --flip: #efebe0; border-width: 1px; font-family: var(--serif); font-weight: 600; letter-spacing: 0.16em; }
+  .s06 .decor .frame { position: absolute; inset: clamp(16px, 2.4vw, 36px); border: 1px solid rgba(51,54,31,0.28); }
+  .s06 .decor .frame + .frame { inset: clamp(22px, 3vw, 44px); border-color: rgba(51,54,31,0.14); }
+  @media (max-width: 800px) {
+    .s06 .tag { font-size: 15px; letter-spacing: 0.14em; padding: 6px 12px; }
+    .s06 .placard { padding: 22px 18px 20px; }
+    .s06 .ba > div { padding: 14px 14px 14px 0; }
+    .s06 .ba > div + div { padding-left: 14px; padding-right: 0; }
+    .s06 .ba dd { font-size: 34px; }
+    .s06 .placard blockquote { font-size: 19px; }
+    .s06 .decor .frame { inset: 8px; }
+    .s06 .decor .frame + .frame { display: none; }
+    .s06 .notes li { font-size: 17px; }
+  }
+
+  /* ─── s07 · DARK REPORT / CLASSIFIED — Vercel Sandbox bounty ─── */
+  .s07 { background: #0e0b0b; color: #efe6e3; }
+  .s07 .tag { color: #ff3b3b; border-color: #ff3b3b; font-family: var(--mono); border-radius: 0; }
+  .s07 .hed {
+    font-family: var(--sans); font-weight: 800; letter-spacing: -0.03em;
+    font-size: clamp(46px, 6.2vw, 96px); line-height: 1.0;
+  }
+  .s07 .hed em { font-style: normal; color: #ff3b3b; }
+  .s07 .lede { font-family: var(--sans); font-size: clamp(19px, 1.55vw, 22px); color: #d5c9c5; max-width: 62ch; }
+  .s07 .file { border: 1px solid #5a1c1c; background: rgba(40,10,10,0.35); max-width: 1180px; }
+  .s07 .file .hdr {
+    display: flex; flex-wrap: wrap; gap: 6px 28px; padding: 12px 20px;
+    border-bottom: 1px solid #5a1c1c; background: #1c0d0d;
+    font-family: var(--mono); font-size: 15px; letter-spacing: 0.1em; text-transform: uppercase; color: #bdb0ac;
+  }
+  .s07 .file .hdr b { color: #ff3b3b; font-weight: 600; }
+  .s07 .file .body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); }
+  .s07 .file .body > * { padding: 20px 24px; margin: 0; }
+  .s07 .file .body > * + * { border-left: 1px solid #5a1c1c; }
+  .s07 .chart h4 { font-family: var(--mono); font-weight: 600; font-size: 15px; letter-spacing: 0.1em; text-transform: uppercase; color: #bdb0ac; margin-bottom: 12px; }
+  .s07 .chart .b { display: grid; grid-template-columns: 8.2em minmax(0, 1fr) 3.2em; gap: 10px; align-items: center; margin-bottom: 8px; font-family: var(--mono); font-size: 16px; }
+  .s07 .chart .b i { display: block; height: 20px; background: #2a1212; }
+  .s07 .chart .b i b { display: block; height: 100%; min-width: 4px; background: #8a7f7c; }
+  .s07 .chart .b.hot i b { background: #e3121b; }
+  .s07 .chart .b em { font-style: normal; text-align: right; }
+  .s07 .sev { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .s07 .sev span { font-family: var(--mono); font-size: 15px; padding: 4px 10px; border: 1px solid #5a1c1c; }
+  .s07 .sev span.c { background: #e3121b; color: #0e0b0b; border-color: #e3121b; font-weight: 600; }
+  .s07 .finds { margin: 0; padding: 0; list-style: none; }
+  .s07 .finds li { padding: 0 0 14px; margin-bottom: 14px; border-bottom: 1px solid #3a1515; font-family: var(--sans); font-size: 18px; line-height: 1.45; }
+  .s07 .finds li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .s07 .finds b { display: block; font-family: var(--mono); font-weight: 600; font-size: 15px; letter-spacing: 0.12em; color: #ff3b3b; margin-bottom: 2px; }
+  .s07 .redact { background: #efe6e3; color: #efe6e3; padding: 0 0.15em; }
+  .s07 .redact:hover { color: #0e0b0b; }
+  .s07 .quote {
+    margin: 0; border-top: 1px solid #5a1c1c; padding: 16px 20px 18px;
+    font-family: var(--mono); font-size: 17px; line-height: 1.55; color: #ff8a80;
+  }
+  .s07 .read-on { color: #ff3b3b; font-family: var(--mono); border-radius: 0; --flip: #0e0b0b; }
+  .s07 .decor .stamp {
+    position: absolute; right: -6vw; top: 40%;
+    font-family: var(--sans); font-weight: 900; font-size: 15vw; letter-spacing: -0.04em; line-height: 1;
+    color: rgba(227,18,27,0.07); transform: rotate(-12deg); white-space: nowrap;
+  }
+  @media (max-width: 800px) {
+    .s07 .file .body { grid-template-columns: 1fr; }
+    .s07 .file .body > * { padding: 16px 14px; }
+    .s07 .file .body > * + * { border-left: none; border-top: 1px solid #5a1c1c; }
+    .s07 .file .hdr { font-size: 14px; padding: 10px 14px; }
+    .s07 .chart .b { grid-template-columns: 6.6em minmax(0, 1fr) 3em; font-size: 15px; }
+    .s07 .finds li { font-size: 17px; }
+    .s07 .quote { font-size: 15px; padding: 14px; }
+  }
+
+  /* ─── s08 · PASTEL ROSE — Odyssey-3 ─── */
+  .s08 { background: linear-gradient(160deg, #fbe4eb 0%, #f4ddef 48%, #e3e5f8 100%); color: #4a2b3f; }
+  .s08 .tag { background: rgba(255,255,255,0.6); border-color: transparent; color: #a8476f; font-weight: 600; }
+  .s08 .hed {
+    text-wrap: balance;
+    font-weight: 300; font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-size: clamp(54px, 7vw, 112px); letter-spacing: -0.025em; line-height: 1.02;
+  }
+  .s08 .hed em { font-style: normal; font-weight: 600; color: #b8507c; font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 0; }
+  .s08 .lede { max-width: 56ch; }
+  .s08 .variants { display: flex; flex-wrap: wrap; gap: 18px; }
+  .s08 .variants > div {
+    flex: 1 1 220px; min-width: 0;
+    background: rgba(255,255,255,0.55); border-radius: 26px; padding: 20px 24px;
+    box-shadow: 0 10px 30px rgba(168,71,111,0.12);
+  }
+  .s08 .variants b {
+    display: block; font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 32px; line-height: 1.1;
+    font-variation-settings: "opsz" 144, "SOFT" 100; color: #a8476f;
+  }
+  .s08 .variants span { display: block; margin-top: 6px; font-family: var(--sans); font-size: 17px; line-height: 1.45; }
+  .s08 .variants .px { font-family: var(--mono); font-size: 17px; color: #4a2b3f; }
+  .s08 .note {
+    margin: 22px 0 0; max-width: 48ch;
+    font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 22px; line-height: 1.4;
+    font-variation-settings: "opsz" 72, "SOFT" 100, "WONK" 1; color: #6a3d58;
+  }
+  .s08 .read-on { color: #4a2b3f; border-radius: 999px; --flip: #fbe4eb; }
+  .s08 .decor .blob { position: absolute; border-radius: 50%; filter: blur(40px); }
+  .s08 .decor .blob.a { width: 46vw; height: 46vw; right: -10vw; top: 6vw; background: rgba(255,182,206,0.6); }
+  .s08 .decor .blob.b { width: 38vw; height: 38vw; left: -12vw; bottom: -10vw; background: rgba(190,196,255,0.55); }
+  @media (max-width: 800px) {
+    .s08 .variants b { font-size: 26px; }
+    .s08 .note { font-size: 19px; }
+  }
+
+  /* ─── s09 · WARM ORANGE — Cloudflare Void ─── */
+  .s09 { background: #f6821f; color: #1b0f05; }
+  .s09 .tag { color: #1b0f05; border: 2px solid #1b0f05; font-weight: 700; opacity: 1; }
+  .s09 .hed {
+    font-family: var(--sans); font-weight: 900; letter-spacing: -0.04em; line-height: 1.08;
+    text-wrap: balance;
+  }
+  .s09 .hed em {
+    font-style: normal; background: #1b0f05; color: #fff1e4; padding: 0 0.12em;
+    -webkit-box-decoration-break: clone; box-decoration-break: clone;
+  }
+  .s09 .lede { font-family: var(--sans); font-weight: 500; font-size: clamp(19px, 1.6vw, 23px); max-width: 60ch; }
+  .s09 .lede code { font-family: var(--mono); font-size: 0.9em; font-weight: 600; }
+  .s09 .two { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 36px; align-items: start; }
+  .s09 .code {
+    margin: 0; background: #1b0f05; color: #ffd9b8;
+    padding: 22px 24px; font-family: var(--mono); font-size: 17px; line-height: 1.7;
+    white-space: pre-wrap; overflow-wrap: anywhere;
+  }
+  .s09 .code .k { color: #f6821f; }
+  .s09 .code .c { color: #a8876b; }
+  .s09 .pull { border-left: 6px solid #1b0f05; padding: 4px 0 4px 24px; }
+  .s09 .pull p {
+    margin: 0; font-family: var(--serif); font-style: italic; font-weight: 800;
+    font-variation-settings: "opsz" 144, "SOFT" 60, "WONK" 1;
+    font-size: clamp(28px, 2.6vw, 38px); line-height: 1.15;
+  }
+  .s09 .pull .with { margin-top: 14px; font-family: var(--sans); font-style: normal; font-weight: 600; font-size: 17px; line-height: 1.5; }
+  .s09 .read-on { color: #1b0f05; --flip: #f6821f; border-width: 3px; }
+  .s09 .decor .ghost {
+    position: absolute; right: -3vw; bottom: -7vw;
+    font-family: var(--mono); font-weight: 600; font-size: 28vw; line-height: 1; letter-spacing: -0.06em;
+    color: rgba(27,15,5,0.08);
+  }
+  @media (max-width: 800px) {
+    .s09 .two { grid-template-columns: 1fr; gap: 24px; }
+    .s09 .code { font-size: 15px; padding: 16px 16px; }
+    .s09 .pull { padding-left: 18px; }
+  }
+
+  /* ─── s10 · CONCRETE — Next.js security update ─── */
+  .s10 {
+    background-color: #bdb7ac; color: #1c1a17;
+    background-image: radial-gradient(rgba(28,26,23,0.07) 1px, transparent 1.2px);
+    background-size: 7px 7px;
+  }
+  .s10 .tag { background: #d6361f; color: #f4efe6; border-color: #d6361f; border-radius: 0; font-weight: 700; opacity: 1; }
+  .s10 .hed { font-family: var(--sans); font-weight: 800; letter-spacing: -0.035em; line-height: 1.0; text-wrap: balance; }
+  .s10 .hed em {
+    font-family: var(--serif); font-style: italic; font-weight: 700; letter-spacing: -0.02em;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1; color: #b12a17;
+  }
+  .s10 .lede { font-family: var(--sans); font-weight: 500; font-size: clamp(19px, 1.6vw, 23px); max-width: 58ch; }
+  .s10 .slab { background: #d8d3c9; box-shadow: 14px 14px 0 #1c1a17; max-width: 1020px; }
+  .s10 .row {
+    display: grid; grid-template-columns: 9em minmax(0, 1fr); gap: 6px 22px; align-items: start;
+    padding: 16px 22px;
+  }
+  .s10 .row + .row { border-top: 1px solid #8f897e; }
+  .s10 .sev { justify-self: start; display: inline-block; font-family: var(--sans); font-weight: 800; font-size: 15px; letter-spacing: 0.12em; padding: 4px 10px; background: #1c1a17; color: #f4efe6; }
+  .s10 .sev.c { background: #d6361f; }
+  .s10 .row p { margin: 0; font-family: var(--sans); font-size: 18px; line-height: 1.45; }
+  .s10 .row code { font-family: var(--mono); font-size: 0.9em; }
+  .s10 .row p small { display: block; font-family: var(--mono); font-size: 15px; color: #4b463e; margin-top: 3px; }
+  .s10 .cmds {
+    margin: 0; padding: 16px 22px; background: #1c1a17; color: #e9e4da;
+    font-family: var(--mono); font-size: 17px; line-height: 1.7; white-space: pre-wrap; overflow-wrap: anywhere;
+  }
+  .s10 .cmds .c { color: #9a9387; }
+  .s10 .read-on { color: #1c1a17; --flip: #bdb7ac; border-width: 3px; }
+  .s10 .decor .bang {
+    position: absolute; right: 2vw; top: 50%; transform: translateY(-50%);
+    font-family: var(--serif); font-weight: 900; font-size: 48vw; line-height: 0.8;
+    font-variation-settings: "opsz" 144, "WONK" 1;
+    color: rgba(28,26,23,0.1);
+  }
+  @media (max-width: 800px) {
+    .s10 .row { grid-template-columns: 1fr; padding: 14px 16px; }
+    .s10 .row p { font-size: 17px; }
+    .s10 .cmds { font-size: 14px; padding: 14px 16px; }
+    .s10 .slab { box-shadow: 8px 8px 0 #1c1a17; }
+    .s10 .decor .bang { font-size: 110vw; right: -10vw; }
+  }
+
+  /* ─── COLOPHON — ink black, yellow accent ─── */
+  .colophon { background: #141210; color: #ece6dc; }
+  .colophon .hed {
+    font-weight: 800; font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-size: clamp(56px, 7vw, 112px);
+  }
+  .colophon .hed em { color: #ffd400; }
+  .colophon .lede { max-width: 58ch; }
+  .colophon .srcs { display: flex; flex-wrap: wrap; gap: 10px; }
+  .colophon .srcs span { font-family: var(--sans); font-weight: 600; font-size: 17px; padding: 6px 14px; border: 1.5px solid #ece6dc; }
+  .colophon .srcs span.via { border-style: dashed; color: #ffd400; border-color: #ffd400; }
+  .colophon .rubric { margin: 0; font-family: var(--serif); font-size: 19px; line-height: 1.55; max-width: 72ch; color: #cfc7ba; }
+  .colophon .folio a.home { color: inherit; }
+  .colophon .decor .ghost {
+    position: absolute; right: -2vw; bottom: -6vw;
+    font-family: var(--sans); font-weight: 900; font-size: 36vw; line-height: 1; letter-spacing: -0.06em;
+    color: rgba(255,212,0,0.07);
+  }
+  @media (max-width: 800px) {
+    .colophon .srcs span { font-size: 15px; }
+    .colophon .rubric { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══ COVER · pull-quote ═══ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 125</a></span>
+    <span>Saturday · 17 Oct 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <div class="corner"><b>Ephemeris.</b><span>№ 125 · ten stories from the week</span></div>
+    <h1 class="pq"><span class="q">“</span>Very often, we found that the role of the engineers was to tell Claude <mark>‘no.’</mark><span class="q">”</span></h1>
+    <p class="attr"><b>Anthropic’s source-control team</b>, on moving a monorepo that takes more than 30,000 merges a day off git in five months. Story 01, and the thread through the week: tools built for the volume agents now produce.</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>Anthropic replaced git in five months</span><span>Anthropic</span></a>
+      <a href="#s02"><span><span class="num">02</span>Mistral Large 4, open weights for defenders</span><span>Import AI</span></a>
+      <a href="#s03"><span><span class="num">03</span>Anatomy draws the machine for you</span><span>@TochkiNadAI</span></a>
+      <a href="#s04"><span><span class="num">04</span>The 0.001% Hyperdrive bug</span><span>Cloudflare</span></a>
+      <a href="#s05"><span><span class="num">05</span>Turn old agent sessions into evals</span><span>@seeallochnaya</span></a>
+      <a href="#s06"><span><span class="num">06</span>Star history without the stargazers</span><span>GitHub</span></a>
+      <a href="#s07"><span><span class="num">07</span>What a $1M sandbox bounty found</span><span>Vercel</span></a>
+      <a href="#s08"><span><span class="num">08</span>Odyssey-3: walk around a prompt</span><span>@TochkiNadAI</span></a>
+      <a href="#s09"><span><span class="num">09</span>Void deploys what your code imports</span><span>Cloudflare</span></a>
+      <a href="#s10"><span><span class="num">10</span>Next.js 16.4.1 patches two RCEs</span><span>Next.js</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"><span class="bigq">“</span></div>
+</section>
+
+<!-- ═══ s01 · BIG STATS / YELLOW ═══ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 125</a></span>
+    <span>01 / 10 · Anthropic Engineering</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev infra · Agentic coding</span>
+    <h2 class="hed">Git couldn’t keep up with <span class="cut">Claude.</span></h2>
+    <p class="lede">Merges into Anthropic’s monorepo rose from about 2,500 a day in May to more than 30,000 in September, and CI ran 25 million checkouts a day against nearly 100 GB of history. Seven engineers built Scion, version control for clients that are always online: the server owns history, merges and blame, and each job fetches only the files it reads. Anthropic offers its server-side RPC, cache tiers and sparse checkouts as ideas to carry back to git and the forges.</p>
+    <div class="figure">
+      <p class="big">30,000<span class="unit">merges a day in September <s>2,500 in May</s></span></p>
+      <dl class="stats">
+        <div><dt>200×</dt><dd>smaller CPU and memory footprint than the git mirrors it replaced</dd></div>
+        <div><dt>~100×</dt><dd>faster CI checkouts: seconds where they took minutes</dd></div>
+        <div><dt>7</dt><dd>engineers built it and a code-review tool, and migrated in five months</dd></div>
+      </dl>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.anthropic.com/engineering/redesigning-source-control" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"><span class="ghost">12×</span><span class="tape"></span></div>
+</section>
+
+<!-- ═══ s02 · POSTCARD ═══ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 125</a></span>
+    <span>02 / 10 · Mistral · via Import AI</span>
+  </header>
+  <div class="main">
+    <span class="tag">AI tools · Open weights</span>
+    <h2 class="hed">Open weights for <em>the people who patch.</em></h2>
+    <p class="lede">Mistral Large 4 is a mixture-of-experts model with about a trillion parameters, 52 billion active, in public preview on Mistral Studio at $1.36 in and $4.18 out per million tokens. It scores 82% on a test that asks a model to reproduce a real vulnerability and then patch it, the best result among publicly available models; Mistral says several closed models score near zero there because they refuse. Import AI’s caveat: it is the strongest Western open-weight model and still trails the leading Chinese ones.</p>
+    <div class="figure">
+      <div class="card">
+        <div class="msg">
+          <p class="note">“Weights drop end of this month.”</p>
+          <p class="sig">Mistral, announcing Large 4 on 6 October. Hosting includes a European deployment Mistral runs end to end; the license is not yet named.</p>
+        </div>
+        <div class="addr">
+          <div class="stamprow">
+            <div class="postmark">PARIS<br>06·10·26</div>
+            <div class="stamp"><b>52B</b><span>active of ~1T</span></div>
+          </div>
+          <ul class="lines">
+            <li><span>Reproduce, then patch</span><b>82%</b></li>
+            <li><span>Cybench, 40 challenges</span><b>93%</b></li>
+            <li><span>AA Intelligence Index</span><b>38</b></li>
+            <li><span>Per M tokens, in / out</span><b>$1.36 / $4.18</b></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://mistral.ai/news/mistral-large-4/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"><span class="airmail"></span></div>
+</section>
+
+<!-- ═══ s03 · RISOGRAPH DUOTONE ═══ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 125</a></span>
+    <span>03 / 10 · wheresryan22 · via @TochkiNadAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Creative tools · Agent skills</span>
+    <h2 class="hed">Ask how it works. <em>Get the machine.</em></h2>
+    <p class="lede">Anatomy is an MIT-licensed agent skill that answers an explanation request with an interactive isometric drawing: shaded SVG parts with a live readout, optional WebGL fire, water and steam, and a 3D mode in beta. It installs with one command into Claude Code, Codex, OpenCode and others, needs no API key, and passed 14,000 GitHub stars nine days after the repo went up. On @denissexy it was paired with a sound-layer skill to rebuild historical photos as simulated scenes.</p>
+    <div class="figure">
+      <div class="press">
+<pre class="cmd"><span class="p">$</span> npx skills add wheresryan22/anatomy -g
+
+<span class="p">›</span> /anatomy explain how a token bucket rate limiter works, interactive</pre>
+        <ul class="outs">
+          <li>SVG<span>a standalone page, a lone .svg, or React components</span></li>
+          <li>SVG + WebGL<span>fire, water, steam and light as shaders</span></li>
+          <li>3D, in beta<span>parts that spin or break off in true 3D</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://github.com/wheresryan22/anatomy" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true">
+    <span class="dots"></span>
+    <svg class="a" viewBox="0 0 200 200" fill="none" stroke="#ff48b0" stroke-width="10" stroke-linejoin="round"><path d="M100 20 L170 60 L170 140 L100 180 L30 140 L30 60 Z M30 60 L100 100 L170 60 M100 100 L100 180"/></svg>
+    <svg class="b" viewBox="0 0 200 200" fill="none" stroke="#0078bf" stroke-width="10" stroke-linejoin="round"><path d="M100 20 L170 60 L170 140 L100 180 L30 140 L30 60 Z M30 60 L100 100 L170 60 M100 100 L100 180"/></svg>
+  </div>
+</section>
+
+<!-- ═══ s04 · FILM STILL ═══ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 125</a></span>
+    <span>04 / 10 · Cloudflare</span>
+  </header>
+  <div class="main">
+    <span class="tag">Postmortem · Databases</span>
+    <h2 class="hed">One query in 100,000 came back <em>empty.</em></h2>
+    <p class="lede">Hyperdrive pools database connections for Cloudflare Workers and caches query results, and its MySQL beta failed on about 0.001% of requests, only where caching was on. The cause was a capability flag: the <code>mysql2</code> driver can’t read <code>CLIENT_DEPRECATE_EOF</code>, so the node beside the Worker rewrote result bytes while the node beside the database did not, and both wrote their own encoding under the same cache key. If you cache wire bytes behind a protocol translator, this is the bug to look for.</p>
+    <div class="figure">
+      <div class="board">
+        <div class="frame"><h4>FRAME 01</h4><p>Hyperdrive talks to the origin with CLIENT_DEPRECATE_EOF on. The Worker’s mysql2 driver can’t, so result sets must end the old way.</p></div>
+        <div class="frame"><h4>FRAME 02</h4><p>The client node translates for the Worker. The endpoint node keeps the origin’s bytes. Both cache under one key.</p></div>
+        <div class="frame"><h4>FRAME 03</h4><p>Each node reads the other’s bytes: an untranslated answer, an early EOF, or a hang.</p></div>
+        <div class="frame end"><h4>FADE OUT</h4><p>Store one canonical encoding, whoever writes it. Client connection success: 99.99%. MySQL is now GA.</p></div>
+      </div>
+      <p class="sub">“the difference between beta and GA is just 20 bug fixes in a trenchcoat.”</p>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.cloudflare.com/hyperdrive-mysql/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true">
+    <span class="vig"></span>
+    <span class="bar t"></span><span class="bar b"></span>
+    <span class="tc">REC · 00:00:00:01</span>
+  </div>
+</section>
+
+<!-- ═══ s05 · HOT PINK ═══ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 125</a></span>
+    <span>05 / 10 · ibragim-bad · via @seeallochnaya</span>
+  </header>
+  <div class="main">
+    <span class="tag">Agentic coding · Evals</span>
+    <h2 class="hed">Your old sessions are <em>the eval set.</em></h2>
+    <p class="lede">Ibragim went through about 1,270 of his own Claude Code, Codex and Pi sessions, kept ten tasks that a script can check, and ran agent setups on them three times each. On GPT-6.1 Sol both the lightweight Pi agent and native Codex solved every task, and Pi did it for half the money. His skill, evals-from-sessions, walks your agent through the same pipeline into Harbor tasks, and stops for your approval on the candidate list, the spec and the finished task.</p>
+    <div class="figure">
+      <ol class="steps">
+        <li><span class="n">1</span><div><b>Mine</b><p>Copy logs from <code>~/.claude/projects</code>, <code>~/.codex/sessions</code> or Pi, scan the copy with gitleaks, list candidates.</p></div></li>
+        <li><span class="n">2</span><div><b>Spec</b><p>Write down what the agent is told and what it has to discover on its own.</p></div></li>
+        <li><span class="n">3</span><div><b>Seal</b><p>Package a Harbor task with no future commits, reference diff or visible tests to peek at.</p></div></li>
+        <li><span class="n">4</span><div><b>Prove the checker</b><p>A no-op fails, the oracle passes, a near miss fails, a different correct fix passes.</p></div></li>
+      </ol>
+      <div class="cost">
+        <h4>Cost per task, all ten solved · GPT-6.1 Sol, medium</h4>
+        <div class="row"><span>Pi</span><i><b style="width:50.7%">$0.070</b></i></div>
+        <div class="row"><span>Codex</span><i><b style="width:100%">$0.138</b></i></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://github.com/ibragim-bad/evals-from-sessions" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"><span class="ghost">1,270</span></div>
+</section>
+
+<!-- ═══ s06 · MUSEUM PLACARD ═══ -->
+<section class="spread s06 centered" id="s06">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 125</a></span>
+    <span>06 / 10 · GitHub</span>
+  </header>
+  <div class="main">
+    <span class="tag">Architecture · Privacy</span>
+    <h2 class="hed">Star history, <em>without the stargazers.</em></h2>
+    <p class="lede">Star-history tools drew their charts by paging through every account that starred a repository, 100 at a time, through an endpoint that also let spam and phishing scrapers harvest usernames. GitHub now limits stargazer lists to a repository’s admins and collaborators and has added a star-history endpoint that returns daily counts with no user data, up to 30 weeks per call. If your dashboard reads the old list, it gets an empty response or a 403.</p>
+    <div class="figure">
+      <div class="placard">
+        <p class="ttl">react/react</p>
+        <p class="sub">About 251,000 stars. Requests for a full history.</p>
+        <dl class="ba">
+          <div><dt>before</dt><dd>2,511<small>pages of 100 people</small></dd></div>
+          <div><dt>after</dt><dd>24<small>pages of 30 weeks</small></dd></div>
+        </dl>
+        <ul class="notes">
+          <li>Filter by date first, then group: about 251,000 rows read, against some 6 million had they grouped and then paginated.</li>
+          <li>Stargazer requests reaching the database fell about 60%; time on count queries, about 80%.</li>
+        </ul>
+        <blockquote>“A smaller response does not always mean a cheaper query.”</blockquote>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://github.blog/engineering/architecture-optimization/from-2500-requests-to-24-rebuilding-star-history-without-the-stargazers/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"><span class="frame"></span><span class="frame"></span></div>
+</section>
+
+<!-- ═══ s07 · DARK REPORT / CLASSIFIED ═══ -->
+<section class="spread s07" id="s07">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 125</a></span>
+    <span>07 / 10 · Vercel</span>
+  </header>
+  <div class="main">
+    <span class="tag">Security · Sandboxes</span>
+    <h2 class="hed">A packet from inside the sandbox <em>reached the host.</em></h2>
+    <p class="lede">Vercel’s $1M bounty for escaping Vercel Sandbox drew 1,285 reports in two weeks and paid out $242,000. On day three Paulos Yibelo found a flaw in the Linux kernel’s networking stack: crafted packets from inside a microVM leaked host memory in production, and on matching KVM and Firecracker machines crashed the host or ran code on it. CVEs are pending, and the same kernel layer isolates tenants at most large clouds. If you run sandboxes for agents, the section on what Vercel stopped trusting is the part to copy.</p>
+    <div class="figure">
+      <div class="file">
+        <div class="hdr"><span><b>File</b> · Sandbox bounty</span><span>Opened · Aug 2026</span><span>Customer data reached · none</span></div>
+        <div class="body">
+          <div class="chart">
+            <h4>1,285 reports, triaged</h4>
+            <div class="b"><span>duplicate</span><i><b style="width:68.2%"></b></i><em>877</em></div>
+            <div class="b"><span>not applic.</span><i><b style="width:24.8%"></b></i><em>319</em></div>
+            <div class="b hot"><span>valid</span><i><b style="width:4.4%"></b></i><em>57</em></div>
+            <div class="b"><span>informative</span><i><b style="width:2.5%"></b></i><em>32</em></div>
+            <div class="sev"><span class="c">1 critical</span><span>5 high</span><span>9 medium</span><span>42 low</span></div>
+          </div>
+          <ul class="finds">
+            <li><b>KERNEL</b>Packets from a guest reach host memory. Exploit details: <span class="redact">withheld until the kernel fix is public</span>.</li>
+            <li><b>STORAGE</b>Device-mapper handed recycled blocks from deleted sandboxes to new ones. Found by a Vercel intern.</li>
+            <li><b>SNAPSHOTS</b>The control plane trusted storage details the guest reported. Bound to the owning project within a week.</li>
+          </ul>
+        </div>
+        <p class="quote">“a boundary that depends on a secret staying secret is not a boundary”</p>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://vercel.com/blog/findings-from-the-1-million-dollar-vercel-sandbox-challenge" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"><span class="stamp">$242,000</span></div>
+</section>
+
+<!-- ═══ s08 · PASTEL ROSE ═══ -->
+<section class="spread s08" id="s08">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 125</a></span>
+    <span>08 / 10 · Odyssey · via @TochkiNadAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Generative media · World models</span>
+    <h2 class="hed">Type a world, <em>then walk around in it.</em></h2>
+    <p class="lede">Odyssey-3 is a world model that turns a prompt into a place you move through in first or third person, updating as you act or drop in events, with a camera you steer separately. The free research preview runs Flash, a distilled version fast enough for real-time play. Odyssey also pitches it for training robots, and its own benchmark numbers put the Pro variant first on Physics-IQ Verified. API access is by request.</p>
+    <div class="figure">
+      <div class="variants">
+        <div><b>Flash</b><span>distilled, few steps, real time: the one in the browser preview</span></div>
+        <div><b>Odyssey-3</b><span class="px">832 × 480</span><span>the base model</span></div>
+        <div><b>Pro</b><span class="px">1280 × 720</span><span>66.1 on Physics-IQ Verified, by Odyssey’s count</span></div>
+      </div>
+      <p class="note">In @TochkiNadAI’s run every step on screen came from a keypress, and the character could interact with objects in the scene.</p>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://odyssey.systems/meet-odyssey-3" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"><span class="blob a"></span><span class="blob b"></span></div>
+</section>
+
+<!-- ═══ s09 · WARM ORANGE ═══ -->
+<section class="spread s09" id="s09">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 125</a></span>
+    <span>09 / 10 · Cloudflare</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev tools · Deploy</span>
+    <h2 class="hed">Your imports are the infra <em>config.</em></h2>
+    <p class="lede">VoidZero, the Vite company that joined Cloudflare, released Void: an open-source SDK, CLI and self-hostable platform shipped as one npm package and Vite plugin. Import <code>void/db</code> and you get a local database in development and D1 on deploy; <code>void/ai</code> wires up AI Gateway. <code>void deploy</code> builds, migrates, provisions and ships, and Void Platform lets a company give people a place to ship internal apps without a Cloudflare account per project.</p>
+    <div class="figure">
+      <div class="two">
+<pre class="code"><span class="k">$</span> npm install void
+<span class="c"># add the Void plugin to vite.config</span>
+
+<span class="k">import</span> … from "void/db"  <span class="c">// D1 on deploy</span>
+<span class="k">import</span> … from "void/ai"  <span class="c">// AI Gateway</span>
+
+<span class="k">$</span> void deploy
+<span class="c">  build · migrate · provision · ship</span>
+<span class="k">$</span> void connect &lt;platform-url&gt;
+<span class="c">  ship to your own Void Platform</span></pre>
+        <div class="pull">
+          <p>“Void turns a Vite app into a full-stack Cloudflare Workers app.”</p>
+          <p class="with">Works next to React Router, SvelteKit, Nuxt, TanStack Start and Astro. Auth through Better Auth; the platform needs Workers for Platforms, R2 and a Postgres database.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.cloudflare.com/deploy-with-void/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"><span class="ghost">void</span></div>
+</section>
+
+<!-- ═══ s10 · CONCRETE ═══ -->
+<section class="spread s10" id="s10">
+  <header class="folio">
+    <span><a class="home" href="../index.html">Ephemeris · Issue 125</a></span>
+    <span>10 / 10 · Next.js</span>
+  </header>
+  <div class="main">
+    <span class="tag">Security · Patch today</span>
+    <h2 class="hed">Two unauthenticated RCEs. <em>Patch to 16.4.1.</em></h2>
+    <p class="lede">The 14 October out-of-band release fixes two critical remote-code-execution bugs and one high-severity denial of service, all traced to upstream dependencies. The first hits App Router apps on Cache Components, which create-next-app has switched on by default since 16.4, and has no workaround. The second sits in image optimization of SVGs on glibc Linux, through sharp.</p>
+    <div class="figure">
+      <div class="slab">
+        <div class="row"><span class="sev c">CRITICAL</span><p>RCE when a <code>use cache</code> function returns multiple typed arrays. No workaround; upgrade even if you have no such function.<small>GHSA-673q-mjm6-r5xr · React GHSA-xqc2-xf4c-x3h3</small></p></div>
+        <div class="row"><span class="sev c">CRITICAL</span><p>RCE in the Image Optimization API with SVG on glibc Linux. Stopgap: sharp 0.35.5 or later.<small>CVE-2026-96889 · GHSA-2464-fhr4-w9xw</small></p></div>
+        <div class="row"><span class="sev">HIGH</span><p>Crafted requests to Server Actions pin the CPU. Pages Router apps, and apps without Server Actions, are not affected.<small>GHSA-p3m5-59mp-jv5r</small></p></div>
+<pre class="cmds">npm install next@16.4.1   <span class="c"># 16.4, Active LTS</span>
+npm install next@15.5.28  <span class="c"># 15.5, Maintenance LTS</span></pre>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://nextjs.org/blog/nextjs-security-update-october-14-2026" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"><span class="bang">!</span></div>
+</section>
+
+<!-- ═══ COLOPHON ═══ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 125</span>
+    <span><a class="home" href="#cover">Back to top ↑</a></span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That’s <em>the week.</em></h3>
+    <p class="lede">Issue 125, Saturday 17 October 2026. Ten picks from nine publishers, published between 6 and 16 October, seven of them since last Saturday’s issue. Three came to us through Telegram channels; Mistral Large 4 came through Import AI.</p>
+    <div class="figure">
+      <div class="srcs">
+        <span>Anthropic</span><span>Mistral</span><span>wheresryan22</span><span>Cloudflare</span><span>ibragim-bad</span>
+        <span>GitHub</span><span>Vercel</span><span>Odyssey</span><span>Next.js</span>
+        <span class="via">Import AI</span><span class="via">@TochkiNadAI</span><span class="via">@denissexy</span><span class="via">@seeallochnaya</span>
+      </div>
+    </div>
+    <p class="rubric">
+      Rubric, in order: AI tools you could adopt this week · creative software and generative
+      media · dev tools and agentic coding · privacy and security where the signal is high ·
+      science and research with a practical kernel · anything immediately actionable for a
+      senior engineer or founder.
+    </p>
+    <p class="rubric">
+      Also read this week and left out: The Batch, The Zvi, OpenAI News, Anthropic News,
+      jeffbullas.com, PostHog, Sentry, @rvnikita_blog, @ProductsAndStartups. The newest fly.io
+      post had already run here.
+    </p>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"><span class="ghost">125</span></div>
+</section>
+
+</main>
+</body>
+</html>
