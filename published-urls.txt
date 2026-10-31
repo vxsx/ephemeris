@@ -70,6 +70,7 @@ https://anthropic.com/research/natural-language-autoencoders
 https://anthropic.com/research/teaching-claude-why
 https://anthropic.com/threat-intelligence-report-september-2026
 https://antigravity.google/blog/google-io-2026
+https://apple.com/newsroom/2026/10/apple-creator-studio-adds-powerful-new-ai-features-and-even-more-creative-tools
 https://artificialanalysis.ai/articles/nvidia-nemotron-3-ultra-released
 https://arxiv.org/abs/2509.00462
 https://arxiv.org/abs/2512.12087
@@ -129,6 +130,7 @@ https://blog.cloudflare.com/dmarc-management-ga
 https://blog.cloudflare.com/dns-cache-memory-optimization-1111
 https://blog.cloudflare.com/dnssec-nta-ede-33
 https://blog.cloudflare.com/dynamic-workflows
+https://blog.cloudflare.com/emudhra-patching
 https://blog.cloudflare.com/enforce-first-as-bgp
 https://blog.cloudflare.com/engineering-standards-enforcement
 https://blog.cloudflare.com/frontier-model-defense
@@ -142,6 +144,7 @@ https://blog.cloudflare.com/introducing-cache-response-rules
 https://blog.cloudflare.com/introducing-precursor
 https://blog.cloudflare.com/iran-internet-partially-restored-may-2026
 https://blog.cloudflare.com/kitesurf
+https://blog.cloudflare.com/kv-cache-exposure-remediation
 https://blog.cloudflare.com/local-tracing
 https://blog.cloudflare.com/making-rust-workers-reliable
 https://blog.cloudflare.com/mcp-security-updates
@@ -210,6 +213,7 @@ https://claude.com/blog/cowork-is-now-claude
 https://claude.com/blog/how-claude-code-works-in-large-codebases-best-practices-and-where-to-start
 https://claude.com/blog/introducing-dynamic-workflows-in-claude-code
 https://claude.com/blog/the-new-rules-of-context-engineering-for-claude-5-generation-models
+https://claude.com/resources/articles/building-agents-when-to-fold-subagents-into-your-main-agent-loop
 https://claude.com/resources/articles/claude-duet-safety-privacy-and-security
 https://claude.com/resources/articles/dashboards-and-motion
 https://claude.dev/blog/automating-eval-design-and-hillclimbing
@@ -354,6 +358,7 @@ https://github.com/oven-sh/bun/pull/30412
 https://github.com/palmier-io/palmier-pro
 https://github.com/Panniantong/Agent-Reach
 https://github.com/petergyang/human-review
+https://github.com/Pomerado/pomerado
 https://github.com/rehan-remade/universal-modder
 https://github.com/rvnikita/claude-code-statusline
 https://github.com/specs-devs/samples/tree/main/Agent%20Center
@@ -398,6 +403,7 @@ https://jack-clark.net/2026/07/27/import-ai-466-the-bitter-lesson-for-robotics-a
 https://jack-clark.net/2026/08/10/import-ai-468-23-rsi-ideas-posttrainbench-and-how-trust-and-transparency-interplay-with-ai-racing
 https://jack-clark.net/2026/08/24/import-ai-470-no-rights-for-machines-automating-environment-generation-with-spade-and-building-better-gpu-kernels-with-hawkeye
 https://jack-clark.net/2026/09/07/import-ai-472-deepminds-cheating-math-agents-populist-ai-policies-and-forethought-theorizes-a-nightwatchman
+https://jack-clark.net/2026/10/26/import-ai-478-math-for-alignment-programbench-and-mirendil-shows-what-rsi-means
 https://jeffbullas.com/ai-reinvention-truth
 https://jeffbullas.com/ai-slop-crisis
 https://jeffbullas.com/charisma-into-cash
@@ -448,6 +454,7 @@ https://nextjs.org/blog/next-security-release-program
 https://nextjs.org/blog/nextjs-across-platforms
 https://nextjs.org/blog/nextjs-security-update-october-14-2026
 https://nextjs.org/blog/september-2026-security-release
+https://nextjs.org/blog/ship-less-javascript-with-ai
 https://nextjs.org/blog/turbopack-chunking
 https://nextjs.org/blog/turbopack-incremental-computation
 https://nvidianews.nvidia.com/news/nvidia-microsoft-windows-pcs-agents-rtx-spark
@@ -559,6 +566,7 @@ https://posthog.com/blog/embedded-analytics-provisioning-api
 https://posthog.com/blog/everything-is-build-mode
 https://posthog.com/blog/how-ai-agents-behave
 https://posthog.com/blog/how-i-use-skills-for-everything
+https://posthog.com/blog/how-to-benchmark-ai-agents
 https://posthog.com/blog/joe-os-analytics
 https://posthog.com/blog/local-flag-evals-rust
 https://posthog.com/blog/making-claude-cowork-actually-useful
@@ -617,6 +625,7 @@ https://sentry.io/blog/errors-traces-logs-metrics-when-to-reach-for-what
 https://sentry.io/blog/etsy-peak-traffic-prep
 https://sentry.io/blog/fixing-javascript-observability
 https://sentry.io/blog/logging-best-practices
+https://sentry.io/blog/measuring-soft-navigation-web-vitals
 https://sentry.io/blog/metrics-caught-ai-size-estimate
 https://sentry.io/blog/mongodb-query-tracing-dotnet-sentry
 https://sentry.io/blog/nextjs-export-traces-opentelemetry
@@ -728,6 +737,7 @@ https://vercel.com/blog/introducing-deepsec-find-and-fix-vulnerabilities-in-your
 https://vercel.com/blog/introducing-eve
 https://vercel.com/blog/introducing-run
 https://vercel.com/blog/introducing-the-new-v0-api
+https://vercel.com/blog/introducing-vercel-ci
 https://vercel.com/blog/introducing-vercel-connect
 https://vercel.com/blog/making-every-harness-durable
 https://vercel.com/blog/making-turborepo-ninety-six-percent-faster-with-agents-sandboxes-and-humans
