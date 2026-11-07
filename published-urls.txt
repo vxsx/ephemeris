@@ -10,6 +10,7 @@ https://aisi.gov.uk/blog/how-far-behind-the-frontier-are-leading-open-weight-mod
 https://aisi.gov.uk/blog/incident-report-unsanctioned-agent-behaviour-during-cyber-testing
 https://aisi.gov.uk/blog/our-evaluation-of-openais-gpt-5-5-cyber-capabilities
 https://aleximas.substack.com/p/how-will-ai-driven-automation-actually
+https://alignment.openai.com/misalignment-reports/covert-underperformance-on-safety-research-tasks
 https://andonlabs.com/blog/openai-gpt-5-5-vending-bench
 https://anthropic.com/claude-fable-and-mythos-5-1
 https://anthropic.com/claude-haiku-5-5
@@ -61,6 +62,7 @@ https://anthropic.com/news/widening-conversation-ai
 https://anthropic.com/research/2028-ai-leadership
 https://anthropic.com/research/anthropic-institute-agenda
 https://anthropic.com/research/claude-personal-guidance
+https://anthropic.com/research/components-of-agent-memory
 https://anthropic.com/research/discovering-cryptographic-weaknesses
 https://anthropic.com/research/donating-open-source-petri
 https://anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench
@@ -255,6 +257,7 @@ https://developers.googleblog.com/introducing-the-google-colab-cli
 https://developers.googleblog.com/litertjs-googles-high-performance-web-ai-inference
 https://developers.googleblog.com/we-terminated-a-tpu-mid-training-and-it-recovered-in-seconds-introduction-to-elastic-training-with-maxtext
 https://developers.openai.com/ads
+https://developers.openai.com/api/docs/guides/image-generation
 https://developers.openai.com/codex/record-and-replay
 https://developers.openai.com/codex/use-cases
 https://dsv4.interactive.ikot.blog
@@ -277,6 +280,7 @@ https://fly.io/blog/litestream-vfs
 https://fly.io/blog/litestream-writable-vfs
 https://fly.io/blog/sprites-mcp
 https://fly.io/blog/unfortunately-mcp
+https://fly.io/blog/well-that-wasnt-fun
 https://github.blog/ai-and-ml/generative-ai/migrating-the-github-copilot-runtime-to-rust-using-copilot
 https://github.blog/ai-and-ml/github-copilot/agent-driven-development-in-copilot-applied-science
 https://github.blog/ai-and-ml/github-copilot/automating-cross-repo-documentation-with-github-agentic-workflows
@@ -404,6 +408,7 @@ https://jack-clark.net/2026/08/10/import-ai-468-23-rsi-ideas-posttrainbench-and-
 https://jack-clark.net/2026/08/24/import-ai-470-no-rights-for-machines-automating-environment-generation-with-spade-and-building-better-gpu-kernels-with-hawkeye
 https://jack-clark.net/2026/09/07/import-ai-472-deepminds-cheating-math-agents-populist-ai-policies-and-forethought-theorizes-a-nightwatchman
 https://jack-clark.net/2026/10/26/import-ai-478-math-for-alignment-programbench-and-mirendil-shows-what-rsi-means
+https://jack-clark.net/2026/11/02/import-ai-479-spacewar-low-latency-tasks-versus-llms-genie-4
 https://jeffbullas.com/ai-reinvention-truth
 https://jeffbullas.com/ai-slop-crisis
 https://jeffbullas.com/charisma-into-cash
@@ -417,6 +422,7 @@ https://jeffbullas.com/stop-using-just-one-ai
 https://jeffbullas.com/truth-business-growth-strategy
 https://kimi.ai/blog/kimi-k3-1-pro
 https://kimi.com/blog/kimi-k3
+https://kino.ai/changelog
 https://krea.ai/
 https://krea.ai/app
 https://krea.ai/blog/krea-2-technical-report
@@ -571,6 +577,7 @@ https://posthog.com/blog/joe-os-analytics
 https://posthog.com/blog/local-flag-evals-rust
 https://posthog.com/blog/making-claude-cowork-actually-useful
 https://posthog.com/blog/minimum-viable-product-marketing
+https://posthog.com/blog/moving-off-duckdb
 https://posthog.com/blog/multimodal-models-need-video
 https://posthog.com/blog/replay-vision
 https://posthog.com/blog/self-driving-loops
@@ -596,6 +603,7 @@ https://proofofconcept.pub/p/design-systems-are-now-inference
 https://qwen.ai/blog
 https://ramp.com/data/ai-index
 https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2
+https://rikiyat.github.io/blog/weight-space-programming
 https://runway.com/news/research/introducing-solaris
 https://safe.ai/blog/significant-increase-in-digital-labor-automation
 https://sakana.ai/fugu-release
@@ -631,6 +639,7 @@ https://sentry.io/blog/mongodb-query-tracing-dotnet-sentry
 https://sentry.io/blog/nextjs-export-traces-opentelemetry
 https://sentry.io/blog/nextjs-supabase-observability
 https://sentry.io/blog/otel-spans-errors-sentry-trace
+https://sentry.io/blog/performance-wins-traces-coding-agent
 https://sentry.io/blog/scaling-observability-for-multi-agent-ai-systems
 https://sentry.io/blog/seer-agent-page-context
 https://sentry.io/blog/sentry-opentelemetry-work-together
@@ -751,6 +760,7 @@ https://vercel.com/blog/the-best-workflow-engine-is-a-programming-language
 https://vercel.com/blog/vercel-agent
 https://vercel.com/blog/vercel-and-shopify-are-rebuilding-hydrogen
 https://vercel.com/blog/vercel-flags-platform-native-feature-flags
+https://vercel.com/blog/vercel-security-review
 https://vercel.com/blog/vercel-services-run-full-stack-on-vercel
 https://vercel.com/blog/we-ralph-wiggumed-webstreams-to-make-them-10x-faster
 https://vercel.com/blog/zdr-on-ai-gateway
