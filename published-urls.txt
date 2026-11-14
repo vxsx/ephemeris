@@ -13,6 +13,7 @@ https://aleximas.substack.com/p/how-will-ai-driven-automation-actually
 https://alignment.openai.com/misalignment-reports/covert-underperformance-on-safety-research-tasks
 https://andonlabs.com/blog/openai-gpt-5-5-vending-bench
 https://anthropic.com/claude-fable-and-mythos-5-1
+https://anthropic.com/claude-fable-and-mythos-5-2
 https://anthropic.com/claude-haiku-5-5
 https://anthropic.com/claude-opus-5-5
 https://anthropic.com/claude-sonnet-5-5
@@ -94,6 +95,7 @@ https://astral.sh/blog/ruff-v0.16.0
 https://bfl.ai/blog/flux-3
 https://biohub.org/news/world-model-of-protein-biology
 https://blaizzy.github.io/nativ
+https://blog.cloudflare.com/adapting-to-ai-penetration-testing-orchestrators
 https://blog.cloudflare.com/aeo
 https://blog.cloudflare.com/agent-readiness
 https://blog.cloudflare.com/agentic-internet-bot-report
@@ -146,6 +148,7 @@ https://blog.cloudflare.com/introducing-cache-response-rules
 https://blog.cloudflare.com/introducing-precursor
 https://blog.cloudflare.com/iran-internet-partially-restored-may-2026
 https://blog.cloudflare.com/kitesurf
+https://blog.cloudflare.com/kitesurf-open-source
 https://blog.cloudflare.com/kv-cache-exposure-remediation
 https://blog.cloudflare.com/local-tracing
 https://blog.cloudflare.com/making-rust-workers-reliable
@@ -217,6 +220,7 @@ https://claude.com/blog/introducing-dynamic-workflows-in-claude-code
 https://claude.com/blog/the-new-rules-of-context-engineering-for-claude-5-generation-models
 https://claude.com/resources/articles/building-agents-when-to-fold-subagents-into-your-main-agent-loop
 https://claude.com/resources/articles/claude-duet-safety-privacy-and-security
+https://claude.com/resources/articles/claude-meetings
 https://claude.com/resources/articles/dashboards-and-motion
 https://claude.dev/blog/automating-eval-design-and-hillclimbing
 https://claude.dev/blog/solving-code-review-at-anthropic
@@ -250,6 +254,7 @@ https://deeplearning.ai/the-batch/issue-359
 https://deeplearning.ai/the-batch/issue-366
 https://deeplearning.ai/the-batch/issue-368
 https://deeplearning.ai/the-batch/issue-369
+https://deeplearning.ai/the-batch/issue-379
 https://deepmind.google/blog/gemini-robotics-2-brings-whole-body-intelligence-to-robots
 https://deepswe.datacurve.ai/blog
 https://developers.googleblog.com/build-agentic-full-stack-apps-with-genkit
@@ -279,6 +284,7 @@ https://fly.io/blog/everyone-write-an-agent
 https://fly.io/blog/litestream-vfs
 https://fly.io/blog/litestream-writable-vfs
 https://fly.io/blog/sprites-mcp
+https://fly.io/blog/throwing-out-the-phonebook
 https://fly.io/blog/unfortunately-mcp
 https://fly.io/blog/well-that-wasnt-fun
 https://github.blog/ai-and-ml/generative-ai/migrating-the-github-copilot-runtime-to-rust-using-copilot
@@ -433,6 +439,7 @@ https://maxleiter.com/blog/weights
 https://memeburn.com/openais-chatgpt-bidi-1-brings-bidirectional-voice-mode
 https://metr.org/blog/2026-05-19-frontier-risk-report
 https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation
+https://metr.org/blog/2026-11-05-anthropic-ai-rd-acceleration-assessment
 https://mf0.ai/
 https://microsoft.com/en-us/research/articles/whimsical-strategies-break-ai-agents-generating-out-of-distribution-adversarial-strategies-at-scale
 https://microsoft.com/en-us/research/blog/memora-a-harmonic-memory-representation-balancing-abstraction-and-specificity
@@ -580,6 +587,7 @@ https://posthog.com/blog/minimum-viable-product-marketing
 https://posthog.com/blog/moving-off-duckdb
 https://posthog.com/blog/multimodal-models-need-video
 https://posthog.com/blog/replay-vision
+https://posthog.com/blog/self-driving-ga
 https://posthog.com/blog/self-driving-loops
 https://posthog.com/blog/self-driving-product
 https://posthog.com/blog/semantic-layer
@@ -626,6 +634,7 @@ https://sentry.io/blog/ai-bug-reproduction
 https://sentry.io/blog/apple-update-breaks-app
 https://sentry.io/blog/automated-debugging-workflow-sentry
 https://sentry.io/blog/bfcache-metrics
+https://sentry.io/blog/broken-release-database-load
 https://sentry.io/blog/claude-routines-agent-triage
 https://sentry.io/blog/cut-build-times-delete-cms
 https://sentry.io/blog/debugging-multi-agent-ai-when-the-failure-is-in-the-space-between-agents
@@ -718,6 +727,7 @@ https://vercel.com/blog/agentic-infrastructure
 https://vercel.com/blog/ai-gateway-production-index
 https://vercel.com/blog/ai-gateway-production-index-july-2026
 https://vercel.com/blog/ai-gateway-production-index-june-2026
+https://vercel.com/blog/ai-gateway-production-index-november-2026
 https://vercel.com/blog/ai-gateway-production-index-september-2026
 https://vercel.com/blog/ai-sdk-7
 https://vercel.com/blog/build-knowledge-agents-without-embeddings
