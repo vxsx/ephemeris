@@ -158,8 +158,10 @@ https://blog.cloudflare.com/meerkat-introduction
 https://blog.cloudflare.com/ml-dsa-will-have-to-do
 https://blog.cloudflare.com/monetization-gateway
 https://blog.cloudflare.com/moq-relays
+https://blog.cloudflare.com/nginx2root
 https://blog.cloudflare.com/oauth-for-all
 https://blog.cloudflare.com/obsessive-inference-optimization
+https://blog.cloudflare.com/open-clairic
 https://blog.cloudflare.com/open-sourcing-our-privacy-proxy-cli
 https://blog.cloudflare.com/optimizing-core-unit-boot-time
 https://blog.cloudflare.com/our-unified-data-platform
@@ -196,6 +198,7 @@ https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3
 https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-text-to-speech
 https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-omni-flash-nano-banana-2-lite
 https://blog.google/innovation-and-ai/products/gemini-app/next-evolution-gemini-app
+https://blog.google/innovation-and-ai/technology/developers-tools/genie-4-in-gemini-api
 https://blog.google/innovation-and-ai/technology/research/gemini-for-science-io-2026
 https://blog.interceptfund.com/p/ending-respiratory-infections
 https://blog.jetbrains.com/ai/2026/07/ponytail-skill-claude-tested
@@ -263,6 +266,7 @@ https://developers.googleblog.com/litertjs-googles-high-performance-web-ai-infer
 https://developers.googleblog.com/we-terminated-a-tpu-mid-training-and-it-recovered-in-seconds-introduction-to-elastic-training-with-maxtext
 https://developers.openai.com/ads
 https://developers.openai.com/api/docs/guides/image-generation
+https://developers.openai.com/api/docs/guides/latest-model
 https://developers.openai.com/codex/record-and-replay
 https://developers.openai.com/codex/use-cases
 https://dsv4.interactive.ikot.blog
@@ -283,6 +287,7 @@ https://fly.io/blog/design-and-implementation
 https://fly.io/blog/everyone-write-an-agent
 https://fly.io/blog/litestream-vfs
 https://fly.io/blog/litestream-writable-vfs
+https://fly.io/blog/petsem
 https://fly.io/blog/sprites-mcp
 https://fly.io/blog/throwing-out-the-phonebook
 https://fly.io/blog/unfortunately-mcp
@@ -313,6 +318,7 @@ https://github.blog/engineering/architecture-optimization/from-latency-to-instan
 https://github.blog/engineering/architecture-optimization/how-we-rebuilt-the-search-architecture-for-high-availability-in-github-enterprise-server
 https://github.blog/engineering/architecture-optimization/improving-site-performance-by-shipping-more-css
 https://github.blog/engineering/architecture-optimization/the-uphill-climb-of-making-diff-lines-performant
+https://github.blog/engineering/engineering-principles/building-the-agent-host-protocol-for-sessions-that-continue-across-devices
 https://github.blog/engineering/from-pixels-to-characters-the-engineering-behind-github-copilot-clis-animated-ascii-banner
 https://github.blog/engineering/infrastructure/how-github-uses-ebpf-to-improve-deployment-safety
 https://github.blog/engineering/infrastructure/when-protections-outlive-their-purpose-a-lesson-on-managing-defense-systems-at-scale
@@ -415,6 +421,7 @@ https://jack-clark.net/2026/08/24/import-ai-470-no-rights-for-machines-automatin
 https://jack-clark.net/2026/09/07/import-ai-472-deepminds-cheating-math-agents-populist-ai-policies-and-forethought-theorizes-a-nightwatchman
 https://jack-clark.net/2026/10/26/import-ai-478-math-for-alignment-programbench-and-mirendil-shows-what-rsi-means
 https://jack-clark.net/2026/11/02/import-ai-479-spacewar-low-latency-tasks-versus-llms-genie-4
+https://jack-clark.net/2026/11/16/import-ai-481-ai-sub-contractors-a-wet-lab-for-ai-and-subterfuge-during-development
 https://jeffbullas.com/ai-reinvention-truth
 https://jeffbullas.com/ai-slop-crisis
 https://jeffbullas.com/charisma-into-cash
@@ -454,6 +461,7 @@ https://newsletter.semianalysis.com/p/the-coding-assistant-breakdown-more
 https://nextjs.org/blog/agentic-future
 https://nextjs.org/blog/building-app-like-experiences-with-nextjs-16-3
 https://nextjs.org/blog/how-we-closed-1500-github-issues
+https://nextjs.org/blog/how-were-using-ai-to-make-nextjs-more-secure
 https://nextjs.org/blog/july-2026-security-release
 https://nextjs.org/blog/making-v0-navigations-instant
 https://nextjs.org/blog/next-16-2
@@ -560,6 +568,7 @@ https://pangram.com/blog/introducing-pangram-image-detection
 https://pasqualepillitteri.it/en/news/6571/google-ai-studio-design-variations-en
 https://pcgamer.com/software/ai/amazon-bins-an-internal-ai-leaderboard-for-its-kiro-employees-because-they-were-burning-through-too-many-costly-tokens
 https://posthog.com/blog/10k-prs-a-month
+https://posthog.com/blog/accidentally-launched-new-ui
 https://posthog.com/blog/agents-closed-4063-errors
 https://posthog.com/blog/agents-killing-ui
 https://posthog.com/blog/ai-observability-for-mvps
@@ -721,6 +730,7 @@ https://vectoral.com/blog/token-relay-market
 https://venturebeat.com/technology/z-ai-launches-zcode-to-challenge-cursor-claude-code-and-github-copilot-in-ai-coding
 https://vercel.com/blog/a-new-programming-model-for-durable-execution
 https://vercel.com/blog/a-sandbox-without-a-network-boundary-is-only-half-a-sandbox
+https://vercel.com/blog/agent-evals
 https://vercel.com/blog/agent-responsibly
 https://vercel.com/blog/agent-stack
 https://vercel.com/blog/agentic-infrastructure
